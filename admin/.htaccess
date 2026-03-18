@@ -1,0 +1,7 @@
+# Zaštita admin foldera
+# Opciono: Dozvolite samo specifičnoj IP adresi
+# Order Deny,Allow
+# Deny from all
+# Allow from 123.456.789.0
+
+Options -Indexes

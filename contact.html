@@ -1,41 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kontaktirajte Make My Home – zidni paneli i 3D letvice Podgorica. Tel: 069 105 222. Vojvode Maša Đurovića 41, City Kvart.">
+  <title>Kontakt | Make My Home – Zidni Paneli & 3D Letvice</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Contact Us</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Get in Touch</h2>
-            <form action="/submit-form" method="post">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <br>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
-                <br>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-        <section>
-            <h2>Our Contact Information</h2>
-            <p><strong>Company Name:</strong> Your Company Name</p>
-            <p><strong>Email:</strong> contact@yourcompany.com</p>
-            <p><strong>Phone:</strong> (123) 456-7890</p>
-            <p><strong>Address:</strong> 1234 Your Address, City, Country</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Your Company Name. All rights reserved.</p>
-    </footer>
+
+<header id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><i class="fas fa-home"></i></div>
+      <div class="logo-text">
+        <span class="name">Make My Home</span>
+        <span class="tagline">Wall Panels & Decor</span>
+      </div>
+    </a>
+    <nav id="nav-menu" class="nav-menu">
+      <a href="index.html" class="nav-link">Početna</a>
+      <a href="products.html" class="nav-link">Proizvodi</a>
+      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
+    </nav>
+    <button id="hamburger" class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Početna</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Kontakt</span>
+      </div>
+      <h1 class="section-title">Kontaktirajte Nas</h1>
+      <p class="section-subtitle">Tu smo za Vas – pošaljite upit, pozovite ili nas posjetite u showroomu</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Kontakt informacije -->
+      <div>
+        <div class="gold-line"></div>
+        <h2 class="section-title" style="font-size:28px;">Informacije</h2>
+        <p style="font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:36px;">
+          Javite nam se za ponudu, savjet pri odabiru materijala ili informacije o cijenama. Odgovaramo brzo i ljubazno!
+        </p>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-info-text">
+            <h4>Adresa Showrooma</h4>
+            <p>Vojvode Maša Đurovića 41<br>City Kvart, Podgorica<br>Crna Gora</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
+          <div class="contact-info-text">
+            <h4>Telefon / Viber / WhatsApp</h4>
+            <p><a href="tel:+38269105222">+382 69 105 222</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-info-text">
+            <h4>Email</h4>
+            <p><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+          <div class="contact-info-text">
+            <h4>Radno Vrijeme</h4>
+            <p>Ponedeljak – Petak: 09:00 – 18:00h<br>
+            Subota: 09:00 – 15:00h<br>
+            Nedjelja: Zatvoreno</p>
+          </div>
+        </div>
+
+        <!-- Social links -->
+        <div style="margin-top:32px;padding-top:32px;border-top:1px solid rgba(0,0,0,0.08);">
+          <h4 style="font-weight:600;color:var(--dark);margin-bottom:16px;">Pratite Nas</h4>
+          <div style="display:flex;gap:12px;">
+            <a href="#" class="social-btn" style="background:rgba(0,0,0,0.06);color:var(--dark);" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn" style="background:rgba(0,0,0,0.06);color:var(--dark);" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" style="background:rgba(0,0,0,0.06);color:var(--dark);" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kontakt forma -->
+      <div class="contact-form">
+        <h3 class="form-title">Pošaljite Upit</h3>
+        <p class="form-subtitle">Odgovaramo u roku od 24 sata</p>
+
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Ime i prezime <span class="required">*</span></label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Vaše ime" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon</label>
+              <input type="tel" id="phone" name="phone" class="form-control" placeholder="+382 XX XXX XXX">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email adresa <span class="required">*</span></label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="vasa@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="product">Zainteresovani za proizvod</label>
+            <select id="product" name="product" class="form-control">
+              <option value="">Odaberite kategoriju (opciono)</option>
+              <option value="3D Letvice">3D Letvice</option>
+              <option value="Akustični Paneli">Akustični Paneli</option>
+              <option value="Dekorativni Paneli">Dekorativni Paneli</option>
+              <option value="Flex Stone">Flex Stone</option>
+              <option value="PU Stone">PU Stone</option>
+              <option value="UV Paneli">UV Paneli</option>
+              <option value="Ostalo">Ostalo / Opšte informacije</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Poruka <span class="required">*</span></label>
+            <textarea id="message" name="message" class="form-control" placeholder="Opišite vaš prostor, dimenzije, željeni materijal ili postavite pitanje..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
+            <i class="fas fa-paper-plane"></i> Pošalji Poruku
+          </button>
+
+          <div id="form-message"></div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="map-section">
+  <div class="container">
+    <div class="map-wrapper">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2938.6!2d19.2594!3d42.4304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDI1JzQ5LjQiTiAxOcKwMTUnMzMuOCJF!5e0!3m2!1sbs!2sme!4v1710000000000!5m2!1sbs!2sme"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Make My Home lokacija - City Kvart Podgorica">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fas fa-home"></i></div>
+          <div class="logo-text">
+            <span class="name">Make My Home</span>
+            <span class="tagline">Wall Panels & Decor</span>
+          </div>
+        </a>
+        <p class="footer-desc">Premium zidni paneli i 3D letvice u Podgorici. Transformišite Vaš prostor.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title">Navigacija</h4>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Početna</a></li>
+          <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> O Nama</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Kategorije</h4>
+        <ul class="footer-links">
+          <li><a href="products.html?cat=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="products.html?cat=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="products.html?cat=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+          <li><a href="products.html?cat=pu-stone"><i class="fas fa-chevron-right"></i> PU Stone</a></li>
+          <li><a href="products.html?cat=uv-paneli"><i class="fas fa-chevron-right"></i> UV Paneli</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Kontakt</h4>
+        <ul class="footer-contact-list">
+          <li><i class="fas fa-map-marker-alt"></i><span>City Kvart, Podgorica</span></li>
+          <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
+          <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
+          <li><i class="fas fa-clock"></i><span>Pon–Sub: 09:00 – 18:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Make My Home. Sva prava zadržana.</p>
+      <p>Dizajnirano za <a href="#">makemyhome.me</a></p>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
+<script src="js/main.js"></script>
+<script>
+  // Pre-fill product from URL
+  const params = new URLSearchParams(window.location.search);
+  const prod = params.get('product');
+  if (prod) {
+    const sel = document.getElementById('product');
+    if (sel) {
+      for (let opt of sel.options) {
+        if (opt.value.toLowerCase().includes(prod.toLowerCase())) {
+          opt.selected = true;
+          break;
+        }
+      }
+    }
+  }
+</script>
 </body>
 </html>

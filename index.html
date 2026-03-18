@@ -1,28 +1,389 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make My Home Decor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Make My Home - Prodaja zidnih panela, 3D letvica, akustičnih panela i dekorativnih obloga u Crnoj Gori. Podgorica. Posjetite naš showroom.">
+  <meta name="keywords" content="zidni paneli, 3D letvice, akustični paneli, dekorativni paneli, flex stone, PU stone, UV paneli, Podgorica, Crna Gora">
+  <meta property="og:title" content="Make My Home – Zidni Paneli & 3D Letvice">
+  <meta property="og:description" content="Transformišite svoj dom uz premium zidne panele i 3D letvice. Podgorica, Crna Gora.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://makemyhome.me">
+  <title>Make My Home – Zidni Paneli & 3D Letvice | Podgorica</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Make My Home Decor</h1>
-        <p>Contact us: <a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></p>
-        <p>Phone: 069105222</p>
-        <p>Location: Vojvode Maša Djurovića 41, City Kvart, Podgorica</p>
-    </header>
-    <main>
-        <section>
-            <h2>Our Products</h2>
-            <ul>
-                <li>Wall Coverings</li>
-                <li>Decorative Panels</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Make My Home Decor</p>
-    </footer>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-home"></i>
+      </div>
+      <div class="logo-text">
+        <span class="name">Make My Home</span>
+        <span class="tagline">Wall Panels & Decor</span>
+      </div>
+    </a>
+
+    <nav id="nav-menu" class="nav-menu">
+      <a href="index.html" class="nav-link">Početna</a>
+      <a href="products.html" class="nav-link">Proizvodi</a>
+      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
+    </nav>
+
+    <button id="hamburger" class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-award"></i>
+        Premium Zidne Obloge · Podgorica, CG
+      </div>
+      <h1 class="hero-title">
+        Transformišite<br>Vaš Dom sa<br><span class="accent">Stilom i Elegancijom</span>
+      </h1>
+      <p class="hero-desc">
+        Prodajemo premium zidne panele i 3D letvice koji pretvaraju svaki prostor u remek-djelo.
+        Veliku kolekciju materijala i dizajna prilagođavamo Vašoj viziji.
+      </p>
+      <div class="hero-actions">
+        <a href="products.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-th-large"></i> Pogledaj Proizvode
+        </a>
+        <a href="contact.html" class="btn btn-outline btn-lg">
+          <i class="fas fa-phone"></i> Pozovite Nas
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="number">6+</div>
+          <div class="label">Kategorija proizvoda</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">100+</div>
+          <div class="label">Zadovoljnih kupaca</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">50+</div>
+          <div class="label">Modela i dezena</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Skrolujte</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ===== KATEGORIJE ===== -->
+<section id="categories">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Naše Kategorije</h2>
+      <p class="section-subtitle">
+        Od 3D letvica do akustičnih panela – pronađite savršeno rješenje za svaki prostor
+      </p>
+    </div>
+    <div class="categories-grid" id="categories-grid">
+      <!-- Učitava se dinamički -->
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section id="featured">
+  <div class="container">
+    <div class="featured-header">
+      <div>
+        <div class="gold-line"></div>
+        <h2 class="section-title">Istaknuti Proizvodi</h2>
+        <p class="section-subtitle">Naši najpopularniji i najprodavaniji modeli</p>
+      </div>
+      <a href="products.html" class="btn btn-dark">
+        Svi Proizvodi <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="products-grid" id="featured-products">
+      <!-- Učitava se dinamički -->
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== O NAMA PREVIEW ===== -->
+<section id="about-preview">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrapper animate-on-scroll">
+        <div class="about-img-main">
+          <img src="images/about-showroom.jpg" alt="Make My Home Showroom"
+            onerror="this.parentElement.innerHTML='<i class=\'fas fa-store\' style=\'font-size:120px;color:rgba(255,255,255,0.2)\'></i>'">
+        </div>
+        <div class="about-img-badge">
+          <div class="years">5+</div>
+          <div class="years-text">Godina iskustva</div>
+        </div>
+      </div>
+      <div class="about-content animate-on-scroll">
+        <div class="gold-line"></div>
+        <h2 class="section-title">Vaš Partner za Ljepši Dom</h2>
+        <p class="section-subtitle">
+          Make My Home je specijalizovana firma za prodaju premium zidnih panela i dekorativnih obloga u Podgorici.
+          Nudimo kvalitetne materijale koji transformišu enterijer uz laku montažu i povoljne cijene.
+        </p>
+        <ul class="about-list">
+          <li><i class="fas fa-check-circle"></i> Premium kvalitet materijala po pristupačnim cijenama</li>
+          <li><i class="fas fa-check-circle"></i> Stručni savjeti za odabir pravog materijala</li>
+          <li><i class="fas fa-check-circle"></i> Brza isporuka na teritoriji Crne Gore</li>
+          <li><i class="fas fa-check-circle"></i> Montaža u saradnji sa provjerenim majstorima</li>
+          <li><i class="fas fa-check-circle"></i> Showroom u centru Podgorice – City Kvart</li>
+        </ul>
+        <a href="about.html" class="btn btn-primary">
+          <i class="fas fa-info-circle"></i> Saznaj Više
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ZAŠTO MI ===== -->
+<section id="why-us">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Zašto Izabrati Make My Home?</h2>
+      <p class="section-subtitle">Nudimo kompletno rješenje za uređenje Vašeg doma ili poslovnog prostora</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-medal"></i></div>
+        <h3>Premium Kvalitet</h3>
+        <p>Svi naši proizvodi prolaze stroge kontrole kvaliteta. Radimo isključivo sa provjerenim dobavljačima i certificiranim materijalima.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-palette"></i></div>
+        <h3>Širok Asortiman</h3>
+        <p>Više od 50 modela u 6 kategorija. Od rustikalnog drva do modernog betona – pronađite savršeni dizajn za svaki ukus.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-tools"></i></div>
+        <h3>Laka Montaža</h3>
+        <p>Naši paneli su dizajnirani za jednostavnu montažu. Pružamo tehničku podršku i upute za instalaciju za svaki proizvod.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-tag"></i></div>
+        <h3>Povoljne Cijene</h3>
+        <p>Direktan uvoz znači niže cijene za vas. Nudimo i posebne popuste za veće količine i projekte.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-truck"></i></div>
+        <h3>Brza Isporuka</h3>
+        <p>Dostava na cijeloj teritoriji Crne Gore. Materijal uvijek na lageru, bez čekanja i odlaganja vaših projekata.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-headset"></i></div>
+        <h3>Stručna Podrška</h3>
+        <p>Naš tim stoji Vam na raspolaganju za savjete pri odabiru materijala, mjerenjima i procjenama za vaš projekat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Šta Kažu Naši Kupci</h2>
+      <p class="section-subtitle">Pravi komentari zadovoljnih kupaca koji su uredili svoje domove</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">Nevjerovatna transformacija dnevnog boravka! 3D letvice u hrast dezenu izgledaju luksuzno i skupo, a cijena je bila pristupačna. Montaža je bila jednostavna. Preporučujem svima!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">M</div>
+          <div class="author-info">
+            <div class="name">Marko Nikolić</div>
+            <div class="location">Podgorica</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">Koristila sam Flex Stone za renoviranje kupatila. Materijal je fantastičan – izgleda kao pravi kamen, a vodooporan je i lagan za čišćenje. Osoblje je bilo izuzetno ljubazno i stručno.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <div class="name">Ana Popović</div>
+            <div class="location">Bar</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <p class="testimonial-text">Akustični paneli su savršeni za naš kućni studio. Zvuk je drastično bolji, a prostorija izgleda profesionalno. Brza isporuka i odlična komunikacija sa firmom.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">D</div>
+          <div class="author-info">
+            <div class="name">Dragana Vujović</div>
+            <div class="location">Nikšić</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT CTA ===== -->
+<section id="contact-cta">
+  <div class="container">
+    <div class="cta-content">
+      <div class="gold-line" style="margin:0 auto 20px;"></div>
+      <h2 class="section-title">Spremni za Transformaciju?</h2>
+      <p class="section-subtitle">
+        Posjetite nas u showroomu ili nas kontaktirajte – dajte nam dimenzije i mi ćemo Vam izračunati tačne količine i cijenu
+      </p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-envelope"></i> Pošalji Upit
+        </a>
+        <a href="products.html" class="btn btn-outline btn-lg">
+          <i class="fas fa-th-large"></i> Pogledaj Katalog
+        </a>
+      </div>
+      <div class="cta-contact-info">
+        <div class="cta-contact-item">
+          <i class="fas fa-phone"></i>
+          <span>069 105 222</span>
+        </div>
+        <div class="cta-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>makemyhome.me@gmail.com</span>
+        </div>
+        <div class="cta-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Vojvode Maša Đurovića 41, City Kvart, Podgorica</span>
+        </div>
+        <div class="cta-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Pon–Sub: 09:00 – 18:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon"><i class="fas fa-home"></i></div>
+          <div class="logo-text">
+            <span class="name">Make My Home</span>
+            <span class="tagline">Wall Panels & Decor</span>
+          </div>
+        </a>
+        <p class="footer-desc">
+          Specijalizovana prodavnica premium zidnih panela i 3D letvica u Podgorici.
+          Transformišite Vaš prostor uz kvalitetne materijale po povoljnim cijenama.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Navigacija</h4>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Početna</a></li>
+          <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> O Nama</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Kontakt</a></li>
+          <li><a href="admin/"><i class="fas fa-lock"></i> Admin Panel</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Kategorije</h4>
+        <ul class="footer-links">
+          <li><a href="products.html?cat=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="products.html?cat=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="products.html?cat=dekorativni-paneli"><i class="fas fa-chevron-right"></i> Dekorativni Paneli</a></li>
+          <li><a href="products.html?cat=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+          <li><a href="products.html?cat=pu-stone"><i class="fas fa-chevron-right"></i> PU Stone</a></li>
+          <li><a href="products.html?cat=uv-paneli"><i class="fas fa-chevron-right"></i> UV Paneli</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Kontakt</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Vojvode Maša Đurovića 41, City Kvart, Podgorica</span>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <span><a href="tel:+38269105222">069 105 222</a></span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span>
+          </li>
+          <li>
+            <i class="fas fa-clock"></i>
+            <span>Pon–Sub: 09:00 – 18:00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Make My Home. Sva prava zadržana.</p>
+      <p>Dizajnirano za <a href="#">makemyhome.me</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCROLL TO TOP ===== -->
+<button id="scroll-top" aria-label="Nazad na vrh">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script src="js/main.js"></script>
+<script src="js/products.js"></script>
+<script>
+  // Učitaj kategorije i featured proizvode
+  renderCategories('categories-grid');
+  renderFeatured('featured-products', 6);
+</script>
 </body>
 </html>

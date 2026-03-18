@@ -1,0 +1,56 @@
+[
+  {
+    "id": "3d-letvice",
+    "name": "3D Letvice",
+    "nameEn": "3D Wall Slats",
+    "icon": "fas fa-grip-lines",
+    "description": "Elegantne drvene letvice za moderne i luksuzne enterijer projekte",
+    "image": "images/categories/3d-letvice.jpg",
+    "color": "#8B6914"
+  },
+  {
+    "id": "akusticni-paneli",
+    "name": "Akustični Paneli",
+    "nameEn": "Acoustic Panels",
+    "icon": "fas fa-volume-mute",
+    "description": "Vrhunska zvučna izolacija uz dekorativan izgled",
+    "image": "images/categories/akusticni.jpg",
+    "color": "#2c2c2c"
+  },
+  {
+    "id": "dekorativni-paneli",
+    "name": "Dekorativni Paneli",
+    "nameEn": "Decorative Panels",
+    "icon": "fas fa-th-large",
+    "description": "Transformišite prostor uz naše dekorativne zidne obloge",
+    "image": "images/categories/dekorativni.jpg",
+    "color": "#5a5a5a"
+  },
+  {
+    "id": "flex-stone",
+    "name": "Flex Stone",
+    "nameEn": "Flex Stone",
+    "icon": "fas fa-mountain",
+    "description": "Prirodni kamen u fleksibilnoj formi za svaku površinu",
+    "image": "images/categories/flex-stone.jpg",
+    "color": "#6b5344"
+  },
+  {
+    "id": "pu-stone",
+    "name": "PU Stone",
+    "nameEn": "PU Stone",
+    "icon": "fas fa-cube",
+    "description": "Laki poliuretan kameni paneli za unutrašnje uređenje",
+    "image": "images/categories/pu-stone.jpg",
+    "color": "#7a7a6a"
+  },
+  {
+    "id": "uv-paneli",
+    "name": "UV Paneli",
+    "nameEn": "UV Panels",
+    "icon": "fas fa-sun",
+    "description": "Visokoglansni i mat UV paneli za savremene enterijer projekte",
+    "image": "images/categories/uv-paneli.jpg",
+    "color": "#c9a86c"
+  }
+]
