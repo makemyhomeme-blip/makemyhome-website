@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        #weather { margin-top: 20px; }
+        .forecast { display: flex; justify-content: space-between; }
+        .day { background: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <h1>Weather Dashboard</h1>
+    <div>
+        <input type="text" id="city-input" placeholder="Enter city" />
+        <button id="search-button">Search</button>
+    </div>
+    <div id="weather">
+        <h2>Current Weather</h2>
+        <div id="current-weather"></div>
+        <h2>5-Day Forecast</h2>
+        <div id="forecast" class="forecast"></div>
+        <h2>Air Quality</h2>
+        <div id="air-quality"></div>
+    </div>
+    <script>
+        const apiKey = 'YOUR_API_KEY'; // Please replace with your actual API key
+        const searchButton = document.getElementById('search-button');
+        const cityInput = document.getElementById('city-input');
+        const currentWeatherDiv = document.getElementById('current-weather');
+        const forecastDiv = document.getElementById('forecast');
+        const airQualityDiv = document.getElementById('air-quality');
+
+        searchButton.addEventListener('click', async () => {
+            const city = cityInput.value;
+            if (city) {
+                const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+                const weatherData = await weatherResponse.json();
+                const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`);
+                const forecastData = await forecastResponse.json();
+                const airQualityResponse = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${apiKey}`);
+                const airQualityData = await airQualityResponse.json();
+
+                displayCurrentWeather(weatherData);
+                displayForecast(forecastData);
+                displayAirQuality(airQualityData);
+            }
+        });
+
+        function displayCurrentWeather(data) {
+            const temp = (data.main.temp - 273.15).toFixed(2);
+            currentWeatherDiv.innerHTML = `<p>${data.name}: ${temp}°C, ${data.weather[0].description}</p>`;
+        }
+
+        function displayForecast(data) {
+            forecastDiv.innerHTML = '';
+            for (let i = 0; i < data.list.length; i += 8) {
+                const day = data.list[i];
+                const temp = (day.main.temp - 273.15).toFixed(2);
+                const date = new Date(day.dt * 1000).toLocaleDateString();
+                forecastDiv.innerHTML += `<div class='day'><h3>${date}</h3><p>${temp}°C, ${day.weather[0].description}</p></div>`;
+            }
+        }
+
+        function displayAirQuality(data) {
+            const aqi = data.list[0].main.aqi;
+            airQualityDiv.innerHTML = `<p>Air Quality Index: ${aqi}</p>`;
+        }
+    </script>
+</body>
+</html>
