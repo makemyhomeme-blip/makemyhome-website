@@ -2,12 +2,19 @@
    MAKE MY HOME - Products JavaScript
    =================================================== */
 
-let allProducts = [];
-let allCategories = [];
 let currentFilter = 'all';
 
-// ===== UČITAJ PODATKE =====
+// ===== PODACI UGRAĐENI DIREKTNO (rade i bez servera) =====
+const PRODUCTS_DATA = [{"id":1,"name":"3D Letvice Natura","category":"3d-letvice","price":"45.00","unit":"m²","description":"Elegantne 3D letvice od prirodnog drveta koje daju dubinu i karakter svakom prostoru. Idealne za dnevne sobe i spavaće sobe.","features":["Prirodno drvo","Jednostavna montaža","Razne boje","Dimenzije: 270x12x2cm"],"image":"images/products/3d-letvice-natura.jpg","badge":"Najprodavanije","inStock":true,"featured":true},{"id":2,"name":"3D Letvice Premium Oak","category":"3d-letvice","price":"55.00","unit":"m²","description":"Premium hrast letvice sa naturalnim završetkom. Vrhunski kvalitet za ekskluzivne enterijer projekte.","features":["Premium hrast","UV zaštita","Anti-vlaga tretman","Dimenzije: 270x12x2cm"],"image":"images/products/3d-letvice-oak.jpg","badge":"Premium","inStock":true,"featured":true},{"id":3,"name":"Akustični Panel Crni","category":"akusticni-paneli","price":"65.00","unit":"m²","description":"Visokoučinkoviti akustični paneli koji reduciraju buku za 70%. Savršeni za studije, kancelarije i kućna bioskopska sala.","features":["Zvučna izolacija 70%","Ekološki materijal","Crna boja","Dimenzije: 60x60cm"],"image":"images/products/akusticni-crni.jpg","badge":"Novo","inStock":true,"featured":false},{"id":4,"name":"Akustični Panel Sivi","category":"akusticni-paneli","price":"60.00","unit":"m²","description":"Moderni sivi akustični paneli sa dekorativnom strukturom. Kombinuju estetiku i funkcionalnost.","features":["Zvučna izolacija 65%","Moderna siva","Lako čišćenje","Dimenzije: 60x60cm"],"image":"images/products/akusticni-sivi.jpg","badge":null,"inStock":true,"featured":false},{"id":5,"name":"Dekorativni Panel Mramor","category":"dekorativni-paneli","price":"38.00","unit":"m²","description":"Luksuzni mramorni efekt panel koji transformiše prostor bez skupih renovacija. PVC osnova sa UV štampom.","features":["Mramorni efekt","Vodootporan","Laka montaža","Dimenzije: 122x244cm"],"image":"images/products/dekorativni-mramor.jpg","badge":"Akcija","inStock":true,"featured":true},{"id":6,"name":"Dekorativni Panel Beton","category":"dekorativni-paneli","price":"35.00","unit":"m²","description":"Industrijski betonski efekt za moderan loft dizajn. Lagani panel koji ne opterećuje zid.","features":["Beton efekt","Lagan materijal","Bez prašine od betona","Dimenzije: 122x244cm"],"image":"images/products/dekorativni-beton.jpg","badge":null,"inStock":true,"featured":false},{"id":7,"name":"Flex Stone Antracit","category":"flex-stone","price":"75.00","unit":"m²","description":"Prirodni kamen tanak svega 2-3mm koji se savija i montira na svaku površinu. Jedinstven izgled pravog kamena.","features":["Prirodni kamen","Debljina 2-3mm","Fleksibilan","Vodootporan"],"image":"images/products/flex-stone-antracit.jpg","badge":"Ekskluzivno","inStock":true,"featured":true},{"id":8,"name":"Flex Stone Bež","category":"flex-stone","price":"75.00","unit":"m²","description":"Topli bež ton prirodnog kamena u fleksibilnoj formi. Idealan za mediteranski i prirodni dizajn interijera.","features":["Prirodni kamen","Topli bež ton","UV stabilan","Za unutra i vani"],"image":"images/products/flex-stone-bez.jpg","badge":null,"inStock":true,"featured":false},{"id":9,"name":"PU Stone Cigla Bijela","category":"pu-stone","price":"28.00","unit":"m²","description":"Poliuretan kameni panel sa izgledom bijele cigle. Lagan, topao i jednostavan za montažu bez majstora.","features":["PU materijal","Lagan i topao","Cigla efekt","Dimenzije: 60x15cm"],"image":"images/products/pu-stone-cigla.jpg","badge":"Popularno","inStock":true,"featured":false},{"id":10,"name":"PU Stone Rustik","category":"pu-stone","price":"32.00","unit":"m²","description":"Rustikalni kamen efekt od PU materijala sa dubokim 3D reljefom. Savršen za tematske i rustikalne enterijer projekte.","features":["Duboki reljef","Rustikalni dizajn","Topla izolacija","Laka montaža"],"image":"images/products/pu-stone-rustik.jpg","badge":null,"inStock":true,"featured":false},{"id":11,"name":"UV Panel Visoki Sjaj","category":"uv-paneli","price":"42.00","unit":"m²","description":"Visokoglansni UV panel sa ogledalo efektom. Idealan za moderne kuhinje, kupatila i poslovne prostore.","features":["Visoki sjaj","UV otporan","Vodootporan","Dimenzije: 122x244cm"],"image":"images/products/uv-panel-sjaj.jpg","badge":"Bestseller","inStock":true,"featured":true},{"id":12,"name":"UV Panel Mat Bijeli","category":"uv-paneli","price":"38.00","unit":"m²","description":"Elegantni mat bijeli UV panel za minimalistički i skandinavski dizajn. Stvara osjećaj prostranstva i čistoće.","features":["Mat završetak","Čista bijela","Lako čišćenje","Dimenzije: 122x244cm"],"image":"images/products/uv-panel-mat.jpg","badge":null,"inStock":true,"featured":false}];
+
+const CATEGORIES_DATA = [{"id":"3d-letvice","name":"3D Letvice","icon":"fas fa-grip-lines","description":"Elegantne drvene letvice za moderne i luksuzne enterijer projekte","color":"#8B6914"},{"id":"akusticni-paneli","name":"Akustični Paneli","icon":"fas fa-volume-mute","description":"Vrhunska zvučna izolacija uz dekorativan izgled","color":"#2c2c2c"},{"id":"dekorativni-paneli","name":"Dekorativni Paneli","icon":"fas fa-th-large","description":"Transformišite prostor uz naše dekorativne zidne obloge","color":"#5a5a5a"},{"id":"flex-stone","name":"Flex Stone","icon":"fas fa-mountain","description":"Prirodni kamen u fleksibilnoj formi za svaku površinu","color":"#6b5344"},{"id":"pu-stone","name":"PU Stone","icon":"fas fa-cube","description":"Laki poliuretan kameni paneli za unutrašnje uređenje","color":"#7a7a6a"},{"id":"uv-paneli","name":"UV Paneli","icon":"fas fa-sun","description":"Visokoglansni i mat UV paneli za savremene enterijer projekte","color":"#c9a86c"}];
+
+let allProducts = PRODUCTS_DATA;
+let allCategories = CATEGORIES_DATA;
+
+// ===== UČITAJ PODATKE (pokušaj fetch, fallback na ugrađene) =====
 async function loadData() {
+  if (allProducts.length > 0 && allCategories.length > 0) return; // već učitano
   try {
     const [prodRes, catRes] = await Promise.all([
       fetch('data/products.json'),
@@ -16,9 +23,9 @@ async function loadData() {
     allProducts = await prodRes.json();
     allCategories = await catRes.json();
   } catch (e) {
-    console.error('Greška učitavanja:', e);
-    allProducts = [];
-    allCategories = [];
+    // Koristimo ugrađene podatke (fallback)
+    allProducts = PRODUCTS_DATA;
+    allCategories = CATEGORIES_DATA;
   }
 }
 
