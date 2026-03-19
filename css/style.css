@@ -1687,3 +1687,73 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   #categories, #featured, #about-preview, #why-us, #testimonials, #contact-cta { padding: 64px 0; }
   .products-grid { grid-template-columns: 1fr; }
 }
+
+/* ===== INSTAGRAM FEED ===== */
+#instagram-feed {
+  padding: 100px 0;
+  background: var(--light);
+}
+
+.insta-handle {
+  color: var(--primary);
+  font-weight: 600;
+}
+.insta-handle:hover { color: var(--primary-dark); }
+
+.insta-widget-wrapper {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Placeholder — vidljiv dok LightWidget nije ubačen */
+.insta-placeholder {
+  border: 2px dashed var(--primary-light);
+  border-radius: var(--radius);
+  padding: 60px 20px;
+  text-align: center;
+  background: var(--white);
+}
+
+.insta-placeholder-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--dark);
+}
+.insta-placeholder-link:hover .insta-placeholder-icon { background: var(--primary); color: var(--white); }
+
+.insta-placeholder-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--primary);
+  transition: var(--transition);
+  border: 2px solid var(--primary-light);
+}
+
+.insta-placeholder-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.insta-placeholder-text strong { font-size: 18px; color: var(--dark); }
+.insta-placeholder-text span { font-size: 14px; color: var(--gray); }
+
+/* LightWidget iframe — poravnanje nakon ubacivanja */
+.insta-widget-wrapper iframe.lightwidget-widget {
+  display: block;
+  width: 100%;
+  border: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  #instagram-feed { padding: 64px 0; }
+}
