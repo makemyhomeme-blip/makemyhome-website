@@ -2236,7 +2236,30 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .spec-feature-list li i { color: var(--primary); font-size: 13px; margin-top: 2px; flex-shrink: 0; }
 
-/* ===== REVIEWS ===== */
+/* ===== REVIEWS (inline in product info) ===== */
+.product-reviews-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1.5px solid rgba(0,0,0,0.08);
+}
+.reviews-heading {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reviews-avg {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+/* ===== REVIEWS (old summary – kept for fallback) ===== */
 .reviews-summary {
   display: flex;
   align-items: center;
