@@ -354,21 +354,57 @@ async function renderProductDetail() {
   }
   const coveragePerUnit = getCoveragePerUnit();
 
-  // Reviews data
+  // Reviews data – per product ID, with total count and 2 visible comments
   const reviewsData = {
-    'bambus-drveni': [
-      { name: 'Marko T.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Postavio sam u dnevnoj sobi iza TV-a i rezultat je fantastičan. Panel je čvrst, montaža super jednostavna – silikon i gotovo. Svi gosti pitaju odakle mi ideja.' },
-      { name: 'Jovana M.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Naručila za spavaću sobu, boja je tačno kako izgleda na slici. Kvalitet odličan za ovu cijenu. Preporučujem svima!' }
-    ],
-    'akusticni-paneli': [
-      { name: 'Dragan L.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Postavio u kućni studio za snimanje. Zvuk je primjetno bolji, a i vizuelno izgleda profesionalno. Odlična investicija.' },
-      { name: 'Ivana B.', city: 'Herceg Novi', date: 'Decembar 2025', stars: 5, text: 'Koristim u dnevnoj sobi jer imam mali stan. I zvuk je bolji i izgled sobe je ljepši. Zadovoljna sam 100%.' }
-    ]
+    4:  { total: 7,  fiveS: 6, fourS: 1, comments: [
+      { name: 'Aleksandar M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio u kućni studio – razlika u zvuku je odmah primjetna. Panel je sivi, diskretnog dizajna, odlično se uklapa.' },
+      { name: 'Tijana R.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Kupila za dnevnu sobu. Siva boja je neutralna, pristaje uz sve. Montaža je bila super jednostavna.' }
+    ]},
+    18: { total: 15, fiveS: 13, fourS: 2, comments: [
+      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Topli Tik daje savršenu toplinu prostoriji. Postavio iza TV-a u dnevnoj sobi i svi gosti pitaju odakle mi ideja – izgleda skupo a cijena je odlična.' },
+      { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Boja tika je tačno kao na slikama, topla i prirodna. Postavljanje sa silikonom trajalo svega sat vremena. Presretna sam!' }
+    ]},
+    19: { total: 10, fiveS: 8, fourS: 2, comments: [
+      { name: 'Stefan K.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Bijeli Jasen je pravi izbor za moderan, svetao stan. Osvjetljava prostor i čini sobu vizualno većom. Preporučujem svima!' },
+      { name: 'Ana P.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Jako lijepa bijela nijansa, ne previše bijela nego prirodna. Jedino bih voljela malo veće dimenzije panela.' }
+    ]},
+    20: { total: 12, fiveS: 11, fourS: 1, comments: [
+      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Crni Antracit je brutalno lijep. Cijela zida u spavaćoj sobi – izgleda kao luksuzni hotel. Montaža perfektna.' },
+      { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Tamna boja daje dramatičnost prostoru. Kombinovala sa zlatnim detaljima i rezultat je fenomenalan!' }
+    ]},
+    21: { total: 6,  fiveS: 5, fourS: 1, comments: [
+      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Srebrno siva je savršena nijansa – ni pretopla ni prehladna. Ide uz sve stilove namještaja. Jako zadovoljan.' },
+      { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Odabrala za ured i savršeno odgovara poslovnom prostoru. Daje ozbiljnost i eleganciju.' }
+    ]},
+    22: { total: 9,  fiveS: 8, fourS: 1, comments: [
+      { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Pješčani Hrast je toplih tonova – savršen za stan koji želi prirodan dodir. Postavio u hodniku i odmah promjena.' },
+      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Boja hrasta je autentična, ne plastičan izgled. Kvalitet je iznenađujuće dobar za ovu cijenu!' }
+    ]},
+    23: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Dimljeni Orah je moja omiljena nijansa. Daje prostoriji karakter i toplinu istovremeno. Postavio u trpezariji.' },
+      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Tamni orah je elegantan i moderan. Kombinuje se lijepo i sa svjetlim i sa tamnim namještajem.' }
+    ]},
+    24: { total: 8,  fiveS: 7, fourS: 1, comments: [
+      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Prirodni Hrast izgleda kao pravo drvo. Postavio u dnevnoj sobi iza sofe i efekt je nevjerovatan – kao da je sobi duša vraćena.' },
+      { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Boja je autentično drvenasta, miris je čak i kao pravo drvo. Izuzetno zadovoljna kvalitetom!' }
+    ]},
+    25: { total: 5,  fiveS: 4, fourS: 1, comments: [
+      { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Divlji Orah ima specifičnu teksturu koja privlači pogled. Jedinstven izgled, svaka daska drugačija – baš kao pravo drvo.' },
+      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Lijepa tamno-smeđa nijansa, odlično ide uz rustičan enterijer. Montaža jednostavna, preporučujem.' }
+    ]},
+    26: { total: 13, fiveS: 12, fourS: 1, comments: [
+      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Orah je savršen spoj tamnog i toplog tona. Postavio u kancelariji i kolege svakodnevno komentarišu koliko je prostorija lijepa.' },
+      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Tamna espresso boja daje luksuz bez prevelike cijene. Panel je čvrst i lako se čisti. Apsolutno preporučujem!' }
+    ]}
   };
-  const productReviews = reviewsData[product.category] || reviewsData['bambus-drveni'];
-  const totalRev = productReviews.length;
-  const fiveStars = productReviews.filter(r => r.stars === 5).length;
-  const fourStars = productReviews.filter(r => r.stars === 4).length;
+  const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
+    { name: 'Marko T.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Odličan panel, montaža jednostavna, izgleda skupo. Preporučujem!' },
+    { name: 'Ana K.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Jako sam zadovoljna. Boja je tačna, kvalitet dobar. Svaka preporuka.' }
+  ]};
+  const productReviews = rv.comments;
+  const totalRev = rv.total;
+  const fiveStarsCount = rv.fiveS;
+  const fourStarsCount = rv.fourS;
   const starFull = '<i class="fas fa-star rev-star-gold"></i>';
   const starEmpty = '<i class="fas fa-star rev-star-empty"></i>';
   const starIcons = n => Array.from({length: 5}, (_, i) => i < n ? starFull : starEmpty).join('');
@@ -380,11 +416,11 @@ async function renderProductDetail() {
         <div class="rv-score-col">
           <div class="rv-big-num">4.8</div>
           <div class="rv-big-stars">${starIcons(5)}</div>
-          <div class="rv-count">${totalRev} recenzije</div>
+          <div class="rv-count">${totalRev} recenzija</div>
         </div>
         <div class="rv-bars-col">
-          <div class="rv-bar-row"><span class="rv-bar-label">5</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill" style="width:${pct(fiveStars)}%"></div></div><span class="rv-bar-num">${fiveStars}</span></div>
-          <div class="rv-bar-row"><span class="rv-bar-label">4</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill" style="width:${pct(fourStars)}%"></div></div><span class="rv-bar-num">${fourStars}</span></div>
+          <div class="rv-bar-row"><span class="rv-bar-label">5</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill" style="width:${pct(fiveStarsCount)}%"></div></div><span class="rv-bar-num">${fiveStarsCount}</span></div>
+          <div class="rv-bar-row"><span class="rv-bar-label">4</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill" style="width:${pct(fourStarsCount)}%"></div></div><span class="rv-bar-num">${fourStarsCount}</span></div>
           <div class="rv-bar-row"><span class="rv-bar-label">3</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill rv-bar-fill--empty" style="width:0%"></div></div><span class="rv-bar-num">0</span></div>
           <div class="rv-bar-row"><span class="rv-bar-label">2</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill rv-bar-fill--empty" style="width:0%"></div></div><span class="rv-bar-num">0</span></div>
           <div class="rv-bar-row"><span class="rv-bar-label">1</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill rv-bar-fill--empty" style="width:0%"></div></div><span class="rv-bar-num">0</span></div>
