@@ -94,49 +94,110 @@ async function renderFeatured(containerId, limit = 6) {
   initAnimations();
 }
 
-// ===== RENDERUJ SVE PROIZVODE (Products page) =====
-async function renderAllProducts(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
+// ===== PRODUCTS PAGE – category-first navigation =====
+async function initProductsPage() {
   await loadData();
-  renderFilters();
-  filterAndRender(container);
+
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('cat') || params.get('category');
+
+  if (cat) {
+    showCategoryProducts(cat);
+  } else {
+    showCategoryGrid();
+  }
+
+  // Fill footer categories
+  const footerCats = document.getElementById('footer-cats');
+  if (footerCats) {
+    const catMap = buildCatMap();
+    footerCats.innerHTML = Object.values(catMap).map(c =>
+      `<li><a href="products.html?cat=${c.id}"><i class="fas fa-chevron-right"></i> ${c.name}</a></li>`
+    ).join('');
+  }
 }
 
-// ===== FILTERI =====
-function renderFilters() {
-  const filterBar = document.getElementById('filter-bar');
-  if (!filterBar) return;
-
-  const allBtn = `<button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">
-    Sve Kategorije
-  </button>`;
-
-  const catBtns = allCategories.map(cat =>
-    `<button class="filter-btn" data-filter="${cat.id}" onclick="setFilter('${cat.id}', this)">
-      ${cat.name}
-    </button>`
-  ).join('');
-
-  filterBar.innerHTML = allBtn + catBtns + `<span class="products-count" id="products-count"></span>`;
+function buildCatMap() {
+  const catMap = {};
+  allProducts.forEach(p => {
+    if (!catMap[p.category]) {
+      const catData = allCategories.find(c => c.id === p.category);
+      catMap[p.category] = {
+        id: p.category,
+        name: catData?.name || p.category,
+        icon: catData?.icon || 'fas fa-box',
+        color: catData?.color || '#c9a86c',
+        description: catData?.description || '',
+        count: 0,
+        firstImage: null
+      };
+    }
+    catMap[p.category].count++;
+    if (!catMap[p.category].firstImage && p.image) {
+      catMap[p.category].firstImage = p.image;
+    }
+  });
+  return catMap;
 }
 
-function setFilter(filter, btn) {
-  currentFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+function showCategoryGrid() {
+  document.getElementById('category-grid').style.display = 'grid';
+  document.getElementById('products-container').style.display = 'none';
+  document.getElementById('back-bar').style.display = 'none';
+
+  const grid = document.getElementById('category-grid');
+  const catMap = buildCatMap();
+  const cats = Object.values(catMap);
+
+  grid.innerHTML = cats.map(cat => `
+    <a href="products.html?cat=${cat.id}" class="cat-card animate-on-scroll">
+      <div class="cat-card-img">
+        ${cat.firstImage
+          ? `<img src="${cat.firstImage}" alt="${cat.name}" loading="lazy">`
+          : `<i class="${cat.icon}"></i>`}
+      </div>
+      <div class="cat-card-body">
+        <div class="cat-card-icon" style="background:${cat.color}">
+          <i class="${cat.icon}"></i>
+        </div>
+        <div class="cat-card-info">
+          <h3>${cat.name}</h3>
+          <p>${cat.description}</p>
+          <span class="cat-card-count">${cat.count} proizvoda</span>
+        </div>
+      </div>
+    </a>
+  `).join('');
+
+  initAnimations();
+}
+
+function showCategoryProducts(catId) {
+  document.getElementById('category-grid').style.display = 'none';
+  document.getElementById('products-container').style.display = 'grid';
+
+  const catMap = buildCatMap();
+  const cat = catMap[catId] || { name: catId, count: 0 };
+
+  // Update breadcrumb & title
+  const breadLabel = document.getElementById('breadcrumb-label');
+  if (breadLabel) breadLabel.textContent = cat.name;
+  const pageTitle = document.getElementById('page-title');
+  if (pageTitle) pageTitle.textContent = cat.name;
+  const pageSub = document.getElementById('page-subtitle');
+  if (pageSub) pageSub.textContent = `Pogledajte sve ${cat.count} proizvoda u kategoriji ${cat.name}`;
+
+  // Show back bar
+  const backBar = document.getElementById('back-bar');
+  if (backBar) backBar.style.display = 'flex';
+  const catTitle = document.getElementById('cat-title');
+  if (catTitle) catTitle.textContent = cat.name;
+  const catCount = document.getElementById('cat-count');
+  if (catCount) catCount.textContent = `${cat.count} proizvoda`;
+
+  // Render products
   const container = document.getElementById('products-container');
-  if (container) filterAndRender(container);
-}
-
-function filterAndRender(container) {
-  const filtered = currentFilter === 'all'
-    ? allProducts
-    : allProducts.filter(p => p.category === currentFilter);
-
-  const countEl = document.getElementById('products-count');
-  if (countEl) countEl.textContent = `${filtered.length} proizvod${filtered.length !== 1 ? 'a' : ''}`;
+  const filtered = allProducts.filter(p => p.category === catId);
 
   if (filtered.length === 0) {
     container.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gray);padding:60px 0;">Nema proizvoda u ovoj kategoriji.</p>';
