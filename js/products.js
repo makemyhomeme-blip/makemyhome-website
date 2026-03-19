@@ -534,8 +534,10 @@ async function renderProductDetail() {
       <div class="trust-item"><i class="fas fa-undo"></i><span>Zamjena u 7 dana</span></div>
     </div>
 
-    ${reviewsHtml}
   `;
+
+  // Append reviews directly to info
+  info.insertAdjacentHTML('beforeend', reviewsHtml);
 
   // Tab switch
   window.switchPqTab = function(tab, btn) {
