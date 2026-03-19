@@ -154,5 +154,70 @@
     "badge": null,
     "inStock": true,
     "featured": false
+  },
+  {
+    "id": 13,
+    "name": "Bambus Panel CQ006 Orah",
+    "category": "bambus-paneli",
+    "price": "86.99",
+    "unit": "kom",
+    "description": "Dekorativni bambus panel u toploj orah boji sa prirodnom teksturom drveta. Dimenzije 280×122 cm (3,42 m²) – idealan za zidne i stropne površine.",
+    "features": ["Dimenzije: 280×122 cm", "Površina: 3,42 m²", "Prirodna tekstura", "Jednostavna montaža"],
+    "image": "images/products/bambus-cq006.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 14,
+    "name": "Bambus Panel MW010 Bijeli Hrast",
+    "category": "bambus-paneli",
+    "price": "86.99",
+    "unit": "kom",
+    "description": "Svijetli bambus panel u prirodnom tonu bijelog hrasta. Dimenzije 280×122 cm (3,42 m²) – unosi toplinu i svjetlost u svaki prostor.",
+    "features": ["Dimenzije: 280×122 cm", "Površina: 3,42 m²", "Prirodna tekstura", "Jednostavna montaža"],
+    "image": "images/products/bambus-mw010.jpg",
+    "badge": "Novo",
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 15,
+    "name": "Bambus Panel MW301 Antracit",
+    "category": "bambus-paneli",
+    "price": "86.99",
+    "unit": "kom",
+    "description": "Tamni bambus panel u antracit boji sa suptilnom teksturom drveta. Dimenzije 280×122 cm (3,42 m²) – za moderan i elegantan interijer.",
+    "features": ["Dimenzije: 280×122 cm", "Površina: 3,42 m²", "Tamna antracit boja", "Jednostavna montaža"],
+    "image": "images/products/bambus-mw301.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 16,
+    "name": "Bambus Panel MW211 Sivi",
+    "category": "bambus-paneli",
+    "price": "86.99",
+    "unit": "kom",
+    "description": "Neutralni sivi bambus panel sa finim vertikalnim linijama. Dimenzije 280×122 cm (3,42 m²) – savršen za skandinavski i minimalistički dizajn.",
+    "features": ["Dimenzije: 280×122 cm", "Površina: 3,42 m²", "Siva boja", "Jednostavna montaža"],
+    "image": "images/products/bambus-mw211.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 17,
+    "name": "Bambus Panel MW013 Bež Orah",
+    "category": "bambus-paneli",
+    "price": "86.99",
+    "unit": "kom",
+    "description": "Topli bež-orah bambus panel sa prirodnim godovima drveta. Dimenzije 280×122 cm (3,42 m²) – klasičan izbor za dnevne sobe i spavaće sobe.",
+    "features": ["Dimenzije: 280×122 cm", "Površina: 3,42 m²", "Topla bež boja", "Jednostavna montaža"],
+    "image": "images/products/bambus-mw013.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
   }
 ]
