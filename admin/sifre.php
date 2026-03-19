@@ -2,81 +2,72 @@
 session_start();
 if (empty($_SESSION['admin_logged'])) { header('Location: index.php'); exit; }
 
-// Category mapping by page number
-function getCategory($page) {
-    if ($page >= 1 && $page <= 9)   return ['id' => 'drveni-paneli',    'name' => 'Drveni Paneli',    'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'];
-    if ($page >= 10 && $page <= 18)  return ['id' => 'tekstilni-paneli', 'name' => 'Tekstilni Paneli', 'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'];
-    if ($page >= 19 && $page <= 31)  return ['id' => 'mermerni-paneli',  'name' => 'Mermerni Paneli',  'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'];
-    if ($page >= 32 && $page <= 35)  return null; // skip
-    if ($page >= 36 && $page <= 39)  return ['id' => 'metalni-paneli',   'name' => 'Metalni Paneli',   'price' => '115.99', 'unit' => 'kom', 'dims' => '280×122cm'];
-    if ($page >= 40 && $page <= 67)  return ['id' => '3d-letvice',       'name' => '3D Letvice',       'price' => '19.99', 'unit' => 'kom', 'dims' => '280×16cm'];
-    if ($page >= 68 && $page <= 72)  return ['id' => 'akusticni-paneli', 'name' => 'Akustični Paneli', 'price' => '94.99', 'unit' => 'kom', 'dims' => '280×60cm'];
-    return null;
-}
+$categories = [
+    'drveni-paneli'    => ['name' => 'Drveni Paneli',    'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'],
+    'tekstilni-paneli' => ['name' => 'Tekstilni Paneli', 'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'],
+    'mermerni-paneli'  => ['name' => 'Mermerni Paneli',  'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'],
+    'metalni-paneli'   => ['name' => 'Metalni Paneli',   'price' => '115.99','unit' => 'kom', 'dims' => '280×122cm'],
+    '3d-letvice'       => ['name' => '3D Letvice',       'price' => '19.99', 'unit' => 'kom', 'dims' => '280×16cm'],
+    'akusticni-paneli' => ['name' => 'Akustični Paneli', 'price' => '94.99', 'unit' => 'kom', 'dims' => '280×60cm'],
+    'bambus-paneli'    => ['name' => 'Bambus Paneli',    'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'],
+];
 
 $message = '';
+$msgType = 'success';
 
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
-    $products = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jsonFile = '../data/products.json';
-    if (file_exists($jsonFile)) {
-        $products = json_decode(file_get_contents($jsonFile), true) ?? [];
-    }
+    $products = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?? []) : [];
+    $nextId   = count($products) > 0 ? max(array_column($products, 'id')) + 1 : 1;
+    $saved    = 0;
+    $errors   = [];
 
-    // Remove existing catalog products (pages 1-72) to avoid duplicates
-    $products = array_filter($products, fn($p) => !isset($p['from_katalog']));
-    $products = array_values($products);
+    $count = count($_POST['sifra'] ?? []);
+    for ($i = 0; $i < $count; $i++) {
+        $sifra   = trim($_POST['sifra'][$i] ?? '');
+        $catId   = $_POST['category'][$i] ?? '';
+        $imgFile = $_FILES['image']['name'][$i] ?? '';
 
-    $nextId = count($products) > 0 ? max(array_column($products, 'id')) + 1 : 1;
-    $saved = 0;
+        if (empty($sifra) || empty($catId)) continue;
+        if (!isset($categories[$catId])) continue;
 
-    foreach ($_POST['sifra'] as $page => $sifra) {
-        $sifra = trim($sifra);
-        if (empty($sifra)) continue;
+        $cat = $categories[$catId];
+        $sifraSlug = strtolower(str_replace([' ', '/'], '-', $sifra));
+        $imgDest   = "../images/products/{$sifraSlug}.jpg";
+        $imgPath   = "images/products/{$sifraSlug}.jpg";
 
-        $cat = getCategory((int)$page);
-        if (!$cat) continue;
+        // Handle image upload
+        if (!empty($imgFile) && $_FILES['image']['error'][$i] === UPLOAD_ERR_OK) {
+            $tmp = $_FILES['image']['tmp_name'][$i];
+            $ext = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg','jpeg','png','webp'])) {
+                if (!is_dir('../images/products')) mkdir('../images/products', 0755, true);
+                move_uploaded_file($tmp, $imgDest);
+            }
+        }
 
-        $pageStr = str_pad($page, 4, '0', STR_PAD_LEFT);
-        $srcFile = "../images/katalog/page-{$pageStr}.jpg";
-        if (!file_exists($srcFile)) continue;
-
-        $sifraLower = strtolower(str_replace(' ', '-', $sifra));
-        $imgDest = "../images/products/{$sifraLower}.jpg";
-        copy($srcFile, $imgDest);
+        // Remove existing product with same šifra if exists
+        $products = array_values(array_filter($products, fn($p) => strtolower(str_replace([' ','/'],'-', $p['name'])) !== $sifraSlug));
 
         $products[] = [
-            'id' => $nextId++,
-            'name' => $cat['name'] . ' ' . strtoupper($sifra),
-            'category' => $cat['id'],
-            'price' => $cat['price'],
-            'unit' => $cat['unit'],
-            'description' => $cat['name'] . ' ' . strtoupper($sifra) . ' - kvalitetan panel za uređenje interijera. Dimenzije: ' . $cat['dims'] . '.',
-            'features' => ['Dimenzije: ' . $cat['dims'], 'Visoka kvaliteta', 'Jednostavna montaža', 'Šifra: ' . strtoupper($sifra)],
-            'image' => "images/products/{$sifraLower}.jpg",
-            'badge' => null,
-            'inStock' => true,
-            'featured' => false,
-            'from_katalog' => true
+            'id'          => $nextId++,
+            'name'        => $cat['name'] . ' ' . strtoupper($sifra),
+            'category'    => $catId,
+            'price'       => $cat['price'],
+            'unit'        => $cat['unit'],
+            'description' => $cat['name'] . ' ' . strtoupper($sifra) . '. Dimenzije: ' . $cat['dims'] . '.',
+            'features'    => ['Dimenzije: ' . $cat['dims'], 'Visoka kvaliteta', 'Jednostavna montaža', 'Šifra: ' . strtoupper($sifra)],
+            'image'       => $imgPath,
+            'badge'       => null,
+            'inStock'     => true,
+            'featured'    => false,
         ];
         $saved++;
     }
 
-    file_put_contents($jsonFile, json_encode($products, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    file_put_contents($jsonFile, json_encode(array_values($products), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     $message = "✅ Sačuvano $saved proizvoda!";
-}
-
-// Load existing codes
-$existingCodes = [];
-$jsonFile = '../data/products.json';
-if (file_exists($jsonFile)) {
-    $prods = json_decode(file_get_contents($jsonFile), true) ?? [];
-    foreach ($prods as $p) {
-        if (isset($p['from_katalog']) && $p['from_katalog']) {
-            // Extract page from image name - find which page maps to this
-        }
-    }
+    if ($errors) { $message .= ' ⚠️ Greške: ' . implode(', ', $errors); $msgType = 'warning'; }
 }
 ?>
 <!DOCTYPE html>
@@ -84,7 +75,7 @@ if (file_exists($jsonFile)) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unos Šifri | Make My Home Admin</title>
+<title>Dodaj Proizvode | Make My Home Admin</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #f5f5f5; color: #1a1a1a; }
@@ -101,133 +92,177 @@ body { font-family: 'Inter', sans-serif; background: #f5f5f5; color: #1a1a1a; }
 }
 .btn-save:hover { background: #a8863f; }
 .message {
-    background: #d4edda; color: #155724; padding: 14px 24px;
-    font-size: 15px; font-weight: 600; border-left: 4px solid #28a745;
+    padding: 14px 24px; font-size: 15px; font-weight: 600;
+    border-left: 4px solid #28a745; background: #d4edda; color: #155724;
 }
-.section {
-    margin: 20px 24px;
+.container { padding: 24px; max-width: 1200px; margin: 0 auto; }
+
+/* Product rows */
+.products-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.products-table th {
+    background: #1a1a1a; color: #c9a86c; padding: 12px 16px;
+    text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
 }
-.section-title {
-    background: #1a1a1a; color: #c9a86c;
-    padding: 10px 16px; border-radius: 8px 8px 0 0;
-    font-size: 15px; font-weight: 700; letter-spacing: 1px;
+.products-table td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.products-table tr:last-child td { border-bottom: none; }
+.products-table tr:hover td { background: #faf8f5; }
+
+.img-preview-wrap {
+    width: 80px; height: 80px; border: 2px dashed #ddd; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; cursor: pointer; position: relative; flex-shrink: 0;
+    background: #f9f9f9;
 }
-.section-info {
-    background: #fff3cd; padding: 8px 16px;
-    font-size: 13px; color: #856404;
-    border: 1px solid #ffc107; border-top: none;
+.img-preview-wrap:hover { border-color: #c9a86c; }
+.img-preview-wrap img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.img-preview-wrap .placeholder { font-size: 11px; color: #aaa; text-align: center; padding: 4px; }
+.img-preview-wrap input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+
+.sifra-input {
+    width: 140px; padding: 8px 12px; border: 1.5px solid #ddd;
+    border-radius: 6px; font-size: 14px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px;
 }
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-    padding: 16px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
+.sifra-input:focus { outline: none; border-color: #c9a86c; }
+.sifra-input:not(:placeholder-shown) { border-color: #28a745; background: #f0fff4; }
+
+.cat-select {
+    padding: 8px 12px; border: 1.5px solid #ddd; border-radius: 6px;
+    font-size: 13px; background: #fff; cursor: pointer; min-width: 160px;
 }
-.card {
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #fff;
-    transition: border-color .2s;
+.cat-select:focus { outline: none; border-color: #c9a86c; }
+
+.price-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
+    background: #f0fff4; color: #28a745; font-size: 12px; font-weight: 700;
+    border: 1px solid #c3e6cb;
 }
-.card:has(input:not(:placeholder-shown)) {
-    border-color: #28a745;
+
+.btn-add-row {
+    background: #1a1a1a; color: #c9a86c; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer;
+    margin-top: 16px; display: inline-flex; align-items: center; gap: 8px;
 }
-.card-img {
-    width: 100%; height: 140px;
-    object-fit: cover; display: block;
-    background: #f0f0f0;
-}
-.card-body {
-    padding: 8px;
-}
-.page-num {
-    font-size: 11px; color: #888; margin-bottom: 4px;
-}
-.card-body input {
-    width: 100%;
-    padding: 7px 10px;
-    border: 1.5px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.card-body input:focus {
-    outline: none;
-    border-color: #c9a86c;
-}
-.card-body input:not(:placeholder-shown) {
-    border-color: #28a745;
-    background: #f0fff4;
-}
-.skip-badge {
-    background: #f8d7da; color: #721c24;
-    padding: 4px 8px; border-radius: 4px;
-    font-size: 12px; text-align: center;
-}
+.btn-add-row:hover { background: #333; }
+
+.btn-remove { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 18px; padding: 4px 8px; }
+.btn-remove:hover { color: #c0392b; }
+
+.row-num { width: 30px; text-align: center; font-size: 13px; color: #888; font-weight: 700; }
 </style>
 </head>
 <body>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 <div class="header">
     <a href="dashboard.php">← Dashboard</a>
-    <h1>📋 Unos Šifri Proizvoda</h1>
-    <button type="submit" name="save" class="btn-save">💾 Sačuvaj sve</button>
+    <h1>📦 Dodaj Proizvode</h1>
+    <button type="submit" class="btn-save">💾 Sačuvaj sve</button>
 </div>
 
 <?php if ($message): ?>
 <div class="message"><?= $message ?></div>
 <?php endif; ?>
 
-<?php
-$sections = [
-    ['title' => '🪵 DRVENI PANELI', 'pages' => range(1, 9),   'info' => 'Stranice 1-9 | 86.99€/kom | 280×122cm'],
-    ['title' => '🧵 TEKSTILNI PANELI', 'pages' => range(10, 18), 'info' => 'Stranice 10-18 | 86.99€/kom | 280×122cm'],
-    ['title' => '🪨 MERMERNI PANELI', 'pages' => range(19, 31), 'info' => 'Stranice 19-31 | 86.99€/kom | 280×122cm'],
-    ['title' => '⚙️ METALNI PANELI', 'pages' => range(36, 39), 'info' => 'Stranice 36-39 | 115.99€/kom | 280×122cm'],
-    ['title' => '📏 3D LETVICE', 'pages' => range(40, 67), 'info' => 'Stranice 40-67 | 19.99€/kom | 280×16cm'],
-    ['title' => '🔊 AKUSTIČNI PANELI', 'pages' => range(68, 72), 'info' => 'Stranice 68-72 | 94.99€/kom | 280×60cm'],
-];
+<div class="container">
+    <table class="products-table" id="product-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Slika</th>
+                <th>Šifra proizvoda</th>
+                <th>Kategorija</th>
+                <th>Cijena</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="rows">
+            <!-- rows added by JS -->
+        </tbody>
+    </table>
 
-foreach ($sections as $sec):
-?>
-<div class="section">
-    <div class="section-title"><?= $sec['title'] ?></div>
-    <div class="section-info"><?= $sec['info'] ?></div>
-    <div class="grid">
-    <?php foreach ($sec['pages'] as $page):
-        $pageStr = str_pad($page, 4, '0', STR_PAD_LEFT);
-        $imgPath = "../images/katalog/page-{$pageStr}.jpg";
-        $imgExists = file_exists($imgPath);
-    ?>
-    <div class="card">
-        <?php if ($imgExists): ?>
-        <img class="card-img" src="../images/katalog/page-<?= $pageStr ?>.jpg" alt="Stranica <?= $page ?>">
-        <?php else: ?>
-        <div class="card-img" style="display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">Nema slike</div>
-        <?php endif; ?>
-        <div class="card-body">
-            <div class="page-num">Stranica <?= $page ?></div>
-            <input type="text" name="sifra[<?= $page ?>]" placeholder="Upiši šifru..."
-                   autocomplete="off" autocorrect="off" spellcheck="false">
-        </div>
-    </div>
-    <?php endforeach; ?>
-    </div>
-</div>
-<?php endforeach; ?>
-
-<div style="padding:20px 24px;text-align:center;">
-    <button type="submit" name="save" class="btn-save" style="font-size:17px;padding:14px 40px;">
-        💾 Sačuvaj sve proizvode
+    <button type="button" class="btn-add-row" onclick="addRow()">
+        + Dodaj red
     </button>
+
+    <div style="margin-top:24px;text-align:right;">
+        <button type="submit" class="btn-save" style="font-size:16px;padding:14px 40px;">
+            💾 Sačuvaj sve proizvode
+        </button>
+    </div>
 </div>
 </form>
+
+<script>
+const cats = <?= json_encode(array_map(fn($k,$v) => ['id'=>$k,'name'=>$v['name'],'price'=>$v['price'],'dims'=>$v['dims']], array_keys($categories), $categories)) ?>;
+let rowCount = 0;
+
+function addRow() {
+    const tbody = document.getElementById('rows');
+    const idx = rowCount++;
+    const tr = document.createElement('tr');
+    tr.id = 'row-' + idx;
+
+    const catOptions = cats.map(c =>
+        `<option value="${c.id}">${c.name} — ${c.price}€</option>`
+    ).join('');
+
+    tr.innerHTML = `
+        <td class="row-num">${idx+1}</td>
+        <td>
+            <div class="img-preview-wrap" id="wrap-${idx}" onclick="document.getElementById('file-${idx}').click()">
+                <img id="preview-${idx}" src="" alt="">
+                <span class="placeholder" id="ph-${idx}">📷<br>Klikni</span>
+                <input type="file" name="image[${idx}]" id="file-${idx}"
+                    accept="image/*" onchange="previewImg(this, ${idx})" onclick="event.stopPropagation()">
+            </div>
+        </td>
+        <td>
+            <input type="text" name="sifra[${idx}]" class="sifra-input"
+                placeholder="npr. DW110" autocomplete="off" spellcheck="false">
+        </td>
+        <td>
+            <select name="category[${idx}]" class="cat-select" onchange="updatePrice(this, ${idx})">
+                ${catOptions}
+            </select>
+        </td>
+        <td>
+            <span class="price-badge" id="price-${idx}">${cats[0].price}€/kom<br><small>${cats[0].dims}</small></span>
+        </td>
+        <td>
+            <button type="button" class="btn-remove" onclick="removeRow(${idx})">✕</button>
+        </td>
+    `;
+    tbody.appendChild(tr);
+}
+
+function previewImg(input, idx) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = document.getElementById('preview-' + idx);
+            img.src = e.target.result;
+            img.style.display = 'block';
+            document.getElementById('ph-' + idx).style.display = 'none';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function updatePrice(sel, idx) {
+    const cat = cats.find(c => c.id === sel.value);
+    if (cat) {
+        document.getElementById('price-' + idx).innerHTML =
+            cat.price + '€/kom<br><small>' + cat.dims + '</small>';
+    }
+}
+
+function removeRow(idx) {
+    const row = document.getElementById('row-' + idx);
+    if (row) row.remove();
+}
+
+// Start with 5 rows
+for (let i = 0; i < 5; i++) addRow();
+</script>
 </body>
 </html>
