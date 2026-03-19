@@ -2,6 +2,9 @@
 
 Options -Indexes
 
+# Naš index.html ima prioritet nad WordPress index.php
+DirectoryIndex index.html index.php
+
 # Admin zaštita
 <Files "admin">
   # Options +FollowSymLinks
