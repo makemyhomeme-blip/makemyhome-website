@@ -1095,6 +1095,12 @@ ul { list-style: none; }
   flex-shrink: 0;
 }
 
+.footer-map {
+  margin: 40px 0 0;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
 .footer-bottom {
   display: flex;
   align-items: center;
