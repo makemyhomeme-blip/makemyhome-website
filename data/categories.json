@@ -2,23 +2,16 @@
   {
     "id": "bambus-paneli",
     "name": "Bambus Paneli",
-    "icon": "fas fa-leaf",
-    "description": "Dekorativni bambus paneli – prirodni materijal u modernom dizajnu",
+    "icon": "fas fa-layer-group",
+    "description": "Dekorativni bambus paneli u 5 stilova",
     "color": "#7a9e6e",
     "subcategories": [
-      { "id": "bambus-drveni", "name": "Drveni" },
-      { "id": "bambus-tekstilni", "name": "Tekstilni" },
-      { "id": "bambus-mermerni", "name": "Mermerni" },
-      { "id": "bambus-metalni", "name": "Metalni" },
-      { "id": "bambus-kozni", "name": "Kožni" }
+      { "id": "bambus-drveni",    "name": "Drveni",    "icon": "fas fa-tree",   "color": "#8B6914", "description": "Bambus paneli sa drvenom strukturom" },
+      { "id": "bambus-tekstilni", "name": "Tekstilni", "icon": "fas fa-th",     "color": "#7a9e6e", "description": "Bambus paneli sa tekstilnom površinom" },
+      { "id": "bambus-mermerni",  "name": "Mermerni",  "icon": "fas fa-gem",    "color": "#888",    "description": "Bambus paneli sa mermernim uzorkom" },
+      { "id": "bambus-metalni",   "name": "Metalni",   "icon": "fas fa-cube",   "color": "#555",    "description": "Bambus paneli sa metalnim završetkom" },
+      { "id": "bambus-kozni",     "name": "Kožni",     "icon": "fas fa-star",   "color": "#a0522d", "description": "Bambus paneli sa kožnom površinom" }
     ]
-  },
-  {
-    "id": "3d-letvice",
-    "name": "3D Letvice",
-    "icon": "fas fa-grip-lines",
-    "description": "Elegantne 3D letvice za moderne i luksuzne enterijer projekte",
-    "color": "#8B6914"
   },
   {
     "id": "akusticni-paneli",
@@ -26,12 +19,5 @@
     "icon": "fas fa-volume-mute",
     "description": "Vrhunska zvučna izolacija uz dekorativan izgled",
     "color": "#2c2c2c"
-  },
-  {
-    "id": "aluminijum-lajsne",
-    "name": "Aluminijum Lajsne",
-    "icon": "fas fa-minus",
-    "description": "Aluminijumske lajsne za završnu obradu i elegantne detalje",
-    "color": "#888888"
   }
 ]

@@ -1,41 +1,5 @@
 [
   {
-    "id": 2,
-    "name": "3D Letvice Premium Oak",
-    "category": "3d-letvice",
-    "price": "55.00",
-    "unit": "m²",
-    "description": "Premium hrast letvice sa naturalnim završetkom. Vrhunski kvalitet za ekskluzivne enterijer projekte.",
-    "features": [
-      "Premium hrast",
-      "UV zaštita",
-      "Anti-vlaga tretman",
-      "Dimenzije: 270x12x2cm"
-    ],
-    "image": "images/products/3d-letvice-oak.jpg",
-    "badge": "Premium",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 3,
-    "name": "Akustični Panel Crni",
-    "category": "akusticni-paneli",
-    "price": "65.00",
-    "unit": "m²",
-    "description": "Visokoučinkoviti akustični paneli koji reduciraju buku za 70%. Savršeni za studije, kancelarije i kućna bioskopska sala.",
-    "features": [
-      "Zvučna izolacija 70%",
-      "Ekološki materijal",
-      "Crna boja",
-      "Dimenzije: 60x60cm"
-    ],
-    "image": "images/products/akusticni-crni.jpg",
-    "badge": "Novo",
-    "inStock": true,
-    "featured": true
-  },
-  {
     "id": 4,
     "name": "Akustični Panel Sivi",
     "category": "akusticni-paneli",
@@ -54,153 +18,9 @@
     "featured": true
   },
   {
-    "id": 5,
-    "name": "Dekorativni Panel Mramor",
-    "category": "dekorativni-paneli",
-    "price": "38.00",
-    "unit": "m²",
-    "description": "Luksuzni mramorni efekt panel koji transformiše prostor bez skupih renovacija. PVC osnova sa UV štampom.",
-    "features": [
-      "Mramorni efekt",
-      "Vodootporan",
-      "Laka montaža",
-      "Dimenzije: 122x244cm"
-    ],
-    "image": "images/products/dekorativni-mramor.jpg",
-    "badge": "Akcija",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 6,
-    "name": "Dekorativni Panel Beton",
-    "category": "dekorativni-paneli",
-    "price": "35.00",
-    "unit": "m²",
-    "description": "Industrijski betonski efekt za moderan loft dizajn. Lagani panel koji ne opterećuje zid.",
-    "features": [
-      "Beton efekt",
-      "Lagan materijal",
-      "Bez prašine od betona",
-      "Dimenzije: 122x244cm"
-    ],
-    "image": "images/products/dekorativni-beton.jpg",
-    "badge": null,
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 7,
-    "name": "Flex Stone Antracit",
-    "category": "flex-stone",
-    "price": "75.00",
-    "unit": "m²",
-    "description": "Prirodni kamen tanak svega 2-3mm koji se savija i montira na svaku površinu. Jedinstven izgled pravog kamena.",
-    "features": [
-      "Prirodni kamen",
-      "Debljina 2-3mm",
-      "Fleksibilan",
-      "Vodootporan"
-    ],
-    "image": "images/products/flex-stone-antracit.jpg",
-    "badge": "Ekskluzivno",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 8,
-    "name": "Flex Stone Bež",
-    "category": "flex-stone",
-    "price": "75.00",
-    "unit": "m²",
-    "description": "Topli bež ton prirodnog kamena u fleksibilnoj formi. Idealan za mediteranski i prirodni dizajn interijera.",
-    "features": [
-      "Prirodni kamen",
-      "Topli bež ton",
-      "UV stabilan",
-      "Za unutra i vani"
-    ],
-    "image": "images/products/flex-stone-bez.jpg",
-    "badge": null,
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 9,
-    "name": "PU Stone Cigla Bijela",
-    "category": "pu-stone",
-    "price": "28.00",
-    "unit": "m²",
-    "description": "Poliuretan kameni panel sa izgledom bijele cigle. Lagan, topao i jednostavan za montažu bez majstora.",
-    "features": [
-      "PU materijal",
-      "Lagan i topao",
-      "Cigla efekt",
-      "Dimenzije: 60x15cm"
-    ],
-    "image": "images/products/pu-stone-cigla.jpg",
-    "badge": "Popularno",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 10,
-    "name": "PU Stone Rustik",
-    "category": "pu-stone",
-    "price": "32.00",
-    "unit": "m²",
-    "description": "Rustikalni kamen efekt od PU materijala sa dubokim 3D reljefom. Savršen za tematske i rustikalne enterijer projekte.",
-    "features": [
-      "Duboki reljef",
-      "Rustikalni dizajn",
-      "Topla izolacija",
-      "Laka montaža"
-    ],
-    "image": "images/products/pu-stone-rustik.jpg",
-    "badge": null,
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 11,
-    "name": "UV Panel Visoki Sjaj",
-    "category": "uv-paneli",
-    "price": "42.00",
-    "unit": "m²",
-    "description": "Visokoglansni UV panel sa ogledalo efektom. Idealan za moderne kuhinje, kupatila i poslovne prostore.",
-    "features": [
-      "Visoki sjaj",
-      "UV otporan",
-      "Vodootporan",
-      "Dimenzije: 122x244cm"
-    ],
-    "image": "images/products/uv-panel-sjaj.jpg",
-    "badge": "Bestseller",
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 12,
-    "name": "UV Panel Mat Bijeli",
-    "category": "uv-paneli",
-    "price": "38.00",
-    "unit": "m²",
-    "description": "Elegantni mat bijeli UV panel za minimalistički i skandinavski dizajn. Stvara osjećaj prostranstva i čistoće.",
-    "features": [
-      "Mat završetak",
-      "Čista bijela",
-      "Lako čišćenje",
-      "Dimenzije: 122x244cm"
-    ],
-    "image": "images/products/uv-panel-mat.jpg",
-    "badge": null,
-    "inStock": true,
-    "featured": true
-  },
-  {
     "id": 13,
     "name": "Bambus Panel CQ006 Orah",
-    "category": "bambus-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Dekorativni bambus panel u toploj orah boji sa prirodnom teksturom drveta. Dimenzije 280×122 cm (3,42 m²) – idealan za zidne i stropne površine.",
@@ -218,7 +38,7 @@
   {
     "id": 14,
     "name": "Bambus Panel MW010 Bijeli Hrast",
-    "category": "bambus-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Svijetli bambus panel u prirodnom tonu bijelog hrasta. Dimenzije 280×122 cm (3,42 m²) – unosi toplinu i svjetlost u svaki prostor.",
@@ -236,7 +56,7 @@
   {
     "id": 15,
     "name": "Bambus Panel MW301 Antracit",
-    "category": "bambus-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Tamni bambus panel u antracit boji sa suptilnom teksturom drveta. Dimenzije 280×122 cm (3,42 m²) – za moderan i elegantan interijer.",
@@ -254,7 +74,7 @@
   {
     "id": 16,
     "name": "Bambus Panel MW211 Sivi",
-    "category": "bambus-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Neutralni sivi bambus panel sa finim vertikalnim linijama. Dimenzije 280×122 cm (3,42 m²) – savršen za skandinavski i minimalistički dizajn.",
@@ -272,7 +92,7 @@
   {
     "id": 18,
     "name": "Drveni Paneli CQ006",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli CQ006. Dimenzije: 280×122cm.",
@@ -290,7 +110,7 @@
   {
     "id": 19,
     "name": "Drveni Paneli MW010",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW010. Dimenzije: 280×122cm.",
@@ -308,7 +128,7 @@
   {
     "id": 20,
     "name": "Drveni Paneli MW301",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW301. Dimenzije: 280×122cm.",
@@ -326,7 +146,7 @@
   {
     "id": 21,
     "name": "Drveni Paneli MW211",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW211. Dimenzije: 280×122cm.",
@@ -344,7 +164,7 @@
   {
     "id": 22,
     "name": "Drveni Paneli MW013",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW013. Dimenzije: 280×122cm.",
@@ -362,7 +182,7 @@
   {
     "id": 23,
     "name": "Drveni Paneli MW300",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW300. Dimenzije: 280×122cm.",
@@ -380,7 +200,7 @@
   {
     "id": 24,
     "name": "Drveni Paneli MW321",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW321. Dimenzije: 280×122cm.",
@@ -398,7 +218,7 @@
   {
     "id": 25,
     "name": "Drveni Paneli MW682",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW682. Dimenzije: 280×122cm.",
@@ -416,7 +236,7 @@
   {
     "id": 26,
     "name": "Drveni Paneli MW312",
-    "category": "drveni-paneli",
+    "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
     "description": "Drveni Paneli MW312. Dimenzije: 280×122cm.",
