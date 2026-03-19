@@ -19,15 +19,18 @@
   },
   {
     "id": 18,
-    "name": "Drveni Paneli CQ006",
+    "name": "Drveni Panel CQ006 – Topli Tik",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli CQ006. Dimenzije: 280×122cm.",
+    "description": "Topla srednje-smeđa nijansa s izraženom ravnom drvenom žicom nalik tiku ili hrastu. Ovaj panel unosi prirodnu toplinu u svaki prostor – idealan za dnevne sobe, spavaće sobe i poslovne enterijere koji traže elegantan drveni dekor bez kompromisa.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: topla srednje-smeđa (tik tonovi)",
+      "Ravna, izražena drvena žica",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Pogodan za zidove i stropove",
       "Šifra: CQ006"
     ],
     "image": "images/products/cq006.jpg",
@@ -37,15 +40,18 @@
   },
   {
     "id": 19,
-    "name": "Drveni Paneli MW010",
+    "name": "Drveni Panel MW010 – Bijeli Jasen",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW010. Dimenzije: 280×122cm.",
+    "description": "Izuzetno svijetla, gotovo bijela nijansa s delikatnom prirodnom žicom jasena. Savršen izbor za skandinavski, minimalistički ili Japandi stil enterijera. Prostorijama daje osjećaj prostornosti, čistoće i modernog luksuza.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: bijela/krema (jasen tonovi)",
+      "Fina, delikatna drvena tekstura",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Idealan za skandinavski i minimalistički stil",
       "Šifra: MW010"
     ],
     "image": "images/products/mw010.jpg",
@@ -55,128 +61,149 @@
   },
   {
     "id": 20,
-    "name": "Drveni Paneli MW301",
+    "name": "Drveni Panel MW301 – Crni Antracit",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW301. Dimenzije: 280×122cm.",
+    "description": "Tamno antracitna, gotovo crna nijansa s jedva vidljivom drvenom žicom. Ovaj panel je vrhunski izbor za moderne, luksuzne i industrijske enterijerе. Kao akcentni zid ili pozadina namještaja, stvara dramatičan i sofisticiran vizualni efekt.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: antracit/crna",
+      "Suptilna, ravna drvena žica",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Idealan za akcentne zidove i moderni luksuzni stil",
       "Šifra: MW301"
     ],
     "image": "images/products/mw301.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 21,
-    "name": "Drveni Paneli MW211",
+    "name": "Drveni Panel MW211 – Srebrno Sivi",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW211. Dimenzije: 280×122cm.",
+    "description": "Hladna srebrno-siva nijansa s preciznom i ujednačenom linearnom teksturom. Idealan za suvremene i minimalističke enterijerе koji traže neutralnu eleganciju. Odlično se kombinuje s bijelim, crnim i metalnim detaljima.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: srebrno-siva",
+      "Uniformna, linearna tekstura",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Neutralna elegancija – lako kombinovanje s dekором",
       "Šifra: MW211"
     ],
     "image": "images/products/mw211.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 22,
-    "name": "Drveni Paneli MW013",
+    "name": "Drveni Panel MW013 – Pješčani Hrast",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW013. Dimenzije: 280×122cm.",
+    "description": "Topla svjetla bež nijansa s mekim i prirodnim drvenim žicama hrasta. Ova nijanса je jedna od najpopularnijih – neutralna, topla i svestrana. Savršeno se uklapa u klasičan, rustikalan i moderan enterijer podjednako.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: topla bež/pješčana (hrast tonovi)",
+      "Meke, prirodne drvene žice",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Svestrana nijansa – odgovara svim stilovima",
       "Šifra: MW013"
     ],
     "image": "images/products/mw013.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 23,
-    "name": "Drveni Paneli MW300",
+    "name": "Drveni Panel MW300 – Dimljeni Orah",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW300. Dimenzije: 280×122cm.",
+    "description": "Bogata topla sivo-smeđa nijansa s dubokom drvenom žicom oraha. Ovaj panel kombinuje toplinu drveta i modernu sivinu, stvarajući sofisticiran i elegantan dojam. Odlično se slaže s tamnim namještajem, zlatnim i bakrenim detaljima.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: topla taupe/dimljeni orah",
+      "Duboka, izražena drvena žica",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Luksuzna nijansa – odlična uz zlatne i bakrene detalje",
       "Šifra: MW300"
     ],
     "image": "images/products/mw300.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 24,
-    "name": "Drveni Paneli MW321",
+    "name": "Drveni Panel MW321 – Prirodni Hrast",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW321. Dimenzije: 280×122cm.",
+    "description": "Klasična srednje-smeđa nijansa s čistom i prirodnom hrastovom žicom. Ovaj panel je timeless izbor koji odaje toplinu prirodnog materijala. Savršen za dnevne sobe, hodnike i uredske prostore koji žele autentičan drveni izgled.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: srednje-smeđa (prirodni hrast)",
+      "Čista, klasična hrastova žica",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Timeless izgled – odgovara klasičnom i modernom stilu",
       "Šifra: MW321"
     ],
     "image": "images/products/mw321.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 25,
-    "name": "Drveni Paneli MW682",
+    "name": "Drveni Panel MW682 – Divlji Orah",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW682. Dimenzije: 280×122cm.",
+    "description": "Bogata topla smeđa s izraženim čvorom i dramatičnom drvenom žicom – karakteristika pravog divljeg oraha. Ovaj panel donosi prirodan karakter i jedinstvenost svakom prostoru. Idealan kao akcentni zid koji privlači pažnju i priča priču.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: tamna topla smeđa (divlji orah)",
+      "Izražena žica s karakterističnim čvorom",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Jedinstven, prirodan karakter – svaki panel je drugačiji",
       "Šifra: MW682"
     ],
     "image": "images/products/mw682.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": 26,
-    "name": "Drveni Paneli MW312",
+    "name": "Drveni Panel MW312 – Espresso Orah",
     "category": "bambus-drveni",
     "price": "86.99",
     "unit": "kom",
-    "description": "Drveni Paneli MW312. Dimenzije: 280×122cm.",
+    "description": "Tamna čokoladno-smeđa nijansa s elegantnom valovitom drvenom žicom oraha. Ovaj panel je definicija modernog luksuza – bogat, dubok i sofisticiran. Savršen za premium enterijerе, kućne bioskope, barove i luksuzne spavaće sobe.",
     "features": [
       "Dimenzije: 280×122cm",
-      "Visoka kvaliteta",
-      "Jednostavna montaža",
+      "Boja: tamna čokoladna/espresso orah",
+      "Valovita, sofisticirana drvena žica",
+      "Površinska UV zaštita",
+      "Laka i brza montaža – ljepilo ili spajalice",
+      "Premium luksuzni izgled – za ekskluzivne prostore",
       "Šifra: MW312"
     ],
     "image": "images/products/mw312.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": false
   }
 ]
