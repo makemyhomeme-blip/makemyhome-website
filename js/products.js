@@ -327,8 +327,13 @@ async function renderProductDetail() {
   const galleryMain = document.getElementById('gallery-main');
   const galleryThumbs = document.getElementById('gallery-thumbs');
   if (galleryMain) {
-    galleryMain.innerHTML = `<img id="gallery-main-img" src="${product.image}" alt="${product.name}"
-      onerror="this.style.display='none'">`;
+    galleryMain.innerHTML = `
+      <img id="gallery-main-img" src="${product.image}" alt="${product.name}"
+        onclick="openImageLightbox(this.src, '${product.name}')"
+        style="cursor:zoom-in;"
+        onerror="this.style.display='none'">
+      <div class="gallery-zoom-hint"><i class="fas fa-search-plus"></i> Klikni za prikaz u punoj veličini</div>
+    `;
   }
   if (galleryThumbs) {
     const images = [{ src: product.image, label: 'Proizvod' }];
@@ -454,9 +459,42 @@ async function renderProductDetail() {
 }
 
 function switchGalleryImg(thumb, src) {
-  document.getElementById('gallery-main-img').src = src;
+  const img = document.getElementById('gallery-main-img');
+  img.src = src;
+  img.onclick = () => openImageLightbox(src, img.alt);
   document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
   thumb.classList.add('active');
+}
+
+function openImageLightbox(src, name) {
+  const lb = document.createElement('div');
+  lb.id = 'img-lightbox';
+  lb.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;`;
+  lb.innerHTML = `
+    <div style="position:relative;max-width:95vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:14px;">
+      <img src="${src}" alt="${name}"
+        style="max-width:100%;max-height:80vh;object-fit:contain;border-radius:8px;box-shadow:0 0 60px rgba(0,0,0,0.6);">
+      <div style="display:flex;gap:12px;">
+        <a href="${src}" download="${name.replace(/\s+/g,'-')}.jpg"
+          style="display:inline-flex;align-items:center;gap:8px;background:#c9a86c;color:#fff;
+          padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;">
+          <i class="fas fa-download"></i> Preuzmi sliku
+        </a>
+        <button onclick="document.getElementById('img-lightbox').remove()"
+          style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);
+          color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;">
+          <i class="fas fa-times"></i> Zatvori
+        </button>
+      </div>
+      <span style="font-size:12px;color:rgba(255,255,255,0.4);">Pritisni ESC ili klikni van slike za zatvaranje</span>
+    </div>
+  `;
+  lb.addEventListener('click', e => { if (e.target === lb) lb.remove(); });
+  document.addEventListener('keydown', function esc(e) {
+    if (e.key === 'Escape') { lb.remove(); document.removeEventListener('keydown', esc); }
+  });
+  document.body.appendChild(lb);
 }
 
 function changeQty(delta) {
