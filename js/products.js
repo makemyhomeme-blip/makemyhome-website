@@ -101,17 +101,22 @@ async function initProductsPage() {
   const params = new URLSearchParams(window.location.search);
   const cat = params.get('cat') || params.get('category');
 
-  if (cat) {
-    showCategoryProducts(cat);
-  } else {
+  if (!cat) {
     showCategoryGrid();
+  } else {
+    // Check if this cat is a parent with subcategories
+    const parentCat = allCategories.find(c => c.id === cat && c.subcategories?.length > 0);
+    if (parentCat) {
+      showSubcategoryGrid(parentCat);
+    } else {
+      showCategoryProducts(cat);
+    }
   }
 
   // Fill footer categories
   const footerCats = document.getElementById('footer-cats');
   if (footerCats) {
-    const catMap = buildCatMap();
-    footerCats.innerHTML = Object.values(catMap).map(c =>
+    footerCats.innerHTML = allCategories.map(c =>
       `<li><a href="products.html?cat=${c.id}"><i class="fas fa-chevron-right"></i> ${c.name}</a></li>`
     ).join('');
   }
@@ -138,6 +143,59 @@ function buildCatMap() {
     }
   });
   return catMap;
+}
+
+function showSubcategoryGrid(parentCat) {
+  document.getElementById('category-grid').style.display = 'grid';
+  document.getElementById('products-container').style.display = 'none';
+
+  // Back bar
+  const backBar = document.getElementById('back-bar');
+  if (backBar) backBar.style.display = 'flex';
+  const catTitle = document.getElementById('cat-title');
+  if (catTitle) catTitle.textContent = parentCat.name;
+  const catCount = document.getElementById('cat-count');
+  if (catCount) catCount.textContent = `${parentCat.subcategories.length} podkategorija`;
+
+  // Breadcrumb
+  const breadLabel = document.getElementById('breadcrumb-label');
+  if (breadLabel) breadLabel.textContent = parentCat.name;
+  const pageTitle = document.getElementById('page-title');
+  if (pageTitle) pageTitle.textContent = parentCat.name;
+  const pageSub = document.getElementById('page-subtitle');
+  if (pageSub) pageSub.textContent = 'Odaberite tip panela';
+
+  // Back button goes to all categories
+  const btnBack = document.querySelector('.btn-back');
+  if (btnBack) { btnBack.href = 'products.html'; btnBack.innerHTML = '<i class="fas fa-arrow-left"></i> Sve Kategorije'; }
+
+  // Count products per subcategory
+  const grid = document.getElementById('category-grid');
+  grid.innerHTML = parentCat.subcategories.map(sub => {
+    const subProducts = allProducts.filter(p => p.category === sub.id);
+    const firstImg = subProducts.find(p => p.image)?.image || '';
+    return `
+      <a href="products.html?cat=${sub.id}" class="cat-card animate-on-scroll">
+        <div class="cat-card-img">
+          ${firstImg
+            ? `<img src="${firstImg}" alt="${sub.name}" loading="lazy">`
+            : `<i class="${sub.icon || parentCat.icon}"></i>`}
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-icon" style="background:${sub.color || parentCat.color}">
+            <i class="${sub.icon || parentCat.icon}"></i>
+          </div>
+          <div class="cat-card-info">
+            <h3>${sub.name}</h3>
+            <p>${sub.description || ''}</p>
+            <span class="cat-card-count">${subProducts.length} proizvoda</span>
+          </div>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  initAnimations();
 }
 
 function showCategoryGrid() {
@@ -187,6 +245,9 @@ function showCategoryProducts(catId) {
   const pageSub = document.getElementById('page-subtitle');
   if (pageSub) pageSub.textContent = `Pogledajte sve ${cat.count} proizvoda u kategoriji ${cat.name}`;
 
+  // Find parent category if this is a subcategory
+  const parentCat = allCategories.find(c => c.subcategories?.some(s => s.id === catId));
+
   // Show back bar
   const backBar = document.getElementById('back-bar');
   if (backBar) backBar.style.display = 'flex';
@@ -194,6 +255,13 @@ function showCategoryProducts(catId) {
   if (catTitle) catTitle.textContent = cat.name;
   const catCount = document.getElementById('cat-count');
   if (catCount) catCount.textContent = `${cat.count} proizvoda`;
+
+  // Back button: go to parent if subcategory, else go to all categories
+  const btnBack = document.querySelector('.btn-back');
+  if (btnBack && parentCat) {
+    btnBack.href = `products.html?cat=${parentCat.id}`;
+    btnBack.innerHTML = `<i class="fas fa-arrow-left"></i> ${parentCat.name}`;
+  }
 
   // Render products
   const container = document.getElementById('products-container');
