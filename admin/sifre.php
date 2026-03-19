@@ -4,13 +4,13 @@ if (empty($_SESSION['admin_logged'])) { header('Location: index.php'); exit; }
 
 // Category mapping by page number
 function getCategory($page) {
-    if ($page >= 1 && $page <= 9)   return ['id' => 'drveni-paneli',    'name' => 'Drveni Paneli',    'price' => '89.99'];
-    if ($page >= 10 && $page <= 18)  return ['id' => 'tekstilni-paneli', 'name' => 'Tekstilni Paneli', 'price' => '74.99'];
-    if ($page >= 19 && $page <= 31)  return ['id' => 'mermerni-paneli',  'name' => 'Mermerni Paneli',  'price' => '94.99'];
+    if ($page >= 1 && $page <= 9)   return ['id' => 'drveni-paneli',    'name' => 'Drveni Paneli',    'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'];
+    if ($page >= 10 && $page <= 18)  return ['id' => 'tekstilni-paneli', 'name' => 'Tekstilni Paneli', 'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'];
+    if ($page >= 19 && $page <= 31)  return ['id' => 'mermerni-paneli',  'name' => 'Mermerni Paneli',  'price' => '86.99', 'unit' => 'kom', 'dims' => '280×122cm'];
     if ($page >= 32 && $page <= 35)  return null; // skip
-    if ($page >= 36 && $page <= 39)  return ['id' => 'metalni-paneli',   'name' => 'Metalni Paneli',   'price' => '115.99'];
-    if ($page >= 40 && $page <= 67)  return ['id' => '3d-letvice',       'name' => '3D Letvice',       'price' => '45.00'];
-    if ($page >= 68 && $page <= 72)  return ['id' => 'akusticni-paneli', 'name' => 'Akustični Paneli', 'price' => '65.00'];
+    if ($page >= 36 && $page <= 39)  return ['id' => 'metalni-paneli',   'name' => 'Metalni Paneli',   'price' => '115.99', 'unit' => 'kom', 'dims' => '280×122cm'];
+    if ($page >= 40 && $page <= 67)  return ['id' => '3d-letvice',       'name' => '3D Letvice',       'price' => '19.99', 'unit' => 'kom', 'dims' => '280×16cm'];
+    if ($page >= 68 && $page <= 72)  return ['id' => 'akusticni-paneli', 'name' => 'Akustični Paneli', 'price' => '94.99', 'unit' => 'kom', 'dims' => '280×60cm'];
     return null;
 }
 
@@ -51,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
             'name' => $cat['name'] . ' ' . strtoupper($sifra),
             'category' => $cat['id'],
             'price' => $cat['price'],
-            'unit' => 'm²',
-            'description' => $cat['name'] . ' ' . strtoupper($sifra) . ' - kvalitetan panel za uređenje interijera.',
-            'features' => ['Visoka kvaliteta', 'Jednostavna montaža', 'Šifra: ' . strtoupper($sifra)],
+            'unit' => $cat['unit'],
+            'description' => $cat['name'] . ' ' . strtoupper($sifra) . ' - kvalitetan panel za uređenje interijera. Dimenzije: ' . $cat['dims'] . '.',
+            'features' => ['Dimenzije: ' . $cat['dims'], 'Visoka kvaliteta', 'Jednostavna montaža', 'Šifra: ' . strtoupper($sifra)],
             'image' => "images/products/{$sifraLower}.jpg",
             'badge' => null,
             'inStock' => true,
@@ -187,12 +187,12 @@ body { font-family: 'Inter', sans-serif; background: #f5f5f5; color: #1a1a1a; }
 
 <?php
 $sections = [
-    ['title' => '🪵 DRVENI PANELI', 'pages' => range(1, 9),   'info' => 'Stranice 1-9 | Cijena: 89.99€/m²'],
-    ['title' => '🧵 TEKSTILNI PANELI', 'pages' => range(10, 18), 'info' => 'Stranice 10-18 | Cijena: 74.99€/m²'],
-    ['title' => '🪨 MERMERNI PANELI', 'pages' => range(19, 31), 'info' => 'Stranice 19-31 | Cijena: 94.99€/m²'],
-    ['title' => '⚙️ METALNI PANELI', 'pages' => range(36, 39), 'info' => 'Stranice 36-39 | Cijena: 115.99€/m²'],
-    ['title' => '📏 3D LETVICE', 'pages' => range(40, 67), 'info' => 'Stranice 40-67 | Cijena: 45.00€/m²'],
-    ['title' => '🔊 AKUSTIČNI PANELI', 'pages' => range(68, 72), 'info' => 'Stranice 68-72 | Cijena: 65.00€/m²'],
+    ['title' => '🪵 DRVENI PANELI', 'pages' => range(1, 9),   'info' => 'Stranice 1-9 | 86.99€/kom | 280×122cm'],
+    ['title' => '🧵 TEKSTILNI PANELI', 'pages' => range(10, 18), 'info' => 'Stranice 10-18 | 86.99€/kom | 280×122cm'],
+    ['title' => '🪨 MERMERNI PANELI', 'pages' => range(19, 31), 'info' => 'Stranice 19-31 | 86.99€/kom | 280×122cm'],
+    ['title' => '⚙️ METALNI PANELI', 'pages' => range(36, 39), 'info' => 'Stranice 36-39 | 115.99€/kom | 280×122cm'],
+    ['title' => '📏 3D LETVICE', 'pages' => range(40, 67), 'info' => 'Stranice 40-67 | 19.99€/kom | 280×16cm'],
+    ['title' => '🔊 AKUSTIČNI PANELI', 'pages' => range(68, 72), 'info' => 'Stranice 68-72 | 94.99€/kom | 280×60cm'],
 ];
 
 foreach ($sections as $sec):
