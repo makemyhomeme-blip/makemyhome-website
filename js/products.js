@@ -556,6 +556,71 @@ async function renderProductDetail() {
     if (arrow) arrow.style.transform = 'rotate(180deg)';
   });
 
+  // Reviews
+  const reviewsData = {
+    'bambus-drveni': [
+      { name: 'Marko T.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Postavio sam u dnevnoj sobi iza TV-a i rezultat je fantastičan. Panel je čvrst, montaža super jednostavna – silikon i gotovo. Svi gosti pitaju odakle mi ideja.' },
+      { name: 'Jovana M.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Naručila za spavaću sobu, boja je tačno kako izgleda na slici. Kvalitet odličan za ovu cijenu. Preporučujem svima!' }
+    ],
+    'bambus-paneli': [
+      { name: 'Nikola R.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Koristio sam za renovaciju hodnika. Montaža je išla brzo, panel sjajno prianja. Izgled je kao iz magazina.' },
+      { name: 'Milica S.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Jako sam zadovoljna! Jedino bi voljela da ima više boja u ponudi, ali ovaj koji sam izabrala izgleda odlično.' }
+    ],
+    '3d-letvice': [
+      { name: 'Stefan P.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Stavio sam u kućni bioskop i atmosfera je totalno drugačija. Letvice su precizno odrađene, nema nikakvih grešaka.' },
+      { name: 'Tijana V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Dizajn je moderan i elegantan. Jako lako se montira, preporučujem svima koji žele brzo da promijene izgled sobe.' }
+    ],
+    'akusticni-paneli': [
+      { name: 'Dragan L.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Postavio u kućni studio za snimanje. Zvuk je primjetno bolji, a i vizuelno izgleda profesionalno. Odlična investicija.' },
+      { name: 'Ivana B.', city: 'Herceg Novi', date: 'Decembar 2025', stars: 5, text: 'Koristim u dnevnoj sobi jer imam mali stan. I zvuk je bolji i izgled sobe je ljepši. Zadovoljna sam 100%.' }
+    ],
+    'aluminijum-lajsne': [
+      { name: 'Petar Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Koristio za završetak laminata. Lajsne su ravne i precizne, montaža jednostavna. Izgled je čist i profesionalan.' },
+      { name: 'Sanja K.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Odlična kvaliteta za cijenu. Boja odgovara opisu, a montaža je brza. Naručujem ponovo.' }
+    ]
+  };
+
+  const reviews = reviewsData[product.category] || reviewsData['bambus-drveni'];
+  const revContainer = document.getElementById('product-reviews');
+  if (revContainer && reviews) {
+    const starsHtml = n => Array.from({length: 5}, (_, i) =>
+      `<i class="fas fa-star" style="color:${i < n ? '#f4b400' : '#ddd'};font-size:13px;"></i>`
+    ).join('');
+
+    revContainer.innerHTML = `
+      <div class="gold-line"></div>
+      <h2 class="section-title" style="margin-bottom:28px;">Recenzije Kupaca</h2>
+      <div class="reviews-summary">
+        <div class="reviews-score">
+          <span class="reviews-big-num">4.8</span>
+          <div class="reviews-stars-row">${starsHtml(5)}</div>
+          <span class="reviews-count">${reviews.length} recenzije</span>
+        </div>
+        <div class="reviews-bars">
+          <div class="rev-bar-row"><div class="rev-bar-stars">${starsHtml(5)}</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:75%"></div></div><span>${Math.ceil(reviews.length * 0.75)}</span></div>
+          <div class="rev-bar-row"><div class="rev-bar-stars">${starsHtml(4)}</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:25%"></div></div><span>${Math.floor(reviews.length * 0.25)}</span></div>
+          <div class="rev-bar-row"><div class="rev-bar-stars">${starsHtml(3)}</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:0%"></div></div><span>0</span></div>
+        </div>
+      </div>
+      <div class="reviews-list">
+        ${reviews.map(r => `
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">${r.name.charAt(0)}</div>
+              <div class="review-meta">
+                <div class="review-name">${r.name} <span class="review-city">· ${r.city}</span></div>
+                <div class="review-stars">${starsHtml(r.stars)}</div>
+              </div>
+              <span class="review-date">${r.date}</span>
+            </div>
+            <p class="review-text">${r.text}</p>
+            <div class="review-verified"><i class="fas fa-check-circle"></i> Verifikovana kupovina</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
   // Related products
   const related = allProducts.filter(p => p.category === product.category && p.id !== id).slice(0, 4);
   const relContainer = document.getElementById('related-products');
