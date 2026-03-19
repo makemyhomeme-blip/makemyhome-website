@@ -220,9 +220,20 @@ async function renderProductDetail() {
 
   // Gallery
   const galleryMain = document.getElementById('gallery-main');
+  const galleryThumbs = document.getElementById('gallery-thumbs');
   if (galleryMain) {
-    galleryMain.innerHTML = `<img src="${product.image}" alt="${product.name}"
-      onerror="this.innerHTML='<span class=\'gallery-placeholder\'><i class=\'fas fa-image\'></i></span>'">`;
+    galleryMain.innerHTML = `<img id="gallery-main-img" src="${product.image}" alt="${product.name}"
+      onerror="this.style.display='none'">`;
+  }
+  if (galleryThumbs) {
+    const images = [{ src: product.image, label: 'Proizvod' }];
+    if (product.roomImage) images.push({ src: product.roomImage, label: 'U prostoru' });
+    if (images.length > 1) {
+      galleryThumbs.innerHTML = images.map((img, i) => `
+        <div class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="switchGalleryImg(this, '${img.src}')">
+          <img src="${img.src}" alt="${img.label}">
+        </div>`).join('');
+    }
   }
 
   // Info
@@ -268,6 +279,12 @@ async function renderProductDetail() {
     relContainer.innerHTML = related.map(p => renderProductCard(p)).join('');
     initAnimations();
   }
+}
+
+function switchGalleryImg(thumb, src) {
+  document.getElementById('gallery-main-img').src = src;
+  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
 }
 
 function changeQty(delta) {
