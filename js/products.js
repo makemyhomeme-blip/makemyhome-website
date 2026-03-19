@@ -377,21 +377,31 @@ async function renderProductDetail() {
       ? `<div class="product-highlight"><i class="fas fa-quote-left"></i> ${product.highlight}</div>`
       : '';
 
-    // Coverage calculator: panel is 280x122cm = 3.416 m²
-    const panelArea = 3.416;
     const calcHtml = `
       <div class="coverage-calc">
         <div class="calc-title"><i class="fas fa-ruler-combined"></i> Kalkulator – koliko panela trebaš?</div>
-        <div class="calc-row">
-          <label>Širina zida (m):</label>
-          <input type="number" id="wall-w" value="4" min="0.5" max="50" step="0.1" oninput="calcPanels()">
-        </div>
-        <div class="calc-row">
-          <label>Visina zida (m):</label>
-          <input type="number" id="wall-h" value="2.8" min="0.5" max="10" step="0.1" oninput="calcPanels()">
+        <div class="calc-fields">
+          <div class="calc-field">
+            <label>Širina zida</label>
+            <div class="calc-stepper">
+              <button type="button" onclick="stepCalc('wall-w',-0.5)">−</button>
+              <input type="number" id="wall-w" value="4" min="0.5" max="50" step="0.5" oninput="calcPanels()">
+              <span class="calc-unit">m</span>
+              <button type="button" onclick="stepCalc('wall-w',0.5)">+</button>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label>Visina zida</label>
+            <div class="calc-stepper">
+              <button type="button" onclick="stepCalc('wall-h',-0.1)">−</button>
+              <input type="number" id="wall-h" value="2.8" min="0.5" max="10" step="0.1" oninput="calcPanels()">
+              <span class="calc-unit">m</span>
+              <button type="button" onclick="stepCalc('wall-h',0.1)">+</button>
+            </div>
+          </div>
         </div>
         <div class="calc-result" id="calc-result">
-          Za zid od <strong>11.2 m²</strong> trebaš <strong>4 panela</strong> (ostatak za rezanje)
+          Za zid od <strong>11.2 m²</strong> trebaš <strong>4 panela</strong>
         </div>
       </div>`;
 
@@ -437,6 +447,15 @@ async function renderProductDetail() {
     `;
   }
 
+  window.stepCalc = function(id, delta) {
+    const input = document.getElementById(id);
+    if (!input) return;
+    let val = Math.round((parseFloat(input.value) + delta) * 10) / 10;
+    val = Math.max(parseFloat(input.min), Math.min(parseFloat(input.max), val));
+    input.value = val;
+    calcPanels();
+  };
+
   window.calcPanels = function() {
     const w = parseFloat(document.getElementById('wall-w')?.value) || 0;
     const h = parseFloat(document.getElementById('wall-h')?.value) || 0;
@@ -444,7 +463,7 @@ async function renderProductDetail() {
     const panels = Math.ceil(area / 3.416);
     const res = document.getElementById('calc-result');
     if (res && area > 0) {
-      res.innerHTML = `Za zid od <strong>${area.toFixed(1)} m²</strong> trebaš <strong>${panels} panela</strong> (preporučujemo +1 za rezanje)`;
+      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1)} m²</strong> → trebaš <strong>${panels} ${panels === 1 ? 'panel' : panels < 5 ? 'panela' : 'panela'}</strong>`;
     }
   };
 
