@@ -366,26 +366,46 @@ async function renderProductDetail() {
     ]
   };
   const productReviews = reviewsData[product.category] || reviewsData['bambus-drveni'];
-  const starIcons = n => Array.from({length: 5}, (_, i) =>
-    '<i class="fas fa-star" style="color:' + (i < n ? '#f4b400' : '#ddd') + ';font-size:13px;"></i>'
-  ).join('');
+  const totalRev = productReviews.length;
+  const fiveStars = productReviews.filter(r => r.stars === 5).length;
+  const fourStars = productReviews.filter(r => r.stars === 4).length;
+  const starFull = '<i class="fas fa-star rev-star-gold"></i>';
+  const starEmpty = '<i class="fas fa-star rev-star-empty"></i>';
+  const starIcons = n => Array.from({length: 5}, (_, i) => i < n ? starFull : starEmpty).join('');
+  const pct = n => totalRev ? Math.round((n / totalRev) * 100) : 0;
   const reviewsHtml = `
-    <div class="product-reviews-section">
-      <h3 class="reviews-heading"><i class="fas fa-star" style="color:#f4b400;"></i> Recenzije Kupaca <span class="reviews-avg">4.8 / 5</span></h3>
-      ${productReviews.map(r => `
-        <div class="review-card">
-          <div class="review-header">
-            <div class="review-avatar">${r.name.charAt(0)}</div>
-            <div class="review-meta">
-              <div class="review-name">${r.name} <span class="review-city">· ${r.city}</span></div>
-              <div class="review-stars">${starIcons(r.stars)}</div>
-            </div>
-            <span class="review-date">${r.date}</span>
-          </div>
-          <p class="review-text">${r.text}</p>
-          <div class="review-verified"><i class="fas fa-check-circle"></i> Verifikovana kupovina</div>
+    <div class="rv-wrap">
+      <h3 class="rv-title">Ocjene korisnika</h3>
+      <div class="rv-summary">
+        <div class="rv-score-col">
+          <div class="rv-big-num">4.8</div>
+          <div class="rv-big-stars">${starIcons(5)}</div>
+          <div class="rv-count">${totalRev} recenzije</div>
         </div>
-      `).join('')}
+        <div class="rv-bars-col">
+          <div class="rv-bar-row"><span class="rv-bar-label">5</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill" style="width:${pct(fiveStars)}%"></div></div><span class="rv-bar-num">${fiveStars}</span></div>
+          <div class="rv-bar-row"><span class="rv-bar-label">4</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill" style="width:${pct(fourStars)}%"></div></div><span class="rv-bar-num">${fourStars}</span></div>
+          <div class="rv-bar-row"><span class="rv-bar-label">3</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill rv-bar-fill--empty" style="width:0%"></div></div><span class="rv-bar-num">0</span></div>
+          <div class="rv-bar-row"><span class="rv-bar-label">2</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill rv-bar-fill--empty" style="width:0%"></div></div><span class="rv-bar-num">0</span></div>
+          <div class="rv-bar-row"><span class="rv-bar-label">1</span><i class="fas fa-star rv-star-gold"></i><div class="rv-bar-track"><div class="rv-bar-fill rv-bar-fill--empty" style="width:0%"></div></div><span class="rv-bar-num">0</span></div>
+        </div>
+      </div>
+      <div class="rv-list">
+        ${productReviews.map(r => `
+          <div class="rv-card">
+            <div class="rv-card-top">
+              <div class="rv-avatar">${r.name.charAt(0)}</div>
+              <div class="rv-card-meta">
+                <div class="rv-card-name">${r.name} <span class="rv-card-city">· ${r.city}</span></div>
+                <div class="rv-card-stars">${starIcons(r.stars)}</div>
+              </div>
+              <span class="rv-card-date">${r.date}</span>
+            </div>
+            <p class="rv-card-text">${r.text}</p>
+            <div class="rv-verified"><i class="fas fa-check-circle"></i> Verifikovana kupovina</div>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
 
