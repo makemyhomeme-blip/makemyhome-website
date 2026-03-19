@@ -344,6 +344,53 @@ async function renderProductDetail() {
   // Info
   const info = document.getElementById('product-info-content');
   if (info) {
+    // Ideal for icons map
+    const roomIcons = {
+      'Dnevna soba': 'fas fa-couch',
+      'Spavaća soba': 'fas fa-bed',
+      'Kuhinja': 'fas fa-utensils',
+      'Kupaonica': 'fas fa-bath',
+      'Hodnik': 'fas fa-door-open',
+      'Ured': 'fas fa-briefcase',
+      'Restoran': 'fas fa-concierge-bell',
+      'Bar/kafić': 'fas fa-coffee',
+      'Kućni bioskop': 'fas fa-film',
+      'Hotel': 'fas fa-hotel',
+      'VIP lounge': 'fas fa-glass-cheers',
+      'Biblioteka': 'fas fa-book'
+    };
+
+    const idealForHtml = (product.idealFor || []).map(room => `
+      <div class="ideal-room">
+        <i class="${roomIcons[room] || 'fas fa-home'}"></i>
+        <span>${room}</span>
+      </div>`).join('');
+
+    const styleMatchHtml = (product.styleMatch || []).map(s =>
+      `<span class="style-badge">${s}</span>`).join('');
+
+    const highlightHtml = product.highlight
+      ? `<div class="product-highlight"><i class="fas fa-quote-left"></i> ${product.highlight}</div>`
+      : '';
+
+    // Coverage calculator: panel is 280x122cm = 3.416 m²
+    const panelArea = 3.416;
+    const calcHtml = `
+      <div class="coverage-calc">
+        <div class="calc-title"><i class="fas fa-ruler-combined"></i> Kalkulator – koliko panela trebaš?</div>
+        <div class="calc-row">
+          <label>Širina zida (m):</label>
+          <input type="number" id="wall-w" value="4" min="0.5" max="50" step="0.1" oninput="calcPanels()">
+        </div>
+        <div class="calc-row">
+          <label>Visina zida (m):</label>
+          <input type="number" id="wall-h" value="2.8" min="0.5" max="10" step="0.1" oninput="calcPanels()">
+        </div>
+        <div class="calc-result" id="calc-result">
+          Za zid od <strong>11.2 m²</strong> trebaš <strong>4 panela</strong> (ostatak za rezanje)
+        </div>
+      </div>`;
+
     info.innerHTML = `
       <div class="product-category">${categoryName}</div>
       <h1 class="product-name">${product.name}</h1>
@@ -351,31 +398,51 @@ async function renderProductDetail() {
         <span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
         <span class="rating-count">(4.8) · Odlično</span>
       </div>
+
+      ${highlightHtml}
+
       <div class="product-price-lg">${product.price} € <span>/ ${product.unit}</span></div>
-      <div class="price-note"><i class="fas fa-info-circle"></i> Cijena iskazana po kvadratnom metru. PDV uključen.</div>
+      <div class="price-note"><i class="fas fa-info-circle"></i> Cijena po komadu (panel 280×122cm = 3,42 m²). PDV uključen.</div>
+
       <div class="product-short-desc">${product.description}</div>
+
+      ${idealForHtml ? `<div class="ideal-for-label">Idealno za:</div><div class="ideal-for-grid">${idealForHtml}</div>` : ''}
+
+      ${styleMatchHtml ? `<div class="style-match-row"><span class="style-match-label">Stil:</span>${styleMatchHtml}</div>` : ''}
+
       <ul class="product-features-list">
         ${product.features.map(f => `<li><i class="fas fa-check"></i>${f}</li>`).join('')}
       </ul>
-      <div class="product-qty">
-        <span class="qty-label">Količina:</span>
-        <div class="qty-input">
-          <button class="qty-btn" onclick="changeQty(-1)">−</button>
-          <input type="number" id="qty" class="qty-num" value="1" min="1" max="999">
-          <button class="qty-btn" onclick="changeQty(1)">+</button>
-        </div>
-        <span class="qty-unit">m²</span>
-      </div>
+
+      ${calcHtml}
+
       <div class="product-detail-actions">
         <button class="btn btn-primary btn-lg" onclick="inquireProduct('${product.name}')">
           <i class="fas fa-envelope"></i> Pošalji Upit
         </button>
-        <a href="contact.html" class="btn btn-dark btn-lg">
-          <i class="fas fa-phone"></i> Pozovite Nas
+        <a href="https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20${encodeURIComponent(product.name)}" target="_blank" class="btn btn-dark btn-lg">
+          <i class="fab fa-whatsapp"></i> WhatsApp
         </a>
+      </div>
+
+      <div class="product-trust-row">
+        <div class="trust-item"><i class="fas fa-truck"></i><span>Dostava Crna Gora</span></div>
+        <div class="trust-item"><i class="fas fa-tools"></i><span>Savjeti za montažu</span></div>
+        <div class="trust-item"><i class="fas fa-undo"></i><span>Zamjena u 7 dana</span></div>
       </div>
     `;
   }
+
+  window.calcPanels = function() {
+    const w = parseFloat(document.getElementById('wall-w')?.value) || 0;
+    const h = parseFloat(document.getElementById('wall-h')?.value) || 0;
+    const area = w * h;
+    const panels = Math.ceil(area / 3.416);
+    const res = document.getElementById('calc-result');
+    if (res && area > 0) {
+      res.innerHTML = `Za zid od <strong>${area.toFixed(1)} m²</strong> trebaš <strong>${panels} panela</strong> (preporučujemo +1 za rezanje)`;
+    }
+  };
 
   // Related products
   const related = allProducts.filter(p => p.category === product.category && p.id !== id).slice(0, 4);

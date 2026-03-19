@@ -1769,3 +1769,164 @@ textarea.form-control { resize: vertical; min-height: 130px; }
     gap: 20px;
   }
 }
+
+/* ===== PRODUCT DETAIL – NEW ELEMENTS ===== */
+
+/* Highlight quote */
+.product-highlight {
+  background: linear-gradient(135deg, rgba(201,168,108,0.12), rgba(201,168,108,0.05));
+  border-left: 3px solid var(--primary);
+  padding: 14px 18px;
+  border-radius: 0 10px 10px 0;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--dark-2);
+  margin: 16px 0 20px;
+  line-height: 1.5;
+}
+.product-highlight .fa-quote-left {
+  color: var(--primary);
+  margin-right: 8px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* Ideal for rooms */
+.ideal-for-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  margin: 20px 0 10px;
+}
+.ideal-for-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.ideal-room {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--light);
+  border: 1px solid rgba(201,168,108,0.25);
+  padding: 7px 13px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dark-2);
+}
+.ideal-room i {
+  color: var(--primary);
+  font-size: 12px;
+}
+
+/* Style match badges */
+.style-match-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+.style-match-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  margin-right: 4px;
+}
+.style-badge {
+  background: var(--dark);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Coverage calculator */
+.coverage-calc {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 24px 0;
+  border: 1px solid rgba(201,168,108,0.2);
+}
+.calc-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.calc-title i { color: var(--primary); }
+.calc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.calc-row label {
+  font-size: 13px;
+  color: var(--dark-2);
+  font-weight: 500;
+}
+.calc-row input {
+  width: 90px;
+  padding: 7px 10px;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.calc-row input:focus { border-color: var(--primary); }
+.calc-result {
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--dark-2);
+  margin-top: 8px;
+  border: 1px solid rgba(201,168,108,0.3);
+}
+.calc-result strong { color: var(--primary-dark); }
+
+/* Trust row */
+.product-trust-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--gray);
+  font-weight: 500;
+}
+.trust-item i {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .calc-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .calc-row input { width: 100%; }
+  .product-trust-row { flex-direction: column; }
+}
