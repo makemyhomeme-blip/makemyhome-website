@@ -4,46 +4,22 @@
 
 let currentFilter = 'all';
 
-// ===== PODACI UGRAĐENI DIREKTNO (rade i bez servera) =====
-const PRODUCTS_DATA = [
-  {"id":1,"name":"Bambus Panel Drveni","category":"bambus-drveni","price":"0.00","unit":"m²","description":"Dekorativni bambus panel sa drvenom strukturom. Prirodan i elegantan izgled za svaki prostor.","features":["Prirodni bambus","Jednostavna montaža","Različite nijanse"],"image":"","badge":null,"inStock":true,"featured":true},
-  {"id":2,"name":"Bambus Panel Tekstilni","category":"bambus-tekstilni","price":"0.00","unit":"m²","description":"Bambus panel sa tekstilnom površinom. Mekana tekstura koja unosi toplinu u prostor.","features":["Tekstilna površina","Zvučna apsorpcija","Elegantni dizajn"],"image":"","badge":null,"inStock":true,"featured":true},
-  {"id":3,"name":"Bambus Panel Mermerni","category":"bambus-mermerni","price":"0.00","unit":"m²","description":"Bambus panel sa mermernim uzorkom. Luksuzni izgled bez visoke cijene pravog mermera.","features":["Mermerni uzorak","Vodootporan","Laka montaža"],"image":"","badge":null,"inStock":true,"featured":true},
-  {"id":4,"name":"Bambus Panel Metalni","category":"bambus-metalni","price":"0.00","unit":"m²","description":"Bambus panel sa metalnim završetkom. Moderan industrijski stil za savremene enterijer projekte.","features":["Metalni završetak","Moderan dizajn","Otporan na ogrebotine"],"image":"","badge":null,"inStock":true,"featured":false},
-  {"id":5,"name":"Bambus Panel Kožni","category":"bambus-kozni","price":"0.00","unit":"m²","description":"Bambus panel sa kožnom površinom. Luksuzno rješenje za ekskluzivne prostore.","features":["Kožna površina","Luksuzni izgled","Premium kvalitet"],"image":"","badge":"Novo","inStock":true,"featured":false},
-  {"id":6,"name":"3D Letvice","category":"3d-letvice","price":"0.00","unit":"m²","description":"Elegantne 3D letvice za moderne i luksuzne enterijer projekte.","features":["Prirodno drvo","Jednostavna montaža","Razne boje"],"image":"","badge":null,"inStock":true,"featured":true},
-  {"id":7,"name":"Akustični Panel","category":"akusticni-paneli","price":"0.00","unit":"m²","description":"Vrhunska zvučna izolacija uz dekorativan izgled.","features":["Zvučna izolacija","Ekološki materijal","Različite boje"],"image":"","badge":null,"inStock":true,"featured":true},
-  {"id":8,"name":"Aluminijum Lajsne","category":"aluminijum-lajsne","price":"0.00","unit":"kom","description":"Aluminijumske lajsne za završnu obradu i elegantne detalje.","features":["Aluminijum","Razne dimenzije","Laka montaža"],"image":"","badge":null,"inStock":true,"featured":false}
-];
+let allProducts = [];
+let allCategories = [];
 
-const CATEGORIES_DATA = [
-  {"id":"bambus-drveni","name":"Drveni","icon":"fas fa-leaf","description":"Bambus paneli sa drvenom strukturom","color":"#7a9e6e"},
-  {"id":"bambus-tekstilni","name":"Tekstilni","icon":"fas fa-leaf","description":"Bambus paneli sa tekstilnom površinom","color":"#7a9e6e"},
-  {"id":"bambus-mermerni","name":"Mermerni","icon":"fas fa-leaf","description":"Bambus paneli sa mermernim uzorkom","color":"#7a9e6e"},
-  {"id":"bambus-metalni","name":"Metalni","icon":"fas fa-leaf","description":"Bambus paneli sa metalnim završetkom","color":"#7a9e6e"},
-  {"id":"bambus-kozni","name":"Kožni","icon":"fas fa-leaf","description":"Bambus paneli sa kožnom površinom","color":"#7a9e6e"},
-  {"id":"3d-letvice","name":"3D Letvice","icon":"fas fa-grip-lines","description":"Elegantne 3D letvice za moderne enterijer projekte","color":"#8B6914"},
-  {"id":"akusticni-paneli","name":"Akustični Paneli","icon":"fas fa-volume-mute","description":"Vrhunska zvučna izolacija uz dekorativan izgled","color":"#2c2c2c"},
-  {"id":"aluminijum-lajsne","name":"Aluminijum Lajsne","icon":"fas fa-minus","description":"Aluminijumske lajsne za završnu obradu","color":"#888888"}
-];
-
-let allProducts = PRODUCTS_DATA;
-let allCategories = CATEGORIES_DATA;
-
-// ===== UČITAJ PODATKE (pokušaj fetch, fallback na ugrađene) =====
+// ===== UČITAJ PODATKE SA SERVERA =====
 async function loadData() {
-  if (allProducts.length > 0 && allCategories.length > 0) return; // već učitano
   try {
     const [prodRes, catRes] = await Promise.all([
-      fetch('data/products.json'),
-      fetch('data/categories.json')
+      fetch('data/products.json?v=' + Date.now()),
+      fetch('data/categories.json?v=' + Date.now())
     ]);
     allProducts = await prodRes.json();
     allCategories = await catRes.json();
   } catch (e) {
-    // Koristimo ugrađene podatke (fallback)
-    allProducts = PRODUCTS_DATA;
-    allCategories = CATEGORIES_DATA;
+    console.error('Greška pri učitavanju proizvoda:', e);
+    allProducts = [];
+    allCategories = [];
   }
 }
 
