@@ -246,6 +246,8 @@ ul { list-style: none; }
 /* ===== DROPDOWN NAV ===== */
 .nav-dropdown {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .nav-dropdown-toggle {
@@ -256,14 +258,16 @@ ul { list-style: none; }
 .nav-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 12px;
   background: #1a1a1a;
   border: 1px solid rgba(201,168,108,0.2);
   border-radius: 10px;
   min-width: 160px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-  z-index: 999;
+  z-index: 9999;
   overflow: hidden;
 }
 
