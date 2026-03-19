@@ -443,7 +443,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           <span class="card-title">Dodaj Novi Proizvod</span>
         </div>
         <div style="padding:28px;">
-          <form method="POST" action="actions.php">
+          <form method="POST" action="actions.php" enctype="multipart/form-data">
             <input type="hidden" name="action" value="add">
             <div class="form-grid">
               <div class="form-group">
@@ -454,12 +454,16 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                 <label>Kategorija *</label>
                 <select name="category" required>
                   <option value="">Odaberi kategoriju</option>
-                  <option value="3d-letvice">3D Letvice</option>
-                  <option value="akusticni-paneli">Akustični Paneli</option>
-                  <option value="dekorativni-paneli">Dekorativni Paneli</option>
-                  <option value="flex-stone">Flex Stone</option>
-                  <option value="pu-stone">PU Stone</option>
-                  <option value="uv-paneli">UV Paneli</option>
+                  <optgroup label="── Bambus Paneli ──">
+                    <option value="bambus-drveni">Bambus › Drveni</option>
+                    <option value="bambus-tekstilni">Bambus › Tekstilni</option>
+                    <option value="bambus-mermerni">Bambus › Mermerni</option>
+                    <option value="bambus-metalni">Bambus › Metalni</option>
+                    <option value="bambus-kozni">Bambus › Kožni</option>
+                  </optgroup>
+                  <optgroup label="── Ostalo ──">
+                    <option value="akusticni-paneli">Akustični Paneli</option>
+                  </optgroup>
                 </select>
               </div>
               <div class="form-group">
@@ -484,8 +488,16 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                 <input type="text" name="features" placeholder="Prirodno drvo, Laka montaža, UV zaštita, Dimenzije: 270x12x2cm">
               </div>
               <div class="form-group full">
-                <label>Putanja do slike (npr. images/products/naziv.jpg)</label>
-                <input type="text" name="image" placeholder="images/products/naziv-proizvoda.jpg">
+                <label>Slika proizvoda</label>
+                <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;">
+                  <div style="flex:1;min-width:200px;">
+                    <input type="file" name="image_upload" accept="image/*" id="add-img-file"
+                      style="padding:8px;background:#f8f6f3;border:2px dashed #c9a86c;cursor:pointer;"
+                      onchange="previewImg(this,'add-img-preview')">
+                    <div style="font-size:11px;color:#888;margin-top:4px;">JPG, PNG, WEBP — max 5MB</div>
+                  </div>
+                  <img id="add-img-preview" style="width:80px;height:80px;object-fit:cover;border-radius:8px;display:none;border:2px solid #c9a86c;">
+                </div>
               </div>
               <div class="form-group">
                 <label>Badge/Oznaka (opciono)</label>
@@ -575,7 +587,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
       <h3 class="modal-title">Uredi Proizvod</h3>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <form method="POST" action="actions.php" id="edit-form">
+    <form method="POST" action="actions.php" id="edit-form" enctype="multipart/form-data">
       <input type="hidden" name="action" value="edit">
       <input type="hidden" name="id" id="edit-id">
       <div class="form-grid">
@@ -586,12 +598,16 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
         <div class="form-group">
           <label>Kategorija *</label>
           <select name="category" id="edit-category" required>
-            <option value="3d-letvice">3D Letvice</option>
-            <option value="akusticni-paneli">Akustični Paneli</option>
-            <option value="dekorativni-paneli">Dekorativni Paneli</option>
-            <option value="flex-stone">Flex Stone</option>
-            <option value="pu-stone">PU Stone</option>
-            <option value="uv-paneli">UV Paneli</option>
+            <optgroup label="── Bambus Paneli ──">
+              <option value="bambus-drveni">Bambus › Drveni</option>
+              <option value="bambus-tekstilni">Bambus › Tekstilni</option>
+              <option value="bambus-mermerni">Bambus › Mermerni</option>
+              <option value="bambus-metalni">Bambus › Metalni</option>
+              <option value="bambus-kozni">Bambus › Kožni</option>
+            </optgroup>
+            <optgroup label="── Ostalo ──">
+              <option value="akusticni-paneli">Akustični Paneli</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
@@ -616,8 +632,17 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           <input type="text" name="features" id="edit-features">
         </div>
         <div class="form-group full">
-          <label>Putanja slike</label>
-          <input type="text" name="image" id="edit-image">
+          <label>Slika proizvoda</label>
+          <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;">
+              <input type="file" name="image_upload" accept="image/*" id="edit-img-file"
+                style="padding:8px;background:#f8f6f3;border:2px dashed #c9a86c;cursor:pointer;"
+                onchange="previewImg(this,'edit-img-preview')">
+              <div style="font-size:11px;color:#888;margin-top:4px;">Ostavite prazno da zadržite postojeću sliku</div>
+            </div>
+            <img id="edit-img-preview" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid #c9a86c;">
+          </div>
+          <input type="hidden" name="image" id="edit-image">
         </div>
         <div class="form-group">
           <label>Badge</label>
@@ -682,6 +707,15 @@ function closeModal() {
 document.getElementById('edit-modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
+
+function previewImg(input, previewId) {
+  const preview = document.getElementById(previewId);
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 </script>
 
 </body>
