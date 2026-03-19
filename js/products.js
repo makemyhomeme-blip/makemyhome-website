@@ -356,6 +356,10 @@ async function renderProductDetail() {
 
   // Reviews data – per product ID, with total count and 2 visible comments
   const reviewsData = {
+    27: { total: 9,  fiveS: 8, fourS: 1, comments: [
+      { name: 'Amira K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'BW229 je nešto posebno – tekstura lana na zidu daje prostoriji mekoću kakvu nisam vidjela ni u jednom hotelu. Spavaća soba je potpuno transformisana.' },
+      { name: 'Milena V.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Bijelo-bež nijansa je savršeno topla, nije hladna bijela. Odlično ide uz drvo i prirodne materijale. Montaža super jednostavna.' }
+    ]},
     4:  { total: 7,  fiveS: 6, fourS: 1, comments: [
       { name: 'Aleksandar M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio u kućni studio – razlika u zvuku je odmah primjetna. Panel je sivi, diskretnog dizajna, odlično se uklapa.' },
       { name: 'Tijana R.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Kupila za dnevnu sobu. Siva boja je neutralna, pristaje uz sve. Montaža je bila super jednostavna.' }
