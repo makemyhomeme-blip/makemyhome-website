@@ -230,6 +230,13 @@ ul { list-style: none; }
   border-radius: 2px;
 }
 
+.logo-img {
+  height: 52px;
+  width: auto;
+  border-radius: 8px;
+  display: block;
+}
+
 .nav-cta {
   background: var(--primary);
   color: var(--dark) !important;
