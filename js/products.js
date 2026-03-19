@@ -332,7 +332,6 @@ async function renderProductDetail() {
         onclick="openImageLightbox(this.src, '${product.name}')"
         style="cursor:zoom-in;"
         onerror="this.style.display='none'">
-      <div class="gallery-zoom-hint"><i class="fas fa-search-plus"></i> Klikni za prikaz u punoj veličini</div>
     `;
   }
   if (galleryThumbs) {
