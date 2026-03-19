@@ -253,6 +253,10 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
         <span class="badge-count"><?= $unread ?></span>
       <?php endif; ?>
     </button>
+    <div class="nav-section-label">Katalog</div>
+    <a href="sifre.php" class="sidebar-link">
+      <i class="fas fa-barcode"></i> Unos Šifri
+    </a>
     <div class="nav-section-label">Web sajt</div>
     <a href="../index.html" target="_blank" class="sidebar-link">
       <i class="fas fa-external-link-alt"></i> Pogledaj Sajt
