@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'image'       => $imgPath,
             'badge'       => null,
             'inStock'     => true,
-            'featured'    => false,
+            'featured'    => true,
         ];
         $saved++;
     }
