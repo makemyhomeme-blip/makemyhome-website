@@ -850,7 +850,7 @@ async function renderProductDetail() {
           </div>
           <div class="pair-card-info">
             <div class="pair-card-name">${p.name}</div>
-            <div class="pair-card-price">${p.price.toFixed(2).replace('.', ',')} €<span class="pair-card-unit"> / ${p.unit}</span></div>
+            <div class="pair-card-price">${parseFloat(p.price).toFixed(2).replace('.', ',')} €<span class="pair-card-unit"> / ${p.unit}</span></div>
             <div class="pair-card-cta">Pogledaj <i class="fas fa-arrow-right"></i></div>
           </div>
         </a>
