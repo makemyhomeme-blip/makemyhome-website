@@ -405,6 +405,46 @@ async function renderProductDetail() {
     26: { total: 13, fiveS: 12, fourS: 1, comments: [
       { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Orah je savršen spoj tamnog i toplog tona. Postavio u kancelariji i kolege svakodnevno komentarišu koliko je prostorija lepa.' },
       { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Tamna espresso boja daje luksuz bez prevelike cene. Panel je čvrst i lako se čisti. Apsolutno preporučujem!' }
+    ]},
+    46: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Dragana M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW215 izgleda kao pravi mermerni zid. Gosti uvek pitaju da li sam ugradila pravi mermer – ne mogu da veruju da je panel. Fenomenalno!' },
+      { name: 'Zoran K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Postavio u kupatilu iza lavaboa. Efekat je neverovatan – luksuz za malu cenu. Montaža sa silikonom prošla bez ikakvih problema.' }
+    ]},
+    47: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Kristina P.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'SW222 ima savršene nijanse sive i bele – baš kao karerski mermer. Transformisala sam dnevnu sobu i svi su oduševljeni rezultatom.' },
+      { name: 'Nemanja R.', city: 'Nikšić', date: 'Januar 2026', stars: 4, text: 'Jako lep panel, tekstura autentična. Trebalo je malo pažnje pri rezanju skalpelom, ali rezultat je odličan.' }
+    ]},
+    48: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Ivana B.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Topli bež tonovi ovog panela savršeno odgovaraju mojoj kuhinji. Izgleda skupo i elegantno, a montaža je trajala svega sat vremena.' },
+      { name: 'Rade S.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Odlična imitacija mermera, fotografije ne mogu da prenesu koliko lepo izgleda uživo. Preporučujem svakome.' }
+    ]},
+    49: { total: 7, fiveS: 6, fourS: 1, comments: [
+      { name: 'Snežana J.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Postavila u hodniku i kompletno je promenila atmosferu. Tamnije žilice daju dubinu i karakter zidu. Izvanredno!' },
+      { name: 'Miloš V.', city: 'Cetinje', date: 'Februar 2026', stars: 5, text: 'Kvalitet materijala je odličan, panel je čvrst i lak za montažu. Izgleda kao pravi mermer, a cena je pristupačna.' }
+    ]},
+    50: { total: 13, fiveS: 12, fourS: 1, comments: [
+      { name: 'Tatjana Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW003 – čista elegancija. Beli mermer sa suptilnim žilicama je klasičan izbor koji nikad ne stari. Spavaća soba izgleda kao iz časopisa.' },
+      { name: 'Goran N.', city: 'Bijelo Polje', date: 'Februar 2026', stars: 5, text: 'Postavio iza kreveta umesto tapete. Razlika je ogromna – prostor deluje dvostruko skuplje. Montaža jednostavna, silikon drži savršeno.' }
+    ]},
+    51: { total: 10, fiveS: 9, fourS: 1, comments: [
+      { name: 'Bojana L.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW001-B ima nešto posebno – kombinacija bele i zlatnih žilica daje toplinu i luksuz istovremeno. Trpezarija je potpuno transformisana.' },
+      { name: 'Danilo F.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Koristio za restoran koji sam renovirao – klijent je oduševljen. Izgleda profesionalno i skupo, a ugradnja je brza i čista.' }
+    ]},
+    52: { total: 6, fiveS: 5, fourS: 1, comments: [
+      { name: 'Marina T.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'YL059 je imitacija žutog mermera i izgleda prelepo uz svetli drveni nameštaj. Jedinstven i elegantno topao izbor.' },
+      { name: 'Predrag M.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Neuobičajena boja mermera koja privlači pažnju. Postavio u recepciji firme – svi posetioci komentarišu koliko je zanimljivo.' }
+    ]},
+    53: { total: 12, fiveS: 11, fourS: 1, comments: [
+      { name: 'Jelena S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'SW212 – siva sa tamnim žilicama je savremena i sofisticirana. Moj omiljeni panel do sada. Kupatilo izgleda kao spa centar.' },
+      { name: 'Stefan B.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Moderan i neutralan dizajn koji ide uz sve. Jako sam zadovoljan kvalitetom – panel je čvrst, lepo izgleda i lako se čisti.' }
+    ]},
+    54: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Aleksandra C.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'YL056 ima tople zelenkasto-zlatne nijanse koje daju prostoru karakter. Hodnik je potpuno drugačiji – topliji i prijatniji.' },
+      { name: 'Vuk J.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Neobičan i prelep mermer efekat. Svaki panel je malo drugačiji baš kao pravi kamen. Odlično za fokalnu tačku u sobi.' }
+    ]},
+    55: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Milica R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'SW219 je suptilna i elegantna – svetla siva sa blagim žilicama. Savršena za moderne enterijerske projekte. Kupatilo izgleda luksuzno.' },
+      { name: 'Andrija K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Postavio u dnevnoj sobi i odmah je postala tema razgovora. Toliko lepo izgleda da svi misle da je pravi mermer. Preporučujem!' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
