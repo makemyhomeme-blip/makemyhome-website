@@ -2301,6 +2301,20 @@
     ]
   },
   {
+    "id": 96,
+    "name": "L1",
+    "category": "aluminijum-lajsne",
+    "price": "13.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013021-738.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
     "id": 95,
     "name": "L2",
     "category": "aluminijum-lajsne",
@@ -2310,20 +2324,6 @@
     "description": "",
     "features": [],
     "image": "images/products/product-1774012922-882.png",
-    "badge": null,
-    "inStock": true,
-    "featured": true
-  },
-  {
-    "id": 96,
-    "name": "L88",
-    "category": "aluminijum-lajsne",
-    "price": "13.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "",
-    "features": [],
-    "image": "images/products/product-1774013021-738.png",
     "badge": null,
     "inStock": true,
     "featured": true
