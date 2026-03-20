@@ -703,8 +703,6 @@ async function renderProductDetail() {
       : `<div class="product-price-lg">${product.price} € <span>/ ${product.unit}</span></div>`
     }
 
-    <div class="product-short-desc">${product.description}</div>
-
     <!-- Tab switcher -->
     <div class="pq-tabs">
       <button class="pq-tab active" onclick="switchPqTab('qty', this)">
@@ -753,6 +751,8 @@ async function renderProductDetail() {
         Za zid 4 × 2,8 m = <strong>11,2 m²</strong> → trebaš <strong>4 komada</strong>
       </div>
     </div>
+
+    <div class="product-short-desc">${product.description}</div>
 
     <!-- Akcijska dugmad -->
     <div class="pq-actions">
