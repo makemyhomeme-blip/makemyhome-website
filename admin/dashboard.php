@@ -456,9 +456,6 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   <option value="">Odaberi kategoriju</option>
                   <optgroup label="── 3D Letvice ──">
                     <option value="3d-letvice">3D Letvice</option>
-                    <option value="3d-letvice-drvene">3D Letvice › Drvene</option>
-                    <option value="3d-letvice-mdf">3D Letvice › MDF</option>
-                    <option value="3d-letvice-pvc">3D Letvice › PVC</option>
                   </optgroup>
                   <optgroup label="── Bambus Paneli ──">
                     <option value="bambus-drveni">Bambus › Drveni</option>
@@ -606,9 +603,6 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           <select name="category" id="edit-category" required>
             <optgroup label="── 3D Letvice ──">
               <option value="3d-letvice">3D Letvice</option>
-              <option value="3d-letvice-drvene">3D Letvice › Drvene</option>
-              <option value="3d-letvice-mdf">3D Letvice › MDF</option>
-              <option value="3d-letvice-pvc">3D Letvice › PVC</option>
             </optgroup>
             <optgroup label="── Bambus Paneli ──">
               <option value="bambus-drveni">Bambus › Drveni</option>
