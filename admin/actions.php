@@ -56,6 +56,7 @@ switch ($action) {
         $category    = trim($_POST['category'] ?? '');
         $price       = trim($_POST['price'] ?? '0');
         $unit        = trim($_POST['unit'] ?? 'm²');
+        $discount    = max(0, min(99, (int)($_POST['discount'] ?? 0)));
         $description = trim($_POST['description'] ?? '');
         $featuresRaw = trim($_POST['features'] ?? '');
         $uploadedImg = handleImageUpload('image_upload');
@@ -77,6 +78,7 @@ switch ($action) {
             'name'        => htmlspecialchars($name, ENT_QUOTES, 'UTF-8'),
             'category'    => $category,
             'price'       => $price,
+            'discount'    => $discount,
             'unit'        => $unit,
             'description' => htmlspecialchars($description, ENT_QUOTES, 'UTF-8'),
             'features'    => $features,
@@ -97,6 +99,7 @@ switch ($action) {
         $category    = trim($_POST['category'] ?? '');
         $price       = trim($_POST['price'] ?? '0');
         $unit        = trim($_POST['unit'] ?? 'm²');
+        $discount    = max(0, min(99, (int)($_POST['discount'] ?? 0)));
         $description = trim($_POST['description'] ?? '');
         $featuresRaw = trim($_POST['features'] ?? '');
         $uploadedImg = handleImageUpload('image_upload');
@@ -118,6 +121,7 @@ switch ($action) {
                 $p['name']        = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
                 $p['category']    = $category;
                 $p['price']       = $price;
+                $p['discount']    = $discount;
                 $p['unit']        = $unit;
                 $p['description'] = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
                 $p['features']    = $features;

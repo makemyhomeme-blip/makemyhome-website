@@ -404,7 +404,16 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   </td>
                   <td><strong><?= htmlspecialchars($p['name']) ?></strong></td>
                   <td><?= htmlspecialchars(ucfirst(str_replace('-', ' ', $p['category']))) ?></td>
-                  <td><?= htmlspecialchars($p['price']) ?> €/<?= htmlspecialchars($p['unit']) ?></td>
+                  <td>
+                    <?php if (!empty($p['discount']) && $p['discount'] > 0): ?>
+                      <span style="text-decoration:line-through;color:#aaa;font-size:12px;"><?= htmlspecialchars($p['price']) ?> €</span><br>
+                      <strong style="color:#e74c3c;"><?= number_format($p['price'] * (1 - $p['discount']/100), 2) ?> €</strong>
+                      <span style="font-size:11px;background:#e74c3c;color:#fff;border-radius:4px;padding:1px 5px;margin-left:3px;">-<?= (int)$p['discount'] ?>%</span>
+                      /<?= htmlspecialchars($p['unit']) ?>
+                    <?php else: ?>
+                      <?= htmlspecialchars($p['price']) ?> €/<?= htmlspecialchars($p['unit']) ?>
+                    <?php endif; ?>
+                  </td>
                   <td><?= htmlspecialchars($p['badge'] ?? '—') ?></td>
                   <td>
                     <?php if ($p['inStock']): ?>
@@ -474,7 +483,12 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               </div>
               <div class="form-group">
                 <label>Cijena (€) *</label>
-                <input type="text" name="price" required placeholder="45.00">
+                <input type="text" name="price" id="add-price" required placeholder="45.00" oninput="updateAddDiscount()">
+              </div>
+              <div class="form-group">
+                <label>Popust (%)</label>
+                <input type="number" name="discount" id="add-discount" min="0" max="99" placeholder="0 = bez popusta" style="border:2px solid #e74c3c20;" oninput="updateAddDiscount()">
+                <div id="add-discount-preview" style="font-size:12px;color:#e74c3c;margin-top:4px;"></div>
               </div>
               <div class="form-group">
                 <label>Jedinica mjere</label>
@@ -624,7 +638,12 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
         </div>
         <div class="form-group">
           <label>Cijena (€)</label>
-          <input type="text" name="price" id="edit-price">
+          <input type="text" name="price" id="edit-price" oninput="updateEditDiscount()">
+        </div>
+        <div class="form-group">
+          <label>Popust (%)</label>
+          <input type="number" name="discount" id="edit-discount" min="0" max="99" placeholder="0 = bez popusta" style="border:2px solid #e74c3c20;" oninput="updateEditDiscount()">
+          <div id="edit-discount-preview" style="font-size:12px;color:#e74c3c;margin-top:4px;"></div>
         </div>
         <div class="form-group">
           <label>Jedinica</label>
@@ -709,6 +728,7 @@ function editProduct(id) {
   document.getElementById('edit-name').value = p.name;
   document.getElementById('edit-category').value = p.category;
   document.getElementById('edit-price').value = p.price;
+  document.getElementById('edit-discount').value = p.discount || 0;
   document.getElementById('edit-unit').value = p.unit;
   document.getElementById('edit-description').value = p.description || '';
   document.getElementById('edit-features').value = (p.features || []).join(', ');
@@ -716,7 +736,32 @@ function editProduct(id) {
   document.getElementById('edit-badge').value = p.badge || '';
   document.getElementById('edit-inStock').checked = p.inStock;
   document.getElementById('edit-featured').checked = p.featured;
+  updateEditDiscount();
   document.getElementById('edit-modal').classList.add('open');
+}
+
+function updateEditDiscount() {
+  const price = parseFloat(document.getElementById('edit-price').value) || 0;
+  const disc = parseInt(document.getElementById('edit-discount').value) || 0;
+  const preview = document.getElementById('edit-discount-preview');
+  if (disc > 0 && price > 0) {
+    const sale = (price * (1 - disc / 100)).toFixed(2);
+    preview.innerHTML = `<s>${price.toFixed(2)} €</s> → <strong>${sale} €</strong> (ušteda ${disc}%)`;
+  } else {
+    preview.innerHTML = '';
+  }
+}
+
+function updateAddDiscount() {
+  const price = parseFloat(document.getElementById('add-price').value) || 0;
+  const disc = parseInt(document.getElementById('add-discount').value) || 0;
+  const preview = document.getElementById('add-discount-preview');
+  if (disc > 0 && price > 0) {
+    const sale = (price * (1 - disc / 100)).toFixed(2);
+    preview.innerHTML = `<s>${price.toFixed(2)} €</s> → <strong>${sale} €</strong> (ušteda ${disc}%)`;
+  } else {
+    preview.innerHTML = '';
+  }
 }
 
 function closeModal() {
