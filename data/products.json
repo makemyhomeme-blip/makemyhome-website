@@ -1,1396 +1,2011 @@
 [
-    {
-        "id": 18,
-        "name": "Drveni Panel CQ006 – Topli Tik",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Toplina koja grije sobu i bez radijatora",
-        "description": "Zamislite kako jutarnje sunce prelama kroz vaš prozor i boji ovaj panel zlatnim odsjajima. CQ006 donosi toplinu egzotičnog tik-drveta u vaš dom – autentičnu, prirodnu, opuštajuću. Ravne, izražene žice teku mirno i elegantno po cijeloj površini, a bogata smeđa nijansa savršeno se topi s toplim tekstilom, bambusovim ukrasima i prirodnim materijalima. Jedan panel mijenja energiju čitave prostorije.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: topla srednje-smeđa – tik tonovi",
-            "Ravna, izražena drvena žica",
-            "Površinska UV zaštita – ne blijedi na suncu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: CQ006"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Hodnik",
-            "Restoran"
-        ],
-        "styleMatch": [
-            "Prirodni",
-            "Moderni",
-            "Mediteranski",
-            "Tropski"
-        ],
-        "image": "images/products/cq006.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 19,
-        "name": "Drveni Panel MW010 – Bijeli Jasen",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Prostorija izgleda duplo veća – odmah",
-        "description": "Bijela nijansa jasena koja prostoriju čini luminoznom i prostranom. Delikatna, fina žica daje dubinu bez zagušivanja – baš onako kako funkcionišu skandinavski i japandi enterijeri koje vidite na Pinterest-u. Savršena uz tamni namještaj od oraha, biljke i tekstil boje slonove kosti. MW010 je panel koji nikad ne zastarijeva – kupite ga danas, voleće ga i za 10 godina.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: bijela/krema – tonovi prirodnog jasena",
-            "Fina, delikatna tekstura",
-            "Površinska UV zaštita – ne žuti s vremenom",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Odlično odražava svjetlost – prostorija djeluje veće",
-            "Šifra: MW010"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Kupaonica",
-            "Kuhinja"
-        ],
-        "styleMatch": [
-            "Skandinavski",
-            "Minimalistički",
-            "Japandi",
-            "Boho"
-        ],
-        "image": "images/products/mw010.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 20,
-        "name": "Drveni Panel MW301 – Crni Antracit",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Napravi izjavu. Bez riječi.",
-        "description": "Tamno, misteriozno, moćno. MW301 pretvara svaki zid u art instalaciju. Gotovo crna antracitna nijansa s jedva vidljivom drvenom žicom stvara efekt koji se ne može postići bojom ni tapetom. Postavite ga iza kreveta, iza TV-a ili kao akcentni zid u hodniku – i prostorija dobija karakter koji gosti odmah primjete. Slaže se s zlatnim i bakrenim metalnim detaljima, bijelim keramičkim ukrasima i jakim rasvjetom koji dramatično iscrtava teksturu.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: tamni antracit – gotovo crna",
-            "Suptilna, ravna drvena žica",
-            "Površinska UV zaštita",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Dramatičan vizualni efekt – idealan akcentni zid",
-            "Šifra: MW301"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Kućni bioskop",
-            "Bar/kafić"
-        ],
-        "styleMatch": [
-            "Moderni luksuz",
-            "Industrijski",
-            "Art Deco",
-            "Noir"
-        ],
-        "image": "images/products/mw301.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": false
-    },
-    {
-        "id": 21,
-        "name": "Drveni Panel MW211 – Srebrno Sivi",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Neutralan kao platno – ali daleko od dosadnog",
-        "description": "Srebrno-siva nijansa s preciznom linearnom teksturom koja nalikuje tkanom materijalu. MW211 je master kameleon – savršeno se uklapa uz gotovo svaki namještaj i dekor jer mu ne oduzima pažnju, nego ga ističe. Idealan za one koji žele moderan, uredan enterijer bez previše 'buke'. Hladna siva boja posebno lijepo funkcionira s bijelom, crnom, mustard žutom i biljnim zelenim tonovima.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: srebrno-siva s hladnim podtonom",
-            "Uniformna, precizna linearna tekstura",
-            "Površinska UV zaštita",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Svestrana nijansa – uklopljiva u svaki enterijer",
-            "Šifra: MW211"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Ured",
-            "Hodnik",
-            "Restoran"
-        ],
-        "styleMatch": [
-            "Moderni",
-            "Minimalistički",
-            "Industrijski",
-            "Scandi"
-        ],
-        "image": "images/products/mw211.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": false
-    },
-    {
-        "id": 22,
-        "name": "Drveni Panel MW013 – Pješčani Hrast",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Najpopularnija nijansa – i nije slučajno",
-        "description": "Topla bež sa mekim prirodnim žicama hrasta – ovo je nijansa koja osvaja sve. Ni previše tamna ni previše svijetla, ni hladna ni vruća. MW013 radi u svakom prostoru, uz svaki namještaj, u svakom stilu. Nije ni čudo što je ovo najtraženija nijansa naše kolekcije. Posebno se ističe u prirodnom dnevnom svjetlu kada žice hrasta dobivaju zlatni odsjaj koji čini prostoriju toplijim i prijatnijim mjestom.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: topla bež/pješčana – tonovi hrasta",
-            "Meke, prirodne drvene žice",
-            "Površinska UV zaštita",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Bestseller – najprodavanija nijansa",
-            "Šifra: MW013"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Kuhinja",
-            "Hodnik",
-            "Ured"
-        ],
-        "styleMatch": [
-            "Klasični",
-            "Moderni",
-            "Rustikalni",
-            "Scandi",
-            "Boho"
-        ],
-        "image": "images/products/mw013.jpg",
-        "badge": "Bestseller",
-        "inStock": true,
-        "featured": false
-    },
-    {
-        "id": 23,
-        "name": "Drveni Panel MW300 – Dimljeni Orah",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Sofisticiranost koja se ne kupuje novcem – nego ukusom",
-        "description": "Topla sivo-smeđa nijansa s dubokom drvenom žicom oraha – panel koji izgleda skuplje nego što košta. MW300 savršeno balansira između topline drveta i moderne hladnoće sivila, stvarajući sofisticirani tonski kontrast. Posebno moćan u kombinaciji s tamnim namještajem, zlatnim lampama i tamno zelenim biljkama. Ovaj panel čini da vaša prostorija izgleda kao iz arhitektonskog časopisa.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: topla taupe/dimljeni orah",
-            "Duboka, izražena drvena žica",
-            "Površinska UV zaštita",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Luksuzni izgled uz pristupačnu cijenu",
-            "Šifra: MW300"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Restoran",
-            "Hotel"
-        ],
-        "styleMatch": [
-            "Moderni luksuz",
-            "Art Deco",
-            "Glamour",
-            "Rustikalni"
-        ],
-        "image": "images/products/mw300.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": false
-    },
-    {
-        "id": 24,
-        "name": "Drveni Panel MW321 – Prirodni Hrast",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Klasik koji nikad ne izlazi iz mode",
-        "description": "Srednje-smeđa hrastova nijansa s čistom, prirodnom žicom – timeless izbor koji funkcionira u svakoj dekadi i svakom stilu. MW321 je kao dobro odijelo – uvijek pristaje. Topla srednja smeđa prikazuje drvenu teksturu u njenom najčišćem obliku bez tamnih ni svijetlih ekstrama. Idealan za porodične domove, urede, restorane – svuda gdje se želi prirodan, topao, ali neupadljiv dekor.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: srednje-smeđa – prirodni hrast",
-            "Čista, klasična hrastova žica",
-            "Površinska UV zaštita",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Timeless dizajn – nikad ne zastarijeva",
-            "Šifra: MW321"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Hodnik",
-            "Ured",
-            "Restoran"
-        ],
-        "styleMatch": [
-            "Klasični",
-            "Moderni",
-            "Rustikalni",
-            "Skandinavski"
-        ],
-        "image": "images/products/mw321.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": false
-    },
-    {
-        "id": 25,
-        "name": "Drveni Panel MW682 – Divlji Orah",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Jedinstven – kao otisak prsta, svaki panel priča svoju priču",
-        "description": "Bogata topla smeđa s dramatičnim čvorom i valovitim žicama oraha – ovaj panel nosi duh divlje prirode. MW682 nije panel za one koji žele 'prolaziti nezapaženo'. To je izbor za ljude s karakterom koji žele enterijer koji se pamti. Svaki komad ima nešto jedinstveno – čvor koji je godinama rastao u stablu sada krasi vaš zid. Ta autentičnost ne može se imitirati ni fabricirati. Slaže se uz kožni namještaj, vintage detalje i bakrene lampe.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: tamna topla smeđa – divlji orah",
-            "Izražena žica s karakterističnim čvorom",
-            "Svaki komad vizualno jedinstven",
-            "Površinska UV zaštita",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Šifra: MW682"
-        ],
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Bar/kafić",
-            "Biblioteka"
-        ],
-        "styleMatch": [
-            "Rustikalni",
-            "Industrijski",
-            "Vintage",
-            "Bohemian"
-        ],
-        "image": "images/products/mw682.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": false
-    },
-    {
-        "id": 26,
-        "name": "Drveni Panel MW312 – Espresso Orah",
-        "category": "bambus-drveni",
-        "price": "86.99",
-        "unit": "kom",
-        "highlight": "Za one koji znaju šta žele – i neće se zadovoljiti manje",
-        "description": "Tamna čokoladna nijansa s elegantnom valovitom žicom oraha – definicija modernog luksuza. MW312 je za premium prostore koji odbijaju kompromis. Bogata espresso boja apsorbira svjetlost i stvara dubinu koja se ne može postići ni jednom drugom površinom. Kada rasvjeta padne na panel pod kutom, žica oraha zasvijetli poput satenskog tkanine. Savršen za kućne bioskope, master spavaće sobe, luksuzne restorane i VIP zone.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: tamna čokoladna/espresso orah",
-            "Valovita, sofisticirana drvena žica",
-            "Duboka apsorpcija svjetlosti – dramatičan efekt",
-            "Površinska UV zaštita",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Šifra: MW312"
-        ],
-        "idealFor": [
-            "Spavaća soba",
-            "Kućni bioskop",
-            "Bar/kafić",
-            "VIP lounge"
-        ],
-        "styleMatch": [
-            "Moderni luksuz",
-            "Art Deco",
-            "Glamour",
-            "Noir"
-        ],
-        "image": "images/products/mw312.jpg",
-        "badge": "Premium",
-        "inStock": true,
-        "featured": false
-    },
-    {
-        "id": 37,
-        "name": "Tekstilni Panel BW229 – Topla Bež",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "Zatvorite oči i zamislite grubu, toplu lanenu tkaninu na zidu – to je BW229. Sitna, gustо isprepletena struktura u toploj bež nijansi unosi u prostoriju osjećaj prirodnosti i mira. Nijansa između pijeska i lana savršeno se stapa s drvenim detaljima, prirodnim materijalima i toplim rasvjetnim tijelima. Zid koji izgleda kao da je oduvijek bio tu.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: topla bež – laneni tonovi",
-            "Fina, gusto isprepletena tekstilna struktura",
-            "Površinska zaštita – otporan na prašinu i vlagu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW229"
-        ],
-        "image": "images/products/product-1774006203-686.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Prirodna toplina tkanine koja umiruje svaki prostor",
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Hodnik",
-            "Kancelarija"
-        ],
-        "styleMatch": [
-            "Prirodni",
-            "Skandinavski",
-            "Rustikalni",
-            "Minimalistički"
-        ]
-    },
-    {
-        "id": 38,
-        "name": "Tekstilni Panel BW400 – Čista Bijela",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "BW400 je čisto platno za vašu kreativnost. Hladno-bijela nijansa s jedva vidljivom tkanicom unosi svjetlost i zrak u svaki prostor. Idealan za male prostorije koje želite vizualno proširiti, ali i za moderne interijere gdje bijela igra glavnu ulogu. Elegancija u svojoj najčišćoj formi.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: čisto bijela – hladni ton",
-            "Fina, glatka tekstilna površina",
-            "Površinska zaštita – otporan na prašinu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW400"
-        ],
-        "image": "images/products/product-1774006240-870.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Bijela koja prostoriju čini dvostruko većom",
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Kupatilo",
-            "Kancelarija"
-        ],
-        "styleMatch": [
-            "Moderni",
-            "Minimalistički",
-            "Skandinavski",
-            "Luksuzni"
-        ]
-    },
-    {
-        "id": 39,
-        "name": "Tekstilni Panel BW224 – Hladna Siva",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "Siva nikad nije bila dosadna – BW224 to dokazuje. Srednje-siva nijansa s finim tkanicom djeluje urbano, moderno i sofisticirano. Bez pretjerivanja, bez buke – samo čist zidni dekor koji se savršeno uklapa uz beton, metal, staklo i bijele površine. Enterijer koji govori sam za sebe.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: srednje siva – hladni urbani ton",
-            "Fina, ravnomjerna tekstilna struktura",
-            "Površinska zaštita – otporan na prašinu i vlagu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW224"
-        ],
-        "image": "images/products/product-1774006266-913.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Urbana sofisticiranost koja odgovara svakom enterijeru",
-        "idealFor": [
-            "Dnevna soba",
-            "Kancelarija",
-            "Hodnik",
-            "Restoran"
-        ],
-        "styleMatch": [
-            "Moderni",
-            "Industrijski",
-            "Minimalistički",
-            "Urbani"
-        ]
-    },
-    {
-        "id": 40,
-        "name": "Tekstilni Panel BW003 – Prirodni Lan",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "BW003 donosi na zid ono što prirodni lan donosi na sto – toplinu, karakter i autentičnost. Svjetlo sivo-bež nijansa s vidljivim nitima tkanine stvara bogatu, ali nenametljivu površinu. Savršen kao neutralna pozadina koja propušta da namještaj i detalji dođu do izražaja, a opet dodaje dovoljno teksture da zid ne bude pust.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: svjetlo sivo-bež – prirodni lan ton",
-            "Vidljiva, autentična tekstura tkanine",
-            "Površinska zaštita – otporan na prašinu i vlagu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW003"
-        ],
-        "image": "images/products/product-1774006317-836.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Tekstura koja podsjeća na najfiniji prirodni lan",
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Trpezarija",
-            "Hodnik"
-        ],
-        "styleMatch": [
-            "Prirodni",
-            "Skandinavski",
-            "Rustikalni",
-            "Mediteranski"
-        ]
-    },
-    {
-        "id": 41,
-        "name": "Tekstilni Panel BW220 – Zlatna Krema",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "BW220 je panel koji u sebi nosi malo luksuza. Kremasto-bijela osnova protkana je zlatnim i bež nitima koje daju suptilan, gotovo neuhvatljiv sjaj – kao da zid lagano treperi u toplom svjetlu. Nije pretjeran, nije kričav, samo dovoljno poseban da posjetilac zastane i pogleda izbliza.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: kremasto bijela sa zlatnim nitima",
-            "Suptilan sjaj – posebno vidljiv u toplijoj rasvjeti",
-            "Površinska zaštita – otporan na prašinu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW220"
-        ],
-        "image": "images/products/product-1774006385-983.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Toplina kreme i suptilni sjaj zlatnih niti",
-        "idealFor": [
-            "Spavaća soba",
-            "Dnevna soba",
-            "Recepcija",
-            "Restoran"
-        ],
-        "styleMatch": [
-            "Luksuzni",
-            "Glamurozni",
-            "Moderni",
-            "Art Deco"
-        ]
-    },
-    {
-        "id": 42,
-        "name": "Tekstilni Panel BW221 – Srebrni Lan",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "BW221 je taj savršeni neutralac koji svi traže. Svjetlo siva s toplim podtonom – ni prehladna ni pretopla, idealna osnova za bilo koji enterijer. Fina tekstura tkanine daje zidu karakter bez da dominira prostorom. Odaberite je kad niste sigurni – sigurno je da neće pogriješiti.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: svjetlo siva s toplim podtonom",
-            "Fina, ravnomjerna tekstilna struktura",
-            "Površinska zaštita – otporan na prašinu i vlagu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW221"
-        ],
-        "image": "images/products/product-1774006410-646.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Neutralna elegancija koja pasuje uz sve",
-        "idealFor": [
-            "Dnevna soba",
-            "Spavaća soba",
-            "Kancelarija",
-            "Hodnik"
-        ],
-        "styleMatch": [
-            "Moderni",
-            "Minimalistički",
-            "Skandinavski",
-            "Klasični"
-        ]
-    },
-    {
-        "id": 43,
-        "name": "Tekstilni Panel BW809 – Ledena Magla",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "Zamislite jutarnju maglu nad morem – to je BW809. Ledeno bijelo-plava nijansa s jedva vidljivim horizontalnim nitima unosi svježinu i lakoću u prostor. Posebno dolazi do izražaja u kupaonicama i spavaćim sobama gdje stvara atmosferu spa-centra. Zid koji diše.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: ledeno bijelo-plava – hladna i svježa",
-            "Horizontalne niti daju usmjerenost i širinu",
-            "Površinska zaštita – otporan na vlagu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW809"
-        ],
-        "image": "images/products/product-1774006432-776.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Hladna svježina koja osvježava svaki prostor",
-        "idealFor": [
-            "Spavaća soba",
-            "Kupatilo",
-            "Dnevna soba",
-            "Wellness"
-        ],
-        "styleMatch": [
-            "Skandinavski",
-            "Minimalistički",
-            "Obalni",
-            "Moderni"
-        ]
-    },
-    {
-        "id": 44,
-        "name": "Tekstilni Panel BW222 – Bijeli Buklé",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "BW222 nije samo panel – to je skulptura na zidu. Chunky buklé tekstura u bijeloj boji stvara bogatu, trodimenzionalnu površinu koja mijenja izgled ovisno o smjeru svjetlosti. Topla, gotovo 'mekana' na pogled, ova tekstura unosi osjećaj ugodnosti i luksuza u svaki prostor gdje se nađe.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: bijela s toplim podtonom",
-            "Voluminozna buklé tekstura – bogata 3D površina",
-            "Površinska zaštita – otporan na prašinu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW222"
-        ],
-        "image": "images/products/product-1774006463-976.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Meka, voluminozna tekstura koja poziva na dodir",
-        "idealFor": [
-            "Spavaća soba",
-            "Dnevna soba",
-            "Recepcija",
-            "Butik"
-        ],
-        "styleMatch": [
-            "Luksuzni",
-            "Glamurozni",
-            "Moderni",
-            "Cozy"
-        ]
-    },
-    {
-        "id": 45,
-        "name": "Tekstilni Panel BW008 – Šampanjac",
-        "category": "bambus-tekstilni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "BW008 je klasa za sebe. Topla šampanjac-zlatna nijansa s horizontalnim svilenkastim nitima koje hvataju svjetlost i stvaraju suptilnu igru sjene i sjaja. Kao da je zid obučen u skupocjenu tkaninu. Savršen za prostore gdje želite pokazati ukus bez izvikivanja – luksuzan, ali diskretan.",
-        "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: topla šampanjac-zlatna",
-            "Horizontalne svilenkaste niti – suptilan sjaj",
-            "Površinska zaštita – otporan na prašinu i vlagu",
-            "Montaža: silikon/ljepilo, reže se skalpelom",
-            "Pogodan za zidove i stropove",
-            "Šifra: BW008"
-        ],
-        "image": "images/products/product-1774006512-598.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true,
-        "highlight": "Svilenkasti sjaj šampanjca na vašem zidu",
-        "idealFor": [
-            "Spavaća soba",
-            "Dnevna soba",
-            "Restoran",
-            "Recepcija"
-        ],
-        "styleMatch": [
-            "Luksuzni",
-            "Art Deco",
-            "Glamurozni",
-            "Klasični"
-        ]
-    },
-    {
-        "id": 46,
-        "name": "SW215",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774008515-675.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 47,
-        "name": "SW222",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774008575-466.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 48,
-        "name": "05512",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774008649-735.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 49,
-        "name": "05512",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774008688-517.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 50,
-        "name": "SW003",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774008744-316.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 51,
-        "name": "SW001-B",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774008913-825.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 52,
-        "name": "YL059",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009000-287.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 53,
-        "name": "SW212",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009018-208.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 54,
-        "name": "YL056",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009037-462.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 55,
-        "name": "SW219",
-        "category": "bambus-mermerni",
-        "price": "86.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009181-772.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 56,
-        "name": "JS23007",
-        "category": "bambus-metalni",
-        "price": "114.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009566-250.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 57,
-        "name": "TS002",
-        "category": "bambus-metalni",
-        "price": "114.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009589-918.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 58,
-        "name": "JS007",
-        "category": "bambus-metalni",
-        "price": "114.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009612-205.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 59,
-        "name": "JS0014",
-        "category": "bambus-metalni",
-        "price": "114.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774009629-455.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 60,
-        "name": "I3D160CQ006",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774010978-346.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 61,
-        "name": "I3D160MW300",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011058-682.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 62,
-        "name": "I3D160MW312",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011072-999.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 63,
-        "name": "I3D160MW321",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011085-475.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 64,
-        "name": "I3D160MW010",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011100-591.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 65,
-        "name": "I3D160MW010",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011113-813.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 66,
-        "name": "I3D160MW010",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011127-211.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 67,
-        "name": "I3D160MW682",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011139-663.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 68,
-        "name": "170SP054MW",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011169-606.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 69,
-        "name": "I3D170MW018",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011187-463.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 70,
-        "name": "I3D170SP052MW",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011242-938.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 71,
-        "name": "I3D160CS022",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011253-906.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 72,
-        "name": "I3D160CS013",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011266-297.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 73,
-        "name": "I3D160CS013",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011278-208.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 74,
-        "name": "I3D160039",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011294-937.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 75,
-        "name": "I3D160021",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011310-815.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 76,
-        "name": "I3D140021",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011321-786.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 77,
-        "name": "I3D160029",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011345-739.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 78,
-        "name": "I3D160016",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011373-836.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 79,
-        "name": "I3D160BW008",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011390-105.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 80,
-        "name": "I3D160BW224",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011402-320.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 81,
-        "name": "I3D160BW809",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011420-164.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 82,
-        "name": "I3D160BW229",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011449-644.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 83,
-        "name": "I3D 160 003",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011471-225.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 84,
-        "name": "3D02",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011493-381.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 85,
-        "name": "3D05",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011506-585.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 86,
-        "name": "3D05",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011543-890.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 87,
-        "name": "3D07X",
-        "category": "3d-letvice",
-        "price": "19.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011594-795.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 88,
-        "name": "AKU063",
-        "category": "akusticni-paneli",
-        "price": "94.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011747-477.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 89,
-        "name": "AKU063",
-        "category": "akusticni-paneli",
-        "price": "94.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011763-194.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 90,
-        "name": "AKU060",
-        "category": "akusticni-paneli",
-        "price": "94.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011807-750.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 91,
-        "name": "AKU060",
-        "category": "akusticni-paneli",
-        "price": "94.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011821-454.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 92,
-        "name": "AKU060",
-        "category": "akusticni-paneli",
-        "price": "94.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774011837-259.jpg",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 95,
-        "name": "L2",
-        "category": "aluminijum-lajsne",
-        "price": "13.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774012922-882.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 96,
-        "name": "L88",
-        "category": "aluminijum-lajsne",
-        "price": "13.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774013021-738.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 97,
-        "name": "L3",
-        "category": "aluminijum-lajsne",
-        "price": "114.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774013083-586.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 98,
-        "name": "L4",
-        "category": "aluminijum-lajsne",
-        "price": "18.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774013099-421.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 99,
-        "name": "L5",
-        "category": "aluminijum-lajsne",
-        "price": "13.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774013264-451.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 100,
-        "name": "L6",
-        "category": "aluminijum-lajsne",
-        "price": "13.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774013277-339.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 101,
-        "name": "L7",
-        "category": "aluminijum-lajsne",
-        "price": "114.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774013303-190.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    },
-    {
-        "id": 102,
-        "name": "L8",
-        "category": "aluminijum-lajsne",
-        "price": "18.99",
-        "discount": 0,
-        "unit": "kom",
-        "description": "",
-        "features": [],
-        "image": "images/products/product-1774013504-324.png",
-        "badge": null,
-        "inStock": true,
-        "featured": true
-    }
+  {
+    "id": 18,
+    "name": "Drveni Panel CQ006 – Topli Tik",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Toplina koja grije sobu i bez radijatora",
+    "description": "Zamislite kako jutarnje sunce prelama kroz vaš prozor i boji ovaj panel zlatnim odsjajima. CQ006 donosi toplinu egzotičnog tik-drveta u vaš dom – autentičnu, prirodnu, opuštajuću. Ravne, izražene žice teku mirno i elegantno po cijeloj površini, a bogata smeđa nijansa savršeno se topi s toplim tekstilom, bambusovim ukrasima i prirodnim materijalima. Jedan panel mijenja energiju čitave prostorije.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: topla srednje-smeđa – tik tonovi",
+      "Ravna, izražena drvena žica",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: CQ006"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Moderni",
+      "Mediteranski",
+      "Tropski"
+    ],
+    "image": "images/products/cq006.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 19,
+    "name": "Drveni Panel MW010 – Bijeli Jasen",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Prostorija izgleda duplo veća – odmah",
+    "description": "Bijela nijansa jasena koja prostoriju čini luminoznom i prostranom. Delikatna, fina žica daje dubinu bez zagušivanja – baš onako kako funkcionišu skandinavski i japandi enterijeri koje vidite na Pinterest-u. Savršena uz tamni namještaj od oraha, biljke i tekstil boje slonove kosti. MW010 je panel koji nikad ne zastarijeva – kupite ga danas, voleće ga i za 10 godina.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: bijela/krema – tonovi prirodnog jasena",
+      "Fina, delikatna tekstura",
+      "Površinska UV zaštita – ne žuti s vremenom",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Odlično odražava svjetlost – prostorija djeluje veće",
+      "Šifra: MW010"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Kupaonica",
+      "Kuhinja"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Minimalistički",
+      "Japandi",
+      "Boho"
+    ],
+    "image": "images/products/mw010.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 20,
+    "name": "Drveni Panel MW301 – Crni Antracit",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Napravi izjavu. Bez riječi.",
+    "description": "Tamno, misteriozno, moćno. MW301 pretvara svaki zid u art instalaciju. Gotovo crna antracitna nijansa s jedva vidljivom drvenom žicom stvara efekt koji se ne može postići bojom ni tapetom. Postavite ga iza kreveta, iza TV-a ili kao akcentni zid u hodniku – i prostorija dobija karakter koji gosti odmah primjete. Slaže se s zlatnim i bakrenim metalnim detaljima, bijelim keramičkim ukrasima i jakim rasvjetom koji dramatično iscrtava teksturu.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: tamni antracit – gotovo crna",
+      "Suptilna, ravna drvena žica",
+      "Površinska UV zaštita",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Dramatičan vizualni efekt – idealan akcentni zid",
+      "Šifra: MW301"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Kućni bioskop",
+      "Bar/kafić"
+    ],
+    "styleMatch": [
+      "Moderni luksuz",
+      "Industrijski",
+      "Art Deco",
+      "Noir"
+    ],
+    "image": "images/products/mw301.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 21,
+    "name": "Drveni Panel MW211 – Srebrno Sivi",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Neutralan kao platno – ali daleko od dosadnog",
+    "description": "Srebrno-siva nijansa s preciznom linearnom teksturom koja nalikuje tkanom materijalu. MW211 je master kameleon – savršeno se uklapa uz gotovo svaki namještaj i dekor jer mu ne oduzima pažnju, nego ga ističe. Idealan za one koji žele moderan, uredan enterijer bez previše 'buke'. Hladna siva boja posebno lijepo funkcionira s bijelom, crnom, mustard žutom i biljnim zelenim tonovima.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: srebrno-siva s hladnim podtonom",
+      "Uniformna, precizna linearna tekstura",
+      "Površinska UV zaštita",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Svestrana nijansa – uklopljiva u svaki enterijer",
+      "Šifra: MW211"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Hodnik",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Minimalistički",
+      "Industrijski",
+      "Scandi"
+    ],
+    "image": "images/products/mw211.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 22,
+    "name": "Drveni Panel MW013 – Pješčani Hrast",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Najpopularnija nijansa – i nije slučajno",
+    "description": "Topla bež sa mekim prirodnim žicama hrasta – ovo je nijansa koja osvaja sve. Ni previše tamna ni previše svijetla, ni hladna ni vruća. MW013 radi u svakom prostoru, uz svaki namještaj, u svakom stilu. Nije ni čudo što je ovo najtraženija nijansa naše kolekcije. Posebno se ističe u prirodnom dnevnom svjetlu kada žice hrasta dobivaju zlatni odsjaj koji čini prostoriju toplijim i prijatnijim mjestom.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: topla bež/pješčana – tonovi hrasta",
+      "Meke, prirodne drvene žice",
+      "Površinska UV zaštita",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Bestseller – najprodavanija nijansa",
+      "Šifra: MW013"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Kuhinja",
+      "Hodnik",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Klasični",
+      "Moderni",
+      "Rustikalni",
+      "Scandi",
+      "Boho"
+    ],
+    "image": "images/products/mw013.jpg",
+    "badge": "Bestseller",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 23,
+    "name": "Drveni Panel MW300 – Dimljeni Orah",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Sofisticiranost koja se ne kupuje novcem – nego ukusom",
+    "description": "Topla sivo-smeđa nijansa s dubokom drvenom žicom oraha – panel koji izgleda skuplje nego što košta. MW300 savršeno balansira između topline drveta i moderne hladnoće sivila, stvarajući sofisticirani tonski kontrast. Posebno moćan u kombinaciji s tamnim namještajem, zlatnim lampama i tamno zelenim biljkama. Ovaj panel čini da vaša prostorija izgleda kao iz arhitektonskog časopisa.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: topla taupe/dimljeni orah",
+      "Duboka, izražena drvena žica",
+      "Površinska UV zaštita",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Luksuzni izgled uz pristupačnu cijenu",
+      "Šifra: MW300"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Restoran",
+      "Hotel"
+    ],
+    "styleMatch": [
+      "Moderni luksuz",
+      "Art Deco",
+      "Glamour",
+      "Rustikalni"
+    ],
+    "image": "images/products/mw300.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 24,
+    "name": "Drveni Panel MW321 – Prirodni Hrast",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Klasik koji nikad ne izlazi iz mode",
+    "description": "Srednje-smeđa hrastova nijansa s čistom, prirodnom žicom – timeless izbor koji funkcionira u svakoj dekadi i svakom stilu. MW321 je kao dobro odijelo – uvijek pristaje. Topla srednja smeđa prikazuje drvenu teksturu u njenom najčišćem obliku bez tamnih ni svijetlih ekstrama. Idealan za porodične domove, urede, restorane – svuda gdje se želi prirodan, topao, ali neupadljiv dekor.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: srednje-smeđa – prirodni hrast",
+      "Čista, klasična hrastova žica",
+      "Površinska UV zaštita",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Timeless dizajn – nikad ne zastarijeva",
+      "Šifra: MW321"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Ured",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Klasični",
+      "Moderni",
+      "Rustikalni",
+      "Skandinavski"
+    ],
+    "image": "images/products/mw321.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 25,
+    "name": "Drveni Panel MW682 – Divlji Orah",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Jedinstven – kao otisak prsta, svaki panel priča svoju priču",
+    "description": "Bogata topla smeđa s dramatičnim čvorom i valovitim žicama oraha – ovaj panel nosi duh divlje prirode. MW682 nije panel za one koji žele 'prolaziti nezapaženo'. To je izbor za ljude s karakterom koji žele enterijer koji se pamti. Svaki komad ima nešto jedinstveno – čvor koji je godinama rastao u stablu sada krasi vaš zid. Ta autentičnost ne može se imitirati ni fabricirati. Slaže se uz kožni namještaj, vintage detalje i bakrene lampe.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: tamna topla smeđa – divlji orah",
+      "Izražena žica s karakterističnim čvorom",
+      "Svaki komad vizualno jedinstven",
+      "Površinska UV zaštita",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Šifra: MW682"
+    ],
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Bar/kafić",
+      "Biblioteka"
+    ],
+    "styleMatch": [
+      "Rustikalni",
+      "Industrijski",
+      "Vintage",
+      "Bohemian"
+    ],
+    "image": "images/products/mw682.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 26,
+    "name": "Drveni Panel MW312 – Espresso Orah",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Za one koji znaju šta žele – i neće se zadovoljiti manje",
+    "description": "Tamna čokoladna nijansa s elegantnom valovitom žicom oraha – definicija modernog luksuza. MW312 je za premium prostore koji odbijaju kompromis. Bogata espresso boja apsorbira svjetlost i stvara dubinu koja se ne može postići ni jednom drugom površinom. Kada rasvjeta padne na panel pod kutom, žica oraha zasvijetli poput satenskog tkanine. Savršen za kućne bioskope, master spavaće sobe, luksuzne restorane i VIP zone.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: tamna čokoladna/espresso orah",
+      "Valovita, sofisticirana drvena žica",
+      "Duboka apsorpcija svjetlosti – dramatičan efekt",
+      "Površinska UV zaštita",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Šifra: MW312"
+    ],
+    "idealFor": [
+      "Spavaća soba",
+      "Kućni bioskop",
+      "Bar/kafić",
+      "VIP lounge"
+    ],
+    "styleMatch": [
+      "Moderni luksuz",
+      "Art Deco",
+      "Glamour",
+      "Noir"
+    ],
+    "image": "images/products/mw312.jpg",
+    "badge": "Premium",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 37,
+    "name": "Tekstilni Panel BW229 – Topla Bež",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Zatvorite oči i zamislite grubu, toplu lanenu tkaninu na zidu – to je BW229. Sitna, gustо isprepletena struktura u toploj bež nijansi unosi u prostoriju osjećaj prirodnosti i mira. Nijansa između pijeska i lana savršeno se stapa s drvenim detaljima, prirodnim materijalima i toplim rasvjetnim tijelima. Zid koji izgleda kao da je oduvijek bio tu.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: topla bež – laneni tonovi",
+      "Fina, gusto isprepletena tekstilna struktura",
+      "Površinska zaštita – otporan na prašinu i vlagu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW229"
+    ],
+    "image": "images/products/product-1774006203-686.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Prirodna toplina tkanine koja umiruje svaki prostor",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Kancelarija"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Skandinavski",
+      "Rustikalni",
+      "Minimalistički"
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Tekstilni Panel BW400 – Čista Bijela",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW400 je čisto platno za vašu kreativnost. Hladno-bijela nijansa s jedva vidljivom tkanicom unosi svjetlost i zrak u svaki prostor. Idealan za male prostorije koje želite vizualno proširiti, ali i za moderne interijere gdje bijela igra glavnu ulogu. Elegancija u svojoj najčišćoj formi.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: čisto bijela – hladni ton",
+      "Fina, glatka tekstilna površina",
+      "Površinska zaštita – otporan na prašinu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW400"
+    ],
+    "image": "images/products/product-1774006240-870.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Bijela koja prostoriju čini dvostruko većom",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Kupatilo",
+      "Kancelarija"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Minimalistički",
+      "Skandinavski",
+      "Luksuzni"
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Tekstilni Panel BW224 – Hladna Siva",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Siva nikad nije bila dosadna – BW224 to dokazuje. Srednje-siva nijansa s finim tkanicom djeluje urbano, moderno i sofisticirano. Bez pretjerivanja, bez buke – samo čist zidni dekor koji se savršeno uklapa uz beton, metal, staklo i bijele površine. Enterijer koji govori sam za sebe.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: srednje siva – hladni urbani ton",
+      "Fina, ravnomjerna tekstilna struktura",
+      "Površinska zaštita – otporan na prašinu i vlagu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW224"
+    ],
+    "image": "images/products/product-1774006266-913.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Urbana sofisticiranost koja odgovara svakom enterijeru",
+    "idealFor": [
+      "Dnevna soba",
+      "Kancelarija",
+      "Hodnik",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Industrijski",
+      "Minimalistički",
+      "Urbani"
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Tekstilni Panel BW003 – Prirodni Lan",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW003 donosi na zid ono što prirodni lan donosi na sto – toplinu, karakter i autentičnost. Svjetlo sivo-bež nijansa s vidljivim nitima tkanine stvara bogatu, ali nenametljivu površinu. Savršen kao neutralna pozadina koja propušta da namještaj i detalji dođu do izražaja, a opet dodaje dovoljno teksture da zid ne bude pust.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: svjetlo sivo-bež – prirodni lan ton",
+      "Vidljiva, autentična tekstura tkanine",
+      "Površinska zaštita – otporan na prašinu i vlagu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW003"
+    ],
+    "image": "images/products/product-1774006317-836.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Tekstura koja podsjeća na najfiniji prirodni lan",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Trpezarija",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Skandinavski",
+      "Rustikalni",
+      "Mediteranski"
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Tekstilni Panel BW220 – Zlatna Krema",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW220 je panel koji u sebi nosi malo luksuza. Kremasto-bijela osnova protkana je zlatnim i bež nitima koje daju suptilan, gotovo neuhvatljiv sjaj – kao da zid lagano treperi u toplom svjetlu. Nije pretjeran, nije kričav, samo dovoljno poseban da posjetilac zastane i pogleda izbliza.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: kremasto bijela sa zlatnim nitima",
+      "Suptilan sjaj – posebno vidljiv u toplijoj rasvjeti",
+      "Površinska zaštita – otporan na prašinu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW220"
+    ],
+    "image": "images/products/product-1774006385-983.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Toplina kreme i suptilni sjaj zlatnih niti",
+    "idealFor": [
+      "Spavaća soba",
+      "Dnevna soba",
+      "Recepcija",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Glamurozni",
+      "Moderni",
+      "Art Deco"
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Tekstilni Panel BW221 – Srebrni Lan",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW221 je taj savršeni neutralac koji svi traže. Svjetlo siva s toplim podtonom – ni prehladna ni pretopla, idealna osnova za bilo koji enterijer. Fina tekstura tkanine daje zidu karakter bez da dominira prostorom. Odaberite je kad niste sigurni – sigurno je da neće pogriješiti.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: svjetlo siva s toplim podtonom",
+      "Fina, ravnomjerna tekstilna struktura",
+      "Površinska zaštita – otporan na prašinu i vlagu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW221"
+    ],
+    "image": "images/products/product-1774006410-646.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Neutralna elegancija koja pasuje uz sve",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Kancelarija",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Minimalistički",
+      "Skandinavski",
+      "Klasični"
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Tekstilni Panel BW809 – Ledena Magla",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Zamislite jutarnju maglu nad morem – to je BW809. Ledeno bijelo-plava nijansa s jedva vidljivim horizontalnim nitima unosi svježinu i lakoću u prostor. Posebno dolazi do izražaja u kupaonicama i spavaćim sobama gdje stvara atmosferu spa-centra. Zid koji diše.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: ledeno bijelo-plava – hladna i svježa",
+      "Horizontalne niti daju usmjerenost i širinu",
+      "Površinska zaštita – otporan na vlagu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW809"
+    ],
+    "image": "images/products/product-1774006432-776.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Hladna svježina koja osvježava svaki prostor",
+    "idealFor": [
+      "Spavaća soba",
+      "Kupatilo",
+      "Dnevna soba",
+      "Wellness"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Minimalistički",
+      "Obalni",
+      "Moderni"
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Tekstilni Panel BW222 – Bijeli Buklé",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW222 nije samo panel – to je skulptura na zidu. Chunky buklé tekstura u bijeloj boji stvara bogatu, trodimenzionalnu površinu koja mijenja izgled ovisno o smjeru svjetlosti. Topla, gotovo 'mekana' na pogled, ova tekstura unosi osjećaj ugodnosti i luksuza u svaki prostor gdje se nađe.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: bijela s toplim podtonom",
+      "Voluminozna buklé tekstura – bogata 3D površina",
+      "Površinska zaštita – otporan na prašinu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW222"
+    ],
+    "image": "images/products/product-1774006463-976.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Meka, voluminozna tekstura koja poziva na dodir",
+    "idealFor": [
+      "Spavaća soba",
+      "Dnevna soba",
+      "Recepcija",
+      "Butik"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Glamurozni",
+      "Moderni",
+      "Cozy"
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Tekstilni Panel BW008 – Šampanjac",
+    "category": "bambus-tekstilni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW008 je klasa za sebe. Topla šampanjac-zlatna nijansa s horizontalnim svilenkastim nitima koje hvataju svjetlost i stvaraju suptilnu igru sjene i sjaja. Kao da je zid obučen u skupocjenu tkaninu. Savršen za prostore gdje želite pokazati ukus bez izvikivanja – luksuzan, ali diskretan.",
+    "features": [
+      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Boja: topla šampanjac-zlatna",
+      "Horizontalne svilenkaste niti – suptilan sjaj",
+      "Površinska zaštita – otporan na prašinu i vlagu",
+      "Montaža: silikon/ljepilo, reže se skalpelom",
+      "Pogodan za zidove i stropove",
+      "Šifra: BW008"
+    ],
+    "image": "images/products/product-1774006512-598.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Svilenkasti sjaj šampanjca na vašem zidu",
+    "idealFor": [
+      "Spavaća soba",
+      "Dnevna soba",
+      "Restoran",
+      "Recepcija"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Art Deco",
+      "Glamurozni",
+      "Klasični"
+    ]
+  },
+  {
+    "id": 46,
+    "name": "SW215",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774008515-675.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 47,
+    "name": "SW222",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774008575-466.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 48,
+    "name": "05512",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774008649-735.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 49,
+    "name": "05512",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774008688-517.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 50,
+    "name": "SW003",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774008744-316.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 51,
+    "name": "SW001-B",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774008913-825.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 52,
+    "name": "YL059",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009000-287.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 53,
+    "name": "SW212",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009018-208.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 54,
+    "name": "YL056",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009037-462.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 55,
+    "name": "SW219",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009181-772.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 56,
+    "name": "JS23007",
+    "category": "bambus-metalni",
+    "price": "114.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009566-250.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 57,
+    "name": "TS002",
+    "category": "bambus-metalni",
+    "price": "114.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009589-918.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 58,
+    "name": "JS007",
+    "category": "bambus-metalni",
+    "price": "114.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009612-205.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 59,
+    "name": "JS0014",
+    "category": "bambus-metalni",
+    "price": "114.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774009629-455.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 60,
+    "name": "3D Letvica CQ006 – Topli Tik",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Kada želite zid koji govori – bez slika, bez tapeta, samo čista forma i sjena. CQ006 letvica donosi toplu tik paletu u modernom 3D obliku: svaka letva baca blagu sjenu na susjednu, stvarajući živi, promjenjivi uzorak ovisno o kutu svjetla. Savršena za fokalni zid u dnevnoj sobi ili iza kreveta.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: topla srednje-smeđa – tik tonovi (CQ006)",
+      "3D reljefna površina – igra svjetla i sjene",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160CQ006"
+    ],
+    "image": "images/products/product-1774010978-346.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Trodimenzionalna dubina u toplim tik-tonovima",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Moderni",
+      "Skandinavski",
+      "Industrijski"
+    ]
+  },
+  {
+    "id": 61,
+    "name": "3D Letvica MW300 – Prirodna Bijela",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Bijela ne mora biti dosadna. MW300 letvica u prirodno bijeloj nijansi unosi svjetlost i osjećaj prostranstva u svaki kutak. 3D profil stvara suptilne sjene koje zidu daju karakter, a ne samo boju. Idealna za minimalističke enterijer gdje detalj mora biti savršen.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: prirodna bijela (MW300)",
+      "3D reljefna površina – suptilna igra sjene",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160MW300"
+    ],
+    "image": "images/products/product-1774011058-682.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Čista bijela koja daje prostoru dah",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Kupatilo",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Minimalistički",
+      "Moderni",
+      "Skandinavski",
+      "Hamptons"
+    ]
+  },
+  {
+    "id": 62,
+    "name": "3D Letvica MW312 – Pepeljasti Hrast",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "MW312 nosi u sebi hladnoću skandinavskih šuma – ton pepeljastog hrasta koji je istovremeno prirodan i sofisticiran. 3D profil naglašava dubinu drvenaste teksture, a hladni podton savršeno odgovara metalnim, betonskim i staklenim elementima modernog interijera.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: pepeljasti hrast (MW312)",
+      "3D reljefna površina – naglašena drvenasta tekstura",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160MW312"
+    ],
+    "image": "images/products/product-1774011072-999.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Hladna elegancija pepeljaste hrast nijanse",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Hodnik",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Industrijski",
+      "Moderni",
+      "Loft"
+    ]
+  },
+  {
+    "id": 63,
+    "name": "3D Letvica MW321 – Zlatni Kesten",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Postoje boje koje odmah donose osjećaj topline i domačnosti – MW321 je jedna od njih. Zlatno-kestena nijansa s blagim žutim podtonom osvjetljava prostor i stvara atmosferu udobnosti. 3D profil dodaje dubinu i teksturu koja je vidljiva i opipljiva.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: zlatni kesten (MW321)",
+      "3D reljefna površina – bogata dubina teksture",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160MW321"
+    ],
+    "image": "images/products/product-1774011085-475.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Topli zlatno-kesteni ton za udoban dom",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Trpezarija",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Mediteranski",
+      "Rustikalni",
+      "Klasični"
+    ]
+  },
+  {
+    "id": 64,
+    "name": "3D Letvica MW010 – Snježna Bijela",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "MW010 je bijela u najčišćem obliku – snježna, hladna i precizna. Ova letvica transformira obični zid u arhitektonski element: svaka letva je savršeno definisana, a igra svjetla i sjene između 3D profila stvara dinamičan uzorak koji se mijenja tokom dana.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: snježna bijela (MW010)",
+      "3D reljefna površina – oštra, definisana forma",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove, stropove i pregradne panele",
+      "Šifra: I3D160MW010"
+    ],
+    "image": "images/products/product-1774011100-591.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Besprijekorna bijela za savršen fokalni zid",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Kupatilo",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Minimalistički",
+      "Moderni",
+      "Skandinavski",
+      "Glamurozni"
+    ]
+  },
+  {
+    "id": 65,
+    "name": "3D Letvica MW010 – Snježna Bijela (Mat)",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Varijanta MW010 u mat završnici – ista snježna bijela, ali s mekšim odsjajom koji smanjuje refleksije i daje zidu topliji karakter. Idealna za prostorije s jakim prirodnim osvjetljenjem gdje sjajna površina može biti previše intenzivna.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: snježna bijela mat (MW010)",
+      "3D reljefna površina – diskretna forma",
+      "Materijal: MDF s mat dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove, stropove i pregradne panele",
+      "Šifra: I3D160MW010"
+    ],
+    "image": "images/products/product-1774011113-813.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Mat bijela s diskretnim 3D efektom",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Dječija soba",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Minimalistički",
+      "Skandinavski",
+      "Moderni",
+      "Japandi"
+    ]
+  },
+  {
+    "id": 66,
+    "name": "3D Letvica MW010 – Snježna Bijela (Gloss)",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Gloss varijanta MW010 maksimizira refleksiju svjetla – sjajna bijela površina vizualno uvećava prostoriju i dodaje joj glamurozni sjaj. 3D profil u sjajnoj obradi stvara dramatičan kontrast sjene i svjetlosti, posebno efektan uz usmjerenu rasvjetu.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: snježna bijela gloss (MW010)",
+      "3D reljefna površina – dramatična igra sjaja i sjene",
+      "Materijal: MDF s gloss dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160MW010"
+    ],
+    "image": "images/products/product-1774011127-211.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Sjajna bijela koja odbija svjetlo i uvećava prostor",
+    "idealFor": [
+      "Dnevna soba",
+      "Hodnik",
+      "Recepcija",
+      "Butik"
+    ],
+    "styleMatch": [
+      "Glamurozni",
+      "Moderni",
+      "Art Deco",
+      "Luksuzni"
+    ]
+  },
+  {
+    "id": 67,
+    "name": "3D Letvica MW682 – Tamni Orah",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "MW682 nosi sobom ozbiljnost i luksuz tamnog oraha – boja koja asocira na biblioteke, kožne fotelje i prostorije u kojima se donose važne odluke. 3D profil u ovoj tamnoj nijansi stvara dramatičan kontrast sa svjetlim zidovima i bijelim stropovima, dajući prostoru karakter i dubinu.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: tamni orah (MW682)",
+      "3D reljefna površina – dramatična dubina i sjena",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160MW682"
+    ],
+    "image": "images/products/product-1774011139-663.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Bogata tamno-orahova nijansa za luksuzni enterijer",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Biblioteka",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Klasični",
+      "Industrijski",
+      "Moderni"
+    ]
+  },
+  {
+    "id": 68,
+    "name": "3D Letvica 170 SP054 – Hladni Sivi",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "SP054 dolazi u širem 170mm profilu koji daje zidu veći vizualni udar po letvici. Hladna siva nijansa savršeno korespondira s betonskim, čeličnim i staklenim elementima – boja arhitekture, preciznosti i modernog dizajna. Širi profil znači manji broj letvica, brža montaža, bolder rezultat.",
+    "features": [
+      "Dimenzije: 270×17cm po letvici",
+      "Širina: 170mm (širi profil)",
+      "Boja: hladni sivi (SP054)",
+      "3D reljefna površina – bold, arhitektonski izraz",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: 170SP054MW"
+    ],
+    "image": "images/products/product-1774011169-606.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Širi profil u hladnoj sivoj – modernost na kvadrat",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Hodnik",
+      "Loft"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Loft",
+      "Minimalistički"
+    ]
+  },
+  {
+    "id": 69,
+    "name": "3D Letvica 170 MW018 – Bež Lanen",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "MW018 u 170mm formatu donosi toplinu prirodnih vlakana – beja s blagim lanen podtonom koja je ni previše topla ni previše hladna, nego savršeno neutralna. Širi profil stvara ritmičan, umirujući uzorak na zidu koji opušta i harmonizuje prostor.",
+    "features": [
+      "Dimenzije: 270×17cm po letvici",
+      "Širina: 170mm (širi profil)",
+      "Boja: bež lanen (MW018)",
+      "3D reljefna površina – miran, harmoničan ritam",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D170MW018"
+    ],
+    "image": "images/products/product-1774011187-463.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Široki 170mm profil u toplom lanen-bežu",
+    "idealFor": [
+      "Spavaća soba",
+      "Dnevna soba",
+      "Meditacijski kutak",
+      "Hotel"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Japandi",
+      "Prirodni",
+      "Zen"
+    ]
+  },
+  {
+    "id": 70,
+    "name": "3D Letvica 170 SP052 – Topla Bijela",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "SP052 je posebna serija – 170mm profil s teksturom koja oponaša drvenaste pruge u toploj bijeloj osnovi. Rezultat je zid koji se čini da diše: bijela boja donosi svjetlost i prostor, a drvenasta tekstura daje toplinu i karakter koji čista bijela nema.",
+    "features": [
+      "Dimenzije: 270×17cm po letvici",
+      "Širina: 170mm (širi profil – posebna serija)",
+      "Boja: topla bijela s drvenim efektom (SP052)",
+      "3D reljefna površina – drvenasta tekstura u bijeloj",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D170SP052MW"
+    ],
+    "image": "images/products/product-1774011242-938.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Poseban 170mm profil u toploj bijeloj s drvenim efektom",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Trpezarija"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Moderni",
+      "Japandi",
+      "Hamptons"
+    ]
+  },
+  {
+    "id": 71,
+    "name": "3D Letvica CS022 – Betonski Sivi",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "CS022 donosi estetiku industrijskog betona bez hladnoće i težine pravog betona. Siva nijansa s blagim toplim podtonom savršeno imitira glatkani beton, a 3D profil dodaje onu strukturu i reljef koji betonski zidovi imaju prirodno. Urban, moderan, autentičan.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: betonski sivi (CS022)",
+      "3D reljefna površina – betonska tekstura",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160CS022"
+    ],
+    "image": "images/products/product-1774011253-906.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Urbani betonski ton s trodimenzionalnom teksturom",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Loft",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Loft",
+      "Moderni",
+      "Minimalistički"
+    ]
+  },
+  {
+    "id": 72,
+    "name": "3D Letvica CS013 – Hladno Siva",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "CS013 je siva kakvu arhitekti vole – hladna, precizna, bez kompromisa. Ova nijansa nije ni tamna ni svijetla, nego savršeno balansirana srednja siva koja funkcioniše kao neutralna pozadina za svaki stil. 3D profil daje joj dubinu i teksturu, pretvarajući neutralnu boju u vizualni doživljaj.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: hladna srednja siva (CS013)",
+      "3D reljefna površina – precizna, oštra forma",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160CS013"
+    ],
+    "image": "images/products/product-1774011266-297.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Precizna hladna siva za profesionalne enterijer",
+    "idealFor": [
+      "Ured",
+      "Dnevna soba",
+      "Hodnik",
+      "Recepcija"
+    ],
+    "styleMatch": [
+      "Minimalistički",
+      "Industrijski",
+      "Moderni",
+      "Korporativni"
+    ]
+  },
+  {
+    "id": 73,
+    "name": "3D Letvica CS013 – Hladno Siva (Teksturisana)",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Teksturisana varijanta CS013 nudi isti hladni sivi ton, ali s naglašenijim reljefom koji daje zidu snažniju taktilnu i vizualnu dimenziju. Savršena kada želite da siva siva bude nešto više od boje – da postane materijal koji se vidi i osjeća.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: hladna siva, naglašena tekstura (CS013)",
+      "3D reljefna površina – pojačani reljef za dodatnu dubinu",
+      "Materijal: MDF s teksturisanim dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za fokalne zidove i pregradne panele",
+      "Šifra: I3D160CS013"
+    ],
+    "image": "images/products/product-1774011278-208.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Teksturisana varijanta hladne sive za dodatnu dubinu",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Hotel lobby",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Loft",
+      "Moderni",
+      "Brutalistički"
+    ]
+  },
+  {
+    "id": 74,
+    "name": "3D Letvica 039 – Tamna Espresso",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Broj 039 nosi boju toplih espresso tonova – tamno-smeđa s toplim podtonom koja je gotovo crna, ali zadržava toplinu drveta. Ovaj letvice stvara intimnu, koktelbar atmosferu: idealna za zid iza TV-a, radne sobe ili restorana gdje se želi osjećaj luksuzne topline.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: tamna espresso (039)",
+      "3D reljefna površina – dramatičan kontrast sjene",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160039"
+    ],
+    "image": "images/products/product-1774011294-937.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Duboka espresso nijansa za dramatičan zid",
+    "idealFor": [
+      "Dnevna soba",
+      "Bar",
+      "Restoran",
+      "Spavaća soba"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Art Deco",
+      "Industrijski",
+      "Klasični"
+    ]
+  },
+  {
+    "id": 75,
+    "name": "3D Letvica 021 – Srednji Hrast",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "021 je boja klasičnog hrasta u punoj zrelosti – ni previše svjetla ni previše tamna, sa zlatnim podtonovima koji unose toplinu i vedrinu. Ovo je ta neutralna, universalna drvenasta nijansa koja pristaje uz bijeli, sivi, krem ili bež enterijer. Klasik koji nikad ne izlazi iz mode.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: srednji hrast (021)",
+      "3D reljefna površina – klasična drvenasta tekstura",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove, stropove i pregradne panele",
+      "Šifra: I3D160021"
+    ],
+    "image": "images/products/product-1774011310-815.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Klasični srednje-hrastov ton za svaki enterijer",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Trpezarija"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Skandinavski",
+      "Moderni",
+      "Rustikalni"
+    ]
+  },
+  {
+    "id": 76,
+    "name": "3D Letvica 140 021 – Srednji Hrast Uski",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Isti topli hrastov ton 021, ali u užem 140mm profilu. Uže letvice postavljene zajedno stvaraju gušći, finiji ritam na zidu – gotovo poput tekstilne površine. Efektan izbor za manje prostorije gdje širi profil bi bio previše dominantan.",
+    "features": [
+      "Dimenzije: 270×14cm po letvici",
+      "Širina: 140mm (uži profil – finiji ritam)",
+      "Boja: srednji hrast (021)",
+      "3D reljefna površina – fina, gusta tekstura",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D140021"
+    ],
+    "image": "images/products/product-1774011321-786.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Uži 140mm profil u hrastovoj nijansi – gušći ritam",
+    "idealFor": [
+      "Spavaća soba",
+      "Dječija soba",
+      "Hodnik",
+      "Kupatilo"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Japandi",
+      "Prirodni",
+      "Minimalistički"
+    ]
+  },
+  {
+    "id": 77,
+    "name": "3D Letvica 029 – Topli Mahagonij",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Kod 029 nosi boju zrelog mahagonija – crvenkasto-smeđa nijansa s toplim, gotovo svečanim karakterom. Ovo nije boja za timidne enterijer – to je boja knjižnica, sudnica i plemićkih dvorana. 3D profil joj daje suvremenu notu, spajajući klasičnu eleganciju s modernom formom.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: topli mahagonij (029)",
+      "3D reljefna površina – svečana dubina teksture",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160029"
+    ],
+    "image": "images/products/product-1774011345-739.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Crvenkasti mahagonij ton s luksuznim karakterom",
+    "idealFor": [
+      "Ured",
+      "Dnevna soba",
+      "Biblioteka",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Klasični",
+      "Luksuzni",
+      "Art Deco",
+      "Mediteranski"
+    ]
+  },
+  {
+    "id": 78,
+    "name": "3D Letvica 016 – Svijetli Javor",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "016 donosi lakoću i svježinu svijetlog javora – blago zlatasta bijela koja kupaonicu, spavaću ili dnevnu sobu čini svetlijom i vedrijom. Jedna od najuniverzalnijih nijansi u kolekciji: dovoljno neutralna da ide uz sve, dovoljno topla da prostoru dá dušu.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: svijetli javor (016)",
+      "3D reljefna površina – lagana, prozračna forma",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove, stropove i pregradne panele",
+      "Šifra: I3D160016"
+    ],
+    "image": "images/products/product-1774011373-836.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Svijetla javorova nijansa za prozračan enterijer",
+    "idealFor": [
+      "Spavaća soba",
+      "Dječija soba",
+      "Dnevna soba",
+      "Kupatilo"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Japandi",
+      "Prirodni",
+      "Minimalistički"
+    ]
+  },
+  {
+    "id": 79,
+    "name": "3D Letvica BW008 – Crna Ebonija",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW008 je tamno-crna – gotovo bezbojna u svojoj intenzivnosti. Ova letvica ne mumlа: stavlja tačku u prostoriji i kaže što želi. Idealna za fokalni zid koji će biti zvijezda interijera, posebno u kombinaciji s bijelim zidovima, zlatnim dodacima ili toplim osvjetljenjem.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: crna ebonija (BW008)",
+      "3D reljefna površina – dramatična, definisana forma",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za fokalne zidove i pregradne panele",
+      "Šifra: I3D160BW008"
+    ],
+    "image": "images/products/product-1774011390-105.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Tamna kao noć – crna ebonija za maksimalan kontrast",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Bar",
+      "Boutique"
+    ],
+    "styleMatch": [
+      "Glamurozni",
+      "Moderni",
+      "Minimalistički",
+      "Art Deco"
+    ]
+  },
+  {
+    "id": 80,
+    "name": "3D Letvica BW224 – Antracit",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW224 je boja antracita – tamna, ali ne crna. Dovoljno duboka da dominira prostorom, dovoljno mekana da ne zaplaši. Savršena za enterijer koji želi karakter bez ekstravagancije. U kombinaciji s toplim drvenim tonovima ili betonskim elementima, antracit stvara savršen kontrast.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: antracit (BW224)",
+      "3D reljefna površina – tamna, duboka forma",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160BW224"
+    ],
+    "image": "images/products/product-1774011402-320.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Prefinjen antracit između crne i sive",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Spavaća soba",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Loft",
+      "Minimalistički"
+    ]
+  },
+  {
+    "id": 81,
+    "name": "3D Letvica BW809 – Tamni Grafit",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW809 grafit ima nešto što čista crna nema – topao metalični podton koji ga čini živim. Ova nijansa upija svjetlo i odbija ga na specifičan način koji se mijenja tokom dana. Savršena za profesionalne i luksuzne enterijer gdje materijal mora stati i biti prepoznat.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: tamni grafit s metalnim podtonom (BW809)",
+      "3D reljefna površina – metalični odsjaj u tami",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za fokalne zidove i pregradne panele",
+      "Šifra: I3D160BW809"
+    ],
+    "image": "images/products/product-1774011420-164.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Grafitna tamnoća s toplim metalnim podtonom",
+    "idealFor": [
+      "Ured",
+      "Dnevna soba",
+      "Bar",
+      "Hotel"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Industrijski",
+      "Moderni",
+      "Glamurozni"
+    ]
+  },
+  {
+    "id": 82,
+    "name": "3D Letvica BW229 – Tamni Škriljevac",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "BW229 imitira boju tamnog škriljevca – hladna, duboka siva s plavičastim podtonom koja asocira na planinska jezera i kišne oblake. Ova nijansa je sofisticirana alternativa crnoj: dovoljno tamna za drama, dovoljno plemenita za eleganciju.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: tamni škriljevac (BW229)",
+      "3D reljefna površina – hladna, kamena tekstura",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove i pregradne panele",
+      "Šifra: I3D160BW229"
+    ],
+    "image": "images/products/product-1774011449-644.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Škriljevac nijansa – prirodna tamnoća kamena",
+    "idealFor": [
+      "Dnevna soba",
+      "Kupatilo",
+      "Hodnik",
+      "Spa"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Skandinavski",
+      "Japandi",
+      "Zen"
+    ]
+  },
+  {
+    "id": 83,
+    "name": "3D Letvica 003 – Topli Hrast",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "003 je osnovna, autentična hrastova nijansa – topla, prirodna, bezvremenski lijepa. Nema tu eksperimenta s bojom: samo čisti hrast koji se slaže s gotovo svim stilovima i bojama interijera. Pouzdana, klasična, dugotrajna – kao pravi hrast.",
+    "features": [
+      "Dimenzije: 270×16cm po letvici",
+      "Širina: 160mm",
+      "Boja: topli hrast (003)",
+      "3D reljefna površina – autentična drvenasta tekstura",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za zidove, stropove i pregradne panele",
+      "Šifra: I3D 160 003"
+    ],
+    "image": "images/products/product-1774011471-225.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Klasični topli hrast u čistom 3D profilu",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Trpezarija"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Rustikalni",
+      "Skandinavski",
+      "Klasični"
+    ]
+  },
+  {
+    "id": 84,
+    "name": "3D Letvica 3D02 – Siva Mineralna",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Model 3D02 dolazi s posebnim oblikom profila koji stvara gušći i dinamičniji 3D uzorak nego standardne letvice. Siva mineralna nijansa podsjeća na prirodni kamen i mineral – hladna, ali s karakterom. Ovaj model je izbor za one koji žele nešto drugačije od uobičajenih linija.",
+    "features": [
+      "Poseban dizajn profila 3D02 – gušći 3D efekt",
+      "Boja: siva mineralna",
+      "Naglašen 3D reljef – dinamičan uzorak",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Pogodan za fokalne zidove i pregradne panele",
+      "Šifra: 3D02"
+    ],
+    "image": "images/products/product-1774011493-381.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Mineralna siva u posebnom 3D02 dizajnu profila",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Hotel",
+      "Showroom"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Industrijski",
+      "Minimalistički",
+      "Arhitektonski"
+    ]
+  },
+  {
+    "id": 85,
+    "name": "3D Letvica 3D05 – Bijela Struktura",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "3D05 profil se odlikuje izrazitijim reljefom koji baca dublje sjene i stvara jači vizualni udar. U bijeloj nijansi ovaj efekt je posebno izražen – kontrast između osvjetljenih vrhova i zasjenjenih udubina stvara gotovo skulpturalni dojam na zidu.",
+    "features": [
+      "Poseban dizajn profila 3D05 – izrazitiji reljef",
+      "Boja: bijela",
+      "Skulpturalni 3D efekt – duboke sjene",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Idealan za usmjerenu rasvjetu (spot, LED traka)",
+      "Pogodan za fokalne zidove",
+      "Šifra: 3D05"
+    ],
+    "image": "images/products/product-1774011506-585.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Model 3D05 s naglašenim reljefom u bijeloj",
+    "idealFor": [
+      "Dnevna soba",
+      "Hodnik",
+      "Hotel lobby",
+      "Spa"
+    ],
+    "styleMatch": [
+      "Minimalistički",
+      "Moderni",
+      "Glamurozni",
+      "Zen"
+    ]
+  },
+  {
+    "id": 86,
+    "name": "3D Letvica 3D05 – Siva Struktura",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Siva varijanta 3D05 profila – isti izraziti 3D reljef koji u sivoj nijansi dobiva urbaniji, suvremeniji karakter. Tamo gdje bijela verzija daje svečanost, siva daje urbanost. Odlična za moderne, industrijski inspirirane prostore.",
+    "features": [
+      "Poseban dizajn profila 3D05 – izrazitiji reljef",
+      "Boja: siva",
+      "Skulpturalni 3D efekt – urbani, moderni karakter",
+      "Materijal: MDF s dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Idealan za usmjerenu rasvjetu (spot, LED traka)",
+      "Pogodan za fokalne zidove",
+      "Šifra: 3D05"
+    ],
+    "image": "images/products/product-1774011543-890.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Isti 3D05 profil u sivoj za urbani efekt",
+    "idealFor": [
+      "Ured",
+      "Dnevna soba",
+      "Loft",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Loft",
+      "Minimalistički"
+    ]
+  },
+  {
+    "id": 87,
+    "name": "3D Letvica 3D07X – Premium Crna",
+    "category": "3d-letvice",
+    "price": "19.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "3D07X je premium model – X oznaka znači ekstra izražen profil koji pruža najdublju trodimenzionalnost u cijeloj kolekciji. U crnoj nijansi ovaj model je apsolutni showstopper: dramatičan, moćan, nezaboravan. Jedan zid s ovim letvicama postaje centralni element čitave prostorije.",
+    "features": [
+      "Premium dizajn profila 3D07X – maksimalna dubina 3D efekta",
+      "Boja: premium crna",
+      "Ekstra izražen 3D reljef – najdublji u kolekciji",
+      "Materijal: MDF s premium dekorativnim premazom",
+      "Montaža: silikon ili klamerica, reže se pilom",
+      "Idealan za dramatičnu usmjerenu rasvjetu",
+      "Isključivo za fokalne zidove – pravi statement komad",
+      "Šifra: 3D07X"
+    ],
+    "image": "images/products/product-1774011594-795.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true,
+    "highlight": "Ekstra profil 3D07X – premium crna za maksimalan statement",
+    "idealFor": [
+      "Dnevna soba",
+      "Hotel",
+      "Restoran",
+      "Boutique"
+    ],
+    "styleMatch": [
+      "Glamurozni",
+      "Luksuzni",
+      "Art Deco",
+      "Moderni"
+    ]
+  },
+  {
+    "id": 88,
+    "name": "AKU063",
+    "category": "akusticni-paneli",
+    "price": "94.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774011747-477.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 89,
+    "name": "AKU063",
+    "category": "akusticni-paneli",
+    "price": "94.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774011763-194.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 90,
+    "name": "AKU060",
+    "category": "akusticni-paneli",
+    "price": "94.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774011807-750.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 91,
+    "name": "AKU060",
+    "category": "akusticni-paneli",
+    "price": "94.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774011821-454.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 92,
+    "name": "AKU060",
+    "category": "akusticni-paneli",
+    "price": "94.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774011837-259.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 95,
+    "name": "L2",
+    "category": "aluminijum-lajsne",
+    "price": "13.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774012922-882.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 96,
+    "name": "L88",
+    "category": "aluminijum-lajsne",
+    "price": "13.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013021-738.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 97,
+    "name": "L3",
+    "category": "aluminijum-lajsne",
+    "price": "114.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013083-586.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 98,
+    "name": "L4",
+    "category": "aluminijum-lajsne",
+    "price": "18.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013099-421.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 99,
+    "name": "L5",
+    "category": "aluminijum-lajsne",
+    "price": "13.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013264-451.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 100,
+    "name": "L6",
+    "category": "aluminijum-lajsne",
+    "price": "13.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013277-339.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 101,
+    "name": "L7",
+    "category": "aluminijum-lajsne",
+    "price": "114.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013303-190.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  },
+  {
+    "id": 102,
+    "name": "L8",
+    "category": "aluminijum-lajsne",
+    "price": "18.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [],
+    "image": "images/products/product-1774013504-324.png",
+    "badge": null,
+    "inStock": true,
+    "featured": true
+  }
 ]
