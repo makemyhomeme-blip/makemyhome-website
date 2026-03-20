@@ -770,12 +770,33 @@
     "price": "114.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "JS23007 panel spaja industrijalnu hladnoću metala s organskim karakterom bambusa – rezultat je površina koja izgleda skupocjeno i u modernom i u loft enterijeru. Metalički premaz reflektuje svjetlo na jedinstven način, dajući prostoru dubinu i karakter bez pretjerivanja. Idealan za fokalni zid ili pregradni element.",
+    "features": [
+      "Dimenzije: 60×30cm po panelu",
+      "Materijal: bambus vlakno s metalnim završetkom",
+      "Metalni premaz – srebrnasto-čelična paleta",
+      "Površinska obrada: mat metallic lak",
+      "Montaža: ljepilo za panele ili dvostrana traka",
+      "Pogodan za unutrašnje suhe prostorije",
+      "Šifra: JS23007"
+    ],
     "image": "images/products/product-1774009566-250.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Metalni sjaj s toplinom bambus vlakna",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Hodnik",
+      "Recepcija"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Loft",
+      "Minimalizam"
+    ]
   },
   {
     "id": 57,
@@ -784,12 +805,33 @@
     "price": "114.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "TS002 donosi zlatni metalički sjaj na bambus podlogu – kombinacija koja odiše luksuzom bez kičastosti. Topla zlatna nijansa savršeno se uklapa uz tamni drvo dekor, crni metal ili beton, stvarajući kontrast koji osvaja na prvi pogled. Svaki panel ručno je tretiran pa nijanse blago variraju, dajući zidu autentičan karakter.",
+    "features": [
+      "Dimenzije: 60×30cm po panelu",
+      "Materijal: bambus vlakno s metalnim završetkom",
+      "Boja: toplo zlato – zlatni metalni ton",
+      "Površinska obrada: metallic lak s blagim sjajem",
+      "Montaža: ljepilo za panele ili dvostrana traka",
+      "Pogodan za unutrašnje suhe prostorije",
+      "Šifra: TS002"
+    ],
     "image": "images/products/product-1774009589-918.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Zlatni tonus – luksuzan i upečatljiv",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Restoran",
+      "Recepcija"
+    ],
+    "styleMatch": [
+      "Glamur",
+      "Moderni",
+      "Art Deco",
+      "Industrijski"
+    ]
   },
   {
     "id": 58,
@@ -798,12 +840,33 @@
     "price": "114.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "JS007 panel u dubokoj crno-metalnoj obradi donosi smionost i snagu u svaki prostor. Tamna metallic površina na bambus osnovi upija svjetlo i stvara dramatičan efekt koji funkcioniše jednako dobro kao cijeli zid ili kao akcentni detalj. Kombinujte s drvetom ili bijelim zidom za maksimalan kontrast.",
+    "features": [
+      "Dimenzije: 60×30cm po panelu",
+      "Materijal: bambus vlakno s metalnim završetkom",
+      "Boja: duboka crno-čelična metallic paleta",
+      "Površinska obrada: mat crni metallic lak",
+      "Montaža: ljepilo za panele ili dvostrana traka",
+      "Pogodan za unutrašnje suhe prostorije",
+      "Šifra: JS007"
+    ],
     "image": "images/products/product-1774009612-205.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Crni metal – snažan vizualni statement",
+    "idealFor": [
+      "Dnevna soba",
+      "Ured",
+      "Bar i restoran",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Minimalistički",
+      "Loft"
+    ]
   },
   {
     "id": 59,
@@ -812,12 +875,33 @@
     "price": "114.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "JS0014 panel u bronzanoj metalnoj obradi evocira starinske patinirane surface, ali u potpuno savremenom obliku. Topla bronza na bambus podlozi daje prostorijama taj rijedak kvalitet – starinsku dušu u modernom ruhu. Savršen izbor za ugostiteljske objekte, studije ili spavaće sobe koji traže nešto više od uobičajenog.",
+    "features": [
+      "Dimenzije: 60×30cm po panelu",
+      "Materijal: bambus vlakno s metalnim završetkom",
+      "Boja: topla bronzana – bronzano-metallic ton",
+      "Površinska obrada: metallic lak s patina efektom",
+      "Montaža: ljepilo za panele ili dvostrana traka",
+      "Pogodan za unutrašnje suhe prostorije",
+      "Šifra: JS0014"
+    ],
     "image": "images/products/product-1774009629-455.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Bronzana patina – vintage susreće moderno",
+    "idealFor": [
+      "Spavaća soba",
+      "Restoran",
+      "Cafe",
+      "Studija"
+    ],
+    "styleMatch": [
+      "Vintage",
+      "Industrijski",
+      "Art Deco",
+      "Eklektični"
+    ]
   },
   {
     "id": 60,
