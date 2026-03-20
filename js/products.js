@@ -705,16 +705,16 @@ async function renderProductDetail() {
 
     <!-- Tab switcher -->
     <div class="pq-tabs">
-      <button class="pq-tab active" onclick="switchPqTab('qty', this)">
-        <i class="fas fa-list-ol"></i> Unesi Količinu
-      </button>
-      <button class="pq-tab" onclick="switchPqTab('calc', this)">
+      <button class="pq-tab active" onclick="switchPqTab('calc', this)">
         <i class="fas fa-calculator"></i> Kalkulator m²
+      </button>
+      <button class="pq-tab" onclick="switchPqTab('qty', this)">
+        <i class="fas fa-list-ol"></i> Unesi Količinu
       </button>
     </div>
 
     <!-- Tab: Količina -->
-    <div class="pq-panel" id="pq-qty">
+    <div class="pq-panel" id="pq-qty" style="display:none;">
       <div class="pq-stepper">
         <button type="button" class="pq-step-btn" onclick="stepPqQty(-1)">−</button>
         <span class="pq-step-val" id="pq-qty-val">1</span>
@@ -726,7 +726,7 @@ async function renderProductDetail() {
     </div>
 
     <!-- Tab: Kalkulator -->
-    <div class="pq-panel" id="pq-calc" style="display:none;">
+    <div class="pq-panel" id="pq-calc">
       <div class="pq-calc-inner">
         <div class="pq-calc-field">
           <label>Širina zida</label>
