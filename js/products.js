@@ -47,15 +47,15 @@ function renderProductCard(product, lazy = true) {
   `;
 
   return `
-    <article class="product-card animate-on-scroll" data-category="${product.category}" data-id="${product.id}">
+    <article class="product-card animate-on-scroll" data-category="${product.category}" data-id="${product.id}" onclick="window.location='product.html?id=${product.id}'" style="cursor:pointer;">
       <div class="product-img">
         ${imgContent}
         ${badge}
         <div class="product-actions">
-          <button class="btn-action" title="Brzi pregled" onclick="openProductModal(${product.id})">
+          <button class="btn-action" title="Brzi pregled" onclick="event.stopPropagation(); openProductModal(${product.id})">
             <i class="fas fa-eye"></i>
           </button>
-          <button class="btn-action" title="Pošalji upit" onclick="inquireProduct('${product.name}')">
+          <button class="btn-action" title="Pošalji upit" onclick="event.stopPropagation(); inquireProduct('${product.name}')">
             <i class="fas fa-envelope"></i>
           </button>
         </div>
