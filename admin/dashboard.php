@@ -454,6 +454,12 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                 <label>Kategorija *</label>
                 <select name="category" required>
                   <option value="">Odaberi kategoriju</option>
+                  <optgroup label="── 3D Letvice ──">
+                    <option value="3d-letvice">3D Letvice</option>
+                    <option value="3d-letvice-drvene">3D Letvice › Drvene</option>
+                    <option value="3d-letvice-mdf">3D Letvice › MDF</option>
+                    <option value="3d-letvice-pvc">3D Letvice › PVC</option>
+                  </optgroup>
                   <optgroup label="── Bambus Paneli ──">
                     <option value="bambus-drveni">Bambus › Drveni</option>
                     <option value="bambus-tekstilni">Bambus › Tekstilni</option>
@@ -598,6 +604,12 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
         <div class="form-group">
           <label>Kategorija *</label>
           <select name="category" id="edit-category" required>
+            <optgroup label="── 3D Letvice ──">
+              <option value="3d-letvice">3D Letvice</option>
+              <option value="3d-letvice-drvene">3D Letvice › Drvene</option>
+              <option value="3d-letvice-mdf">3D Letvice › MDF</option>
+              <option value="3d-letvice-pvc">3D Letvice › PVC</option>
+            </optgroup>
             <optgroup label="── Bambus Paneli ──">
               <option value="bambus-drveni">Bambus › Drveni</option>
               <option value="bambus-tekstilni">Bambus › Tekstilni</option>
@@ -682,6 +694,13 @@ function showSection(name) {
   document.getElementById('page-title').textContent = titles[name] || '';
   event?.target?.classList.add('active');
 }
+
+// Otvori sekciju iz URL parametra (npr. nakon dodavanja proizvoda)
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const section = urlParams.get('section');
+  if (section) showSection(section);
+})();
 
 function editProduct(id) {
   const p = products.find(x => x.id === id);

@@ -13,10 +13,12 @@ $products = json_decode(file_get_contents($productsFile), true) ?: [];
 
 $action = $_POST['action'] ?? '';
 
-function redirect($msg = '', $err = '') {
-    $query = '';
-    if ($msg) $query = '?msg=' . urlencode($msg);
-    if ($err) $query = '?err=' . urlencode($err);
+function redirect($msg = '', $err = '', $section = '') {
+    $params = [];
+    if ($msg) $params[] = 'msg=' . urlencode($msg);
+    if ($err) $params[] = 'err=' . urlencode($err);
+    if ($section) $params[] = 'section=' . urlencode($section);
+    $query = $params ? '?' . implode('&', $params) : '';
     header('Location: dashboard.php' . $query);
     exit;
 }
@@ -86,7 +88,7 @@ switch ($action) {
 
         $products[] = $newProduct;
         saveProducts($products, $productsFile);
-        redirect("Proizvod '{$name}' je uspješno dodat!");
+        redirect("Proizvod '{$name}' je uspješno dodat!", '', 'add-product');
         break;
 
     case 'edit':
@@ -129,7 +131,7 @@ switch ($action) {
         unset($p);
 
         saveProducts($products, $productsFile);
-        redirect("Proizvod '{$name}' je uspješno ažuriran!");
+        redirect("Proizvod '{$name}' je uspješno ažuriran!", '', 'products');
         break;
 
     case 'delete':
@@ -140,7 +142,7 @@ switch ($action) {
         }
         $products = array_filter($products, fn($p) => $p['id'] !== $id);
         saveProducts($products, $productsFile);
-        redirect("Proizvod '{$deletedName}' je obrisan.");
+        redirect("Proizvod '{$deletedName}' je obrisan.", '', 'products');
         break;
 
     default:
