@@ -457,6 +457,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   <optgroup label="── 3D Letvice ──">
                     <option value="3d-letvice">3D Letvice</option>
                   </optgroup>
+                  <optgroup label="── Aluminijumske Lajsne ──">
+                    <option value="aluminijumske-lajsne">Aluminijumske Lajsne</option>
+                  </optgroup>
                   <optgroup label="── Bambus Paneli ──">
                     <option value="bambus-drveni">Bambus › Drveni</option>
                     <option value="bambus-tekstilni">Bambus › Tekstilni</option>
@@ -603,6 +606,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           <select name="category" id="edit-category" required>
             <optgroup label="── 3D Letvice ──">
               <option value="3d-letvice">3D Letvice</option>
+            </optgroup>
+            <optgroup label="── Aluminijumske Lajsne ──">
+              <option value="aluminijumske-lajsne">Aluminijumske Lajsne</option>
             </optgroup>
             <optgroup label="── Bambus Paneli ──">
               <option value="bambus-drveni">Bambus › Drveni</option>
