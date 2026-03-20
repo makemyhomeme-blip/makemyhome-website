@@ -630,12 +630,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "SW215 panel donosi cistu estetiku bijelog mermera s karakteristicnim sivim zilama – savremena alternativa pravom kamenu, laksa za montazu i bez brige o vlazi ili pucanju. Bambus osnova daje panelu prirodnu toplinu, dok mermerni uzorak dize prostor u premium kategoriju. Idealan za kupatilo, hodnik ili fokalni zid u dnevnoj sobi.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: bijeli mermer sa sivim zilama",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: SW215"
+    ],
     "image": "images/products/product-1774008515-675.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Elegancija bijelog mermera bez hladnoce kamena",
+    "idealFor": [
+      "Kupatilo",
+      "Hodnik",
+      "Dnevna soba",
+      "Kuhinja"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Luksuzni",
+      "Minimalisticki",
+      "Klasicni"
+    ]
   },
   {
     "id": 47,
@@ -644,12 +665,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "SW222 panel u sivoj mermernoj paleti idealan je za one koji traze sofisticiranu neutralnost – ne previse hladan, ne previse topao, samo cist i elegantan. Sivi mermerasti uzorak savrseno prati moderne kuhinje, kupatila i poslovne prostore, a bambus podloga osigurava laganu montazu i dugotrajnost.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: sivi mermer s tamnim i svijetlim zilama",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: SW222"
+    ],
     "image": "images/products/product-1774008575-466.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Sivi mermer – sofisticiran i neutralan",
+    "idealFor": [
+      "Kupatilo",
+      "Kuhinja",
+      "Ured",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Minimalisticki",
+      "Industrijski",
+      "Skandinavski"
+    ]
   },
   {
     "id": 48,
@@ -658,12 +700,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "05512 panel nosi klasican mermerasti uzorak koji nikad ne izlazi iz mode – bijela podloga s delikatnim zilama koje imitiraju prirodni kamen toliko uvjerljivo da gosti nece znati razliku. Savrsen za zidove u kupatilu ili kuhinji gdje pravi mermer nije praktican zbog cijene ili tezine.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: klasicni bijelo-krem mermer",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: 05512"
+    ],
     "image": "images/products/product-1774008649-735.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Klasican mermer – vremenski provjeren izbor",
+    "idealFor": [
+      "Kupatilo",
+      "Kuhinja",
+      "Dnevna soba",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Klasicni",
+      "Moderni",
+      "Luksuzni",
+      "Mediteranski"
+    ]
   },
   {
     "id": 49,
@@ -672,12 +735,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "05512 panel nosi klasican mermerasti uzorak koji nikad ne izlazi iz mode – bijela podloga s delikatnim zilama koje imitiraju prirodni kamen toliko uvjerljivo da gosti nece znati razliku. Savrsen za zidove u kupatilu ili kuhinji gdje pravi mermer nije praktican zbog cijene ili tezine.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: klasicni bijelo-krem mermer",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: 05512"
+    ],
     "image": "images/products/product-1774008688-517.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Klasican mermer – vremenski provjeren izbor",
+    "idealFor": [
+      "Kupatilo",
+      "Kuhinja",
+      "Dnevna soba",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Klasicni",
+      "Moderni",
+      "Luksuzni",
+      "Mediteranski"
+    ]
   },
   {
     "id": 50,
@@ -686,12 +770,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "SW003 donosi uzorak inspirisan travertinom i bez mermerom – materijalom koji zraci mediteranskom toplinom. Za razliku od hladnih bijelih varijanti, ovaj panel unosi zemljane tonove koji prostor cine gostoljubivim i udobnim. Odlicno funkcionise u kombinaciji s drvenim dekorom i mesinganim detaljima.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: bez travertin – topli kamen tonovi",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: SW003"
+    ],
     "image": "images/products/product-1774008744-316.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Travertin tekstura – toplina prirodnog kamena",
+    "idealFor": [
+      "Kupatilo",
+      "Dnevna soba",
+      "Hodnik",
+      "Kuhinja"
+    ],
+    "styleMatch": [
+      "Mediteranski",
+      "Klasicni",
+      "Rustikalni",
+      "Moderni"
+    ]
   },
   {
     "id": 51,
@@ -700,12 +805,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "SW001-B je za one koji se ne boje izjave – crna mermerna povrsina sa zlatnim i bijelim zilama donosi nivo luksuza koji odmah upada u oci. Ovaj panel transformise svaki prostor u nesto posebno: tusevi, fokalni zidovi, recepcije i barovi su idealne lokacije za ovaj smioni izbor.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: crni mermer sa zlatnim i bijelim zilama",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: SW001-B"
+    ],
     "image": "images/products/product-1774008913-825.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Crni mermer – premium dramatican efekt",
+    "idealFor": [
+      "Kupatilo",
+      "Bar i restoran",
+      "Recepcija",
+      "Dnevna soba"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Glamur",
+      "Art Deco",
+      "Moderni"
+    ]
   },
   {
     "id": 52,
@@ -714,12 +840,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "YL059 panel imitira dragocjeni zlatni oniks – kamen koji se rijetko vidi zbog visoke cijene, ali ciji uzorak ostavlja bez daha. Topli jantarno-zlatni tonovi s prozirnim zilama stvaraju gotovo luminozni efekt, posebno uz toplu rasvjetu. Jedan od najtrazenih uzoraka za premium kupatila i hotelske lobby prostore.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: zlatni oniks – jantarno-zute nijanse",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: YL059"
+    ],
     "image": "images/products/product-1774009000-287.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Zlatni oniks – egzoticno i upecatljivo",
+    "idealFor": [
+      "Kupatilo",
+      "Recepcija",
+      "Dnevna soba",
+      "Hotel"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Glamur",
+      "Art Deco",
+      "Eklekticni"
+    ]
   },
   {
     "id": 53,
@@ -728,12 +875,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "SW212 panel nosi tamno-sivu mermernu paletu dramaticnog karaktera – duboki sivi tonovi s gotovo crnim zilama savrseno pristaju uz metalne elemente i bijeli dekor, stvarajuci kontraste koji izgledaju dizajnerski i pazljivo planirani. Odlican izbor za urede i prostore gdje se zeli postici jaka vizuelna izjava.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: tamno-sivi mermer s dubokim zilama",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: SW212"
+    ],
     "image": "images/products/product-1774009018-208.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Tamni mermer – misteriozna siva paleta",
+    "idealFor": [
+      "Kupatilo",
+      "Hodnik",
+      "Ured",
+      "Dnevna soba"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Minimalisticki",
+      "Luksuzni"
+    ]
   },
   {
     "id": 54,
@@ -742,12 +910,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "YL056 panel donosi uzorak inspirisan rijetkim zelenim jade kamenom – savrsen za one koji zele nesto potpuno drugacije od tipicnih bijelih mermera. Zeleni tonovi unose svjezinu i vitalnost u prostor, a kombinacija s prirodnim materijalom bambus osnove pravi ovaj panel jednim od najekocentricnijih u kolekciji.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: zeleni jade – prirodne zelene nijanse",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: YL056"
+    ],
     "image": "images/products/product-1774009037-462.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Zeleni jade – prirodan i unikatan uzorak",
+    "idealFor": [
+      "Kupatilo",
+      "Dnevna soba",
+      "Spa",
+      "Wellness"
+    ],
+    "styleMatch": [
+      "Prirodni",
+      "Zen",
+      "Eklekticni",
+      "Moderni"
+    ]
   },
   {
     "id": 55,
@@ -756,12 +945,33 @@
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "SW219 donosi uzorak legendarnog Carrara mermera iz Italije – snijezno bijela podloga s diskretnim sivim zilama koja je obiljezila arhitekturu luksuznih vila i hotela sirom svijeta. Dostupno kao bambus panel, bez tezine i troskova originalnog kamena, ali s istim vizuelnim efektom koji podize svaki prostor.",
+    "features": [
+      "Dimenzije: 60x30cm po panelu",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: Carrara bijeli – snijezno bijeli s sivim zilama",
+      "Povrsinska obrada: visoko-sjajna lak zastita",
+      "Montaza: ljepilo za panele ili dvostrana traka",
+      "Otporan na vlagu - pogodan za kupatilo",
+      "Sifra: SW219"
+    ],
     "image": "images/products/product-1774009181-772.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Carrara bijeli – vjecna elegancija",
+    "idealFor": [
+      "Kupatilo",
+      "Kuhinja",
+      "Dnevna soba",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Klasicni",
+      "Luksuzni",
+      "Moderni",
+      "Skandinavski"
+    ]
   },
   {
     "id": 56,
@@ -1917,12 +2127,34 @@
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "AKU063 akusticni panel spaja dvije funkcije u jednom: smanjuje odraz zvuka i eho u prostoriji te istovremeno donosi toplinu prirodnog drveta na zid. Savrsen za home cinema, studije, otvorene urede i dnevne sobe s visokim stropovima gdje zvuk neugodno odzvanja. Jednostavna montaza bez majstora – postavlja se kao dekorativni panel.",
+    "features": [
+      "Dimenzije: 60x60cm po panelu",
+      "Materijal: akusticna spuzva s dekorativnom drvenom oblogom",
+      "Zvucna apsorpcija: NRC koeficijent 0.65–0.85",
+      "Smanjuje eho i reverberaciju u prostoriji",
+      "Povrsina: prirodna drvena obloga u toplim tonovima",
+      "Montaza: ljepilo ili sistem kuka",
+      "Pogodan za dnevne sobe, urede, studije i cinema sobe",
+      "Sifra: AKU063"
+    ],
     "image": "images/products/product-1774011747-477.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Zvucna tisina s estetikom prirodnog drveta",
+    "idealFor": [
+      "Home cinema",
+      "Ured",
+      "Studija za snimanje",
+      "Dnevna soba"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Skandinavski",
+      "Prirodni",
+      "Industrijski"
+    ]
   },
   {
     "id": 89,
@@ -1931,12 +2163,34 @@
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "AKU063 akusticni panel spaja dvije funkcije u jednom: smanjuje odraz zvuka i eho u prostoriji te istovremeno donosi toplinu prirodnog drveta na zid. Savrsen za home cinema, studije, otvorene urede i dnevne sobe s visokim stropovima gdje zvuk neugodno odzvanja. Jednostavna montaza bez majstora – postavlja se kao dekorativni panel.",
+    "features": [
+      "Dimenzije: 60x60cm po panelu",
+      "Materijal: akusticna spuzva s dekorativnom drvenom oblogom",
+      "Zvucna apsorpcija: NRC koeficijent 0.65–0.85",
+      "Smanjuje eho i reverberaciju u prostoriji",
+      "Povrsina: prirodna drvena obloga u toplim tonovima",
+      "Montaza: ljepilo ili sistem kuka",
+      "Pogodan za dnevne sobe, urede, studije i cinema sobe",
+      "Sifra: AKU063"
+    ],
     "image": "images/products/product-1774011763-194.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Zvucna tisina s estetikom prirodnog drveta",
+    "idealFor": [
+      "Home cinema",
+      "Ured",
+      "Studija za snimanje",
+      "Dnevna soba"
+    ],
+    "styleMatch": [
+      "Moderni",
+      "Skandinavski",
+      "Prirodni",
+      "Industrijski"
+    ]
   },
   {
     "id": 90,
@@ -1945,12 +2199,34 @@
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
+    "features": [
+      "Dimenzije: 60x60cm po panelu",
+      "Materijal: visokogusti akusticni filc s drvenom oblogom",
+      "Zvucna apsorpcija: NRC koeficijent 0.80–0.95",
+      "Visoka apsorpcija niskih i visokih frekvencija",
+      "Povrsina: drvena obloga u tamnijem tonu",
+      "Montaza: ljepilo ili sistem kuka",
+      "Pogodan za glazbene studije, home theatre, konferencijske sale",
+      "Sifra: AKU060"
+    ],
     "image": "images/products/product-1774011807-750.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Premium akustika – visoka apsorpcija, drveni dizajn",
+    "idealFor": [
+      "Glazbeni studio",
+      "Home theatre",
+      "Konferencijska sala",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Luksuzni",
+      "Minimalisticki"
+    ]
   },
   {
     "id": 91,
@@ -1959,12 +2235,34 @@
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
+    "features": [
+      "Dimenzije: 60x60cm po panelu",
+      "Materijal: visokogusti akusticni filc s drvenom oblogom",
+      "Zvucna apsorpcija: NRC koeficijent 0.80–0.95",
+      "Visoka apsorpcija niskih i visokih frekvencija",
+      "Povrsina: drvena obloga u tamnijem tonu",
+      "Montaza: ljepilo ili sistem kuka",
+      "Pogodan za glazbene studije, home theatre, konferencijske sale",
+      "Sifra: AKU060"
+    ],
     "image": "images/products/product-1774011821-454.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Premium akustika – visoka apsorpcija, drveni dizajn",
+    "idealFor": [
+      "Glazbeni studio",
+      "Home theatre",
+      "Konferencijska sala",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Luksuzni",
+      "Minimalisticki"
+    ]
   },
   {
     "id": 92,
@@ -1973,12 +2271,34 @@
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "",
-    "features": [],
+    "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
+    "features": [
+      "Dimenzije: 60x60cm po panelu",
+      "Materijal: visokogusti akusticni filc s drvenom oblogom",
+      "Zvucna apsorpcija: NRC koeficijent 0.80–0.95",
+      "Visoka apsorpcija niskih i visokih frekvencija",
+      "Povrsina: drvena obloga u tamnijem tonu",
+      "Montaza: ljepilo ili sistem kuka",
+      "Pogodan za glazbene studije, home theatre, konferencijske sale",
+      "Sifra: AKU060"
+    ],
     "image": "images/products/product-1774011837-259.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "highlight": "Premium akustika – visoka apsorpcija, drveni dizajn",
+    "idealFor": [
+      "Glazbeni studio",
+      "Home theatre",
+      "Konferencijska sala",
+      "Ured"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Luksuzni",
+      "Minimalisticki"
+    ]
   },
   {
     "id": 95,
