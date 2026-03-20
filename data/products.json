@@ -310,129 +310,318 @@
     },
     {
         "id": 37,
-        "name": "BW229",
+        "name": "Tekstilni Panel BW229 – Topla Bež",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "Zatvorite oči i zamislite grubu, toplu lanenu tkaninu na zidu – to je BW229. Sitna, gustо isprepletena struktura u toploj bež nijansi unosi u prostoriju osjećaj prirodnosti i mira. Nijansa između pijeska i lana savršeno se stapa s drvenim detaljima, prirodnim materijalima i toplim rasvjetnim tijelima. Zid koji izgleda kao da je oduvijek bio tu.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: topla bež – laneni tonovi",
+            "Fina, gusto isprepletena tekstilna struktura",
+            "Površinska zaštita – otporan na prašinu i vlagu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW229"
+        ],
         "image": "images/products/product-1774006203-686.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Prirodna toplina tkanine koja umiruje svaki prostor",
+        "idealFor": [
+            "Dnevna soba",
+            "Spavaća soba",
+            "Hodnik",
+            "Kancelarija"
+        ],
+        "styleMatch": [
+            "Prirodni",
+            "Skandinavski",
+            "Rustikalni",
+            "Minimalistički"
+        ]
     },
     {
         "id": 38,
-        "name": "BW400",
+        "name": "Tekstilni Panel BW400 – Čista Bijela",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "BW400 je čisto platno za vašu kreativnost. Hladno-bijela nijansa s jedva vidljivom tkanicom unosi svjetlost i zrak u svaki prostor. Idealan za male prostorije koje želite vizualno proširiti, ali i za moderne interijere gdje bijela igra glavnu ulogu. Elegancija u svojoj najčišćoj formi.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: čisto bijela – hladni ton",
+            "Fina, glatka tekstilna površina",
+            "Površinska zaštita – otporan na prašinu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW400"
+        ],
         "image": "images/products/product-1774006240-870.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Bijela koja prostoriju čini dvostruko većom",
+        "idealFor": [
+            "Dnevna soba",
+            "Spavaća soba",
+            "Kupatilo",
+            "Kancelarija"
+        ],
+        "styleMatch": [
+            "Moderni",
+            "Minimalistički",
+            "Skandinavski",
+            "Luksuzni"
+        ]
     },
     {
         "id": 39,
-        "name": "BW224",
+        "name": "Tekstilni Panel BW224 – Hladna Siva",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "Siva nikad nije bila dosadna – BW224 to dokazuje. Srednje-siva nijansa s finim tkanicom djeluje urbano, moderno i sofisticirano. Bez pretjerivanja, bez buke – samo čist zidni dekor koji se savršeno uklapa uz beton, metal, staklo i bijele površine. Enterijer koji govori sam za sebe.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: srednje siva – hladni urbani ton",
+            "Fina, ravnomjerna tekstilna struktura",
+            "Površinska zaštita – otporan na prašinu i vlagu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW224"
+        ],
         "image": "images/products/product-1774006266-913.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Urbana sofisticiranost koja odgovara svakom enterijeru",
+        "idealFor": [
+            "Dnevna soba",
+            "Kancelarija",
+            "Hodnik",
+            "Restoran"
+        ],
+        "styleMatch": [
+            "Moderni",
+            "Industrijski",
+            "Minimalistički",
+            "Urbani"
+        ]
     },
     {
         "id": 40,
-        "name": "BW003",
+        "name": "Tekstilni Panel BW003 – Prirodni Lan",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "BW003 donosi na zid ono što prirodni lan donosi na sto – toplinu, karakter i autentičnost. Svjetlo sivo-bež nijansa s vidljivim nitima tkanine stvara bogatu, ali nenametljivu površinu. Savršen kao neutralna pozadina koja propušta da namještaj i detalji dođu do izražaja, a opet dodaje dovoljno teksture da zid ne bude pust.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: svjetlo sivo-bež – prirodni lan ton",
+            "Vidljiva, autentična tekstura tkanine",
+            "Površinska zaštita – otporan na prašinu i vlagu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW003"
+        ],
         "image": "images/products/product-1774006317-836.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Tekstura koja podsjeća na najfiniji prirodni lan",
+        "idealFor": [
+            "Dnevna soba",
+            "Spavaća soba",
+            "Trpezarija",
+            "Hodnik"
+        ],
+        "styleMatch": [
+            "Prirodni",
+            "Skandinavski",
+            "Rustikalni",
+            "Mediteranski"
+        ]
     },
     {
         "id": 41,
-        "name": "BW220",
+        "name": "Tekstilni Panel BW220 – Zlatna Krema",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "BW220 je panel koji u sebi nosi malo luksuza. Kremasto-bijela osnova protkana je zlatnim i bež nitima koje daju suptilan, gotovo neuhvatljiv sjaj – kao da zid lagano treperi u toplom svjetlu. Nije pretjeran, nije kričav, samo dovoljno poseban da posjetilac zastane i pogleda izbliza.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: kremasto bijela sa zlatnim nitima",
+            "Suptilan sjaj – posebno vidljiv u toplijoj rasvjeti",
+            "Površinska zaštita – otporan na prašinu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW220"
+        ],
         "image": "images/products/product-1774006385-983.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Toplina kreme i suptilni sjaj zlatnih niti",
+        "idealFor": [
+            "Spavaća soba",
+            "Dnevna soba",
+            "Recepcija",
+            "Restoran"
+        ],
+        "styleMatch": [
+            "Luksuzni",
+            "Glamurozni",
+            "Moderni",
+            "Art Deco"
+        ]
     },
     {
         "id": 42,
-        "name": "BW221",
+        "name": "Tekstilni Panel BW221 – Srebrni Lan",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "BW221 je taj savršeni neutralac koji svi traže. Svjetlo siva s toplim podtonom – ni prehladna ni pretopla, idealna osnova za bilo koji enterijer. Fina tekstura tkanine daje zidu karakter bez da dominira prostorom. Odaberite je kad niste sigurni – sigurno je da neće pogriješiti.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: svjetlo siva s toplim podtonom",
+            "Fina, ravnomjerna tekstilna struktura",
+            "Površinska zaštita – otporan na prašinu i vlagu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW221"
+        ],
         "image": "images/products/product-1774006410-646.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Neutralna elegancija koja pasuje uz sve",
+        "idealFor": [
+            "Dnevna soba",
+            "Spavaća soba",
+            "Kancelarija",
+            "Hodnik"
+        ],
+        "styleMatch": [
+            "Moderni",
+            "Minimalistički",
+            "Skandinavski",
+            "Klasični"
+        ]
     },
     {
         "id": 43,
-        "name": "BW809",
+        "name": "Tekstilni Panel BW809 – Ledena Magla",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "Zamislite jutarnju maglu nad morem – to je BW809. Ledeno bijelo-plava nijansa s jedva vidljivim horizontalnim nitima unosi svježinu i lakoću u prostor. Posebno dolazi do izražaja u kupaonicama i spavaćim sobama gdje stvara atmosferu spa-centra. Zid koji diše.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: ledeno bijelo-plava – hladna i svježa",
+            "Horizontalne niti daju usmjerenost i širinu",
+            "Površinska zaštita – otporan na vlagu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW809"
+        ],
         "image": "images/products/product-1774006432-776.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Hladna svježina koja osvježava svaki prostor",
+        "idealFor": [
+            "Spavaća soba",
+            "Kupatilo",
+            "Dnevna soba",
+            "Wellness"
+        ],
+        "styleMatch": [
+            "Skandinavski",
+            "Minimalistički",
+            "Obalni",
+            "Moderni"
+        ]
     },
     {
         "id": 44,
-        "name": "BW222",
+        "name": "Tekstilni Panel BW222 – Bijeli Buklé",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "BW222 nije samo panel – to je skulptura na zidu. Chunky buklé tekstura u bijeloj boji stvara bogatu, trodimenzionalnu površinu koja mijenja izgled ovisno o smjeru svjetlosti. Topla, gotovo 'mekana' na pogled, ova tekstura unosi osjećaj ugodnosti i luksuza u svaki prostor gdje se nađe.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: bijela s toplim podtonom",
+            "Voluminozna buklé tekstura – bogata 3D površina",
+            "Površinska zaštita – otporan na prašinu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW222"
+        ],
         "image": "images/products/product-1774006463-976.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Meka, voluminozna tekstura koja poziva na dodir",
+        "idealFor": [
+            "Spavaća soba",
+            "Dnevna soba",
+            "Recepcija",
+            "Butik"
+        ],
+        "styleMatch": [
+            "Luksuzni",
+            "Glamurozni",
+            "Moderni",
+            "Cozy"
+        ]
     },
     {
         "id": 45,
-        "name": "BW008",
+        "name": "Tekstilni Panel BW008 – Šampanjac",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
-        "description": "",
-        "features": [],
+        "description": "BW008 je klasa za sebe. Topla šampanjac-zlatna nijansa s horizontalnim svilenkastim nitima koje hvataju svjetlost i stvaraju suptilnu igru sjene i sjaja. Kao da je zid obučen u skupocjenu tkaninu. Savršen za prostore gdje želite pokazati ukus bez izvikivanja – luksuzan, ali diskretan.",
+        "features": [
+            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Boja: topla šampanjac-zlatna",
+            "Horizontalne svilenkaste niti – suptilan sjaj",
+            "Površinska zaštita – otporan na prašinu i vlagu",
+            "Montaža: silikon/ljepilo, reže se skalpelom",
+            "Pogodan za zidove i stropove",
+            "Šifra: BW008"
+        ],
         "image": "images/products/product-1774006512-598.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "highlight": "Svilenkasti sjaj šampanjca na vašem zidu",
+        "idealFor": [
+            "Spavaća soba",
+            "Dnevna soba",
+            "Restoran",
+            "Recepcija"
+        ],
+        "styleMatch": [
+            "Luksuzni",
+            "Art Deco",
+            "Glamurozni",
+            "Klasični"
+        ]
     },
     {
         "id": 46,
