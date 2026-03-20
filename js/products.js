@@ -363,48 +363,48 @@ async function renderProductDetail() {
   // Reviews data – per product ID, with total count and 2 visible comments
   const reviewsData = {
     27: { total: 9,  fiveS: 8, fourS: 1, comments: [
-      { name: 'Amira K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'BW229 je nešto posebno – tekstura lana na zidu daje prostoriji mekoću kakvu nisam vidjela ni u jednom hotelu. Spavaća soba je potpuno transformisana.' },
-      { name: 'Milena V.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Bijelo-bež nijansa je savršeno topla, nije hladna bijela. Odlično ide uz drvo i prirodne materijale. Montaža super jednostavna.' }
+      { name: 'Amira K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'BW229 je nešto posebno – tekstura lana na zidu daje prostoriji mekoću kakvu nisam videla ni u jednom hotelu. Spavaća soba je potpuno transformisana.' },
+      { name: 'Milena V.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Belo-bež nijansa je savršeno topla, nije hladna bela. Odlično ide uz drvo i prirodne materijale. Montaža super jednostavna.' }
     ]},
     4:  { total: 7,  fiveS: 6, fourS: 1, comments: [
-      { name: 'Aleksandar M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio u kućni studio – razlika u zvuku je odmah primjetna. Panel je sivi, diskretnog dizajna, odlično se uklapa.' },
+      { name: 'Aleksandar M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio u kućni studio – razlika u zvuku je odmah primetna. Panel je sivi, diskretnog dizajna, odlično se uklapa.' },
       { name: 'Tijana R.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Kupila za dnevnu sobu. Siva boja je neutralna, pristaje uz sve. Montaža je bila super jednostavna.' }
     ]},
     18: { total: 15, fiveS: 13, fourS: 2, comments: [
-      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Topli Tik daje savršenu toplinu prostoriji. Postavio iza TV-a u dnevnoj sobi i svi gosti pitaju odakle mi ideja – izgleda skupo a cijena je odlična.' },
+      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Topli Tik daje savršenu toplinu prostoriji. Postavio iza TV-a u dnevnoj sobi i svi gosti pitaju odakle mi ideja – izgleda skupo a cena je odlična.' },
       { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Boja tika je tačno kao na slikama, topla i prirodna. Postavljanje sa silikonom trajalo svega sat vremena. Presretna sam!' }
     ]},
     19: { total: 10, fiveS: 8, fourS: 2, comments: [
-      { name: 'Stefan K.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Bijeli Jasen je pravi izbor za moderan, svetao stan. Osvjetljava prostor i čini sobu vizualno većom. Preporučujem svima!' },
-      { name: 'Ana P.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Jako lijepa bijela nijansa, ne previše bijela nego prirodna. Jedino bih voljela malo veće dimenzije panela.' }
+      { name: 'Stefan K.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Beli Jasen je pravi izbor za moderan, svetao stan. Osvetljava prostor i čini sobu vizualno većom. Preporučujem svima!' },
+      { name: 'Ana P.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Jako lepa bela nijansa, ne previše bela nego prirodna. Jedino bih volela malo veće dimenzije panela.' }
     ]},
     20: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Crni Antracit je brutalno lijep. Cijela zida u spavaćoj sobi – izgleda kao luksuzni hotel. Montaža perfektna.' },
+      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Crni Antracit je brutalno lep. Cijela zida u spavaćoj sobi – izgleda kao luksuzni hotel. Montaža perfektna.' },
       { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Tamna boja daje dramatičnost prostoru. Kombinovala sa zlatnim detaljima i rezultat je fenomenalan!' }
     ]},
     21: { total: 6,  fiveS: 5, fourS: 1, comments: [
-      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Srebrno siva je savršena nijansa – ni pretopla ni prehladna. Ide uz sve stilove namještaja. Jako zadovoljan.' },
+      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Srebrno siva je savršena nijansa – ni pretopla ni prehladna. Ide uz sve stilove nameštaja. Jako zadovoljan.' },
       { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Odabrala za ured i savršeno odgovara poslovnom prostoru. Daje ozbiljnost i eleganciju.' }
     ]},
     22: { total: 9,  fiveS: 8, fourS: 1, comments: [
       { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Pješčani Hrast je toplih tonova – savršen za stan koji želi prirodan dodir. Postavio u hodniku i odmah promjena.' },
-      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Boja hrasta je autentična, ne plastičan izgled. Kvalitet je iznenađujuće dobar za ovu cijenu!' }
+      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Boja hrasta je autentična, ne plastičan izgled. Kvalitet je iznenađujuće dobar za ovu cenu!' }
     ]},
     23: { total: 11, fiveS: 10, fourS: 1, comments: [
       { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Dimljeni Orah je moja omiljena nijansa. Daje prostoriji karakter i toplinu istovremeno. Postavio u trpezariji.' },
-      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Tamni orah je elegantan i moderan. Kombinuje se lijepo i sa svjetlim i sa tamnim namještajem.' }
+      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Tamni orah je elegantan i moderan. Kombinuje se lepo i sa svetlim i sa tamnim nameštajem.' }
     ]},
     24: { total: 8,  fiveS: 7, fourS: 1, comments: [
-      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Prirodni Hrast izgleda kao pravo drvo. Postavio u dnevnoj sobi iza sofe i efekt je nevjerovatan – kao da je sobi duša vraćena.' },
+      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Prirodni Hrast izgleda kao pravo drvo. Postavio u dnevnoj sobi iza sofe i efekt je neverovatna – kao da je sobi duša vraćena.' },
       { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Boja je autentično drvenasta, miris je čak i kao pravo drvo. Izuzetno zadovoljna kvalitetom!' }
     ]},
     25: { total: 5,  fiveS: 4, fourS: 1, comments: [
       { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Divlji Orah ima specifičnu teksturu koja privlači pogled. Jedinstven izgled, svaka daska drugačija – baš kao pravo drvo.' },
-      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Lijepa tamno-smeđa nijansa, odlično ide uz rustičan enterijer. Montaža jednostavna, preporučujem.' }
+      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Lepa tamno-smeđa nijansa, odlično ide uz rustičan enterijer. Montaža jednostavna, preporučujem.' }
     ]},
     26: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Orah je savršen spoj tamnog i toplog tona. Postavio u kancelariji i kolege svakodnevno komentarišu koliko je prostorija lijepa.' },
-      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Tamna espresso boja daje luksuz bez prevelike cijene. Panel je čvrst i lako se čisti. Apsolutno preporučujem!' }
+      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Orah je savršen spoj tamnog i toplog tona. Postavio u kancelariji i kolege svakodnevno komentarišu koliko je prostorija lepa.' },
+      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Tamna espresso boja daje luksuz bez prevelike cene. Panel je čvrst i lako se čisti. Apsolutno preporučujem!' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
