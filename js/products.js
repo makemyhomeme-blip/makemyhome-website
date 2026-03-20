@@ -732,7 +732,7 @@ async function renderProductDetail() {
           <label>Širina zida</label>
           <div class="pq-calc-stepper">
             <button type="button" onclick="stepCalc('wall-w',-0.5)">−</button>
-            <input type="number" id="wall-w" value="4" min="0.5" max="50" step="0.5" oninput="calcPanels()">
+            <input type="number" id="wall-w" value="1" min="0.5" max="50" step="0.5" oninput="calcPanels()">
             <span class="pq-calc-unit">m</span>
             <button type="button" onclick="stepCalc('wall-w',0.5)">+</button>
           </div>
@@ -748,7 +748,7 @@ async function renderProductDetail() {
         </div>
       </div>
       <div class="pq-calc-result" id="calc-result">
-        Za zid 4 × 2,8 m = <strong>11,2 m²</strong> → trebaš <strong>4 komada</strong>
+        Za zid 1 × 2,8 m = <strong>2,8 m²</strong> → trebaš <strong>1 komad</strong>
       </div>
     </div>
 
