@@ -11,18 +11,28 @@ document.addEventListener('DOMContentLoaded', function () {
     else header.classList.remove('scrolled');
   });
 
-  // ===== HAMBURGER MENU =====
+  // ===== HAMBURGER MENU + REBUILD NAV (uvijek svjež, bez obzira na keš) =====
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
-  if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navMenu.classList.toggle('open');
-    });
-    // Zatvori menu na klik linka
+  if (navMenu) {
+    navMenu.innerHTML = `
+      <a href="index.html" class="nav-link">Početna</a>
+      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
+      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
+      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
+    `;
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('open');
+      });
+    }
     navMenu.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
         navMenu.classList.remove('open');
       });
     });
@@ -30,9 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ===== ACTIVE NAV =====
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentSearch = window.location.search;
   document.querySelectorAll('.nav-link').forEach(link => {
     const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    const [hPage, hSearch] = href.split('?');
+    if (
+      href === currentPage ||
+      (currentPage === '' && href === 'index.html') ||
+      (hPage === currentPage && hSearch && currentSearch.includes(hSearch.split('=')[1]))
+    ) {
       link.classList.add('active');
     }
   });
