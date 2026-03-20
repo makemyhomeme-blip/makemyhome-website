@@ -458,7 +458,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                     <option value="3d-letvice">3D Letvice</option>
                   </optgroup>
                   <optgroup label="── Aluminijumske Lajsne ──">
-                    <option value="aluminijumske-lajsne">Aluminijumske Lajsne</option>
+                    <option value="aluminijum-lajsne">Aluminijumske Lajsne</option>
                   </optgroup>
                   <optgroup label="── Bambus Paneli ──">
                     <option value="bambus-drveni">Bambus › Drveni</option>
@@ -608,7 +608,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <option value="3d-letvice">3D Letvice</option>
             </optgroup>
             <optgroup label="── Aluminijumske Lajsne ──">
-              <option value="aluminijumske-lajsne">Aluminijumske Lajsne</option>
+              <option value="aluminijum-lajsne">Aluminijumske Lajsne</option>
             </optgroup>
             <optgroup label="── Bambus Paneli ──">
               <option value="bambus-drveni">Bambus › Drveni</option>
