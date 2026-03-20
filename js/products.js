@@ -406,6 +406,42 @@ async function renderProductDetail() {
       { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Orah je savršen spoj tamnog i toplog tona. Postavio u kancelariji i kolege svakodnevno komentarišu koliko je prostorija lepa.' },
       { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Tamna espresso boja daje luksuz bez prevelike cene. Panel je čvrst i lako se čisti. Apsolutno preporučujem!' }
     ]},
+    37: { total: 12, fiveS: 11, fourS: 1, comments: [
+      { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'BW229 Topla Bež je savršena za spavaću sobu – mekana lanena tekstura daje neverovatnu toplinu i udobnost prostoru. Kao da si omotan u ćebe.' },
+      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Tekstura lana je neverovatno autentična na dodir i pogledom. Postavio u dnevnoj sobi i svi gosti misle da je pravi tekstil na zidu.' }
+    ]},
+    38: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Čista Bela BW400 je savršena za minimalistički enterijer. Tekstura daje dubinu zidu – nije ravna kao farba nego živa i dinamična.' },
+      { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Lepa bela nijansa, ne previše hladna. Kombinovala sa drvenim nameštajem i rezultat je moderan i čist. Veoma zadovoljna montažom.' }
+    ]},
+    39: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'BW224 Hladna Siva je idealna za kancelariju – neutralna, ozbiljna, elegantna. Klijenti uvek komentarišu koliko prostor deluje profesionalno.' },
+      { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Siva nijansa je tačno onakva kakva se vidi na slikama. Tekstilna površina upija svetlost i daje sobi miran, staložen karakter.' }
+    ]},
+    40: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Ana R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'BW003 Prirodni Lan je moj apsolutni favorit. Sivo-bež ton je toliko neutralan da ide uz sve – drvo, metal, beton. Toplo preporučujem.' },
+      { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Površina panela je meka na pogled i stvara atmosferu prirodnog materijala. Spavaća soba je dobila sasvim novu dušu.' }
+    ]},
+    41: { total: 7, fiveS: 6, fourS: 1, comments: [
+      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'BW220 Zlatna Krema je luksuzna bez preterivanja. Zlatne niti u teksturi blistaju pod svetlom i daju sobi toplinu kakvu nisam videla nigde.' },
+      { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Kremasta nijansa sa zlatnim sjajem je savršena za elegantnu trpezariju. Panel izgleda skupo, a cena je sasvim razumna.' }
+    ]},
+    42: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Petar L.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'BW221 Srebrni Lan je delikatan i sofisticiran. Topli podton sprečava hladnoću sive, a tekstilna površina daje prostoru karakter i dubinu.' },
+      { name: 'Sandra N.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Kombinovala sa belim nameštajem i srebrnim detaljima – rezultat je savršen. Panel je čvrst, lak za montažu i izgleda odlično.' }
+    ]},
+    43: { total: 6, fiveS: 5, fourS: 1, comments: [
+      { name: 'Bojan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'BW809 Ledena Magla je jedinstvena – hladno belo-plava nijansa daje prostoru svežinu kao da si na moru. Kupatilo izgleda kao luksuzni spa.' },
+      { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Jako interesantna boja – ni bela ni plava nego nešto između. Izuzetno moderna, odlično ide uz mat metalne elemente u enterijeru.' }
+    ]},
+    44: { total: 10, fiveS: 9, fourS: 1, comments: [
+      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'BW222 Beli Buklé je neverovatna – buklé tekstura na panelu daje onaj meki, udobni izgled koji obožavam. Spavaća soba izgleda kao iz modnog magazina.' },
+      { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Buklé površina je toliko upečatljiva da panel odmah postaje fokalna tačka svake sobe. Toplo bela nijansa je savršena za svetle enterijerske projekte.' }
+    ]},
+    45: { total: 13, fiveS: 12, fourS: 1, comments: [
+      { name: 'Milena D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'BW008 Šampanjac je pravi luksuz. Topla zlatno-šampanjac nijansa sa tekstilnom površinom daje dnevnoj sobi glamur koji svaki gost primeti.' },
+      { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Šampanjac boja je prefinjena i elegantna – savršena za recepcije, hotele, ali i privatne stanove. Montaža brza, panel vrhunskog kvaliteta.' }
+    ]},
     46: { total: 11, fiveS: 10, fourS: 1, comments: [
       { name: 'Dragana M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW215 izgleda kao pravi mermerni zid. Gosti uvek pitaju da li sam ugradila pravi mermer – ne mogu da veruju da je panel. Fenomenalno!' },
       { name: 'Zoran K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Postavio u kupatilu iza lavaboa. Efekat je neverovatan – luksuz za malu cenu. Montaža sa silikonom prošla bez ikakvih problema.' }
