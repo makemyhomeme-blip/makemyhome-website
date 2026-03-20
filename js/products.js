@@ -816,6 +816,58 @@ async function renderProductDetail() {
 
   `;
 
+  // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
+  const matchingPairs = {
+    18: [60], 60: [18],          // CQ006
+    19: [64, 65, 66], 64: [19], 65: [19], 66: [19], // MW010
+    23: [61], 61: [23],          // MW300
+    24: [63], 63: [24],          // MW321
+    25: [67], 67: [25],          // MW682
+    26: [62], 62: [26],          // MW312
+    37: [82], 82: [37],          // BW229
+    39: [80], 80: [39],          // BW224
+    43: [81], 81: [43],          // BW809
+    45: [79], 79: [45],          // BW008
+  };
+
+  const partnerIds = matchingPairs[id];
+  if (partnerIds && partnerIds.length > 0) {
+    const partners = partnerIds.map(pid => allProducts.find(p => p.id === pid)).filter(Boolean);
+    if (partners.length > 0) {
+      const isPanel = partners[0].category === '3d-letvice';
+      const sectionTitle = isPanel
+        ? '<i class="fas fa-link"></i> Ove 3D letvice postoje u istoj nijansi'
+        : '<i class="fas fa-link"></i> Ovaj panel postoji u istoj nijansi';
+      const sectionSubtitle = isPanel
+        ? 'Kombiniraj panel sa 3D letvicama iste boje za savršen enterijer'
+        : 'Kombiniraj 3D letvice sa panelom iste boje za savršen enterijer';
+
+      const partnerCards = partners.map(p => `
+        <a href="product.html?id=${p.id}" class="pair-card">
+          <div class="pair-card-img">
+            <img src="${p.image}" alt="${p.name}" loading="lazy">
+            ${p.badge ? `<span class="pair-badge">${p.badge}</span>` : ''}
+          </div>
+          <div class="pair-card-info">
+            <div class="pair-card-name">${p.name}</div>
+            <div class="pair-card-price">${p.price.toFixed(2).replace('.', ',')} €<span class="pair-card-unit"> / ${p.unit}</span></div>
+            <div class="pair-card-cta">Pogledaj <i class="fas fa-arrow-right"></i></div>
+          </div>
+        </a>
+      `).join('');
+
+      info.insertAdjacentHTML('beforeend', `
+        <div class="matching-pair-section">
+          <div class="matching-pair-header">
+            <div class="matching-pair-title">${sectionTitle}</div>
+            <div class="matching-pair-subtitle">${sectionSubtitle}</div>
+          </div>
+          <div class="pair-cards-row">${partnerCards}</div>
+        </div>
+      `);
+    }
+  }
+
   // Append reviews directly to info
   info.insertAdjacentHTML('beforeend', reviewsHtml);
 

@@ -1966,6 +1966,133 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .product-trust-row { flex-direction: column; }
 }
 
+/* ===== MATCHING PAIR SECTION ===== */
+.matching-pair-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fdf8f0 0%, #fff9f0 100%);
+  border: 1.5px solid rgba(201,168,108,0.35);
+  border-radius: 16px;
+}
+.matching-pair-header {
+  margin-bottom: 16px;
+}
+.matching-pair-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.matching-pair-title i {
+  color: var(--primary);
+  font-size: 14px;
+}
+.matching-pair-subtitle {
+  font-size: 12.5px;
+  color: var(--gray);
+}
+.pair-cards-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pair-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1.5px solid rgba(201,168,108,0.25);
+  border-radius: 12px;
+  padding: 12px;
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  min-width: 220px;
+  max-width: 360px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.pair-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(201,168,108,0.2);
+  transform: translateY(-2px);
+}
+.pair-card-img {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f0e8;
+}
+.pair-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pair-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.pair-card-info {
+  flex: 1;
+  min-width: 0;
+}
+.pair-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.35;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pair-card-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.pair-card-unit {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray);
+}
+.pair-card-cta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pair-card-cta i {
+  font-size: 11px;
+  transition: transform 0.2s;
+}
+.pair-card:hover .pair-card-cta i {
+  transform: translateX(3px);
+}
+
+@media (max-width: 600px) {
+  .pair-card { min-width: 100%; max-width: 100%; }
+  .matching-pair-section { padding: 16px; }
+}
+
 /* ===== PRODUCT QTY / CALCULATOR TABS ===== */
 .pq-tabs {
   display: flex;
