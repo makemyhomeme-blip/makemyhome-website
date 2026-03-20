@@ -395,7 +395,7 @@ async function renderProductDetail() {
       { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Tamni orah je elegantan i moderan. Kombinuje se lepo i sa svetlim i sa tamnim nameštajem.' }
     ]},
     24: { total: 8,  fiveS: 7, fourS: 1, comments: [
-      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Prirodni Hrast izgleda kao pravo drvo. Postavio u dnevnoj sobi iza sofe i efekt je neverovatna – kao da je sobi duša vraćena.' },
+      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Prirodni Hrast izgleda kao pravo drvo. Postavio u dnevnoj sobi iza sofe i efekt je nevjerovatna – kao da je sobi duša vraćena.' },
       { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Boja je autentično drvenasta, miris je čak i kao pravo drvo. Izuzetno zadovoljna kvalitetom!' }
     ]},
     25: { total: 5,  fiveS: 4, fourS: 1, comments: [
@@ -408,14 +408,14 @@ async function renderProductDetail() {
     ]},
     37: { total: 12, fiveS: 11, fourS: 1, comments: [
       { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'BW229 Topla Bež je savršena za spavaću sobu – mekana lanena tekstura daje neverovatnu toplinu i udobnost prostoru. Kao da si omotan u ćebe.' },
-      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Tekstura lana je neverovatno autentična na dodir i pogledom. Postavio u dnevnoj sobi i svi gosti misle da je pravi tekstil na zidu.' }
+      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Tekstura lana je nevjerovatno autentična na dodir i pogledom. Postavio u dnevnoj sobi i svi gosti misle da je pravi tekstil na zidu.' }
     ]},
     38: { total: 9, fiveS: 8, fourS: 1, comments: [
       { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Čista Bela BW400 je savršena za minimalistički enterijer. Tekstura daje dubinu zidu – nije ravna kao farba nego živa i dinamična.' },
       { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Lepa bela nijansa, ne previše hladna. Kombinovala sa drvenim nameštajem i rezultat je moderan i čist. Veoma zadovoljna montažom.' }
     ]},
     39: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'BW224 Hladna Siva je idealna za kancelariju – neutralna, ozbiljna, elegantna. Klijenti uvek komentarišu koliko prostor deluje profesionalno.' },
+      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'BW224 Hladna Siva je idealna za kancelariju – neutralna, ozbiljna, elegantna. Klijenti uvijek komentarišu koliko prostor djeluje profesionalno.' },
       { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Siva nijansa je tačno onakva kakva se vidi na slikama. Tekstilna površina upija svetlost i daje sobi miran, staložen karakter.' }
     ]},
     40: { total: 11, fiveS: 10, fourS: 1, comments: [
@@ -423,7 +423,7 @@ async function renderProductDetail() {
       { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Površina panela je meka na pogled i stvara atmosferu prirodnog materijala. Spavaća soba je dobila sasvim novu dušu.' }
     ]},
     41: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'BW220 Zlatna Krema je luksuzna bez preterivanja. Zlatne niti u teksturi blistaju pod svetlom i daju sobi toplinu kakvu nisam videla nigde.' },
+      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'BW220 Zlatna Krema je luksuzna bez pretjerivanja. Zlatne niti u teksturi blistaju pod svjetlom i daju sobi toplinu kakvu nisam videla nigde.' },
       { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Kremasta nijansa sa zlatnim sjajem je savršena za elegantnu trpezariju. Panel izgleda skupo, a cena je sasvim razumna.' }
     ]},
     42: { total: 9, fiveS: 8, fourS: 1, comments: [
@@ -435,7 +435,7 @@ async function renderProductDetail() {
       { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Jako interesantna boja – ni bela ni plava nego nešto između. Izuzetno moderna, odlično ide uz mat metalne elemente u enterijeru.' }
     ]},
     44: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'BW222 Beli Buklé je neverovatna – buklé tekstura na panelu daje onaj meki, udobni izgled koji obožavam. Spavaća soba izgleda kao iz modnog magazina.' },
+      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'BW222 Beli Buklé je nevjerovatna – buklé tekstura na panelu daje onaj meki, udobni izgled koji obožavam. Spavaća soba izgleda kao iz modnog magazina.' },
       { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Buklé površina je toliko upečatljiva da panel odmah postaje fokalna tačka svake sobe. Toplo bela nijansa je savršena za svetle enterijerske projekte.' }
     ]},
     45: { total: 13, fiveS: 12, fourS: 1, comments: [
@@ -443,7 +443,7 @@ async function renderProductDetail() {
       { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Šampanjac boja je prefinjena i elegantna – savršena za recepcije, hotele, ali i privatne stanove. Montaža brza, panel vrhunskog kvaliteta.' }
     ]},
     46: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Dragana M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW215 izgleda kao pravi mermerni zid. Gosti uvek pitaju da li sam ugradila pravi mermer – ne mogu da veruju da je panel. Fenomenalno!' },
+      { name: 'Dragana M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW215 izgleda kao pravi mermerni zid. Gosti uvijek pitaju da li sam ugradila pravi mermer – ne mogu da veruju da je panel. Fenomenalno!' },
       { name: 'Zoran K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Postavio u kupatilu iza lavaboa. Efekat je neverovatan – luksuz za malu cenu. Montaža sa silikonom prošla bez ikakvih problema.' }
     ]},
     47: { total: 8, fiveS: 7, fourS: 1, comments: [
@@ -455,12 +455,12 @@ async function renderProductDetail() {
       { name: 'Rade S.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Odlična imitacija mermera, fotografije ne mogu da prenesu koliko lepo izgleda uživo. Preporučujem svakome.' }
     ]},
     49: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Snežana J.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Postavila u hodniku i kompletno je promenila atmosferu. Tamnije žilice daju dubinu i karakter zidu. Izvanredno!' },
+      { name: 'Snežana J.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Postavila u hodniku i kompletno je promijenila atmosferu. Tamnije žilice daju dubinu i karakter zidu. Izvanredno!' },
       { name: 'Miloš V.', city: 'Cetinje', date: 'Februar 2026', stars: 5, text: 'Kvalitet materijala je odličan, panel je čvrst i lak za montažu. Izgleda kao pravi mermer, a cena je pristupačna.' }
     ]},
     50: { total: 13, fiveS: 12, fourS: 1, comments: [
       { name: 'Tatjana Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW003 – čista elegancija. Beli mermer sa suptilnim žilicama je klasičan izbor koji nikad ne stari. Spavaća soba izgleda kao iz časopisa.' },
-      { name: 'Goran N.', city: 'Bijelo Polje', date: 'Februar 2026', stars: 5, text: 'Postavio iza kreveta umesto tapete. Razlika je ogromna – prostor deluje dvostruko skuplje. Montaža jednostavna, silikon drži savršeno.' }
+      { name: 'Goran N.', city: 'Bijelo Polje', date: 'Februar 2026', stars: 5, text: 'Postavio iza kreveta umjesto tapete. Razlika je ogromna – prostor djeluje dvostruko skuplje. Montaža jednostavna, silikon drži savršeno.' }
     ]},
     51: { total: 10, fiveS: 9, fourS: 1, comments: [
       { name: 'Bojana L.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SW001-B ima nešto posebno – kombinacija bele i zlatnih žilica daje toplinu i luksuz istovremeno. Trpezarija je potpuno transformisana.' },
@@ -468,7 +468,7 @@ async function renderProductDetail() {
     ]},
     52: { total: 6, fiveS: 5, fourS: 1, comments: [
       { name: 'Marina T.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'YL059 je imitacija žutog mermera i izgleda prelepo uz svetli drveni nameštaj. Jedinstven i elegantno topao izbor.' },
-      { name: 'Predrag M.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Neuobičajena boja mermera koja privlači pažnju. Postavio u recepciji firme – svi posetioci komentarišu koliko je zanimljivo.' }
+      { name: 'Predrag M.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Neuobičajena boja mermera koja privlači pažnju. Postavio u recepciji firme – svi posjetioci komentarišu koliko je zanimljivo.' }
     ]},
     53: { total: 12, fiveS: 11, fourS: 1, comments: [
       { name: 'Jelena S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'SW212 – siva sa tamnim žilicama je savremena i sofisticirana. Moj omiljeni panel do sada. Kupatilo izgleda kao spa centar.' },
@@ -501,27 +501,27 @@ async function renderProductDetail() {
     ]},
 
     60: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Igor S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'CQ006 Topli Tik letvice su transformisale moju dnevnu sobu. 3D efekat pod lampama je neverovatna – senke i svetlo igraju ceo dan.' },
-      { name: 'Tijana R.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Tik tonovi su topli i prirodni. Montaža silikonom je bila jednostavna, a PVC materijal je lagan i lako se seče skalpelom.' }
+      { name: 'Igor S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'CQ006 Topli Tik letvice su transformisale moju dnevnu sobu. 3D efekat pod lampama je nevjerovatna – senke i svjetlo igraju cijeli dan.' },
+      { name: 'Tijana R.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Tik tonovi su topli i prirodni. Montaža silikonom je bila jednostavna, a PVC materijal je lagan i lako se siječe skalpelom.' }
     ]},
     61: { total: 8, fiveS: 7, fourS: 1, comments: [
       { name: 'Stefan M.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'MW300 Prirodna Bela letvice daju zidu skulpturalni izgled. Čiste, moderne, savršene za svetle minimalistike enterijere.' },
       { name: 'Maja L.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Bela letvica uz LED traku iza je savršena kombinacija. Prostor dobija dubinu i ambijentalnost kakvu nisam mogla ni zamisliti.' }
     ]},
     62: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Nikola V.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'MW312 Pepeljasti Hrast je delikatan i sofisticiran. Siva sa drvenim uzorkom daje zidu prirodan karakter bez preterivanja.' },
+      { name: 'Nikola V.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'MW312 Pepeljasti Hrast je delikatan i sofisticiran. Siva sa drvenim uzorkom daje zidu prirodan karakter bez pretjerivanja.' },
       { name: 'Sanja B.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Lepa nijansa pepela i hrasta – moderna i topla istovremeno. 3D senke pod spotovima su fenomenalne.' }
     ]},
     63: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Petar D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'MW321 Zlatni Kesten ima bogatu, toplu teksturu koja osvaja na prvi pogled. Hodnik je potpuno promenjen – topliji i prijatniji.' },
-      { name: 'Jelena N.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Kesten tonovi su savršeni za trpezariju. 3D reljef stvara igru senki koja menja izgled tokom dana zavisno od osvetljenja.' }
+      { name: 'Petar D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'MW321 Zlatni Kesten ima bogatu, toplu teksturu koja osvaja na prvi pogled. Hodnik je potpuno promijenjen – topliji i prijatniji.' },
+      { name: 'Jelena N.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Kesten tonovi su savršeni za trpezariju. 3D reljef stvara igru senki koja menja izgled tokom dana zavisno od osvjetljenja.' }
     ]},
     64: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Milena P.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'MW010 Snežna Bela letvice su klasika koja nikad ne stari. Oštre, definisane forme uz belu boju daju prostoru arhitektonski izgled.' },
+      { name: 'Milena P.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'MW010 Snježna Bijela letvice su klasika koja nikad ne stari. Oštre, definisane forme uz belu boju daju prostoru arhitektonski izgled.' },
       { name: 'Vuk J.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Postavio u spavaćoj sobi uz LED traku i efekat je kao u luksuznom hotelu. Montaža brza, PVC materijal lagan i praktičan.' }
     ]},
     65: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Dragana K.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Mat verzija MW010 je diskretna i elegantna. Nema refleksije svetlosti što je savršeno za dnevne sobe sa puno prirodnog svetla.' },
+      { name: 'Dragana K.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Mat verzija MW010 je diskretna i elegantna. Nema refleksije svjetlosti što je savršeno za dnevne sobe sa puno prirodnog svetla.' },
       { name: 'Bojan R.', city: 'Cetinje', date: 'Januar 2026', stars: 5, text: 'Mat bela letvica je sofisticiranija od gloss verzije. Prijatna za oči, moderna i čista. Odlična za minimalistički enterijer.' }
     ]},
     66: { total: 7, fiveS: 6, fourS: 1, comments: [
@@ -529,7 +529,7 @@ async function renderProductDetail() {
       { name: 'Luka M.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Sjajne letvice menjaju karakter prostora zavisno od izvora svetla. Dnevni prostor je potpuno drugačiji noću i danju.' }
     ]},
     67: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Goran T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'MW682 Tamni Orah letvice su dramatične i moćne. Iza kauča u dnevnoj sobi izgledaju kao skulptura – neverovatna dubina i karakter.' },
+      { name: 'Goran T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'MW682 Tamni Orah letvice su dramatične i moćne. Iza kauča u dnevnoj sobi izgledaju kao skulptura – nevjerovatna dubina i karakter.' },
       { name: 'Ana Đ.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Tamni orah u 3D formatu je drugačiji od svakog drugog materijala. Senke između letvica stvaraju iluziju mnogo dubljeg zida.' }
     ]},
     68: { total: 9, fiveS: 8, fourS: 1, comments: [
@@ -537,15 +537,15 @@ async function renderProductDetail() {
       { name: 'Kristina B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Širi profil letvice pravi duže i dublje senke. Siva boja uz betonski pod je savršena industrijska kombinacija.' }
     ]},
     69: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Nemanja S.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'MW018 Bež Lanen letvice su tople i harmonične. Ritam letvica stvara smirujući efekat – soba deluje uređeno i opuštajuće.' },
-      { name: 'Vesna P.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Bež u 3D formatu je neverovatno toplo i prijatno. Kombinovala sa drvenim detaljima i biljkama – rezultat je kao iz Instagram profila.' }
+      { name: 'Nemanja S.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'MW018 Bež Lanen letvice su tople i harmonične. Ritam letvica stvara smirujući efekat – soba djeluje uređeno i opuštajuće.' },
+      { name: 'Vesna P.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Bež u 3D formatu je nevjerovatno toplo i prijatno. Kombinovala sa drvenim detaljima i biljkama – rezultat je kao iz Instagram profila.' }
     ]},
     70: { total: 7, fiveS: 6, fourS: 1, comments: [
       { name: 'Srđan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'SP052 Topla Bela sa drvenim efektom je savršena kombinacija – ni čisto drvo ni čista bela. Daje prostoru toplinu i modernost istovremeno.' },
-      { name: 'Milica T.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Zanimljiva tekstura bele s drvenim šarama. Širi profil 170mm pravi jače senke i efekat je impresivan uz bočno osvetljenje.' }
+      { name: 'Milica T.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Zanimljiva tekstura bele s drvenim šarama. Širi profil 170mm pravi jače senke i efekat je impresivan uz bočno osvjetljenje.' }
     ]},
     71: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Zoran M.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'CS022 Betonski Sivi je savršen za industrijski enterijer. Betonska tekstura na letvici je toliko autentična da moraš prstom proveriti da li je beton.' },
+      { name: 'Zoran M.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'CS022 Betonski Sivi je savršen za industrijski enterijer. Betonska tekstura na letvici je toliko autentična da moraš prstom provjeriti da li je beton.' },
       { name: 'Aleksandra J.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Beton + 3D reljef je ubojita kombinacija. Dnevna soba je dobila karakter industrijske loft arhitekture za mali novac.' }
     ]},
     72: { total: 8, fiveS: 7, fourS: 1, comments: [
@@ -557,7 +557,7 @@ async function renderProductDetail() {
       { name: 'Stefan Đ.', city: 'Cetinje', date: 'Februar 2026', stars: 4, text: 'Razlika između obične i teksturisane verzije je primetna. Ova teksturisana je za one koji žele maksimalan 3D efekat.' }
     ]},
     74: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Predrag N.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamna Espresso letvica je dramatična i luksuzna. Pod usmerjenim svetlom senke između letvica su neverovatno duboke i upečatljive.' },
+      { name: 'Predrag N.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamna Espresso letvica je dramatična i luksuzna. Pod usmjerenim svjetlom senke između letvica su nevjerovatno duboke i upečatljive.' },
       { name: 'Tatjana K.', city: 'Kotor', date: 'Januar 2026', stars: 5, text: 'Espresso tamna nijansa uz zlatne detalje je klasična luksuzna kombinacija. Trpezarija je dobila novi identitet.' }
     ]},
     75: { total: 11, fiveS: 10, fourS: 1, comments: [
@@ -577,7 +577,7 @@ async function renderProductDetail() {
       { name: 'Ivana M.', city: 'Cetinje', date: 'Januar 2026', stars: 5, text: 'Javor je svetao i energičan. Soba dobija skandinavski karakter koji volim – prirodno, čisto, moderno. Jako zadovoljna.' }
     ]},
     79: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Nikola F.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'BW008 Crna Ebonija letvice su najdramatičniji izbor u kolekciji. Pod usmerjenim svetlom efekat je kao skulptura – apsolutan statement.' },
+      { name: 'Nikola F.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'BW008 Crna Ebonija letvice su najdramatičniji izbor u kolekciji. Pod usmjerenim svjetlom efekat je kao skulptura – apsolutan statement.' },
       { name: 'Milena K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Crna ebonija na fokalnom zidu je hrabar potez koji se apsolutno isplatilo. Svaki gost ostane bez reči kad uđe u sobu.' }
     ]},
     80: { total: 8, fiveS: 7, fourS: 1, comments: [
@@ -586,11 +586,11 @@ async function renderProductDetail() {
     ]},
     81: { total: 7, fiveS: 6, fourS: 1, comments: [
       { name: 'Bojan N.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'BW809 Tamni Grafit sa metalnim podtonom je jedinstven – blago metalično blistanje uz 3D senke pravi futuristički efekat.' },
-      { name: 'Sanja M.', city: 'Bar', date: 'Februar 2026', stars: 4, text: 'Metalni podton grafita je nešto posebno. Izgleda drugačije pod različitim svetlom – uvek nov i zanimljiv. Pravi dizajnerski komad.' }
+      { name: 'Sanja M.', city: 'Bar', date: 'Februar 2026', stars: 4, text: 'Metalni podton grafita je nešto posebno. Izgleda drugačije pod različitim svjetlom – uvijek nov i zanimljiv. Pravi dizajnerski komad.' }
     ]},
     82: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Dragan J.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'BW229 Tamni Škriljevac ima hladnu kamenu teksturu koja deluje veoma skupo. Kupatilo uz ovu letvicu izgleda kao visokoklasni hotel.' },
-      { name: 'Katarina S.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Škriljevac tekstura u 3D formatu je kombinacija dva materijala u jednom. Zid deluje kao pravi kamen a montaža je bila trivijalna.' }
+      { name: 'Dragan J.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'BW229 Tamni Škriljevac ima hladnu kamenu teksturu koja djeluje veoma skupo. Kupatilo uz ovu letvicu izgleda kao visokoklasni hotel.' },
+      { name: 'Katarina S.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Škriljevac tekstura u 3D formatu je kombinacija dva materijala u jednom. Zid djeluje kao pravi kamen a montaža je bila trivijalna.' }
     ]},
     83: { total: 12, fiveS: 11, fourS: 1, comments: [
       { name: 'Marko B.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Topli Hrast 003 letvice su klasika koja ne može da pogreši. Topla smeđa uz 3D reljef daje prostoru prirodnu energiju i karakter.' },
@@ -598,19 +598,19 @@ async function renderProductDetail() {
     ]},
     84: { total: 8, fiveS: 7, fourS: 1, comments: [
       { name: 'Zoran P.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: '3D02 Siva Mineralna ima gušći 3D efekat od standardnih letvica. Mineralna tekstura je neobična i upečatljiva – pravi razgovor starter.' },
-      { name: 'Ana B.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Mineralni 3D profil je za one koji žele više od klasičnih letvica. Efekat na fokalnom zidu je fantastičan pod bilo kojim osvetljenjem.' }
+      { name: 'Ana B.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Mineralni 3D profil je za one koji žele više od klasičnih letvica. Efekat na fokalnom zidu je fantastičan pod bilo kojim osvjetljenjem.' }
     ]},
     85: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Miloš T.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: '3D05 Bela Struktura je skulpturalni komad na zidu. Duboke senke između reljefa pod usmerjenim svetlom prave pravi umetnički efekat.' },
+      { name: 'Miloš T.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: '3D05 Bela Struktura je skulpturalni komad na zidu. Duboke senke između reljefa pod usmjerenim svjetlom prave pravi umetnički efekat.' },
       { name: 'Dragana V.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Izrazitiji reljef 3D05 profila je za hrabre – efekat je snažan i dramatičan. Fotke ne mogu da prenesu koliko lepo izgleda uživo.' }
     ]},
     86: { total: 6, fiveS: 5, fourS: 1, comments: [
       { name: 'Nemanja B.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: '3D05 Siva Struktura je urbana i moćna. Isti profil kao bela verzija ali siva nijansa daje industrijskiji i agresivniji karakter zidu.' },
-      { name: 'Tijana S.', city: 'Tivat', date: 'Februar 2026', stars: 4, text: 'Siva sa dubokim reljefom je odlična za moderne kancelarije. Klijenti su odmah primetili promenu – prostor deluje ozbiljno i savremeno.' }
+      { name: 'Tijana S.', city: 'Tivat', date: 'Februar 2026', stars: 4, text: 'Siva sa dubokim reljefom je odlična za moderne kancelarije. Klijenti su odmah primijetili promjenu – prostor djeluje ozbiljno i savremeno.' }
     ]},
     87: { total: 10, fiveS: 10, fourS: 0, comments: [
       { name: 'Luka Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: '3D07X Premium Crna je apsolutni vrhunac kolekcije. Najdublji 3D reljef uz crnu boju je nešto što se mora videti uživo da bi se razumelo.' },
-      { name: 'Kristina N.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Premium crna letvica uz dramatično usmerjeno svetlo pravi efekat koji ostavlja bez daha. Investicija koja se vraća svakog dana.' }
+      { name: 'Kristina N.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Premium crna letvica uz dramatično usmjereno svjetlo pravi efekat koji ostavlja bez daha. Investicija koja se vraća svakog dana.' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
