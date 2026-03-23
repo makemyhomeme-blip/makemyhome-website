@@ -566,7 +566,7 @@ async function renderProductDetail() {
       { name: 'Bojana S.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Hladna siva letvica je neutralna i elegantna. Lako se kombinuje sa svim bojama nameštaja. Jako zadovoljna izborom.' }
     ]},
     73: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Marija V.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'CS013 Teksturisana verzija je jača od obične – naglašeni reljef pravi dublje senke i zid ima pravu trodimenzionalnu dubinu.' },
+      { name: 'Marija V.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'JM001 Teksturisana verzija je jača od obične – naglašeni reljef pravi dublje senke i zid ima pravu trodimenzionalnu dubinu.' },
       { name: 'Stefan Đ.', city: 'Cetinje', date: 'Februar 2026', stars: 4, text: 'Razlika između obične i teksturisane verzije je primetna. Ova teksturisana je za one koji žele maksimalan 3D efekat.' }
     ]},
     74: { total: 9, fiveS: 8, fourS: 1, comments: [
@@ -618,7 +618,7 @@ async function renderProductDetail() {
       { name: 'Dragana V.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Izrazitiji reljef 3D05 profila je za hrabre – efekat je snažan i dramatičan. Fotke ne mogu da prenesu koliko lepo izgleda uživo.' }
     ]},
     86: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Nemanja B.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: '3D05 Siva Struktura je urbana i moćna. Isti profil kao bela verzija ali siva nijansa daje industrijskiji i agresivniji karakter zidu.' },
+      { name: 'Nemanja B.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: '3D09X Siva Struktura je urbana i moćna. Isti profil kao bela verzija ali siva nijansa daje industrijskiji i agresivniji karakter zidu.' },
       { name: 'Tijana S.', city: 'Tivat', date: 'Februar 2026', stars: 4, text: 'Siva sa dubokim reljefom je odlična za moderne kancelarije. Klijenti su odmah primijetili promjenu – prostor djeluje ozbiljno i savremeno.' }
     ]},
     87: { total: 10, fiveS: 10, fourS: 0, comments: [
