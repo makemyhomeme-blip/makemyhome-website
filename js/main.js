@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
       <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
       <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
+      <a href="products.html?category=classic" class="nav-link">Classic Paneli</a>
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     `;
