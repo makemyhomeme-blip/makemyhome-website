@@ -3,7 +3,7 @@
     "id": "bambus-paneli",
     "name": "Bambus Paneli",
     "icon": "fas fa-layer-group",
-    "description": "Dekorativni bambus paneli u 5 stilova",
+    "description": "Dekorativni bambus paneli u 6 stilova",
     "color": "#7a9e6e",
     "subcategories": [
       { "id": "bambus-drveni",    "name": "Drveni",    "icon": "fas fa-tree",   "color": "#8B6914", "description": "Bambus paneli sa drvenom strukturom" },
