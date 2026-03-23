@@ -349,11 +349,18 @@ async function renderProductDetail() {
     }
   }
 
+  // Čitaj širinu letvice iz featuresa (Širina: Xmm), fallback 160mm
+  function getLetvicaWidthCm() {
+    for (const f of (product.features || [])) {
+      const m = f.match(/Širina:\s*(\d+)\s*mm/i);
+      if (m) return parseInt(m[1]) / 10;
+    }
+    return 16; // default 160mm
+  }
   // Compute m² per unit from features string
   function getCoveragePerUnit() {
     if (product.unit === 'm²') return 1;
-    // 3D letvice: 280cm visina × 16cm širina = 0.448 m² po komadu
-    if (product.category === '3d-letvice') return 2.80 * 0.16;
+    if (product.category === '3d-letvice') return 2.80 * (getLetvicaWidthCm() / 100);
     for (const f of (product.features || [])) {
       const m1 = f.match(/\((\d+[.,]\d+)\s*m²/);
       if (m1) return parseFloat(m1[1].replace(',', '.'));
@@ -362,7 +369,7 @@ async function renderProductDetail() {
   }
   // Dimensions info for letvice (shown in calculator)
   const letvicaDims = product.category === '3d-letvice'
-    ? { w: 16, h: 280 }  // cm
+    ? { w: getLetvicaWidthCm(), h: 280 }  // cm
     : null;
   const coveragePerUnit = getCoveragePerUnit();
 
@@ -737,7 +744,7 @@ async function renderProductDetail() {
       ${letvicaDims ? `
       <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
         <i class="fas fa-ruler-horizontal"></i>
-        <span>Svaka letvica: <strong>280cm visina × 16cm širina</strong> → 1 letvica = 0,45 m²</span>
+        <span>Svaka letvica: <strong>280cm visina × ${letvicaDims.w}cm širina</strong> → 1 letvica = ${coveragePerUnit.toFixed(2).replace('.', ',')} m²</span>
       </div>` : ''}
       <div class="pq-calc-inner">
         <div class="pq-calc-field">
@@ -829,7 +836,7 @@ async function renderProductDetail() {
   // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
   const matchingPairs = {
     18: [60], 60: [18],          // CQ006
-    19: [64, 66], 64: [19, 66], 66: [19, 64], // MW010
+    19: [64], 64: [19],          // MW010
     23: [61], 61: [23],          // MW300
     24: [63], 63: [24],          // MW321
     25: [67], 67: [25],          // MW682
