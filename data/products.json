@@ -31,7 +31,8 @@
         "image": "images/products/cq006.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "sku": "CQ006"
     },
     {
         "id": 19,
@@ -65,7 +66,8 @@
         "image": "images/products/mw010.jpg",
         "badge": null,
         "inStock": true,
-        "featured": true
+        "featured": true,
+        "sku": "MW010"
     },
     {
         "id": 20,
@@ -99,7 +101,8 @@
         "image": "images/products/mw301.jpg",
         "badge": null,
         "inStock": true,
-        "featured": false
+        "featured": false,
+        "sku": "MW301"
     },
     {
         "id": 21,
@@ -133,7 +136,8 @@
         "image": "images/products/mw211.jpg",
         "badge": null,
         "inStock": true,
-        "featured": false
+        "featured": false,
+        "sku": "MW211"
     },
     {
         "id": 22,
@@ -169,7 +173,8 @@
         "image": "images/products/mw013.jpg",
         "badge": "Bestseller",
         "inStock": true,
-        "featured": false
+        "featured": false,
+        "sku": "MW013"
     },
     {
         "id": 23,
@@ -203,7 +208,8 @@
         "image": "images/products/mw300.jpg",
         "badge": null,
         "inStock": true,
-        "featured": false
+        "featured": false,
+        "sku": "MW300"
     },
     {
         "id": 24,
@@ -238,7 +244,8 @@
         "image": "images/products/mw321.jpg",
         "badge": null,
         "inStock": true,
-        "featured": false
+        "featured": false,
+        "sku": "MW321"
     },
     {
         "id": 25,
@@ -272,7 +279,8 @@
         "image": "images/products/mw682.jpg",
         "badge": null,
         "inStock": true,
-        "featured": false
+        "featured": false,
+        "sku": "MW682"
     },
     {
         "id": 26,
@@ -306,7 +314,8 @@
         "image": "images/products/mw312.jpg",
         "badge": "Premium",
         "inStock": true,
-        "featured": false
+        "featured": false,
+        "sku": "MW312"
     },
     {
         "id": 37,
@@ -341,7 +350,8 @@
             "Skandinavski",
             "Rustikalni",
             "Minimalistički"
-        ]
+        ],
+        "sku": "BW229"
     },
     {
         "id": 38,
@@ -376,7 +386,8 @@
             "Minimalistički",
             "Skandinavski",
             "Luksuzni"
-        ]
+        ],
+        "sku": "BW400"
     },
     {
         "id": 39,
@@ -411,7 +422,8 @@
             "Industrijski",
             "Minimalistički",
             "Urbani"
-        ]
+        ],
+        "sku": "BW224"
     },
     {
         "id": 40,
@@ -446,7 +458,8 @@
             "Skandinavski",
             "Rustikalni",
             "Mediteranski"
-        ]
+        ],
+        "sku": "BW003"
     },
     {
         "id": 41,
@@ -481,7 +494,8 @@
             "Glamurozni",
             "Moderni",
             "Art Deco"
-        ]
+        ],
+        "sku": "BW220"
     },
     {
         "id": 42,
@@ -516,7 +530,8 @@
             "Minimalistički",
             "Skandinavski",
             "Klasični"
-        ]
+        ],
+        "sku": "BW221"
     },
     {
         "id": 43,
@@ -551,7 +566,8 @@
             "Minimalistički",
             "Obalni",
             "Moderni"
-        ]
+        ],
+        "sku": "BW809"
     },
     {
         "id": 44,
@@ -586,7 +602,8 @@
             "Glamurozni",
             "Moderni",
             "Cozy"
-        ]
+        ],
+        "sku": "BW222"
     },
     {
         "id": 45,
@@ -621,7 +638,8 @@
             "Art Deco",
             "Glamurozni",
             "Klasični"
-        ]
+        ],
+        "sku": "BW008"
     },
     {
         "id": 46,
@@ -656,7 +674,8 @@
             "Luksuzni",
             "Minimalisticki",
             "Klasicni"
-        ]
+        ],
+        "sku": "SW215"
     },
     {
         "id": 47,
@@ -691,7 +710,8 @@
             "Minimalisticki",
             "Industrijski",
             "Skandinavski"
-        ]
+        ],
+        "sku": "SW222"
     },
     {
         "id": 48,
@@ -726,7 +746,8 @@
             "Moderni",
             "Luksuzni",
             "Mediteranski"
-        ]
+        ],
+        "sku": "05512"
     },
     {
         "id": 49,
@@ -761,7 +782,8 @@
             "Moderni",
             "Luksuzni",
             "Mediteranski"
-        ]
+        ],
+        "sku": "05512"
     },
     {
         "id": 50,
@@ -796,7 +818,8 @@
             "Klasicni",
             "Rustikalni",
             "Moderni"
-        ]
+        ],
+        "sku": "SW003"
     },
     {
         "id": 51,
@@ -831,7 +854,8 @@
             "Glamur",
             "Art Deco",
             "Moderni"
-        ]
+        ],
+        "sku": "SW001-B"
     },
     {
         "id": 52,
@@ -866,7 +890,8 @@
             "Glamur",
             "Art Deco",
             "Eklekticni"
-        ]
+        ],
+        "sku": "YL059"
     },
     {
         "id": 53,
@@ -901,7 +926,8 @@
             "Moderni",
             "Minimalisticki",
             "Luksuzni"
-        ]
+        ],
+        "sku": "SW212"
     },
     {
         "id": 54,
@@ -936,7 +962,8 @@
             "Zen",
             "Eklekticni",
             "Moderni"
-        ]
+        ],
+        "sku": "YL056"
     },
     {
         "id": 55,
@@ -971,7 +998,8 @@
             "Luksuzni",
             "Moderni",
             "Skandinavski"
-        ]
+        ],
+        "sku": "SW219"
     },
     {
         "id": 56,
@@ -1006,7 +1034,8 @@
             "Moderni",
             "Loft",
             "Minimalizam"
-        ]
+        ],
+        "sku": "JS23007"
     },
     {
         "id": 57,
@@ -1041,7 +1070,8 @@
             "Moderni",
             "Art Deco",
             "Industrijski"
-        ]
+        ],
+        "sku": "TS002"
     },
     {
         "id": 58,
@@ -1076,7 +1106,8 @@
             "Moderni",
             "Minimalistički",
             "Loft"
-        ]
+        ],
+        "sku": "JS007"
     },
     {
         "id": 59,
@@ -1111,7 +1142,8 @@
             "Industrijski",
             "Art Deco",
             "Eklektični"
-        ]
+        ],
+        "sku": "JS0014"
     },
     {
         "id": 60,
@@ -1188,7 +1220,8 @@
             "Moderni",
             "Skandinavski",
             "Hamptons"
-        ]
+        ],
+        "sku": "I3D160MW300"
     },
     {
         "id": 62,
@@ -1225,7 +1258,8 @@
             "Industrijski",
             "Moderni",
             "Loft"
-        ]
+        ],
+        "sku": "I3D160MW312"
     },
     {
         "id": 63,
@@ -1262,7 +1296,8 @@
             "Mediteranski",
             "Rustikalni",
             "Klasični"
-        ]
+        ],
+        "sku": "I3D160MW321"
     },
     {
         "id": 64,
@@ -1309,7 +1344,7 @@
         "price": "19.99",
         "discount": 0,
         "unit": "kom",
-        "description": "Varijanta MW010 u mat završnici – ista snežna bela, ali s mekšim odsjajom koji smanjuje refleksije i daje zidu topliji karakter. Idealna za prostorije s jakim prirodnim osvjetljenjem gdje sjajna površina može biti previše intenzivna.",
+        "description": "M51-01 je mat varijanta snežne bele – ista čistoća bijele, ali s mekšim odsjajom koji smanjuje refleksije i daje zidu topliji karakter. Idealna za prostorije s jakim prirodnim osvjetljenjem gdje sjajna površina može biti previše intenzivna.",
         "features": [
             "Dimenzije: 280×16cm po letvici",
             "Širina: 160mm",
@@ -1347,7 +1382,7 @@
         "price": "19.99",
         "discount": 0,
         "unit": "kom",
-        "description": "Gloss varijanta MW010 maksimizira refleksiju svjetla – sjajna bela površina vizualno uvećava prostoriju i dodaje joj glamurozni sjaj. 3D profil u sjajnoj obradi stvara dramatičan kontrast sene i svjetlosti, posebno efektan uz usmjerenu rasvjetu.",
+        "description": "MW319 je gloss varijanta snežne bele koja maksimizira refleksiju svjetla – sjajna bela površina vizualno uvećava prostoriju i dodaje joj glamurozni sjaj. 3D profil u sjajnoj obradi stvara dramatičan kontrast sene i svjetlosti, posebno efektan uz usmjerenu rasvjetu.",
         "features": [
             "Dimenzije: 280×15cm po letvici",
             "Širina: 150mm",
@@ -1413,7 +1448,8 @@
             "Klasični",
             "Industrijski",
             "Moderni"
-        ]
+        ],
+        "sku": "I3D160MW682"
     },
     {
         "id": 68,
@@ -1450,7 +1486,8 @@
             "Moderni",
             "Loft",
             "Minimalistički"
-        ]
+        ],
+        "sku": "170SP054"
     },
     {
         "id": 69,
@@ -1487,7 +1524,8 @@
             "Japandi",
             "Prirodni",
             "Zen"
-        ]
+        ],
+        "sku": "I3D170MW018"
     },
     {
         "id": 70,
@@ -1524,7 +1562,8 @@
             "Moderni",
             "Japandi",
             "Hamptons"
-        ]
+        ],
+        "sku": "I3D170SP052"
     },
     {
         "id": 71,
@@ -1561,7 +1600,8 @@
             "Loft",
             "Moderni",
             "Minimalistički"
-        ]
+        ],
+        "sku": "I3D160CS022"
     },
     {
         "id": 72,
@@ -1608,7 +1648,7 @@
         "price": "19.99",
         "discount": 0,
         "unit": "kom",
-        "description": "Teksturisana varijanta CS013 nudi isti hladni sivi ton, ali s naglašenijim reljefom koji daje zidu snažniju taktilnu i vizualnu dimenziju. Savršena kada želite da siva siva bude nešto više od boje – da postane materijal koji se vidi i osjeća.",
+        "description": "JM001 je teksturisana varijanta hladne sive – isti hladni sivi ton, ali s naglašenijim reljefom koji daje zidu snažniju taktilnu i vizualnu dimenziju. Savršena kada želite da siva bude nešto više od boje – da postane materijal koji se vidi i osjeća.",
         "features": [
             "Dimenzije: 280×16cm po letvici",
             "Širina: 160mm",
@@ -1674,7 +1714,8 @@
             "Art Deco",
             "Industrijski",
             "Klasični"
-        ]
+        ],
+        "sku": "I3D160039"
     },
     {
         "id": 75,
@@ -1711,7 +1752,8 @@
             "Skandinavski",
             "Moderni",
             "Rustikalni"
-        ]
+        ],
+        "sku": "I3D160021"
     },
     {
         "id": 76,
@@ -1748,7 +1790,8 @@
             "Japandi",
             "Prirodni",
             "Minimalistički"
-        ]
+        ],
+        "sku": "I3D140021"
     },
     {
         "id": 77,
@@ -1785,7 +1828,8 @@
             "Luksuzni",
             "Art Deco",
             "Mediteranski"
-        ]
+        ],
+        "sku": "I3D160029"
     },
     {
         "id": 78,
@@ -1822,7 +1866,8 @@
             "Japandi",
             "Prirodni",
             "Minimalistički"
-        ]
+        ],
+        "sku": "I3D160016"
     },
     {
         "id": 79,
@@ -1859,7 +1904,8 @@
             "Moderni",
             "Minimalistički",
             "Art Deco"
-        ]
+        ],
+        "sku": "I3D160BW008"
     },
     {
         "id": 80,
@@ -1896,7 +1942,8 @@
             "Moderni",
             "Loft",
             "Minimalistički"
-        ]
+        ],
+        "sku": "I3D160BW224"
     },
     {
         "id": 81,
@@ -1933,7 +1980,8 @@
             "Industrijski",
             "Moderni",
             "Glamurozni"
-        ]
+        ],
+        "sku": "I3D160BW809"
     },
     {
         "id": 82,
@@ -1970,7 +2018,8 @@
             "Skandinavski",
             "Japandi",
             "Zen"
-        ]
+        ],
+        "sku": "I3D160BW229"
     },
     {
         "id": 83,
@@ -2007,7 +2056,8 @@
             "Rustikalni",
             "Skandinavski",
             "Klasični"
-        ]
+        ],
+        "sku": "I3D160003"
     },
     {
         "id": 84,
@@ -2043,7 +2093,8 @@
             "Industrijski",
             "Minimalistički",
             "Arhitektonski"
-        ]
+        ],
+        "sku": "3D02"
     },
     {
         "id": 85,
@@ -2090,7 +2141,7 @@
         "price": "19.99",
         "discount": 0,
         "unit": "kom",
-        "description": "Siva varijanta 3D05 profila – isti izraziti 3D reljef koji u sivoj nijansi dobiva urbaniji, suvremeniji karakter. Tamo gdje bela verzija daje svečanost, siva daje urbanost. Odlična za moderne, industrijski inspirirane prostore.",
+        "description": "3D09X je siva varijanta struktura profila – isti izraziti 3D reljef koji u sivoj nijansi dobiva urbaniji, suvremeniji karakter. Tamo gdje bela verzija daje svečanost, siva daje urbanost. Odlična za moderne, industrijski inspirirane prostore.",
         "features": [
             "Poseban dizajn profila 3D09X – izrazitiji reljef",
             "Boja: siva",
@@ -2156,7 +2207,8 @@
             "Luksuzni",
             "Art Deco",
             "Moderni"
-        ]
+        ],
+        "sku": "3D07X"
     },
     {
         "id": 88,
