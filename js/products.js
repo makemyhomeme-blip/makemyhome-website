@@ -352,16 +352,18 @@ async function renderProductDetail() {
   // Compute m² per unit from features string
   function getCoveragePerUnit() {
     if (product.unit === 'm²') return 1;
+    // 3D letvice: 280cm visina × 16cm širina = 0.448 m² po komadu
+    if (product.category === '3d-letvice') return 2.80 * 0.16;
     for (const f of (product.features || [])) {
-      // Format: "(X.XX m²"
       const m1 = f.match(/\((\d+[.,]\d+)\s*m²/);
       if (m1) return parseFloat(m1[1].replace(',', '.'));
-      // Format: "Dimenzije: 280×16cm" ili "280 x 16 cm"
-      const m2 = f.match(/(\d+)\s*[×x]\s*(\d+)\s*cm/i);
-      if (m2) return (parseFloat(m2[1]) / 100) * (parseFloat(m2[2]) / 100);
     }
     return 3.416;
   }
+  // Dimensions info for letvice (shown in calculator)
+  const letvicaDims = product.category === '3d-letvice'
+    ? { w: 16, h: 280 }  // cm
+    : null;
   const coveragePerUnit = getCoveragePerUnit();
 
   // Reviews data – per product ID, with total count and 2 visible comments
@@ -731,6 +733,11 @@ async function renderProductDetail() {
 
     <!-- Tab: Kalkulator -->
     <div class="pq-panel" id="pq-calc">
+      ${letvicaDims ? `
+      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+        <i class="fas fa-ruler-horizontal"></i>
+        <span>Svaka letvica: <strong>280cm visina × 16cm širina</strong> → 1 letvica = 0,45 m²</span>
+      </div>` : ''}
       <div class="pq-calc-inner">
         <div class="pq-calc-field">
           <label>Širina zida</label>
@@ -751,9 +758,7 @@ async function renderProductDetail() {
           </div>
         </div>
       </div>
-      <div class="pq-calc-result" id="calc-result">
-        Za zid 1 × 2,8 m = <strong>2,8 m²</strong> → trebaš <strong>1 komad</strong>
-      </div>
+      <div class="pq-calc-result" id="calc-result"></div>
     </div>
 
     <div class="product-short-desc">${product.description}</div>
@@ -910,14 +915,40 @@ async function renderProductDetail() {
     const area = w * h;
     const count = Math.ceil(area / coveragePerUnit);
     const res = document.getElementById('calc-result');
-    if (res && area > 0) {
+    if (!res || area <= 0) return;
+
+    const totalPrice = (count * parseFloat(product.price)).toFixed(2).replace('.', ',');
+
+    if (letvicaDims) {
+      // 3D letvice – poseban prikaz po širini i visini
+      const letviceW = letvicaDims.w / 100; // 0.16 m
+      const letviceH = letvicaDims.h / 100; // 2.80 m
+      const perRow   = Math.ceil(w / letviceW);          // po širini zida
+      const perCol   = Math.ceil(h / letviceH);          // po visini (redovi)
+      const total    = perRow * perCol;
+      const pricePerM2 = (parseFloat(product.price) / coveragePerUnit).toFixed(2).replace('.', ',');
+      const totalCost  = (total * parseFloat(product.price)).toFixed(2).replace('.', ',');
+      const label = total === 1 ? 'letvica' : total < 5 ? 'letvice' : 'letvica';
+      res.innerHTML = `
+        <div style="font-size:15px;font-weight:600;">
+          Za zid <strong>${w} × ${h} m</strong>:
+        </div>
+        <div style="margin-top:6px;font-size:14px;">
+          • Horizontalno: <strong>${perRow} letvica</strong> × ${letvicaDims.w}cm = ${(perRow*letviceW).toFixed(2).replace('.',',')} m
+        </div>
+        <div style="font-size:14px;">
+          • Vertikalno: <strong>${perCol} red${perCol>1?'a':''}</strong> × ${letvicaDims.h}cm = ${(perCol*letviceH).toFixed(2).replace('.',',')} m
+        </div>
+        <div style="margin-top:8px;padding:8px 12px;background:rgba(201,168,108,0.15);border-radius:8px;font-size:15px;">
+          Ukupno: <strong style="font-size:18px;">${total} ${label}</strong>
+          <span style="color:#888;font-size:13px;margin-left:6px;">(~${totalCost} €)</span>
+        </div>
+        <div style="margin-top:6px;font-size:12px;color:#888;">
+          Cijena po m²: ~${pricePerM2} €/m²
+        </div>`;
+    } else {
       const label = product.unit === 'm²' ? 'm²' : count === 1 ? 'komad' : 'komada';
-      const pricePerM2 = (product.price / coveragePerUnit).toFixed(2).replace('.', ',');
-      const totalPrice = (count * product.price).toFixed(2).replace('.', ',');
-      const m2Info = product.unit !== 'm²'
-        ? `<div style="margin-top:6px;font-size:13px;color:#888;">1 kom = ${coveragePerUnit.toFixed(2).replace('.',',')} m² · Cijena po m²: <strong style="color:#c9a86c;">~${pricePerM2} €/m²</strong></div>`
-        : '';
-      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${count} ${label}</strong> (~${totalPrice} €)${m2Info}`;
+      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${count} ${label}</strong> (~${totalPrice} €)`;
     }
   };
 
@@ -935,6 +966,9 @@ async function renderProductDetail() {
     const arrow = b.previousElementSibling.querySelector('.spec-arrow');
     if (arrow) arrow.style.transform = 'rotate(180deg)';
   });
+
+  // Immediately compute initial calculator result
+  calcPanels();
 
   // Related products
   const related = allProducts.filter(p => p.category === product.category && p.id !== id).slice(0, 4);
