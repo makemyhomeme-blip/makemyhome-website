@@ -829,7 +829,7 @@ async function renderProductDetail() {
   // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
   const matchingPairs = {
     18: [60], 60: [18],          // CQ006
-    19: [64, 65, 66], 64: [19], 65: [64, 66], 66: [64, 65], // MW010
+    19: [64, 66], 64: [19, 66], 66: [19, 64], // MW010
     23: [61], 61: [23],          // MW300
     24: [63], 63: [24],          // MW321
     25: [67], 67: [25],          // MW682
