@@ -920,32 +920,10 @@ async function renderProductDetail() {
     const totalPrice = (count * parseFloat(product.price)).toFixed(2).replace('.', ',');
 
     if (letvicaDims) {
-      // 3D letvice – poseban prikaz po širini i visini
-      const letviceW = letvicaDims.w / 100; // 0.16 m
-      const letviceH = letvicaDims.h / 100; // 2.80 m
-      const perRow   = Math.ceil(w / letviceW);          // po širini zida
-      const perCol   = Math.ceil(h / letviceH);          // po visini (redovi)
-      const total    = perRow * perCol;
-      const pricePerM2 = (parseFloat(product.price) / coveragePerUnit).toFixed(2).replace('.', ',');
-      const totalCost  = (total * parseFloat(product.price)).toFixed(2).replace('.', ',');
+      const total = Math.ceil(area / coveragePerUnit);
+      const totalCost = (total * parseFloat(product.price)).toFixed(2).replace('.', ',');
       const label = total === 1 ? 'letvica' : total < 5 ? 'letvice' : 'letvica';
-      res.innerHTML = `
-        <div style="font-size:15px;font-weight:600;">
-          Za zid <strong>${w} × ${h} m</strong>:
-        </div>
-        <div style="margin-top:6px;font-size:14px;">
-          • Horizontalno: <strong>${perRow} letvica</strong> × ${letvicaDims.w}cm = ${(perRow*letviceW).toFixed(2).replace('.',',')} m
-        </div>
-        <div style="font-size:14px;">
-          • Vertikalno: <strong>${perCol} red${perCol>1?'a':''}</strong> × ${letvicaDims.h}cm = ${(perCol*letviceH).toFixed(2).replace('.',',')} m
-        </div>
-        <div style="margin-top:8px;padding:8px 12px;background:rgba(201,168,108,0.15);border-radius:8px;font-size:15px;">
-          Ukupno: <strong style="font-size:18px;">${total} ${label}</strong>
-          <span style="color:#888;font-size:13px;margin-left:6px;">(~${totalCost} €)</span>
-        </div>
-        <div style="margin-top:6px;font-size:12px;color:#888;">
-          Cijena po m²: ~${pricePerM2} €/m²
-        </div>`;
+      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${total} ${label}</strong> (~${totalCost} €)`;
     } else {
       const label = product.unit === 'm²' ? 'm²' : count === 1 ? 'komad' : 'komada';
       res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${count} ${label}</strong> (~${totalPrice} €)`;
