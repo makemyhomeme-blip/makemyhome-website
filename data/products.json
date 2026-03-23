@@ -1303,7 +1303,7 @@
     },
     {
         "id": 65,
-        "name": "3D Letvica MW010 – Snežna Bela (Mat)",
+        "name": "3D Letvica 170 M51-01 – Snežna Bela (Mat)",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1315,10 +1315,13 @@
             "Boja: snežna bela mat (MW010)",
             "3D reljefna površina – diskretna forma",
             "Materijal: PVC plastika (mat)",
-            "Montaža: lijepi se silikonom, siječe se skalpelom",
-            "Pogodan za zidove, plafone i pregradne panele",
+            "Montaža: lijepi se silikonom",
+            "siječe se skalpelom",
+            "Pogodan za zidove",
+            "plafone i pregradne panele",
             "Šifra: I3D160MW010",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0",
+            "45 m²)"
         ],
         "image": "images\/products\/product-1774011113-813.jpg",
         "badge": null,
@@ -1336,11 +1339,12 @@
             "Skandinavski",
             "Moderni",
             "Japandi"
-        ]
+        ],
+        "sku": null
     },
     {
         "id": 66,
-        "name": "3D Letvica MW010 – Snežna Bela (Gloss)",
+        "name": "3D Letvica MW319 – Snežna Bela (Gloss)",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1349,13 +1353,15 @@
         "features": [
             "Dimenzije: 280×16cm po letvici",
             "Širina: 160mm",
-            "Boja: snežna bela gloss (MW010)",
+            "Boja: snežna bela gloss (MW319)",
             "3D reljefna površina – dramatična igra sjaja i sene",
             "Materijal: PVC plastika (gloss)",
-            "Montaža: lijepi se silikonom, siječe se skalpelom",
+            "Montaža: lijepi se silikonom",
+            "siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160MW010",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0",
+            "45 m²)"
         ],
         "image": "images\/products\/product-1774011127-211.jpg",
         "badge": null,
@@ -1373,7 +1379,8 @@
             "Moderni",
             "Art Deco",
             "Luksuzni"
-        ]
+        ],
+        "sku": "I3D150MW319"
     },
     {
         "id": 67,
@@ -1599,7 +1606,7 @@
     },
     {
         "id": 73,
-        "name": "3D Letvica CS013 – Hladno Siva (Teksturisana)",
+        "name": "3D Letvica JM001 – Hladno Siva (Teksturisana)",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1608,13 +1615,16 @@
         "features": [
             "Dimenzije: 280×16cm po letvici",
             "Širina: 160mm",
-            "Boja: hladna siva, naglašena tekstura (CS013)",
+            "Boja: hladna siva",
+            "naglašena tekstura (CS013)",
             "3D reljefna površina – pojačani reljef za dodatnu dubinu",
             "Materijal: PVC plastika (teksturisana)",
-            "Montaža: lijepi se silikonom, siječe se skalpelom",
+            "Montaža: lijepi se silikonom",
+            "siječe se skalpelom",
             "Pogodan za fokalne zidove i pregradne panele",
             "Šifra: I3D160CS013",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0",
+            "45 m²)"
         ],
         "image": "images\/products\/product-1774011278-208.jpg",
         "badge": null,
@@ -1632,7 +1642,8 @@
             "Loft",
             "Moderni",
             "Brutalistički"
-        ]
+        ],
+        "sku": "I3D160JM001"
     },
     {
         "id": 74,
@@ -2079,22 +2090,26 @@
     },
     {
         "id": 86,
-        "name": "3D Letvica 3D05 – Siva Struktura",
+        "name": "3D Letvica 3D09X– Siva Struktura",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
         "unit": "kom",
         "description": "Siva varijanta 3D05 profila – isti izraziti 3D reljef koji u sivoj nijansi dobiva urbaniji, suvremeniji karakter. Tamo gdje bela verzija daje svečanost, siva daje urbanost. Odlična za moderne, industrijski inspirirane prostore.",
         "features": [
-            "Poseban dizajn profila 3D05 – izrazitiji reljef",
+            "Poseban dizajn profila 3D09X– izrazitiji reljef",
             "Boja: siva",
-            "Skulpturalni 3D efekt – urbani, moderni karakter",
+            "Skulpturalni 3D efekt – urbani",
+            "moderni karakter",
             "Materijal: PVC plastika",
-            "Montaža: lijepi se silikonom, siječe se skalpelom",
-            "Idealan za usmjerenu rasvjetu (spot, LED traka)",
+            "Montaža: lijepi se silikonom",
+            "siječe se skalpelom",
+            "Idealan za usmjerenu rasvjetu (spot",
+            "LED traka)",
             "Pogodan za fokalne zidove",
             "Šifra: 3D05",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0",
+            "45 m²)"
         ],
         "image": "images\/products\/product-1774011543-890.jpg",
         "badge": null,
@@ -2112,7 +2127,8 @@
             "Moderni",
             "Loft",
             "Minimalistički"
-        ]
+        ],
+        "sku": "3D09X"
     },
     {
         "id": 87,
