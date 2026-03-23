@@ -624,6 +624,54 @@ async function renderProductDetail() {
     87: { total: 10, fiveS: 10, fourS: 0, comments: [
       { name: 'Luka Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: '3D07X Premium Crna je apsolutni vrhunac kolekcije. Najdublji 3D reljef uz crnu boju je nešto što se mora videti uživo da bi se razumelo.' },
       { name: 'Kristina N.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Premium crna letvica uz dramatično usmjereno svjetlo pravi efekat koji ostavlja bez daha. Investicija koja se vraća svakog dana.' }
+    ]},
+
+    // Classic Panel CS029 – Terrazzo
+    103: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Valentina R.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'CS029 Terrazzo je pravi razgovor-startač. Svaki gost koji uđe u kupaonicu odmah pita odakle mi panel – niko ne vjeruje da se lijepi na zid. Fragmenti plave i smeđe na bijeloj osnovi izgledaju kao skupi kamen.' },
+      { name: 'Đorđe F.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Postavio u hodniku od ulaza – odmah daje karakter cijelom stanu. Terrazzo je trend koji nikad ne zastarijeva, a ovaj panel košta višestruko manje od pravog kamena. Odlična investicija.' }
+    ]},
+
+    // Classic Panel CS013 – Bijela
+    104: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Jelena M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Imala sam malu spavaću sobu koja je izgledala tamno i skučeno. CS013 bijela na jednom zidu je potpuno promijenila atmosferu – soba je odjednom svjetlija i veća, a nikakve boje nisam trebala.' },
+      { name: 'Nikola B.', city: 'Herceg Novi', date: 'Februar 2026', stars: 4, text: 'Čista bijela, bez žutih tonova. Idealna za skandinavski interijer koji sam radio. Uz prirodno drvo i crne detalje – savršena kombinacija. Jedino bih volio malo veće formate.' }
+    ]},
+
+    // Classic Panel CS014 – Bež
+    105: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Sanja P.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Nisam mogla da se odlučim između bijele i sive – CS014 bež je tačno to između. Uz moj ratan nameštaj i biljke izgleda kao da je dizajner radio sobu. Topla, neutralna, savršena.' },
+      { name: 'Bojan K.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Dnevna soba uz tamno drvo i bež panel izgleda kao iz kataloga. Boja ne zamarajući okom, uvijek izgleda uredno i toplo. Preporučio bih svima koji ne znaju koju boju odabrati – ovo je siguran izbor.' }
+    ]},
+
+    // Classic Panel CS022 – Crna
+    106: { total: 13, fiveS: 12, fourS: 1, comments: [
+      { name: 'Miloš D.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio CS022 crnu iza kreveta i spavaća soba je postala nešto drugo – kao suite u boutique hotelu. Uz zlatne lampe i bijelo posteljina kontrast je nevjerovatan. Jedina žalost što nisam ranije naručio.' },
+      { name: 'Tamara J.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Kućni bioskop s crnim zidom je sada pravi kino-doživljaj. Panel je mat, nema refleksija od projektora, a tekstura je elegantna. Svi koji dođu ostanu impresionisani sobom.' }
+    ]},
+
+    // Kožni Panel PW001 – Crvena
+    107: { total: 10, fiveS: 9, fourS: 1, comments: [
+      { name: 'Ivana Č.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'PW001 crvena koža u dnevnoj sobi je nešto što morate vidjeti uživo. Na slikama izgleda smjelo, ali kad ga postaviš – prostorija dobija dušu. Uz crne detalje i bijele zidove kontrast je savršen.' },
+      { name: 'Ognjen M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Postavio u restoranu iza šanka – reakcije gostiju su odmah bile pozitivne. Crvena koža daje toplinu i luksuz koji jeftinim materijalima nije moguće postići. Tekstura kože na dodir je odlična.' }
+    ]},
+
+    // Kožni Panel PW007 – Narandžasta
+    108: { total: 7, fiveS: 6, fourS: 1, comments: [
+      { name: 'Lena V.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'PW007 narandžasta u kreativnom uredu je tačno ono što nam je trebalo – boja koja budi energiju i inspiraciju. Kolege su odmah promijenile stav prema prostoru. Smiješno koliko boja može da promijeni raspoloženje.' },
+      { name: 'Dejan T.', city: 'Bar', date: 'Februar 2026', stars: 4, text: 'Smjela boja, ne za svakoga – ali za bar koji sam opremao bila je idealna. Narandžasta koža uz crne stolice i drvene površine izgleda retro-chic. Gosti je fotografišu i stavljaju na Instagram.' }
+    ]},
+
+    // Kožni Panel PW002 – Antracit
+    109: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Stefan L.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'PW002 antracit je ta sofisticirana tamna nijansa koja ne viče nego šapuće luksuz. Za razliku od obične crne – u određenom kutu svjetlosti vidite suptilnu granulaciju kože. Spavaća soba izgleda kao iz luksuznog hotela.' },
+      { name: 'Milica R.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Kućni ured s antracit kožnim panelom je prestao da izgleda kao obična soba – sada je to prostor u koji volim da uđem. Tamna boja fokusira pažnju i smanjuje distrakcije. Kombinacija s drvenim stolom je savršena.' }
+    ]},
+
+    // Kožni Panel PW005 – Biserno Siva
+    110: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Maja S.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'PW005 biserno siva je ta nijansa o kojoj dizajneri pišu u knjigama – hladna, elegantna, savremena. Uz zlatne okvire i bijeli nameštaj u spavaćoj sobi izgleda kao visoka moda u enterijeru. Fino zrno kože daje živost materijalu.' },
+      { name: 'Petar A.', city: 'Podgorica', date: 'Mart 2026', stars: 4, text: 'Postavio u recepciji firme – klijenti primijete odmah. Biserno siva koža komunicira profesionalnost i stil bez ikakvog pretjerivanja. Lako se čisti, izgleda uvijek uredno. Jedina zamjerka – volio bih i tamnije nijanse iste teksture.' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
