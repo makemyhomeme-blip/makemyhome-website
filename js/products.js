@@ -829,7 +829,7 @@ async function renderProductDetail() {
   // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
   const matchingPairs = {
     18: [60], 60: [18],          // CQ006
-    19: [64, 65, 66], 64: [19], 65: [19], 66: [19], // MW010
+    19: [64, 65, 66], 64: [19], 65: [64, 66], 66: [64, 65], // MW010
     23: [61], 61: [23],          // MW300
     24: [63], 63: [24],          // MW321
     25: [67], 67: [25],          // MW682
@@ -845,12 +845,17 @@ async function renderProductDetail() {
     const partners = partnerIds.map(pid => allProducts.find(p => p.id === pid)).filter(Boolean);
     if (partners.length > 0) {
       const isPanel = partners[0].category === '3d-letvice';
-      const sectionTitle = isPanel
-        ? '<i class="fas fa-link"></i> Ove 3D letvice postoje u istoj nijansi'
-        : '<i class="fas fa-link"></i> Ovaj panel postoji u istoj nijansi';
-      const sectionSubtitle = isPanel
-        ? 'Kombiniraj panel sa 3D letvicama iste boje za savršen enterijer'
-        : 'Kombiniraj 3D letvice sa panelom iste boje za savršen enterijer';
+      const letvicaVariants = isPanel && product.category === '3d-letvice';
+      const sectionTitle = letvicaVariants
+        ? '<i class="fas fa-link"></i> Ostale varijante iste nijanse'
+        : isPanel
+          ? '<i class="fas fa-link"></i> Ove 3D letvice postoje u istoj nijansi'
+          : '<i class="fas fa-link"></i> Ovaj panel postoji u istoj nijansi';
+      const sectionSubtitle = letvicaVariants
+        ? 'Ista nijansa dostupna je i u ovim završnicama'
+        : isPanel
+          ? 'Kombiniraj panel sa 3D letvicama iste boje za savršen enterijer'
+          : 'Kombiniraj 3D letvice sa panelom iste boje za savršen enterijer';
 
       const partnerCards = partners.map(p => `
         <a href="product.html?id=${p.id}" class="pair-card">
