@@ -694,6 +694,7 @@ async function renderProductDetail() {
   info.innerHTML = `
     <div class="product-category">${categoryName}</div>
     <h1 class="product-name">${product.name}</h1>
+    ${product.sku ? `<div style="font-size:12px;color:#999;font-family:monospace;margin-top:-6px;margin-bottom:4px;">Šifra: ${product.sku}</div>` : ''}
     <div class="product-rating">
       <span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
       <span class="rating-count">(4.8) · Odlično</span>

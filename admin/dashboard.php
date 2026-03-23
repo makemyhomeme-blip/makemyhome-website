@@ -402,7 +402,12 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                         onerror="this.parentElement.innerHTML='<i class=\'fas fa-image\'></i>'">
                     </div>
                   </td>
-                  <td><strong><?= htmlspecialchars($p['name']) ?></strong></td>
+                  <td>
+                    <strong><?= htmlspecialchars($p['name']) ?></strong>
+                    <?php if (!empty($p['sku'])): ?>
+                      <div style="font-size:11px;color:#888;margin-top:2px;font-family:monospace;"><?= htmlspecialchars($p['sku']) ?></div>
+                    <?php endif; ?>
+                  </td>
                   <td><?= htmlspecialchars(ucfirst(str_replace('-', ' ', $p['category']))) ?></td>
                   <td>
                     <?php if (!empty($p['discount']) && $p['discount'] > 0): ?>
@@ -518,6 +523,10 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   </div>
                   <img id="add-img-preview" style="width:80px;height:80px;object-fit:cover;border-radius:8px;display:none;border:2px solid #c9a86c;">
                 </div>
+              </div>
+              <div class="form-group">
+                <label>Šifra proizvoda (SKU)</label>
+                <input type="text" name="sku" placeholder="npr. I3D160CQ006" style="font-family:monospace;">
               </div>
               <div class="form-group">
                 <label>Badge/Oznaka (opciono)</label>
@@ -676,6 +685,10 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           <input type="hidden" name="image" id="edit-image">
         </div>
         <div class="form-group">
+          <label>Šifra proizvoda (SKU)</label>
+          <input type="text" name="sku" id="edit-sku" placeholder="npr. I3D160CQ006" style="font-family:monospace;">
+        </div>
+        <div class="form-group">
           <label>Badge</label>
           <input type="text" name="badge" id="edit-badge">
         </div>
@@ -733,6 +746,7 @@ function editProduct(id) {
   document.getElementById('edit-description').value = p.description || '';
   document.getElementById('edit-features').value = (p.features || []).join(', ');
   document.getElementById('edit-image').value = p.image || '';
+  document.getElementById('edit-sku').value = p.sku || '';
   document.getElementById('edit-badge').value = p.badge || '';
   document.getElementById('edit-inStock').checked = p.inStock;
   document.getElementById('edit-featured').checked = p.featured;

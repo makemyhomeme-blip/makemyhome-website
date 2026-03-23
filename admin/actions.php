@@ -62,6 +62,7 @@ switch ($action) {
         $uploadedImg = handleImageUpload('image_upload');
         $image       = $uploadedImg ?: trim($_POST['image'] ?? '');
         $badge       = trim($_POST['badge'] ?? '') ?: null;
+        $sku         = trim($_POST['sku'] ?? '') ?: null;
         $inStock     = !empty($_POST['inStock']);
         $featured    = !empty($_POST['featured']);
 
@@ -84,6 +85,7 @@ switch ($action) {
             'features'    => $features,
             'image'       => $image,
             'badge'       => $badge ? htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') : null,
+            'sku'         => $sku ? strtoupper(htmlspecialchars($sku, ENT_QUOTES, 'UTF-8')) : null,
             'inStock'     => $inStock,
             'featured'    => $featured
         ];
@@ -105,6 +107,7 @@ switch ($action) {
         $uploadedImg = handleImageUpload('image_upload');
         $image       = $uploadedImg ?: trim($_POST['image'] ?? '');
         $badge       = trim($_POST['badge'] ?? '') ?: null;
+        $sku         = trim($_POST['sku'] ?? '') ?: null;
         $inStock     = !empty($_POST['inStock']);
         $featured    = !empty($_POST['featured']);
 
@@ -127,6 +130,7 @@ switch ($action) {
                 $p['features']    = $features;
                 if (!empty($image)) $p['image'] = $image; // zadržati staru ako nema novog
                 $p['badge']       = $badge ? htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') : null;
+                $p['sku']         = $sku ? strtoupper(htmlspecialchars($sku, ENT_QUOTES, 'UTF-8')) : ($p['sku'] ?? null);
                 $p['inStock']     = $inStock;
                 $p['featured']    = $featured;
                 break;
