@@ -353,8 +353,12 @@ async function renderProductDetail() {
   function getCoveragePerUnit() {
     if (product.unit === 'm²') return 1;
     for (const f of (product.features || [])) {
-      const m = f.match(/\((\d+[.,]\d+)\s*m²/);
-      if (m) return parseFloat(m[1].replace(',', '.'));
+      // Format: "(X.XX m²"
+      const m1 = f.match(/\((\d+[.,]\d+)\s*m²/);
+      if (m1) return parseFloat(m1[1].replace(',', '.'));
+      // Format: "Dimenzije: 280×16cm" ili "280 x 16 cm"
+      const m2 = f.match(/(\d+)\s*[×x]\s*(\d+)\s*cm/i);
+      if (m2) return (parseFloat(m2[1]) / 100) * (parseFloat(m2[2]) / 100);
     }
     return 3.416;
   }
@@ -908,7 +912,12 @@ async function renderProductDetail() {
     const res = document.getElementById('calc-result');
     if (res && area > 0) {
       const label = product.unit === 'm²' ? 'm²' : count === 1 ? 'komad' : 'komada';
-      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${count} ${label}</strong>`;
+      const pricePerM2 = (product.price / coveragePerUnit).toFixed(2).replace('.', ',');
+      const totalPrice = (count * product.price).toFixed(2).replace('.', ',');
+      const m2Info = product.unit !== 'm²'
+        ? `<div style="margin-top:6px;font-size:13px;color:#888;">1 kom = ${coveragePerUnit.toFixed(2).replace('.',',')} m² · Cijena po m²: <strong style="color:#c9a86c;">~${pricePerM2} €/m²</strong></div>`
+        : '';
+      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${count} ${label}</strong> (~${totalPrice} €)${m2Info}`;
     }
   };
 
