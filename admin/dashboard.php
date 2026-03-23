@@ -480,9 +480,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                     <option value="bambus-mermerni">Bambus › Mermerni</option>
                     <option value="bambus-metalni">Bambus › Metalni</option>
                     <option value="bambus-kozni">Bambus › Kožni</option>
-                  </optgroup>
-                  <optgroup label="── Classic Paneli ──">
-                    <option value="classic">Classic Paneli</option>
+                    <option value="classic">Bambus › Classic</option>
                   </optgroup>
                   <optgroup label="── Ostalo ──">
                     <option value="akusticni-paneli">Akustični Paneli</option>
@@ -642,9 +640,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <option value="bambus-mermerni">Bambus › Mermerni</option>
               <option value="bambus-metalni">Bambus › Metalni</option>
               <option value="bambus-kozni">Bambus › Kožni</option>
-            </optgroup>
-            <optgroup label="── Classic Paneli ──">
-              <option value="classic">Classic Paneli</option>
+              <option value="classic">Bambus › Classic</option>
             </optgroup>
             <optgroup label="── Ostalo ──">
               <option value="akusticni-paneli">Akustični Paneli</option>
