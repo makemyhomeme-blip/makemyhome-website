@@ -534,11 +534,11 @@ async function renderProductDetail() {
       { name: 'Vuk J.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Postavio u spavaćoj sobi uz LED traku i efekat je kao u luksuznom hotelu. Montaža brza, PVC materijal lagan i praktičan.' }
     ]},
     65: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Dragana K.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Mat verzija MW010 je diskretna i elegantna. Nema refleksije svjetlosti što je savršeno za dnevne sobe sa puno prirodnog svetla.' },
+      { name: 'Dragana K.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Mat verzija M51-01 je diskretna i elegantna. Nema refleksije svjetlosti što je savršeno za dnevne sobe sa puno prirodnog svetla.' },
       { name: 'Bojan R.', city: 'Cetinje', date: 'Januar 2026', stars: 5, text: 'Mat bela letvica je sofisticiranija od gloss verzije. Prijatna za oči, moderna i čista. Odlična za minimalistički enterijer.' }
     ]},
     66: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Ivana S.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Gloss MW010 letvice su spektakularne pod spotovima – sjaj bele u kombinaciji sa 3D senkom pravi dramatičan efekat koji oduševljava.' },
+      { name: 'Ivana S.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Gloss MW319 letvice su spektakularne pod spotovima – sjaj bele u kombinaciji sa 3D senkom pravi dramatičan efekat koji oduševljava.' },
       { name: 'Luka M.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Sjajne letvice menjaju karakter prostora zavisno od izvora svetla. Dnevni prostor je potpuno drugačiji noću i danju.' }
     ]},
     67: { total: 11, fiveS: 10, fourS: 1, comments: [
