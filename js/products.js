@@ -626,6 +626,40 @@ async function renderProductDetail() {
       { name: 'Kristina N.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Premium crna letvica uz dramatično usmjereno svjetlo pravi efekat koji ostavlja bez daha. Investicija koja se vraća svakog dana.' }
     ]},
 
+    // Aluminijum lajsne
+    96: { total: 7, fiveS: 6, fourS: 1, comments: [
+      { name: 'Miloš K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Crna srednja lajsna između panela je detalj koji sve mijenja. Bez nje paneli izgledaju nedovršeno – sa njom zid dobija profesionalnu završnicu kakvu viđaš samo kod arhitekata.' },
+      { name: 'Ana R.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Linija između panela odvaja i definiše svaki dio zida. Prostor bez nje nikada ne bi izgledao ovako čisto i dorađeno. Absolutno neophodna.' }
+    ]},
+    95: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Stefan B.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Početna lajsna daje zidu savršen ulaz – bez nje ivica panela je sirova i nedovršena. Sa njom sve izgleda kao da je rađeno po mjeri. Enterijer je znatno uljepšan.' },
+      { name: 'Jelena M.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Postavljam je i na početak i na kraj obloge. Crna boja idealno prati tamne panele koje sam odabrala. Bez nje prostor zaista nije isti.' }
+    ]},
+    97: { total: 6, fiveS: 5, fourS: 1, comments: [
+      { name: 'Nikola V.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Ugaona lajsna rješava problem spoljnog ugla savršeno. Crna linija na uglu spaja oba zida u cjelinu – efekat je dramatičan i moderan. Prostor bez nje bio bi daleko siromašniji.' },
+      { name: 'Dragana P.', city: 'Bar', date: 'Mart 2026', stars: 4, text: 'Ugao između dva oblozena zida je uvijek bio problem dok nisam otkrila ovu lajsnu. Čista crna linija koja razdvaja uglove i daje im arhitektonski karakter.' }
+    ]},
+    98: { total: 7, fiveS: 6, fourS: 1, comments: [
+      { name: 'Lazar T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'LED lajsna između panela je transformisala čitav zid. Svjetlost se pojavljuje kao tanka sjajna linija i prostor dobija ambijent koji ne možeš dobiti drugačije. Nevjerovatno uljepšava.' },
+      { name: 'Marina Đ.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Ugradila LED traku u crni kanal i rezultat je spektakularan. Zid živi noću – suptilna svjetlost između panela pravi dubinu i toplinu koju niko nije očekivao.' }
+    ]},
+    99: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Vesna K.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Bronzana srednja lajsna između panela dodaje toplinu i luksuz koji crna ne može dati. Svaka linija na zidu govori o pažnji prema detaljima. Prostor bez nje nije isti.' },
+      { name: 'Goran S.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Bronzana boja savršeno prati tople tonove drvenih panela. Linija koja odvaja svaki panel daje zidu ritmičnost i dorađenost. Znatno uljepšava enterijer.' }
+    ]},
+    100: { total: 7, fiveS: 6, fourS: 1, comments: [
+      { name: 'Ivana R.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Bronzana završna lajsna je luksuzni detalj koji zatvara oblogu. Bez nje ivica bi bila sirova – sa njom sve izgleda kao premium enterijer iz kataloga.' },
+      { name: 'Bojan N.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Koristim je i za početak i za kraj. Topla bronzana nijansa uz bež panele je kombinacija koja diže enterijer na drugi nivo. Neophodna završnica.' }
+    ]},
+    101: { total: 6, fiveS: 5, fourS: 1, comments: [
+      { name: 'Predrag L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Bronzana ugaona lajsna na spoljnom uglu je detalj koji oduševljava. Topla bronzana linija spaja dva zida elegantno – efekat je sofisticiran i znatno uljepšava prostor.' },
+      { name: 'Tijana B.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Ugao sa bronzanom lajsnom izgleda kao da je dizajner radio na projektu. Bez nje to bi bio samo sirov spoj dva zida – sa njom je arhitektonski detalj.' }
+    ]},
+    102: { total: 7, fiveS: 7, fourS: 0, comments: [
+      { name: 'Aleksandar M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bronzana LED lajsna je vrhunac enterijera. Topla bronzana sa toplim LED svjetlom stvara ambijentalnost kakvu nisi mogao ni zamisliti. Zid živi i bez ijednog spotlighta.' },
+      { name: 'Sandra V.', city: 'Kotor', date: 'Januar 2026', stars: 5, text: 'Kombinacija bronzanog kanala i tople bijele LED trake između panela je magična. Svaki večer kada se upali svjetlo, soba se pretvori u nešto posebno. Znatno uljepšava prostor.' }
+    ]},
+
     // Classic Panel CS029 – Terrazzo
     103: { total: 11, fiveS: 10, fourS: 1, comments: [
       { name: 'Valentina R.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Fragmenti su savršeni – ima ih svake boje, od modrikasto-sive do ciglaste smeđe, krema i bež. Svaki panel je malo drugačiji, baš kao pravi kamen. Nisam mogla vjerovati da je plastika dok nisam primila – površina glatka i polirana kao pravi mozaik.' },
@@ -774,7 +808,8 @@ async function renderProductDetail() {
         <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
       </div>
     </div>
-    <div id="pq-calc" style="display:none;">` : `
+    <div id="pq-calc" style="display:none;"><div class="pq-calc-result" id="calc-result"></div></div>
+    ` : `
     <!-- Tab switcher -->
     <div class="pq-tabs">
       <button class="pq-tab active" onclick="switchPqTab('calc', this)">
