@@ -160,10 +160,11 @@ switch ($action) {
             if ($p['id'] === $id) { $currentlyFeatured = (bool)($p['featured'] ?? false); break; }
         }
         if (!$currentlyFeatured) {
-            // Adding – check limit
             $featuredCount = count(array_filter($products, fn($p) => $p['featured'] ?? false));
             if ($featuredCount >= 6) {
-                redirect('', 'Maksimalno 6 istaknuta proizvoda. Ukloni jedan pa pokušaj ponovo.', 'products');
+                header('Content-Type: application/json');
+                echo json_encode(['ok' => false, 'error' => 'Maksimalno 6 istaknuta proizvoda. Ukloni jedan pa pokušaj ponovo.']);
+                exit;
             }
         }
         foreach ($products as &$p) {
@@ -171,8 +172,10 @@ switch ($action) {
         }
         unset($p);
         saveProducts($products, $productsFile);
-        redirect('', '', 'products');
-        break;
+        $newCount = count(array_filter($products, fn($p) => $p['featured'] ?? false));
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => true, 'featured' => !$currentlyFeatured, 'count' => $newCount]);
+        exit;
 
     case 'set_badge':
         $id = (int)($_POST['id'] ?? 0);
@@ -185,8 +188,9 @@ switch ($action) {
         }
         unset($p);
         saveProducts($products, $productsFile);
-        redirect('', '', 'products');
-        break;
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => true, 'badge' => $badge]);
+        exit;
 
     default:
         redirect('', 'Nepoznata akcija.');

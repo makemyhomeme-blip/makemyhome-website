@@ -387,12 +387,10 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             <span style="font-size:13px;color:var(--gray);">
               <i class="fas fa-star" style="color:#c9a86c;"></i>
               Istaknuti na početnoj:
-              <strong style="color:<?= $featuredCount >= 6 ? 'var(--danger)' : 'var(--dark)' ?>;">
+              <strong id="featured-counter" style="color:<?= $featuredCount >= 6 ? 'var(--danger)' : 'var(--dark)' ?>;">
                 <?= $featuredCount ?>/6
               </strong>
-              <?php if ($featuredCount >= 6): ?>
-                <span style="font-size:11px;color:var(--danger);margin-left:4px;">— maksimum dostignut</span>
-              <?php endif; ?>
+              <span id="featured-max-msg" style="font-size:11px;color:var(--danger);margin-left:4px;<?= $featuredCount >= 6 ? '' : 'display:none;' ?>">— maksimum dostignut</span>
             </span>
           </div>
           <div class="table-wrap">
@@ -440,36 +438,31 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                     <?php endif; ?>
                   </td>
                   <td style="text-align:center;">
-                    <form method="POST" action="actions.php" style="margin:0;display:inline;">
-                      <input type="hidden" name="action" value="toggle_featured">
-                      <input type="hidden" name="id" value="<?= $p['id'] ?>">
-                      <button type="submit" title="<?= $isFeatured ? 'Ukloni iz istaknuti' : 'Dodaj u istaknuti' ?>"
-                        style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:8px;
-                               font-size:20px;line-height:1;
-                               <?= $isFeatured ? 'color:#c9a86c;' : 'color:#ccc;' ?>
-                               transition:all 0.2s;"
-                        onmouseover="this.style.opacity='0.7'"
-                        onmouseout="this.style.opacity='1'">
-                        <i class="fas fa-star"></i>
-                      </button>
-                    </form>
+                    <button
+                      onclick="toggleFeatured(this, <?= $p['id'] ?>)"
+                      data-featured="<?= $isFeatured ? '1' : '0' ?>"
+                      title="<?= $isFeatured ? 'Ukloni iz istaknuti' : 'Dodaj u istaknuti' ?>"
+                      style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:8px;
+                             font-size:20px;line-height:1;
+                             color:<?= $isFeatured ? '#c9a86c' : '#ccc' ?>;
+                             transition:all 0.2s;">
+                      <i class="fas fa-star"></i>
+                    </button>
                   </td>
                   <td style="text-align:center;">
-                    <form method="POST" action="actions.php" style="margin:0;display:inline-flex;align-items:center;gap:4px;">
-                      <input type="hidden" name="action" value="set_badge">
-                      <input type="hidden" name="id" value="<?= $p['id'] ?>">
-                      <select name="badge" onchange="this.form.submit()"
-                        style="font-size:12px;padding:3px 6px;border:1px solid #ddd;border-radius:6px;
-                               background:#fff;cursor:pointer;max-width:120px;
-                               <?= $curBadge ? 'border-color:#c9a86c;color:#c9a86c;font-weight:600;' : 'color:#999;' ?>">
-                        <option value="">— bez oznake</option>
-                        <?php foreach ($badgeOptions as $opt): ?>
-                          <option value="<?= htmlspecialchars($opt) ?>" <?= $curBadge === $opt ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($opt) ?>
-                          </option>
-                        <?php endforeach; ?>
-                      </select>
-                    </form>
+                    <select
+                      onchange="setBadge(this, <?= $p['id'] ?>)"
+                      style="font-size:12px;padding:3px 6px;border:1px solid <?= $curBadge ? '#c9a86c' : '#ddd' ?>;
+                             border-radius:6px;background:#fff;cursor:pointer;max-width:120px;
+                             color:<?= $curBadge ? '#c9a86c' : '#999' ?>;
+                             font-weight:<?= $curBadge ? '600' : '400' ?>;">
+                      <option value="">— bez oznake</option>
+                      <?php foreach ($badgeOptions as $opt): ?>
+                        <option value="<?= htmlspecialchars($opt) ?>" <?= $curBadge === $opt ? 'selected' : '' ?>>
+                          <?= htmlspecialchars($opt) ?>
+                        </option>
+                      <?php endforeach; ?>
+                    </select>
                   </td>
                   <td>
                     <?php if ($p['inStock']): ?>
@@ -846,6 +839,60 @@ function previewImg(input, previewId) {
     reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
     reader.readAsDataURL(input.files[0]);
   }
+}
+
+async function toggleFeatured(btn, id) {
+  btn.style.opacity = '0.4';
+  const fd = new FormData();
+  fd.append('action', 'toggle_featured');
+  fd.append('id', id);
+  try {
+    const res = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!data.ok) {
+      alert(data.error || 'Greška');
+      btn.style.opacity = '1';
+      return;
+    }
+    // Update star
+    btn.style.color = data.featured ? '#c9a86c' : '#ccc';
+    btn.dataset.featured = data.featured ? '1' : '0';
+    btn.title = data.featured ? 'Ukloni iz istaknuti' : 'Dodaj u istaknuti';
+    // Update row background
+    btn.closest('tr').style.background = data.featured ? 'rgba(201,168,108,0.06)' : '';
+    // Update counter
+    const counter = document.getElementById('featured-counter');
+    if (counter) {
+      counter.textContent = data.count + '/6';
+      counter.style.color = data.count >= 6 ? 'var(--danger)' : 'var(--dark)';
+    }
+    const maxMsg = document.getElementById('featured-max-msg');
+    if (maxMsg) maxMsg.style.display = data.count >= 6 ? 'inline' : 'none';
+  } catch(e) {
+    alert('Greška pri čuvanju');
+  }
+  btn.style.opacity = '1';
+}
+
+async function setBadge(select, id) {
+  const badge = select.value;
+  const fd = new FormData();
+  fd.append('action', 'set_badge');
+  fd.append('id', id);
+  fd.append('badge', badge);
+  select.style.opacity = '0.4';
+  try {
+    const res = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.ok) {
+      select.style.borderColor = badge ? '#c9a86c' : '#ddd';
+      select.style.color = badge ? '#c9a86c' : '#999';
+      select.style.fontWeight = badge ? '600' : '400';
+    }
+  } catch(e) {
+    alert('Greška pri čuvanju');
+  }
+  select.style.opacity = '1';
 }
 </script>
 
