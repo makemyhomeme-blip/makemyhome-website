@@ -893,6 +893,9 @@ async function renderProductDetail() {
     39: [80], 80: [39],          // BW224
     43: [81], 81: [43],          // BW809
     45: [79], 79: [45],          // BW008
+    103: [77], 77: [103],        // CS029 – Terrazzo ↔ I3D160029 Topli Mahagonija
+    104: [72], 72: [104],        // CS013 – Bijela ↔ I3D160CS013 Bijela
+    106: [71], 71: [106],        // CS022 – Crna ↔ I3D160CS022 Betonski Sivi
   };
 
   const partnerIds = matchingPairs[id];
