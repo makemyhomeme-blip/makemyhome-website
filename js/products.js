@@ -864,7 +864,7 @@ async function renderProductDetail() {
           <label>${product.category === 'spc-pod' ? 'Dužina prostorije' : 'Širina zida'}</label>
           <div class="pq-calc-stepper">
             <button type="button" onclick="stepCalc('wall-w',-0.5)">−</button>
-            <input type="number" id="wall-w" value="${product.category === 'spc-pod' ? '4' : '1'}" min="0.5" max="50" step="0.5" oninput="calcPanels()">
+            <input type="number" id="wall-w" value="2" min="0.5" max="50" step="0.5" oninput="calcPanels()">
             <span class="pq-calc-unit">m</span>
             <button type="button" onclick="stepCalc('wall-w',0.5)">+</button>
           </div>
@@ -873,7 +873,7 @@ async function renderProductDetail() {
           <label>${product.category === 'spc-pod' ? 'Širina prostorije' : 'Visina zida'}</label>
           <div class="pq-calc-stepper">
             <button type="button" onclick="stepCalc('wall-h',-0.1)">−</button>
-            <input type="number" id="wall-h" value="${product.category === 'spc-pod' ? '3.5' : '2.8'}" min="0.5" max="50" step="0.1" oninput="calcPanels()">
+            <input type="number" id="wall-h" value="${product.category === 'spc-pod' ? '2' : '2.5'}" min="0.5" max="50" step="0.1" oninput="calcPanels()">
             <span class="pq-calc-unit">m</span>
             <button type="button" onclick="stepCalc('wall-h',0.1)">+</button>
           </div>
@@ -1060,12 +1060,13 @@ async function renderProductDetail() {
       return;
     }
 
+    const unitPrice = parseFloat(product.price) * (1 - (product.discount || 0) / 100);
     const count = Math.ceil(area / coveragePerUnit);
-    const totalPrice = (count * parseFloat(product.price)).toFixed(2).replace('.', ',');
+    const totalPrice = (count * unitPrice).toFixed(2).replace('.', ',');
 
     if (letvicaDims) {
       const total = Math.ceil(area / coveragePerUnit);
-      const totalCost = (total * parseFloat(product.price)).toFixed(2).replace('.', ',');
+      const totalCost = (total * unitPrice).toFixed(2).replace('.', ',');
       const label = total === 1 ? 'letvica' : total < 5 ? 'letvice' : 'letvica';
       res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${total} ${label}</strong> (~${totalCost} €)`;
     } else {
