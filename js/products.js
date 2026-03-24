@@ -864,7 +864,7 @@ async function renderProductDetail() {
           <label>${product.category === 'spc-pod' ? 'Dužina prostorije' : 'Širina zida'}</label>
           <div class="pq-calc-stepper">
             <button type="button" onclick="stepCalc('wall-w',-0.5)">−</button>
-            <input type="number" id="wall-w" value="${product.category === 'spc-pod' ? '2' : '1'}" min="0.5" max="50" step="0.5" oninput="calcPanels()">
+            <input type="number" id="wall-w" value="1" min="0.5" max="50" step="0.5" oninput="calcPanels()">
             <span class="pq-calc-unit">m</span>
             <button type="button" onclick="stepCalc('wall-w',0.5)">+</button>
           </div>
@@ -873,7 +873,7 @@ async function renderProductDetail() {
           <label>${product.category === 'spc-pod' ? 'Širina prostorije' : 'Visina zida'}</label>
           <div class="pq-calc-stepper">
             <button type="button" onclick="stepCalc('wall-h',-0.1)">−</button>
-            <input type="number" id="wall-h" value="${product.category === 'spc-pod' ? '2' : '2.8'}" min="0.5" max="50" step="0.1" oninput="calcPanels()">
+            <input type="number" id="wall-h" value="${product.category === 'spc-pod' ? '1' : '2.8'}" min="0.5" max="50" step="0.1" oninput="calcPanels()">
             <span class="pq-calc-unit">m</span>
             <button type="button" onclick="stepCalc('wall-h',0.1)">+</button>
           </div>
