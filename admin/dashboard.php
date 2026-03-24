@@ -294,6 +294,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
   <div class="content">
 
     <!-- ALERT -->
+    <!-- TEST_MARKER_V<?= date('Hi') ?> -->
     <?php if (!empty($_GET['msg'])): ?>
       <div class="alert alert-success"><i class="fas fa-check-circle"></i> <?= htmlspecialchars($_GET['msg']) ?></div>
     <?php endif; ?>
