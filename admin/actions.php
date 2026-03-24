@@ -2,8 +2,10 @@
 /**
  * Make My Home – Admin Actions (dodaj, uredi, obriši proizvode)
  */
+ob_start(); // buffer any PHP warnings so they don't corrupt JSON responses
 session_start();
 if (empty($_SESSION['admin_logged'])) {
+    ob_end_clean();
     header('Location: index.php');
     exit;
 }
@@ -234,10 +236,13 @@ switch ($action) {
         exit;
 
     case 'upload_category_image':
+        ob_end_clean(); // clear buffer, send pure JSON
+        ob_start();
         $catsFile = __DIR__ . '/../data/categories.json';
         $cats     = json_decode(file_get_contents($catsFile), true) ?: [];
         $catId    = trim($_POST['cat_id'] ?? '');
         if (!$catId) {
+            ob_end_clean();
             header('Content-Type: application/json');
             echo json_encode(['ok' => false, 'error' => 'Nedostaje ID kategorije.']);
             exit;
@@ -253,38 +258,47 @@ switch ($action) {
             } else {
                 $errMsg = 'Upload nije uspio (kod: ' . $errCode . '). Pokušajte ponovo.';
             }
+            ob_end_clean();
             header('Content-Type: application/json');
             echo json_encode(['ok' => false, 'error' => $errMsg]);
             exit;
         }
         $file = $_FILES['cat_image'];
-        // Determine MIME type from actual file content (not browser-reported type)
         $finfo    = new finfo(FILEINFO_MIME_TYPE);
         $mimeReal = $finfo->file($file['tmp_name']);
         $mimeMap  = ['image/jpeg' => 'jpg', 'image/jpg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
         if (!isset($mimeMap[$mimeReal])) {
+            ob_end_clean();
             header('Content-Type: application/json');
-            echo json_encode(['ok' => false, 'error' => 'Nedozvoljen format slike. Dozvoljeni: JPG, PNG, WEBP.']);
+            echo json_encode(['ok' => false, 'error' => 'Nedozvoljen format. Dozvoljeni: JPG, PNG, WEBP.']);
             exit;
         }
         if ($file['size'] > 8 * 1024 * 1024) {
+            ob_end_clean();
             header('Content-Type: application/json');
             echo json_encode(['ok' => false, 'error' => 'Fajl je prevelik. Maksimalno 8MB.']);
             exit;
         }
-        $filename  = 'cat-' . $catId . '-' . time() . '.jpg'; // uvijek JPEG nakon optimizacije
+        $filename  = 'cat-' . $catId . '-' . time() . '.jpg';
         $uploadDir = __DIR__ . '/../images/categories/';
-        if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0777, true)) {
+                ob_end_clean();
+                header('Content-Type: application/json');
+                echo json_encode(['ok' => false, 'error' => 'Ne mogu kreirati upload folder. Kontaktirajte admina.']);
+                exit;
+            }
+        }
         $destPath = $uploadDir . $filename;
         $saved    = optimizeImage($file['tmp_name'], $destPath, 1400, 1050, 82);
         if (!$saved) {
-            // Fallback: sačuvaj original ako GD nije dostupan
             $ext      = $mimeMap[$mimeReal];
             $filename = 'cat-' . $catId . '-' . time() . '.' . $ext;
             $destPath = $uploadDir . $filename;
             if (!move_uploaded_file($file['tmp_name'], $destPath)) {
+                ob_end_clean();
                 header('Content-Type: application/json');
-                echo json_encode(['ok' => false, 'error' => 'Snimanje fajla nije uspjelo.']);
+                echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo. Provjeri dozvole foldera.']);
                 exit;
             }
         }
@@ -293,7 +307,14 @@ switch ($action) {
             if ($c['id'] === $catId) { $c['image'] = $imgPath; break; }
         }
         unset($c);
-        file_put_contents($catsFile, json_encode($cats, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $saved = file_put_contents($catsFile, json_encode($cats, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        if ($saved === false) {
+            ob_end_clean();
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Slika snimljena ali baza nije upisana. Provjeri dozvole data/categories.json.']);
+            exit;
+        }
+        ob_end_clean();
         header('Content-Type: application/json');
         echo json_encode(['ok' => true, 'path' => $imgPath]);
         exit;

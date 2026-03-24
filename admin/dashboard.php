@@ -1076,22 +1076,32 @@ document.querySelectorAll('.zoom-slider').forEach(slider => {
 async function handleCatImageUpload(input, catId) {
   if (!input.files || !input.files[0]) return;
   const label = input.closest('label');
-  label.querySelector('span').textContent = 'Uploadujem...';
+  const span  = label.querySelector('span');
+  span.textContent = 'Uploadujem...';
   const fd = new FormData();
   fd.append('action', 'upload_category_image');
   fd.append('cat_id', catId);
   fd.append('cat_image', input.files[0]);
+  // Reset input so the same file can be re-selected if needed
+  input.value = '';
   try {
     const res  = await fetch('actions.php', { method: 'POST', body: fd });
-    const data = await res.json();
+    const text = await res.text();
+    let data;
+    try { data = JSON.parse(text); }
+    catch(e) {
+      span.textContent = 'Greška servera – pokušaj ponovo';
+      console.error('Server response (not JSON):', text.slice(0, 500));
+      return;
+    }
     if (data.ok) {
-      label.querySelector('span').textContent = 'Slika uploadovana!';
+      span.textContent = 'Slika uploadovana!';
       setTimeout(() => location.href = 'dashboard.php?section=cat-images', 800);
     } else {
-      label.querySelector('span').textContent = data.error || 'Greška';
+      span.textContent = data.error || 'Greška';
     }
   } catch(e) {
-    label.querySelector('span').textContent = 'Greška pri uploadu';
+    span.textContent = 'Greška pri uploadu – provjeri vezu';
   }
 }
 
