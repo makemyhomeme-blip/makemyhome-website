@@ -29,6 +29,8 @@ function getBadgeClass(badge) {
   const lower = badge.toLowerCase();
   if (lower.includes('novo') || lower.includes('new')) return 'new';
   if (lower.includes('akcija') || lower.includes('sale')) return 'sale';
+  if (lower.includes('limitirano')) return 'limited';
+  if (lower.includes('preporučujemo')) return 'recommended';
   return '';
 }
 

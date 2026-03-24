@@ -411,7 +411,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                 <?php foreach ($products as $p):
                   $isFeatured = !empty($p['featured']);
                   $curBadge   = $p['badge'] ?? null;
-                  $badgeOptions = ['Bestseller', 'Najpopularniji', 'Novo', 'Akcija'];
+                  $badgeOptions = ['Bestseller', 'Najpopularniji', 'Novo', 'Akcija', 'Preporučujemo', 'Limitirano'];
                 ?>
                 <tr style="<?= $isFeatured ? 'background:rgba(201,168,108,0.06);' : '' ?>">
                   <td>
