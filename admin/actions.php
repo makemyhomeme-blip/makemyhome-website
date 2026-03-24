@@ -13,6 +13,15 @@ if (empty($_SESSION['admin_logged'])) {
 $productsFile = __DIR__ . '/../data/products.json';
 $products = json_decode(file_get_contents($productsFile), true) ?: [];
 
+// If $_POST is empty but it was a POST request, the file exceeded post_max_size
+// Return a JSON error immediately so AJAX handlers can show a proper message
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST) && !empty($_SERVER['CONTENT_TYPE'])) {
+    ob_end_clean();
+    header('Content-Type: application/json');
+    echo json_encode(['ok' => false, 'error' => 'Fajl je prevelik za server (post_max_size: ' . ini_get('post_max_size') . '). Smanji veličinu slike.']);
+    exit;
+}
+
 $action = $_POST['action'] ?? '';
 
 function redirect($msg = '', $err = '', $section = '') {
@@ -238,6 +247,23 @@ switch ($action) {
     case 'upload_category_image':
         ob_end_clean(); // clear buffer, send pure JSON
         ob_start();
+        // Debug log
+        $debugLog = __DIR__ . '/../data/upload_debug.log';
+        $debugInfo = date('Y-m-d H:i:s') . "\n";
+        $debugInfo .= "POST action: " . ($_POST['action'] ?? 'MISSING') . "\n";
+        $debugInfo .= "POST cat_id: " . ($_POST['cat_id'] ?? 'MISSING') . "\n";
+        $debugInfo .= "FILES set: " . (isset($_FILES['cat_image']) ? 'YES' : 'NO') . "\n";
+        if (isset($_FILES['cat_image'])) {
+            $debugInfo .= "FILE error code: " . $_FILES['cat_image']['error'] . "\n";
+            $debugInfo .= "FILE size: " . ($_FILES['cat_image']['size'] ?? 0) . " bytes\n";
+            $debugInfo .= "FILE name: " . ($_FILES['cat_image']['name'] ?? '') . "\n";
+            $debugInfo .= "FILE type: " . ($_FILES['cat_image']['type'] ?? '') . "\n";
+        }
+        $debugInfo .= "PHP upload_max_filesize: " . ini_get('upload_max_filesize') . "\n";
+        $debugInfo .= "PHP post_max_size: " . ini_get('post_max_size') . "\n";
+        $debugInfo .= "---\n";
+        file_put_contents($debugLog, $debugInfo, FILE_APPEND);
+
         $catsFile = __DIR__ . '/../data/categories.json';
         $cats     = json_decode(file_get_contents($catsFile), true) ?: [];
         $catId    = trim($_POST['cat_id'] ?? '');
@@ -250,7 +276,7 @@ switch ($action) {
         if (!isset($_FILES['cat_image']) || $_FILES['cat_image']['error'] !== UPLOAD_ERR_OK) {
             $errCode = $_FILES['cat_image']['error'] ?? UPLOAD_ERR_NO_FILE;
             if ($errCode === UPLOAD_ERR_INI_SIZE || $errCode === UPLOAD_ERR_FORM_SIZE) {
-                $errMsg = 'Fajl je prevelik. Maksimalno 8MB.';
+                $errMsg = 'Fajl je prevelik. Server limit: ' . ini_get('upload_max_filesize') . '. Smanji sliku ispod tog limita.';
             } elseif ($errCode === UPLOAD_ERR_PARTIAL) {
                 $errMsg = 'Upload je prekinut. Pokušajte ponovo.';
             } elseif ($errCode === UPLOAD_ERR_NO_FILE) {
