@@ -196,19 +196,42 @@ switch ($action) {
         $catsFile = __DIR__ . '/../data/categories.json';
         $cats     = json_decode(file_get_contents($catsFile), true) ?: [];
         $catId    = trim($_POST['cat_id'] ?? '');
-        if (!$catId || empty($_FILES['cat_image']['tmp_name'])) {
+        if (!$catId) {
             header('Content-Type: application/json');
-            echo json_encode(['ok' => false, 'error' => 'Nedostaju podaci.']);
+            echo json_encode(['ok' => false, 'error' => 'Nedostaje ID kategorije.']);
             exit;
         }
-        $file    = $_FILES['cat_image'];
-        $allowed = ['image/jpeg','image/jpg','image/png','image/webp'];
-        if (!in_array($file['type'], $allowed) || $file['size'] > 8 * 1024 * 1024) {
+        if (!isset($_FILES['cat_image']) || $_FILES['cat_image']['error'] !== UPLOAD_ERR_OK) {
+            $errCode = $_FILES['cat_image']['error'] ?? UPLOAD_ERR_NO_FILE;
+            if ($errCode === UPLOAD_ERR_INI_SIZE || $errCode === UPLOAD_ERR_FORM_SIZE) {
+                $errMsg = 'Fajl je prevelik. Maksimalno 8MB.';
+            } elseif ($errCode === UPLOAD_ERR_PARTIAL) {
+                $errMsg = 'Upload je prekinut. Pokušajte ponovo.';
+            } elseif ($errCode === UPLOAD_ERR_NO_FILE) {
+                $errMsg = 'Nije odabran fajl.';
+            } else {
+                $errMsg = 'Upload nije uspio (kod: ' . $errCode . '). Pokušajte ponovo.';
+            }
             header('Content-Type: application/json');
-            echo json_encode(['ok' => false, 'error' => 'Nedozvoljen tip ili veličina fajla.']);
+            echo json_encode(['ok' => false, 'error' => $errMsg]);
             exit;
         }
-        $ext      = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $file = $_FILES['cat_image'];
+        // Determine MIME type from actual file content (not browser-reported type)
+        $finfo    = new finfo(FILEINFO_MIME_TYPE);
+        $mimeReal = $finfo->file($file['tmp_name']);
+        $mimeMap  = ['image/jpeg' => 'jpg', 'image/jpg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+        if (!isset($mimeMap[$mimeReal])) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Nedozvoljen format slike. Dozvoljeni: JPG, PNG, WEBP.']);
+            exit;
+        }
+        if ($file['size'] > 8 * 1024 * 1024) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Fajl je prevelik. Maksimalno 8MB.']);
+            exit;
+        }
+        $ext      = $mimeMap[$mimeReal];
         $filename = 'cat-' . $catId . '-' . time() . '.' . $ext;
         $uploadDir = __DIR__ . '/../images/categories/';
         if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
@@ -231,12 +254,12 @@ switch ($action) {
         $catsFile = __DIR__ . '/../data/categories.json';
         $cats     = json_decode(file_get_contents($catsFile), true) ?: [];
         $catId    = trim($_POST['cat_id'] ?? '');
-        $tx       = max(-50.0, min(50.0, (float)($_POST['tx']   ?? 0)));
-        $ty       = max(-50.0, min(50.0, (float)($_POST['ty']   ?? 0)));
-        $zoom     = max(1.0,   min(3.0,  (float)($_POST['zoom'] ?? 1.0)));
+        $posX     = max(0.0,  min(100.0, (float)($_POST['posX'] ?? 50)));
+        $posY     = max(0.0,  min(100.0, (float)($_POST['posY'] ?? 50)));
+        $zoom     = max(1.0,  min(3.0,   (float)($_POST['zoom'] ?? 1.0)));
         foreach ($cats as &$c) {
             if ($c['id'] === $catId) {
-                $c['imagePosition'] = ['tx' => $tx, 'ty' => $ty, 'zoom' => $zoom];
+                $c['imagePosition'] = ['posX' => $posX, 'posY' => $posY, 'zoom' => $zoom];
                 break;
             }
         }

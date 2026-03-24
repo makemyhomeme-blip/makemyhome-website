@@ -673,10 +673,10 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
       ?>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;">
         <?php foreach ($cats as $cat):
-          $img = $cat['image'] ?? '';
-          $pos = $cat['imagePosition'] ?? ['tx'=>0,'ty'=>0,'zoom'=>1.0];
-          $tx   = $pos['tx']   ?? 0;
-          $ty   = $pos['ty']   ?? 0;
+          $img  = $cat['image'] ?? '';
+          $pos  = $cat['imagePosition'] ?? [];
+          $posX = $pos['posX'] ?? 50;
+          $posY = $pos['posY'] ?? 50;
           $zoom = $pos['zoom'] ?? 1.0;
         ?>
         <div class="card" style="overflow:visible;">
@@ -694,7 +694,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <?php if ($img): ?>
                 <img src="../<?= htmlspecialchars($img) ?>"
                      class="crop-img"
-                     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(<?= $zoom ?>) translate(<?= $tx ?>%, <?= $ty ?>%);transform-origin:center;transition:none;"
+                     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:<?= $posX ?>% <?= $posY ?>%;transform:scale(<?= $zoom ?>);transform-origin:center;transition:none;"
                      draggable="false">
               <?php else: ?>
                 <div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,0.3);flex-direction:column;gap:8px;">
@@ -991,46 +991,39 @@ async function setBadge(select, id) {
 }
 
 // ── SLIKE KATEGORIJA ──────────────────────────────────────────
-// State: { catId: { tx: number, ty: number, zoom: number } }
-// tx/ty su u % od dimenzija slike (transform: scale(zoom) translate(tx%, ty%))
+// State: { catId: { posX: number, posY: number, zoom: number } }
+// posX/posY su 0-100 za object-position, zoom je 1.0-3.0 za transform:scale()
 const cropState = {};
-
-function getMaxTranslate(zoom) {
-  // Koliko % možemo pomjerati a da ivice slike ne odu van containera
-  // scale(z) → slika je z puta veća → višak je (z-1) na svakoj strani → to je 50*(z-1)/z %
-  return zoom > 1 ? (50 * (zoom - 1) / zoom) : 0;
-}
-
-function clampState(s) {
-  const m = getMaxTranslate(s.zoom);
-  s.tx = Math.max(-m, Math.min(m, s.tx));
-  s.ty = Math.max(-m, Math.min(m, s.ty));
-}
 
 function applyTransform(catId) {
   const s   = cropState[catId];
   const img = document.querySelector(`.crop-container[data-cat="${catId}"] .crop-img`);
   if (!img || !s) return;
-  img.style.transform = `scale(${s.zoom}) translate(${s.tx}%, ${s.ty}%)`;
+  img.style.objectPosition = `${s.posX}% ${s.posY}%`;
+  img.style.transform      = `scale(${s.zoom})`;
 }
 
-// Inicijalizuj stanje iz PHP-a i prikvači drag
+// Inicijalizuj stanje i prikvači drag
 document.querySelectorAll('.crop-container').forEach(container => {
   const catId = container.dataset.cat;
   const img   = container.querySelector('.crop-img');
   if (!img) return;
 
-  // Izvuci početno stanje iz inline transform koji je PHP postavio
+  // Izvuci početno stanje iz inline stila koji je PHP postavio
   const sliderVal = parseInt(container.closest('.card').querySelector('.zoom-slider')?.value) || 100;
-  cropState[catId] = cropState[catId] || { tx: 0, ty: 0, zoom: sliderVal / 100 };
+  const objPos    = img.style.objectPosition || '50% 50%';
+  const parts     = objPos.match(/([\d.]+)%\s+([\d.]+)%/);
+  const initPosX  = parts ? parseFloat(parts[1]) : 50;
+  const initPosY  = parts ? parseFloat(parts[2]) : 50;
+  cropState[catId] = { posX: initPosX, posY: initPosY, zoom: sliderVal / 100 };
 
-  let dragging = false, startX, startY, startTx, startTy;
+  let dragging = false, startX, startY, startPosX, startPosY;
 
   function onDragStart(cx, cy) {
-    dragging = true;
-    startX  = cx; startY  = cy;
-    startTx = cropState[catId].tx;
-    startTy = cropState[catId].ty;
+    dragging  = true;
+    startX    = cx; startY    = cy;
+    startPosX = cropState[catId].posX;
+    startPosY = cropState[catId].posY;
     container.style.cursor = 'grabbing';
   }
 
@@ -1039,12 +1032,11 @@ document.querySelectorAll('.crop-container').forEach(container => {
     const s  = cropState[catId];
     const cw = container.offsetWidth;
     const ch = container.offsetHeight;
-    // Pretvori px pomak u % od dimenzija skalirane slike
-    const dtx = ((cx - startX) / (cw  * s.zoom)) * 100;
-    const dty = ((cy - startY) / (ch * s.zoom)) * 100;
-    s.tx = startTx + dtx;
-    s.ty = startTy + dty;
-    clampState(s);
+    // Povlačenje desno → slika prati prst → posX se smanjuje (pokazuje lijevu stranu)
+    const dpX = -((cx - startX) / cw) * 100;
+    const dpY = -((cy - startY) / ch) * 100;
+    s.posX = Math.max(0, Math.min(100, startPosX + dpX));
+    s.posY = Math.max(0, Math.min(100, startPosY + dpY));
     applyTransform(catId);
   }
 
@@ -1072,9 +1064,8 @@ document.querySelectorAll('.zoom-slider').forEach(slider => {
   slider.addEventListener('input', function() {
     const catId = this.dataset.cat;
     const zoom  = parseInt(this.value) / 100;
-    if (!cropState[catId]) cropState[catId] = { tx: 0, ty: 0, zoom };
+    if (!cropState[catId]) cropState[catId] = { posX: 50, posY: 50, zoom };
     cropState[catId].zoom = zoom;
-    clampState(cropState[catId]);
     applyTransform(catId);
     const valEl = document.querySelector(`.crop-container[data-cat="${catId}"]`)
                     ?.closest('.card')?.querySelector('.zoom-val');
@@ -1112,8 +1103,8 @@ async function saveCatPosition(catId) {
   const fd = new FormData();
   fd.append('action', 'save_category_position');
   fd.append('cat_id', catId);
-  fd.append('tx',   s.tx.toFixed(4));
-  fd.append('ty',   s.ty.toFixed(4));
+  fd.append('posX', s.posX.toFixed(2));
+  fd.append('posY', s.posY.toFixed(2));
   fd.append('zoom', s.zoom.toFixed(4));
   try {
     const res  = await fetch('actions.php', { method: 'POST', body: fd });

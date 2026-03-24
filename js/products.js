@@ -292,11 +292,11 @@ async function renderCategories(containerId) {
   await loadData();
 
   container.innerHTML = allCategories.map(cat => {
-    const pos  = cat.imagePosition || { tx: 0, ty: 0, zoom: 1.0 };
+    const pos  = cat.imagePosition || {};
     const zoom = pos.zoom || 1.0;
-    const tx   = pos.tx   || 0;
-    const ty   = pos.ty   || 0;
-    const imgStyle = `width:100%;height:100%;object-fit:cover;transform:scale(${zoom}) translate(${tx}%,${ty}%);transform-origin:center;`;
+    const posX = pos.posX !== undefined ? pos.posX : 50;
+    const posY = pos.posY !== undefined ? pos.posY : 50;
+    const imgStyle = `width:100%;height:100%;object-fit:cover;object-position:${posX}% ${posY}%;transform:scale(${zoom});transform-origin:center;`;
     const imgTag = cat.image
       ? `<img src="${cat.image}" alt="${cat.name}" style="${imgStyle}" loading="lazy"
            onerror="this.parentElement.innerHTML='<span class=\\'category-img-placeholder\\'><i class=\\'${cat.icon}\\'></i></span>'">`
