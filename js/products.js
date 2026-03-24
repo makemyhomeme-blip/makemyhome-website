@@ -673,20 +673,20 @@ async function renderProductDetail() {
 
     // SPC04 – SPC Laminat 122×18cm
     103: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Marko D.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio u kuhinji i kupatilu – voda može slobodno da stoji i ništa se ne dešava. Klasični laminat bi nabrekao za dan, a ovaj izgleda kao novi i nakon godinu dana. Click sistem je toliko jednostavan da sam sam postavio 14m² za jedno popodne.' },
-      { name: 'Jelena K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Dugi uski format vizuelno produžava hodnik – izgleda duplo veće. Dekor drveta je toliko uvjerljiv da gosti stalno pitaju da li je pravo drvo. Na dodir je topao, ne klizi, ne škripi. Odlična investicija.' }
+      { name: 'Marko D.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Iskreno, spasio me ovaj pod. Imao sam klasični laminat u kuhinji i jednom mi je dijete prosulo čašu vode – za dva dana je nabreknuo i morao sam sve da mijenjam. Od kad sam postavio ovaj SPC, ni briga. Voda, sok, sve – obrišeš i gotovo. Ne nabrekne, ne mijenja oblik, ništa. Trebalo mi je ovo godinama ranije.' },
+      { name: 'Jelena K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Nisam vjerovala dok nisam sama probala – postavljam ga sama, bez majstora, bez ljepila. Klikneš jedan u drugi i to je to. Za vikend sam završila cijelu dnevnu sobu. Pod izgleda kao pravo drvo, topao je na dodir i ne škripi ni korak. Preporučila sam već troje komšija.' }
     ]},
 
     // SPC05 – SPC Laminat 122×18cm
     104: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Stefan R.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Imamo podno grijanje i brinuo sam se da li je kompatibilno – radi savršeno. Pod se ravnomjerno grije, ne deformiše se ni malo. IXPE podloga potpuno prigušuje zvuk koraka, u stanu je tiho kao nikad.' },
-      { name: 'Ana M.', city: 'Herceg Novi', date: 'Februar 2026', stars: 4, text: 'Djeca i pas – ovaj pod sve podnosi bez ogrebotine. Već smo prosuli sok, vodu, ulje – obrišeš krpom i gotovo. Jedina razlika od pravog drveta je cijena, a izgled je gotovo identičan. Preporučujem svima sa kućnim ljubimcima.' }
+      { name: 'Stefan R.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Živimo u stanu s podnim grijanjem i svaki pod koji smo probali je ili nabubreao ili se iskrivio od topline. Od kad smo stavili ovaj SPC – nema ništa. Pod ostaje ravan, grije se ravnomjerno, a hod je tih i ugodan. Komšije ispod nas su primijetile da ih više ne čujemo. To nešto govori.' },
+      { name: 'Ana M.', city: 'Herceg Novi', date: 'Februar 2026', stars: 4, text: 'Imam troje djece i psa. Svaki prethodni pod je bio katastrofa za godinu-dvije. Ovaj SPC stoji već 14 mjeseci i nema ni jedne ogrebotine vidljive. Pas trči, djeca bacaju igračke, prosipaju – krpom obrišeš i kao nov. Jedino što mi malo smeta je što nisam ranije znala za SPC podove.' }
     ]},
 
     // SPC07 – SPC Laminat Tile Format 61.5×31cm
     105: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Maja T.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Postavljala u kupatilu – format pločice 61×31 je savršen, izgleda kao pravi keramički pod ali je topao na dodir. Nema grout fuga gdje se skuplja prljavština, čisti se za minutu. Na vlagu ne reaguje nimalo.' },
-      { name: 'Dragan P.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Kraći format bio je idealan za moju L-shaped kuhinju s puno rezova. Otpada je bilo minimalno, montaža precizna. Betonski dekor uz bijele ploče je kombinacija koja izgleda kao iz kataloga. Apsolutno zadovoljan.' }
+      { name: 'Maja T.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Imala sam keramiku u kupatilu – hladna, klizava, a između fuga se skupljala prljavština pa sam ribala svake sedmice. Promijenila na ovaj SPC tile format i razlika je nebo i zemlja. Topao na bosim nogama, ne kliza, fuga nema, čisti se za minut. Nisam mogla ni zamisliti da postoji nešto ovako.' },
+      { name: 'Dragan P.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Renovirao sam cijeli stan i za hodnik i kuhinju sam uzeo ovaj tile SPC. Majstor mi je rekao da ga nikad nije postavljao ali da mu je najlakši pod u karijeri – klikne, gotovo. Izgleda skupo, osjećaj je mekan i tih, a cijena je bila pola od keramike kad uradiš račun sa postavljanjem. Definitivno ponovo.' }
     ]},
 
     // Classic Panel CS022 – Crna
