@@ -380,6 +380,21 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             Nema proizvoda. <button class="btn btn-primary" onclick="showSection('add-product')">Dodajte prvi</button>
           </div>
         <?php else: ?>
+          <?php
+            $featuredCount = count(array_filter($products, fn($p) => $p['featured'] ?? false));
+          ?>
+          <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:10px;gap:10px;">
+            <span style="font-size:13px;color:var(--gray);">
+              <i class="fas fa-star" style="color:#c9a86c;"></i>
+              Istaknuti na početnoj:
+              <strong style="color:<?= $featuredCount >= 6 ? 'var(--danger)' : 'var(--dark)' ?>;">
+                <?= $featuredCount ?>/6
+              </strong>
+              <?php if ($featuredCount >= 6): ?>
+                <span style="font-size:11px;color:var(--danger);margin-left:4px;">— maksimum dostignut</span>
+              <?php endif; ?>
+            </span>
+          </div>
           <div class="table-wrap">
             <table>
               <thead>
@@ -388,14 +403,19 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   <th>Naziv</th>
                   <th>Kategorija</th>
                   <th>Cijena</th>
-                  <th>Badge</th>
+                  <th style="text-align:center;">Istaknuti</th>
+                  <th style="text-align:center;">Badge</th>
                   <th>Status</th>
                   <th>Akcije</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($products as $p): ?>
-                <tr>
+                <?php foreach ($products as $p):
+                  $isFeatured = !empty($p['featured']);
+                  $curBadge   = $p['badge'] ?? null;
+                  $badgeOptions = ['Bestseller', 'Najpopularniji', 'Novo', 'Akcija'];
+                ?>
+                <tr style="<?= $isFeatured ? 'background:rgba(201,168,108,0.06);' : '' ?>">
                   <td>
                     <div class="product-thumb">
                       <img src="../<?= htmlspecialchars($p['image'] ?? '') ?>" alt=""
@@ -419,7 +439,38 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                       <?= htmlspecialchars($p['price']) ?> €/<?= htmlspecialchars($p['unit']) ?>
                     <?php endif; ?>
                   </td>
-                  <td><?= htmlspecialchars($p['badge'] ?? '—') ?></td>
+                  <td style="text-align:center;">
+                    <form method="POST" action="actions.php" style="margin:0;display:inline;">
+                      <input type="hidden" name="action" value="toggle_featured">
+                      <input type="hidden" name="id" value="<?= $p['id'] ?>">
+                      <button type="submit" title="<?= $isFeatured ? 'Ukloni iz istaknuti' : 'Dodaj u istaknuti' ?>"
+                        style="background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:8px;
+                               font-size:20px;line-height:1;
+                               <?= $isFeatured ? 'color:#c9a86c;' : 'color:#ccc;' ?>
+                               transition:all 0.2s;"
+                        onmouseover="this.style.opacity='0.7'"
+                        onmouseout="this.style.opacity='1'">
+                        <i class="fas fa-star"></i>
+                      </button>
+                    </form>
+                  </td>
+                  <td style="text-align:center;">
+                    <form method="POST" action="actions.php" style="margin:0;display:inline-flex;align-items:center;gap:4px;">
+                      <input type="hidden" name="action" value="set_badge">
+                      <input type="hidden" name="id" value="<?= $p['id'] ?>">
+                      <select name="badge" onchange="this.form.submit()"
+                        style="font-size:12px;padding:3px 6px;border:1px solid #ddd;border-radius:6px;
+                               background:#fff;cursor:pointer;max-width:120px;
+                               <?= $curBadge ? 'border-color:#c9a86c;color:#c9a86c;font-weight:600;' : 'color:#999;' ?>">
+                        <option value="">— bez oznake</option>
+                        <?php foreach ($badgeOptions as $opt): ?>
+                          <option value="<?= htmlspecialchars($opt) ?>" <?= $curBadge === $opt ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($opt) ?>
+                          </option>
+                        <?php endforeach; ?>
+                      </select>
+                    </form>
+                  </td>
                   <td>
                     <?php if ($p['inStock']): ?>
                       <span class="badge badge-success">Na lageru</span>

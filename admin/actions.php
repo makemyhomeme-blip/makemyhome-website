@@ -153,6 +153,41 @@ switch ($action) {
         redirect("Proizvod '{$deletedName}' je obrisan.", '', 'products');
         break;
 
+    case 'toggle_featured':
+        $id = (int)($_POST['id'] ?? 0);
+        $currentlyFeatured = false;
+        foreach ($products as $p) {
+            if ($p['id'] === $id) { $currentlyFeatured = (bool)($p['featured'] ?? false); break; }
+        }
+        if (!$currentlyFeatured) {
+            // Adding – check limit
+            $featuredCount = count(array_filter($products, fn($p) => $p['featured'] ?? false));
+            if ($featuredCount >= 6) {
+                redirect('', 'Maksimalno 6 istaknuta proizvoda. Ukloni jedan pa pokušaj ponovo.', 'products');
+            }
+        }
+        foreach ($products as &$p) {
+            if ($p['id'] === $id) { $p['featured'] = !$currentlyFeatured; break; }
+        }
+        unset($p);
+        saveProducts($products, $productsFile);
+        redirect('', '', 'products');
+        break;
+
+    case 'set_badge':
+        $id = (int)($_POST['id'] ?? 0);
+        $badge = trim($_POST['badge'] ?? '') ?: null;
+        foreach ($products as &$p) {
+            if ($p['id'] === $id) {
+                $p['badge'] = $badge ? htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') : null;
+                break;
+            }
+        }
+        unset($p);
+        saveProducts($products, $productsFile);
+        redirect('', '', 'products');
+        break;
+
     default:
         redirect('', 'Nepoznata akcija.');
 }
