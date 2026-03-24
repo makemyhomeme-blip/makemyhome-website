@@ -671,22 +671,22 @@ async function renderProductDetail() {
       { name: 'Sandra V.', city: 'Kotor', date: 'Januar 2026', stars: 5, text: 'Kombinacija bronzanog kanala i tople bijele LED trake između panela je magična. Svaki večer kada se upali svjetlo, soba se pretvori u nešto posebno. Znatno uljepšava prostor.' }
     ]},
 
-    // Classic Panel CS029 – Terrazzo
-    103: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Valentina R.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Fragmenti su savršeni – ima ih svake boje, od modrikasto-sive do ciglaste smeđe, krema i bež. Svaki panel je malo drugačiji, baš kao pravi kamen. Nisam mogla vjerovati da je plastika dok nisam primila – površina glatka i polirana kao pravi mozaik.' },
-      { name: 'Đorđe F.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Postavio u hodniku – svaki gost stane pred zid i gleda. Bijela osnova s raznobojnim fragmentima oživljava svaki prostor koji je godinama bio prazan. Niko ne vjeruje da nije pravi kamen.' }
+    // SPC04 – SPC Laminat 122×18cm
+    103: { total: 12, fiveS: 11, fourS: 1, comments: [
+      { name: 'Marko D.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio u kuhinji i kupatilu – voda može slobodno da stoji i ništa se ne dešava. Klasični laminat bi nabrekao za dan, a ovaj izgleda kao novi i nakon godinu dana. Click sistem je toliko jednostavan da sam sam postavio 14m² za jedno popodne.' },
+      { name: 'Jelena K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Dugi uski format vizuelno produžava hodnik – izgleda duplo veće. Dekor drveta je toliko uvjerljiv da gosti stalno pitaju da li je pravo drvo. Na dodir je topao, ne klizi, ne škripi. Odlična investicija.' }
     ]},
 
-    // Classic Panel CS013 – Bijela
-    104: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Jelena M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Boja nije hladna bela – ovo je topla kremasto-bijela koja prostor grije. Spavaća soba je postala šira i mirnija. Skoro sam uzela sivu ali sam sretna što sam ostala na bijeloj – ova nijansa je savršena.' },
-      { name: 'Nikola B.', city: 'Herceg Novi', date: 'Februar 2026', stars: 4, text: 'Uz crni okvir i prirodno drvo ova bijela je tačno pravi kontrast. Topla, nije klinička – boja koja pristaje uz sve a nikad ne viče. Idealna za skandinavski interijer koji sam radio.' }
+    // SPC05 – SPC Laminat 122×18cm
+    104: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Stefan R.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Imamo podno grijanje i brinuo sam se da li je kompatibilno – radi savršeno. Pod se ravnomjerno grije, ne deformiše se ni malo. IXPE podloga potpuno prigušuje zvuk koraka, u stanu je tiho kao nikad.' },
+      { name: 'Ana M.', city: 'Herceg Novi', date: 'Februar 2026', stars: 4, text: 'Djeca i pas – ovaj pod sve podnosi bez ogrebotine. Već smo prosuli sok, vodu, ulje – obrišeš krpom i gotovo. Jedina razlika od pravog drveta je cijena, a izgled je gotovo identičan. Preporučujem svima sa kućnim ljubimcima.' }
     ]},
 
-    // Classic Panel CS014 – Bež
-    105: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Sanja P.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Boja je suptilna neutralna između sive i bež – savršen "niti-niti". Ne dominira ali ni ne nestaje. Uz moj sivi nameštaj i biljke daje zemaljsku, smirenu atmosferu bez jakog kontrasta.' },
-      { name: 'Bojan K.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Stavio u dnevnu sobu uz tamno drvo i metal. Ova bež-siva nijansa je baš ono što trebate kad niste sigurni šta odabrati – uvijek izgleda uredno i savremeno. Siguran izbor.' }
+    // SPC07 – SPC Laminat Tile Format 61.5×31cm
+    105: { total: 10, fiveS: 9, fourS: 1, comments: [
+      { name: 'Maja T.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Postavljala u kupatilu – format pločice 61×31 je savršen, izgleda kao pravi keramički pod ali je topao na dodir. Nema grout fuga gdje se skuplja prljavština, čisti se za minutu. Na vlagu ne reaguje nimalo.' },
+      { name: 'Dragan P.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Kraći format bio je idealan za moju L-shaped kuhinju s puno rezova. Otpada je bilo minimalno, montaža precizna. Betonski dekor uz bijele ploče je kombinacija koja izgleda kao iz kataloga. Apsolutno zadovoljan.' }
     ]},
 
     // Classic Panel CS022 – Crna
