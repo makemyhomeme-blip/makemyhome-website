@@ -291,12 +291,21 @@ async function renderCategories(containerId) {
 
   await loadData();
 
-  container.innerHTML = allCategories.map(cat => `
+  container.innerHTML = allCategories.map(cat => {
+    const pos  = cat.imagePosition || { x: 50, y: 50, zoom: 100 };
+    const zoom = pos.zoom || 100;
+    // object-position: x% y% handles the crop; zoom via transform scale on the img
+    const imgStyle = cat.image
+      ? `width:100%;height:100%;object-fit:cover;object-position:${pos.x}% ${pos.y}%;transform:scale(${zoom/100});transform-origin:${pos.x}% ${pos.y}%;`
+      : '';
+    const imgTag = cat.image
+      ? `<img src="${cat.image}" alt="${cat.name}" style="${imgStyle}" loading="lazy"
+           onerror="this.parentElement.innerHTML='<span class=\\'category-img-placeholder\\'><i class=\\'${cat.icon}\\'></i></span>'">`
+      : `<span class="category-img-placeholder"><i class="${cat.icon}"></i></span>`;
+    return `
     <a href="products.html?cat=${cat.id}" class="category-card animate-on-scroll">
-      <div class="category-img">
-        <img src="${cat.image}" alt="${cat.name}"
-          onerror="this.parentElement.innerHTML='<span class=\'category-img-placeholder\'><i class=\'${cat.icon}\'></i></span>'"
-          loading="lazy">
+      <div class="category-img" style="overflow:hidden;">
+        ${imgTag}
       </div>
       <div class="category-body">
         <div class="category-icon" style="background:${cat.color}">
@@ -307,7 +316,7 @@ async function renderCategories(containerId) {
         <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
       </div>
     </a>
-  `).join('');
+  `; }).join('');
 
   initAnimations();
 }

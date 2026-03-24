@@ -192,6 +192,60 @@ switch ($action) {
         echo json_encode(['ok' => true, 'badge' => $badge]);
         exit;
 
+    case 'upload_category_image':
+        $catsFile = __DIR__ . '/../data/categories.json';
+        $cats     = json_decode(file_get_contents($catsFile), true) ?: [];
+        $catId    = trim($_POST['cat_id'] ?? '');
+        if (!$catId || empty($_FILES['cat_image']['tmp_name'])) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Nedostaju podaci.']);
+            exit;
+        }
+        $file    = $_FILES['cat_image'];
+        $allowed = ['image/jpeg','image/jpg','image/png','image/webp'];
+        if (!in_array($file['type'], $allowed) || $file['size'] > 8 * 1024 * 1024) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Nedozvoljen tip ili veličina fajla.']);
+            exit;
+        }
+        $ext      = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $filename = 'cat-' . $catId . '-' . time() . '.' . $ext;
+        $uploadDir = __DIR__ . '/../images/categories/';
+        if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+        if (!move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Upload nije uspio.']);
+            exit;
+        }
+        $imgPath = 'images/categories/' . $filename;
+        foreach ($cats as &$c) {
+            if ($c['id'] === $catId) { $c['image'] = $imgPath; break; }
+        }
+        unset($c);
+        file_put_contents($catsFile, json_encode($cats, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => true, 'path' => $imgPath]);
+        exit;
+
+    case 'save_category_position':
+        $catsFile = __DIR__ . '/../data/categories.json';
+        $cats     = json_decode(file_get_contents($catsFile), true) ?: [];
+        $catId    = trim($_POST['cat_id'] ?? '');
+        $x        = max(0, min(100, (int)($_POST['x'] ?? 50)));
+        $y        = max(0, min(100, (int)($_POST['y'] ?? 50)));
+        $zoom     = max(100, min(250, (int)($_POST['zoom'] ?? 100)));
+        foreach ($cats as &$c) {
+            if ($c['id'] === $catId) {
+                $c['imagePosition'] = ['x' => $x, 'y' => $y, 'zoom' => $zoom];
+                break;
+            }
+        }
+        unset($c);
+        file_put_contents($catsFile, json_encode($cats, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => true]);
+        exit;
+
     default:
         redirect('', 'Nepoznata akcija.');
 }

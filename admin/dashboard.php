@@ -257,6 +257,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     <a href="sifre.php" class="sidebar-link">
       <i class="fas fa-barcode"></i> Unos Šifri
     </a>
+    <button class="sidebar-link" onclick="showSection('cat-images')">
+      <i class="fas fa-images"></i> Slike Kategorija
+    </button>
     <div class="nav-section-label">Web sajt</div>
     <a href="../index.html" target="_blank" class="sidebar-link">
       <i class="fas fa-external-link-alt"></i> Pogledaj Sajt
@@ -654,6 +657,88 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
       <?php endif; ?>
     </section>
 
+    <!-- SLIKE KATEGORIJA -->
+    <section id="section-cat-images" class="section">
+      <div class="card" style="margin-bottom:24px;">
+        <div class="card-header">
+          <span class="card-title"><i class="fas fa-images" style="color:var(--primary);margin-right:8px;"></i>Slike Kategorija – Početna stranica</span>
+        </div>
+        <div style="padding:16px 20px;color:var(--gray);font-size:14px;border-bottom:1px solid #f0ede8;">
+          Uploadujte sliku za svaku kategoriju i podesite koji dio slike želite prikazati (povucite sliku unutar okvira). Kliknite <strong>Sačuvaj poziciju</strong> nakon što postavite željeni prikaz.
+        </div>
+      </div>
+      <?php
+        $catsFile = __DIR__ . '/../data/categories.json';
+        $cats = json_decode(file_get_contents($catsFile), true) ?: [];
+      ?>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;">
+        <?php foreach ($cats as $cat):
+          $img = $cat['image'] ?? '';
+          $pos = $cat['imagePosition'] ?? ['x'=>50,'y'=>50,'zoom'=>100];
+        ?>
+        <div class="card" style="overflow:visible;">
+          <div class="card-header" style="padding:14px 16px;">
+            <span class="card-title" style="font-size:14px;">
+              <i class="<?= htmlspecialchars($cat['icon']) ?>" style="color:<?= htmlspecialchars($cat['color']) ?>;margin-right:6px;"></i>
+              <?= htmlspecialchars($cat['name']) ?>
+            </span>
+          </div>
+          <div style="padding:16px;">
+
+            <!-- PREVIEW + DRAG -->
+            <div class="crop-container" data-cat="<?= htmlspecialchars($cat['id']) ?>"
+                 style="width:100%;height:180px;overflow:hidden;border-radius:8px;background:#1a1a1a;position:relative;cursor:grab;border:2px solid #e8e2da;user-select:none;">
+              <?php if ($img): ?>
+                <img src="../<?= htmlspecialchars($img) ?>"
+                     class="crop-img"
+                     style="position:absolute;width:<?= $pos['zoom'] ?>%;height:<?= $pos['zoom'] ?>%;object-fit:cover;transform-origin:top left;left:0;top:0;"
+                     draggable="false">
+              <?php else: ?>
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,0.3);flex-direction:column;gap:8px;">
+                  <i class="fas fa-image" style="font-size:32px;"></i>
+                  <span style="font-size:12px;">Nema slike</span>
+                </div>
+              <?php endif; ?>
+            </div>
+
+            <!-- ZOOM SLIDER -->
+            <div style="margin-top:12px;display:flex;align-items:center;gap:10px;">
+              <i class="fas fa-search-minus" style="color:var(--gray);font-size:12px;"></i>
+              <input type="range" class="zoom-slider" min="100" max="250" value="<?= $pos['zoom'] ?>"
+                     style="flex:1;accent-color:var(--primary);"
+                     data-cat="<?= htmlspecialchars($cat['id']) ?>">
+              <i class="fas fa-search-plus" style="color:var(--gray);font-size:12px;"></i>
+              <span class="zoom-val" style="font-size:12px;color:var(--gray);min-width:36px;"><?= $pos['zoom'] ?>%</span>
+            </div>
+
+            <!-- UPLOAD -->
+            <form class="cat-img-form" data-cat="<?= htmlspecialchars($cat['id']) ?>" style="margin-top:14px;">
+              <input type="hidden" name="action" value="upload_category_image">
+              <input type="hidden" name="cat_id" value="<?= htmlspecialchars($cat['id']) ?>">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;background:#f8f6f3;border:2px dashed #c9a86c;border-radius:8px;padding:10px 12px;font-size:13px;color:var(--dark);">
+                <i class="fas fa-upload" style="color:var(--primary);"></i>
+                <span>Odaberi sliku</span>
+                <input type="file" name="cat_image" accept="image/*" style="display:none;"
+                       onchange="handleCatImageUpload(this,'<?= htmlspecialchars($cat['id']) ?>')">
+              </label>
+            </form>
+
+            <!-- SAVE POSITION BTN -->
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
+              <button class="btn btn-primary btn-sm save-pos-btn" data-cat="<?= htmlspecialchars($cat['id']) ?>"
+                      style="flex:1;font-size:13px;" onclick="saveCatPosition('<?= htmlspecialchars($cat['id']) ?>')">
+                <i class="fas fa-check"></i> Sačuvaj poziciju
+              </button>
+              <span class="pos-saved-msg" data-cat="<?= htmlspecialchars($cat['id']) ?>"
+                    style="font-size:12px;color:var(--success);display:none;">✓ Sačuvano</span>
+            </div>
+
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </section>
+
   </div><!-- /content -->
 </div><!-- /main -->
 
@@ -773,7 +858,8 @@ function showSection(name) {
   document.getElementById('section-' + name).classList.add('active');
   const titles = {
     'overview': 'Pregled', 'products': 'Proizvodi',
-    'add-product': 'Dodaj Proizvod', 'inquiries': 'Upiti'
+    'add-product': 'Dodaj Proizvod', 'inquiries': 'Upiti',
+    'cat-images': 'Slike Kategorija'
   };
   document.getElementById('page-title').textContent = titles[name] || '';
   event?.target?.classList.add('active');
@@ -899,6 +985,170 @@ async function setBadge(select, id) {
     alert('Greška pri čuvanju');
   }
   select.style.opacity = '1';
+}
+
+// ── SLIKE KATEGORIJA ──────────────────────────────────────────
+// Stanje pozicija po kategoriji
+const catPositions = {};
+
+document.querySelectorAll('.crop-container').forEach(container => {
+  const catId = container.dataset.cat;
+  const img   = container.querySelector('.crop-img');
+  if (!img) return;
+
+  // Inicijalizuj stanje iz inline stilova (postavljenih od PHP-a)
+  const zoom = parseInt(container.closest('.card').querySelector('.zoom-slider')?.value) || 100;
+  catPositions[catId] = catPositions[catId] || { x: 50, y: 50, zoom };
+  applyPosition(container, img, catPositions[catId]);
+
+  let dragging = false, startX, startY, startLeft, startTop;
+
+  container.addEventListener('mousedown', e => {
+    dragging = true;
+    startX = e.clientX; startY = e.clientY;
+    startLeft = parseFloat(img.style.left) || 0;
+    startTop  = parseFloat(img.style.top)  || 0;
+    container.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    const newLeft = clampLeft(startLeft + dx, container, img);
+    const newTop  = clampTop (startTop  + dy, container, img);
+    img.style.left = newLeft + 'px';
+    img.style.top  = newTop  + 'px';
+    // Pretvori px u % za čuvanje
+    const cw = container.offsetWidth, ch = container.offsetHeight;
+    const iw = img.offsetWidth,       ih = img.offsetHeight;
+    catPositions[catId].x = iw > cw ? Math.round((-newLeft / (iw - cw)) * 100) : 50;
+    catPositions[catId].y = ih > ch ? Math.round((-newTop  / (ih - ch)) * 100) : 50;
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (dragging) { dragging = false; container.style.cursor = 'grab'; }
+  });
+
+  // Touch podrška
+  container.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    dragging = true;
+    startX = t.clientX; startY = t.clientY;
+    startLeft = parseFloat(img.style.left) || 0;
+    startTop  = parseFloat(img.style.top)  || 0;
+  }, { passive: true });
+
+  container.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const t = e.touches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    const newLeft = clampLeft(startLeft + dx, container, img);
+    const newTop  = clampTop (startTop  + dy, container, img);
+    img.style.left = newLeft + 'px';
+    img.style.top  = newTop  + 'px';
+    const cw = container.offsetWidth, ch = container.offsetHeight;
+    const iw = img.offsetWidth,       ih = img.offsetHeight;
+    catPositions[catId].x = iw > cw ? Math.round((-newLeft / (iw - cw)) * 100) : 50;
+    catPositions[catId].y = ih > ch ? Math.round((-newTop  / (ih - ch)) * 100) : 50;
+    e.preventDefault();
+  }, { passive: false });
+
+  container.addEventListener('touchend', () => { dragging = false; });
+});
+
+// Zoom slider
+document.querySelectorAll('.zoom-slider').forEach(slider => {
+  slider.addEventListener('input', function() {
+    const catId = this.dataset.cat;
+    const zoom = parseInt(this.value);
+    catPositions[catId] = catPositions[catId] || { x: 50, y: 50, zoom };
+    catPositions[catId].zoom = zoom;
+    const container = document.querySelector(`.crop-container[data-cat="${catId}"]`);
+    const img = container?.querySelector('.crop-img');
+    if (img) applyPosition(container, img, catPositions[catId]);
+    const valEl = container?.closest('.card')?.querySelector('.zoom-val');
+    if (valEl) valEl.textContent = zoom + '%';
+  });
+});
+
+function applyPosition(container, img, pos) {
+  img.style.width  = pos.zoom + '%';
+  img.style.height = pos.zoom + '%';
+  // Forsiraj reflow da dobijemo prave dimenzije
+  requestAnimationFrame(() => {
+    const cw = container.offsetWidth, ch = container.offsetHeight;
+    const iw = img.offsetWidth,       ih = img.offsetHeight;
+    const left = iw > cw ? -((pos.x / 100) * (iw - cw)) : (cw - iw) / 2;
+    const top  = ih > ch ? -((pos.y / 100) * (ih - ch)) : (ch - ih) / 2;
+    img.style.left = clampLeft(left, container, img) + 'px';
+    img.style.top  = clampTop (top,  container, img) + 'px';
+  });
+}
+
+function clampLeft(left, container, img) {
+  const excess = img.offsetWidth - container.offsetWidth;
+  if (excess <= 0) return (container.offsetWidth - img.offsetWidth) / 2;
+  return Math.min(0, Math.max(-excess, left));
+}
+function clampTop(top, container, img) {
+  const excess = img.offsetHeight - container.offsetHeight;
+  if (excess <= 0) return (container.offsetHeight - img.offsetHeight) / 2;
+  return Math.min(0, Math.max(-excess, top));
+}
+
+async function handleCatImageUpload(input, catId) {
+  if (!input.files || !input.files[0]) return;
+  const label = input.closest('label');
+  label.querySelector('span').textContent = 'Uploadujem...';
+  const fd = new FormData();
+  fd.append('action', 'upload_category_image');
+  fd.append('cat_id', catId);
+  fd.append('cat_image', input.files[0]);
+  try {
+    const res  = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.ok) {
+      const container = document.querySelector(`.crop-container[data-cat="${catId}"]`);
+      // Zamijeni sadržaj containera sa novom slikom
+      container.innerHTML = `<img src="../${data.path}?t=${Date.now()}" class="crop-img"
+        style="position:absolute;width:100%;height:100%;object-fit:cover;left:0;top:0;" draggable="false">`;
+      // Re-inicijalizuj drag za novu sliku
+      catPositions[catId] = { x: 50, y: 50, zoom: 100 };
+      // Refresh page to rebind drag events (simple reload)
+      label.querySelector('span').textContent = 'Slika uploadovana!';
+      setTimeout(() => location.reload(), 800);
+    } else {
+      label.querySelector('span').textContent = data.error || 'Greška';
+    }
+  } catch(e) {
+    label.querySelector('span').textContent = 'Greška pri uploadu';
+  }
+}
+
+async function saveCatPosition(catId) {
+  const pos = catPositions[catId];
+  if (!pos) return;
+  const btn = document.querySelector(`.save-pos-btn[data-cat="${catId}"]`);
+  btn.style.opacity = '0.5';
+  const fd = new FormData();
+  fd.append('action', 'save_category_position');
+  fd.append('cat_id', catId);
+  fd.append('x', pos.x);
+  fd.append('y', pos.y);
+  fd.append('zoom', pos.zoom);
+  try {
+    const res  = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.ok) {
+      const msg = document.querySelector(`.pos-saved-msg[data-cat="${catId}"]`);
+      msg.style.display = 'inline';
+      setTimeout(() => msg.style.display = 'none', 2000);
+    }
+  } catch(e) { alert('Greška'); }
+  btn.style.opacity = '1';
 }
 </script>
 
