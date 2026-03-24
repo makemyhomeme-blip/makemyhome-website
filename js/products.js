@@ -765,6 +765,16 @@ async function renderProductDetail() {
       : `<div class="product-price-lg">${product.price} € <span>/ ${product.unit}</span></div>`
     }
 
+    ${product.category === 'aluminijum-lajsne' ? `
+    <!-- Količina za lajsne (bez kalkulatora) -->
+    <div class="pq-panel" id="pq-qty" style="display:block;">
+      <div class="pq-stepper">
+        <button type="button" class="pq-step-btn" onclick="stepPqQty(-1)">−</button>
+        <span class="pq-step-val" id="pq-qty-val">1</span>
+        <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
+      </div>
+    </div>
+    <div id="pq-calc" style="display:none;">` : `
     <!-- Tab switcher -->
     <div class="pq-tabs">
       <button class="pq-tab active" onclick="switchPqTab('calc', this)">
@@ -816,6 +826,7 @@ async function renderProductDetail() {
       </div>
       <div class="pq-calc-result" id="calc-result"></div>
     </div>
+    `}
 
     <div class="product-short-desc">${product.description}</div>
 
