@@ -231,12 +231,12 @@ switch ($action) {
         $catsFile = __DIR__ . '/../data/categories.json';
         $cats     = json_decode(file_get_contents($catsFile), true) ?: [];
         $catId    = trim($_POST['cat_id'] ?? '');
-        $x        = max(0, min(100, (int)($_POST['x'] ?? 50)));
-        $y        = max(0, min(100, (int)($_POST['y'] ?? 50)));
-        $zoom     = max(100, min(250, (int)($_POST['zoom'] ?? 100)));
+        $tx       = max(-50.0, min(50.0, (float)($_POST['tx']   ?? 0)));
+        $ty       = max(-50.0, min(50.0, (float)($_POST['ty']   ?? 0)));
+        $zoom     = max(1.0,   min(3.0,  (float)($_POST['zoom'] ?? 1.0)));
         foreach ($cats as &$c) {
             if ($c['id'] === $catId) {
-                $c['imagePosition'] = ['x' => $x, 'y' => $y, 'zoom' => $zoom];
+                $c['imagePosition'] = ['tx' => $tx, 'ty' => $ty, 'zoom' => $zoom];
                 break;
             }
         }

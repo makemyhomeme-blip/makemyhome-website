@@ -292,12 +292,11 @@ async function renderCategories(containerId) {
   await loadData();
 
   container.innerHTML = allCategories.map(cat => {
-    const pos  = cat.imagePosition || { x: 50, y: 50, zoom: 100 };
-    const zoom = pos.zoom || 100;
-    // object-position: x% y% handles the crop; zoom via transform scale on the img
-    const imgStyle = cat.image
-      ? `width:100%;height:100%;object-fit:cover;object-position:${pos.x}% ${pos.y}%;transform:scale(${zoom/100});transform-origin:${pos.x}% ${pos.y}%;`
-      : '';
+    const pos  = cat.imagePosition || { tx: 0, ty: 0, zoom: 1.0 };
+    const zoom = pos.zoom || 1.0;
+    const tx   = pos.tx   || 0;
+    const ty   = pos.ty   || 0;
+    const imgStyle = `width:100%;height:100%;object-fit:cover;transform:scale(${zoom}) translate(${tx}%,${ty}%);transform-origin:center;`;
     const imgTag = cat.image
       ? `<img src="${cat.image}" alt="${cat.name}" style="${imgStyle}" loading="lazy"
            onerror="this.parentElement.innerHTML='<span class=\\'category-img-placeholder\\'><i class=\\'${cat.icon}\\'></i></span>'">`

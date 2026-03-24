@@ -674,7 +674,10 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;">
         <?php foreach ($cats as $cat):
           $img = $cat['image'] ?? '';
-          $pos = $cat['imagePosition'] ?? ['x'=>50,'y'=>50,'zoom'=>100];
+          $pos = $cat['imagePosition'] ?? ['tx'=>0,'ty'=>0,'zoom'=>1.0];
+          $tx   = $pos['tx']   ?? 0;
+          $ty   = $pos['ty']   ?? 0;
+          $zoom = $pos['zoom'] ?? 1.0;
         ?>
         <div class="card" style="overflow:visible;">
           <div class="card-header" style="padding:14px 16px;">
@@ -691,7 +694,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <?php if ($img): ?>
                 <img src="../<?= htmlspecialchars($img) ?>"
                      class="crop-img"
-                     style="position:absolute;width:<?= $pos['zoom'] ?>%;height:<?= $pos['zoom'] ?>%;object-fit:cover;transform-origin:top left;left:0;top:0;"
+                     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(<?= $zoom ?>) translate(<?= $tx ?>%, <?= $ty ?>%);transform-origin:center;transition:none;"
                      draggable="false">
               <?php else: ?>
                 <div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,0.3);flex-direction:column;gap:8px;">
@@ -704,11 +707,11 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             <!-- ZOOM SLIDER -->
             <div style="margin-top:12px;display:flex;align-items:center;gap:10px;">
               <i class="fas fa-search-minus" style="color:var(--gray);font-size:12px;"></i>
-              <input type="range" class="zoom-slider" min="100" max="250" value="<?= $pos['zoom'] ?>"
+              <input type="range" class="zoom-slider" min="100" max="300" step="1" value="<?= round($zoom * 100) ?>"
                      style="flex:1;accent-color:var(--primary);"
                      data-cat="<?= htmlspecialchars($cat['id']) ?>">
               <i class="fas fa-search-plus" style="color:var(--gray);font-size:12px;"></i>
-              <span class="zoom-val" style="font-size:12px;color:var(--gray);min-width:36px;"><?= $pos['zoom'] ?>%</span>
+              <span class="zoom-val" style="font-size:12px;color:var(--gray);min-width:36px;"><?= round($zoom * 100) ?>%</span>
             </div>
 
             <!-- UPLOAD -->
@@ -988,116 +991,96 @@ async function setBadge(select, id) {
 }
 
 // ── SLIKE KATEGORIJA ──────────────────────────────────────────
-// Stanje pozicija po kategoriji
-const catPositions = {};
+// State: { catId: { tx: number, ty: number, zoom: number } }
+// tx/ty su u % od dimenzija slike (transform: scale(zoom) translate(tx%, ty%))
+const cropState = {};
 
+function getMaxTranslate(zoom) {
+  // Koliko % možemo pomjerati a da ivice slike ne odu van containera
+  // scale(z) → slika je z puta veća → višak je (z-1) na svakoj strani → to je 50*(z-1)/z %
+  return zoom > 1 ? (50 * (zoom - 1) / zoom) : 0;
+}
+
+function clampState(s) {
+  const m = getMaxTranslate(s.zoom);
+  s.tx = Math.max(-m, Math.min(m, s.tx));
+  s.ty = Math.max(-m, Math.min(m, s.ty));
+}
+
+function applyTransform(catId) {
+  const s   = cropState[catId];
+  const img = document.querySelector(`.crop-container[data-cat="${catId}"] .crop-img`);
+  if (!img || !s) return;
+  img.style.transform = `scale(${s.zoom}) translate(${s.tx}%, ${s.ty}%)`;
+}
+
+// Inicijalizuj stanje iz PHP-a i prikvači drag
 document.querySelectorAll('.crop-container').forEach(container => {
   const catId = container.dataset.cat;
   const img   = container.querySelector('.crop-img');
   if (!img) return;
 
-  // Inicijalizuj stanje iz inline stilova (postavljenih od PHP-a)
-  const zoom = parseInt(container.closest('.card').querySelector('.zoom-slider')?.value) || 100;
-  catPositions[catId] = catPositions[catId] || { x: 50, y: 50, zoom };
-  applyPosition(container, img, catPositions[catId]);
+  // Izvuci početno stanje iz inline transform koji je PHP postavio
+  const sliderVal = parseInt(container.closest('.card').querySelector('.zoom-slider')?.value) || 100;
+  cropState[catId] = cropState[catId] || { tx: 0, ty: 0, zoom: sliderVal / 100 };
 
-  let dragging = false, startX, startY, startLeft, startTop;
+  let dragging = false, startX, startY, startTx, startTy;
 
-  container.addEventListener('mousedown', e => {
+  function onDragStart(cx, cy) {
     dragging = true;
-    startX = e.clientX; startY = e.clientY;
-    startLeft = parseFloat(img.style.left) || 0;
-    startTop  = parseFloat(img.style.top)  || 0;
+    startX  = cx; startY  = cy;
+    startTx = cropState[catId].tx;
+    startTy = cropState[catId].ty;
     container.style.cursor = 'grabbing';
-    e.preventDefault();
-  });
+  }
 
-  document.addEventListener('mousemove', e => {
+  function onDragMove(cx, cy) {
     if (!dragging) return;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    const newLeft = clampLeft(startLeft + dx, container, img);
-    const newTop  = clampTop (startTop  + dy, container, img);
-    img.style.left = newLeft + 'px';
-    img.style.top  = newTop  + 'px';
-    // Pretvori px u % za čuvanje
-    const cw = container.offsetWidth, ch = container.offsetHeight;
-    const iw = img.offsetWidth,       ih = img.offsetHeight;
-    catPositions[catId].x = iw > cw ? Math.round((-newLeft / (iw - cw)) * 100) : 50;
-    catPositions[catId].y = ih > ch ? Math.round((-newTop  / (ih - ch)) * 100) : 50;
-  });
+    const s  = cropState[catId];
+    const cw = container.offsetWidth;
+    const ch = container.offsetHeight;
+    // Pretvori px pomak u % od dimenzija skalirane slike
+    const dtx = ((cx - startX) / (cw  * s.zoom)) * 100;
+    const dty = ((cy - startY) / (ch * s.zoom)) * 100;
+    s.tx = startTx + dtx;
+    s.ty = startTy + dty;
+    clampState(s);
+    applyTransform(catId);
+  }
 
-  document.addEventListener('mouseup', () => {
-    if (dragging) { dragging = false; container.style.cursor = 'grab'; }
-  });
+  function onDragEnd() {
+    dragging = false;
+    container.style.cursor = 'grab';
+  }
 
-  // Touch podrška
+  container.addEventListener('mousedown',  e => { onDragStart(e.clientX, e.clientY); e.preventDefault(); });
+  document .addEventListener('mousemove',  e => onDragMove(e.clientX, e.clientY));
+  document .addEventListener('mouseup',    ()  => onDragEnd());
+
   container.addEventListener('touchstart', e => {
-    const t = e.touches[0];
-    dragging = true;
-    startX = t.clientX; startY = t.clientY;
-    startLeft = parseFloat(img.style.left) || 0;
-    startTop  = parseFloat(img.style.top)  || 0;
+    onDragStart(e.touches[0].clientX, e.touches[0].clientY);
   }, { passive: true });
-
   container.addEventListener('touchmove', e => {
-    if (!dragging) return;
-    const t = e.touches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
-    const newLeft = clampLeft(startLeft + dx, container, img);
-    const newTop  = clampTop (startTop  + dy, container, img);
-    img.style.left = newLeft + 'px';
-    img.style.top  = newTop  + 'px';
-    const cw = container.offsetWidth, ch = container.offsetHeight;
-    const iw = img.offsetWidth,       ih = img.offsetHeight;
-    catPositions[catId].x = iw > cw ? Math.round((-newLeft / (iw - cw)) * 100) : 50;
-    catPositions[catId].y = ih > ch ? Math.round((-newTop  / (ih - ch)) * 100) : 50;
+    onDragMove(e.touches[0].clientX, e.touches[0].clientY);
     e.preventDefault();
   }, { passive: false });
-
-  container.addEventListener('touchend', () => { dragging = false; });
+  container.addEventListener('touchend', () => onDragEnd());
 });
 
 // Zoom slider
 document.querySelectorAll('.zoom-slider').forEach(slider => {
   slider.addEventListener('input', function() {
     const catId = this.dataset.cat;
-    const zoom = parseInt(this.value);
-    catPositions[catId] = catPositions[catId] || { x: 50, y: 50, zoom };
-    catPositions[catId].zoom = zoom;
-    const container = document.querySelector(`.crop-container[data-cat="${catId}"]`);
-    const img = container?.querySelector('.crop-img');
-    if (img) applyPosition(container, img, catPositions[catId]);
-    const valEl = container?.closest('.card')?.querySelector('.zoom-val');
-    if (valEl) valEl.textContent = zoom + '%';
+    const zoom  = parseInt(this.value) / 100;
+    if (!cropState[catId]) cropState[catId] = { tx: 0, ty: 0, zoom };
+    cropState[catId].zoom = zoom;
+    clampState(cropState[catId]);
+    applyTransform(catId);
+    const valEl = document.querySelector(`.crop-container[data-cat="${catId}"]`)
+                    ?.closest('.card')?.querySelector('.zoom-val');
+    if (valEl) valEl.textContent = Math.round(zoom * 100) + '%';
   });
 });
-
-function applyPosition(container, img, pos) {
-  img.style.width  = pos.zoom + '%';
-  img.style.height = pos.zoom + '%';
-  // Forsiraj reflow da dobijemo prave dimenzije
-  requestAnimationFrame(() => {
-    const cw = container.offsetWidth, ch = container.offsetHeight;
-    const iw = img.offsetWidth,       ih = img.offsetHeight;
-    const left = iw > cw ? -((pos.x / 100) * (iw - cw)) : (cw - iw) / 2;
-    const top  = ih > ch ? -((pos.y / 100) * (ih - ch)) : (ch - ih) / 2;
-    img.style.left = clampLeft(left, container, img) + 'px';
-    img.style.top  = clampTop (top,  container, img) + 'px';
-  });
-}
-
-function clampLeft(left, container, img) {
-  const excess = img.offsetWidth - container.offsetWidth;
-  if (excess <= 0) return (container.offsetWidth - img.offsetWidth) / 2;
-  return Math.min(0, Math.max(-excess, left));
-}
-function clampTop(top, container, img) {
-  const excess = img.offsetHeight - container.offsetHeight;
-  if (excess <= 0) return (container.offsetHeight - img.offsetHeight) / 2;
-  return Math.min(0, Math.max(-excess, top));
-}
 
 async function handleCatImageUpload(input, catId) {
   if (!input.files || !input.files[0]) return;
@@ -1111,13 +1094,6 @@ async function handleCatImageUpload(input, catId) {
     const res  = await fetch('actions.php', { method: 'POST', body: fd });
     const data = await res.json();
     if (data.ok) {
-      const container = document.querySelector(`.crop-container[data-cat="${catId}"]`);
-      // Zamijeni sadržaj containera sa novom slikom
-      container.innerHTML = `<img src="../${data.path}?t=${Date.now()}" class="crop-img"
-        style="position:absolute;width:100%;height:100%;object-fit:cover;left:0;top:0;" draggable="false">`;
-      // Re-inicijalizuj drag za novu sliku
-      catPositions[catId] = { x: 50, y: 50, zoom: 100 };
-      // Refresh page to rebind drag events (simple reload)
       label.querySelector('span').textContent = 'Slika uploadovana!';
       setTimeout(() => location.href = 'dashboard.php?section=cat-images', 800);
     } else {
@@ -1129,23 +1105,23 @@ async function handleCatImageUpload(input, catId) {
 }
 
 async function saveCatPosition(catId) {
-  const pos = catPositions[catId];
-  if (!pos) return;
+  const s = cropState[catId];
+  if (!s) return;
   const btn = document.querySelector(`.save-pos-btn[data-cat="${catId}"]`);
   btn.style.opacity = '0.5';
   const fd = new FormData();
   fd.append('action', 'save_category_position');
   fd.append('cat_id', catId);
-  fd.append('x', pos.x);
-  fd.append('y', pos.y);
-  fd.append('zoom', pos.zoom);
+  fd.append('tx',   s.tx.toFixed(4));
+  fd.append('ty',   s.ty.toFixed(4));
+  fd.append('zoom', s.zoom.toFixed(4));
   try {
     const res  = await fetch('actions.php', { method: 'POST', body: fd });
     const data = await res.json();
     if (data.ok) {
       const msg = document.querySelector(`.pos-saved-msg[data-cat="${catId}"]`);
       msg.style.display = 'inline';
-      setTimeout(() => msg.style.display = 'none', 2000);
+      setTimeout(() => msg.style.display = 'none', 2500);
     }
   } catch(e) { alert('Greška'); }
   btn.style.opacity = '1';
