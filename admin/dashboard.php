@@ -1119,7 +1119,7 @@ async function handleCatImageUpload(input, catId) {
       catPositions[catId] = { x: 50, y: 50, zoom: 100 };
       // Refresh page to rebind drag events (simple reload)
       label.querySelector('span').textContent = 'Slika uploadovana!';
-      setTimeout(() => location.reload(), 800);
+      setTimeout(() => location.href = 'dashboard.php?section=cat-images', 800);
     } else {
       label.querySelector('span').textContent = data.error || 'Greška';
     }
