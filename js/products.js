@@ -375,6 +375,15 @@ async function renderProductDetail() {
     : null;
   const coveragePerUnit = getCoveragePerUnit();
 
+  // SPC floor plank/tile dimensions from features (e.g. "Dimenzije: 122 × 18 cm")
+  const spcDims = product.category === 'spc-pod' ? (() => {
+    for (const f of (product.features || [])) {
+      const m = f.match(/(\d+[.,]?\d*)\s*[×x]\s*(\d+[.,]?\d*)\s*cm/i);
+      if (m) return { w: parseFloat(m[1].replace(',','.')), h: parseFloat(m[2].replace(',','.')) };
+    }
+    return null;
+  })() : null;
+
   // Reviews data – per product ID, with total count and 2 visible comments
   const reviewsData = {
     27: { total: 9,  fiveS: 8, fourS: 1, comments: [
@@ -829,9 +838,9 @@ async function renderProductDetail() {
         <span class="pq-step-val" id="pq-qty-val">1</span>
         <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
       </div>
-      <div class="pq-m2-badge" id="pq-m2-badge">
+      ${product.category !== 'spc-pod' ? `<div class="pq-m2-badge" id="pq-m2-badge">
         1 ${product.unit === 'm²' ? 'm²' : 'kom'} = ${coveragePerUnit.toFixed(2).replace('.', ',')} m²
-      </div>
+      </div>` : ''}
     </div>
 
     <!-- Tab: Kalkulator -->
@@ -841,21 +850,30 @@ async function renderProductDetail() {
         <i class="fas fa-ruler-horizontal"></i>
         <span>Svaka letvica: <strong>280cm visina × ${letvicaDims.w}cm širina</strong> → 1 letvica = ${coveragePerUnit.toFixed(2).replace('.', ',')} m²</span>
       </div>` : ''}
+      ${spcDims ? `
+      <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
+        <i class="fas fa-ruler-combined"></i>
+        <span>Svaka daska: <strong>${spcDims.w} × ${spcDims.h} cm</strong> &nbsp;·&nbsp; Kalkulator uključuje <strong>+10% otpad</strong> za rezove</span>
+      </div>` : (product.category === 'spc-pod' ? `
+      <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
+        <i class="fas fa-info-circle"></i>
+        <span>Kalkulator uključuje <strong>+10% otpad</strong> za rezove</span>
+      </div>` : '')}
       <div class="pq-calc-inner">
         <div class="pq-calc-field">
-          <label>Širina zida</label>
+          <label>${product.category === 'spc-pod' ? 'Dužina prostorije' : 'Širina zida'}</label>
           <div class="pq-calc-stepper">
             <button type="button" onclick="stepCalc('wall-w',-0.5)">−</button>
-            <input type="number" id="wall-w" value="1" min="0.5" max="50" step="0.5" oninput="calcPanels()">
+            <input type="number" id="wall-w" value="${product.category === 'spc-pod' ? '4' : '1'}" min="0.5" max="50" step="0.5" oninput="calcPanels()">
             <span class="pq-calc-unit">m</span>
             <button type="button" onclick="stepCalc('wall-w',0.5)">+</button>
           </div>
         </div>
         <div class="pq-calc-field">
-          <label>Visina zida</label>
+          <label>${product.category === 'spc-pod' ? 'Širina prostorije' : 'Visina zida'}</label>
           <div class="pq-calc-stepper">
             <button type="button" onclick="stepCalc('wall-h',-0.1)">−</button>
-            <input type="number" id="wall-h" value="2.8" min="0.5" max="10" step="0.1" oninput="calcPanels()">
+            <input type="number" id="wall-h" value="${product.category === 'spc-pod' ? '3.5' : '2.8'}" min="0.5" max="50" step="0.1" oninput="calcPanels()">
             <span class="pq-calc-unit">m</span>
             <button type="button" onclick="stepCalc('wall-h',0.1)">+</button>
           </div>
@@ -1025,10 +1043,24 @@ async function renderProductDetail() {
     const w = parseFloat(document.getElementById('wall-w')?.value) || 0;
     const h = parseFloat(document.getElementById('wall-h')?.value) || 0;
     const area = w * h;
-    const count = Math.ceil(area / coveragePerUnit);
     const res = document.getElementById('calc-result');
     if (!res || area <= 0) return;
 
+    if (product.category === 'spc-pod') {
+      const areaWithWaste = area * 1.10;
+      const m2Needed = Math.ceil(areaWithWaste * 10) / 10; // round up to 0.1
+      const price = parseFloat(product.price) * (1 - (product.discount || 0) / 100);
+      const totalCost = (m2Needed * price).toFixed(2).replace('.', ',');
+      res.innerHTML = `
+        <div style="line-height:1.7;">
+          Prostorija <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
+          <span style="color:#9b7d56;">+10% za rezove</span> → trebaš <strong>${m2Needed.toFixed(1).replace('.',',')} m²</strong><br>
+          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+        </div>`;
+      return;
+    }
+
+    const count = Math.ceil(area / coveragePerUnit);
     const totalPrice = (count * parseFloat(product.price)).toFixed(2).replace('.', ',');
 
     if (letvicaDims) {

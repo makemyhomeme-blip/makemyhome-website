@@ -29,7 +29,7 @@
       "Tropski"
     ],
     "image": "images/products/cq006.jpg",
-    "badge": null,
+    "badge": "Bestseller",
     "inStock": true,
     "featured": true,
     "sku": "CQ006"
@@ -66,7 +66,7 @@
     "image": "images/products/mw010.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true,
+    "featured": false,
     "sku": "MW010"
   },
   {
@@ -171,7 +171,7 @@
       "Boho"
     ],
     "image": "images/products/mw013.jpg",
-    "badge": "Bestseller",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "sku": "MW013"
@@ -206,9 +206,9 @@
       "Rustikalni"
     ],
     "image": "images/products/mw300.jpg",
-    "badge": null,
+    "badge": "Najpopularniji",
     "inStock": true,
-    "featured": false,
+    "featured": true,
     "sku": "MW300"
   },
   {
@@ -312,7 +312,7 @@
       "Noir"
     ],
     "image": "images/products/mw312.jpg",
-    "badge": "Premium",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "sku": "MW312"
@@ -337,7 +337,7 @@
     "image": "images/products/product-1774006203-686.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true,
+    "featured": false,
     "highlight": "Prirodna toplina tkanine koja umiruje svaki prostor",
     "idealFor": [
       "Dnevna soba",
@@ -373,7 +373,7 @@
     "image": "images/products/product-1774006240-870.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true,
+    "featured": false,
     "highlight": "Bijela koja prostoriju čini dvostruko većom",
     "idealFor": [
       "Dnevna soba",
@@ -407,7 +407,7 @@
       "Šifra: BW224"
     ],
     "image": "images/products/product-1774006266-913.jpg",
-    "badge": null,
+    "badge": "Novo",
     "inStock": true,
     "featured": true,
     "highlight": "Urbana sofisticiranost koja odgovara svakom enterijeru",
@@ -445,7 +445,7 @@
     "image": "images/products/product-1774006317-836.jpg",
     "badge": null,
     "inStock": true,
-    "featured": true,
+    "featured": false,
     "highlight": "Tekstura koja podsjeća na najfiniji prirodni lan",
     "idealFor": [
       "Dnevna soba",
@@ -661,7 +661,7 @@
     "image": "images/products/product-1774008515-675.jpg",
     "badge": null,
     "inStock": true,
-    "featured": false,
+    "featured": true,
     "highlight": "Elegancija bijelog mermera bez hladnoce kamena",
     "idealFor": [
       "Kupatilo",
@@ -934,20 +934,22 @@
     "name": "YL056",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 30,
     "unit": "kom",
     "description": "YL056 panel donosi uzorak inspirisan rijetkim zelenim jade kamenom – savrsen za one koji zele nesto potpuno drugacije od tipicnih belih mermera. Zeleni tonovi unose svjezinu i vitalnost u prostor, a kombinacija s prirodnim materijalom bambus osnove pravi ovaj panel jednim od najekocentricnijih u kolekciji.",
     "features": [
-      "Dimenzije: 280×122cm (3,42 m² po komadu)",
+      "Dimenzije: 280×122cm (3",
+      "42 m² po komadu)",
       "Materijal: bambus vlakno s mermernim UV printom",
       "Uzorak: zeleni jade – prirodne zelene nijanse",
       "Povrsinska obrada: visoko-sjajna lak zastita",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
       "Otporan na vlagu - pogodan za kupatilo",
       "Sifra: YL056"
     ],
     "image": "images/products/product-1774009037-462.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Zeleni jade – prirodan i unikatan uzorak",
@@ -2359,7 +2361,7 @@
     "name": "AKU060",
     "category": "akusticni-paneli",
     "price": "94.99",
-    "discount": 0,
+    "discount": 30,
     "unit": "kom",
     "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
     "features": [
@@ -2369,11 +2371,13 @@
       "Visoka apsorpcija niskih i visokih frekvencija",
       "Povrsina: drvena obloga u tamnijem tonu",
       "Montaža: lepi se lepilom ili sistem kuka",
-      "Pogodan za glazbene studije, home theatre, konferencijske sale",
+      "Pogodan za glazbene studije",
+      "home theatre",
+      "konferencijske sale",
       "Sifra: AKU060"
     ],
     "image": "images/products/product-1774011837-259.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Premium akustika – visoka apsorpcija, drveni dizajn",
@@ -2388,7 +2392,8 @@
       "Moderni",
       "Luksuzni",
       "Minimalisticki"
-    ]
+    ],
+    "sku": null
   },
   {
     "id": 96,
@@ -2547,6 +2552,78 @@
     ],
     "image": "images/products/product-1774013504-324.png",
     "badge": null,
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 103,
+    "name": "SPC04 – SPC Laminat",
+    "category": "spc-pod",
+    "price": "24.99",
+    "discount": 30,
+    "unit": "m²",
+    "description": "Dugi uski format 122×18 cm koji prostoriji daje eleganciju i vizuelno je produžava. Prirodni dekor drveta u vrhunskoj SPC izvedbi – 100% vodootporan, bez bubrenja, bez brige. Idealan za sve prostorije uključujući kuhinje i kupatila. Click-lock sistem za brzu i jednostavnu montažu bez ljepila ili posebnih alata.",
+    "features": [
+      "Dimenzije: 122 × 18 cm",
+      "Površina po dasci: 0,22 m²",
+      "Sistem montaže: Click-lock (plutajuća montaža)",
+      "Vodootpornost: 100% – pogodan za kuhinje i kupatila",
+      "Otpornost na ogrebotine i habanje",
+      "Kompatibilan sa podnim grijanjem",
+      "IXPE podloga – prigušuje zvuk koraka",
+      "Lak za rezanje i prilagođavanje prostoru"
+    ],
+    "image": "images/products/product-1774370378-495.jpeg",
+    "badge": "Akcija",
+    "sku": "SPC04",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 104,
+    "name": "SPC05 – SPC Laminat",
+    "category": "spc-pod",
+    "price": "24.99",
+    "discount": 30,
+    "unit": "m²",
+    "description": "Format 122×18 cm u toplom dekor tonu koji donosi prirodnu atmosferu drveta bez ijednog kompromisa. SPC jezgra od kamenog kompozita znači da nema bubrenja čak ni u vlažnim prostorijama. Savršen za dnevne sobe, hodnike i spavaće sobe gdje se traži trajnost i izgled koji ne blijedi. Montaža u sat vremena, bez profesionalaca.",
+    "features": [
+      "Dimenzije: 122 × 18 cm",
+      "Površina po dasci: 0,22 m²",
+      "Sistem montaže: Click-lock (plutajuća montaža)",
+      "Vodootpornost: 100% – pogodan za kuhinje i kupatila",
+      "Dimenziona stabilnost – ne skuplja se niti širi",
+      "Kompatibilan sa podnim grijanjem",
+      "IXPE podloga – prigušuje zvuk koraka",
+      "Visoka otpornost na udarce i teško namještanje"
+    ],
+    "image": "images/products/product-1774370411-629.jpeg",
+    "badge": "Akcija",
+    "sku": "SPC05",
+    "inStock": true,
+    "featured": false
+  },
+  {
+    "id": 105,
+    "name": "SPC07 – SPC Laminat (Tile Format)",
+    "category": "spc-pod",
+    "price": "24.99",
+    "discount": 30,
+    "unit": "m²",
+    "description": "Format pločice 61,5×31 cm koji savršeno imitira kamene ili betonske površine u punoj vodonepropusnosti SPC tehnologije. Kraće daske olakšavaju montažu u manjim ili nepravilnim prostorima – manje otpada, više preciznosti. Idealno za kupatila, hodnike i kuhinje gdje se traži estetika kamena bez hladnoće ili krhkosti. Rustičan ili urbani – odgovara svemu.",
+    "features": [
+      "Dimenzije: 61,5 × 31 cm",
+      "Površina po pločici: 0,19 m²",
+      "Sistem montaže: Click-lock (plutajuća montaža)",
+      "Vodootpornost: 100% – idealan za kupatila i kuhinje",
+      "Kraći format – lakša montaža u malim prostorima",
+      "Kompatibilan sa podnim grijanjem",
+      "IXPE podloga – prigušuje zvuk koraka",
+      "Otporan na vlagu, udarce i svakodnevno habanje"
+    ],
+    "image": "images/products/product-1774370435-331.jpeg",
+    "badge": "Akcija",
+    "sku": "SPC07",
     "inStock": true,
     "featured": false
   }
