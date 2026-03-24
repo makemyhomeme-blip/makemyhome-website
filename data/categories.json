@@ -34,5 +34,12 @@
     "icon": "fas fa-minus",
     "description": "Aluminijumske lajsne za završnu obradu",
     "color": "#888"
+  },
+  {
+    "id": "spc-pod",
+    "name": "SPC Pod",
+    "icon": "fas fa-border-all",
+    "description": "Vodootporni SPC laminatni podovi za svaki prostor",
+    "color": "#5c4a32"
   }
 ]
