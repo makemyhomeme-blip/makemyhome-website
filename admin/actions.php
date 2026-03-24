@@ -28,17 +28,58 @@ function saveProducts($products, $file) {
     return file_put_contents($file, $json) !== false;
 }
 
+/**
+ * Smanji i kompresuje sliku na max dimenzije, sačuvaj kao JPEG.
+ * Vraća putanju sačuvanog fajla ili false ako ne uspije.
+ */
+function optimizeImage($tmpPath, $destPath, $maxW = 1200, $maxH = 900, $quality = 82) {
+    $finfo    = new finfo(FILEINFO_MIME_TYPE);
+    $mimeReal = $finfo->file($tmpPath);
+    $gdCreate = [
+        'image/jpeg' => 'imagecreatefromjpeg',
+        'image/jpg'  => 'imagecreatefromjpeg',
+        'image/png'  => 'imagecreatefrompng',
+        'image/webp' => 'imagecreatefromwebp',
+    ];
+    if (!isset($gdCreate[$mimeReal])) return false;
+    $src = $gdCreate[$mimeReal]($tmpPath);
+    if (!$src) return false;
+    $srcW = imagesx($src);
+    $srcH = imagesy($src);
+    // Izračunaj nove dimenzije zadržavajući proporcije
+    $ratio  = min($maxW / $srcW, $maxH / $srcH, 1.0); // ne uvećavaj male slike
+    $dstW   = (int)round($srcW * $ratio);
+    $dstH   = (int)round($srcH * $ratio);
+    $dst    = imagecreatetruecolor($dstW, $dstH);
+    // Zadrži prozirnost za PNG
+    if ($mimeReal === 'image/png') {
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+    }
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $dstW, $dstH, $srcW, $srcH);
+    imagedestroy($src);
+    $ok = imagejpeg($dst, $destPath, $quality);
+    imagedestroy($dst);
+    return $ok ? $destPath : false;
+}
+
 function handleImageUpload($fieldName) {
     if (empty($_FILES[$fieldName]['tmp_name'])) return null;
-    $file = $_FILES[$fieldName];
+    $file    = $_FILES[$fieldName];
     $allowed = ['image/jpeg','image/jpg','image/png','image/webp'];
-    if (!in_array($file['type'], $allowed)) return null;
-    if ($file['size'] > 5 * 1024 * 1024) return null;
-    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $filename = 'product-' . time() . '-' . rand(100,999) . '.' . strtolower($ext);
+    $finfo   = new finfo(FILEINFO_MIME_TYPE);
+    $mime    = $finfo->file($file['tmp_name']);
+    if (!in_array($mime, $allowed)) return null;
+    if ($file['size'] > 8 * 1024 * 1024) return null;
+    $filename  = 'product-' . time() . '-' . rand(100,999) . '.jpg';
     $uploadDir = __DIR__ . '/../images/products/';
     if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
-    if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+    $destPath  = $uploadDir . $filename;
+    if (optimizeImage($file['tmp_name'], $destPath, 1200, 900, 82)) {
+        return 'images/products/' . $filename;
+    }
+    // Fallback: sačuvaj original ako GD nije dostupan
+    if (move_uploaded_file($file['tmp_name'], $destPath)) {
         return 'images/products/' . $filename;
     }
     return null;
@@ -231,14 +272,21 @@ switch ($action) {
             echo json_encode(['ok' => false, 'error' => 'Fajl je prevelik. Maksimalno 8MB.']);
             exit;
         }
-        $ext      = $mimeMap[$mimeReal];
-        $filename = 'cat-' . $catId . '-' . time() . '.' . $ext;
+        $filename  = 'cat-' . $catId . '-' . time() . '.jpg'; // uvijek JPEG nakon optimizacije
         $uploadDir = __DIR__ . '/../images/categories/';
         if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
-        if (!move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
-            header('Content-Type: application/json');
-            echo json_encode(['ok' => false, 'error' => 'Upload nije uspio.']);
-            exit;
+        $destPath = $uploadDir . $filename;
+        $saved    = optimizeImage($file['tmp_name'], $destPath, 1400, 1050, 82);
+        if (!$saved) {
+            // Fallback: sačuvaj original ako GD nije dostupan
+            $ext      = $mimeMap[$mimeReal];
+            $filename = 'cat-' . $catId . '-' . time() . '.' . $ext;
+            $destPath = $uploadDir . $filename;
+            if (!move_uploaded_file($file['tmp_name'], $destPath)) {
+                header('Content-Type: application/json');
+                echo json_encode(['ok' => false, 'error' => 'Snimanje fajla nije uspjelo.']);
+                exit;
+            }
         }
         $imgPath = 'images/categories/' . $filename;
         foreach ($cats as &$c) {
