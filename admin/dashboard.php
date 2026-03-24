@@ -701,13 +701,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
 
             <!-- PREVIEW + DRAG -->
             <div class="crop-container" data-cat="<?= $catId ?>"
-                 style="width:100%;height:240px;overflow:hidden;border-radius:8px;background:#1a1a1a;position:relative;cursor:grab;border:2px solid #e8e2da;user-select:none;touch-action:none;">
-              <?php if ($img): ?>
-                <img src="../<?= htmlspecialchars($img) ?>"
-                     class="crop-img"
-                     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:<?= $posX ?>% <?= $posY ?>%;transform:scale(<?= $zoom ?>);transform-origin:center;transition:none;"
-                     draggable="false">
-              <?php else: ?>
+                 data-img-src="<?= $img ? '../'.htmlspecialchars($img, ENT_QUOTES) : '' ?>"
+                 style="width:100%;height:240px;overflow:hidden;border-radius:8px;background:#1a1a1a;position:relative;cursor:<?= $img ? 'grab' : 'default' ?>;border:2px solid #e8e2da;user-select:none;touch-action:none;<?php if ($img): ?>background-image:url('../<?= htmlspecialchars($img, ENT_QUOTES) ?>');background-repeat:no-repeat;background-position:<?= $posX ?>% <?= $posY ?>%;<?php endif; ?>">
+              <?php if (!$img): ?>
                 <div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,0.3);flex-direction:column;gap:8px;">
                   <i class="fas fa-image" style="font-size:32px;"></i>
                   <span style="font-size:12px;">Nema slike – odaberi ispod</span>
@@ -755,7 +751,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <div style="font-size:12px;color:var(--gray);line-height:2;">
                 <div>X: <strong><span class="pos-x-val" data-cat="<?= $catId ?>"><?= round($posX) ?></span>%</strong></div>
                 <div>Y: <strong><span class="pos-y-val" data-cat="<?= $catId ?>"><?= round($posY) ?></span>%</strong></div>
-                <div style="font-size:11px;color:#bbb;margin-top:2px;">ili prevuci sliku</div>
+                <div style="font-size:11px;color:#bbb;margin-top:2px;">prevuci / 2 prsta za zoom</div>
               </div>
             </div>
 
@@ -1044,21 +1040,25 @@ const cropState = {};
 let _cropActionInterval = null;
 
 function applyTransform(catId) {
-  const s   = cropState[catId];
-  const img = document.querySelector(`.crop-container[data-cat="${catId}"] .crop-img`);
-  if (!img || !s) return;
-  img.style.objectPosition = `${s.posX}% ${s.posY}%`;
-  img.style.transform      = `scale(${s.zoom})`;
+  const s = cropState[catId];
+  const container = document.querySelector(`.crop-container[data-cat="${catId}"]`);
+  if (!container || !s) return;
+
+  // background-size: coverPct * zoom % → gives "cover-at-zoom-1" behaviour
+  const sizePct = (s.coverPct || 100) * s.zoom;
+  container.style.backgroundPosition = `${s.posX}% ${s.posY}%`;
+  container.style.backgroundSize     = `${sizePct.toFixed(1)}%`;
+
   // Update coordinate display
   const xEl = document.querySelector(`.pos-x-val[data-cat="${catId}"]`);
   const yEl = document.querySelector(`.pos-y-val[data-cat="${catId}"]`);
   if (xEl) xEl.textContent = Math.round(s.posX);
   if (yEl) yEl.textContent = Math.round(s.posY);
+
   // Update zoom slider and label
   const slider = document.querySelector(`.zoom-slider[data-cat="${catId}"]`);
   if (slider) slider.value = Math.round(s.zoom * 100);
-  const valEl = document.querySelector(`.crop-container[data-cat="${catId}"]`)
-                  ?.closest('.card')?.querySelector('.zoom-val');
+  const valEl = container.closest('.card')?.querySelector('.zoom-val');
   if (valEl) valEl.textContent = Math.round(s.zoom * 100) + '%';
 }
 
@@ -1100,59 +1100,120 @@ function resetCropPos(catId) {
   applyTransform(catId);
 }
 
-// Drag to position
+// Init each crop container
 document.querySelectorAll('.crop-container').forEach(container => {
-  const catId = container.dataset.cat;
-  const img   = container.querySelector('.crop-img');
-  if (!img) return;
+  const catId  = container.dataset.cat;
+  const imgSrc = container.dataset.imgSrc;
+  if (!imgSrc) return; // no image yet
 
   const slider    = container.closest('.card').querySelector('.zoom-slider');
   const sliderVal = slider ? parseInt(slider.value) : 100;
-  const objPos    = img.style.objectPosition || '50% 50%';
-  const parts     = objPos.match(/([\d.]+)%\s+([\d.]+)%/);
+  const bgPos     = container.style.backgroundPosition || '50% 50%';
+  const parts     = bgPos.match(/([\d.]+)%\s+([\d.]+)%/);
+
   cropState[catId] = {
-    posX: parts ? parseFloat(parts[1]) : 50,
-    posY: parts ? parseFloat(parts[2]) : 50,
-    zoom: sliderVal / 100
+    posX:     parts ? parseFloat(parts[1]) : 50,
+    posY:     parts ? parseFloat(parts[2]) : 50,
+    zoom:     sliderVal / 100,
+    coverPct: null,   // set once image loads
+    naturalW: 1,
+    naturalH: 1
   };
 
-  let dragging = false, startX, startY, startPosX, startPosY;
+  // Load image to compute "cover" base size and natural dimensions
+  const tmpImg = new Image();
+  tmpImg.onload = function() {
+    const cw = container.offsetWidth  || 340;
+    const ch = container.offsetHeight || 240;
+    const scale = Math.max(cw / this.naturalWidth, ch / this.naturalHeight);
+    cropState[catId].coverPct = scale * 100;
+    cropState[catId].naturalW = this.naturalWidth;
+    cropState[catId].naturalH = this.naturalHeight;
+    applyTransform(catId);
+  };
+  tmpImg.src = imgSrc;
 
-  container.addEventListener('pointerdown', e => {
+  // Helper: overflow in px at current state
+  function overflow(s) {
+    const cw   = container.offsetWidth  || 340;
+    const ch   = container.offsetHeight || 240;
+    const imgW = cw * (s.coverPct || 100) * s.zoom / 100;
+    const imgH = imgW * s.naturalH / s.naturalW;
+    return { ox: Math.max(1, imgW - cw), oy: Math.max(1, imgH - ch) };
+  }
+
+  // ── Mouse drag ──────────────────────────────────────────────
+  let dragging = false, mStartX, mStartY, mStartPosX, mStartPosY;
+
+  container.addEventListener('mousedown', e => {
     dragging  = true;
-    startX    = e.clientX; startY    = e.clientY;
-    startPosX = cropState[catId].posX;
-    startPosY = cropState[catId].posY;
-    container.setPointerCapture(e.pointerId);
+    mStartX   = e.clientX; mStartY   = e.clientY;
+    mStartPosX = cropState[catId].posX;
+    mStartPosY = cropState[catId].posY;
     container.style.cursor = 'grabbing';
     e.preventDefault();
   });
-
-  container.addEventListener('pointermove', e => {
+  document.addEventListener('mousemove', e => {
     if (!dragging) return;
-    const s  = cropState[catId];
-    const cw = container.offsetWidth;
-    const ch = container.offsetHeight;
-    // sensitivity reduces at higher zoom so movement feels natural
-    const sens = 1 / s.zoom;
-    s.posX = Math.max(0, Math.min(100, startPosX - ((e.clientX - startX) / cw) * 100 * sens));
-    s.posY = Math.max(0, Math.min(100, startPosY - ((e.clientY - startY) / ch) * 100 * sens));
+    const s = cropState[catId];
+    const { ox, oy } = overflow(s);
+    s.posX = Math.max(0, Math.min(100, mStartPosX - ((e.clientX - mStartX) / ox) * 100));
+    s.posY = Math.max(0, Math.min(100, mStartPosY - ((e.clientY - mStartY) / oy) * 100));
     applyTransform(catId);
   });
-
-  container.addEventListener('pointerup',    () => { dragging = false; container.style.cursor = 'grab'; });
-  container.addEventListener('pointercancel',() => { dragging = false; container.style.cursor = 'grab'; });
-});
-
-// Zoom slider (manual drag)
-document.querySelectorAll('.zoom-slider').forEach(slider => {
-  slider.addEventListener('input', function() {
-    const catId = this.dataset.cat;
-    const zoom  = parseInt(this.value) / 100;
-    if (!cropState[catId]) cropState[catId] = { posX: 50, posY: 50, zoom };
-    cropState[catId].zoom = zoom;
-    applyTransform(catId);
+  document.addEventListener('mouseup', () => {
+    if (dragging) { dragging = false; container.style.cursor = 'grab'; }
   });
+
+  // ── Touch drag + pinch-to-zoom ───────────────────────────────
+  let tStartX, tStartY, tStartPosX, tStartPosY;
+  let pinchStartDist, pinchStartZoom, activeTouches = 0;
+
+  container.addEventListener('touchstart', e => {
+    activeTouches = e.touches.length;
+    if (activeTouches === 1) {
+      tStartX    = e.touches[0].clientX;
+      tStartY    = e.touches[0].clientY;
+      tStartPosX = cropState[catId].posX;
+      tStartPosY = cropState[catId].posY;
+    } else if (activeTouches === 2) {
+      pinchStartDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      pinchStartZoom = cropState[catId].zoom;
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  container.addEventListener('touchmove', e => {
+    const s = cropState[catId];
+    if (e.touches.length === 1 && activeTouches === 1) {
+      const { ox, oy } = overflow(s);
+      s.posX = Math.max(0, Math.min(100, tStartPosX - ((e.touches[0].clientX - tStartX) / ox) * 100));
+      s.posY = Math.max(0, Math.min(100, tStartPosY - ((e.touches[0].clientY - tStartY) / oy) * 100));
+      applyTransform(catId);
+    } else if (e.touches.length === 2) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      s.zoom = Math.max(1.0, Math.min(3.0, pinchStartZoom * (dist / pinchStartDist)));
+      applyTransform(catId);
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  container.addEventListener('touchend', e => { activeTouches = e.touches.length; });
+
+  // ── Zoom slider ──────────────────────────────────────────────
+  if (slider) {
+    slider.addEventListener('input', function() {
+      const zoom = parseInt(this.value) / 100;
+      cropState[catId].zoom = zoom;
+      applyTransform(catId);
+    });
+  }
 });
 
 async function handleCatImageUpload(input, catId) {
