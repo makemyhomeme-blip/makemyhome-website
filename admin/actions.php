@@ -3,6 +3,19 @@
  * Make My Home – Admin Actions (dodaj, uredi, obriši proizvode)
  */
 ob_start(); // buffer any PHP warnings so they don't corrupt JSON responses
+
+// === GLOBAL DEBUG LOG (privremeno) ===
+$_glog = __DIR__ . '/../data/actions_debug.log';
+$_ginfo  = date('Y-m-d H:i:s') . " | METHOD=" . ($_SERVER['REQUEST_METHOD']??'?');
+$_ginfo .= " | action=" . ($_POST['action']??'EMPTY');
+$_ginfo .= " | POST_empty=" . (empty($_POST)?'YES':'NO');
+$_ginfo .= " | FILES=" . json_encode(array_map(fn($f)=>['name'=>$f['name'],'size'=>$f['size'],'error'=>$f['error']], $_FILES??[]));
+$_ginfo .= " | session_ok=" . (!empty($_SESSION['admin_logged'])?'YES':'NO(not_checked_yet)');
+$_ginfo .= " | CONTENT_LENGTH=" . ($_SERVER['CONTENT_LENGTH']??'?');
+$_ginfo .= "\n";
+file_put_contents($_glog, $_ginfo, FILE_APPEND);
+// === END DEBUG ===
+
 session_start();
 if (empty($_SESSION['admin_logged'])) {
     ob_end_clean();
