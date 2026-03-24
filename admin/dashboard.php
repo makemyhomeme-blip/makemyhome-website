@@ -671,13 +671,23 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
         $catsFile = __DIR__ . '/../data/categories.json';
         $cats = json_decode(file_get_contents($catsFile), true) ?: [];
       ?>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;">
+      <style>
+        .crop-arrow-btn {
+          width:44px;height:44px;border:1px solid #ddd;border-radius:8px;background:#fff;
+          cursor:pointer;display:flex;align-items:center;justify-content:center;
+          font-size:14px;color:var(--dark);transition:background 0.15s;user-select:none;
+          -webkit-user-select:none;touch-action:none;
+        }
+        .crop-arrow-btn:active { background:#f0ede8; }
+      </style>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;">
         <?php foreach ($cats as $cat):
-          $img  = $cat['image'] ?? '';
-          $pos  = $cat['imagePosition'] ?? [];
-          $posX = $pos['posX'] ?? 50;
-          $posY = $pos['posY'] ?? 50;
-          $zoom = $pos['zoom'] ?? 1.0;
+          $img   = $cat['image'] ?? '';
+          $pos   = $cat['imagePosition'] ?? [];
+          $posX  = $pos['posX'] ?? 50;
+          $posY  = $pos['posY'] ?? 50;
+          $zoom  = $pos['zoom'] ?? 1.0;
+          $catId = htmlspecialchars($cat['id']);
         ?>
         <div class="card" style="overflow:visible;">
           <div class="card-header" style="padding:14px 16px;">
@@ -689,8 +699,8 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           <div style="padding:16px;">
 
             <!-- PREVIEW + DRAG -->
-            <div class="crop-container" data-cat="<?= htmlspecialchars($cat['id']) ?>"
-                 style="width:100%;height:180px;overflow:hidden;border-radius:8px;background:#1a1a1a;position:relative;cursor:grab;border:2px solid #e8e2da;user-select:none;">
+            <div class="crop-container" data-cat="<?= $catId ?>"
+                 style="width:100%;height:240px;overflow:hidden;border-radius:8px;background:#1a1a1a;position:relative;cursor:grab;border:2px solid #e8e2da;user-select:none;touch-action:none;">
               <?php if ($img): ?>
                 <img src="../<?= htmlspecialchars($img) ?>"
                      class="crop-img"
@@ -699,42 +709,80 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <?php else: ?>
                 <div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,0.3);flex-direction:column;gap:8px;">
                   <i class="fas fa-image" style="font-size:32px;"></i>
-                  <span style="font-size:12px;">Nema slike</span>
+                  <span style="font-size:12px;">Nema slike – odaberi ispod</span>
                 </div>
               <?php endif; ?>
             </div>
 
-            <!-- ZOOM SLIDER -->
-            <div style="margin-top:12px;display:flex;align-items:center;gap:10px;">
-              <i class="fas fa-search-minus" style="color:var(--gray);font-size:12px;"></i>
-              <input type="range" class="zoom-slider" min="100" max="300" step="1" value="<?= round($zoom * 100) ?>"
-                     style="flex:1;accent-color:var(--primary);"
-                     data-cat="<?= htmlspecialchars($cat['id']) ?>">
-              <i class="fas fa-search-plus" style="color:var(--gray);font-size:12px;"></i>
-              <span class="zoom-val" style="font-size:12px;color:var(--gray);min-width:36px;"><?= round($zoom * 100) ?>%</span>
+            <?php if ($img): ?>
+
+            <!-- ZOOM -->
+            <div style="margin-top:12px;display:flex;align-items:center;gap:6px;">
+              <span style="font-size:12px;color:var(--gray);white-space:nowrap;min-width:42px;">Zoom:</span>
+              <button type="button" class="crop-arrow-btn" style="width:36px;height:36px;font-size:18px;"
+                      onpointerdown="startZoom('<?= $catId ?>',-0.05)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">−</button>
+              <input type="range" class="zoom-slider" min="100" max="300" step="5" value="<?= round($zoom * 100) ?>"
+                     style="flex:1;accent-color:var(--primary);" data-cat="<?= $catId ?>">
+              <button type="button" class="crop-arrow-btn" style="width:36px;height:36px;font-size:18px;"
+                      onpointerdown="startZoom('<?= $catId ?>',0.05)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">+</button>
+              <span class="zoom-val" style="font-size:12px;color:var(--gray);min-width:40px;text-align:right;"><?= round($zoom * 100) ?>%</span>
             </div>
 
+            <!-- ARROWS + COORDINATES -->
+            <div style="margin-top:10px;display:flex;align-items:center;gap:14px;">
+              <div style="display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:4px;">
+                <div></div>
+                <button type="button" class="crop-arrow-btn"
+                        onpointerdown="startMove('<?= $catId ?>',0,-4)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">
+                  <i class="fas fa-chevron-up"></i></button>
+                <div></div>
+                <button type="button" class="crop-arrow-btn"
+                        onpointerdown="startMove('<?= $catId ?>',-4,0)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">
+                  <i class="fas fa-chevron-left"></i></button>
+                <button type="button" class="crop-arrow-btn" style="background:#f8f6f3;" title="Resetuj poziciju"
+                        onclick="resetCropPos('<?= $catId ?>')">
+                  <i class="fas fa-crosshairs" style="color:var(--primary);"></i></button>
+                <button type="button" class="crop-arrow-btn"
+                        onpointerdown="startMove('<?= $catId ?>',4,0)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">
+                  <i class="fas fa-chevron-right"></i></button>
+                <div></div>
+                <button type="button" class="crop-arrow-btn"
+                        onpointerdown="startMove('<?= $catId ?>',0,4)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">
+                  <i class="fas fa-chevron-down"></i></button>
+                <div></div>
+              </div>
+              <div style="font-size:12px;color:var(--gray);line-height:2;">
+                <div>X: <strong><span class="pos-x-val" data-cat="<?= $catId ?>"><?= round($posX) ?></span>%</strong></div>
+                <div>Y: <strong><span class="pos-y-val" data-cat="<?= $catId ?>"><?= round($posY) ?></span>%</strong></div>
+                <div style="font-size:11px;color:#bbb;margin-top:2px;">ili prevuci sliku</div>
+              </div>
+            </div>
+
+            <?php endif; ?>
+
             <!-- UPLOAD -->
-            <form class="cat-img-form" data-cat="<?= htmlspecialchars($cat['id']) ?>" style="margin-top:14px;">
+            <form class="cat-img-form" data-cat="<?= $catId ?>" style="margin-top:14px;">
               <input type="hidden" name="action" value="upload_category_image">
               <input type="hidden" name="cat_id" value="<?= htmlspecialchars($cat['id']) ?>">
               <label style="display:flex;align-items:center;gap:8px;cursor:pointer;background:#f8f6f3;border:2px dashed #c9a86c;border-radius:8px;padding:10px 12px;font-size:13px;color:var(--dark);">
                 <i class="fas fa-upload" style="color:var(--primary);"></i>
-                <span>Odaberi sliku</span>
-                <input type="file" name="cat_image" accept="image/*" style="display:none;"
-                       onchange="handleCatImageUpload(this,'<?= htmlspecialchars($cat['id']) ?>')">
+                <span><?= $img ? 'Zamijeni sliku (JPG/PNG/WEBP, max 15MB)' : 'Odaberi sliku (JPG/PNG/WEBP, max 15MB)' ?></span>
+                <input type="file" name="cat_image" accept="image/jpeg,image/jpg,image/png,image/webp" style="display:none;"
+                       onchange="handleCatImageUpload(this,'<?= $catId ?>')">
               </label>
             </form>
 
             <!-- SAVE POSITION BTN -->
-            <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
-              <button class="btn btn-primary btn-sm save-pos-btn" data-cat="<?= htmlspecialchars($cat['id']) ?>"
+            <?php if ($img): ?>
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center;">
+              <button class="btn btn-primary btn-sm save-pos-btn" data-cat="<?= $catId ?>"
                       style="flex:1;font-size:13px;" onclick="saveCatPosition('<?= htmlspecialchars($cat['id']) ?>')">
                 <i class="fas fa-check"></i> Sačuvaj poziciju
               </button>
-              <span class="pos-saved-msg" data-cat="<?= htmlspecialchars($cat['id']) ?>"
+              <span class="pos-saved-msg" data-cat="<?= $catId ?>"
                     style="font-size:12px;color:var(--success);display:none;">✓ Sačuvano</span>
             </div>
+            <?php endif; ?>
 
           </div>
         </div>
@@ -991,9 +1039,8 @@ async function setBadge(select, id) {
 }
 
 // ── SLIKE KATEGORIJA ──────────────────────────────────────────
-// State: { catId: { posX: number, posY: number, zoom: number } }
-// posX/posY su 0-100 za object-position, zoom je 1.0-3.0 za transform:scale()
 const cropState = {};
+let _cropActionInterval = null;
 
 function applyTransform(catId) {
   const s   = cropState[catId];
@@ -1001,65 +1048,102 @@ function applyTransform(catId) {
   if (!img || !s) return;
   img.style.objectPosition = `${s.posX}% ${s.posY}%`;
   img.style.transform      = `scale(${s.zoom})`;
+  // Update coordinate display
+  const xEl = document.querySelector(`.pos-x-val[data-cat="${catId}"]`);
+  const yEl = document.querySelector(`.pos-y-val[data-cat="${catId}"]`);
+  if (xEl) xEl.textContent = Math.round(s.posX);
+  if (yEl) yEl.textContent = Math.round(s.posY);
+  // Update zoom slider and label
+  const slider = document.querySelector(`.zoom-slider[data-cat="${catId}"]`);
+  if (slider) slider.value = Math.round(s.zoom * 100);
+  const valEl = document.querySelector(`.crop-container[data-cat="${catId}"]`)
+                  ?.closest('.card')?.querySelector('.zoom-val');
+  if (valEl) valEl.textContent = Math.round(s.zoom * 100) + '%';
 }
 
-// Inicijalizuj stanje i prikvači drag
+// Arrow buttons: hold for continuous movement
+function startMove(catId, dx, dy) {
+  stopCropAction();
+  const step = () => {
+    const s = cropState[catId];
+    if (!s) return;
+    s.posX = Math.max(0, Math.min(100, s.posX + dx));
+    s.posY = Math.max(0, Math.min(100, s.posY + dy));
+    applyTransform(catId);
+  };
+  step();
+  _cropActionInterval = setInterval(step, 80);
+}
+
+// Zoom buttons: hold for continuous zoom
+function startZoom(catId, delta) {
+  stopCropAction();
+  const step = () => {
+    const s = cropState[catId];
+    if (!s) return;
+    s.zoom = Math.max(1.0, Math.min(3.0, s.zoom + delta));
+    applyTransform(catId);
+  };
+  step();
+  _cropActionInterval = setInterval(step, 80);
+}
+
+function stopCropAction() {
+  if (_cropActionInterval) { clearInterval(_cropActionInterval); _cropActionInterval = null; }
+}
+
+function resetCropPos(catId) {
+  const s = cropState[catId];
+  if (!s) return;
+  s.posX = 50; s.posY = 50; s.zoom = 1.0;
+  applyTransform(catId);
+}
+
+// Drag to position
 document.querySelectorAll('.crop-container').forEach(container => {
   const catId = container.dataset.cat;
   const img   = container.querySelector('.crop-img');
   if (!img) return;
 
-  // Izvuci početno stanje iz inline stila koji je PHP postavio
-  const sliderVal = parseInt(container.closest('.card').querySelector('.zoom-slider')?.value) || 100;
+  const slider    = container.closest('.card').querySelector('.zoom-slider');
+  const sliderVal = slider ? parseInt(slider.value) : 100;
   const objPos    = img.style.objectPosition || '50% 50%';
   const parts     = objPos.match(/([\d.]+)%\s+([\d.]+)%/);
-  const initPosX  = parts ? parseFloat(parts[1]) : 50;
-  const initPosY  = parts ? parseFloat(parts[2]) : 50;
-  cropState[catId] = { posX: initPosX, posY: initPosY, zoom: sliderVal / 100 };
+  cropState[catId] = {
+    posX: parts ? parseFloat(parts[1]) : 50,
+    posY: parts ? parseFloat(parts[2]) : 50,
+    zoom: sliderVal / 100
+  };
 
   let dragging = false, startX, startY, startPosX, startPosY;
 
-  function onDragStart(cx, cy) {
+  container.addEventListener('pointerdown', e => {
     dragging  = true;
-    startX    = cx; startY    = cy;
+    startX    = e.clientX; startY    = e.clientY;
     startPosX = cropState[catId].posX;
     startPosY = cropState[catId].posY;
+    container.setPointerCapture(e.pointerId);
     container.style.cursor = 'grabbing';
-  }
+    e.preventDefault();
+  });
 
-  function onDragMove(cx, cy) {
+  container.addEventListener('pointermove', e => {
     if (!dragging) return;
     const s  = cropState[catId];
     const cw = container.offsetWidth;
     const ch = container.offsetHeight;
-    // Povlačenje desno → slika prati prst → posX se smanjuje (pokazuje lijevu stranu)
-    const dpX = -((cx - startX) / cw) * 100;
-    const dpY = -((cy - startY) / ch) * 100;
-    s.posX = Math.max(0, Math.min(100, startPosX + dpX));
-    s.posY = Math.max(0, Math.min(100, startPosY + dpY));
+    // sensitivity reduces at higher zoom so movement feels natural
+    const sens = 1 / s.zoom;
+    s.posX = Math.max(0, Math.min(100, startPosX - ((e.clientX - startX) / cw) * 100 * sens));
+    s.posY = Math.max(0, Math.min(100, startPosY - ((e.clientY - startY) / ch) * 100 * sens));
     applyTransform(catId);
-  }
+  });
 
-  function onDragEnd() {
-    dragging = false;
-    container.style.cursor = 'grab';
-  }
-
-  container.addEventListener('mousedown',  e => { onDragStart(e.clientX, e.clientY); e.preventDefault(); });
-  document .addEventListener('mousemove',  e => onDragMove(e.clientX, e.clientY));
-  document .addEventListener('mouseup',    ()  => onDragEnd());
-
-  container.addEventListener('touchstart', e => {
-    onDragStart(e.touches[0].clientX, e.touches[0].clientY);
-  }, { passive: true });
-  container.addEventListener('touchmove', e => {
-    onDragMove(e.touches[0].clientX, e.touches[0].clientY);
-    e.preventDefault();
-  }, { passive: false });
-  container.addEventListener('touchend', () => onDragEnd());
+  container.addEventListener('pointerup',    () => { dragging = false; container.style.cursor = 'grab'; });
+  container.addEventListener('pointercancel',() => { dragging = false; container.style.cursor = 'grab'; });
 });
 
-// Zoom slider
+// Zoom slider (manual drag)
 document.querySelectorAll('.zoom-slider').forEach(slider => {
   slider.addEventListener('input', function() {
     const catId = this.dataset.cat;
@@ -1067,9 +1151,6 @@ document.querySelectorAll('.zoom-slider').forEach(slider => {
     if (!cropState[catId]) cropState[catId] = { posX: 50, posY: 50, zoom };
     cropState[catId].zoom = zoom;
     applyTransform(catId);
-    const valEl = document.querySelector(`.crop-container[data-cat="${catId}"]`)
-                    ?.closest('.card')?.querySelector('.zoom-val');
-    if (valEl) valEl.textContent = Math.round(zoom * 100) + '%';
   });
 });
 

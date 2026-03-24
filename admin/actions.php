@@ -273,10 +273,10 @@ switch ($action) {
             echo json_encode(['ok' => false, 'error' => 'Nedozvoljen format. Dozvoljeni: JPG, PNG, WEBP.']);
             exit;
         }
-        if ($file['size'] > 8 * 1024 * 1024) {
+        if ($file['size'] > 15 * 1024 * 1024) {
             ob_end_clean();
             header('Content-Type: application/json');
-            echo json_encode(['ok' => false, 'error' => 'Fajl je prevelik. Maksimalno 8MB.']);
+            echo json_encode(['ok' => false, 'error' => 'Fajl je prevelik. Maksimalno 15MB.']);
             exit;
         }
         $filename  = 'cat-' . $catId . '-' . time() . '.jpg';
