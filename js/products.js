@@ -1108,6 +1108,49 @@ async function renderProductDetail() {
   // Immediately compute initial calculator result
   calcPanels();
 
+  // Prati ga letvica / panel (bidirectional link)
+  const pairedId = product.relatedLetvica || product.relatedPanel;
+  if (pairedId) {
+    const paired = allProducts.find(p => p.id === pairedId);
+    if (paired) {
+      const isLetvica = !!product.relatedLetvica;
+      const label = isLetvica ? 'Prati ga 3D Letvica' : 'Prati ga Classic Panel';
+      const icon  = isLetvica ? 'fas fa-grip-lines' : 'fas fa-columns';
+      const relContainer = document.getElementById('related-products');
+      if (relContainer) {
+        relContainer.insertAdjacentHTML('beforebegin', `
+          <div class="paired-product-banner animate-on-scroll" style="
+            background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%);
+            border:1px solid rgba(201,168,108,0.3);
+            border-radius:16px;padding:24px 28px;margin-bottom:40px;
+            display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+            <div style="flex:0 0 auto;">
+              <div style="width:52px;height:52px;background:rgba(201,168,108,0.15);border-radius:12px;
+                display:flex;align-items:center;justify-content:center;">
+                <i class="${icon}" style="color:#c9a86c;font-size:22px;"></i>
+              </div>
+            </div>
+            <div style="flex:1;min-width:180px;">
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#c9a86c;font-weight:600;margin-bottom:4px;">${label}</div>
+              <div style="font-size:17px;font-weight:700;color:#fff;margin-bottom:2px;">${paired.name}</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.5);">Isti ton boje – savršena kombinacija za jedan zid</div>
+            </div>
+            <a href="product.html?id=${paired.id}" style="
+              flex:0 0 auto;
+              background:#c9a86c;color:#1a1a1a;
+              padding:12px 24px;border-radius:10px;
+              font-size:14px;font-weight:700;
+              text-decoration:none;white-space:nowrap;
+              transition:opacity .2s;"
+              onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+              Pogledaj →
+            </a>
+          </div>
+        `);
+      }
+    }
+  }
+
   // Related products
   const related = allProducts.filter(p => p.category === product.category && p.id !== id).slice(0, 4);
   const relContainer = document.getElementById('related-products');
