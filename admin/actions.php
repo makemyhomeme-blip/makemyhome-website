@@ -364,7 +364,7 @@ switch ($action) {
         $catId    = trim($_POST['cat_id'] ?? '');
         $posX     = max(0.0,  min(100.0, (float)($_POST['posX'] ?? 50)));
         $posY     = max(0.0,  min(100.0, (float)($_POST['posY'] ?? 50)));
-        $zoom     = max(1.0,  min(6.0,   (float)($_POST['zoom'] ?? 1.0)));
+        $zoom     = max(1.0,  min(3.0,   (float)($_POST['zoom'] ?? 1.0)));
         foreach ($cats as &$c) {
             if ($c['id'] === $catId) {
                 $c['imagePosition'] = ['posX' => $posX, 'posY' => $posY, 'zoom' => $zoom];
