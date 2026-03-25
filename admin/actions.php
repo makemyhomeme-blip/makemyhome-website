@@ -343,7 +343,11 @@ switch ($action) {
         }
         $imgPath = 'images/categories/' . $filename;
         foreach ($cats as &$c) {
-            if ($c['id'] === $catId) { $c['image'] = $imgPath; break; }
+            if ($c['id'] === $catId) {
+                $c['image'] = $imgPath;
+                $c['imagePosition'] = ['posX' => 50.0, 'posY' => 50.0, 'zoom' => 1.0];
+                break;
+            }
         }
         unset($c);
         $saved = file_put_contents($catsFile, json_encode($cats, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
