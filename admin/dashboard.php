@@ -229,7 +229,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
 <body>
 
 <!-- MOBILE OVERLAY -->
-<div id="sidebar-overlay" onclick="document.getElementById('sidebar').classList.remove('open')" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;"></div>
+<div id="sidebar-overlay" onclick="document.getElementById('sidebar').classList.remove('open');this.style.display='none';" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;"></div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
