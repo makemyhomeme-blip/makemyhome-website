@@ -47,9 +47,36 @@ function redirect($msg = '', $err = '', $section = '') {
     exit;
 }
 
+function backupData($file) {
+    if (!file_exists($file)) return;
+    $dir     = dirname($file);
+    $base    = basename($file, '.json');
+    $backups = glob($dir . '/' . $base . '.bak.*.json');
+    // Zadrži max 5 backupa, obriši najstarije
+    if (count($backups) >= 5) {
+        sort($backups);
+        foreach (array_slice($backups, 0, count($backups) - 4) as $old) {
+            @unlink($old);
+        }
+    }
+    $dest = $dir . '/' . $base . '.bak.' . date('Ymd-His') . '.json';
+    @copy($file, $dest);
+}
+
 function saveProducts($products, $file) {
+    backupData($file);
     $json = json_encode(array_values($products), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    return file_put_contents($file, $json) !== false;
+    $tmp  = $file . '.tmp';
+    if (file_put_contents($tmp, $json, LOCK_EX) === false) return false;
+    return rename($tmp, $file);
+}
+
+function saveCategories($cats, $file) {
+    backupData($file);
+    $json = json_encode(array_values($cats), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    $tmp  = $file . '.tmp';
+    if (file_put_contents($tmp, $json, LOCK_EX) === false) return false;
+    return rename($tmp, $file);
 }
 
 /**
@@ -156,7 +183,9 @@ switch ($action) {
         ];
 
         $products[] = $newProduct;
-        saveProducts($products, $productsFile);
+        if (!saveProducts($products, $productsFile)) {
+            redirect('', 'GREŠKA: Proizvod nije sačuvan – problem sa diskom ili dozvolama. Kontaktirajte admina.', 'add-product');
+        }
         redirect("Proizvod '{$name}' je uspješno dodat!", '', 'add-product');
         break;
 
@@ -203,7 +232,9 @@ switch ($action) {
         }
         unset($p);
 
-        saveProducts($products, $productsFile);
+        if (!saveProducts($products, $productsFile)) {
+            redirect('', 'GREŠKA: Izmjene nisu sačuvane – problem sa diskom ili dozvolama.', 'products');
+        }
         redirect("Proizvod '{$name}' je uspješno ažuriran!", '', 'products');
         break;
 
@@ -214,7 +245,9 @@ switch ($action) {
             if ($p['id'] === $id) { $deletedName = $p['name']; break; }
         }
         $products = array_filter($products, fn($p) => $p['id'] !== $id);
-        saveProducts($products, $productsFile);
+        if (!saveProducts($products, $productsFile)) {
+            redirect('', 'GREŠKA: Brisanje nije sačuvano – problem sa diskom ili dozvolama.', 'products');
+        }
         redirect("Proizvod '{$deletedName}' je obrisan.", '', 'products');
         break;
 
@@ -236,7 +269,11 @@ switch ($action) {
             if ($p['id'] === $id) { $p['featured'] = !$currentlyFeatured; break; }
         }
         unset($p);
-        saveProducts($products, $productsFile);
+        if (!saveProducts($products, $productsFile)) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju – pokušaj ponovo.']);
+            exit;
+        }
         $newCount = count(array_filter($products, fn($p) => $p['featured'] ?? false));
         header('Content-Type: application/json');
         echo json_encode(['ok' => true, 'featured' => !$currentlyFeatured, 'count' => $newCount]);
@@ -252,7 +289,11 @@ switch ($action) {
             }
         }
         unset($p);
-        saveProducts($products, $productsFile);
+        if (!saveProducts($products, $productsFile)) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju badge-a – pokušaj ponovo.']);
+            exit;
+        }
         header('Content-Type: application/json');
         echo json_encode(['ok' => true, 'badge' => $badge]);
         exit;
@@ -350,8 +391,7 @@ switch ($action) {
             }
         }
         unset($c);
-        $saved = file_put_contents($catsFile, json_encode($cats, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        if ($saved === false) {
+        if (!saveCategories($cats, $catsFile)) {
             ob_end_clean();
             header('Content-Type: application/json');
             echo json_encode(['ok' => false, 'error' => 'Slika snimljena ali baza nije upisana. Provjeri dozvole data/categories.json.']);
@@ -376,7 +416,11 @@ switch ($action) {
             }
         }
         unset($c);
-        file_put_contents($catsFile, json_encode($cats, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        if (!saveCategories($cats, $catsFile)) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju pozicije – pokušaj ponovo.']);
+            exit;
+        }
         header('Content-Type: application/json');
         echo json_encode(['ok' => true]);
         exit;
