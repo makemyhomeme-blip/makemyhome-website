@@ -222,7 +222,14 @@ switch ($action) {
                 $p['unit']        = $unit;
                 $p['description'] = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
                 $p['features']    = $features;
-                if (!empty($image)) $p['image'] = $image; // zadržati staru ako nema novog
+                if (!empty($image) && $image !== ($p['image'] ?? '')) {
+                    // Obriši staru sliku ako postoji i nije ista
+                    $oldImg = $p['image'] ?? '';
+                    if ($oldImg && str_starts_with($oldImg, 'images/products/')) {
+                        @unlink(__DIR__ . '/../' . $oldImg);
+                    }
+                    $p['image'] = $image;
+                }
                 $p['badge']       = $badge ? htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') : null;
                 $p['sku']         = $sku ? strtoupper(htmlspecialchars($sku, ENT_QUOTES, 'UTF-8')) : ($p['sku'] ?? null);
                 $p['inStock']     = $inStock;
@@ -385,6 +392,11 @@ switch ($action) {
         $imgPath = 'images/categories/' . $filename;
         foreach ($cats as &$c) {
             if ($c['id'] === $catId) {
+                // Obriši staru sliku kategorije ako postoji
+                $oldImg = $c['image'] ?? '';
+                if ($oldImg && str_starts_with($oldImg, 'images/categories/')) {
+                    @unlink(__DIR__ . '/../' . $oldImg);
+                }
                 $c['image'] = $imgPath;
                 $c['imagePosition'] = ['posX' => 50.0, 'posY' => 50.0, 'zoom' => 1.0];
                 break;
