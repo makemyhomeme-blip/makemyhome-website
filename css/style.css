@@ -495,7 +495,7 @@ ul { list-style: none; }
   transition: transform 0.5s ease;
 }
 
-.category-card:hover .category-bg-img { transform: scale(1.08); }
+.category-card:hover .category-bg-img { transform: scale(calc(var(--zoom, 1) * 1.05)); }
 
 .category-img-placeholder {
   font-size: 56px;

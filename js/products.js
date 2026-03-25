@@ -298,11 +298,15 @@ async function renderCategories(containerId) {
     const posY = pos.posY !== undefined ? pos.posY : 50;
     const imgInner = cat.image
       ? `<div class="category-bg-img"
-              data-src="${cat.image}"
-              data-zoom="${zoom}"
-              data-posx="${posX}"
-              data-posy="${posY}"
-              style="position:absolute;inset:0;background-image:url('${cat.image}');background-position:${posX}% ${posY}%;background-size:cover;background-repeat:no-repeat;transition:transform 0.5s ease;"></div>`
+              style="position:absolute;inset:0;
+                background-image:url('${cat.image}');
+                background-position:${posX}% ${posY}%;
+                background-size:cover;
+                background-repeat:no-repeat;
+                transform:scale(${zoom});
+                transform-origin:${posX}% ${posY}%;
+                transition:transform 0.5s ease;
+                --zoom:${zoom};"></div>`
       : `<span class="category-img-placeholder"><i class="${cat.icon}"></i></span>`;
     return `
     <a href="products.html?cat=${cat.id}" class="category-card animate-on-scroll">
@@ -319,24 +323,6 @@ async function renderCategories(containerId) {
       </div>
     </a>
   `; }).join('');
-
-  // Compute exact background-size (same formula as admin) once image natural dimensions are known
-  container.querySelectorAll('.category-bg-img[data-src]').forEach(div => {
-    const src  = div.dataset.src;
-    const zoom = parseFloat(div.dataset.zoom) || 1.0;
-    const posX = parseFloat(div.dataset.posx) || 50;
-    const posY = parseFloat(div.dataset.posy) || 50;
-    const tmpImg = new Image();
-    tmpImg.onload = function() {
-      const cw = div.offsetWidth  || 340;
-      const ch = div.offsetHeight || 200;
-      const scale    = Math.max(cw / this.naturalWidth, ch / this.naturalHeight);
-      const coverPct = (this.naturalWidth * scale / cw) * 100;
-      div.style.backgroundSize     = (coverPct * zoom).toFixed(1) + '%';
-      div.style.backgroundPosition = posX + '% ' + posY + '%';
-    };
-    tmpImg.src = src;
-  });
 
   initAnimations();
 }
