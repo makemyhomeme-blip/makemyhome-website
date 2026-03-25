@@ -221,10 +221,15 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
       .content { padding: 20px 16px; }
       .form-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
+      #sidebar-toggle { display: block !important; }
+      #sidebar-overlay { display: block; }
     }
   </style>
 </head>
 <body>
+
+<!-- MOBILE OVERLAY -->
+<div id="sidebar-overlay" onclick="document.getElementById('sidebar').classList.remove('open')" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;"></div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -276,7 +281,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
 <div class="main">
   <header class="topbar">
     <div style="display:flex;align-items:center;gap:12px;">
-      <button id="sidebar-toggle" style="display:none;border:none;background:none;font-size:20px;cursor:pointer;padding:4px;" onclick="document.getElementById('sidebar').classList.toggle('open')">
+      <button id="sidebar-toggle" style="display:none;border:none;background:none;font-size:20px;cursor:pointer;padding:4px;" onclick="var s=document.getElementById('sidebar'),o=document.getElementById('sidebar-overlay');s.classList.toggle('open');o.style.display=s.classList.contains('open')?'block':'none';">
         <i class="fas fa-bars"></i>
       </button>
       <div class="topbar-title" id="page-title">Pregled</div>
@@ -911,6 +916,11 @@ function showSection(name) {
   };
   document.getElementById('page-title').textContent = titles[name] || '';
   event?.target?.classList.add('active');
+  // Zatvori sidebar na mobilnom nakon klika
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebar-overlay');
+  if (sidebar) sidebar.classList.remove('open');
+  if (overlay) overlay.style.display = 'none';
 }
 
 // Otvori sekciju iz URL parametra (npr. nakon dodavanja proizvoda)
