@@ -296,15 +296,18 @@ async function renderCategories(containerId) {
     const zoom = pos.zoom || 1.0;
     const posX = pos.posX !== undefined ? pos.posX : 50;
     const posY = pos.posY !== undefined ? pos.posY : 50;
-    const imgStyle = `width:100%;height:100%;object-fit:cover;object-position:${posX}% ${posY}%;transform:scale(${zoom});transform-origin:center;`;
-    const imgTag = cat.image
-      ? `<img src="${cat.image}" alt="${cat.name}" style="${imgStyle}" loading="lazy"
-           onerror="this.parentElement.innerHTML='<span class=\\'category-img-placeholder\\'><i class=\\'${cat.icon}\\'></i></span>'">`
+    const imgInner = cat.image
+      ? `<div class="category-bg-img"
+              data-src="${cat.image}"
+              data-zoom="${zoom}"
+              data-posx="${posX}"
+              data-posy="${posY}"
+              style="position:absolute;inset:0;background-image:url('${cat.image}');background-position:${posX}% ${posY}%;background-size:cover;background-repeat:no-repeat;transition:transform 0.5s ease;"></div>`
       : `<span class="category-img-placeholder"><i class="${cat.icon}"></i></span>`;
     return `
     <a href="products.html?cat=${cat.id}" class="category-card animate-on-scroll">
-      <div class="category-img" style="overflow:hidden;">
-        ${imgTag}
+      <div class="category-img" style="overflow:hidden;position:relative;">
+        ${imgInner}
       </div>
       <div class="category-body">
         <div class="category-icon" style="background:${cat.color}">
@@ -316,6 +319,24 @@ async function renderCategories(containerId) {
       </div>
     </a>
   `; }).join('');
+
+  // Compute exact background-size (same formula as admin) once image natural dimensions are known
+  container.querySelectorAll('.category-bg-img[data-src]').forEach(div => {
+    const src  = div.dataset.src;
+    const zoom = parseFloat(div.dataset.zoom) || 1.0;
+    const posX = parseFloat(div.dataset.posx) || 50;
+    const posY = parseFloat(div.dataset.posy) || 50;
+    const tmpImg = new Image();
+    tmpImg.onload = function() {
+      const cw = div.offsetWidth  || 340;
+      const ch = div.offsetHeight || 200;
+      const scale    = Math.max(cw / this.naturalWidth, ch / this.naturalHeight);
+      const coverPct = (this.naturalWidth * scale / cw) * 100;
+      div.style.backgroundSize     = (coverPct * zoom).toFixed(1) + '%';
+      div.style.backgroundPosition = posX + '% ' + posY + '%';
+    };
+    tmpImg.src = src;
+  });
 
   initAnimations();
 }

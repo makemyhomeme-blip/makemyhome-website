@@ -491,14 +491,11 @@ ul { list-style: none; }
   justify-content: center;
 }
 
-.category-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.category-bg-img {
   transition: transform 0.5s ease;
 }
 
-.category-card:hover .category-img img { transform: scale(1.08); }
+.category-card:hover .category-bg-img { transform: scale(1.08); }
 
 .category-img-placeholder {
   font-size: 56px;
