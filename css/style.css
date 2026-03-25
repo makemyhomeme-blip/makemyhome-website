@@ -482,7 +482,7 @@ ul { list-style: none; }
 }
 
 .category-img {
-  height: 240px;
+  aspect-ratio: 17 / 12;
   background: var(--dark-2);
   position: relative;
   overflow: hidden;
