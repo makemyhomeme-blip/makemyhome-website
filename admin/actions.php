@@ -4,17 +4,6 @@
  */
 ob_start(); // buffer any PHP warnings so they don't corrupt JSON responses
 
-// === GLOBAL DEBUG LOG (privremeno) ===
-$_glog = __DIR__ . '/../data/actions_debug.log';
-$_ginfo  = date('Y-m-d H:i:s') . " | METHOD=" . ($_SERVER['REQUEST_METHOD']??'?');
-$_ginfo .= " | action=" . ($_POST['action']??'EMPTY');
-$_ginfo .= " | POST_empty=" . (empty($_POST)?'YES':'NO');
-$_ginfo .= " | FILES=" . json_encode(array_map(fn($f)=>['name'=>$f['name'],'size'=>$f['size'],'error'=>$f['error']], $_FILES??[]));
-$_ginfo .= " | session_ok=" . (!empty($_SESSION['admin_logged'])?'YES':'NO(not_checked_yet)');
-$_ginfo .= " | CONTENT_LENGTH=" . ($_SERVER['CONTENT_LENGTH']??'?');
-$_ginfo .= "\n";
-file_put_contents($_glog, $_ginfo, FILE_APPEND);
-// === END DEBUG ===
 
 session_start();
 if (empty($_SESSION['admin_logged'])) {
@@ -308,22 +297,6 @@ switch ($action) {
     case 'upload_category_image':
         ob_end_clean(); // clear buffer, send pure JSON
         ob_start();
-        // Debug log
-        $debugLog = __DIR__ . '/../data/upload_debug.log';
-        $debugInfo = date('Y-m-d H:i:s') . "\n";
-        $debugInfo .= "POST action: " . ($_POST['action'] ?? 'MISSING') . "\n";
-        $debugInfo .= "POST cat_id: " . ($_POST['cat_id'] ?? 'MISSING') . "\n";
-        $debugInfo .= "FILES set: " . (isset($_FILES['cat_image']) ? 'YES' : 'NO') . "\n";
-        if (isset($_FILES['cat_image'])) {
-            $debugInfo .= "FILE error code: " . $_FILES['cat_image']['error'] . "\n";
-            $debugInfo .= "FILE size: " . ($_FILES['cat_image']['size'] ?? 0) . " bytes\n";
-            $debugInfo .= "FILE name: " . ($_FILES['cat_image']['name'] ?? '') . "\n";
-            $debugInfo .= "FILE type: " . ($_FILES['cat_image']['type'] ?? '') . "\n";
-        }
-        $debugInfo .= "PHP upload_max_filesize: " . ini_get('upload_max_filesize') . "\n";
-        $debugInfo .= "PHP post_max_size: " . ini_get('post_max_size') . "\n";
-        $debugInfo .= "---\n";
-        file_put_contents($debugLog, $debugInfo, FILE_APPEND);
 
         $catsFile = __DIR__ . '/../data/categories.json';
         $cats     = json_decode(file_get_contents($catsFile), true) ?: [];

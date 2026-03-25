@@ -58,14 +58,13 @@ $headers .= "X-Mailer: PHP/" . phpversion();
 
 $sent = @mail($to, $subject, $body, $headers);
 
-// Sačuvaj u log fajl (opciono)
+// Sačuvaj upit u JSON fajl (atomski zapis)
 $logDir = __DIR__ . '/../data/';
 if (is_dir($logDir)) {
     $logFile = $logDir . 'inquiries.json';
     $inquiries = [];
     if (file_exists($logFile)) {
-        $existing = file_get_contents($logFile);
-        $inquiries = json_decode($existing, true) ?: [];
+        $inquiries = json_decode(file_get_contents($logFile), true) ?: [];
     }
     $inquiries[] = [
         'date'    => date('Y-m-d H:i:s'),
@@ -76,11 +75,13 @@ if (is_dir($logDir)) {
         'message' => $message,
         'read'    => false
     ];
-    // Čuvaj max 500 upita
     if (count($inquiries) > 500) {
         $inquiries = array_slice($inquiries, -500);
     }
-    file_put_contents($logFile, json_encode($inquiries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    $tmp = $logFile . '.tmp';
+    if (file_put_contents($tmp, json_encode($inquiries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false) {
+        rename($tmp, $logFile);
+    }
 }
 
 echo json_encode([
