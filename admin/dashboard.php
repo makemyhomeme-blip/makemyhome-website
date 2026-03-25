@@ -718,7 +718,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <span style="font-size:12px;color:var(--gray);white-space:nowrap;min-width:42px;">Zoom:</span>
               <button type="button" class="crop-arrow-btn" style="width:36px;height:36px;font-size:18px;"
                       onpointerdown="startZoom('<?= $catId ?>',-0.05)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">−</button>
-              <input type="range" class="zoom-slider" min="100" max="300" step="5" value="<?= round($zoom * 100) ?>"
+              <input type="range" class="zoom-slider" min="100" max="600" step="5" value="<?= round($zoom * 100) ?>"
                      style="flex:1;accent-color:var(--primary);" data-cat="<?= $catId ?>">
               <button type="button" class="crop-arrow-btn" style="width:36px;height:36px;font-size:18px;"
                       onpointerdown="startZoom('<?= $catId ?>',0.05)" onpointerup="stopCropAction()" onpointerleave="stopCropAction()">+</button>
@@ -1082,7 +1082,7 @@ function startZoom(catId, delta) {
   const step = () => {
     const s = cropState[catId];
     if (!s) return;
-    s.zoom = Math.max(1.0, Math.min(3.0, s.zoom + delta));
+    s.zoom = Math.max(1.0, Math.min(6.0, s.zoom + delta));
     applyTransform(catId);
   };
   step();
