@@ -24,7 +24,10 @@
       .showcase-btn-wrap{padding:28px 0 48px}
     }
     /* ===== HERO SLIDER ===== */
-    #hs-track{display:flex;height:100%;transition:transform .65s cubic-bezier(.4,0,.2,1);will-change:transform}
+    #hs-bg{z-index:1}
+    #hero .container,#hero .hero-scroll{position:relative;z-index:3}
+    #hs-dots{z-index:3!important}
+    #hs-track{display:flex;width:100%;height:100%;transition:transform .65s cubic-bezier(.4,0,.2,1);will-change:transform}
     #hs-track img{min-width:100%;width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0}
     .hs-dot{width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.5);cursor:pointer;padding:0;transition:all .3s;background:transparent;pointer-events:all}
     .hs-dot.active{background:#c9a86c;border-color:#c9a86c;transform:scale(1.3)}
@@ -69,12 +72,13 @@
 
 <!-- ===== HERO ===== -->
 <section id="hero">
-  <!-- Slider kao pozadina (prikazuje se kad postoje slike) -->
-  <div id="hs-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+  <!-- Fallback tamna pozadina -->
+  <div class="hero-bg"></div>
+  <!-- Slider slike: z-index iznad hero-bg, ispod teksta -->
+  <div id="hs-bg" style="position:absolute;inset:0;overflow:hidden;display:none;">
     <div id="hs-track"></div>
+    <div id="hs-overlay" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,.72) 0%,rgba(10,10,10,.52) 50%,rgba(10,10,10,.67) 100%);pointer-events:none;"></div>
   </div>
-  <!-- Stalna tamna pozadina (fallback i overlay) -->
-  <div class="hero-bg" id="hero-bg-overlay"></div>
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge">
@@ -531,9 +535,8 @@
     .then(function(r){ return r.json(); })
     .then(function(slides){
       if(!slides || !slides.length) return;
-      var hero    = document.getElementById('hero');
-      var overlay = document.getElementById('hero-bg-overlay');
-      var track   = document.getElementById('hs-track');
+      var hero  = document.getElementById('hero');
+      var track = document.getElementById('hs-track');
       var dotsEl  = document.getElementById('hs-dots');
       var v = Date.now();
       slides.forEach(function(src, i){
@@ -549,9 +552,9 @@
         dotsEl.appendChild(dot);
       });
       // Kad postoje slike: overlay postaje samo tamni gradient (bez hero-bg.jpg)
-      if (overlay) {
-        overlay.style.background = 'linear-gradient(135deg,rgba(10,10,10,.75) 0%,rgba(10,10,10,.55) 50%,rgba(10,10,10,.7) 100%)';
-      }
+      // Prikaži slider (pokrij fallback pozadinu)
+      var hsBg = document.getElementById('hs-bg');
+      if (hsBg) hsBg.style.display = '';
       var current = 0, timer;
       function goTo(n){
         current = ((n % slides.length) + slides.length) % slides.length;
