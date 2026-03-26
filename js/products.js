@@ -7,6 +7,20 @@ let currentFilter = 'all';
 let allProducts = [];
 let allCategories = [];
 
+// Željeni redoslijed kategorija na stranici "Svi proizvodi"
+const CATEGORY_ORDER = [
+  'bambus-mermerni',
+  'classic',
+  'bambus-kozni',
+  'bambus-metalni',
+  'bambus-drveni',
+  'bambus-tekstilni',
+  '3d-letvice',
+  'akusticni-paneli',
+  'aluminijum-lajsne',
+  'spc-pod'
+];
+
 // ===== UČITAJ PODATKE SA SERVERA =====
 async function loadData() {
   try {
@@ -213,7 +227,14 @@ function showCategoryGrid() {
 
   const grid = document.getElementById('category-grid');
   const catMap = buildCatMap();
-  const cats = Object.values(catMap);
+  const cats = Object.values(catMap).sort((a, b) => {
+    const ai = CATEGORY_ORDER.indexOf(a.id);
+    const bi = CATEGORY_ORDER.indexOf(b.id);
+    if (ai === -1 && bi === -1) return 0;
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
 
   grid.innerHTML = cats.map(cat => `
     <a href="products.html?cat=${cat.id}" class="cat-card animate-on-scroll">
