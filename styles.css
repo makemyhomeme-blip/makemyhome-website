@@ -38,49 +38,73 @@
 }
 /* ===== SHOWCASE SEKCIJA ===== */
 #showcase {
-  padding: 80px 0 60px;
-  background: #faf8f5;
+  padding: 90px 0;
+  background: #1a1a1a;
 }
 
 #showcase .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
+}
+
+.showcase-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 60px;
+  align-items: center;
 }
 
 .showcase-text {
-  max-width: 860px;
-  margin: 0 auto 48px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .showcase-title {
-  font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 16px 0 28px;
-  line-height: 1.3;
+  color: #fff;
+  margin: 16px 0 20px;
+  line-height: 1.25;
   letter-spacing: -0.02em;
 }
 
-.showcase-body {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.showcase-lead {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #c9a86c;
+  margin: 0 0 14px;
 }
 
-.showcase-body p {
-  font-size: 1.05rem;
-  color: #555;
+.showcase-desc {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
   line-height: 1.75;
-  margin: 0;
+  margin: 0 0 32px;
 }
+
+.showcase-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #c9a86c;
+  color: #1a1a1a;
+  padding: 13px 26px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: opacity .2s;
+}
+.showcase-cta:hover { opacity: .85; }
 
 .showcase-img-wrap {
   width: 100%;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
 .showcase-img-wrap img {
@@ -89,14 +113,11 @@
   display: block;
 }
 
-@media (max-width: 768px) {
-  #showcase {
-    padding: 60px 0 40px;
+@media (max-width: 900px) {
+  .showcase-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
-  .showcase-title {
-    font-size: 1.2rem;
-  }
-  .showcase-body p {
-    font-size: 0.97rem;
-  }
+  #showcase { padding: 60px 0; }
+  .showcase-title { font-size: 1.4rem; }
 }
