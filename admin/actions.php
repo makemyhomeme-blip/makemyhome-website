@@ -440,6 +440,57 @@ switch ($action) {
         echo json_encode(['ok' => true]);
         exit;
 
+    case 'upload_hero_slide':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $slot = intval($_POST['slot'] ?? 0);
+        if ($slot < 1 || $slot > 3) {
+            echo json_encode(['ok'=>false,'error'=>'Neispravni slot.']); exit;
+        }
+        if (!isset($_FILES['slide_image']) || $_FILES['slide_image']['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(['ok'=>false,'error'=>'Nije odabrana slika ili upload nije uspio.']); exit;
+        }
+        $file  = $_FILES['slide_image'];
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime  = $finfo->file($file['tmp_name']);
+        if (!in_array($mime, ['image/jpeg','image/jpg','image/png','image/webp'])) {
+            echo json_encode(['ok'=>false,'error'=>'Dozvoljeni formati: JPG, PNG, WEBP.']); exit;
+        }
+        if ($file['size'] > 15*1024*1024) {
+            echo json_encode(['ok'=>false,'error'=>'Slika je prevelika. Maksimalno 15MB.']); exit;
+        }
+        $dir = __DIR__ . '/../images/hero-slides';
+        if (!is_dir($dir)) mkdir($dir, 0755, true);
+        $dest  = $dir . '/slide-' . $slot . '.jpg';
+        $saved = optimizeImage($file['tmp_name'], $dest, 1920, 1080, 88);
+        if (!$saved) {
+            if (!move_uploaded_file($file['tmp_name'], $dest)) {
+                echo json_encode(['ok'=>false,'error'=>'Snimanje slike nije uspjelo.']); exit;
+            }
+        }
+        $jsonFile = __DIR__ . '/../data/hero-slides.json';
+        $slides   = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?: []) : [];
+        $url = 'images/hero-slides/slide-' . $slot . '.jpg';
+        if (!in_array($url, $slides)) { $slides[] = $url; sort($slides); }
+        file_put_contents($jsonFile, json_encode(array_values($slides), JSON_PRETTY_PRINT));
+        echo json_encode(['ok'=>true, 'url'=>$url.'?v='.time()]); exit;
+
+    case 'delete_hero_slide':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $slot = intval($_POST['slot'] ?? 0);
+        if ($slot < 1 || $slot > 3) {
+            echo json_encode(['ok'=>false,'error'=>'Neispravni slot.']); exit;
+        }
+        $imgPath = __DIR__ . '/../images/hero-slides/slide-' . $slot . '.jpg';
+        if (file_exists($imgPath)) @unlink($imgPath);
+        $jsonFile = __DIR__ . '/../data/hero-slides.json';
+        $url    = 'images/hero-slides/slide-' . $slot . '.jpg';
+        $slides = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?: []) : [];
+        $slides = array_values(array_filter($slides, function($s) use ($url){ return $s !== $url; }));
+        file_put_contents($jsonFile, json_encode($slides, JSON_PRETTY_PRINT));
+        echo json_encode(['ok'=>true]); exit;
+
     default:
         redirect('', 'Nepoznata akcija.');
 }
