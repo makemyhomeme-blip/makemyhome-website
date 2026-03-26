@@ -491,7 +491,8 @@ switch ($action) {
         $key = ($type === 'mobile') ? 'm' : 'd';
         $slides[$slot - 1][$key] = $url;
         file_put_contents($jsonFile, json_encode(array_values($slides), JSON_PRETTY_PRINT));
-        echo json_encode(['ok'=>true, 'url'=>$url.'?v='.time()]); exit;
+        // Return preview URL with ../ prefix (admin is one level deeper than root)
+        echo json_encode(['ok'=>true, 'url'=>'../' . $url.'?v='.time()]); exit;
 
     case 'delete_hero_slide':
         ob_end_clean();
