@@ -265,6 +265,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     <button class="sidebar-link" onclick="showSection('cat-images')">
       <i class="fas fa-images"></i> Slike Kategorija
     </button>
+    <button class="sidebar-link" onclick="showSection('showcase-img')">
+      <i class="fas fa-image"></i> Showcase Slika
+    </button>
     <div class="nav-section-label">Web sajt</div>
     <a href="../index.html" target="_blank" class="sidebar-link">
       <i class="fas fa-external-link-alt"></i> Pogledaj Sajt
@@ -792,6 +795,67 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
       </div>
     </section>
 
+    <!-- ===== SHOWCASE SLIKA ===== -->
+    <section id="section-showcase-img" class="section">
+      <div style="max-width:700px;">
+        <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:6px;">Showcase Slika – Početna Stranica</h2>
+        <p style="color:var(--gray);margin-bottom:28px;">Ovo je velika slika koja se prikazuje na početnoj stranici ispod "Skrolujte". Uploaduj novu sliku da je zamijeniš.</p>
+
+        <?php
+        $showcasePath = __DIR__ . '/../images/showcase-room.jpg';
+        $showcaseUrl  = '../images/showcase-room.jpg';
+        ?>
+
+        <!-- Trenutna slika -->
+        <div style="margin-bottom:28px;background:var(--white);border-radius:12px;padding:20px;border:1px solid #eee;">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);font-weight:600;margin-bottom:12px;">Trenutna slika</div>
+          <?php if (file_exists($showcasePath)): ?>
+            <img src="<?= $showcaseUrl ?>?v=<?= filemtime($showcasePath) ?>"
+                 alt="Showcase slika"
+                 style="width:100%;border-radius:8px;display:block;">
+          <?php else: ?>
+            <div style="background:#f5f0eb;border-radius:8px;height:160px;display:flex;align-items:center;justify-content:center;color:var(--gray);">
+              <div style="text-align:center;">
+                <i class="fas fa-image" style="font-size:36px;margin-bottom:8px;display:block;opacity:.4;"></i>
+                Slika još nije uploadovana
+              </div>
+            </div>
+          <?php endif; ?>
+        </div>
+
+        <!-- Upload forma -->
+        <div style="background:var(--white);border-radius:12px;padding:24px;border:1px solid #eee;">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);font-weight:600;margin-bottom:16px;">Uploaduj novu sliku</div>
+          <form id="showcase-upload-form" enctype="multipart/form-data">
+            <div id="showcase-drop-zone" style="
+              border:2px dashed #ddd;border-radius:10px;padding:40px 20px;text-align:center;
+              cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:16px;"
+              onclick="document.getElementById('showcase-file-input').click()"
+              ondragover="event.preventDefault();this.style.borderColor='var(--primary)';this.style.background='#fdf8f0';"
+              ondragleave="this.style.borderColor='#ddd';this.style.background='';"
+              ondrop="handleShowcaseDrop(event)">
+              <i class="fas fa-cloud-upload-alt" style="font-size:32px;color:var(--primary);margin-bottom:10px;display:block;"></i>
+              <div style="font-weight:600;margin-bottom:4px;">Prevuci sliku ovdje ili klikni</div>
+              <div style="font-size:13px;color:var(--gray);">JPG, PNG, WEBP – preporučeno široka slika (min 1400px)</div>
+              <input type="file" id="showcase-file-input" accept="image/*" style="display:none" onchange="previewShowcase(this)">
+            </div>
+
+            <div id="showcase-preview-wrap" style="display:none;margin-bottom:16px;">
+              <img id="showcase-preview-img" style="width:100%;border-radius:8px;display:block;">
+            </div>
+
+            <button type="button" id="showcase-upload-btn" onclick="uploadShowcase()" style="
+              display:none;width:100%;padding:14px;background:var(--primary);color:var(--dark);
+              border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;">
+              <i class="fas fa-upload"></i> Sačuvaj na sajt
+            </button>
+
+            <div id="showcase-msg" style="display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-weight:600;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
   </div><!-- /content -->
 </div><!-- /main -->
 
@@ -1279,6 +1343,72 @@ async function saveCatPosition(catId) {
     }
   } catch(e) { alert('Greška'); }
   btn.style.opacity = '1';
+}
+
+// ===== SHOWCASE UPLOAD =====
+function previewShowcase(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('showcase-preview-img').src = e.target.result;
+    document.getElementById('showcase-preview-wrap').style.display = 'block';
+    document.getElementById('showcase-upload-btn').style.display = 'block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function handleShowcaseDrop(e) {
+  e.preventDefault();
+  document.getElementById('showcase-drop-zone').style.borderColor = '#ddd';
+  document.getElementById('showcase-drop-zone').style.background = '';
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const input = document.getElementById('showcase-file-input');
+  input.files = dt.files;
+  previewShowcase(input);
+}
+
+async function uploadShowcase() {
+  const input = document.getElementById('showcase-file-input');
+  const btn   = document.getElementById('showcase-upload-btn');
+  const msg   = document.getElementById('showcase-msg');
+  if (!input.files || !input.files[0]) return;
+
+  btn.textContent = 'Uploaduje se...';
+  btn.disabled = true;
+  msg.style.display = 'none';
+
+  const fd = new FormData();
+  fd.append('action', 'upload_showcase');
+  fd.append('showcase_image', input.files[0]);
+
+  try {
+    const res  = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    msg.style.display = 'block';
+    if (data.ok) {
+      msg.style.background = '#e8f5e9';
+      msg.style.color = '#2e7d32';
+      msg.textContent = 'Slika je uspješno sačuvana na sajtu!';
+      // Refresh preview
+      const ts = Date.now();
+      const cur = document.querySelector('#section-showcase-img img[alt="Showcase slika"]');
+      if (cur) cur.src = '../images/showcase-room.jpg?v=' + ts;
+    } else {
+      msg.style.background = '#fdecea';
+      msg.style.color = '#c62828';
+      msg.textContent = data.error || 'Greška pri uploadu.';
+    }
+  } catch(e) {
+    msg.style.display = 'block';
+    msg.style.background = '#fdecea';
+    msg.style.color = '#c62828';
+    msg.textContent = 'Greška pri uploadu. Pokušaj ponovo.';
+  }
+  btn.textContent = 'Sačuvaj na sajt';
+  btn.disabled = false;
 }
 </script>
 

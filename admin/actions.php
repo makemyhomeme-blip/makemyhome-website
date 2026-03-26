@@ -410,6 +410,36 @@ switch ($action) {
         echo json_encode(['ok' => true]);
         exit;
 
+    case 'upload_showcase':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        if (!isset($_FILES['showcase_image']) || $_FILES['showcase_image']['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(['ok' => false, 'error' => 'Nije odabrana slika ili upload nije uspio.']);
+            exit;
+        }
+        $file    = $_FILES['showcase_image'];
+        $finfo   = new finfo(FILEINFO_MIME_TYPE);
+        $mime    = $finfo->file($file['tmp_name']);
+        $allowed = ['image/jpeg','image/jpg','image/png','image/webp'];
+        if (!in_array($mime, $allowed)) {
+            echo json_encode(['ok' => false, 'error' => 'Dozvoljeni formati: JPG, PNG, WEBP.']);
+            exit;
+        }
+        if ($file['size'] > 15 * 1024 * 1024) {
+            echo json_encode(['ok' => false, 'error' => 'Slika je prevelika. Maksimalno 15MB.']);
+            exit;
+        }
+        $dest = __DIR__ . '/../images/showcase-room.jpg';
+        $saved = optimizeImage($file['tmp_name'], $dest, 1920, 800, 88);
+        if (!$saved) {
+            if (!move_uploaded_file($file['tmp_name'], $dest)) {
+                echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']);
+                exit;
+            }
+        }
+        echo json_encode(['ok' => true]);
+        exit;
+
     default:
         redirect('', 'Nepoznata akcija.');
 }
