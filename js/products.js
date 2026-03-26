@@ -144,11 +144,23 @@ async function initProductsPage() {
   }
 }
 
+function findCatData(catId) {
+  const top = allCategories.find(c => c.id === catId);
+  if (top) return top;
+  for (const cat of allCategories) {
+    if (cat.subcategories) {
+      const sub = cat.subcategories.find(s => s.id === catId);
+      if (sub) return sub;
+    }
+  }
+  return null;
+}
+
 function buildCatMap() {
   const catMap = {};
   allProducts.forEach(p => {
     if (!catMap[p.category]) {
-      const catData = allCategories.find(c => c.id === p.category);
+      const catData = findCatData(p.category);
       catMap[p.category] = {
         id: p.category,
         name: catData?.name || p.category,
