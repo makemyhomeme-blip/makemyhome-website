@@ -31,6 +31,10 @@
     #hs-track img{min-width:100%;width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0}
     .hs-dot{width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.5);cursor:pointer;padding:0;transition:all .3s;background:transparent;pointer-events:all}
     .hs-dot.active{background:#c9a86c;border-color:#c9a86c;transform:scale(1.3)}
+    /* ===== MOBILE NAV FIX ===== */
+    @media(max-width:768px){
+      .nav-menu{max-height:calc(100svh - 75px);overflow-y:auto}
+    }
     /* ===== MOBILE HERO OPTIMIZACIJA ===== */
     @media(max-width:768px){
       #hero{min-height:100svh;padding-top:70px;padding-bottom:100px;align-items:flex-end}
