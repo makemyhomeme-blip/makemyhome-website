@@ -861,65 +861,127 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
 
     <!-- ===== HERO SLIDES ===== -->
     <section id="section-hero-slides" class="section">
-      <div style="max-width:800px;">
+      <div style="max-width:860px;">
         <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:6px;">Hero Slike – Slider na Početnoj</h2>
         <p style="color:var(--gray);margin-bottom:28px;">
-          Dodaj do 3 slike koje se prikazuju ispod hero teksta na početnoj stranici. Slike se automatski izmjenjuju svakih 5 sekundi.<br>
-          <strong>Preporučena razmjera: 16:9 (npr. 1920×1080 piksela)</strong>
+          Slike se automatski izmjenjuju svakih 5 sekundi. Možeš uploadovati posebne slike za desktop i mobilne uređaje.<br>
+          Ako ne dodaš mobilnu verziju, prikazuje se desktop slika i na telefonu.
         </p>
 
         <?php
         $slidesJson = __DIR__ . '/../data/hero-slides.json';
         $slideDir   = __DIR__ . '/../images/hero-slides';
+        $slides     = file_exists($slidesJson) ? (json_decode(file_get_contents($slidesJson), true) ?: []) : [];
+        // Migrate old string format if needed
+        if (!empty($slides) && is_string($slides[0])) {
+            $old = $slides; $slides = [];
+            foreach ($old as $u) {
+                if (preg_match('/slide-(\d+)\.jpg$/', $u, $m)) {
+                    $s = intval($m[1]) - 1;
+                    if ($s >= 0 && $s < 3) { while(count($slides) <= $s) $slides[] = []; $slides[$s]['d'] = $u; }
+                }
+            }
+        }
+        while (count($slides) < 3) $slides[] = [];
         ?>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-bottom:28px;">
-        <?php for ($slot = 1; $slot <= 3; $slot++):
-          $imgPath = $slideDir . '/slide-' . $slot . '.jpg';
-          $imgUrl  = '../images/hero-slides/slide-' . $slot . '.jpg';
-          $exists  = file_exists($imgPath);
-        ?>
-          <div id="hs-slot-<?= $slot ?>" style="background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden;">
-            <div style="position:relative;background:#f5f0eb;height:140px;display:flex;align-items:center;justify-content:center;">
-              <?php if ($exists): ?>
-                <img src="<?= $imgUrl ?>?v=<?= filemtime($imgPath) ?>"
-                     id="hs-preview-<?= $slot ?>"
-                     alt="Slajd <?= $slot ?>"
-                     style="width:100%;height:140px;object-fit:cover;display:block;">
-              <?php else: ?>
-                <div id="hs-preview-<?= $slot ?>" style="text-align:center;color:#bbb;">
-                  <i class="fas fa-image" style="font-size:32px;margin-bottom:6px;display:block;opacity:.4;"></i>
-                  <span style="font-size:12px;">Prazno</span>
-                </div>
-              <?php endif; ?>
-              <div style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,.5);color:#fff;
-                font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;">Slajd <?= $slot ?></div>
+        <!-- DESKTOP -->
+        <div style="margin-bottom:36px;">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:4px;">
+            <i class="fas fa-desktop" style="color:var(--primary);margin-right:6px;"></i>Desktop verzija
+          </h3>
+          <p style="color:var(--gray);font-size:13px;margin-bottom:16px;">
+            Preporučena razmjera: <strong>16:9 (npr. 1920×1080px)</strong>
+          </p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;">
+          <?php for ($slot = 1; $slot <= 3; $slot++):
+            $dUrl    = $slides[$slot-1]['d'] ?? null;
+            $imgPath = $dUrl ? (__DIR__ . '/../' . $dUrl) : null;
+            $exists  = $imgPath && file_exists($imgPath);
+            $preview = $exists ? ('../' . $dUrl . '?v=' . filemtime($imgPath)) : null;
+          ?>
+            <div id="hs-slot-<?= $slot ?>" style="background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden;">
+              <div style="position:relative;background:#f5f0eb;height:140px;display:flex;align-items:center;justify-content:center;">
+                <?php if ($exists): ?>
+                  <img src="<?= $preview ?>" id="hs-preview-<?= $slot ?>" alt="Slajd <?= $slot ?>"
+                       style="width:100%;height:140px;object-fit:cover;display:block;">
+                <?php else: ?>
+                  <div id="hs-preview-<?= $slot ?>" style="text-align:center;color:#bbb;">
+                    <i class="fas fa-image" style="font-size:32px;margin-bottom:6px;display:block;opacity:.4;"></i>
+                    <span style="font-size:12px;">Prazno</span>
+                  </div>
+                <?php endif; ?>
+                <div style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,.5);color:#fff;
+                  font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;">Slajd <?= $slot ?></div>
+              </div>
+              <div style="padding:14px;display:flex;gap:8px;">
+                <button onclick="hsUpload(<?= $slot ?>, 'desktop')"
+                  style="flex:1;background:var(--primary);color:var(--dark);border:none;border-radius:8px;
+                    padding:9px 0;font-size:13px;font-weight:700;cursor:pointer;">
+                  <i class="fas fa-upload"></i> Uploaduj
+                </button>
+                <button id="hs-del-<?= $slot ?>" onclick="hsDelete(<?= $slot ?>, 'desktop')"
+                  style="background:#fee2e2;color:#dc2626;border:none;border-radius:8px;
+                    padding:9px 12px;font-size:13px;font-weight:700;cursor:pointer;<?= $exists ? '' : 'display:none;' ?>">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+              <input type="file" id="hs-file-<?= $slot ?>" accept="image/*"
+                style="display:none" onchange="hsSubmit(<?= $slot ?>, this, 'desktop')">
             </div>
-            <div style="padding:14px;display:flex;gap:8px;">
-              <button onclick="hsUpload(<?= $slot ?>)"
-                style="flex:1;background:var(--primary);color:var(--dark);border:none;border-radius:8px;
-                  padding:9px 0;font-size:13px;font-weight:700;cursor:pointer;">
-                <i class="fas fa-upload"></i> Uploaduj
-              </button>
-              <?php if ($exists): ?>
-              <button id="hs-del-<?= $slot ?>" onclick="hsDelete(<?= $slot ?>)"
-                style="background:#fee2e2;color:#dc2626;border:none;border-radius:8px;
-                  padding:9px 12px;font-size:13px;font-weight:700;cursor:pointer;">
-                <i class="fas fa-trash"></i>
-              </button>
-              <?php else: ?>
-              <button id="hs-del-<?= $slot ?>" onclick="hsDelete(<?= $slot ?>)"
-                style="background:#fee2e2;color:#dc2626;border:none;border-radius:8px;
-                  padding:9px 12px;font-size:13px;font-weight:700;cursor:pointer;display:none;">
-                <i class="fas fa-trash"></i>
-              </button>
-              <?php endif; ?>
-            </div>
-            <input type="file" id="hs-file-<?= $slot ?>" accept="image/*"
-              style="display:none" onchange="hsSubmit(<?= $slot ?>, this)">
+          <?php endfor; ?>
           </div>
-        <?php endfor; ?>
         </div>
+
+        <!-- MOBILE -->
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:4px;">
+            <i class="fas fa-mobile-alt" style="color:var(--primary);margin-right:6px;"></i>Mobilna verzija
+          </h3>
+          <p style="color:var(--gray);font-size:13px;margin-bottom:16px;">
+            Preporučena razmjera: <strong>9:16 (npr. 750×1334px)</strong> – portrait orijentacija.<br>
+            Ako ne dodaš mobilnu sliku, prikazuje se desktop verzija.
+          </p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;">
+          <?php for ($slot = 1; $slot <= 3; $slot++):
+            $mUrl    = $slides[$slot-1]['m'] ?? null;
+            $imgPath = $mUrl ? (__DIR__ . '/../' . $mUrl) : null;
+            $exists  = $imgPath && file_exists($imgPath);
+            $preview = $exists ? ('../' . $mUrl . '?v=' . filemtime($imgPath)) : null;
+          ?>
+            <div id="hs-slot-<?= $slot ?>-m" style="background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden;">
+              <div style="position:relative;background:#f5f0eb;height:140px;display:flex;align-items:center;justify-content:center;">
+                <?php if ($exists): ?>
+                  <img src="<?= $preview ?>" id="hs-preview-<?= $slot ?>-m" alt="Mob <?= $slot ?>"
+                       style="width:100%;height:140px;object-fit:cover;display:block;">
+                <?php else: ?>
+                  <div id="hs-preview-<?= $slot ?>-m" style="text-align:center;color:#bbb;">
+                    <i class="fas fa-image" style="font-size:32px;margin-bottom:6px;display:block;opacity:.4;"></i>
+                    <span style="font-size:12px;">Prazno</span>
+                  </div>
+                <?php endif; ?>
+                <div style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,.5);color:#fff;
+                  font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;">Mob <?= $slot ?></div>
+              </div>
+              <div style="padding:14px;display:flex;gap:8px;">
+                <button onclick="hsUpload(<?= $slot ?>, 'mobile')"
+                  style="flex:1;background:var(--primary);color:var(--dark);border:none;border-radius:8px;
+                    padding:9px 0;font-size:13px;font-weight:700;cursor:pointer;">
+                  <i class="fas fa-upload"></i> Uploaduj
+                </button>
+                <button id="hs-del-<?= $slot ?>-m" onclick="hsDelete(<?= $slot ?>, 'mobile')"
+                  style="background:#fee2e2;color:#dc2626;border:none;border-radius:8px;
+                    padding:9px 12px;font-size:13px;font-weight:700;cursor:pointer;<?= $exists ? '' : 'display:none;' ?>">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+              <input type="file" id="hs-file-<?= $slot ?>-m" accept="image/*"
+                style="display:none" onchange="hsSubmit(<?= $slot ?>, this, 'mobile')">
+            </div>
+          <?php endfor; ?>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1479,34 +1541,37 @@ async function uploadShowcase() {
 }
 
 // ===== HERO SLIDES =====
-function hsUpload(slot) {
-  document.getElementById('hs-file-' + slot).click();
+function hsUpload(slot, type) {
+  const suffix = (type === 'mobile') ? '-m' : '';
+  document.getElementById('hs-file-' + slot + suffix).click();
 }
 
-async function hsSubmit(slot, input) {
+async function hsSubmit(slot, input, type) {
   if (!input.files[0]) return;
+  const suffix = (type === 'mobile') ? '-m' : '';
   const fd = new FormData();
   fd.append('action', 'upload_hero_slide');
   fd.append('slot', slot);
+  fd.append('type', type || 'desktop');
   fd.append('slide_image', input.files[0]);
   try {
     const r = await fetch('actions.php', {method:'POST', body:fd});
     const d = await r.json();
     if (d.ok) {
-      const preview = document.getElementById('hs-preview-' + slot);
+      const preview = document.getElementById('hs-preview-' + slot + suffix);
       if (preview.tagName === 'IMG') {
         preview.src = d.url;
       } else {
         const img = document.createElement('img');
         img.src = d.url;
-        img.id = 'hs-preview-' + slot;
-        img.alt = 'Slajd ' + slot;
+        img.id = 'hs-preview-' + slot + suffix;
+        img.alt = (type === 'mobile' ? 'Mob ' : 'Slajd ') + slot;
         img.style.cssText = 'width:100%;height:140px;object-fit:cover;display:block;';
         preview.replaceWith(img);
       }
-      const delBtn = document.getElementById('hs-del-' + slot);
+      const delBtn = document.getElementById('hs-del-' + slot + suffix);
       if (delBtn) delBtn.style.display = '';
-      showToast('Slajd ' + slot + ' je sačuvan!', 'success');
+      showToast('Slajd ' + slot + (type === 'mobile' ? ' (mobilna)' : '') + ' je sačuvan!', 'success');
     } else {
       showToast(d.error || 'Greška pri uploadu.', 'error');
     }
@@ -1514,24 +1579,27 @@ async function hsSubmit(slot, input) {
   input.value = '';
 }
 
-async function hsDelete(slot) {
-  if (!confirm('Obriši slajd ' + slot + '?')) return;
+async function hsDelete(slot, type) {
+  const suffix = (type === 'mobile') ? '-m' : '';
+  const label  = (type === 'mobile') ? 'mobilni slajd ' : 'slajd ';
+  if (!confirm('Obriši ' + label + slot + '?')) return;
   const fd = new FormData();
   fd.append('action', 'delete_hero_slide');
   fd.append('slot', slot);
+  fd.append('type', type || 'desktop');
   try {
     const r = await fetch('actions.php', {method:'POST', body:fd});
     const d = await r.json();
     if (d.ok) {
-      const preview = document.getElementById('hs-preview-' + slot);
+      const preview = document.getElementById('hs-preview-' + slot + suffix);
       const placeholder = document.createElement('div');
-      placeholder.id = 'hs-preview-' + slot;
+      placeholder.id = 'hs-preview-' + slot + suffix;
       placeholder.style.cssText = 'text-align:center;color:#bbb;';
       placeholder.innerHTML = '<i class="fas fa-image" style="font-size:32px;margin-bottom:6px;display:block;opacity:.4;"></i><span style="font-size:12px;">Prazno</span>';
       preview.replaceWith(placeholder);
-      const delBtn = document.getElementById('hs-del-' + slot);
+      const delBtn = document.getElementById('hs-del-' + slot + suffix);
       if (delBtn) delBtn.style.display = 'none';
-      showToast('Slajd ' + slot + ' je obrisan.', 'success');
+      showToast('Slajd ' + slot + (type === 'mobile' ? ' (mobilna)' : '') + ' je obrisan.', 'success');
     }
   } catch(e) { showToast('Greška.', 'error'); }
 }

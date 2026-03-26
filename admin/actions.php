@@ -444,6 +444,7 @@ switch ($action) {
         ob_end_clean();
         header('Content-Type: application/json');
         $slot = intval($_POST['slot'] ?? 0);
+        $type = (($_POST['type'] ?? 'desktop') === 'mobile') ? 'mobile' : 'desktop';
         if ($slot < 1 || $slot > 3) {
             echo json_encode(['ok'=>false,'error'=>'Neispravni slot.']); exit;
         }
@@ -461,8 +462,13 @@ switch ($action) {
         }
         $dir = __DIR__ . '/../images/hero-slides';
         if (!is_dir($dir)) mkdir($dir, 0755, true);
-        $dest  = $dir . '/slide-' . $slot . '.jpg';
-        $saved = optimizeImage($file['tmp_name'], $dest, 1920, 1080, 88);
+        $fname = ($type === 'mobile') ? 'slide-' . $slot . '-mobile.jpg' : 'slide-' . $slot . '.jpg';
+        $dest  = $dir . '/' . $fname;
+        if ($type === 'mobile') {
+            $saved = optimizeImage($file['tmp_name'], $dest, 750, 1334, 88);
+        } else {
+            $saved = optimizeImage($file['tmp_name'], $dest, 1920, 1080, 88);
+        }
         if (!$saved) {
             if (!move_uploaded_file($file['tmp_name'], $dest)) {
                 echo json_encode(['ok'=>false,'error'=>'Snimanje slike nije uspjelo.']); exit;
@@ -470,8 +476,20 @@ switch ($action) {
         }
         $jsonFile = __DIR__ . '/../data/hero-slides.json';
         $slides   = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?: []) : [];
-        $url = 'images/hero-slides/slide-' . $slot . '.jpg';
-        if (!in_array($url, $slides)) { $slides[] = $url; sort($slides); }
+        // Migrate old format (array of strings) or ensure 3 slots
+        if (!empty($slides) && is_string($slides[0])) {
+            $old = $slides; $slides = [{}, {}, {}];
+            foreach ($old as $u) {
+                if (preg_match('/slide-(\d+)\.jpg$/', $u, $m)) {
+                    $s = intval($m[1]) - 1;
+                    if ($s >= 0 && $s < 3) $slides[$s]['d'] = $u;
+                }
+            }
+        }
+        while (count($slides) < 3) $slides[] = [];
+        $url = 'images/hero-slides/' . $fname;
+        $key = ($type === 'mobile') ? 'm' : 'd';
+        $slides[$slot - 1][$key] = $url;
         file_put_contents($jsonFile, json_encode(array_values($slides), JSON_PRETTY_PRINT));
         echo json_encode(['ok'=>true, 'url'=>$url.'?v='.time()]); exit;
 
@@ -479,16 +497,19 @@ switch ($action) {
         ob_end_clean();
         header('Content-Type: application/json');
         $slot = intval($_POST['slot'] ?? 0);
+        $type = (($_POST['type'] ?? 'desktop') === 'mobile') ? 'mobile' : 'desktop';
         if ($slot < 1 || $slot > 3) {
             echo json_encode(['ok'=>false,'error'=>'Neispravni slot.']); exit;
         }
-        $imgPath = __DIR__ . '/../images/hero-slides/slide-' . $slot . '.jpg';
+        $fname   = ($type === 'mobile') ? 'slide-' . $slot . '-mobile.jpg' : 'slide-' . $slot . '.jpg';
+        $imgPath = __DIR__ . '/../images/hero-slides/' . $fname;
         if (file_exists($imgPath)) @unlink($imgPath);
         $jsonFile = __DIR__ . '/../data/hero-slides.json';
-        $url    = 'images/hero-slides/slide-' . $slot . '.jpg';
-        $slides = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?: []) : [];
-        $slides = array_values(array_filter($slides, function($s) use ($url){ return $s !== $url; }));
-        file_put_contents($jsonFile, json_encode($slides, JSON_PRETTY_PRINT));
+        $slides   = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?: []) : [];
+        while (count($slides) < 3) $slides[] = [];
+        $key = ($type === 'mobile') ? 'm' : 'd';
+        unset($slides[$slot - 1][$key]);
+        file_put_contents($jsonFile, json_encode(array_values($slides), JSON_PRETTY_PRINT));
         echo json_encode(['ok'=>true]); exit;
 
     default:

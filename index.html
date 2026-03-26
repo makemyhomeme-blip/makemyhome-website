@@ -551,13 +551,19 @@
 (function(){
   fetch('data/hero-slides.json?v=' + Date.now())
     .then(function(r){ return r.json(); })
-    .then(function(slides){
-      if(!slides || !slides.length) return;
+    .then(function(slidesData){
+      var isMobile = window.innerWidth <= 768;
+      // Support both old format (array of strings) and new format (array of objects with d/m keys)
+      var slides = (slidesData || []).filter(function(s){
+        return s && (typeof s === 'string' ? s : s.d);
+      });
+      if(!slides.length) return;
       var hero  = document.getElementById('hero');
       var track = document.getElementById('hs-track');
       var dotsEl  = document.getElementById('hs-dots');
       var v = Date.now();
-      slides.forEach(function(src, i){
+      slides.forEach(function(s, i){
+        var src = (typeof s === 'string') ? s : ((isMobile && s.m) ? s.m : s.d);
         var img = document.createElement('img');
         img.src = src + '?v=' + v;
         img.alt = 'Enterijer ' + (i+1);
