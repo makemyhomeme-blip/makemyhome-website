@@ -478,7 +478,7 @@ switch ($action) {
         $slides   = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?: []) : [];
         // Migrate old format (array of strings) or ensure 3 slots
         if (!empty($slides) && is_string($slides[0])) {
-            $old = $slides; $slides = [{}, {}, {}];
+            $old = $slides; $slides = [[], [], []];
             foreach ($old as $u) {
                 if (preg_match('/slide-(\d+)\.jpg$/', $u, $m)) {
                     $s = intval($m[1]) - 1;
