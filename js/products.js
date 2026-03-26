@@ -9,12 +9,12 @@ let allCategories = [];
 
 // Željeni redoslijed kategorija na stranici "Svi proizvodi"
 const CATEGORY_ORDER = [
+  'bambus-drveni',
+  'bambus-tekstilni',
   'bambus-mermerni',
   'classic',
   'bambus-kozni',
   'bambus-metalni',
-  'bambus-drveni',
-  'bambus-tekstilni',
   '3d-letvice',
   'akusticni-paneli',
   'aluminijum-lajsne',
