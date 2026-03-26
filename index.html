@@ -14,20 +14,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css?v=18">
   <style>
-    #showcase{position:relative;overflow:hidden}
-    .showcase-bg{position:relative;background-size:cover;background-position:center;min-height:520px;display:flex;align-items:flex-end}
-    .showcase-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.92) 0%,rgba(10,10,10,.75) 40%,rgba(10,10,10,.25) 70%,rgba(10,10,10,.05) 100%)}
-    .showcase-content{position:relative;z-index:2;max-width:540px;padding:60px 48px 60px 60px}
-    .showcase-title{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:700;color:#fff;margin:16px 0 18px;line-height:1.25;letter-spacing:-.02em}
-    .showcase-lead{font-size:1rem;font-weight:600;color:#c9a86c;margin:0 0 12px}
-    .showcase-desc{font-size:.97rem;color:rgba(255,255,255,.65);line-height:1.75;margin:0 0 28px}
-    .showcase-cta{display:inline-flex;align-items:center;gap:8px;background:#c9a86c;color:#1a1a1a;padding:13px 26px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;transition:opacity .2s}
-    .showcase-cta:hover{opacity:.85}
+    #showcase{background:var(--light);padding:70px 0 0}
+    .showcase-img-wrap{width:100%;line-height:0;margin-top:48px}
+    .showcase-img-wrap img{width:100%;height:auto;display:block;max-height:540px;object-fit:cover}
+    .showcase-btn-wrap{padding:40px 0 70px}
     @media(max-width:768px){
-      .showcase-bg{min-height:480px;background-position:60% center}
-      .showcase-overlay{background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.75) 50%,rgba(10,10,10,.2) 100%)}
-      .showcase-content{padding:32px 24px;max-width:100%}
-      .showcase-title{font-size:1.3rem}
+      #showcase{padding:48px 0 0}
+      .showcase-img-wrap{margin-top:32px}
+      .showcase-btn-wrap{padding:28px 0 48px}
     }
   </style>
 </head>
@@ -116,14 +110,19 @@
 
 <!-- ===== SHOWCASE SEKCIJA ===== -->
 <section id="showcase">
-  <div class="showcase-bg" style="background-image:url('images/showcase-room.jpg')">
-    <div class="showcase-overlay"></div>
-    <div class="showcase-content animate-on-scroll">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
       <div class="gold-line"></div>
-      <h2 class="showcase-title">Make My Home Decor –<br>sve što vam treba za savršen enterijer.</h2>
-      <p class="showcase-lead">Jedna prostorija. Toliko mogućnosti.</p>
-      <p class="showcase-desc">Svaki zid, svaki ugao može izgledati drugačije — od bambusovih panela i 3D letvica do akustičnih obloga i SPC podova. Posjetite naš showroom i pronađite materijal koji odgovara vašem stilu.</p>
-      <a href="products.html" class="showcase-cta">Pogledaj sve proizvode <i class="fas fa-arrow-right"></i></a>
+      <h2 class="section-title">Make My Home Decor –<br>sve što vam treba za savršen enterijer.</h2>
+      <p class="section-subtitle">Svaki zid, svaki ugao može izgledati drugačije — od bambusovih panela i 3D letvica do akustičnih obloga i SPC podova. Posjetite naš showroom i pronađite materijal koji odgovara vašem stilu.</p>
+    </div>
+  </div>
+  <div class="showcase-img-wrap animate-on-scroll">
+    <img src="images/showcase-room.jpg" alt="Make My Home Decor – Kompletna rješenja za enterijer" loading="lazy">
+  </div>
+  <div class="container">
+    <div class="text-center showcase-btn-wrap">
+      <a href="products.html" class="btn btn-primary">Pogledaj sve proizvode <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
