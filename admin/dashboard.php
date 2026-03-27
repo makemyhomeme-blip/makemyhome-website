@@ -482,7 +482,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                       <?php endforeach; ?>
                     </select>
                   </td>
-                  <td>
+                  <td class="stock-badge">
                     <?php if ($p['inStock']): ?>
                       <span class="badge badge-success">Na lageru</span>
                     <?php else: ?>
@@ -493,6 +493,11 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                     <div style="display:flex;gap:6px;">
                       <button class="btn btn-sm btn-edit" onclick="editProduct(<?= $p['id'] ?>)">
                         <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm" id="stock-btn-<?= $p['id'] ?>"
+                        style="background:<?= $p['inStock'] ? 'rgba(39,174,96,0.15)' : 'rgba(231,76,60,0.15)' ?>;color:<?= $p['inStock'] ? '#27ae60' : '#e74c3c' ?>;border:1px solid <?= $p['inStock'] ? '#27ae60' : '#e74c3c' ?>;"
+                        onclick="toggleStock(<?= $p['id'] ?>)" title="<?= $p['inStock'] ? 'Označi kao nema na stanju' : 'Označi kao ima na stanju' ?>">
+                        <i class="fas <?= $p['inStock'] ? 'fa-check-circle' : 'fa-times-circle' ?>"></i>
                       </button>
                       <form method="POST" action="actions.php" style="margin:0;" onsubmit="return confirm('Obrisati proizvod: <?= htmlspecialchars($p['name']) ?>?')">
                         <input type="hidden" name="action" value="delete">
@@ -1273,6 +1278,34 @@ async function toggleFeatured(btn, id) {
   } catch(e) {
     alert('Greška pri čuvanju');
   }
+  btn.style.opacity = '1';
+}
+
+async function toggleStock(id) {
+  const btn = document.getElementById('stock-btn-' + id);
+  btn.style.opacity = '0.4';
+  const fd = new FormData();
+  fd.append('action', 'toggle_stock');
+  fd.append('id', id);
+  try {
+    const res = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!data.ok) { alert(data.error || 'Greška'); btn.style.opacity = '1'; return; }
+    const inStock = data.inStock;
+    btn.style.background = inStock ? 'rgba(39,174,96,0.15)' : 'rgba(231,76,60,0.15)';
+    btn.style.color = inStock ? '#27ae60' : '#e74c3c';
+    btn.style.border = '1px solid ' + (inStock ? '#27ae60' : '#e74c3c');
+    btn.title = inStock ? 'Označi kao nema na stanju' : 'Označi kao ima na stanju';
+    btn.querySelector('i').className = 'fas ' + (inStock ? 'fa-check-circle' : 'fa-times-circle');
+    // Update badge in the stock column
+    const row = btn.closest('tr');
+    const stockCell = row.querySelector('.stock-badge');
+    if (stockCell) {
+      stockCell.innerHTML = inStock
+        ? '<span class="badge badge-success">Na lageru</span>'
+        : '<span class="badge" style="background:rgba(231,76,60,0.1);color:var(--danger);">Nema</span>';
+    }
+  } catch(e) { alert('Greška pri čuvanju'); }
   btn.style.opacity = '1';
 }
 

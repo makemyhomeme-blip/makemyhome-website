@@ -626,6 +626,28 @@ ul { list-style: none; }
 .product-badge.limited { background: #8e44ad; color: var(--white); }
 .product-badge.recommended { background: #2980b9; color: var(--white); }
 
+/* OUT OF STOCK */
+.out-of-stock { opacity: 0.75; }
+.oos-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.oos-overlay span {
+  background: #e74c3c;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 8px 18px;
+  border-radius: 30px;
+  text-transform: uppercase;
+}
+
 .product-actions {
   position: absolute;
   bottom: 14px;

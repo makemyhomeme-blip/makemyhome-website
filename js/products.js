@@ -62,11 +62,14 @@ function renderProductCard(product, lazy = true) {
       ${lazy ? 'loading="lazy"' : ''}>
   `;
 
+  const outOfStock = product.inStock === false;
+
   return `
-    <article class="product-card animate-on-scroll" data-category="${product.category}" data-id="${product.id}" onclick="window.location='product.html?id=${product.id}'" style="cursor:pointer;">
+    <article class="product-card animate-on-scroll${outOfStock ? ' out-of-stock' : ''}" data-category="${product.category}" data-id="${product.id}" onclick="window.location='product.html?id=${product.id}'" style="cursor:pointer;">
       <div class="product-img">
         ${imgContent}
         ${badge}
+        ${outOfStock ? `<div class="oos-overlay"><span>Nije na stanju</span></div>` : ''}
         <div class="product-actions">
           <button class="btn-action" title="Brzi pregled" onclick="event.stopPropagation(); openProductModal(${product.id})">
             <i class="fas fa-eye"></i>

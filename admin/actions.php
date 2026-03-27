@@ -275,6 +275,25 @@ switch ($action) {
         echo json_encode(['ok' => true, 'featured' => !$currentlyFeatured, 'count' => $newCount]);
         exit;
 
+    case 'toggle_stock':
+        $id = (int)($_POST['id'] ?? 0);
+        $currentStock = true;
+        foreach ($products as $p) {
+            if ($p['id'] === $id) { $currentStock = (bool)($p['inStock'] ?? true); break; }
+        }
+        foreach ($products as &$p) {
+            if ($p['id'] === $id) { $p['inStock'] = !$currentStock; break; }
+        }
+        unset($p);
+        if (!saveProducts($products, $productsFile)) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']);
+            exit;
+        }
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => true, 'inStock' => !$currentStock]);
+        exit;
+
     case 'set_badge':
         $id = (int)($_POST['id'] ?? 0);
         $badge = trim($_POST['badge'] ?? '') ?: null;
