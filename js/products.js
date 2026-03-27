@@ -69,7 +69,7 @@ function renderProductCard(product, lazy = true) {
       <div class="product-img">
         ${imgContent}
         ${badge}
-        ${outOfStock ? `<div class="oos-overlay"><span>Nije na stanju</span></div>` : ''}
+        ${outOfStock ? `<div class="oos-tag">Nema na stanju</div>` : ''}
         <div class="product-actions">
           <button class="btn-action" title="Brzi pregled" onclick="event.stopPropagation(); openProductModal(${product.id})">
             <i class="fas fa-eye"></i>
