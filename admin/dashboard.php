@@ -555,6 +555,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   <optgroup label="── SPC Pod ──">
                     <option value="spc-pod">SPC Pod</option>
                   </optgroup>
+                  <optgroup label="── PU Kamen ──">
+                    <option value="pu-kamen">PU Kamen</option>
+                  </optgroup>
                 </select>
               </div>
               <div class="form-group">
@@ -1089,6 +1092,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             </optgroup>
             <optgroup label="── SPC Pod ──">
               <option value="spc-pod">SPC Pod</option>
+            </optgroup>
+            <optgroup label="── PU Kamen ──">
+              <option value="pu-kamen">PU Kamen</option>
             </optgroup>
           </select>
         </div>
