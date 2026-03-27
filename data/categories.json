@@ -1,0 +1,124 @@
+[
+    {
+        "id": "bambus-paneli",
+        "name": "Bambus Paneli",
+        "icon": "fas fa-layer-group",
+        "description": "Dekorativni bambus paneli u 6 stilova",
+        "color": "#7a9e6e",
+        "subcategories": [
+            {
+                "id": "bambus-drveni",
+                "name": "Drveni",
+                "icon": "fas fa-tree",
+                "color": "#8B6914",
+                "description": "Bambus paneli sa drvenom strukturom"
+            },
+            {
+                "id": "bambus-tekstilni",
+                "name": "Tekstilni",
+                "icon": "fas fa-th",
+                "color": "#7a9e6e",
+                "description": "Bambus paneli sa tekstilnom površinom"
+            },
+            {
+                "id": "bambus-mermerni",
+                "name": "Mermerni",
+                "icon": "fas fa-gem",
+                "color": "#888",
+                "description": "Bambus paneli sa mermernim uzorkom"
+            },
+            {
+                "id": "bambus-metalni",
+                "name": "Metalni",
+                "icon": "fas fa-cube",
+                "color": "#555",
+                "description": "Bambus paneli sa metalnim završetkom"
+            },
+            {
+                "id": "bambus-kozni",
+                "name": "Kožni",
+                "icon": "fas fa-star",
+                "color": "#a0522d",
+                "description": "Bambus paneli sa kožnom površinom"
+            },
+            {
+                "id": "classic",
+                "name": "Classic",
+                "icon": "fas fa-columns",
+                "color": "#8B7355",
+                "description": "Elegantni klasični paneli za trajan i sofisticiran izgled – spoj tradicije i modernog dizajna"
+            }
+        ],
+        "image": "images\/categories\/cat-bambus-paneli-1774373553.jpeg",
+        "imagePosition": {
+            "posX": 0,
+            "posY": 66.56999999999999317878973670303821563720703125,
+            "zoom": 1
+        }
+    },
+    {
+        "id": "akusticni-paneli",
+        "name": "Akustični Paneli",
+        "icon": "fas fa-volume-mute",
+        "description": "Vrhunska zvučna izolacija uz dekorativan izgled",
+        "color": "#2c2c2c",
+        "image": "images\/categories\/cat-akusticni-paneli-1774400659.jpg",
+        "imagePosition": {
+            "posX": 0,
+            "posY": 88.7300000000000039790393202565610408782958984375,
+            "zoom": 1
+        }
+    },
+    {
+        "id": "3d-letvice",
+        "name": "3D Letvice",
+        "icon": "fas fa-grip-lines",
+        "description": "Dekorativne 3D letvice za moderan enterijer",
+        "color": "#6b4f2a",
+        "image": "images\/categories\/cat-3d-letvice-1774394494.jpg",
+        "imagePosition": {
+            "posX": 34.7999999999999971578290569595992565155029296875,
+            "posY": 64.4899999999999948840923025272786617279052734375,
+            "zoom": 1.5500000000000000444089209850062616169452667236328125
+        }
+    },
+    {
+        "id": "aluminijum-lajsne",
+        "name": "Alu Lajsne",
+        "icon": "fas fa-minus",
+        "description": "Aluminijumske lajsne za završnu obradu",
+        "color": "#888",
+        "image": "images\/categories\/cat-aluminijum-lajsne-1774393266.jpeg",
+        "imagePosition": {
+            "posX": 100,
+            "posY": 100,
+            "zoom": 1
+        }
+    },
+    {
+        "id": "spc-pod",
+        "name": "SPC Pod",
+        "icon": "fas fa-border-all",
+        "description": "Vodootporni SPC laminatni podovi za svaki prostor",
+        "color": "#5c4a32",
+        "image": "images\/categories\/cat-spc-pod-1774400873.jpg",
+        "imagePosition": {
+            "posX": 100,
+            "posY": 100,
+            "zoom": 1.0500000000000000444089209850062616169452667236328125
+        }
+    },
+    {
+        "id": "pu-kamen",
+        "name": "PU Kamen",
+        "icon": "fas fa-mountain",
+        "description": "Lagani dekorativni PU kameni paneli – realistična tekstura kamena",
+        "color": "#7d6b55",
+        "image": "",
+        "imagePosition": {
+            "posX": 50,
+            "posY": 50,
+            "zoom": 1
+        }
+    }
+]
