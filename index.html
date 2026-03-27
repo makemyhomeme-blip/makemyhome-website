@@ -23,6 +23,7 @@
       .showcase-img-wrap{margin-top:32px;padding:0 16px}
       .showcase-btn-wrap{padding:28px 0 48px}
     }
+    .featured-btn-mobile-wrap{display:none}
     /* ===== HERO SLIDER ===== */
     #hs-bg{z-index:1}
     #hero .container{position:relative;z-index:3}
@@ -63,10 +64,12 @@
       .category-body h3{grid-column:2;grid-row:1;font-size:16px!important;margin-bottom:0!important}
       .category-body p{grid-column:1/-1;grid-row:2;font-size:13px!important;margin-top:10px!important;margin-bottom:8px!important}
       .category-link{grid-column:1/-1;grid-row:3}
-      /* Istaknuti Proizvodi header — centriraj na mobilnom */
+      /* Istaknuti Proizvodi — naslov centriraj, dugme ispod proizvoda */
+      .featured-btn-desktop{display:none!important}
+      .featured-btn-mobile-wrap{display:flex;justify-content:center;margin-top:28px}
+      .featured-btn-mobile-wrap .btn-dark{width:100%;justify-content:center}
       .featured-header{align-items:center!important;text-align:center!important;margin-bottom:28px!important}
       .featured-header>div .gold-line{margin:0 auto 12px}
-      .featured-header .btn-dark{width:100%;justify-content:center;text-align:center}
     }
   </style>
 </head>
@@ -208,7 +211,7 @@
         <h2 class="section-title">Istaknuti Proizvodi</h2>
         <p class="section-subtitle">Naši najpopularniji i najprodavaniji modeli</p>
       </div>
-      <a href="products.html" class="btn btn-dark">
+      <a href="products.html" class="btn btn-dark featured-btn-desktop">
         Svi Proizvodi <i class="fas fa-arrow-right"></i>
       </a>
     </div>
@@ -217,6 +220,11 @@
       <div class="loading-placeholder"></div>
       <div class="loading-placeholder"></div>
       <div class="loading-placeholder"></div>
+    </div>
+    <div class="featured-btn-mobile-wrap">
+      <a href="products.html" class="btn btn-dark">
+        Svi Proizvodi <i class="fas fa-arrow-right"></i>
+      </a>
     </div>
   </div>
 </section>
