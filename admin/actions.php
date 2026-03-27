@@ -440,6 +440,28 @@ switch ($action) {
         echo json_encode(['ok' => true]);
         exit;
 
+    case 'upload_about':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        if (!isset($_FILES['about_image']) || $_FILES['about_image']['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(['ok' => false, 'error' => 'Nije odabrana slika ili upload nije uspio.']); exit;
+        }
+        $file  = $_FILES['about_image'];
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime  = $finfo->file($file['tmp_name']);
+        if (!in_array($mime, ['image/jpeg','image/jpg','image/png','image/webp'])) {
+            echo json_encode(['ok' => false, 'error' => 'Dozvoljeni formati: JPG, PNG, WEBP.']); exit;
+        }
+        if ($file['size'] > 15 * 1024 * 1024) {
+            echo json_encode(['ok' => false, 'error' => 'Slika je prevelika. Maksimalno 15MB.']); exit;
+        }
+        $dest  = __DIR__ . '/../images/about-showroom.jpg';
+        $saved = optimizeImage($file['tmp_name'], $dest, 900, 900, 88);
+        if (!$saved && !move_uploaded_file($file['tmp_name'], $dest)) {
+            echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']); exit;
+        }
+        echo json_encode(['ok' => true]); exit;
+
     case 'upload_hero_slide':
         ob_end_clean();
         header('Content-Type: application/json');

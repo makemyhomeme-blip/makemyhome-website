@@ -268,6 +268,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     <button class="sidebar-link" onclick="showSection('showcase-img')">
       <i class="fas fa-image"></i> Showcase Slika
     </button>
+    <button class="sidebar-link" onclick="showSection('about-img')">
+      <i class="fas fa-store"></i> Slika Radnje (O Nama)
+    </button>
     <button class="sidebar-link" onclick="showSection('hero-slides')">
       <i class="fas fa-film"></i> Hero Slike (Slider)
     </button>
@@ -854,6 +857,62 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             </button>
 
             <div id="showcase-msg" style="display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-weight:600;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT IMAGE ===== -->
+    <section id="section-about-img" class="section">
+      <div style="max-width:700px;">
+        <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:6px;">Slika Radnje – Sekcija "O Nama"</h2>
+        <p style="color:var(--gray);margin-bottom:28px;">Ovo je slika koja se prikazuje u sekciji "Vaš Partner za Ljepši Dom" na početnoj stranici. Uploaduj fotografiju radnje ili showrooma.</p>
+
+        <?php
+        $aboutPath = __DIR__ . '/../images/about-showroom.jpg';
+        $aboutUrl  = '../images/about-showroom.jpg';
+        ?>
+
+        <div style="margin-bottom:28px;background:var(--white);border-radius:12px;padding:20px;border:1px solid #eee;">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);font-weight:600;margin-bottom:12px;">Trenutna slika</div>
+          <?php if (file_exists($aboutPath)): ?>
+            <img src="<?= $aboutUrl ?>?v=<?= filemtime($aboutPath) ?>"
+                 id="about-current-img" alt="Slika radnje"
+                 style="width:100%;border-radius:8px;display:block;">
+          <?php else: ?>
+            <div id="about-current-img" style="background:#f5f0eb;border-radius:8px;height:200px;display:flex;align-items:center;justify-content:center;color:var(--gray);">
+              <div style="text-align:center;">
+                <i class="fas fa-store" style="font-size:48px;margin-bottom:8px;display:block;opacity:.3;"></i>
+                Slika još nije uploadovana
+              </div>
+            </div>
+          <?php endif; ?>
+        </div>
+
+        <div style="background:var(--white);border-radius:12px;padding:24px;border:1px solid #eee;">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);font-weight:600;margin-bottom:16px;">Uploaduj novu sliku</div>
+          <form id="about-upload-form" enctype="multipart/form-data">
+            <div id="about-drop-zone" style="
+              border:2px dashed #ddd;border-radius:10px;padding:40px 20px;text-align:center;
+              cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:16px;"
+              onclick="document.getElementById('about-file-input').click()"
+              ondragover="event.preventDefault();this.style.borderColor='var(--primary)';this.style.background='#fdf8f0';"
+              ondragleave="this.style.borderColor='#ddd';this.style.background='';"
+              ondrop="handleAboutDrop(event)">
+              <i class="fas fa-cloud-upload-alt" style="font-size:32px;color:var(--primary);margin-bottom:10px;display:block;"></i>
+              <div style="font-weight:600;margin-bottom:4px;">Prevuci sliku ovdje ili klikni</div>
+              <div style="font-size:13px;color:var(--gray);">JPG, PNG, WEBP – preporučeno kvadratna ili portret fotografija</div>
+              <input type="file" id="about-file-input" accept="image/*" style="display:none" onchange="previewAbout(this)">
+            </div>
+            <div id="about-preview-wrap" style="display:none;margin-bottom:16px;">
+              <img id="about-preview-img" style="width:100%;border-radius:8px;display:block;">
+            </div>
+            <button type="button" id="about-upload-btn" onclick="uploadAbout()" style="
+              display:none;width:100%;padding:14px;background:var(--primary);color:var(--dark);
+              border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;">
+              <i class="fas fa-upload"></i> Sačuvaj na sajt
+            </button>
+            <div id="about-msg" style="display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-weight:600;"></div>
           </form>
         </div>
       </div>
@@ -1535,6 +1594,75 @@ async function uploadShowcase() {
     msg.style.background = '#fdecea';
     msg.style.color = '#c62828';
     msg.textContent = 'Greška pri uploadu. Pokušaj ponovo.';
+  }
+  btn.textContent = 'Sačuvaj na sajt';
+  btn.disabled = false;
+}
+
+// ===== ABOUT IMAGE =====
+function previewAbout(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('about-preview-img').src = e.target.result;
+    document.getElementById('about-preview-wrap').style.display = 'block';
+    document.getElementById('about-upload-btn').style.display = 'block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function handleAboutDrop(e) {
+  e.preventDefault();
+  document.getElementById('about-drop-zone').style.borderColor = '#ddd';
+  document.getElementById('about-drop-zone').style.background = '';
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const input = document.getElementById('about-file-input');
+  input.files = dt.files;
+  previewAbout(input);
+}
+
+async function uploadAbout() {
+  const input = document.getElementById('about-file-input');
+  const btn   = document.getElementById('about-upload-btn');
+  const msg   = document.getElementById('about-msg');
+  if (!input.files || !input.files[0]) return;
+  btn.textContent = 'Uploaduje se...';
+  btn.disabled = true;
+  msg.style.display = 'none';
+  const fd = new FormData();
+  fd.append('action', 'upload_about');
+  fd.append('about_image', input.files[0]);
+  try {
+    const res  = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    msg.style.display = 'block';
+    if (data.ok) {
+      msg.style.background = '#d1fae5'; msg.style.color = '#065f46';
+      msg.textContent = 'Slika je uspješno sačuvana!';
+      const cur = document.getElementById('about-current-img');
+      if (cur.tagName === 'IMG') {
+        cur.src = '../images/about-showroom.jpg?v=' + Date.now();
+      } else {
+        const img = document.createElement('img');
+        img.src = '../images/about-showroom.jpg?v=' + Date.now();
+        img.id = 'about-current-img';
+        img.style.cssText = 'width:100%;border-radius:8px;display:block;';
+        cur.replaceWith(img);
+      }
+      document.getElementById('about-preview-wrap').style.display = 'none';
+      btn.style.display = 'none';
+      input.value = '';
+    } else {
+      msg.style.background = '#fee2e2'; msg.style.color = '#991b1b';
+      msg.textContent = data.error || 'Greška pri uploadu.';
+    }
+  } catch(e) {
+    msg.style.display = 'block';
+    msg.style.background = '#fee2e2'; msg.style.color = '#991b1b';
+    msg.textContent = 'Greška pri uploadu.';
   }
   btn.textContent = 'Sačuvaj na sajt';
   btn.disabled = false;
