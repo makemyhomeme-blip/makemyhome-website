@@ -439,132 +439,132 @@ async function renderProductDetail() {
   const reviewsData = {
     // ── Drveni paneli ──
     18: { total: 15, fiveS: 13, fourS: 2, comments: [
-      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Golden Teak je savršen izbor za dnevnu sobu – ta topla zlatno-smeđa nijansa tika odmah grije prostor. Postavio iza TV-a i svi gosti pitaju odakle mi ideja. Izgleda skupo, a montaža je bila gotova za sat.' },
-      { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Renovirali smo kafić i odabrali Golden Teak za cijeli jedan zid. Gosti stalno komentarišu koliko je prostorija udobna i topla. Boja je tačno kao na slikama, silikon drži savršeno.' }
+      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Vidio sam ovo kod prijatelja na večeri i odmah znao da moram imati isto. Pitao ga odakle, sljedeće sedmice naručio. Montirao sam sam za 2 sata bez majstora. Svako ko sada dođe pita isto što i ja tada – odakle je to.' },
+      { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Kupila za spavaću sobu, muž je bio skeptičan. Sad mi govori da je to bila njegova omiljena promjena u stanu haha. Topla zlatna nijansa tika izgleda kao pravo drvo. Definitivno kupujem još za hodnik.' }
     ]},
     19: { total: 10, fiveS: 8, fourS: 2, comments: [
-      { name: 'Stefan K.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Nordic Oak je pravi izbor za moderan, svijetao stan. Ta hladna, nordijska nijansa hrasta čini sobu vizualno većom i čišćom. Postavio u spavaćoj sobi i efekt je kao da sam renovirao cijeli stan.' },
-      { name: 'Ana P.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Otvorili smo novi wellness centar i Nordic Oak je bio savršen izbor za recepciju. Daje onaj skandinavski mir i uređenost koji gosti odmah osjete. Montaža brza i bez problema.' }
+      { name: 'Tijana R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Vidjela sam na Instagramu nečiji stan i dva dana tražila koji je panel. Kad sam pronašla – odmah naručila. Montirala sama uz YouTube video. Komšinica kad je vidjela nije mogla vjerovati da je panel. Naručila je isti za sebe.' },
+      { name: 'Stefan K.', city: 'Budva', date: 'Januar 2026', stars: 4, text: 'Nordic Oak u spavaćoj je bio savršen izbor. Svaki put kad uđem u sobu malo se osmiješim, toliko je lijep nordijski hrast. Muž već traži da postavimo i u dnevnu sobu. Montaža je bila jednostavnija nego što sam očekivao.' }
     ]},
     20: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Dark Ash je brutalno lijep. Postavio cijeli zid u spavaćoj sobi – izgleda kao suite u petospratnom hotelu. Tamna pepeljasta nijansa daje dramatičnost bez agresivnosti.' },
-      { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Renovirali smo restoran i Dark Ash je bio naš prvi izbor. Tamna boja uz toplu rasvjetu stvara atmosferu kakvu gosti ne mogu zaboraviti. Preporučujem svima koji žele premium izgled.' }
+      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Htio nešto tamno za spavaću sobu al me bilo strah. Naručio uzorak, vidio uživo i odmah naručio 10 paketa. Žena je nervozno čekala rezultat – kad je vidjela nije imala šta da kaže. Svi gosti pitaju da li smo uzeli dizajnera.' },
+      { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Vidio kod komšije Dark Ash iza kreveta i odmah pitao gdje kupio. Postavio i kod sebe i kombinacija tamne pepeljaste boje s bijelom posteljinom je kao u skupim hotelima. Prijatelj koji je majstor za enterijer pitao me odakle materijal.' }
     ]},
     21: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Smoke Oak je boja koja ne zastarijeva – ta dimljeno-siva nijansa hrasta ide uz svaki stil nameštaja. Postavio u uredu i prostor je dobio ozbiljnost i modernost istovremeno.' },
-      { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Odabrala za hodnik stana i presretan sam s izborom. Smoke Oak je neutralan ali nikako dosadan – tekstura drveta daje mu život. Montaža silikonom bila je laka i brza.' }
+      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Smoke Oak je tačno ta nijansa koju sam tražio – dimljeno siva s drvenim uzorkom, niti previše toplo niti hladno. Postavio u kućnom uredu i videopozivi su mi izgledali mnogo profesionalnije odmah haha. Svi komentarišu pozadinu.' },
+      { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Poslala sliku prijateljici kako izgleda u dnevnoj sobi i odmah je naručila isti. Neutralna boja s karakterom – ide uz sve. Montaža mi je trebala sat i po, sve sama bez pomoći.' }
     ]},
     22: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Amber Oak ima tu jantarnu toplinu koja odmah grije svaki prostor. Postavio u dnevnoj sobi i prijatelji stalno pitaju da li je pravo drvo. Kvalitet je iznenađujuće dobar za ovu cijenu.' },
-      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Za kafić koji smo otvarali tražili smo nešto toplo i prirodno. Amber Oak je bio savršen – med-žuta nijansa hrasta uz tople lampe stvara ambijent koji gosti obožavaju. Svaka preporuka!' }
+      { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Vidjela sam u jednom kafiću u Budvi, pitala konobarica i evo me ovdje. Topla jantarna nijansa hrasta daje onaj kafić-ugođaj koji sam tražila za dnevnu sobu. Svako ko dođe pita – odakle ti ovo.' },
+      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Naručio za trpezariju. Kad su roditelji došli na ručak mama je mislila da sam postavio pravo drvo. Morala je prstom da pipa da povjeruje. Kupujem još za hodnik, ne mogu se zamisliti bez ovog panela.' }
     ]},
     23: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Mocha Oak je moja omiljena nijansa. Ta srednje-smeđa topla boja daje prostoriji karakter bez pretjerivanja. Postavio u trpezariji i svakom gostu odmah pade pogled na taj zid.' },
-      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'U hotelu smo renovirali sobe i Mocha Oak je bio naš izbor za zid iza kreveta. Gosti pišu u recenzijama da su sobe posebno udobne i tople – panel je definitivno doprinosi tome.' }
+      { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Pratila sam stranicu dugo, napokon naručila i ne kajem se ni sekunde. Mocha Oak iza sofe je magičan – neutralno smeđi ali živ i topao. Drugarice su pitale odakle u isto popodne kad su vidjele. Naručujem još.' },
+      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Renovirali smo kafić s ovim panelom i gosti sjede duže – kažu da je toplije i ugodnije. Vlasnik tvrdi da su recenzije bolje od renovacije. Naručujemo i za drugi lokal koji otvaramo.' }
     ]},
     24: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Honey Oak izgleda kao pravo drvo – ta medeno-topla nijansa je autentična i živa. Postavio iza sofe i efekt je nevjerovatan. Dnevna soba je dobila dušu kakvu nije imala s bijelim zidovima.' },
-      { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Odabrala Honey Oak za salon za uljepšavanje i klijentice stalno pitaju odakle ta ideja. Topla nijansa hrasta stvara opuštenu, ugodnu atmosferu. Paneli su čvrsti i lako se čiste.' }
+      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Honey Oak izgleda kao pravo drvo, ta medeno-topla nijansa je autentična. Postavio iza sofe i efekt je nevjerovatan. Dnevna soba je dobila dušu kakvu nije imala s bijelim zidovima. Komšija koji je majstor pitao odakle materijal.' },
+      { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Kupila umjesto farbanja zidova. Za manje novca nego što bi platila majstora za farbanje imam zid koji izgleda deset puta bolje. Kad gledam natrag ne mogu vjerovati da nisam ranije to uradila.' }
     ]},
     25: { total: 5, fiveS: 4, fourS: 1, comments: [
-      { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Havana Oak ima specifičnu tamnu toplinu koja privlači pogled. Tamno-smeđa nijansa s izraženim drvenim šarama daje zidu karakter kao u ekskluzivnom baru na Havani. Jedinstven izbor.' },
-      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Postavio u kućnoj biblioteci i kombinacija Havana Oak panela s drvenim policama je fenomenalna. Prostor djeluje kao da je dizajner radio na projektu. Svaka preporuka!' }
+      { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Havana Oak za biblioteku – bila sam nesigurna ali prijateljica me uvjerila. Sada je to moja omiljena soba u stanu. Svako ko uđe sjedne i kaže "ma ovde je lijepo". Kupujem još za spavaću.' },
+      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Vidio u jednom hotelu u Baru i tražio po internetu dok nisam pronašao ovo. Postavio iza kreveta. Žena je bila toliko oduševljena da je odmah pozvala mamu da vidi. Nevjerovatan panel.' }
     ]},
     26: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Teak je savršen spoj tamnog i toplog. Postavio u kancelariji i kolege svakodnevno komentarišu koliko prostor djeluje ozbiljno i elegantno. Espresso nijansa tika je timeless.' },
-      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'U restoranu smo stavili Espresso Teak na zid iza šanka – tamna nijansa uz zlatnu rasvjetu daje luksuz koji gosti odmah primjete. Panel je čvrst, lak za čišćenje i izgleda skuplje nego što košta.' }
+      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Teak je moja jedina žalba što nisam naručio ranije. Tamna elegancija bez pretjerivanja. Drugar koji radi enterijer pitao me gdje sam našao ovaj materijal – rekao mu i sada on preporučuje klijentima.' },
+      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Postavila u kancelariju pa pozvala klijente na sastanak. Komentarišu od ulaska. Jedna klijentica pitala gdje nabaviti pa sam joj preporučila odmah. Definitivno uzimam još za dom.' }
     ]},
     // ── Tekstilni paneli ──
     37: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Perla je savršena za spavaću sobu – kremasto-biserna nijansa s lanenom teksturom daje nevjerovatnu toplinu. Kao da si obavio zid u skupocjenu tkaninu. Svaki gost ostane bez teksta kad uđe u sobu.' },
-      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Postavio Perla panel u recepciju butik hotela koji smo otvarali. Tekstura lana je nevjerovatno autentična i upija svjetlo na poseban način. Gosti fotografišu recepciju i pitaju koji je materijal na zidu.' }
+      { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Vidjela sam kod prijateljice na rođendanu i odmah pitala odakle. Naručila za spavaću sobu i ne mogu prestati gledati taj zid. Kremasto-biserna boja s lanennom teksturom – mama je mislila da sam kupila pravi tekstil. Naručujem još za dnevnu sobu.' },
+      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Bila sam skeptična prema panelima generalno ali Perla me je uvjerila. Izgleda skuplje nego što košta. Svi koji dođu kažu "ma lijepo je kod tebe" i odmah znaju za taj zid. Preporučujem svima.' }
     ]},
     38: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Calla je savršena za minimalistički enterijer – čista bijela s finom tekstilnom teksturom nije ravna kao farba nego živa i dinamična. Zid diše. Kombinovala sa drvenim nameštajem i rezultat je moderan i čist.' },
-      { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'U wellness centru smo koristili Calla za sve zidove tretman soba. Bijela tekstilna površina daje čistoću i mir koji je idealan za takav prostor. Klijenti kažu da se odmah osjete opuštenije.' }
+      { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Čista bijela ali nije dosadna bijela – tekstura daje dubinu i zid živi. Muž je odmah primijetio razliku bez da je znao šta sam promijenila. Kaže soba izgleda veća i ljepša. Kupujem još za spavaću.' },
+      { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Vidjela u nekom interijer magazinu, tražila na internetu i pronašla ovo. Montirala sama, malo muke s uglovima ali rezultat je savršen. Komšija je pitao da li sam uzela majstora. Presretna s kupovinom.' }
     ]},
     39: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Grigio je idealan za kancelariju – neutralno siva tekstilna površina daje prostor ozbiljnost i eleganciju bez pretjerivanja. Klijenti uvijek komentarišu koliko ured djeluje profesionalno i uređeno.' },
-      { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Siva nijansa Grigio je tačno onakva kakva se vidi na slikama – ni pretopla ni prehladna. Tekstilna površina upija svjetlo i daje sobi miran, staložen karakter. Savršen za spavaću sobu.' }
+      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Tražila nešto neutralno za ured ali da nije dosadna farbana siva. Grigio je bio odgovor. Klijenti stalno pitaju što sam uradila s prostorom – kažem panel na zidu i svi budu iznenađeni. Jedna me pitala da joj preporučim gdje kupiti.' },
+      { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Vidio kod kolege i odmah pitao odakle. Postavio isti i kažem ti razlika je ogromna. Sivi tekstilni panel niti je topao niti hladan – uvijek elegantno. Svako ko dođe primijeti i komentariše.' }
     ]},
     40: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Ana R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Slate je moj apsolutni favorit. Ta sivo-bež nijansa s prirodnom lanenom teksturom ide uz sve – drvo, metal, beton. Postavio u dnevnoj sobi i prijatelji pitaju da li sam uzeo dizajnera enterijerа.' },
-      { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Koristili smo Slate za renovaciju restorana – cijeli jedan zid prekriven ovim panelom. Tekstura lana daje toplinu i prirodnost kakvu tvrdi materijali ne mogu dati. Gosti su oduševljeni.' }
+      { name: 'Ana R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Slate je taj panel koji ide uz doslovno sve. Naručila za dnevnu sobu pa naručila još za spavaću pa sad i hodnik haha. Sestra je vidjela i odmah bila ljubomorna i naručila za sebe.' },
+      { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Boja je tačno kao na slikama, što je rijetko za online kupovinu. Silikon drži odlično, montaža laka. Žena kaže da je Slate bila njena omiljena promjena u renovaciji. Definitivno naručujemo još.' }
     ]},
     41: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Blanc je čista, topla bijela s delikatnom teksturom – nije hladna bijela nego živa i prijatna. Postavio u spavaćoj sobi uz zlatne lampe i efekt je kao iz luksuznog boutique hotela.' },
-      { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Odabrala Blanc za salon za vjenčanja koji uređujemo. Čista bijela tekstilna površina je savršena pozadina za fotografisanje. Klijenti su presretni, prostorija izgleda kao iz magazina.' }
+      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Htjela bijelu zidnu oblogu koja nije sterilna kao farba. Blanc je tačno to – topla bijela s finom teksturom. Mama je pitala da li sam nabavila skupocjenu tapetu, nije mogla vjerovati kad sam joj rekla cijenu. Naručuje za sebe.' },
+      { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Postavio u kupatilo – da nisam vidio kod prijatelja nikad ne bih smislio. Izgleda luksuzno, lako se čisti. Svi gosti koji dođu pitaju odakle. Već sam preporučio trojici i svi su naručili.' }
     ]},
     42: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Petar L.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Siena je delikatan i sofisticiran panel – tople sivo-smeđe nijanse tekstilne površine daju prostoru karakter kakav ne možeš postići bojom. Postavio u trpezariji i prostorija je dobila dušu.' },
-      { name: 'Sandra N.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Renovirali smo kafić i Siena je bio savršen izbor za fokalni zid iza šanka. Topli tonovi s tekstilnom teksturom uz vintage rasvjetu stvaraju ambijent koji gosti obožavaju. Preporučujem svima!' }
+      { name: 'Petar L.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Siena se ne može opisati riječima – ta topla sivo-smeđa s tekstilnom površinom. Vidjela na nekoj fotografiji interijera i dva dana tražila koji je panel. Kad sam pronašla naručila odmah. Uživo je još ljepše nego na slici.' },
+      { name: 'Sandra N.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Renovirali kafić i Siena je bio hit od prvog dana. Gosti sjede duže, kažu da je ugodnije. Vlasnik tvrdi da su mu se recenzije popravile od renovacije. Već naručujemo za drugi lokal.' }
     ]},
     43: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Bojan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Glacier je jedinstven – ta ledeno-bijela nijansa s hladnim podtonom daje prostoru svježinu i modernitet. Postavio u spa centru i klijenti kažu da se odmah osjete kao da su na odmoru.' },
-      { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Koristila Glacier u kupatilu umjesto keramike – ni bela ni plava nego nešto između što daje savremeni spa izgled. Uz mat metalne slavine i betонski pod je kombinacija koja osvaja na prvi pogled.' }
+      { name: 'Bojan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Glacier je nešto između bijele i ledeno plave i tačno to daje moderan, svjež izgled. Postavljeno u kupatilu i muž je bio skeptičan – sada kaže da je to bila nabolja promjena u stanu. Svaki gost primijeti.' },
+      { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Vidio u jednoj privatnoj klinici i odmah pitao recepciju odakle materijal. Naručio za ured i svi kažu da je prostor mnogo mirniji. Kupujem još za hodnik, jednostavno mi se sviđa ovaj panel.' }
     ]},
     44: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Pura s buklé teksturom je nešto posebno – taj meki, trodimenzionalni izgled tkanine na zidu daje spavaćoj sobi izgled iz modnog magazina. Svaki gost ostane zatečen kad vidi taj zid.' },
-      { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Postavio Pura panel u recepciju hotela koji renoviramo. Buklé površina je toliko upečatljiva da odmah postaje fokalna tačka prostorije. Gosti fotografišu recepciju i dijele na društvenim mrežama.' }
+      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Buklé tekstura na panelu – nisam znala da postoji a sad ne mogu zamisliti spavaću sobu bez nje. Vidjela kod drugarice i mislila da je pravi tekstil na zidu. Kad sam saznala da je panel naručila odmah. Sad i drugarice pitaju pa sam im dala kontakt.' },
+      { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Za recepciju smo tražili nešto upečatljivo, Pura buklé je bila savršen izbor. Svaki klijent koji dođe komentariše taj zid. Već naručili još za konferencijsku salu. Niko ne pogađa da je panel.' }
     ]},
     45: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Milena D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Deva šampanjac je pravi luksuz. Topla zlatno-šampanjac nijansa s tekstilnom površinom daje dnevnoj sobi glamur kakav ne možeš postići nikakvom bojom. Svaki gost odmah primjeti taj zid.' },
-      { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Renovirali smo banketnu salu restorana i Deva je bio naš izbor za sve zidove. Šampanjac s tekstilnom teksturom uz kristalne lustere je kombinacija koja oduševljava goste na svakom događaju.' }
+      { name: 'Milena D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Šampanjac tekstilni panel sam vidjela u hotelu u Bečićima i pitala recepciju. Uputili me ovdje, naručila za dnevnu sobu. Sad dvije drugarice naručile isti nakon što su bile u posjeti. Niko ne može vjerovati da nije pravi tekstil.' },
+      { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Postavio u trpezariji uz lustere – svaki put kad imamo goste komentarišu taj zid. Jedna drugarica odmah uzela broj i naručila za sebe isti dan. Definitivno kupujem još, ne mogu se zamisliti bez Deve.' }
     ]},
     // ── Mermerni paneli ──
     46: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Dragana M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Mystic Marble izgleda kao pravi mermerni zid. Gosti uvijek pitaju da li sam ugradila pravi mermer – ne mogu da vjeruju da je panel. Postavljeno u dnevnoj sobi i prostor djeluje dvostruko skuplje.' },
-      { name: 'Zoran K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Postavio Mystic Marble u kupatilu iza lavaboa. Efekat je nevjerovatan – luksuz za malu cijenu. Bijelo-sive žilice izgledaju autentično, montaža sa silikonom prošla bez ikakvih problema.' }
+      { name: 'Dragana M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Htio pravi mermer ali cijena je bila nerealna. Našao ovo, naručio jedan paket za probu i ostao u šoku koliko izgleda realno. Naručio još 8 paketa. Komšija koji je majstor mislio da je pravi mermer dok nisam mu pokazao.' },
+      { name: 'Zoran K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Vidjela sam kod prijateljice u Tivtu, nisu htjela reći odakle haha, ali sam pronašla sama. Postavljeno u dnevnoj sobi iza TV-a. Svi koji dođu pitaju je li to pravi mermer. Kupujem još za ulazni hol.' }
     ]},
     47: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Kristina P.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Desert Stone ima tople pješčano-sive tonove koji su potpuno drugačiji od klasičnog mermera. Postavljeno u holu kuće i svaki gost ostane zatečen – toplo i prirodno, kao da si unijela komad pustime u dom.' },
-      { name: 'Nemanja R.', city: 'Nikšić', date: 'Januar 2026', stars: 4, text: 'Jako lijepa imitacija kamena – topli pješčani tonovi daju prostoru organsku prirodnost. Postavljeno u kafić koji smo renovirali i gosti stalno komentarišu koliko je prostorija unikatna.' }
+      { name: 'Kristina P.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Desert Stone ima tople pješčano-sive tonove, potpuno drugačije od klasičnog mermera. Brat je bio u posjeti i pitao "je li to pravi kamen?" – kad sam mu rekla da je panel odmah naručio za svoju kuću.' },
+      { name: 'Nemanja R.', city: 'Nikšić', date: 'Januar 2026', stars: 4, text: 'Renovirali recepciju i Desert Stone je bio hit. Gosti često komentarišu koliko je prostor lijep. Vlasnik kaže da je ovo bila njegova omiljena promjena u renovaciji i već planira drugi prostor.' }
     ]},
     48: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Ivana B.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'White Marble je klasik koji ne može da pogreši. Čisti bijeli mermer sa suptilnim sivim žilicama je savršen za kupatilo ili dnevnu sobu. Izgleda skupo i elegantno, a montaža je trajala svega sat.' },
-      { name: 'Rade S.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Renovirali smo recepciju hotela i White Marble je bio naš izbor. Fotografije ne mogu prenijeti koliko lijepo izgleda uživo – gosti odmah pitaju koji materijal je na zidu. Čisto luksuz.' }
+      { name: 'Ivana B.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Bijeli mermer zvuči skupo, a ovaj panel je rješenje. Moj frizer koji dolazi kući mislio da sam potrošila hiljade eura. Smijala sam se kad sam mu rekla pravu cijenu. Naručila još za kupatilo.' },
+      { name: 'Rade S.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Vidio u jednom poznatom restoranu u Kotoru i pitao konobarica. Naručio za kuhinju i žena mi se bacila oko vrata kad je vidjela. Svi gosti pitaju je li to pravi mermer. Kupujem još za kupatilo.' }
     ]},
     49: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Snežana J.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Lava Stone je dramatičan i moćan. Tamna vulkanska tekstura na fokalnom zidu u dnevnoj sobi potpuno je promijenila karakter prostorije. Gosti pitaju odakle ta ideja – niko ne može pogoditi da je panel.' },
-      { name: 'Miloš V.', city: 'Cetinje', date: 'Februar 2026', stars: 5, text: 'Koristio Lava Stone u baru koji smo otvarali – tamna kamena tekstura uz industrijsku rasvjetu je kombinacija koja oduševljava goste. Panel je čvrst, lako se čisti i izgleda kao pravi kamen.' }
+      { name: 'Snežana J.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Lava Stone je bio hrabar potez za dnevnu sobu – brat me odgovarao. Sada mi kaže da je to bio moj životni potez haha. Bar koji smo otvorili ima ga na zidu i gosti ga fotografišu svaki dan.' },
+      { name: 'Miloš V.', city: 'Cetinje', date: 'Februar 2026', stars: 5, text: 'Htio nešto drugačije za dnevnu sobu, ne drvo ne mermer. Lava Stone je bio savršen odgovor. Žena je bila sumnjičava, sada mi zahvaljuje svaki dan haha. Kupujem još za hodnik.' }
     ]},
     50: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Tatjana Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Urban Concrete ima savršenu betonsku teksturu – hladan, urbani izgled koji je savremena alternativa klasičnom mermeru. Postavio u kancelariji i prostor odmah dobio industrijski-luksuzni karakter.' },
-      { name: 'Goran N.', city: 'Bijelo Polje', date: 'Februar 2026', stars: 5, text: 'Renovirali smo moderan restoran i Urban Concrete je bio savršen za zidove. Beton tekstura uz drvene stolove i metalne detalje je kombinacija kojom su gosti oduševljeni od prvog dana.' }
+      { name: 'Tatjana Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Vidjela kod prijatelja i bila oduševljena. Mislila sam da je pravi beton i pitala koliko koštalo oblaganje. Kad su mi rekli da je panel nisam vjerovala. Odmah naručila i postavljeno za vikend. Presretna.' },
+      { name: 'Goran N.', city: 'Bijelo Polje', date: 'Februar 2026', stars: 5, text: 'Beton izgled bez težine betona. Postavio u uredu i klijenti sjede opuštenije, duže se zadržavaju. Kolega iz firme je naručio za svoj ured po mome savjetu. Urban Concrete je savršen za moderan poslovni prostor.' }
     ]},
     51: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Bojana L.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Nordic Concrete ima nešto posebno – topliji, svjetliji ton betona s blagim kremastim podtonom. Daje prostoru nordijsku čistoću bez hladnoće. Trpezarija je potpuno transformisana, jako sam zadovoljna.' },
-      { name: 'Danilo F.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Koristio Nordic Concrete za renovaciju spa centra – ta topla betonska nijansa uz drvene detalje i zeleno bilje je kombinacija koja opušta i liječi. Klijenti obožavaju atmosferu tretman soba.' }
+      { name: 'Bojana L.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tražila beton izgled ali da nije hladan. Nordic Concrete je tačno to – topliji kremasti beton. Postavljeno u dnevnoj sobi i sad je to moja omiljena soba u stanu. Mama je pitala što sam uradila i odmah htjela isto za sebe.' },
+      { name: 'Danilo F.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Renovirali spa centar s Nordic Concrete panelima. Klijenti kažu da se odmah osjete opuštenije čim uđu. Vlasnica prezadovoljna, kaže da planira i drugu prostoriju s istim panelom.' }
     ]},
     52: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Marina T.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Noir Stone je hrabar izbor koji se isplati – tamna crno-antracit kamena tekstura daje prostoru snagu i ekskluzivnost. Postavljeno u kućnom bioskopu i prostorija izgleda kao profesionalni kino.' },
-      { name: 'Predrag M.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'U premium baru koji smo otvarali Noir Stone je bio obavezan izbor. Tamna kamena tekstura uz zlatnu rasvjetu je kombinacija koja komunicira luksuz i ekskluzivnost. Gosti su odmah primijetili razliku.' }
+      { name: 'Marina T.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Noir Stone za kućni bioskop – bila ideja prijatelja i u početku skeptičan. Sada mu zahvaljujem svaki put kad gledam film. Tamna kamena tekstura apsorbira sve. Svi koji dođu žele isti.' },
+      { name: 'Predrag M.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Premium bar smo otvarali i Noir Stone na zidovima je bio hit od prvog dana. Gosti fotografišu prostor i dijele na mrežama. Od renovacije nam se povećao broj rezervacija. Naručujemo više.' }
     ]},
     53: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Jelena S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Beige Marble je savremena i sofisticirana – topli bež mermer s tamnim žilicama je moderniji izbor od klasičnog bijelog. Kupatilo izgleda kao suite u luksuznom hotelu, svi gosti su impresionisani.' },
-      { name: 'Stefan B.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Renovirali smo boutique hotel i Beige Marble smo koristili za kupaonice. Gosti pišu u recenzijama da se kupaonice osjećaju kao spa. Panel je čvrst, vodootporan i nevjerovatno lijepo izgleda.' }
+      { name: 'Jelena S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Bež mermer je moderan izbor koji ne zastarijeva. Postavljeno u kupaonici i kuma koja je bila skeptična prema panelima rekla mi da je ovo promijenilo njeno mišljenje. Odmah naručuje za sebe.' },
+      { name: 'Stefan B.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Vidio u jednom hotelu u Herceg Novom i pitao recepciju. Pronašao ovo i naručio za kupatilo. Žena je bila toliko oduševljena da smo naručili još za spavaću sobu. Svi gosti pitaju odakle.' }
     ]},
     54: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Aleksandra C.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Dark Luxe je jedinstven – tamna, duboka nijansa s bogatim žilicama daje prostoru ekskluzivnost kakvu teško postižeš s drugim materijalima. Postavljeno u VIP sobi restorana i efekt je spektakularan.' },
-      { name: 'Vuk J.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'U privatnoj kancelariji sam htio nešto posebno i Dark Luxe je bio savršen izbor. Tamna kamena tekstura s bogatim uzorkom daje prostor ozbiljnost i prestiž. Svaki poslovni partner komentariše taj zid.' }
+      { name: 'Aleksandra C.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Dark Luxe je za one koji žele nešto posebno. U VIP sobi restorana izgleda spektakularno – gosti posebno traže tu sobu od kako smo renovirali. Vlasnik se hvali svima i preporučuje panel.' },
+      { name: 'Vuk J.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Htio kancelariju koja odiše prestižem. Dark Luxe je bio savršen. Svaki poslovni partner komentariše zid. Jedan je pitao kontakt za majstora – rekao mu da sam sam postavljao, pa mu rekao odakle panel.' }
     ]},
     55: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Milica R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Sahara je topla i elegantna – pješčano-bež nijansa s blagim žilicama daje prostoru mediteransku toplinu. Postavljeno u dnevnoj sobi i u kombinaciji sa prirodnim materijalima izgleda kao luksuzni resort.' },
-      { name: 'Andrija K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Odabrali Sahara za hotelski lobi koji renoviramo. Ta topla sahara nijansa uz drvo i zelenilo stvara ambijent luksuznog odmarališta. Gosti odmah pitaju koji materijal je na zidu – niko ne pogađa da je panel.' }
+      { name: 'Milica R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Sahara sam vidjela u jednom resortu i tražila dok nisam pronašla. Postavljeno u dnevnoj sobi i osjećam se kao na odmoru svaki dan. Naručujem još za trpezariju, ne mogu bez ove boje.' },
+      { name: 'Andrija K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Za hotelski lobi – Sahara je bio savršen. Topla mediteranska nijansa uz zelenilo i drvo, gosti odmah oduševljeni. Recenzije hotela su se popravile od renovacije. Naručujemo i za restoran.' }
     ]},
 
     // ── Metalni paneli ──
     56: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Radovan T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Brushed Gold je nešto što nisam vidio kod konkurencije. Četkano zlato pod usmjerenom rasvjetom stvara igru svjetla i sjenke koja menja izgled prostorije tokom dana. Postavio u trpezariji i efekat je luksuzno-dramatičan.' },
-      { name: 'Katarina M.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Koristili smo Brushed Gold za recepciju premium salona – zlatna površina s četkanom teksturom komunicira ekskluzivnost i kvalitet čim neko uđe na vrata. Klijenti odmah primjete i komentarišu.' }
+      { name: 'Radovan T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Četkano zlato zvuči kičasto ali u realnosti je elegantno i suzdržano. Vidio kod drugarice u stanu, odmah naručio isti. Postavljeno u trpezariji i svaki gost ostane šutke kad ga prvi put vidi. Svi pitaju odakle.' },
+      { name: 'Katarina M.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Premium frizerski salon smo otvarali i Brushed Gold je bio pravi hit. Od dana otvaranja gosti fotografišu zidove i dijele na Instagramu. Vlasnica kaže da je panel bila njena omiljena investicija.' }
     ]},
     57: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Dragan S.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Raw Steel je prava bomba za industrijski enterijer. Mat čelična površina bez refleksija daje prostoru autentičan loft karakter kakav ne možeš postići drugačije. Postavljeno u novom baru i gosti su oduševljeni.' },
-      { name: 'Nataša V.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Raw Steel panel u kombinaciji s drvenim elementima i betonskim podom je savršen industrijski trio. Panel je čvrst, ne deformiše se i izgleda kao pravi čelik. Ekipa u uredu ga obožava.' }
+      { name: 'Dragan S.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Raw Steel u novom baru je bio hit od prvog dana. Čelična tekstura uz drvene stolove i industrijske lampe – gosti sjede i kažu da je prostorija posebna. Vlasnik je odmah rekao da naručujemo još. Pravo rješenje.' },
+      { name: 'Nataša V.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Htio loft izgled u stanu bez rušenja zidova. Raw Steel panel na jednom zidu je pretvorio stan u dizajnerski loft. Drugar koji je arhitekt pitao koji panel je – i sam ga sada preporučuje klijentima.' }
     ]},
     58: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Marko Đ.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Champagne Metal je suptilan i elegantan – topla šampanjac-metalna nijansa nije previše zlatna ni previše srebrna. Postavljeno u spavaćoj sobi i daje onaj soft-luksuz koji obožavam. Fenomenalan izbor.' },
-      { name: 'Jovana K.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'U boutique hotelu koji renoviramo koristili smo Champagne Metal za hodnik soba. Topla metalna nijansa uz dimovano ogledalo i mesingane lampe je kombinacija kojom su gosti oduševljeni od prvog dana.' }
+      { name: 'Marko Đ.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Šampanjac metalna nijansa je suptilna elegancija – nije zlatna ni srebrna nego nešto između. Postavljeno u spavaćoj i svaki put kad uđem osjećam se kao u luksuznom hotelu. Kupujem još za hodnik.' },
+      { name: 'Jovana K.', city: 'Podgorica', date: 'Januar 2026', stars: 4, text: 'Vidio u butik hotelu i pitao recepciju koji materijal. Pronašao ovaj panel, naručio za dnevnu sobu. Žena bila oduševljena, odmah pozvala sestru da vidi. Sestra naručila isti dan haha.' }
     ]},
     59: { total: 7, fiveS: 6, fourS: 1, comments: [
       { name: 'Aleksandar B.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Bronzani metalni panel je jedinstven izbor – ni zlatni ni smeđi nego nešto između što daje prostoru toplinu i luksuz istovremeno. Postavljeno u restoranskoj VIP sali i efekt je impresivan.' },
@@ -738,38 +738,38 @@ async function renderProductDetail() {
 
     // ── Kožni paneli ──
     106: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Ivana Č.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bordo Crvena je dublja i toplija od onoga što sam očekivala – bogata cigla-crvena s kožnim reljefom mijenja ton na različitom svjetlu. Postavljeno u restoranu iza šanka i gosti uvijek primijete i fotografišu.' },
-      { name: 'Ognjen M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Postavio u privatnom kabinetу – topla bordo nijansa s kožnom texturom daje prostoriji karakter i toplinu. Ni previše agresivna ni tiha. Klijenti odmah komentarišu koliko je prostor autentičan i jedinstven.' }
+      { name: 'Ivana Č.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bordo crvena koža na zidu zvuči previše ali kad to vidiš uživo sve postane jasno. Vidjela u jednom retro restoranu, pitala konobarica, pronašla ovo. Naručila za hodnik i sada svako ko uđe stane i gleda. Definitivno kupujem još.' },
+      { name: 'Ognjen M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Postavio u kabinetу i klijenti odmah komentarišu koliko je prostor autentičan. Jedna klijentica pitala odakle panel – preporučio sam bez razmišljanja. Bordo s kožnom teksturom je nešto što se mora videti uživo.' }
     ]},
     107: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Lena V.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Hermès Narandžasta je hrabar izbor koji se stoprocentno isplati. Puna saturirana narandžasta s kožnim reljefom daje prostoru energiju i karakter. Kolege u uredu odmah su promijenile stav prema prostoru.' },
-      { name: 'Dejan T.', city: 'Bar', date: 'Februar 2026', stars: 4, text: 'Za bar koji smo otvarali – savršena. Narandžasta s kožnom granulacijom izgleda skupo i retro-chic. Uz crne stolice i drvene površine je kombinacija koja gosti fotografišu i dijele na mrežama.' }
+      { name: 'Lena V.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Narandžasta na zidu je bila ideja moje žene i ja sam se protivio. Sada joj zahvaljujem svaki dan. Hermès narandžasta s kožnom teksturom je magnetska – svaki gost stane i pita. Bar koji smo otvorili je hit.' },
+      { name: 'Dejan T.', city: 'Bar', date: 'Februar 2026', stars: 4, text: 'Vidio sam na nekom Instagram stories i tražio dugo. Kad sam pronašao naručio odmah za studio za fotografisanje. Gosti posebno traže taj zid za pozadinu. Isplatilo se višestruko, naručujem još.' }
     ]},
     108: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Maja S.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Ledena Siva u određenom svjetlu dobiva blag sedefni sjaj – fini kožni reljef je izrazito vidljiv i daje zidu gotovo kristalnu dubinu. Uz bijeli nameštaj i zlatne detalje izgleda prefinijeno i luksuzno.' },
-      { name: 'Petar A.', city: 'Podgorica', date: 'Mart 2026', stars: 4, text: 'Recepcija firme s Ledenom Sivom odmah je dobila premium izgled. Hladna siva s kožnom teksturom komunicira profesionalnost bez pretjerivanja. Posjetioci uvijek pitaju koji materijal je na zidu.' }
+      { name: 'Maja S.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Tražila nešto elegantno za recepciju firme. Ledena Siva s kožnom teksturom bila savršena. Posjetioci uvijek pitaju koji materijal je na zidu. Jedna klijentica pitala kontakt – preporučila odmah.' },
+      { name: 'Petar A.', city: 'Podgorica', date: 'Mart 2026', stars: 4, text: 'Vidio u jednom uredu kod poslovnog partnera i odmah pitao odakle. Postavio kod sebe i razlika je drastična. Hladna siva s kožom daje prostor premium izgled. Svaki gost koji dođe primijeti.' }
     ]},
     109: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Stefan L.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamni Antracit nije crna – to je tamna ugljeno-siva koja se mijenja s kutom svjetlosti. Kožni reljef pod direktnim svjetlom postaje izrazito vidljiv i panel dobija gotovo granitnu dubinu. Fascinantno.' },
-      { name: 'Milica R.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Antracit kožni panel u kućnom uredu – tačno ono za fokus i ozbiljnost. Tamna ali ne depresivna, granulacija kože daje živost zidu. Savršena kombinacija s drvenim stolom i zelenim biljkama.' }
+      { name: 'Stefan L.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamni Antracit nije crna – tamnija siva koja se mijenja s kutom svjetla. Drugar koji je dizajner nije mogao vjerovati da je panel. Postavljeno u kućnom uredu i sada je to moja omiljena prostorija.' },
+      { name: 'Milica R.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Vidio kod prijatelja i odmah pitao odakle. Naručio za spavaću i kombinacija tamnog antracita s bijelom posteljinom je presavršena. Žena bila skeptična, sada kaže da je to njena omiljena soba. Kupujem još.' }
     ]},
 
     // ── Classic paneli ──
     110: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Tamara J.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Terrazzo panel je nešto što nisam vidio ni u jednom salonu – šareni terrazzo uzorak daje prostoru radost i originalnost. Postavljeno u kafiću i gosti ga fotografišu i dijele na Instagramu. Pravi magnet za pažnju.' },
-      { name: 'Kristina R.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'U dječijoj sobi sam tražila nešto veselo ali ne djetinjasto. Terrazzo s raznolikm granulama je savršen – šaren, moderan, jedinstven. Djeca ga obožavaju a i ja sam presretna izborom.' }
+      { name: 'Tamara J.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Terrazzo panel sam vidjela na nekom Pinterest profilu i tražila dugo. Kad sam pronašla odmah naručila za kafić. Gosti ga fotografišu svaki dan i pitaju vlasnika. Od renovacije smo dobili dosta novih mušterija.' },
+      { name: 'Kristina R.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Za dječiju sobu sam tražila nešto veselo ali moderno. Terrazzo je tačno to. Djeca ga obožavaju. Četiri mamice su naručile po mome preporuci nakon što su vidjele kako izgleda. Presretna sa izborom.' }
     ]},
     111: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Miloš D.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Soft Beige je panel koji ne griješi – topla, meka bež nijansa ide uz sve stilove i materijale. Postavljeno u dnevnoj sobi i prostorija je dobila onaj neutralan ali ugodan karakter koji sam uvijek tražio.' },
-      { name: 'Jelena N.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Renovirali smo boutique hotel i Soft Beige je bio naš izbor za sve sobe. Ta topla bež nijansa opušta i grije prostor bez pretjerivanja. Gosti pišu u recenzijama da se osjete kao kod kuće – panel sigurno doprinosi.' }
+      { name: 'Miloš D.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Soft Beige je ta boja koja ide uz doslovno sve. Muž je bio skeptičan, sada mi kaže da je to bila nabolja odluka u renovaciji. Neutralna ali udobna bež nijansa – svi gosti primijete i komentarišu.' },
+      { name: 'Jelena N.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Renovirali boutique hotel i Soft Beige za sve sobe. Gosti pišu u recenzijama da se osjete kao kod kuće. Mama je vidila jednom u sobi i odmah naručila za svoj stan. Preporučujem svima.' }
     ]},
     112: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Ana V.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Pure White je savršen za minimaliste – čista bijela koja nije hladna nego živa i dinamična zahvaljujući finom reljefu površine. Postavljeno u studiju za fotografisanje i postalo je omiljena pozadina za sve snimke.' },
-      { name: 'Bojan S.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'U wellness centru smo koristili Pure White za sve tretman sobe. Bijela čistoća s blagom teksturom daje mir i sterilnost kakvu klijenti traže. Kombinacija s drvenim detaljima i zelenilom je savršena.' }
+      { name: 'Ana V.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Bijela ali nije obična bijela – fina tekstura daje dubinu. Vidio na nekom dizajnerskom blogu i tražio dugo. Kad pronašao odmah naručio. Postavljeno u kupaonici, sad je to najljepša prostorija u kući. Komšija koji je bio u posjeti naručio isti.' },
+      { name: 'Bojan S.', city: 'Tivat', date: 'Januar 2026', stars: 5, text: 'Pure White za studio za jogu – klijentice kažu da soba djeluje čišće i mirnije nego ikad. Tražile me odakle zidna obloga i više puta preporučila. Jednostavno ne bi isto izgledalo s bijelom farbom.' }
     ]},
     113: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Marko Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Midnight Black je apsolutni statement komad – mat crna bez ikakvog sjaja apsorbira svjetlo i daje prostoru dramatičnost i snagu. Postavljeno iza kreveta i spavaća soba izgleda kao suite u boutique hotelu.' },
-      { name: 'Sonja K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'U kućnom bioskopu sam tražila mat crnu bez refleksija projektora – Midnight Black je bio savršen. Ni traga od sjaja, čisto duboko crno. Kino atmosfera kakvu nisam mogla postići nijednom drugom bojom.' }
+      { name: 'Marko Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Midnight Black je bio hrabar potez za spavaću sobu i nabolja odluka u životu. Mat crna uz bijelu posteljinu i zlatne lampe – svaki gost ostane bez daha. Prijatelji mi se smiju što sam to uradio ali odmah pitaju odakle haha.' },
+      { name: 'Sonja K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Kućni bioskop bez mat crnog zida nije pravi bioskop. Postavio Midnight Black i nema ni jedne refleksije. Brat bio toliko oduševljen da odmah naručio za svoju sobu. Preporučujem svima koji žele nešto dramatično.' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
