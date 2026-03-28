@@ -755,18 +755,20 @@
     },
     {
         "id": 49,
-        "name": "White Marble",
+        "name": "Lava Stone",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
         "unit": "kom",
         "description": "05512 panel nosi klasican mermerasti uzorak koji nikad ne izlazi iz mode – bela podloga s delikatnim žilama koje imitiraju prirodni kamen toliko uvjerljivo da gosti nece znati razliku. Savrsen za zidove u kupatilu ili kuhinji gdje pravi mermer nije praktican zbog cijene ili tezine.",
         "features": [
-            "Dimenzije: 280×122cm (3,42 m² po komadu)",
+            "Dimenzije: 280×122cm (3",
+            "42 m² po komadu)",
             "Materijal: bambus vlakno s mermernim UV printom",
             "Uzorak: klasicni belo-krem mermer",
             "Povrsinska obrada: visoko-sjajna lak zastita",
-            "Montaža: lijepi se silikonom, siječe se skalpelom",
+            "Montaža: lijepi se silikonom",
+            "siječe se skalpelom",
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: 05512"
         ],
@@ -787,7 +789,7 @@
             "Luksuzni",
             "Mediteranski"
         ],
-        "sku": "05512"
+        "sku": "SW211"
     },
     {
         "id": 50,
