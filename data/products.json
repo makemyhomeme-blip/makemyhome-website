@@ -1,7 +1,7 @@
 [
     {
         "id": 18,
-        "name": "Drveni Panel CQ006 – Topli Tik",
+        "name": "Golden Teak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -31,7 +31,7 @@
             "Mediteranski",
             "Tropski"
         ],
-        "image": "images\/products\/cq006.jpg",
+        "image": "images/products/cq006.jpg",
         "badge": "Bestseller",
         "inStock": true,
         "featured": true,
@@ -40,7 +40,7 @@
     },
     {
         "id": 19,
-        "name": "Drveni Panel MW010 – Beli Jasen",
+        "name": "Nordic Oak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -48,7 +48,7 @@
         "description": "Bela nijansa jasena koja prostoriju čini luminoznom i prostranom. Delikatna, fina šara drveta daje dubinu bez zagušivanja – baš onako kako funkcionišu skandinavski i japandi enterijeri koje vidite na Pinterest-u. Savršena uz tamni namještaj od oraha, biljke i tekstil boje slonove kosti. MW010 je panel koji nikad ne zastarijeva – kupite ga danas, voleće ga i za 10 godina.",
         "features": [
             "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: bela\/krema – tonovi prirodnog jasena",
+            "Boja: bela/krema – tonovi prirodnog jasena",
             "Fina, delikatna tekstura",
             "Površinska UV zaštita – ne žuti s vremenom",
             "Montaža: lijepi se silikonom, siječe se skalpelom",
@@ -67,7 +67,7 @@
             "Japandi",
             "Boho"
         ],
-        "image": "images\/products\/mw010.jpg",
+        "image": "images/products/mw010.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -75,7 +75,7 @@
     },
     {
         "id": 20,
-        "name": "Drveni Panel MW301 – Crni Antracit",
+        "name": "Dark Ash",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -94,7 +94,7 @@
             "Dnevna soba",
             "Spavaća soba",
             "Kućni bioskop",
-            "Bar\/kafić"
+            "Bar/kafić"
         ],
         "styleMatch": [
             "Moderni luksuz",
@@ -102,7 +102,7 @@
             "Art Deco",
             "Noir"
         ],
-        "image": "images\/products\/mw301.jpg",
+        "image": "images/products/mw301.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -110,7 +110,7 @@
     },
     {
         "id": 21,
-        "name": "Drveni Panel MW211 – Srebrno Sivi",
+        "name": "Smoke Oak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -137,7 +137,7 @@
             "Industrijski",
             "Scandi"
         ],
-        "image": "images\/products\/mw211.jpg",
+        "image": "images/products/mw211.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -145,7 +145,7 @@
     },
     {
         "id": 22,
-        "name": "Drveni Panel MW013 – Pješčani Hrast",
+        "name": "Amber Oak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -153,7 +153,7 @@
         "description": "Topla bež sa mekim prirodnim godovima hrasta – ovo je nijansa koja osvaja sve. Ni previše tamna ni previše svijetla, ni hladna ni vruća. MW013 radi u svakom prostoru, uz svaki namještaj, u svakom stilu. Nije ni čudo što je ovo najtraženija nijansa naše kolekcije. Posebno se ističe u prirodnom dnevnom svjetlu kada godovi hrasta dobivaju zlatni odsjaj koji čini prostoriju toplijim i prijatnijim mjestom.",
         "features": [
             "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: topla bež\/pješčana – tonovi hrasta",
+            "Boja: topla bež/pješčana – tonovi hrasta",
             "Meke, prirodne drvene godovi",
             "Površinska UV zaštita",
             "Montaža: lijepi se silikonom, siječe se skalpelom",
@@ -174,7 +174,7 @@
             "Scandi",
             "Boho"
         ],
-        "image": "images\/products\/mw013.jpg",
+        "image": "images/products/mw013.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -182,7 +182,7 @@
     },
     {
         "id": 23,
-        "name": "Drveni Panel MW300 – Dimljeni Orah",
+        "name": "Mocha Oak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -190,7 +190,7 @@
         "description": "Topla sivo-smeđa nijansa s dubokom drvenom šarom drveta oraha – panel koji izgleda skuplje nego što košta. MW300 savršeno balansira između topline drveta i moderne hladnoće sivila, stvarajući sofisticirani tonski kontrast. Posebno moćan u kombinaciji s tamnim namještajem, zlatnim lampama i tamno zelenim biljkama. Ovaj panel čini da vaša prostorija izgleda kao iz arhitektonskog časopisa.",
         "features": [
             "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: topla taupe\/dimljeni orah",
+            "Boja: topla taupe/dimljeni orah",
             "Duboka, izražena drvena šara",
             "Površinska UV zaštita",
             "Montaža: lijepi se silikonom, siječe se skalpelom",
@@ -209,7 +209,7 @@
             "Glamour",
             "Rustikalni"
         ],
-        "image": "images\/products\/mw300.jpg",
+        "image": "images/products/mw300.jpg",
         "badge": "Najpopularniji",
         "inStock": true,
         "featured": true,
@@ -217,7 +217,7 @@
     },
     {
         "id": 24,
-        "name": "Drveni Panel MW321 – Prirodni Hrast",
+        "name": "Honey Oak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -245,7 +245,7 @@
             "Rustikalni",
             "Skandinavski"
         ],
-        "image": "images\/products\/mw321.jpg",
+        "image": "images/products/mw321.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -253,7 +253,7 @@
     },
     {
         "id": 25,
-        "name": "Drveni Panel MW682 – Divlji Orah",
+        "name": "Havana Oak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -271,7 +271,7 @@
         "idealFor": [
             "Dnevna soba",
             "Spavaća soba",
-            "Bar\/kafić",
+            "Bar/kafić",
             "Biblioteka"
         ],
         "styleMatch": [
@@ -280,7 +280,7 @@
             "Vintage",
             "Bohemian"
         ],
-        "image": "images\/products\/mw682.jpg",
+        "image": "images/products/mw682.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -288,7 +288,7 @@
     },
     {
         "id": 26,
-        "name": "Drveni Panel MW312 – Espresso Orah",
+        "name": "Espresso Teak",
         "category": "bambus-drveni",
         "price": "86.99",
         "unit": "kom",
@@ -296,7 +296,7 @@
         "description": "Tamna čokoladna nijansa s elegantnom valovitom šarom drveta oraha – definicija modernog luksuza. MW312 je za premium prostore koji odbijaju kompromis. Bogata espresso boja apsorbira svjetlost i stvara dubinu koja se ne može postići ni jednom drugom površinom. Kada rasvjeta padne na panel pod kutom, šara drveta oraha zasvetli poput satenskog tkanine. Savršen za kućne bioskope, master spavaće sobe, luksuzne restorane i VIP zone.",
         "features": [
             "Dimenzije: 280×122cm (3,42 m² po komadu)",
-            "Boja: tamna čokoladna\/espresso orah",
+            "Boja: tamna čokoladna/espresso orah",
             "Valovita, sofisticirana drvena šara",
             "Duboka apsorpcija svjetlosti – dramatičan efekt",
             "Površinska UV zaštita",
@@ -306,7 +306,7 @@
         "idealFor": [
             "Spavaća soba",
             "Kućni bioskop",
-            "Bar\/kafić",
+            "Bar/kafić",
             "VIP lounge"
         ],
         "styleMatch": [
@@ -315,7 +315,7 @@
             "Glamour",
             "Noir"
         ],
-        "image": "images\/products\/mw312.jpg",
+        "image": "images/products/mw312.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -323,7 +323,7 @@
     },
     {
         "id": 37,
-        "name": "Tekstilni Panel BW229 – Topla Bež",
+        "name": "Perla",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -338,7 +338,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW229"
         ],
-        "image": "images\/products\/product-1774006203-686.jpg",
+        "image": "images/products/product-1774006203-686.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -359,7 +359,7 @@
     },
     {
         "id": 38,
-        "name": "Tekstilni Panel BW400 – Čista Bela",
+        "name": "Calla",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -374,7 +374,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW400"
         ],
-        "image": "images\/products\/product-1774006240-870.jpg",
+        "image": "images/products/product-1774006240-870.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -395,7 +395,7 @@
     },
     {
         "id": 39,
-        "name": "Tekstilni Panel BW224 – Hladna Siva",
+        "name": "Grigio",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -410,7 +410,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW224"
         ],
-        "image": "images\/products\/product-1774006266-913.jpg",
+        "image": "images/products/product-1774006266-913.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -431,7 +431,7 @@
     },
     {
         "id": 40,
-        "name": "Tekstilni Panel BW003 – Prirodni Lan",
+        "name": "Slate",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -446,7 +446,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW003"
         ],
-        "image": "images\/products\/product-1774006317-836.jpg",
+        "image": "images/products/product-1774006317-836.jpg",
         "badge": "Limitirano",
         "inStock": true,
         "featured": false,
@@ -467,7 +467,7 @@
     },
     {
         "id": 41,
-        "name": "Tekstilni Panel BW220 – Zlatna Krema",
+        "name": "Blanc",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -482,7 +482,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW220"
         ],
-        "image": "images\/products\/product-1774006385-983.jpg",
+        "image": "images/products/product-1774006385-983.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -503,7 +503,7 @@
     },
     {
         "id": 42,
-        "name": "Tekstilni Panel BW221 – Srebrni Lan",
+        "name": "Siena",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -518,7 +518,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW221"
         ],
-        "image": "images\/products\/product-1774006410-646.jpg",
+        "image": "images/products/product-1774006410-646.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -539,7 +539,7 @@
     },
     {
         "id": 43,
-        "name": "Tekstilni Panel BW809 – Ledena Magla",
+        "name": "Glacier",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -554,7 +554,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW809"
         ],
-        "image": "images\/products\/product-1774006432-776.jpg",
+        "image": "images/products/product-1774006432-776.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -575,7 +575,7 @@
     },
     {
         "id": 44,
-        "name": "Tekstilni Panel BW222 – Beli Buklé",
+        "name": "Pura",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -590,7 +590,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW222"
         ],
-        "image": "images\/products\/product-1774006463-976.jpg",
+        "image": "images/products/product-1774006463-976.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -611,7 +611,7 @@
     },
     {
         "id": 45,
-        "name": "Tekstilni Panel BW008 – Šampanjac",
+        "name": "Deva",
         "category": "bambus-tekstilni",
         "price": "86.99",
         "discount": 0,
@@ -626,7 +626,7 @@
             "Pogodan za zidove i plafone",
             "Šifra: BW008"
         ],
-        "image": "images\/products\/product-1774006512-598.jpg",
+        "image": "images/products/product-1774006512-598.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -647,7 +647,7 @@
     },
     {
         "id": 46,
-        "name": "SW215",
+        "name": "Mystic Marble",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -662,7 +662,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: SW215"
         ],
-        "image": "images\/products\/product-1774008515-675.jpg",
+        "image": "images/products/product-1774008515-675.jpg",
         "badge": "Limitirano",
         "inStock": true,
         "featured": true,
@@ -683,7 +683,7 @@
     },
     {
         "id": 47,
-        "name": "SW222",
+        "name": "Desert Stone",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -698,7 +698,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: SW222"
         ],
-        "image": "images\/products\/product-1774008575-466.jpg",
+        "image": "images/products/product-1774008575-466.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -719,7 +719,7 @@
     },
     {
         "id": 48,
-        "name": "05512",
+        "name": "White Marble",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -734,7 +734,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: 05512"
         ],
-        "image": "images\/products\/product-1774008649-735.jpg",
+        "image": "images/products/product-1774008649-735.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -755,7 +755,7 @@
     },
     {
         "id": 49,
-        "name": "05512",
+        "name": "White Marble",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -770,7 +770,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: 05512"
         ],
-        "image": "images\/products\/product-1774008688-517.jpg",
+        "image": "images/products/product-1774008688-517.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -791,7 +791,7 @@
     },
     {
         "id": 50,
-        "name": "SW003",
+        "name": "Urban Concrete",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -806,7 +806,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: SW003"
         ],
-        "image": "images\/products\/product-1774008744-316.jpg",
+        "image": "images/products/product-1774008744-316.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -827,7 +827,7 @@
     },
     {
         "id": 51,
-        "name": "SW001-B",
+        "name": "Nordic Concrete",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -842,7 +842,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: SW001-B"
         ],
-        "image": "images\/products\/product-1774008913-825.jpg",
+        "image": "images/products/product-1774008913-825.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -863,7 +863,7 @@
     },
     {
         "id": 52,
-        "name": "YL059",
+        "name": "Noir Stone",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -878,7 +878,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: YL059"
         ],
-        "image": "images\/products\/product-1774009000-287.jpg",
+        "image": "images/products/product-1774009000-287.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -899,7 +899,7 @@
     },
     {
         "id": 53,
-        "name": "SW212",
+        "name": "Beige Marble",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -914,7 +914,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: SW212"
         ],
-        "image": "images\/products\/product-1774009018-208.jpg",
+        "image": "images/products/product-1774009018-208.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -935,7 +935,7 @@
     },
     {
         "id": 54,
-        "name": "YL056",
+        "name": "Dark Luxe",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 30,
@@ -952,7 +952,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: YL056"
         ],
-        "image": "images\/products\/product-1774546684-773.jpg",
+        "image": "images/products/product-1774546684-773.jpg",
         "badge": "Akcija",
         "inStock": true,
         "featured": false,
@@ -973,7 +973,7 @@
     },
     {
         "id": 55,
-        "name": "SW219",
+        "name": "Sahara",
         "category": "bambus-mermerni",
         "price": "86.99",
         "discount": 0,
@@ -988,7 +988,7 @@
             "Otporan na vlagu - pogodan za kupatilo",
             "Sifra: SW219"
         ],
-        "image": "images\/products\/product-1774009181-772.jpg",
+        "image": "images/products/product-1774009181-772.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1009,7 +1009,7 @@
     },
     {
         "id": 56,
-        "name": "JS23007",
+        "name": "Brushed Gold",
         "category": "bambus-metalni",
         "price": "114.99",
         "discount": 0,
@@ -1024,7 +1024,7 @@
             "Pogodan za unutrašnje suhe prostorije",
             "Šifra: JS23007"
         ],
-        "image": "images\/products\/product-1774009566-250.jpg",
+        "image": "images/products/product-1774009566-250.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1045,7 +1045,7 @@
     },
     {
         "id": 57,
-        "name": "TS002",
+        "name": "Raw Steel",
         "category": "bambus-metalni",
         "price": "114.99",
         "discount": 0,
@@ -1060,7 +1060,7 @@
             "Pogodan za unutrašnje suhe prostorije",
             "Šifra: TS002"
         ],
-        "image": "images\/products\/product-1774009589-918.jpg",
+        "image": "images/products/product-1774009589-918.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1081,7 +1081,7 @@
     },
     {
         "id": 58,
-        "name": "JS007",
+        "name": "Champagne Metal",
         "category": "bambus-metalni",
         "price": "114.99",
         "discount": 0,
@@ -1096,7 +1096,7 @@
             "Pogodan za unutrašnje suhe prostorije",
             "Šifra: JS007"
         ],
-        "image": "images\/products\/product-1774009612-205.jpg",
+        "image": "images/products/product-1774009612-205.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1132,7 +1132,7 @@
             "Pogodan za unutrašnje suhe prostorije",
             "Šifra: JS0014"
         ],
-        "image": "images\/products\/product-1774009629-455.jpg",
+        "image": "images/products/product-1774009629-455.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1153,7 +1153,7 @@
     },
     {
         "id": 60,
-        "name": "3D Letvica CQ006 – Topli Tik",
+        "name": "Golden Teak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 10,
@@ -1169,10 +1169,10 @@
             "siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160CQ006",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0",
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0",
             "45 m²)"
         ],
-        "image": "images\/products\/product-1774010978-346.jpg",
+        "image": "images/products/product-1774010978-346.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1193,7 +1193,7 @@
     },
     {
         "id": 61,
-        "name": "3D Letvica MW300 – Prirodna Bela",
+        "name": "Mocha Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1208,9 +1208,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160MW300",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011058-682.jpg",
+        "image": "images/products/product-1774011058-682.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1231,7 +1231,7 @@
     },
     {
         "id": 62,
-        "name": "3D Letvica MW312 – Pepeljasti Hrast",
+        "name": "Espresso Teak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1246,9 +1246,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160MW312",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011072-999.jpg",
+        "image": "images/products/product-1774011072-999.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1269,7 +1269,7 @@
     },
     {
         "id": 63,
-        "name": "3D Letvica MW321 – Zlatni Kesten",
+        "name": "Honey Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1284,9 +1284,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160MW321",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011085-475.jpg",
+        "image": "images/products/product-1774011085-475.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1307,7 +1307,7 @@
     },
     {
         "id": 64,
-        "name": "3D Letvica MW010 – Snežna Bela",
+        "name": "Nordic Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1322,9 +1322,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove, plafone i pregradne panele",
             "Šifra: I3D160MW010",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011100-591.jpg",
+        "image": "images/products/product-1774011100-591.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1360,9 +1360,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove, plafone i pregradne panele",
             "Šifra: 170 M51-01",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011113-813.jpg",
+        "image": "images/products/product-1774011113-813.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1398,9 +1398,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D150MW319",
-            "Cijena po m²: ~50.99 €\/m² (1 letvica pokriva 0,39 m²)"
+            "Cijena po m²: ~50.99 €/m² (1 letvica pokriva 0,39 m²)"
         ],
-        "image": "images\/products\/product-1774011127-211.jpg",
+        "image": "images/products/product-1774011127-211.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1421,7 +1421,7 @@
     },
     {
         "id": 67,
-        "name": "3D Letvica MW682 – Tamni Orah",
+        "name": "Havana Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1436,9 +1436,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160MW682",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011139-663.jpg",
+        "image": "images/products/product-1774011139-663.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1474,9 +1474,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: 170SP054MW",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011169-606.jpg",
+        "image": "images/products/product-1774011169-606.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1512,9 +1512,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D170MW018",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011187-463.jpg",
+        "image": "images/products/product-1774011187-463.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1550,9 +1550,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D170SP052MW",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011242-938.jpg",
+        "image": "images/products/product-1774011242-938.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1573,7 +1573,7 @@
     },
     {
         "id": 71,
-        "name": "3D Letvica CS022 – Betonski Sivi",
+        "name": "Midnight Black",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1588,9 +1588,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160CS022",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011253-906.jpg",
+        "image": "images/products/product-1774011253-906.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1612,7 +1612,7 @@
     },
     {
         "id": 72,
-        "name": "3D Letvica CS013 – Hladno Siva",
+        "name": "Pure White",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1627,9 +1627,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160CS013",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011266-297.jpg",
+        "image": "images/products/product-1774011266-297.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1666,9 +1666,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za fokalne zidove i pregradne panele",
             "Šifra: I3D160JM001",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011278-208.jpg",
+        "image": "images/products/product-1774011278-208.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1704,9 +1704,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160039",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011294-937.jpg",
+        "image": "images/products/product-1774011294-937.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1742,9 +1742,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove, plafone i pregradne panele",
             "Šifra: I3D160021",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011310-815.jpg",
+        "image": "images/products/product-1774011310-815.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1780,9 +1780,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D140021",
-            "Cijena po m²: ~50.99 €\/m² (1 letvica pokriva 0,39 m²)"
+            "Cijena po m²: ~50.99 €/m² (1 letvica pokriva 0,39 m²)"
         ],
-        "image": "images\/products\/product-1774011321-786.jpg",
+        "image": "images/products/product-1774011321-786.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1818,9 +1818,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160029",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011345-739.jpg",
+        "image": "images/products/product-1774011345-739.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1857,9 +1857,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove, plafone i pregradne panele",
             "Šifra: I3D160016",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011373-836.jpg",
+        "image": "images/products/product-1774011373-836.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1880,7 +1880,7 @@
     },
     {
         "id": 79,
-        "name": "3D Letvica BW008 – Crna Ebonija",
+        "name": "Deva",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1895,9 +1895,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za fokalne zidove i pregradne panele",
             "Šifra: I3D160BW008",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011390-105.jpg",
+        "image": "images/products/product-1774011390-105.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1918,7 +1918,7 @@
     },
     {
         "id": 80,
-        "name": "3D Letvica BW224 – Antracit",
+        "name": "Grigio",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1933,9 +1933,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160BW224",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011402-320.jpg",
+        "image": "images/products/product-1774011402-320.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1956,7 +1956,7 @@
     },
     {
         "id": 81,
-        "name": "3D Letvica BW809 – Tamni Grafit",
+        "name": "Glacier",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1971,9 +1971,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za fokalne zidove i pregradne panele",
             "Šifra: I3D160BW809",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011420-164.jpg",
+        "image": "images/products/product-1774011420-164.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -1994,7 +1994,7 @@
     },
     {
         "id": 82,
-        "name": "3D Letvica BW229 – Tamni Škriljevac",
+        "name": "Perla",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -2009,9 +2009,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove i pregradne panele",
             "Šifra: I3D160BW229",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011449-644.jpg",
+        "image": "images/products/product-1774011449-644.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2047,9 +2047,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za zidove, plafone i pregradne panele",
             "Šifra: I3D 160 003",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011471-225.jpg",
+        "image": "images/products/product-1774011471-225.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2084,9 +2084,9 @@
             "Montaža: lijepi se silikonom, siječe se skalpelom",
             "Pogodan za fokalne zidove i pregradne panele",
             "Šifra: 3D02",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011493-381.jpg",
+        "image": "images/products/product-1774011493-381.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2122,9 +2122,9 @@
             "Idealan za usmjerenu rasvjetu (spot, LED traka)",
             "Pogodan za fokalne zidove",
             "Šifra: 3D05",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011506-585.jpg",
+        "image": "images/products/product-1774011506-585.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2160,9 +2160,9 @@
             "Idealan za usmjerenu rasvjetu (spot, LED traka)",
             "Pogodan za fokalne zidove",
             "Šifra: 3D09X",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011543-890.jpg",
+        "image": "images/products/product-1774011543-890.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2198,9 +2198,9 @@
             "Idealan za dramatičnu usmjerenu rasvjetu",
             "Isključivo za fokalne zidove – pravi statement komad",
             "Šifra: 3D07X",
-            "Cijena po m²: ~44.62 €\/m² (1 letvica pokriva 0,45 m²)"
+            "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
         ],
-        "image": "images\/products\/product-1774011594-795.jpg",
+        "image": "images/products/product-1774011594-795.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2237,7 +2237,7 @@
             "Pogodan za dnevne sobe, urede, studije i cinema sobe",
             "Sifra: AKU063"
         ],
-        "image": "images\/products\/product-1774011747-477.jpg",
+        "image": "images/products/product-1774011747-477.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2273,7 +2273,7 @@
             "Pogodan za dnevne sobe, urede, studije i cinema sobe",
             "Sifra: AKU063"
         ],
-        "image": "images\/products\/product-1774011763-194.jpg",
+        "image": "images/products/product-1774011763-194.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2309,7 +2309,7 @@
             "Pogodan za glazbene studije, home theatre, konferencijske sale",
             "Sifra: AKU060"
         ],
-        "image": "images\/products\/product-1774011807-750.jpg",
+        "image": "images/products/product-1774011807-750.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2345,7 +2345,7 @@
             "Pogodan za glazbene studije, home theatre, konferencijske sale",
             "Sifra: AKU060"
         ],
-        "image": "images\/products\/product-1774011821-454.jpg",
+        "image": "images/products/product-1774011821-454.jpg",
         "badge": null,
         "inStock": true,
         "featured": false,
@@ -2383,7 +2383,7 @@
             "konferencijske sale",
             "Sifra: AKU060"
         ],
-        "image": "images\/products\/product-1774011837-259.jpg",
+        "image": "images/products/product-1774011837-259.jpg",
         "badge": "Akcija",
         "inStock": true,
         "featured": false,
@@ -2417,14 +2417,14 @@
             "Boja: crna",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774013021-738.png",
+        "image": "images/products/product-1774013021-738.png",
         "badge": null,
         "inStock": true,
         "featured": false
     },
     {
         "id": 95,
-        "name": "L2 – Crna Početna\/Završna Lajsna",
+        "name": "L2 – Crna Početna/Završna Lajsna",
         "category": "aluminijum-lajsne",
         "price": "13.99",
         "discount": 0,
@@ -2437,7 +2437,7 @@
             "Boja: crna",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774012922-882.png",
+        "image": "images/products/product-1774012922-882.png",
         "badge": null,
         "inStock": true,
         "featured": false
@@ -2457,7 +2457,7 @@
             "Boja: crna",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774013083-586.png",
+        "image": "images/products/product-1774013083-586.png",
         "badge": null,
         "inStock": true,
         "featured": false
@@ -2477,7 +2477,7 @@
             "Boja: crna",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774013099-421.png",
+        "image": "images/products/product-1774013099-421.png",
         "badge": null,
         "inStock": true,
         "featured": false
@@ -2497,14 +2497,14 @@
             "Boja: bronza",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774013264-451.png",
+        "image": "images/products/product-1774013264-451.png",
         "badge": null,
         "inStock": true,
         "featured": false
     },
     {
         "id": 100,
-        "name": "L6 – Bronzana Početna\/Završna Lajsna",
+        "name": "L6 – Bronzana Početna/Završna Lajsna",
         "category": "aluminijum-lajsne",
         "price": "13.99",
         "discount": 0,
@@ -2517,7 +2517,7 @@
             "Boja: bronza",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774013277-339.png",
+        "image": "images/products/product-1774013277-339.png",
         "badge": null,
         "inStock": true,
         "featured": false
@@ -2537,7 +2537,7 @@
             "Boja: bronza",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774013303-190.png",
+        "image": "images/products/product-1774013303-190.png",
         "badge": null,
         "inStock": true,
         "featured": false
@@ -2557,7 +2557,7 @@
             "Boja: bronza",
             "Materijal: aluminijum"
         ],
-        "image": "images\/products\/product-1774013504-324.png",
+        "image": "images/products/product-1774013504-324.png",
         "badge": null,
         "inStock": true,
         "featured": false
@@ -2579,7 +2579,7 @@
             "Idealno za: spavaća soba, dnevna soba, bar, restoran",
             "Šifra: PW001"
         ],
-        "image": "images\/products\/product-1774454787-918.jpg",
+        "image": "images/products/product-1774454787-918.jpg",
         "badge": null,
         "sku": "PW001",
         "inStock": true,
@@ -2638,7 +2638,7 @@
             "Idealno za: dnevna soba, omladinska soba, kreativni ured, restoran",
             "Šifra: PW007"
         ],
-        "image": "images\/products\/product-1774454850-237.jpg",
+        "image": "images/products/product-1774454850-237.jpg",
         "badge": null,
         "sku": "PW007",
         "inStock": true,
@@ -2697,7 +2697,7 @@
             "Idealno za: spavaća soba, dnevna soba, ured, hodnik",
             "Šifra: PW005"
         ],
-        "image": "images\/products\/product-1774455044-368.jpg",
+        "image": "images/products/product-1774455044-368.jpg",
         "badge": null,
         "sku": "PW005",
         "inStock": true,
@@ -2756,7 +2756,7 @@
             "Idealno za: spavaća soba, home office, bar, loft",
             "Šifra: PW003"
         ],
-        "image": "images\/products\/product-1774455070-350.jpg",
+        "image": "images/products/product-1774455070-350.jpg",
         "badge": null,
         "sku": "PW003",
         "inStock": true,
@@ -2800,7 +2800,7 @@
     },
     {
         "id": 110,
-        "name": "Classic Panel CS029 – Terrazzo",
+        "name": "Terrazzo",
         "category": "classic",
         "price": "86.99",
         "discount": 0,
@@ -2816,7 +2816,7 @@
             "Šifra: CS029",
             "Prati ga 3D Letvica I3D160029"
         ],
-        "image": "images\/products\/product-1774455189-225.jpg",
+        "image": "images/products/product-1774455189-225.jpg",
         "badge": null,
         "sku": "CS029",
         "inStock": true,
@@ -2861,7 +2861,7 @@
     },
     {
         "id": 111,
-        "name": "Classic Panel CS014 – Classic Beige",
+        "name": "Soft Beige",
         "category": "classic",
         "price": "86.99",
         "discount": 0,
@@ -2876,7 +2876,7 @@
             "Idealno za: spavaća soba, kupatilo, spa, dnevna soba",
             "Šifra: CS014"
         ],
-        "image": "images\/products\/product-1774455226-834.jpg",
+        "image": "images/products/product-1774455226-834.jpg",
         "badge": null,
         "sku": "CS014",
         "inStock": true,
@@ -2920,7 +2920,7 @@
     },
     {
         "id": 112,
-        "name": "Classic Panel CS013 – Classic Bijela",
+        "name": "Pure White",
         "category": "classic",
         "price": "86.99",
         "discount": 0,
@@ -2936,7 +2936,7 @@
             "Šifra: CS013",
             "Prati ga 3D Letvica I3D160CS013"
         ],
-        "image": "images\/products\/product-1774455257-458.jpg",
+        "image": "images/products/product-1774455257-458.jpg",
         "badge": null,
         "sku": "CS013",
         "inStock": true,
@@ -2981,7 +2981,7 @@
     },
     {
         "id": 113,
-        "name": "Classic Panel CS022 – Mat Crna",
+        "name": "Midnight Black",
         "category": "classic",
         "price": "86.99",
         "discount": 0,
@@ -2997,7 +2997,7 @@
             "Šifra: CS022",
             "Prati ga 3D Letvica I3D160CS022"
         ],
-        "image": "images\/products\/product-1774455282-287.jpg",
+        "image": "images/products/product-1774455282-287.jpg",
         "badge": null,
         "sku": "CS022",
         "inStock": true,
@@ -3068,7 +3068,7 @@
             "kupatila",
             "hodnike"
         ],
-        "image": "images\/products\/product-1774536767-824.jpg",
+        "image": "images/products/product-1774536767-824.jpg",
         "badge": "Akcija",
         "sku": "SPC04",
         "inStock": true,
@@ -3098,7 +3098,7 @@
             "kupatila",
             "hodnike"
         ],
-        "image": "images\/products\/product-1774536779-822.jpg",
+        "image": "images/products/product-1774536779-822.jpg",
         "badge": "Akcija",
         "sku": "SPC05",
         "inStock": true,
@@ -3122,7 +3122,7 @@
             "Click-lock montaža – bez ljepila, bez profesionalaca",
             "Pogodan za: dnevne sobe, spavaće, kuhinje, kupatila, hodnike"
         ],
-        "image": "images\/products\/product-1774536653-598.jpg",
+        "image": "images/products/product-1774536653-598.jpg",
         "badge": "Akcija",
         "sku": "SPC06",
         "inStock": true,
@@ -3175,7 +3175,7 @@
             "hodnike",
             "poslovne prostore"
         ],
-        "image": "images\/products\/product-1774536801-277.jpg",
+        "image": "images/products/product-1774536801-277.jpg",
         "badge": "Akcija",
         "sku": "SPC07",
         "inStock": true,
@@ -3199,7 +3199,7 @@
             "Click-lock montaža na stari pod – bez rušenja",
             "Pogodan za: kupatila, kuhinje, hodnike, poslovne prostore"
         ],
-        "image": "images\/products\/product-1774536612-106.jpg",
+        "image": "images/products/product-1774536612-106.jpg",
         "badge": "Akcija",
         "sku": "SPC08",
         "inStock": true,
@@ -3245,7 +3245,7 @@
             "Otporan na vlagu – pogodan za kupatilo",
             "Šifra: SW216"
         ],
-        "image": "images\/products\/product-1774541368-499.jpg",
+        "image": "images/products/product-1774541368-499.jpg",
         "badge": "Novo",
         "sku": "SW216",
         "inStock": true,
@@ -3296,7 +3296,7 @@
         "unit": "kom",
         "description": "",
         "features": [],
-        "image": "images\/products\/product-1774546387-799.jpg",
+        "image": "images/products/product-1774546387-799.jpg",
         "badge": null,
         "sku": "SW002",
         "inStock": false,
