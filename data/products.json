@@ -1155,7 +1155,7 @@
     },
     {
         "id": 60,
-        "name": "Golden Teak",
+        "name": "3D Letvica – Golden Teak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 10,
@@ -1195,7 +1195,7 @@
     },
     {
         "id": 61,
-        "name": "Mocha Oak",
+        "name": "3D Letvica – Mocha Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1233,7 +1233,7 @@
     },
     {
         "id": 62,
-        "name": "Espresso Teak",
+        "name": "3D Letvica – Espresso Teak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1271,7 +1271,7 @@
     },
     {
         "id": 63,
-        "name": "Honey Oak",
+        "name": "3D Letvica – Honey Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1309,7 +1309,7 @@
     },
     {
         "id": 64,
-        "name": "Nordic Oak",
+        "name": "3D Letvica – Nordic Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1423,7 +1423,7 @@
     },
     {
         "id": 67,
-        "name": "Havana Oak",
+        "name": "3D Letvica – Havana Oak",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1575,7 +1575,7 @@
     },
     {
         "id": 71,
-        "name": "Midnight Black",
+        "name": "3D Letvica – Midnight Black",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1614,7 +1614,7 @@
     },
     {
         "id": 72,
-        "name": "Pure White",
+        "name": "3D Letvica – Pure White",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1882,7 +1882,7 @@
     },
     {
         "id": 79,
-        "name": "Deva",
+        "name": "3D Letvica – Deva",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1920,7 +1920,7 @@
     },
     {
         "id": 80,
-        "name": "Grigio",
+        "name": "3D Letvica – Grigio",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1958,7 +1958,7 @@
     },
     {
         "id": 81,
-        "name": "Glacier",
+        "name": "3D Letvica – Glacier",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
@@ -1996,7 +1996,7 @@
     },
     {
         "id": 82,
-        "name": "Perla",
+        "name": "3D Letvica – Perla",
         "category": "3d-letvice",
         "price": "19.99",
         "discount": 0,
