@@ -415,6 +415,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             <table>
               <thead>
                 <tr>
+                  <th style="width:36px;"></th>
                   <th>Slika</th>
                   <th>Naziv</th>
                   <th>Kategorija</th>
@@ -431,7 +432,10 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   $curBadge   = $p['badge'] ?? null;
                   $badgeOptions = ['Bestseller', 'Najpopularniji', 'Novo', 'Akcija', 'Preporučujemo', 'Limitirano'];
                 ?>
-                <tr style="<?= $isFeatured ? 'background:rgba(201,168,108,0.06);' : '' ?>">
+                <tr data-id="<?= $p['id'] ?>" style="<?= $isFeatured ? 'background:rgba(201,168,108,0.06);' : '' ?>">
+                  <td class="drag-handle" title="Povuci da promijeniš redosljed" style="cursor:grab;text-align:center;color:#bbb;font-size:16px;user-select:none;">
+                    <i class="fas fa-grip-vertical"></i>
+                  </td>
                   <td>
                     <div class="product-thumb">
                       <img src="../<?= htmlspecialchars($p['image'] ?? '') ?>" alt=""
@@ -1770,6 +1774,61 @@ async function hsDelete(slot, type) {
     }
   } catch(e) { showToast('Greška.', 'error'); }
 }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js"></script>
+<script>
+(function() {
+  const tbody = document.querySelector('#section-products table tbody');
+  if (!tbody) return;
+
+  let saveTimer = null;
+  let saveIndicator = null;
+
+  function getIndicator() {
+    if (!saveIndicator) {
+      saveIndicator = document.createElement('div');
+      saveIndicator.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#333;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;z-index:9999;display:none;transition:opacity 0.3s;';
+      document.body.appendChild(saveIndicator);
+    }
+    return saveIndicator;
+  }
+
+  function showSaveMsg(msg, ok) {
+    const el = getIndicator();
+    el.textContent = msg;
+    el.style.background = ok ? '#27ae60' : '#e74c3c';
+    el.style.display = 'block';
+    el.style.opacity = '1';
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { el.style.opacity = '0'; setTimeout(() => { el.style.display = 'none'; }, 300); }, 2000);
+  }
+
+  async function saveOrder() {
+    const ids = Array.from(tbody.querySelectorAll('tr[data-id]')).map(r => parseInt(r.dataset.id));
+    try {
+      const fd = new FormData();
+      fd.append('action', 'reorder_products');
+      fd.append('ids', JSON.stringify(ids));
+      const res = await fetch('actions.php', { method: 'POST', body: fd });
+      const data = await res.json();
+      showSaveMsg(data.ok ? '✓ Redosljed sačuvan' : '✗ Greška pri snimanju', data.ok);
+    } catch(e) {
+      showSaveMsg('✗ Greška mreže', false);
+    }
+  }
+
+  Sortable.create(tbody, {
+    handle: '.drag-handle',
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+    onEnd: saveOrder
+  });
+
+  const style = document.createElement('style');
+  style.textContent = '.sortable-ghost { opacity:0.4; background:#f8f4ec !important; } .drag-handle:active { cursor: grabbing; }';
+  document.head.appendChild(style);
+})();
 </script>
 
 </body>

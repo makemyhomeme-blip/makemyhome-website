@@ -294,6 +294,33 @@ switch ($action) {
         echo json_encode(['ok' => true, 'inStock' => !$currentStock]);
         exit;
 
+    case 'reorder_products':
+        $ids = json_decode($_POST['ids'] ?? '[]', true);
+        if (!is_array($ids)) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Neispravan format.']);
+            exit;
+        }
+        $indexed = [];
+        foreach ($products as $p) { $indexed[$p['id']] = $p; }
+        $reordered = [];
+        foreach ($ids as $id) {
+            $id = (int)$id;
+            if (isset($indexed[$id])) $reordered[] = $indexed[$id];
+        }
+        // append any products not in the submitted list (safety)
+        foreach ($products as $p) {
+            if (!in_array($p['id'], $ids)) $reordered[] = $p;
+        }
+        if (!saveProducts($reordered, $productsFile)) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']);
+            exit;
+        }
+        header('Content-Type: application/json');
+        echo json_encode(['ok' => true]);
+        exit;
+
     case 'set_badge':
         $id = (int)($_POST['id'] ?? 0);
         $badge = trim($_POST['badge'] ?? '') ?: null;
