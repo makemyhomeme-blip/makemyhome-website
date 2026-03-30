@@ -121,31 +121,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ===== DESKTOP SEARCH =====
   (function() {
-    const headerInner = document.querySelector('.header-inner');
-    const hamBtn = document.getElementById('hamburger');
-    if (!headerInner) return;
-
-    // Injektuj search wrap između nav i hamburgera
-    const wrap = document.createElement('div');
-    wrap.id = 'desk-search-wrap';
-    wrap.style.cssText = 'position:relative;display:flex;align-items:center;margin-right:8px;';
-    wrap.innerHTML = `
-      <button id="desk-search-btn" aria-label="Pretraži"
-        style="width:38px;height:38px;border-radius:50%;background:rgba(201,168,108,0.12);border:1.5px solid rgba(201,168,108,0.3);color:#c9a86c;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;flex-shrink:0;"
-        onmouseenter="this.style.background='rgba(201,168,108,0.25)'" onmouseleave="this.style.background='rgba(201,168,108,0.12)'">
-        <i class="fas fa-search"></i>
-      </button>
-      <div id="desk-search-panel" style="display:none;position:absolute;top:50%;right:0;transform:translateY(-50%);width:260px;z-index:9999;">
-        <div style="position:relative;">
-          <i class="fas fa-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:13px;pointer-events:none;"></i>
-          <input id="desk-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:10px 36px 10px 36px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.5);background:#1a1a1a;color:#fff;font-size:14px;font-family:inherit;outline:none;-webkit-appearance:none;">
-          <button id="desk-search-close" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:14px;padding:2px 4px;">✕</button>
-        </div>
-        <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);right:0;width:320px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);"></div>
-      </div>
-    `;
-    headerInner.insertBefore(wrap, hamBtn);
+    const wrap = document.getElementById('desk-search-wrap');
+    if (!wrap) return;
 
     // Sakrij na mobilnom
     const hideOnMobile = document.createElement('style');
