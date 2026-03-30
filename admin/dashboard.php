@@ -1141,6 +1141,18 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           </div>
           <input type="hidden" name="image" id="edit-image">
         </div>
+        <!-- Galerija -->
+        <div class="form-group full">
+          <label>Galerija slika <span style="font-weight:400;color:#888;font-size:12px;">(prostorije, detalji…)</span></label>
+          <div id="gallery-grid" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;min-height:60px;"></div>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:9px 16px;background:#f8f6f3;border:2px dashed #c9a86c;border-radius:8px;font-size:13px;color:#c9a86c;font-weight:600;transition:background .2s;"
+            onmouseenter="this.style.background='#f0e8d8'" onmouseleave="this.style.background='#f8f6f3'">
+            <i class="fas fa-plus-circle"></i> Dodaj sliku
+            <input type="file" accept="image/*" multiple style="display:none;" onchange="uploadGalleryImages(this)">
+          </label>
+          <div id="gallery-upload-status" style="font-size:12px;margin-top:6px;color:#888;"></div>
+        </div>
+
         <div class="form-group">
           <label>Šifra proizvoda (SKU)</label>
           <input type="text" name="sku" id="edit-sku" placeholder="npr. I3D160CQ006" style="font-family:monospace;">
@@ -1197,9 +1209,12 @@ function showSection(name) {
   if (section) showSection(section);
 })();
 
+let _editingProductId = null;
+
 function editProduct(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
+  _editingProductId = id;
   document.getElementById('edit-id').value = p.id;
   document.getElementById('edit-name').value = p.name;
   document.getElementById('edit-category').value = p.category;
@@ -1213,8 +1228,80 @@ function editProduct(id) {
   document.getElementById('edit-badge').value = p.badge || '';
   document.getElementById('edit-inStock').checked = p.inStock;
   document.getElementById('edit-featured').checked = p.featured;
+  // Prikaži galeriju
+  const gallery = p.gallery || [];
+  renderGalleryGrid(gallery);
+  document.getElementById('gallery-upload-status').textContent = '';
+  // Prikaži preview postojeće slike
+  const prev = document.getElementById('edit-img-preview');
+  if (p.image) { prev.src = '../' + p.image; prev.style.display = 'block'; }
+  else prev.style.display = 'none';
   updateEditDiscount();
   document.getElementById('edit-modal').classList.add('open');
+}
+
+function renderGalleryGrid(gallery) {
+  const grid = document.getElementById('gallery-grid');
+  if (!gallery || !gallery.length) {
+    grid.innerHTML = '<span style="color:#bbb;font-size:12px;align-self:center;">Nema dodatnih slika</span>';
+    return;
+  }
+  grid.innerHTML = gallery.map(img => `
+    <div style="position:relative;width:80px;height:80px;flex-shrink:0;">
+      <img src="../${img}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid #e8e2da;display:block;">
+      <button type="button" onclick="removeGalleryImage('${img}')"
+        style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#e74c3c;color:#fff;border:none;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;line-height:1;">✕</button>
+    </div>
+  `).join('');
+}
+
+async function uploadGalleryImages(input) {
+  const files = Array.from(input.files);
+  if (!files.length || !_editingProductId) return;
+  const status = document.getElementById('gallery-upload-status');
+  status.textContent = 'Uploading…';
+  let uploaded = 0;
+  // Find current product and its gallery
+  const p = products.find(x => x.id === _editingProductId);
+  if (!p) return;
+  if (!p.gallery) p.gallery = [];
+  for (const file of files) {
+    const fd = new FormData();
+    fd.append('action', 'gallery_add');
+    fd.append('id', _editingProductId);
+    fd.append('gallery_image', file);
+    try {
+      const r = await fetch('actions.php', { method: 'POST', body: fd });
+      const j = await r.json();
+      if (j.ok) {
+        p.gallery.push(j.path);
+        uploaded++;
+      } else {
+        status.textContent = 'Greška: ' + (j.error || 'Upload nije uspio');
+      }
+    } catch(e) {
+      status.textContent = 'Greška pri uploadu.';
+    }
+  }
+  renderGalleryGrid(p.gallery);
+  if (uploaded) status.textContent = uploaded + ' slika dodato ✓';
+  input.value = '';
+}
+
+async function removeGalleryImage(imgPath) {
+  if (!_editingProductId) return;
+  if (!confirm('Obriši ovu sliku iz galerije?')) return;
+  const fd = new FormData();
+  fd.append('action', 'gallery_remove');
+  fd.append('id', _editingProductId);
+  fd.append('img', imgPath);
+  const r = await fetch('actions.php', { method: 'POST', body: fd });
+  const j = await r.json();
+  if (j.ok) {
+    const p = products.find(x => x.id === _editingProductId);
+    if (p) p.gallery = (p.gallery || []).filter(g => g !== imgPath);
+    renderGalleryGrid(p ? (p.gallery || []) : []);
+  }
 }
 
 function updateEditDiscount() {

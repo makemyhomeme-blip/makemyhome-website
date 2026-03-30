@@ -581,6 +581,74 @@ switch ($action) {
         file_put_contents($jsonFile, json_encode(array_values($slides), JSON_PRETTY_PRINT));
         echo json_encode(['ok'=>true]); exit;
 
+    case 'gallery_add':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $id = (int)($_POST['id'] ?? 0);
+        if (!$id || empty($_FILES['gallery_image'])) {
+            echo json_encode(['ok' => false, 'error' => 'Nedostaju podaci.']); exit;
+        }
+        $file = $_FILES['gallery_image'];
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(['ok' => false, 'error' => 'Upload nije uspio (kod: ' . $file['error'] . ').']); exit;
+        }
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime  = $finfo->file($file['tmp_name']);
+        if (!in_array($mime, ['image/jpeg','image/jpg','image/png','image/webp'])) {
+            echo json_encode(['ok' => false, 'error' => 'Dozvoljeni formati: JPG, PNG, WEBP.']); exit;
+        }
+        if ($file['size'] > 8 * 1024 * 1024) {
+            echo json_encode(['ok' => false, 'error' => 'Slika je prevelika (max 8MB).']); exit;
+        }
+        $filename  = 'gallery-' . $id . '-' . time() . '-' . rand(100,999) . '.jpg';
+        $uploadDir = __DIR__ . '/../images/products/';
+        if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+        $destPath = $uploadDir . $filename;
+        $imgPath  = 'images/products/' . $filename;
+        if (!optimizeImage($file['tmp_name'], $destPath, 1200, 900, 82)) {
+            if (!move_uploaded_file($file['tmp_name'], $destPath)) {
+                echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']); exit;
+            }
+        }
+        foreach ($products as &$p) {
+            if ($p['id'] === $id) {
+                if (!isset($p['gallery']) || !is_array($p['gallery'])) $p['gallery'] = [];
+                $p['gallery'][] = $imgPath;
+                break;
+            }
+        }
+        unset($p);
+        if (!saveProducts($products, $productsFile)) {
+            @unlink($destPath);
+            echo json_encode(['ok' => false, 'error' => 'Slika snimljena ali baza nije upisana.']); exit;
+        }
+        echo json_encode(['ok' => true, 'path' => $imgPath]); exit;
+
+    case 'gallery_remove':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $id  = (int)($_POST['id'] ?? 0);
+        $img = trim($_POST['img'] ?? '');
+        if (!$id || !$img) {
+            echo json_encode(['ok' => false, 'error' => 'Nedostaju podaci.']); exit;
+        }
+        foreach ($products as &$p) {
+            if ($p['id'] === $id) {
+                $gallery = $p['gallery'] ?? [];
+                $p['gallery'] = array_values(array_filter($gallery, fn($g) => $g !== $img));
+                break;
+            }
+        }
+        unset($p);
+        // Obriši fajl s diska ako je u images/products/
+        if (str_starts_with($img, 'images/products/')) {
+            @unlink(__DIR__ . '/../' . $img);
+        }
+        if (!saveProducts($products, $productsFile)) {
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']); exit;
+        }
+        echo json_encode(['ok' => true]); exit;
+
     default:
         redirect('', 'Nepoznata akcija.');
 }

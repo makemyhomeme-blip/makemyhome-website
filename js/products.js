@@ -394,11 +394,15 @@ async function renderProductDetail() {
   if (galleryThumbs) {
     const images = [{ src: product.image, label: 'Proizvod' }];
     if (product.roomImage) images.push({ src: product.roomImage, label: 'U prostoru' });
+    (product.gallery || []).forEach((src, i) => images.push({ src, label: 'Slika ' + (i + 1) }));
     if (images.length > 1) {
       galleryThumbs.innerHTML = images.map((img, i) => `
         <div class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="switchGalleryImg(this, '${img.src}')">
           <img src="${img.src}" alt="${img.label}">
         </div>`).join('');
+      galleryThumbs.style.display = 'flex';
+    } else {
+      galleryThumbs.style.display = 'none';
     }
   }
 
