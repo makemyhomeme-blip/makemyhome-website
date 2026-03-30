@@ -10,10 +10,17 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Boja: topla zlatno-smeđa – tik tonovi",
-      "Šara: ravne, izražene drvene linije – karakteristična tik tekstura",
+      "Šara: ravne",
+      "izražene drvene linije – karakteristična tik tekstura",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -37,7 +44,8 @@
     "inStock": true,
     "featured": true,
     "sku": "CQ006",
-    "discount": 0
+    "discount": 0,
+    "gallery": []
   },
   {
     "id": 19,
@@ -795,6 +803,69 @@
     "sku": "SW222"
   },
   {
+    "id": 116,
+    "name": "SW216",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "SW216 panel donosi toplinu kremasto-bež mermera s nježnim zlatnim i smeđim žilama koje prolaze kroz površinu poput autorskog potpisa prirode. Za razliku od hladnog bijelog mermera, SW216 unosi toplinu i karakter – savršen za prostore gdje se želi luksuz bez krutosti. Bambus osnova čini panel lakim za montažu i otpornim na vlagu, dok visokosjajni lak zaštitni sloj daje dubinu i sjaj koji imitira prirodni polirani kamen. Jedinstven uzorak žilama čini svaki prostor prepoznatljivim.",
+    "features": [
+      "Dimenzije: 280×122 cm (3,42 m² po komadu)",
+      "Materijal: bambus vlakno s mermernim UV printom",
+      "Uzorak: kremasto-bež mermer s toplim zlatnim žilama",
+      "Površinska obrada: visoko-sjajna lak zaštita",
+      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Otporan na vlagu – pogodan za kupatilo",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: SW216"
+    ],
+    "image": "images/products/product-1774541368-499.jpg",
+    "badge": "Novo",
+    "sku": "SW216",
+    "inStock": true,
+    "featured": true,
+    "highlight": "Topla bež paleta – mermer koji grije prostor",
+    "idealFor": [
+      "Kupatilo",
+      "Hodnik",
+      "Dnevna soba",
+      "Spavaća soba"
+    ],
+    "styleMatch": [
+      "Luksuzni",
+      "Klasični",
+      "Moderni",
+      "Mediteranski"
+    ],
+    "reviews": [
+      {
+        "author": "Tijana M.",
+        "city": "Podgorica",
+        "rating": 5,
+        "date": "Mart 2025",
+        "text": "SW216 je upravo ono što sam tražila – topao mermer bez te hladne bijele boje. Postavila sam u kupatilo i svi gosti pitaju je li pravi kamen. Montaža je bila jednostavna, preporučujem!"
+      },
+      {
+        "author": "Nikola B.",
+        "city": "Budva",
+        "rating": 5,
+        "date": "Februar 2025",
+        "text": "Uzeo sam SW216 za hodnik u stanu. Bež ton s zlatnim žilama savršeno se slaže s drvenim podom. Kvaliteta je odlična, panel je čvrst i sjajan. Definitivno kupujem još."
+      },
+      {
+        "author": "Sonja K.",
+        "city": "Herceg Novi",
+        "rating": 5,
+        "date": "Januar 2025",
+        "text": "Koristila sam SW216 kao fokalni zid u dnevnoj sobi. Jedinstven uzorak žilama daje prostoru karakter koji ne možete naći ni u jednoj drugoj oblozi. Oduševljena sam Make My Home uslugom!"
+      }
+    ]
+  },
+  {
     "id": 48,
     "name": "White Marble",
     "category": "bambus-mermerni",
@@ -833,6 +904,46 @@
       "Mediteranski"
     ],
     "sku": "05512"
+  },
+  {
+    "id": 53,
+    "name": "Beige Marble",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Beige Marble je mermer koji topli. Blage nježne žile u toplim bež tonovima stvaraju elegantnu, opuštenu atmosferu – savršeno za spavaće sobe, kupaonice i prostore za relaksaciju.",
+    "features": [
+      "Dimenzije: 280×122cm (3.42 m² po komadu)",
+      "Boja: topla bež, nježna",
+      "Šara: blage mermerne žile na bež podlozi – mediteranski mermer",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: SW212"
+    ],
+    "image": "images/products/product-1774009018-208.jpg",
+    "badge": null,
+    "inStock": true,
+    "featured": false,
+    "highlight": "Topli mermer koji smiruje i opušta",
+    "idealFor": [
+      "Kupatilo",
+      "Hodnik",
+      "Ured",
+      "Dnevna soba"
+    ],
+    "styleMatch": [
+      "Industrijski",
+      "Moderni",
+      "Minimalisticki",
+      "Luksuzni"
+    ],
+    "sku": "SW212"
   },
   {
     "id": 49,
@@ -995,46 +1106,6 @@
     "sku": "YL059"
   },
   {
-    "id": 53,
-    "name": "Beige Marble",
-    "category": "bambus-mermerni",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "Beige Marble je mermer koji topli. Blage nježne žile u toplim bež tonovima stvaraju elegantnu, opuštenu atmosferu – savršeno za spavaće sobe, kupaonice i prostore za relaksaciju.",
-    "features": [
-      "Dimenzije: 280×122cm (3.42 m² po komadu)",
-      "Boja: topla bež, nježna",
-      "Šara: blage mermerne žile na bež podlozi – mediteranski mermer",
-      "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
-      "Šifra: SW212"
-    ],
-    "image": "images/products/product-1774009018-208.jpg",
-    "badge": null,
-    "inStock": true,
-    "featured": false,
-    "highlight": "Topli mermer koji smiruje i opušta",
-    "idealFor": [
-      "Kupatilo",
-      "Hodnik",
-      "Ured",
-      "Dnevna soba"
-    ],
-    "styleMatch": [
-      "Industrijski",
-      "Moderni",
-      "Minimalisticki",
-      "Luksuzni"
-    ],
-    "sku": "SW212"
-  },
-  {
     "id": 54,
     "name": "Dark Luxe",
     "category": "bambus-mermerni",
@@ -1113,6 +1184,517 @@
       "Skandinavski"
     ],
     "sku": "SW219"
+  },
+  {
+    "id": 117,
+    "name": "SW002",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "",
+    "features": [
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom"
+    ],
+    "image": "images/products/product-1774546387-799.jpg",
+    "badge": null,
+    "sku": "SW002",
+    "inStock": false,
+    "featured": false
+  },
+  {
+    "id": 113,
+    "name": "Midnight Black",
+    "category": "classic",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Midnight Black je odlučan i neobjašnjivo luksuzno. Duboka crna mat površina bez kompromisa – akcentni zid koji preuzima kontrolu nad prostorom i postavlja ton za sve ostalo. Za one koji znaju što hoće.",
+    "features": [
+      "Dimenzije: 280×122cm (3.42 m² po komadu)",
+      "Boja: duboka crna, elegantna",
+      "Šara: glatka mat crna površina – luksuzna tama",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Šifra: CS022"
+    ],
+    "image": "images/products/product-1774455282-287.jpg",
+    "badge": null,
+    "sku": "CS022",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Luksuzna crna koja dominira prostorom",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Restoran",
+      "Bar"
+    ],
+    "styleMatch": [
+      "Luksuzan",
+      "Industrijski",
+      "Minimalistički",
+      "Tamni interijer"
+    ],
+    "relatedLetvica": 71,
+    "reviews": [
+      {
+        "name": "Jasmin A.",
+        "city": "Sarajevo",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Mat crni zid iza TV-a uz zlatne police – kombinacija koja svake večeri izgleda kao scena iz filma. Uz dobru rasvjetu je još impresivnije. Preporučujem svima koji se usude."
+      },
+      {
+        "name": "Katarina L.",
+        "city": "Banja Luka",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Bila sam uplašena od crne ali arhitekta me uvjerio. Spavaća soba u mat crnoj uz bijelo posteljinu i zlatnu lampicu je najljepša soba u kojoj sam ikad spavala."
+      },
+      {
+        "name": "Adnan P.",
+        "city": "Zenica",
+        "date": "Januar 2026",
+        "stars": 5,
+        "text": "Restoran s crnim zidovima, drvenim stolovima i toplom rasvjetom – ambijent koji tjera ljude da se vraćaju. CS022 je dio te jednačine i radi savršeno."
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "name": "Terrazzo",
+    "category": "classic",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Terrazzo je povratak najljepše tradicije talijanskog dizajna. Šareni fragmenti kamena, mramora i stakla na bijeloj podlozi stvaraju živahan, jedinstven uzorak koji nikad ne izgleda isto – svježe, moderno i vječno u isto vrijeme.",
+    "features": [
+      "Dimenzije: 280×122cm (3.42 m² po komadu)",
+      "Boja: bijela podloga s pisanim fragmentima u boji",
+      "Šara: terrazzo uzorak – šareni fragmenti kamena i stakla",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Šifra: CS029"
+    ],
+    "image": "images/products/product-1774455189-225.jpg",
+    "badge": null,
+    "sku": "CS029",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Talijanski terrazzo – vječna modernost",
+    "idealFor": [
+      "Kupatilo",
+      "Kuhinja",
+      "Hodnik",
+      "Kafić"
+    ],
+    "styleMatch": [
+      "Mediteranski",
+      "Moderni",
+      "Retro",
+      "Eksluzivni"
+    ],
+    "relatedLetvica": 77,
+    "reviews": [
+      {
+        "name": "Eldin K.",
+        "city": "Sarajevo",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Kafić koji smo uredili s terrazzo panelima i 3D letvicama izgleda nevjerovatno. Gosti se fotografišu ispred tih zidova svaki dan. Najsretnije ulaganje u dekor."
+      },
+      {
+        "name": "Vesna J.",
+        "city": "Banja Luka",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Koristila za hodnik stana. Bijeli terrazzo uz bijele pločice i mesing detalje – hodnik je postao najljepši prostor u stanu. Svi koji dođu odmah ga primijete."
+      },
+      {
+        "name": "Mladen B.",
+        "city": "Mostar",
+        "date": "Januar 2026",
+        "stars": 5,
+        "text": "Odličan kvalitet, boja i uzorak su tačno kao na slici. Montaža jednostavna. Kupatilo je dobilo premium izgled za razumnu cijenu."
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "name": "Soft Beige",
+    "category": "classic",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Soft Beige je neutralnost koja ima karakter. Topla siva u mat završnici ne privlači previše pažnje – ali svaki prostor u kojem se nalazi izgleda promišljeno i elegantno. Savršen za one koji vole suptilnost.",
+    "features": [
+      "Dimenzije: 280×122cm (3.42 m² po komadu)",
+      "Boja: svijetla topla siva, mat",
+      "Šara: glatka mat površina – neutralna elegancija",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Šifra: CS014"
+    ],
+    "image": "images/products/product-1774455226-834.jpg",
+    "badge": null,
+    "sku": "CS014",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Topla neutralnost koja oplemenjuje prostor",
+    "idealFor": [
+      "Spavaća soba",
+      "Kupatilo",
+      "Spa",
+      "Dnevna soba"
+    ],
+    "styleMatch": [
+      "Skandinavski",
+      "Boho",
+      "Prirodni",
+      "Minimalistički"
+    ],
+    "reviews": [
+      {
+        "name": "Anela M.",
+        "city": "Sarajevo",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Uredila spavaću sobu u bijeloj šalviji i imam osjećaj da spavam u šumi. Ta blijedozelena bijela je toliko umirujuća da čak i san je bolji. Zvuči smiješno ali istina."
+      },
+      {
+        "name": "Goran S.",
+        "city": "Trebinje",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Koristio za spa centar. Klijenti odmah komentarišu kako je prostor opušten i prirodan. CS014 zajedno s drvenim detaljima je kombinacija koja funkcioniše savršeno."
+      },
+      {
+        "name": "Dina H.",
+        "city": "Tuzla",
+        "date": "Januar 2026",
+        "stars": 5,
+        "text": "Bila sam neodlučna između bijele i ove šalvije – uzela šalviju i ne kajem se ni sekunde. Daje prostoru tu živost i karakter koji čista bijela nema."
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "name": "Pure White",
+    "category": "classic",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "Pure White je čistoća u svom najčišćem obliku. Glatka, apsolutno bijela površina bez šara ili teksture stvara savršenu pozadinu za svaki prostor – platno na koje možete nadograditi bilo koji stil.",
+    "features": [
+      "Dimenzije: 280×122cm (3.42 m² po komadu)",
+      "Boja: gotovo čisto bijela, minimalistička",
+      "Šara: glatka, ujednačena površina – apsolutna čistoća",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Šifra: CS013"
+    ],
+    "image": "images/products/product-1774455257-458.jpg",
+    "badge": null,
+    "sku": "CS013",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Savršena bijela – platno za vaš stil",
+    "idealFor": [
+      "Dnevna soba",
+      "Spavaća soba",
+      "Hodnik",
+      "Cijeli stan"
+    ],
+    "styleMatch": [
+      "Minimalistički",
+      "Skandinavski",
+      "Klasični",
+      "Moderni"
+    ],
+    "relatedLetvica": 72,
+    "reviews": [
+      {
+        "name": "Stefan N.",
+        "city": "Banja Luka",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Koristio CS013 panel i odgovarajuću 3D letvicu za cijeli hodnik. Bijela s bijelom letvicom i led rasvjetom – hodnik izgleda kao luksuzni hotel. Nevjerovatna transformacija."
+      },
+      {
+        "name": "Irma Đ.",
+        "city": "Sarajevo",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Ova slomljena bijela je savršena za dnevnu sobu. Nije hladna kao čista bijela, nego topla i prijatna. Uz drveni namještaj izgleda prirodno i skupo istovremeno."
+      },
+      {
+        "name": "Miroslav K.",
+        "city": "Mostar",
+        "date": "Januar 2026",
+        "stars": 5,
+        "text": "Obložio cijeli stan i boja je konzistentna od panela do panela. Kvalitet odličan, montaža brza. Rezultat je stan koji izgleda kao novogradnja."
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "name": "Kožni Panel PW001 – Bordo Crvena",
+    "category": "bambus-kozni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "PW001 je panel koji ne prolazi nezapaženo — niti treba. Duboka bordo crvena s kožnom teksturom odmah daje prostoru karakter i odvažnost. Nije za one koji se boje boje. Jedan zid u ovoj nijansi pretvara spavaću sobu u suite, a dnevnu sobu u prostor koji se pamti. Uz neutralni namještaj efekt je spektakularan.",
+    "features": [
+      "Dimenzije: 280×122 cm po panelu",
+      "Boja: bordo crvena – duboka, bogata nijansa (PW001)",
+      "Tekstura: imitacija fine zrnaste kože",
+      "Materijal: bambus osnova s PU kožnom oblogom",
+      "Montaža: lijepi se silikonom ili dvostrana traka",
+      "Idealno za: spavaća soba, dnevna soba, bar, restoran",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: PW001"
+    ],
+    "image": "images/products/product-1774454787-918.jpg",
+    "badge": null,
+    "sku": "PW001",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Odvažna bordo crvena koja svaki prostor čini nezaboravnim",
+    "idealFor": [
+      "Spavaća soba",
+      "Dnevna soba",
+      "Bar",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Luksuzan",
+      "Art Deco",
+      "Dramatični interijer",
+      "Tamni stil"
+    ],
+    "reviews": [
+      {
+        "name": "Amela K.",
+        "city": "Sarajevo",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Stavila sam ovaj panel iza bračnog kreveta i svi koji uđu u sobu zastanu. Ta bordo boja uz bijelo posteljinu je kombinacija iz snova. Izgleda kao boutique hotel."
+      },
+      {
+        "name": "Dragana P.",
+        "city": "Banja Luka",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Koristila u baru koji smo otvorili. Uz tamno drvo i zlatnu rasvjetu, taj crveni zid je prva stvar koju gosti fotografišu. Oduševljena sam efektom."
+      },
+      {
+        "name": "Mirza H.",
+        "city": "Mostar",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Bio sam skeptičan prema crvenoj ali ova bordo nijansa je savršena – nije agresivna, nego bogata i topla. Dnevna soba mi je dobila karakter koji nije imala godinama."
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "name": "Kožni Panel PW007 – Hermès Narandžasta",
+    "category": "bambus-kozni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "PW007 nije za plašljive – i to je upravo njegova snaga. Živa narandžasta koža u prostoru radi ono što nijedno bijelo ili sivo ne može: unosi energiju, toplinu i neponovljiv karakter. Jedan akcentni zid u narandžastoj transformiše dosadan prostor u nešto što se pamti danima. Posebno efektan u kombinaciji s crnim ili bijelo-sivim namještajem.",
+    "features": [
+      "Dimenzije: 280×122 cm po panelu",
+      "Boja: živa narandžasta – energična, topla nijansa (PW007)",
+      "Tekstura: imitacija fine zrnaste kože",
+      "Materijal: bambus osnova s PU kožnom oblogom",
+      "Montaža: lijepi se silikonom ili dvostrana traka",
+      "Idealno za: dnevna soba, omladinska soba, kreativni ured, restoran",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: PW007"
+    ],
+    "image": "images/products/product-1774454850-237.jpg",
+    "badge": null,
+    "sku": "PW007",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Hermès narandžasta koža – rijetka, upečatljiva, nezaboravna",
+    "idealFor": [
+      "Dnevna soba",
+      "Omladinska soba",
+      "Kreativni ured",
+      "Restoran"
+    ],
+    "styleMatch": [
+      "Eklektični",
+      "Retro",
+      "Pop Art",
+      "Moderni"
+    ],
+    "reviews": [
+      {
+        "name": "Nemanja S.",
+        "city": "Trebinje",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Uredili smo trpezariju i htjeli smo nešto posebno. PW007 narandžasta uz bijeli stol i crne stolice – svaki put kad gosti dođu pitaju gdje smo kupili. Pravi razgovor-starter."
+      },
+      {
+        "name": "Selma B.",
+        "city": "Tuzla",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Stavila u sobu djeteta i naprosto oživjela prostor. Boja je tačno onakva kao na slici – živa, ali ne vrišti. Uz bijeli namještaj izgleda fantastično."
+      },
+      {
+        "name": "Ivan R.",
+        "city": "Zenica",
+        "date": "Januar 2026",
+        "stars": 4,
+        "text": "Nisam očekivao da će narandžasta tako dobro izgledati u enterijeru, ali ovo je dokaz da treba biti smioniji u izborima. Svi posjetioci komentarišu zid."
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "name": "Kožni Panel PW005 – Ledena Siva",
+    "category": "bambus-kozni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "PW005 je siva kakvoj nema premca – hladna, prefinjana, sofisticirana. Kožna tekstura u ovoj svjetlosivoj nijansi daje prostoru onaj \"high-end\" osjećaj koji inače dobijate samo skupim materijalima. Ide uz sve – bijeli, crni, drveni, metalni namještaj. Minimalistički san u jednom panelu.",
+    "features": [
+      "Dimenzije: 280×122 cm po panelu",
+      "Boja: ledena siva – hladna, svjetla nijansa (PW005)",
+      "Tekstura: imitacija fine zrnaste kože",
+      "Materijal: bambus osnova s PU kožnom oblogom",
+      "Montaža: lijepi se silikonom ili dvostrana traka",
+      "Idealno za: spavaća soba, dnevna soba, ured, hodnik",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: PW005"
+    ],
+    "image": "images/products/product-1774455044-368.jpg",
+    "badge": null,
+    "sku": "PW005",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Ledena siva koža – sofisticiranost bez napora",
+    "idealFor": [
+      "Spavaća soba",
+      "Dnevna soba",
+      "Ured",
+      "Hodnik"
+    ],
+    "styleMatch": [
+      "Minimalistički",
+      "Skandinavski",
+      "Moderni",
+      "Industrijski"
+    ],
+    "reviews": [
+      {
+        "name": "Lejla Č.",
+        "city": "Sarajevo",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Tražila sam nešto između bijele i tamne i ova ledena siva je savršena sredina. Uz bijeli namještaj i crne detalje – zid izgleda kao iz arhitektonskog časopisa."
+      },
+      {
+        "name": "Ana T.",
+        "city": "Mostar",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Koristila za uredski prostor. Hladna siva daje ozbiljnost i profesionalnost, a kožna tekstura unosi toplinu da ne bude sterilno. Savršena kombinacija."
+      },
+      {
+        "name": "Bojan M.",
+        "city": "Banja Luka",
+        "date": "Januar 2026",
+        "stars": 5,
+        "text": "Jednostavna montaža, savršen izgled. Siva je tačno onako hladna i prefinjana kao na slici. Hodnik mi je dobio potpuno novi karakter."
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "name": "Kožni Panel PW003 – Tamni Antracit",
+    "category": "bambus-kozni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "PW003 je za one koji znaju šta hoće. Tamni antracit s kožnom teksturom – gotovo crn, ali s onom tankom linijom karaktera koja ga izdvaja od pune crne. Snažan, muževan, neobuzdano elegantan. Uz zlatne ili bronzane detalje postaje luksuz. Uz bijeli namještaj postaje drama. U svakom slučaju – postaje centar pažnje.",
+    "features": [
+      "Dimenzije: 280×122 cm po panelu",
+      "Boja: tamni antracit – skoro crna, duboka nijansa (PW003)",
+      "Tekstura: imitacija fine zrnaste kože",
+      "Materijal: bambus osnova s PU kožnom oblogom",
+      "Montaža: lijepi se silikonom ili dvostrana traka",
+      "Idealno za: spavaća soba, home office, bar, loft",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: PW003"
+    ],
+    "image": "images/products/product-1774455070-350.jpg",
+    "badge": null,
+    "sku": "PW003",
+    "inStock": true,
+    "featured": false,
+    "highlight": "Tamni antracit koža – elegantan, snažan, nezaboravan",
+    "idealFor": [
+      "Spavaća soba",
+      "Home office",
+      "Bar",
+      "Loft"
+    ],
+    "styleMatch": [
+      "Luksuzan",
+      "Industrijski",
+      "Tamni interijer",
+      "Moderni"
+    ],
+    "reviews": [
+      {
+        "name": "Damir F.",
+        "city": "Sarajevo",
+        "date": "Mart 2026",
+        "stars": 5,
+        "text": "Home office s antracit kožnim panelom i zlatnom rasvjetom – svaki Zoom poziv dobiva kompliment na pozadinu. Izgleda skuplje nego što jeste i to je poenta."
+      },
+      {
+        "name": "Nikolina V.",
+        "city": "Herceg Novi",
+        "date": "Februar 2026",
+        "stars": 5,
+        "text": "Spavaća soba u tamnom antracitu uz bijelo posteljinu je kombinacija koja oduzima dah. Gosti uvijek komentarišu koliko je soba dramatična i lijepa."
+      },
+      {
+        "name": "Tarik O.",
+        "city": "Zenica",
+        "date": "Januar 2026",
+        "stars": 5,
+        "text": "Boja je tačno onako duboka i tamna kao na slici – nije siva koja razočara, nego pravi tamni antracit. Montaža jednostavna, kvalitet odličan."
+      }
+    ]
   },
   {
     "id": 56,
@@ -1279,7 +1861,7 @@
     "name": "3D Letvica – Golden Teak",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 10,
+    "discount": 0,
     "unit": "kom",
     "description": "Kada želite zid koji govori – bez slika, bez tapeta, samo čista forma i sena. CQ006 letvica donosi toplu tik paletu u modernom 3D obliku: svaka letva baca blagu sjenu na susjednu, stvarajući živi, promjenjivi uzorak ovisno o kutu svjetla. Savršena za fokalni zid u dnevnoj sobi ili iza kreveta.",
     "features": [
@@ -2455,7 +3037,7 @@
     "name": "AKU060",
     "category": "akusticni-paneli",
     "price": "94.99",
-    "discount": 0,
+    "discount": 30,
     "unit": "kom",
     "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
     "features": [
@@ -2465,7 +3047,9 @@
       "Visoka apsorpcija niskih i visokih frekvencija",
       "Povrsina: drvena obloga u tamnijem tonu",
       "Montaža: lepi se lepilom ili sistem kuka",
-      "Pogodan za glazbene studije, home theatre, konferencijske sale",
+      "Pogodan za glazbene studije",
+      "home theatre",
+      "konferencijske sale",
       "Sifra: AKU060"
     ],
     "image": "images/products/product-1774011821-454.jpg",
@@ -2484,7 +3068,8 @@
       "Moderni",
       "Luksuzni",
       "Minimalisticki"
-    ]
+    ],
+    "sku": null
   },
   {
     "id": 92,
@@ -2686,497 +3271,6 @@
     "featured": false
   },
   {
-    "id": 106,
-    "name": "Kožni Panel PW001 – Bordo Crvena",
-    "category": "bambus-kozni",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "PW001 je panel koji ne prolazi nezapaženo — niti treba. Duboka bordo crvena s kožnom teksturom odmah daje prostoru karakter i odvažnost. Nije za one koji se boje boje. Jedan zid u ovoj nijansi pretvara spavaću sobu u suite, a dnevnu sobu u prostor koji se pamti. Uz neutralni namještaj efekt je spektakularan.",
-    "features": [
-      "Dimenzije: 280×122 cm po panelu",
-      "Boja: bordo crvena – duboka, bogata nijansa (PW001)",
-      "Tekstura: imitacija fine zrnaste kože",
-      "Materijal: bambus osnova s PU kožnom oblogom",
-      "Montaža: lijepi se silikonom ili dvostrana traka",
-      "Idealno za: spavaća soba, dnevna soba, bar, restoran",
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
-      "Šifra: PW001"
-    ],
-    "image": "images/products/product-1774454787-918.jpg",
-    "badge": null,
-    "sku": "PW001",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Odvažna bordo crvena koja svaki prostor čini nezaboravnim",
-    "idealFor": [
-      "Spavaća soba",
-      "Dnevna soba",
-      "Bar",
-      "Restoran"
-    ],
-    "styleMatch": [
-      "Luksuzan",
-      "Art Deco",
-      "Dramatični interijer",
-      "Tamni stil"
-    ],
-    "reviews": [
-      {
-        "name": "Amela K.",
-        "city": "Sarajevo",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Stavila sam ovaj panel iza bračnog kreveta i svi koji uđu u sobu zastanu. Ta bordo boja uz bijelo posteljinu je kombinacija iz snova. Izgleda kao boutique hotel."
-      },
-      {
-        "name": "Dragana P.",
-        "city": "Banja Luka",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Koristila u baru koji smo otvorili. Uz tamno drvo i zlatnu rasvjetu, taj crveni zid je prva stvar koju gosti fotografišu. Oduševljena sam efektom."
-      },
-      {
-        "name": "Mirza H.",
-        "city": "Mostar",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Bio sam skeptičan prema crvenoj ali ova bordo nijansa je savršena – nije agresivna, nego bogata i topla. Dnevna soba mi je dobila karakter koji nije imala godinama."
-      }
-    ]
-  },
-  {
-    "id": 107,
-    "name": "Kožni Panel PW007 – Hermès Narandžasta",
-    "category": "bambus-kozni",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "PW007 nije za plašljive – i to je upravo njegova snaga. Živa narandžasta koža u prostoru radi ono što nijedno bijelo ili sivo ne može: unosi energiju, toplinu i neponovljiv karakter. Jedan akcentni zid u narandžastoj transformiše dosadan prostor u nešto što se pamti danima. Posebno efektan u kombinaciji s crnim ili bijelo-sivim namještajem.",
-    "features": [
-      "Dimenzije: 280×122 cm po panelu",
-      "Boja: živa narandžasta – energična, topla nijansa (PW007)",
-      "Tekstura: imitacija fine zrnaste kože",
-      "Materijal: bambus osnova s PU kožnom oblogom",
-      "Montaža: lijepi se silikonom ili dvostrana traka",
-      "Idealno za: dnevna soba, omladinska soba, kreativni ured, restoran",
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
-      "Šifra: PW007"
-    ],
-    "image": "images/products/product-1774454850-237.jpg",
-    "badge": null,
-    "sku": "PW007",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Hermès narandžasta koža – rijetka, upečatljiva, nezaboravna",
-    "idealFor": [
-      "Dnevna soba",
-      "Omladinska soba",
-      "Kreativni ured",
-      "Restoran"
-    ],
-    "styleMatch": [
-      "Eklektični",
-      "Retro",
-      "Pop Art",
-      "Moderni"
-    ],
-    "reviews": [
-      {
-        "name": "Nemanja S.",
-        "city": "Trebinje",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Uredili smo trpezariju i htjeli smo nešto posebno. PW007 narandžasta uz bijeli stol i crne stolice – svaki put kad gosti dođu pitaju gdje smo kupili. Pravi razgovor-starter."
-      },
-      {
-        "name": "Selma B.",
-        "city": "Tuzla",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Stavila u sobu djeteta i naprosto oživjela prostor. Boja je tačno onakva kao na slici – živa, ali ne vrišti. Uz bijeli namještaj izgleda fantastično."
-      },
-      {
-        "name": "Ivan R.",
-        "city": "Zenica",
-        "date": "Januar 2026",
-        "stars": 4,
-        "text": "Nisam očekivao da će narandžasta tako dobro izgledati u enterijeru, ali ovo je dokaz da treba biti smioniji u izborima. Svi posjetioci komentarišu zid."
-      }
-    ]
-  },
-  {
-    "id": 108,
-    "name": "Kožni Panel PW005 – Ledena Siva",
-    "category": "bambus-kozni",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "PW005 je siva kakvoj nema premca – hladna, prefinjana, sofisticirana. Kožna tekstura u ovoj svjetlosivoj nijansi daje prostoru onaj \"high-end\" osjećaj koji inače dobijate samo skupim materijalima. Ide uz sve – bijeli, crni, drveni, metalni namještaj. Minimalistički san u jednom panelu.",
-    "features": [
-      "Dimenzije: 280×122 cm po panelu",
-      "Boja: ledena siva – hladna, svjetla nijansa (PW005)",
-      "Tekstura: imitacija fine zrnaste kože",
-      "Materijal: bambus osnova s PU kožnom oblogom",
-      "Montaža: lijepi se silikonom ili dvostrana traka",
-      "Idealno za: spavaća soba, dnevna soba, ured, hodnik",
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
-      "Šifra: PW005"
-    ],
-    "image": "images/products/product-1774455044-368.jpg",
-    "badge": null,
-    "sku": "PW005",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Ledena siva koža – sofisticiranost bez napora",
-    "idealFor": [
-      "Spavaća soba",
-      "Dnevna soba",
-      "Ured",
-      "Hodnik"
-    ],
-    "styleMatch": [
-      "Minimalistički",
-      "Skandinavski",
-      "Moderni",
-      "Industrijski"
-    ],
-    "reviews": [
-      {
-        "name": "Lejla Č.",
-        "city": "Sarajevo",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Tražila sam nešto između bijele i tamne i ova ledena siva je savršena sredina. Uz bijeli namještaj i crne detalje – zid izgleda kao iz arhitektonskog časopisa."
-      },
-      {
-        "name": "Ana T.",
-        "city": "Mostar",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Koristila za uredski prostor. Hladna siva daje ozbiljnost i profesionalnost, a kožna tekstura unosi toplinu da ne bude sterilno. Savršena kombinacija."
-      },
-      {
-        "name": "Bojan M.",
-        "city": "Banja Luka",
-        "date": "Januar 2026",
-        "stars": 5,
-        "text": "Jednostavna montaža, savršen izgled. Siva je tačno onako hladna i prefinjana kao na slici. Hodnik mi je dobio potpuno novi karakter."
-      }
-    ]
-  },
-  {
-    "id": 109,
-    "name": "Kožni Panel PW003 – Tamni Antracit",
-    "category": "bambus-kozni",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "PW003 je za one koji znaju šta hoće. Tamni antracit s kožnom teksturom – gotovo crn, ali s onom tankom linijom karaktera koja ga izdvaja od pune crne. Snažan, muževan, neobuzdano elegantan. Uz zlatne ili bronzane detalje postaje luksuz. Uz bijeli namještaj postaje drama. U svakom slučaju – postaje centar pažnje.",
-    "features": [
-      "Dimenzije: 280×122 cm po panelu",
-      "Boja: tamni antracit – skoro crna, duboka nijansa (PW003)",
-      "Tekstura: imitacija fine zrnaste kože",
-      "Materijal: bambus osnova s PU kožnom oblogom",
-      "Montaža: lijepi se silikonom ili dvostrana traka",
-      "Idealno za: spavaća soba, home office, bar, loft",
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
-      "Šifra: PW003"
-    ],
-    "image": "images/products/product-1774455070-350.jpg",
-    "badge": null,
-    "sku": "PW003",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Tamni antracit koža – elegantan, snažan, nezaboravan",
-    "idealFor": [
-      "Spavaća soba",
-      "Home office",
-      "Bar",
-      "Loft"
-    ],
-    "styleMatch": [
-      "Luksuzan",
-      "Industrijski",
-      "Tamni interijer",
-      "Moderni"
-    ],
-    "reviews": [
-      {
-        "name": "Damir F.",
-        "city": "Sarajevo",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Home office s antracit kožnim panelom i zlatnom rasvjetom – svaki Zoom poziv dobiva kompliment na pozadinu. Izgleda skuplje nego što jeste i to je poenta."
-      },
-      {
-        "name": "Nikolina V.",
-        "city": "Herceg Novi",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Spavaća soba u tamnom antracitu uz bijelo posteljinu je kombinacija koja oduzima dah. Gosti uvijek komentarišu koliko je soba dramatična i lijepa."
-      },
-      {
-        "name": "Tarik O.",
-        "city": "Zenica",
-        "date": "Januar 2026",
-        "stars": 5,
-        "text": "Boja je tačno onako duboka i tamna kao na slici – nije siva koja razočara, nego pravi tamni antracit. Montaža jednostavna, kvalitet odličan."
-      }
-    ]
-  },
-  {
-    "id": 110,
-    "name": "Terrazzo",
-    "category": "classic",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "Terrazzo je povratak najljepše tradicije talijanskog dizajna. Šareni fragmenti kamena, mramora i stakla na bijeloj podlozi stvaraju živahan, jedinstven uzorak koji nikad ne izgleda isto – svježe, moderno i vječno u isto vrijeme.",
-    "features": [
-      "Dimenzije: 280×122cm (3.42 m² po komadu)",
-      "Boja: bijela podloga s pisanim fragmentima u boji",
-      "Šara: terrazzo uzorak – šareni fragmenti kamena i stakla",
-      "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
-      "Šifra: CS029"
-    ],
-    "image": "images/products/product-1774455189-225.jpg",
-    "badge": null,
-    "sku": "CS029",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Talijanski terrazzo – vječna modernost",
-    "idealFor": [
-      "Kupatilo",
-      "Kuhinja",
-      "Hodnik",
-      "Kafić"
-    ],
-    "styleMatch": [
-      "Mediteranski",
-      "Moderni",
-      "Retro",
-      "Eksluzivni"
-    ],
-    "relatedLetvica": 77,
-    "reviews": [
-      {
-        "name": "Eldin K.",
-        "city": "Sarajevo",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Kafić koji smo uredili s terrazzo panelima i 3D letvicama izgleda nevjerovatno. Gosti se fotografišu ispred tih zidova svaki dan. Najsretnije ulaganje u dekor."
-      },
-      {
-        "name": "Vesna J.",
-        "city": "Banja Luka",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Koristila za hodnik stana. Bijeli terrazzo uz bijele pločice i mesing detalje – hodnik je postao najljepši prostor u stanu. Svi koji dođu odmah ga primijete."
-      },
-      {
-        "name": "Mladen B.",
-        "city": "Mostar",
-        "date": "Januar 2026",
-        "stars": 5,
-        "text": "Odličan kvalitet, boja i uzorak su tačno kao na slici. Montaža jednostavna. Kupatilo je dobilo premium izgled za razumnu cijenu."
-      }
-    ]
-  },
-  {
-    "id": 111,
-    "name": "Soft Beige",
-    "category": "classic",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "Soft Beige je neutralnost koja ima karakter. Topla siva u mat završnici ne privlači previše pažnje – ali svaki prostor u kojem se nalazi izgleda promišljeno i elegantno. Savršen za one koji vole suptilnost.",
-    "features": [
-      "Dimenzije: 280×122cm (3.42 m² po komadu)",
-      "Boja: svijetla topla siva, mat",
-      "Šara: glatka mat površina – neutralna elegancija",
-      "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
-      "Šifra: CS014"
-    ],
-    "image": "images/products/product-1774455226-834.jpg",
-    "badge": null,
-    "sku": "CS014",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Topla neutralnost koja oplemenjuje prostor",
-    "idealFor": [
-      "Spavaća soba",
-      "Kupatilo",
-      "Spa",
-      "Dnevna soba"
-    ],
-    "styleMatch": [
-      "Skandinavski",
-      "Boho",
-      "Prirodni",
-      "Minimalistički"
-    ],
-    "reviews": [
-      {
-        "name": "Anela M.",
-        "city": "Sarajevo",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Uredila spavaću sobu u bijeloj šalviji i imam osjećaj da spavam u šumi. Ta blijedozelena bijela je toliko umirujuća da čak i san je bolji. Zvuči smiješno ali istina."
-      },
-      {
-        "name": "Goran S.",
-        "city": "Trebinje",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Koristio za spa centar. Klijenti odmah komentarišu kako je prostor opušten i prirodan. CS014 zajedno s drvenim detaljima je kombinacija koja funkcioniše savršeno."
-      },
-      {
-        "name": "Dina H.",
-        "city": "Tuzla",
-        "date": "Januar 2026",
-        "stars": 5,
-        "text": "Bila sam neodlučna između bijele i ove šalvije – uzela šalviju i ne kajem se ni sekunde. Daje prostoru tu živost i karakter koji čista bijela nema."
-      }
-    ]
-  },
-  {
-    "id": 112,
-    "name": "Pure White",
-    "category": "classic",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "Pure White je čistoća u svom najčišćem obliku. Glatka, apsolutno bijela površina bez šara ili teksture stvara savršenu pozadinu za svaki prostor – platno na koje možete nadograditi bilo koji stil.",
-    "features": [
-      "Dimenzije: 280×122cm (3.42 m² po komadu)",
-      "Boja: gotovo čisto bijela, minimalistička",
-      "Šara: glatka, ujednačena površina – apsolutna čistoća",
-      "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
-      "Šifra: CS013"
-    ],
-    "image": "images/products/product-1774455257-458.jpg",
-    "badge": null,
-    "sku": "CS013",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Savršena bijela – platno za vaš stil",
-    "idealFor": [
-      "Dnevna soba",
-      "Spavaća soba",
-      "Hodnik",
-      "Cijeli stan"
-    ],
-    "styleMatch": [
-      "Minimalistički",
-      "Skandinavski",
-      "Klasični",
-      "Moderni"
-    ],
-    "relatedLetvica": 72,
-    "reviews": [
-      {
-        "name": "Stefan N.",
-        "city": "Banja Luka",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Koristio CS013 panel i odgovarajuću 3D letvicu za cijeli hodnik. Bijela s bijelom letvicom i led rasvjetom – hodnik izgleda kao luksuzni hotel. Nevjerovatna transformacija."
-      },
-      {
-        "name": "Irma Đ.",
-        "city": "Sarajevo",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Ova slomljena bijela je savršena za dnevnu sobu. Nije hladna kao čista bijela, nego topla i prijatna. Uz drveni namještaj izgleda prirodno i skupo istovremeno."
-      },
-      {
-        "name": "Miroslav K.",
-        "city": "Mostar",
-        "date": "Januar 2026",
-        "stars": 5,
-        "text": "Obložio cijeli stan i boja je konzistentna od panela do panela. Kvalitet odličan, montaža brza. Rezultat je stan koji izgleda kao novogradnja."
-      }
-    ]
-  },
-  {
-    "id": 113,
-    "name": "Midnight Black",
-    "category": "classic",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "Midnight Black je odlučan i neobjašnjivo luksuzno. Duboka crna mat površina bez kompromisa – akcentni zid koji preuzima kontrolu nad prostorom i postavlja ton za sve ostalo. Za one koji znaju što hoće.",
-    "features": [
-      "Dimenzije: 280×122cm (3.42 m² po komadu)",
-      "Boja: duboka crna, elegantna",
-      "Šara: glatka mat crna površina – luksuzna tama",
-      "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
-      "Šifra: CS022"
-    ],
-    "image": "images/products/product-1774455282-287.jpg",
-    "badge": null,
-    "sku": "CS022",
-    "inStock": true,
-    "featured": false,
-    "highlight": "Luksuzna crna koja dominira prostorom",
-    "idealFor": [
-      "Dnevna soba",
-      "Spavaća soba",
-      "Restoran",
-      "Bar"
-    ],
-    "styleMatch": [
-      "Luksuzan",
-      "Industrijski",
-      "Minimalistički",
-      "Tamni interijer"
-    ],
-    "relatedLetvica": 71,
-    "reviews": [
-      {
-        "name": "Jasmin A.",
-        "city": "Sarajevo",
-        "date": "Mart 2026",
-        "stars": 5,
-        "text": "Mat crni zid iza TV-a uz zlatne police – kombinacija koja svake večeri izgleda kao scena iz filma. Uz dobru rasvjetu je još impresivnije. Preporučujem svima koji se usude."
-      },
-      {
-        "name": "Katarina L.",
-        "city": "Banja Luka",
-        "date": "Februar 2026",
-        "stars": 5,
-        "text": "Bila sam uplašena od crne ali arhitekta me uvjerio. Spavaća soba u mat crnoj uz bijelo posteljinu i zlatnu lampicu je najljepša soba u kojoj sam ikad spavala."
-      },
-      {
-        "name": "Adnan P.",
-        "city": "Zenica",
-        "date": "Januar 2026",
-        "stars": 5,
-        "text": "Restoran s crnim zidovima, drvenim stolovima i toplom rasvjetom – ambijent koji tjera ljude da se vraćaju. CS022 je dio te jednačine i radi savršeno."
-      }
-    ]
-  },
-  {
     "id": 103,
     "name": "SPC04 – SPC Laminat",
     "category": "spc-pod",
@@ -3363,88 +3457,5 @@
         "text": "Jako sam zadovoljna kupovinom. Pod je vodootporan što je bilo ključno za moje kupatilo. Preporučujem Make My Home."
       }
     ]
-  },
-  {
-    "id": 116,
-    "name": "SW216",
-    "category": "bambus-mermerni",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "SW216 panel donosi toplinu kremasto-bež mermera s nježnim zlatnim i smeđim žilama koje prolaze kroz površinu poput autorskog potpisa prirode. Za razliku od hladnog bijelog mermera, SW216 unosi toplinu i karakter – savršen za prostore gdje se želi luksuz bez krutosti. Bambus osnova čini panel lakim za montažu i otpornim na vlagu, dok visokosjajni lak zaštitni sloj daje dubinu i sjaj koji imitira prirodni polirani kamen. Jedinstven uzorak žilama čini svaki prostor prepoznatljivim.",
-    "features": [
-      "Dimenzije: 280×122 cm (3,42 m² po komadu)",
-      "Materijal: bambus vlakno s mermernim UV printom",
-      "Uzorak: kremasto-bež mermer s toplim zlatnim žilama",
-      "Površinska obrada: visoko-sjajna lak zaštita",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Otporan na vlagu – pogodan za kupatilo",
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
-      "Šifra: SW216"
-    ],
-    "image": "images/products/product-1774541368-499.jpg",
-    "badge": "Novo",
-    "sku": "SW216",
-    "inStock": true,
-    "featured": true,
-    "highlight": "Topla bež paleta – mermer koji grije prostor",
-    "idealFor": [
-      "Kupatilo",
-      "Hodnik",
-      "Dnevna soba",
-      "Spavaća soba"
-    ],
-    "styleMatch": [
-      "Luksuzni",
-      "Klasični",
-      "Moderni",
-      "Mediteranski"
-    ],
-    "reviews": [
-      {
-        "author": "Tijana M.",
-        "city": "Podgorica",
-        "rating": 5,
-        "date": "Mart 2025",
-        "text": "SW216 je upravo ono što sam tražila – topao mermer bez te hladne bijele boje. Postavila sam u kupatilo i svi gosti pitaju je li pravi kamen. Montaža je bila jednostavna, preporučujem!"
-      },
-      {
-        "author": "Nikola B.",
-        "city": "Budva",
-        "rating": 5,
-        "date": "Februar 2025",
-        "text": "Uzeo sam SW216 za hodnik u stanu. Bež ton s zlatnim žilama savršeno se slaže s drvenim podom. Kvaliteta je odlična, panel je čvrst i sjajan. Definitivno kupujem još."
-      },
-      {
-        "author": "Sonja K.",
-        "city": "Herceg Novi",
-        "rating": 5,
-        "date": "Januar 2025",
-        "text": "Koristila sam SW216 kao fokalni zid u dnevnoj sobi. Jedinstven uzorak žilama daje prostoru karakter koji ne možete naći ni u jednoj drugoj oblozi. Oduševljena sam Make My Home uslugom!"
-      }
-    ]
-  },
-  {
-    "id": 117,
-    "name": "SW002",
-    "category": "bambus-mermerni",
-    "price": "86.99",
-    "discount": 0,
-    "unit": "kom",
-    "description": "",
-    "features": [
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom"
-    ],
-    "image": "images/products/product-1774546387-799.jpg",
-    "badge": null,
-    "sku": "SW002",
-    "inStock": false,
-    "featured": false
   }
 ]
