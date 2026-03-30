@@ -427,11 +427,36 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($products as $p):
+                <?php
+                $catLabels = [
+                  'bambus-drveni'    => ['label'=>'Bambus › Drveni',      'icon'=>'fas fa-tree',         'color'=>'#8B6914'],
+                  'bambus-tekstilni' => ['label'=>'Bambus › Tekstilni',   'icon'=>'fas fa-grip-lines',   'color'=>'#7a6a5a'],
+                  'bambus-mermerni'  => ['label'=>'Bambus › Mermerni',    'icon'=>'fas fa-gem',          'color'=>'#6b7f8c'],
+                  'bambus-metalni'   => ['label'=>'Bambus › Metalni',     'icon'=>'fas fa-circle',       'color'=>'#b08020'],
+                  'bambus-kozni'     => ['label'=>'Bambus › Kožni',       'icon'=>'fas fa-couch',        'color'=>'#8B3A1A'],
+                  'classic'          => ['label'=>'Bambus › Classic',     'icon'=>'fas fa-border-all',   'color'=>'#5a7a5a'],
+                  '3d-letvice'       => ['label'=>'3D Letvice',           'icon'=>'fas fa-layer-group',  'color'=>'#3a6ea8'],
+                  'akusticni-paneli' => ['label'=>'Akustični Paneli',     'icon'=>'fas fa-volume-off',   'color'=>'#5a5a8a'],
+                  'aluminijum-lajsne'=> ['label'=>'Aluminijum Lajsne',    'icon'=>'fas fa-minus',        'color'=>'#888'],
+                  'spc-pod'          => ['label'=>'SPC Pod',              'icon'=>'fas fa-th-large',     'color'=>'#6a8a6a'],
+                  'pu-kamen'         => ['label'=>'PU Kamen',             'icon'=>'fas fa-mountain',     'color'=>'#8a7a6a'],
+                ];
+                $lastCat = null;
+                foreach ($products as $p):
                   $isFeatured = !empty($p['featured']);
                   $curBadge   = $p['badge'] ?? null;
                   $badgeOptions = ['Bestseller', 'Najpopularniji', 'Novo', 'Akcija', 'Preporučujemo', 'Limitirano'];
+                  $cat = $p['category'] ?? '';
+                  if ($cat !== $lastCat):
+                    $lastCat = $cat;
+                    $cl = $catLabels[$cat] ?? ['label'=>$cat,'icon'=>'fas fa-box','color'=>'#888'];
                 ?>
+                <tr style="background:<?= $cl['color'] ?>18;border-top:2px solid <?= $cl['color'] ?>33;pointer-events:none;" class="cat-separator-row">
+                  <td colspan="9" style="padding:8px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:<?= $cl['color'] ?>;">
+                    <i class="<?= $cl['icon'] ?>" style="margin-right:6px;"></i><?= htmlspecialchars($cl['label']) ?>
+                  </td>
+                </tr>
+                <?php endif; ?>
                 <tr data-id="<?= $p['id'] ?>" style="<?= $isFeatured ? 'background:rgba(201,168,108,0.06);' : '' ?>">
                   <td class="drag-handle" title="Povuci da promijeniš redosljed" style="cursor:grab;text-align:center;color:#bbb;font-size:16px;user-select:none;">
                     <i class="fas fa-grip-vertical"></i>

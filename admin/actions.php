@@ -171,7 +171,17 @@ switch ($action) {
             'featured'    => $featured
         ];
 
-        $products[] = $newProduct;
+        // Ubaci novi proizvod odmah iza zadnjeg proizvoda iste kategorije
+        $lastIdx = -1;
+        foreach ($products as $i => $p) {
+            if ($p['category'] === $category) $lastIdx = $i;
+        }
+        if ($lastIdx === -1) {
+            // Nema proizvoda u toj kategoriji – dodaj na kraj
+            $products[] = $newProduct;
+        } else {
+            array_splice($products, $lastIdx + 1, 0, [$newProduct]);
+        }
         if (!saveProducts($products, $productsFile)) {
             redirect('', 'GREŠKA: Proizvod nije sačuvan – problem sa diskom ili dozvolama. Kontaktirajte admina.', 'add-product');
         }
