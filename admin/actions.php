@@ -581,6 +581,19 @@ switch ($action) {
         file_put_contents($jsonFile, json_encode(array_values($slides), JSON_PRETTY_PRINT));
         echo json_encode(['ok'=>true]); exit;
 
+    case 'delete_inquiry':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $date = trim($_POST['id'] ?? '');
+        if (!$date) { echo json_encode(['ok' => false, 'error' => 'Nedostaje ID.']); exit; }
+        $inquiriesFile = __DIR__ . '/../data/inquiries.json';
+        $inquiries = file_exists($inquiriesFile)
+            ? (json_decode(file_get_contents($inquiriesFile), true) ?: [])
+            : [];
+        $inquiries = array_values(array_filter($inquiries, fn($i) => ($i['date'] ?? '') !== $date));
+        file_put_contents($inquiriesFile, json_encode($inquiries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        echo json_encode(['ok' => true]); exit;
+
     case 'gallery_add':
         ob_end_clean();
         header('Content-Type: application/json');

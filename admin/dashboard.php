@@ -674,10 +674,14 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
               <div class="inquiry-product"><i class="fas fa-box"></i> <?= htmlspecialchars($inq['product']) ?></div>
             <?php endif; ?>
             <div class="inquiry-message"><?= nl2br(htmlspecialchars($inq['message'])) ?></div>
-            <div style="margin-top:12px;">
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
               <a href="mailto:<?= htmlspecialchars($inq['email']) ?>?subject=Re: Upit - <?= urlencode($inq['product'] ?? '') ?>" class="btn btn-sm btn-primary">
                 <i class="fas fa-reply"></i> Odgovori
               </a>
+              <button class="btn btn-sm" onclick="deleteInquiry('<?= htmlspecialchars($inq['date'] ?? '', ENT_QUOTES) ?>', this)"
+                style="background:rgba(231,76,60,0.1);color:#e74c3c;border:1px solid rgba(231,76,60,0.2);">
+                <i class="fas fa-trash"></i> Obriši
+              </button>
             </div>
           </div>
         <?php endforeach; ?>
@@ -1858,6 +1862,23 @@ async function hsDelete(slot, type) {
       const delBtn = document.getElementById('hs-del-' + slot + suffix);
       if (delBtn) delBtn.style.display = 'none';
       showToast('Slajd ' + slot + (type === 'mobile' ? ' (mobilna)' : '') + ' je obrisan.', 'success');
+    }
+  } catch(e) { showToast('Greška.', 'error'); }
+}
+
+async function deleteInquiry(id, btn) {
+  if (!confirm('Obriši ovaj upit? Ova radnja se ne može poništiti.')) return;
+  const fd = new FormData();
+  fd.append('action', 'delete_inquiry');
+  fd.append('id', id);
+  try {
+    const r = await fetch('actions.php', { method: 'POST', body: fd });
+    const j = await r.json();
+    if (j.ok) {
+      btn.closest('.inquiry-card').remove();
+      showToast('Upit je obrisan.', 'success');
+    } else {
+      showToast(j.error || 'Greška pri brisanju.', 'error');
     }
   } catch(e) { showToast('Greška.', 'error'); }
 }
