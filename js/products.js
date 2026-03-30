@@ -842,7 +842,8 @@ async function renderProductDetail() {
   const styleMatchHtml = (product.styleMatch || []).map(s =>
     `<span class="style-badge">${s}</span>`).join('');
 
-  const waLink = `https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20${encodeURIComponent(product.name)}`;
+  const waIdentifier = product.sku ? `šifra: ${product.sku}` : product.name;
+  const waLink = `https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20${encodeURIComponent(waIdentifier)}`;
 
   info.innerHTML = `
     <div class="product-category">${categoryName}</div>
