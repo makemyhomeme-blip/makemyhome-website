@@ -16,6 +16,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const navMenu = document.getElementById('nav-menu');
   if (navMenu) {
     navMenu.innerHTML = `
+      <div id="mob-search-box" style="padding:4px 0 14px;">
+        <div style="position:relative;">
+          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
+          <input id="mob-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
+            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
+        </div>
+        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
+      </div>
       <a href="index.html" class="nav-link">Početna</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
@@ -26,16 +34,87 @@ document.addEventListener('DOMContentLoaded', function () {
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     `;
+
+    // ── Mobile search logic ──
+    let _allProducts = null;
+    async function loadProductsOnce() {
+      if (_allProducts) return _allProducts;
+      try {
+        const r = await fetch('data/products.json?v=' + Date.now());
+        _allProducts = await r.json();
+      } catch(e) { _allProducts = []; }
+      return _allProducts;
+    }
+
+    const catLabels = {
+      'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni',
+      'bambus-mermerni':'Mermerni','bambus-metalni':'Metalni','bambus-kozni':'Kožni',
+      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
+      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic'
+    };
+
+    const searchInput = navMenu.querySelector('#mob-search-input');
+    const resultsBox  = navMenu.querySelector('#mob-search-results');
+
+    searchInput.addEventListener('focus', () => loadProductsOnce());
+    searchInput.addEventListener('input', async () => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (q.length < 2) { resultsBox.style.display = 'none'; resultsBox.innerHTML = ''; return; }
+      const products = await loadProductsOnce();
+      const hits = products.filter(p =>
+        (p.name || '').toLowerCase().includes(q) ||
+        (p.sku  || '').toLowerCase().includes(q)
+      ).slice(0, 12);
+
+      if (!hits.length) {
+        resultsBox.style.display = 'block';
+        resultsBox.innerHTML = `<div style="padding:14px 16px;color:rgba(255,255,255,0.45);font-size:14px;">Nema rezultata za „${searchInput.value}"</div>`;
+        return;
+      }
+
+      resultsBox.innerHTML = hits.map(p => {
+        const cat = p.category || '';
+        const baseCat = cat.replace('bambus-','');
+        const catPage = ['drveni','tekstilni','mermerni','metalni','kozni'].includes(baseCat)
+          ? 'bambus-paneli' : cat;
+        const label = catLabels[cat] || cat;
+        const thumb = p.image ? `<img src="${p.image}" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
+        return `<a href="products.html?category=${encodeURIComponent(catPage)}"
+          style="display:flex;align-items:center;gap:12px;padding:11px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background 0.15s;"
+          onmouseenter="this.style.background='rgba(201,168,108,0.12)'" onmouseleave="this.style.background=''"
+          onclick="document.getElementById('mob-search-input').value='';document.getElementById('mob-search-results').style.display='none';">
+          ${thumb}
+          <div style="flex:1;min-width:0;">
+            <div style="color:#fff;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+            <div style="margin-top:2px;display:flex;gap:6px;flex-wrap:wrap;">
+              ${p.sku ? `<span style="font-size:11px;color:#c9a86c;font-family:monospace;">${p.sku}</span>` : ''}
+              <span style="font-size:11px;color:rgba(255,255,255,0.4);">${label}</span>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right" style="color:rgba(201,168,108,0.5);font-size:11px;flex-shrink:0;"></i>
+        </a>`;
+      }).join('');
+      resultsBox.style.display = 'block';
+    });
+
     if (hamburger) {
       hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('open');
+        if (navMenu.classList.contains('open')) {
+          setTimeout(() => searchInput.focus(), 120);
+        } else {
+          resultsBox.style.display = 'none';
+          searchInput.value = '';
+        }
       });
     }
     navMenu.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         if (hamburger) hamburger.classList.remove('active');
         navMenu.classList.remove('open');
+        resultsBox.style.display = 'none';
+        searchInput.value = '';
       });
     });
   }
