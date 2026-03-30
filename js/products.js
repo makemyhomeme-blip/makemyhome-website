@@ -962,7 +962,22 @@ async function renderProductDetail() {
         </button>
         <div class="spec-body open">
           <ul class="spec-feature-list">
-            ${product.features.map(f => `<li><i class="fas fa-check"></i>${f}</li>`).join('')}
+            ${product.features.map(f => {
+              const protMap = [
+                { k: 'Vodootporan',          icon: 'fa-droplet',        color: '#1a7abf' },
+                { k: 'Otporan na buđ',       icon: 'fa-shield-halved',  color: '#2e9e6b' },
+                { k: 'Vatrootporan',         icon: 'fa-fire-flame-curved', color: '#d4620a' },
+                { k: 'Otporan na prljavštinu', icon: 'fa-hand-sparkles', color: '#7b5ea7' },
+              ];
+              const prot = protMap.find(p => f.startsWith(p.k));
+              if (prot) {
+                return `<li style="background:${prot.color}14;border:1px solid ${prot.color}33;border-radius:8px;padding:8px 12px;margin-bottom:4px;">
+                  <i class="fas ${prot.icon}" style="color:${prot.color};"></i>
+                  <strong style="color:${prot.color}dd;">${f}</strong>
+                </li>`;
+              }
+              return `<li><i class="fas fa-check"></i>${f}</li>`;
+            }).join('')}
           </ul>
         </div>
       </div>
