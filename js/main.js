@@ -119,6 +119,119 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ===== DESKTOP SEARCH =====
+  (function() {
+    const headerInner = document.querySelector('.header-inner');
+    const hamBtn = document.getElementById('hamburger');
+    if (!headerInner) return;
+
+    // Injektuj search wrap između nav i hamburgera
+    const wrap = document.createElement('div');
+    wrap.id = 'desk-search-wrap';
+    wrap.style.cssText = 'position:relative;display:flex;align-items:center;margin-right:8px;';
+    wrap.innerHTML = `
+      <button id="desk-search-btn" aria-label="Pretraži"
+        style="width:38px;height:38px;border-radius:50%;background:rgba(201,168,108,0.12);border:1.5px solid rgba(201,168,108,0.3);color:#c9a86c;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;flex-shrink:0;"
+        onmouseenter="this.style.background='rgba(201,168,108,0.25)'" onmouseleave="this.style.background='rgba(201,168,108,0.12)'">
+        <i class="fas fa-search"></i>
+      </button>
+      <div id="desk-search-panel" style="display:none;position:absolute;top:50%;right:0;transform:translateY(-50%);width:260px;z-index:9999;">
+        <div style="position:relative;">
+          <i class="fas fa-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:13px;pointer-events:none;"></i>
+          <input id="desk-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
+            style="width:100%;box-sizing:border-box;padding:10px 36px 10px 36px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.5);background:#1a1a1a;color:#fff;font-size:14px;font-family:inherit;outline:none;-webkit-appearance:none;">
+          <button id="desk-search-close" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:14px;padding:2px 4px;">✕</button>
+        </div>
+        <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);right:0;width:320px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);"></div>
+      </div>
+    `;
+    headerInner.insertBefore(wrap, hamBtn);
+
+    // Sakrij na mobilnom
+    const hideOnMobile = document.createElement('style');
+    hideOnMobile.textContent = '@media(max-width:768px){#desk-search-wrap{display:none!important;}}';
+    document.head.appendChild(hideOnMobile);
+
+    const btn    = document.getElementById('desk-search-btn');
+    const panel  = document.getElementById('desk-search-panel');
+    const input  = document.getElementById('desk-search-input');
+    const close  = document.getElementById('desk-search-close');
+    const resBox = document.getElementById('desk-search-results');
+
+    let _prods = null;
+    async function loadProds() {
+      if (_prods) return _prods;
+      try { const r = await fetch('data/products.json?v=' + Date.now()); _prods = await r.json(); }
+      catch(e) { _prods = []; }
+      return _prods;
+    }
+
+    const dCatLabels = {
+      'bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni','bambus-mermerni':'Mermerni',
+      'bambus-metalni':'Metalni','bambus-kozni':'Kožni','classic':'Classic',
+      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
+      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen'
+    };
+
+    function openPanel() {
+      panel.style.display = 'block';
+      btn.style.display = 'none';
+      setTimeout(() => input.focus(), 50);
+      loadProds();
+    }
+    function closePanel() {
+      panel.style.display = 'none';
+      btn.style.display = 'flex';
+      input.value = '';
+      resBox.style.display = 'none';
+      resBox.innerHTML = '';
+    }
+
+    btn.addEventListener('click', openPanel);
+    close.addEventListener('click', closePanel);
+
+    input.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+    input.addEventListener('input', async () => {
+      const q = input.value.trim().toLowerCase();
+      if (q.length < 2) { resBox.style.display = 'none'; resBox.innerHTML = ''; return; }
+      const products = await loadProds();
+      const hits = products.filter(p =>
+        (p.name || '').toLowerCase().includes(q) ||
+        (p.sku  || '').toLowerCase().includes(q)
+      ).slice(0, 10);
+
+      if (!hits.length) {
+        resBox.innerHTML = `<div style="padding:14px 16px;color:rgba(255,255,255,0.45);font-size:14px;">Nema rezultata za „${input.value}"</div>`;
+        resBox.style.display = 'block';
+        return;
+      }
+      resBox.innerHTML = hits.map(p => {
+        const label = dCatLabels[p.category] || p.category;
+        const thumb = p.image ? `<img src="${p.image}" style="width:36px;height:36px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
+        return `<a href="product.html?id=${p.id}"
+          style="display:flex;align-items:center;gap:10px;padding:10px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .15s;"
+          onmouseenter="this.style.background='rgba(201,168,108,0.1)'" onmouseleave="this.style.background=''"
+          onclick="setTimeout(()=>{document.getElementById('desk-search-close').click()},50)">
+          ${thumb}
+          <div style="flex:1;min-width:0;">
+            <div style="color:#fff;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+            <div style="margin-top:2px;display:flex;gap:6px;">
+              ${p.sku ? `<span style="font-size:11px;color:#c9a86c;font-family:monospace;">${p.sku}</span>` : ''}
+              <span style="font-size:11px;color:rgba(255,255,255,0.4);">${label}</span>
+            </div>
+          </div>
+        </a>`;
+      }).join('');
+      resBox.style.display = 'block';
+    });
+
+    // Zatvori kad klikneš van
+    document.addEventListener('click', e => {
+      if (!wrap.contains(e.target)) closePanel();
+    });
+  })();
+
   // ===== ACTIVE NAV =====
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const currentSearch = window.location.search;
