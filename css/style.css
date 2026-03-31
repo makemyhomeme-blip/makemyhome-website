@@ -2563,3 +2563,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .showcase-content { padding: 32px 24px; max-width: 100%; }
   .showcase-title { font-size: 1.3rem; }
 }
+
+/* ===== DESKTOP NAV FIX ===== */
+/* Hide mobile search box on desktop — it was showing and breaking nav layout */
+@media (min-width: 769px) {
+  #mob-search-box { display: none !important; }
+  .nav-link { white-space: nowrap !important; }
+  .logo-text .name { white-space: nowrap !important; }
+  .logo-text .tagline { white-space: nowrap !important; }
+}
