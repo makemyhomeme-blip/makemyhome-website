@@ -93,6 +93,17 @@
       .social-btn{width:42px!important;height:42px!important;font-size:18px!important}
     }
   </style>
+<style id="nav-fix">
+@media(min-width:769px){
+  .header-inner{flex-wrap:nowrap!important;}
+  .logo{flex-shrink:0!important;}
+  .logo-text .name{white-space:nowrap!important;font-size:17px!important;}
+  .logo-text .tagline{white-space:nowrap!important;font-size:9.5px!important;}
+  .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;}
+  .nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 6px!important;}
+  #desk-search-wrap{flex-shrink:0!important;min-width:36px;}
+}
+</style>
 </head>
 <body>
 
@@ -601,7 +612,7 @@
   <i class="fas fa-chevron-up"></i>
 </button>
 
-<script src="js/main.js?v=2"></script>
+<script src="js/main-v3.js"></script>
 <script src="js/products.js?v=17"></script>
 <script>
   // Učitaj kategorije i featured proizvode
