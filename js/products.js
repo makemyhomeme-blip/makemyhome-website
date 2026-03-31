@@ -414,19 +414,14 @@ async function renderProductDetail() {
   }
 
   if (galleryMain) {
-    const btnStyle = `position:absolute;top:50%;transform:translateY(-50%);
-      width:38px;height:38px;border-radius:50%;background:rgba(20,18,15,0.65);
-      border:1.5px solid rgba(201,168,108,0.5);color:#c9a86c;font-size:20px;
-      cursor:pointer;display:${multi ? 'flex' : 'none'};align-items:center;
-      justify-content:center;z-index:10;transition:background .2s;`;
     const dotWrap = multi ? `
       <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
-        display:flex;gap:7px;z-index:10;">
+        display:flex;gap:7px;z-index:10;pointer-events:none;">
         ${_galleryImages.map((_, i) => `<span class="gallery-dot" style="
-          display:block;width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all .2s;
+          display:block;width:7px;height:7px;border-radius:50%;transition:all .2s;
           background:${i === 0 ? '#c9a86c' : 'rgba(255,255,255,0.35)'};
           transform:${i === 0 ? 'scale(1.25)' : 'scale(1)'};"
-          onclick="_goToGallery(${i})"></span>`).join('')}
+        ></span>`).join('')}
       </div>` : '';
     galleryMain.innerHTML = `
       <div style="position:relative;width:100%;height:100%;">
@@ -434,29 +429,24 @@ async function renderProductDetail() {
           onclick="openImageLightbox(this.src, '${product.name}')"
           style="cursor:zoom-in;transition:opacity .12s ease;width:100%;height:100%;object-fit:cover;border-radius:16px;"
           onerror="this.style.display='none'">
-        <button id="gallery-prev" style="${btnStyle}left:10px;"
-          onmouseenter="this.style.background='rgba(201,168,108,0.25)'"
-          onmouseleave="this.style.background='rgba(20,18,15,0.65)'"
-          onclick="_goToGallery(_galleryIndex - 1)" aria-label="Prethodna slika">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button id="gallery-next" style="${btnStyle}right:10px;"
-          onmouseenter="this.style.background='rgba(201,168,108,0.25)'"
-          onmouseleave="this.style.background='rgba(20,18,15,0.65)'"
-          onclick="_goToGallery(_galleryIndex + 1)" aria-label="Sljedeća slika">
-          <i class="fas fa-chevron-right"></i>
-        </button>
         ${dotWrap}
       </div>`;
 
-    // Touch/swipe support
+    // Swipe support (mobile)
     let _tx = 0;
-    const mImg = galleryMain;
-    mImg.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
-    mImg.addEventListener('touchend', e => {
+    galleryMain.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
+    galleryMain.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - _tx;
       if (Math.abs(dx) > 40) _goToGallery(_galleryIndex + (dx < 0 ? 1 : -1));
     }, { passive: true });
+
+    // Keyboard arrow keys (desktop)
+    if (multi) {
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  _goToGallery(_galleryIndex - 1);
+        if (e.key === 'ArrowRight') _goToGallery(_galleryIndex + 1);
+      });
+    }
   }
 
   if (galleryThumbs) {
