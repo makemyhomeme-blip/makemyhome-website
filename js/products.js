@@ -1075,6 +1075,8 @@ async function renderProductDetail() {
                 }
               }
               return groups.map(({ main, cont }) => {
+                // Skip "Pogodan za" — covered by "Idealno za" section
+                if (/^Pogodan za/i.test(main)) return '';
                 const prot = protMap.find(p => main.startsWith(p.k));
                 if (prot) {
                   return `<li style="background:${prot.color}14;border:1px solid ${prot.color}33;border-radius:8px;padding:8px 12px;margin-bottom:4px;">
@@ -1082,20 +1084,9 @@ async function renderProductDetail() {
                     <strong style="color:${prot.color}dd;">${main}</strong>
                   </li>`;
                 }
-                // Continuation lines: short (≤4 words each) → tag chips; otherwise join with " – "
-                let extra = '';
-                if (cont.length > 0) {
-                  const allShort = cont.every(c => c.trim().split(/\s+/).length <= 4);
-                  if (allShort) {
-                    extra = `<span style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;">
-                      ${cont.map(c => `<span style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.3);
-                        color:rgba(255,255,255,0.75);border-radius:20px;padding:3px 10px;font-size:12px;">${c}</span>`).join('')}
-                    </span>`;
-                  } else {
-                    extra = `<span style="color:rgba(255,255,255,0.55);"> – ${cont.join(' – ')}</span>`;
-                  }
-                }
-                return `<li><i class="fas fa-check"></i>${main}${extra}</li>`;
+                // Join all continuations inline — no chips, no separate lines
+                const full = cont.length > 0 ? main + ', ' + cont.join(', ') : main;
+                return `<li><i class="fas fa-check"></i>${full}</li>`;
               }).join('');
             })()}
           </ul>
