@@ -24,22 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
       </div>
-      <div id="desk-search-wrap" style="position:relative;display:flex;align-items:center;">
-        <button id="desk-search-btn" aria-label="Pretraži"
-          style="width:34px;height:34px;border-radius:50%;background:rgba(201,168,108,0.12);border:1.5px solid rgba(201,168,108,0.3);color:#c9a86c;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;margin-right:4px;"
-          onmouseenter="this.style.background='rgba(201,168,108,0.25)'" onmouseleave="this.style.background='rgba(201,168,108,0.12)'">
-          <i class="fas fa-search"></i>
-        </button>
-        <div id="desk-search-panel" style="display:none;position:fixed;top:75px;z-index:99999;width:300px;">
-          <div style="position:relative;background:#1a1814;border:1.5px solid rgba(201,168,108,0.4);border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,0.5);">
-            <i class="fas fa-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:13px;pointer-events:none;"></i>
-            <input id="desk-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-              style="width:100%;box-sizing:border-box;padding:11px 38px 11px 38px;border:none;border-radius:24px;background:transparent;color:#fff;font-size:14px;font-family:inherit;outline:none;-webkit-appearance:none;">
-            <button id="desk-search-close" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:14px;padding:2px 4px;line-height:1;">✕</button>
-          </div>
-          <div id="desk-search-results" style="display:none;margin-top:6px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);"></div>
-        </div>
-      </div>
       <a href="index.html" class="nav-link">Početna</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
@@ -333,3 +317,4 @@ function openLightbox(src) {
   overlay.addEventListener('click', () => overlay.remove());
   document.body.appendChild(overlay);
 }
+
