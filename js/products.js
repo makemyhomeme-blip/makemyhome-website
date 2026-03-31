@@ -7,6 +7,12 @@ let currentFilter = 'all';
 let allProducts = [];
 let allCategories = [];
 
+// Start fetching data immediately when script loads — don't wait for initProductsPage()
+const _dataPromise = Promise.all([
+  fetch('data/products.json?v=5').then(r => r.json()),
+  fetch('data/categories.json?v=5').then(r => r.json())
+]).catch(() => [[], []]);
+
 // Željeni redoslijed kategorija na stranici "Svi proizvodi"
 const CATEGORY_ORDER = [
   'bambus-drveni',
@@ -23,14 +29,11 @@ const CATEGORY_ORDER = [
 
 // ===== UČITAJ PODATKE SA SERVERA =====
 async function loadData() {
-  if (allProducts.length > 0) return; // already loaded, use cache
+  if (allProducts.length > 0) return;
   try {
-    const [prodRes, catRes] = await Promise.all([
-      fetch('data/products.json?v=5'),
-      fetch('data/categories.json?v=5')
-    ]);
-    allProducts = await prodRes.json();
-    allCategories = await catRes.json();
+    const [products, categories] = await _dataPromise;
+    allProducts = products;
+    allCategories = categories;
   } catch (e) {
     console.error('Greška pri učitavanju proizvoda:', e);
     allProducts = [];
