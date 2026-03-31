@@ -32,7 +32,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Hodnik",
-      "Restoran"
+      "Restoran",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Prirodni",
@@ -74,7 +79,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Kupaonica",
-      "Kuhinja"
+      "Kuhinja",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Skandinavski",
@@ -114,7 +124,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Kućni bioskop",
-      "Bar/kafić"
+      "Bar/kafić",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni luksuz",
@@ -154,7 +169,12 @@
       "Dnevna soba",
       "Ured",
       "Hodnik",
-      "Restoran"
+      "Restoran",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni",
@@ -195,7 +215,12 @@
       "Spavaća soba",
       "Kuhinja",
       "Hodnik",
-      "Ured"
+      "Ured",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Klasični",
@@ -236,7 +261,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Restoran",
-      "Hotel"
+      "Hotel",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni luksuz",
@@ -277,7 +307,12 @@
       "Spavaća soba",
       "Hodnik",
       "Ured",
-      "Restoran"
+      "Restoran",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Klasični",
@@ -317,7 +352,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Bar/kafić",
-      "Biblioteka"
+      "Biblioteka",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Rustikalni",
@@ -357,7 +397,12 @@
       "Spavaća soba",
       "Kućni bioskop",
       "Bar/kafić",
-      "VIP lounge"
+      "VIP lounge",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni luksuz",
@@ -402,7 +447,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Hodnik",
-      "Kancelarija"
+      "Kancelarija",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Prirodni",
@@ -443,7 +493,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Kupatilo",
-      "Kancelarija"
+      "Kancelarija",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni",
@@ -484,7 +539,12 @@
       "Dnevna soba",
       "Kancelarija",
       "Hodnik",
-      "Restoran"
+      "Restoran",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni",
@@ -525,7 +585,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Trpezarija",
-      "Hodnik"
+      "Hodnik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Prirodni",
@@ -566,7 +631,12 @@
       "Spavaća soba",
       "Dnevna soba",
       "Recepcija",
-      "Restoran"
+      "Restoran",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Luksuzni",
@@ -607,7 +677,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Kancelarija",
-      "Hodnik"
+      "Hodnik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni",
@@ -648,7 +723,12 @@
       "Spavaća soba",
       "Kupatilo",
       "Dnevna soba",
-      "Wellness"
+      "Wellness",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Skandinavski",
@@ -689,7 +769,12 @@
       "Spavaća soba",
       "Dnevna soba",
       "Recepcija",
-      "Butik"
+      "Butik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Luksuzni",
@@ -730,7 +815,12 @@
       "Spavaća soba",
       "Dnevna soba",
       "Restoran",
-      "Recepcija"
+      "Recepcija",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Luksuzni",
@@ -771,7 +861,12 @@
       "Kupatilo",
       "Hodnik",
       "Dnevna soba",
-      "Kuhinja"
+      "Kuhinja",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni",
@@ -812,7 +907,12 @@
       "Kupatilo",
       "Kuhinja",
       "Ured",
-      "Hodnik"
+      "Hodnik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Moderni",
@@ -854,7 +954,12 @@
       "Kupatilo",
       "Hodnik",
       "Dnevna soba",
-      "Spavaća soba"
+      "Spavaća soba",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Luksuzni",
@@ -917,7 +1022,12 @@
       "Kupatilo",
       "Kuhinja",
       "Dnevna soba",
-      "Hodnik"
+      "Hodnik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Klasicni",
@@ -958,7 +1068,12 @@
       "Kupatilo",
       "Hodnik",
       "Ured",
-      "Dnevna soba"
+      "Dnevna soba",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Industrijski",
@@ -999,7 +1114,12 @@
       "Kupatilo",
       "Kuhinja",
       "Dnevna soba",
-      "Hodnik"
+      "Hodnik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Klasicni",
@@ -1040,7 +1160,12 @@
       "Kupatilo",
       "Dnevna soba",
       "Hodnik",
-      "Kuhinja"
+      "Kuhinja",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Mediteranski",
@@ -1081,7 +1206,12 @@
       "Kupatilo",
       "Bar i restoran",
       "Recepcija",
-      "Dnevna soba"
+      "Dnevna soba",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Luksuzni",
@@ -1122,7 +1252,12 @@
       "Kupatilo",
       "Recepcija",
       "Dnevna soba",
-      "Hotel"
+      "Hotel",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Luksuzni",
@@ -1163,7 +1298,12 @@
       "Kupatilo",
       "Dnevna soba",
       "Spa",
-      "Wellness"
+      "Wellness",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Prirodni",
@@ -1204,7 +1344,12 @@
       "Kupatilo",
       "Kuhinja",
       "Dnevna soba",
-      "Hodnik"
+      "Hodnik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Klasicni",
@@ -1233,7 +1378,14 @@
     "badge": null,
     "sku": "SW002",
     "inStock": false,
-    "featured": false
+    "featured": false,
+    "idealFor": [
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
+    ]
   },
   {
     "id": 113,
@@ -1263,7 +1415,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Restoran",
-      "Bar"
+      "Bar",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Luksuzan",
@@ -1324,7 +1481,12 @@
       "Kupatilo",
       "Kuhinja",
       "Hodnik",
-      "Kafić"
+      "Kafić",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Mediteranski",
@@ -1385,7 +1547,12 @@
       "Spavaća soba",
       "Kupatilo",
       "Spa",
-      "Dnevna soba"
+      "Dnevna soba",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Skandinavski",
@@ -1445,7 +1612,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Hodnik",
-      "Cijeli stan"
+      "Cijeli stan",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Minimalistički",
@@ -1761,7 +1933,12 @@
       "Dnevna soba",
       "Ured",
       "Hodnik",
-      "Recepcija"
+      "Recepcija",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Industrijski",
@@ -1802,7 +1979,12 @@
       "Dnevna soba",
       "Spavaća soba",
       "Restoran",
-      "Recepcija"
+      "Recepcija",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Glamur",
@@ -1843,7 +2025,12 @@
       "Dnevna soba",
       "Ured",
       "Bar i restoran",
-      "Hodnik"
+      "Hodnik",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Industrijski",
@@ -1884,7 +2071,12 @@
       "Spavaća soba",
       "Restoran",
       "Cafe",
-      "Studija"
+      "Studija",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
     ],
     "styleMatch": [
       "Vintage",
