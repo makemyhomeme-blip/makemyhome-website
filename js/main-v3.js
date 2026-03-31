@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', function () {
         <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
       </div>
       <a href="index.html" class="nav-link">Početna</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
+      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
+      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     `;
 
@@ -66,10 +66,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const catLabels = {
-      'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni',
+      'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni',
       'bambus-mermerni':'Mermerni','bambus-metalni':'Metalni','bambus-kozni':'Kožni',
-      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
-      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic'
+      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
+      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic'
     };
 
     const searchInput = navMenu.querySelector('#mob-search-input');
@@ -172,8 +172,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const dCatLabels = {
       'bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni','bambus-mermerni':'Mermerni',
       'bambus-metalni':'Metalni','bambus-kozni':'Kožni','classic':'Classic',
-      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
-      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen'
+      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
+      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen'
     };
 
     function openPanel() {
