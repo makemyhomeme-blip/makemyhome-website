@@ -124,27 +124,9 @@ async function initProductsPage() {
   const params = new URLSearchParams(window.location.search);
   const cat = params.get('cat') || params.get('category');
 
-  // Immediately update UI before fetch so user sees correct title/state instantly
+  // Clear subtitle (title/grid already handled by inline script in HTML)
   if (cat) {
-    const quickNames = {
-      'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni Paneli',
-      'bambus-tekstilni':'Tekstilni Paneli','bambus-mermerni':'Mermerni Paneli',
-      'bambus-metalni':'Metalni Paneli','bambus-kozni':'Kožni Paneli',
-      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični Paneli',
-      'aluminijum-lajsne':'Aluminijum Lajsne','spc-pod':'SPC Pod',
-      'pu-kamen':'PU Kamen','classic':'Classic Paneli'
-    };
-    const qn = quickNames[cat] || cat;
-    const pt = document.getElementById('page-title');   if (pt) pt.textContent = qn;
-    const bl = document.getElementById('breadcrumb-label'); if (bl) bl.textContent = qn;
     const ps = document.getElementById('page-subtitle'); if (ps) ps.textContent = '';
-    // Hide category skeleton, show product loading skeleton
-    const cg = document.getElementById('category-grid'); if (cg) cg.style.display = 'none';
-    const pc = document.getElementById('products-container');
-    if (pc) {
-      pc.style.display = 'grid';
-      pc.innerHTML = [1,2,3,4,5,6].map(()=>`<div class="loading-placeholder" style="height:360px;border-radius:16px;"></div>`).join('');
-    }
   }
 
   await loadData();
