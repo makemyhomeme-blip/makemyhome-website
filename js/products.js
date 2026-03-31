@@ -383,21 +383,86 @@ async function renderProductDetail() {
   // Gallery
   const galleryMain = document.getElementById('gallery-main');
   const galleryThumbs = document.getElementById('gallery-thumbs');
-  if (galleryMain) {
-    galleryMain.innerHTML = `
-      <img id="gallery-main-img" src="${product.image}" alt="${product.name}"
-        onclick="openImageLightbox(this.src, '${product.name}')"
-        style="cursor:zoom-in;"
-        onerror="this.style.display='none'">
-    `;
+
+  // Build image list
+  const _galleryImages = [{ src: product.image, label: 'Proizvod' }];
+  if (product.roomImage) _galleryImages.push({ src: product.roomImage, label: 'U prostoru' });
+  (product.gallery || []).forEach((src, i) => _galleryImages.push({ src, label: 'Slika ' + (i + 1) }));
+  let _galleryIndex = 0;
+  const multi = _galleryImages.length > 1;
+
+  function _goToGallery(idx) {
+    _galleryIndex = (idx + _galleryImages.length) % _galleryImages.length;
+    const img = document.getElementById('gallery-main-img');
+    if (img) {
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = _galleryImages[_galleryIndex].src;
+        img.onclick = () => openImageLightbox(img.src, product.name);
+        img.style.opacity = '1';
+      }, 120);
+    }
+    // Update thumbs
+    document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+      t.classList.toggle('active', i === _galleryIndex);
+    });
+    // Update dots
+    document.querySelectorAll('.gallery-dot').forEach((d, i) => {
+      d.style.background = i === _galleryIndex ? '#c9a86c' : 'rgba(255,255,255,0.35)';
+      d.style.transform = i === _galleryIndex ? 'scale(1.25)' : 'scale(1)';
+    });
   }
+
+  if (galleryMain) {
+    const btnStyle = `position:absolute;top:50%;transform:translateY(-50%);
+      width:38px;height:38px;border-radius:50%;background:rgba(20,18,15,0.65);
+      border:1.5px solid rgba(201,168,108,0.5);color:#c9a86c;font-size:20px;
+      cursor:pointer;display:${multi ? 'flex' : 'none'};align-items:center;
+      justify-content:center;z-index:10;transition:background .2s;`;
+    const dotWrap = multi ? `
+      <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+        display:flex;gap:7px;z-index:10;">
+        ${_galleryImages.map((_, i) => `<span class="gallery-dot" style="
+          display:block;width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all .2s;
+          background:${i === 0 ? '#c9a86c' : 'rgba(255,255,255,0.35)'};
+          transform:${i === 0 ? 'scale(1.25)' : 'scale(1)'};"
+          onclick="_goToGallery(${i})"></span>`).join('')}
+      </div>` : '';
+    galleryMain.innerHTML = `
+      <div style="position:relative;width:100%;height:100%;">
+        <img id="gallery-main-img" src="${_galleryImages[0].src}" alt="${product.name}"
+          onclick="openImageLightbox(this.src, '${product.name}')"
+          style="cursor:zoom-in;transition:opacity .12s ease;width:100%;height:100%;object-fit:cover;border-radius:16px;"
+          onerror="this.style.display='none'">
+        <button id="gallery-prev" style="${btnStyle}left:10px;"
+          onmouseenter="this.style.background='rgba(201,168,108,0.25)'"
+          onmouseleave="this.style.background='rgba(20,18,15,0.65)'"
+          onclick="_goToGallery(_galleryIndex - 1)" aria-label="Prethodna slika">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="gallery-next" style="${btnStyle}right:10px;"
+          onmouseenter="this.style.background='rgba(201,168,108,0.25)'"
+          onmouseleave="this.style.background='rgba(20,18,15,0.65)'"
+          onclick="_goToGallery(_galleryIndex + 1)" aria-label="Sljedeća slika">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        ${dotWrap}
+      </div>`;
+
+    // Touch/swipe support
+    let _tx = 0;
+    const mImg = galleryMain;
+    mImg.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
+    mImg.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - _tx;
+      if (Math.abs(dx) > 40) _goToGallery(_galleryIndex + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
   if (galleryThumbs) {
-    const images = [{ src: product.image, label: 'Proizvod' }];
-    if (product.roomImage) images.push({ src: product.roomImage, label: 'U prostoru' });
-    (product.gallery || []).forEach((src, i) => images.push({ src, label: 'Slika ' + (i + 1) }));
-    if (images.length > 1) {
-      galleryThumbs.innerHTML = images.map((img, i) => `
-        <div class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="switchGalleryImg(this, '${img.src}')">
+    if (multi) {
+      galleryThumbs.innerHTML = _galleryImages.map((img, i) => `
+        <div class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="_goToGallery(${i})">
           <img src="${img.src}" alt="${img.label}">
         </div>`).join('');
       galleryThumbs.style.display = 'flex';
@@ -1210,9 +1275,9 @@ async function renderProductDetail() {
 }
 
 function switchGalleryImg(thumb, src) {
+  // Legacy fallback — thumbs now use _goToGallery(index) directly
   const img = document.getElementById('gallery-main-img');
-  img.src = src;
-  img.onclick = () => openImageLightbox(src, img.alt);
+  if (img) { img.src = src; img.onclick = () => openImageLightbox(src, img.alt); }
   document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
   thumb.classList.add('active');
 }
