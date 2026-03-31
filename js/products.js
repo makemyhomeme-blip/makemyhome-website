@@ -384,10 +384,11 @@ async function renderProductDetail() {
   const galleryMain = document.getElementById('gallery-main');
   const galleryThumbs = document.getElementById('gallery-thumbs');
 
-  // Build image list
+  // Build image list — expose globally so lightbox can navigate
   const _galleryImages = [{ src: product.image, label: 'Proizvod' }];
   if (product.roomImage) _galleryImages.push({ src: product.roomImage, label: 'U prostoru' });
   (product.gallery || []).forEach((src, i) => _galleryImages.push({ src, label: 'Slika ' + (i + 1) }));
+  window._lbImages = _galleryImages;
   let _galleryIndex = 0;
   const multi = _galleryImages.length > 1;
 
@@ -1273,69 +1274,125 @@ function switchGalleryImg(thumb, src) {
 }
 
 function openImageLightbox(src, name) {
-  const lb = document.createElement('div');
-  lb.id = 'img-lightbox';
-  lb.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;`;
+  const images = (window._lbImages && window._lbImages.length > 0)
+    ? window._lbImages
+    : [{ src, label: name }];
+  let lbIdx = Math.max(0, images.findIndex(i => i.src === src));
+  const multi = images.length > 1;
 
-  const btnClose = `<button onclick="document.getElementById('img-lightbox').remove()"
-    style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);
-    color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;">
-    <i class="fas fa-times"></i> Zatvori
-  </button>`;
-
-  // Try Web Share API (native share sheet → user picks "Save to Photos")
   const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
   const canShare = isMobile && navigator.canShare;
 
-  const saveBtn = canShare
-    ? `<button id="lb-save-btn"
-        style="display:inline-flex;align-items:center;gap:8px;background:#c9a86c;color:#fff;
-        padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;cursor:pointer;">
-        <i class="fas fa-image"></i> Sačuvaj u Galeriju
-      </button>`
-    : `<a href="${src}" download="${name.replace(/\s+/g,'-')}.jpg"
-        style="display:inline-flex;align-items:center;gap:8px;background:#c9a86c;color:#fff;
-        padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;">
-        <i class="fas fa-download"></i> Preuzmi sliku
-      </a>`;
+  // Build lightbox
+  const lb = document.createElement('div');
+  lb.id = 'img-lightbox';
+  lb.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:99999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;`;
 
-  lb.innerHTML = `
-    <div style="max-width:95vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:14px;">
-      <img src="${src}" alt="${name}"
-        style="max-width:100%;max-height:78vh;object-fit:contain;border-radius:8px;box-shadow:0 0 60px rgba(0,0,0,0.6);">
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        ${saveBtn}
-        ${btnClose}
-      </div>
-      <span style="font-size:12px;color:rgba(255,255,255,0.35);">Tapni van slike ili pritisni ESC za zatvaranje</span>
-    </div>
-  `;
+  function navBtnHtml(dir) {
+    if (!multi) return '';
+    return `<button id="lb-${dir}" style="
+      position:absolute;top:50%;transform:translateY(-50%);${dir === 'prev' ? 'left:16px' : 'right:16px'};
+      width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.12);
+      border:1.5px solid rgba(255,255,255,0.25);color:#fff;font-size:20px;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;">
+      <i class="fas fa-chevron-${dir === 'prev' ? 'left' : 'right'}"></i>
+    </button>`;
+  }
 
-  lb.addEventListener('click', e => { if (e.target === lb) lb.remove(); });
-  document.addEventListener('keydown', function esc(e) {
-    if (e.key === 'Escape') { lb.remove(); document.removeEventListener('keydown', esc); }
-  });
+  function dotHtml() {
+    if (!multi) return '';
+    return `<div id="lb-dots" style="display:flex;gap:7px;justify-content:center;margin-top:10px;">
+      ${images.map((_, i) => `<span class="lb-dot" style="
+        display:block;width:7px;height:7px;border-radius:50%;transition:all .2s;
+        background:${i === lbIdx ? '#c9a86c' : 'rgba(255,255,255,0.3)'};
+        transform:${i === lbIdx ? 'scale(1.3)' : 'scale(1)'};"
+      ></span>`).join('')}
+    </div>`;
+  }
+
+  function saveBtnHtml(s, n) {
+    return canShare
+      ? `<button id="lb-save-btn" style="display:inline-flex;align-items:center;gap:8px;background:#c9a86c;
+          color:#fff;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;">
+          <i class="fas fa-image"></i> Sačuvaj</button>`
+      : `<a href="${s}" download="${n.replace(/\s+/g,'-')}.jpg" style="display:inline-flex;align-items:center;
+          gap:8px;background:#c9a86c;color:#fff;padding:9px 18px;border-radius:8px;font-size:13px;
+          font-weight:600;text-decoration:none;"><i class="fas fa-download"></i> Preuzmi</a>`;
+  }
+
+  function renderLb() {
+    const cur = images[lbIdx];
+    lb.innerHTML = `
+      <div style="position:relative;width:100%;height:100%;display:flex;flex-direction:column;
+          align-items:center;justify-content:center;padding:20px;box-sizing:border-box;">
+        <img id="lb-img" src="${cur.src}" alt="${cur.label}"
+          style="max-width:min(95vw,900px);max-height:75vh;object-fit:contain;border-radius:8px;
+          box-shadow:0 0 60px rgba(0,0,0,0.6);display:block;">
+        ${navBtnHtml('prev')}
+        ${navBtnHtml('next')}
+        ${dotHtml()}
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;">
+          ${saveBtnHtml(cur.src, name)}
+          <button id="lb-close" style="display:inline-flex;align-items:center;gap:8px;
+            background:rgba(255,255,255,0.15);color:#fff;padding:9px 18px;border-radius:8px;
+            font-size:13px;font-weight:600;border:none;cursor:pointer;">
+            <i class="fas fa-times"></i> Zatvori</button>
+        </div>
+        <span style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:8px;">
+          ${multi ? `${lbIdx + 1} / ${images.length} · ` : ''}ESC za zatvaranje</span>
+      </div>`;
+    wireButtons();
+  }
+
+  function goLb(delta) {
+    lbIdx = (lbIdx + delta + images.length) % images.length;
+    // Update image with fade
+    const img = document.getElementById('lb-img');
+    if (img) { img.style.opacity = '0'; setTimeout(() => { renderLb(); }, 100); }
+    else renderLb();
+  }
+
+  function wireButtons() {
+    document.getElementById('lb-close')?.addEventListener('click', () => lb.remove());
+    document.getElementById('lb-prev')?.addEventListener('click', () => goLb(-1));
+    document.getElementById('lb-next')?.addEventListener('click', () => goLb(1));
+    lb.addEventListener('click', e => { if (e.target === lb) lb.remove(); }, { once: true });
+
+    // Attach save handler
+    if (canShare) {
+      document.getElementById('lb-save-btn')?.addEventListener('click', async () => {
+        const cur = images[lbIdx];
+        try {
+          const res = await fetch(cur.src);
+          const blob = await res.blob();
+          const file = new File([blob], `${name.replace(/\s+/g,'-')}.jpg`, { type: blob.type });
+          if (navigator.canShare({ files: [file] })) await navigator.share({ files: [file], title: name });
+          else window.open(cur.src, '_blank');
+        } catch { window.open(cur.src, '_blank'); }
+      });
+    }
+  }
+
+  renderLb();
   document.body.appendChild(lb);
 
-  // Attach Web Share handler after DOM insert
-  if (canShare) {
-    document.getElementById('lb-save-btn').addEventListener('click', async () => {
-      try {
-        const res = await fetch(src);
-        const blob = await res.blob();
-        const file = new File([blob], `${name.replace(/\s+/g,'-')}.jpg`, { type: blob.type });
-        if (navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: name });
-        } else {
-          // Fallback: open in new tab so user can long-press → Save
-          window.open(src, '_blank');
-        }
-      } catch {
-        window.open(src, '_blank');
-      }
-    });
+  // Keyboard: arrows + ESC
+  function onKey(e) {
+    if (!document.getElementById('img-lightbox')) { document.removeEventListener('keydown', onKey); return; }
+    if (e.key === 'Escape')      { lb.remove(); document.removeEventListener('keydown', onKey); }
+    if (e.key === 'ArrowLeft')   goLb(-1);
+    if (e.key === 'ArrowRight')  goLb(1);
   }
+  document.addEventListener('keydown', onKey);
+
+  // Swipe (mobile)
+  let _lbTx = 0;
+  lb.addEventListener('touchstart', e => { _lbTx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - _lbTx;
+    if (Math.abs(dx) > 40) goLb(dx < 0 ? 1 : -1);
+  }, { passive: true });
 }
 
 function changeQty(delta) {
