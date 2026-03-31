@@ -1056,22 +1056,48 @@ async function renderProductDetail() {
         </button>
         <div class="spec-body open">
           <ul class="spec-feature-list">
-            ${product.features.map(f => {
+            ${(() => {
               const protMap = [
-                { k: 'Vodootporan',          icon: 'fa-droplet',        color: '#1a7abf' },
-                { k: 'Otporan na buđ',       icon: 'fa-shield-halved',  color: '#2e9e6b' },
-                { k: 'Vatrootporan',         icon: 'fa-fire-flame-curved', color: '#d4620a' },
-                { k: 'Otporan na prljavštinu', icon: 'fa-hand-sparkles', color: '#7b5ea7' },
+                { k: 'Vodootporan',            icon: 'fa-droplet',           color: '#1a7abf' },
+                { k: 'Otporan na buđ',         icon: 'fa-shield-halved',     color: '#2e9e6b' },
+                { k: 'Vatrootporan',           icon: 'fa-fire-flame-curved', color: '#d4620a' },
+                { k: 'Otporan na prljavštinu', icon: 'fa-hand-sparkles',     color: '#7b5ea7' },
               ];
-              const prot = protMap.find(p => f.startsWith(p.k));
-              if (prot) {
-                return `<li style="background:${prot.color}14;border:1px solid ${prot.color}33;border-radius:8px;padding:8px 12px;margin-bottom:4px;">
-                  <i class="fas ${prot.icon}" style="color:${prot.color};"></i>
-                  <strong style="color:${prot.color}dd;">${f}</strong>
-                </li>`;
+              // Group: lines starting with lowercase are continuations of the line above
+              const groups = [];
+              for (const f of product.features) {
+                if (f.startsWith('Šifra:')) continue;
+                const isContd = /^[a-zšđčćžа-я]/.test(f);
+                if (isContd && groups.length > 0) {
+                  groups[groups.length - 1].cont.push(f);
+                } else {
+                  groups.push({ main: f, cont: [] });
+                }
               }
-              return `<li><i class="fas fa-check"></i>${f}</li>`;
-            }).join('')}
+              return groups.map(({ main, cont }) => {
+                const prot = protMap.find(p => main.startsWith(p.k));
+                if (prot) {
+                  return `<li style="background:${prot.color}14;border:1px solid ${prot.color}33;border-radius:8px;padding:8px 12px;margin-bottom:4px;">
+                    <i class="fas ${prot.icon}" style="color:${prot.color};"></i>
+                    <strong style="color:${prot.color}dd;">${main}</strong>
+                  </li>`;
+                }
+                // Continuation lines: short (≤4 words each) → tag chips; otherwise join with " – "
+                let extra = '';
+                if (cont.length > 0) {
+                  const allShort = cont.every(c => c.trim().split(/\s+/).length <= 4);
+                  if (allShort) {
+                    extra = `<span style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;">
+                      ${cont.map(c => `<span style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.3);
+                        color:rgba(255,255,255,0.75);border-radius:20px;padding:3px 10px;font-size:12px;">${c}</span>`).join('')}
+                    </span>`;
+                  } else {
+                    extra = `<span style="color:rgba(255,255,255,0.55);"> – ${cont.join(' – ')}</span>`;
+                  }
+                }
+                return `<li><i class="fas fa-check"></i>${main}${extra}</li>`;
+              }).join('');
+            })()}
           </ul>
         </div>
       </div>
