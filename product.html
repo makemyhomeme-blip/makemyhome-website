@@ -42,21 +42,15 @@
         <span class="tagline">Dekorativni Bambus Paneli</span>
       </div>
     </a>
-    <div id="desk-search-wrap" style="position:relative;display:flex;align-items:center;margin-left:auto;margin-right:6px;flex-shrink:0;">
-      <button id="desk-search-btn" aria-label="Pretraži" title="Pretraži"
-        style="width:36px;height:36px;border-radius:50%;background:rgba(201,168,108,0.15);border:1.5px solid rgba(201,168,108,0.45);color:#c9a86c;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;"
-        onmouseenter="this.style.background='rgba(201,168,108,0.32)'" onmouseleave="this.style.background='rgba(201,168,108,0.15)'">
-        <i class="fas fa-search"></i>
-      </button>
-      <div id="desk-search-panel" style="display:none;position:fixed;top:76px;z-index:99999;width:300px;">
-        <div style="position:relative;background:#1a1814;border:1.5px solid rgba(201,168,108,0.5);border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,0.6);">
-          <i class="fas fa-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:13px;pointer-events:none;"></i>
-          <input id="desk-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:11px 38px 11px 38px;border:none;border-radius:24px;background:transparent;color:#fff;font-size:14px;font-family:inherit;outline:none;-webkit-appearance:none;">
-          <button id="desk-search-close" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:15px;padding:2px 6px;line-height:1;">✕</button>
-        </div>
-        <div id="desk-search-results" style="display:none;margin-top:6px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);"></div>
+    <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
+      <div style="position:relative;">
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off"
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
       </div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
     </div>
 
     <nav id="nav-menu" class="nav-menu">

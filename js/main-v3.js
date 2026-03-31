@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', function () {
         <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
       </div>
       <a href="index.html" class="nav-link">Početna</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
+      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
+      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     `;
 
@@ -66,10 +66,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const catLabels = {
-      'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni',
+      'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni',
       'bambus-mermerni':'Mermerni','bambus-metalni':'Metalni','bambus-kozni':'Kožni',
-      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
-      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic'
+      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
+      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic'
     };
 
     const searchInput = navMenu.querySelector('#mob-search-input');
@@ -148,18 +148,9 @@ document.addEventListener('DOMContentLoaded', function () {
     navResponsive.textContent = '@media(max-width:768px){#desk-search-wrap{display:none!important;}}@media(min-width:769px){#mob-search-box{display:none!important;}}';
     document.head.appendChild(navResponsive);
 
-    // Pozicioniraj panel ispod dugmeta
-    function positionPanel() {
-      const rect = wrap.getBoundingClientRect();
-      const panel = document.getElementById('desk-search-panel');
-      if (panel) { panel.style.left = rect.left + 'px'; }
-    }
-
-    const btn    = document.getElementById('desk-search-btn');
-    const panel  = document.getElementById('desk-search-panel');
     const input  = document.getElementById('desk-search-input');
-    const close  = document.getElementById('desk-search-close');
     const resBox = document.getElementById('desk-search-results');
+    if (!input || !resBox) return;
 
     let _prods = null;
     async function loadProds() {
@@ -170,31 +161,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const dCatLabels = {
-      'bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni','bambus-mermerni':'Mermerni',
-      'bambus-metalni':'Metalni','bambus-kozni':'Kožni','classic':'Classic',
-      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
-      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen'
+      'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni','bambus-tekstilni':'Tekstilni',
+      'bambus-mermerni':'Mermerni','bambus-metalni':'Metalni','bambus-kozni':'Kožni',
+      '3d-letvice':'3D Letvice','akusticni-paneli':'Akustični','aluminijum-lajsne':'Lajsne',
+      'spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic'
     };
 
-    function openPanel() {
-      positionPanel();
-      panel.style.display = 'block';
-      btn.style.display = 'none';
-      setTimeout(() => input.focus(), 50);
-      loadProds();
-    }
-    function closePanel() {
-      panel.style.display = 'none';
-      btn.style.display = 'flex';
-      input.value = '';
+    function closeResults() {
       resBox.style.display = 'none';
       resBox.innerHTML = '';
+      input.value = '';
     }
 
-    btn.addEventListener('click', openPanel);
-    close.addEventListener('click', closePanel);
-
-    input.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+    input.addEventListener('focus', () => loadProds());
+    input.addEventListener('keydown', e => { if (e.key === 'Escape') closeResults(); });
 
     input.addEventListener('input', async () => {
       const q = input.value.trim().toLowerCase();
@@ -211,12 +191,15 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       resBox.innerHTML = hits.map(p => {
-        const label = dCatLabels[p.category] || p.category;
+        const cat = p.category || '';
+        const baseCat = cat.replace('bambus-','');
+        const catPage = ['drveni','tekstilni','mermerni','metalni','kozni'].includes(baseCat)
+          ? 'bambus-paneli' : cat;
+        const label = dCatLabels[cat] || cat;
         const thumb = p.image ? `<img src="${p.image}" style="width:36px;height:36px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
-        return `<a href="product.html?id=${p.id}"
+        return `<a href="products.html?category=${encodeURIComponent(catPage)}"
           style="display:flex;align-items:center;gap:10px;padding:10px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .15s;"
-          onmouseenter="this.style.background='rgba(201,168,108,0.1)'" onmouseleave="this.style.background=''"
-          onclick="setTimeout(()=>{document.getElementById('desk-search-close').click()},50)">
+          onmouseenter="this.style.background='rgba(201,168,108,0.1)'" onmouseleave="this.style.background=''">
           ${thumb}
           <div style="flex:1;min-width:0;">
             <div style="color:#fff;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
@@ -232,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Zatvori kad klikneš van
     document.addEventListener('click', e => {
-      if (!wrap.contains(e.target)) closePanel();
+      if (!wrap.contains(e.target)) { resBox.style.display = 'none'; }
     });
   })();
 
@@ -336,4 +319,5 @@ function openLightbox(src) {
   overlay.addEventListener('click', () => overlay.remove());
   document.body.appendChild(overlay);
 }
+
 
