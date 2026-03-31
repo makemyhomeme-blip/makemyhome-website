@@ -23,10 +23,11 @@ const CATEGORY_ORDER = [
 
 // ===== UČITAJ PODATKE SA SERVERA =====
 async function loadData() {
+  if (allProducts.length > 0) return; // already loaded, use cache
   try {
     const [prodRes, catRes] = await Promise.all([
-      fetch('data/products.json?v=' + Date.now()),
-      fetch('data/categories.json?v=' + Date.now())
+      fetch('data/products.json?v=5'),
+      fetch('data/categories.json?v=5')
     ]);
     allProducts = await prodRes.json();
     allCategories = await catRes.json();
