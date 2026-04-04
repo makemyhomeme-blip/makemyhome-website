@@ -604,7 +604,7 @@ ul { list-style: none; }
 
 .product-card:hover .product-img img { transform: scale(1.05); }
 
-.out-of-stock .product-img img { filter: grayscale(50%) brightness(0.8); }
+.out-of-stock .product-img img { }
 .oos-tag {
   position: absolute;
   top: 14px;
