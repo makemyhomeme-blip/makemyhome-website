@@ -507,6 +507,15 @@ async function renderProductDetail() {
     return null;
   })() : null;
 
+  // MDF panel dimensions from features (e.g. "Dimenzije: 290×120cm")
+  const mdfDims = product.category === 'mdf' ? (() => {
+    for (const f of (product.features || [])) {
+      const m = f.match(/(\d+)\s*[×x]\s*(\d+)\s*cm/i);
+      if (m) return { w: parseInt(m[1]), h: parseInt(m[2]) };
+    }
+    return null;
+  })() : null;
+
   // SPC floor plank/tile dimensions from features (e.g. "Dimenzije: 122 × 18 cm")
   const spcDims = product.category === 'spc-pod' ? (() => {
     for (const f of (product.features || [])) {
@@ -919,6 +928,27 @@ async function renderProductDetail() {
     125: { total: 11, fiveS: 10, fourS: 1, comments: [
       { name: 'Igor S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Sivi Talas XL u kućnom uredu – svaki video poziv izgleda profesionalno. Kolege pitaju da li sam uzeo novi ured. Hladan sivi kamen uz bijeli stol i crne detalje je savršena kombinacija za moderan radni prostor.' },
       { name: 'Vesna Đ.', city: 'Cetinje', date: 'Februar 2026', stars: 5, text: 'Renovirali smo spa centar sivim Talasom. Klijentice kažu da su zidovi koji "dišu hladnoćom" dio iskustva relaksacije. Recenzije su nam porasle od renovacije. Naručujem još za novu prostoriju.' }
+    ]},
+    // ── MDF Paneli ──
+    126: { total: 13, fiveS: 11, fourS: 2, comments: [
+      { name: 'Nikola R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bijeli kaneliran MDF panel je transformisao moju dnevnu sobu. Ugradio sam ga sam za jedan dan, a rezultat izgleda kao da je radio profesionalni dizajner. Svaki posjetilac misli da sam platio puno više nego što sam zapravo dao.' },
+      { name: 'Tijana B.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Tražila sam nešto čisto i moderno za zid iza kreveta. Bijeli kaneliran panel je savršen – žljebovi bacaju lijepe sjene, a bijela boja čini sobu prostornijom. Montaža je bila jednostavna uz dobre upute.' }
+    ]},
+    127: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Marija K.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Topla boja ovog MDF panela savršeno se uklapa uz parket i drveni namještaj. Dnevna soba je dobila topao, elegantan karakter koji nisam mogla postići nijedno bojom. Preporučujem svima koji žele prirodan izgled.' },
+      { name: 'Dejan M.', city: 'Nikšić', date: 'Januar 2026', stars: 5, text: 'Renovirali smo hodnik u stambenom objektu toplo kaneliranim panelom. Stanari kažu da je ulaz dobio karakter koji ranije nije imao. Panel je lako održavan i izgleda odlično i nakon nekoliko mjeseci.' }
+    ]},
+    128: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Stefan J.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamni kaneliran panel u kućnom bioskopu je bio pravi pogodak. Mat tamna površina apsorbuje odbijenu svjetlost, a tekstura žljebova daje dubinu zidu. Gosti uvijek komentarišu kako je prostorija filmski uređena.' },
+      { name: 'Aleksandra P.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Za restoran koji otvaramo birala sam tamne materijale koji daju luksuzni izgled bez prevelikog budžeta. Ovaj panel je bio idealan izbor – elegancija koja impresionira goste, a cijena pristupačna.' }
+    ]},
+    140: { total: 10, fiveS: 9, fourS: 1, comments: [
+      { name: 'Bojan T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Deblji MDF panel daje zidu pravi volumen – žljebovi su dublji i sjene dramatičnije. Odabrao sam ga za recepciju firme i efekat je bio odmah vidljiv. Klijenti primjećuju i komentarišu već pri ulasku.' },
+      { name: 'Ivana S.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Solidni deblji panel mi se svidio zbog čvrstine i punoće. Zid zvuči drugačije kada ga dodirnete – nema one plastičnosti. Ugradila sam ga u apartman koji iznajmljujem i gosti ga svaki put pohvale u recenzijama.' }
+    ]},
+    141: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Miroslav D.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Lagani tanji panel je bio idealan za moj projekt jer je brži za ugradnju i lakši za rezanje. Rezultat izgleda identično kao kod debljih modela, a uštedeo sam na radnoj snazi. Odlično za veće površine.' },
+      { name: 'Katarina N.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Ugrađivala sam MDF panel u više prostorija i odabrala tanji model za hodnik i kupatilo. Lagan, jednostavan za rad, a izgled je efektan. Već sam preporučila prijateljima koji renoviraju.' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
@@ -1057,6 +1087,11 @@ async function renderProductDetail() {
       <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
         <i class="fas fa-ruler-combined"></i>
         <span>Svaki panel: <strong>${puDims.w} × ${puDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
+      </div>` : ''}
+      ${mdfDims ? `
+      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+        <i class="fas fa-ruler-combined"></i>
+        <span>Svaki panel: <strong>${mdfDims.w} × ${mdfDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
       </div>` : ''}
       ${spcDims ? `
       <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
@@ -1313,6 +1348,17 @@ async function renderProductDetail() {
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
           <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${puDims.w}×${puDims.h}cm)<br>
+          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+        </div>`;
+    } else if (mdfDims) {
+      const areaWithBuffer = area * 1.05;
+      const total = Math.ceil(areaWithBuffer / coveragePerUnit);
+      const totalCost = (total * unitPrice).toFixed(2).replace('.', ',');
+      const label = total === 1 ? 'komad' : total < 5 ? 'komada' : 'komada';
+      res.innerHTML = `
+        <div style="line-height:1.7;">
+          Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
+          <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${mdfDims.w}×${mdfDims.h}cm)<br>
           <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
         </div>`;
     } else if (letvicaDims) {
