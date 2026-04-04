@@ -16,10 +16,11 @@
 @media(min-width:769px){
   .header-inner{flex-wrap:nowrap!important;}
   .logo{flex-shrink:0!important;}
-  .logo-text .name{white-space:nowrap!important;font-size:17px!important;}
-  .logo-text .tagline{white-space:nowrap!important;font-size:9.5px!important;}
-  .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;}
-  .nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 6px!important;}
+  .logo-text .name{white-space:nowrap!important;font-size:15px!important;}
+  .logo-text .tagline{white-space:nowrap!important;font-size:8.5px!important;}
+  .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;justify-content:flex-end!important;flex:1!important;}
+  .nav-link{white-space:nowrap!important;font-size:10.5px!important;padding:8px 4px!important;}
+  .nav-link.nav-cta{padding:7px 10px!important;margin-left:6px!important;}
   #desk-search-wrap{flex-shrink:0!important;min-width:36px;}
 }
 </style>
@@ -53,15 +54,17 @@
       <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
     </div>
 
-    <nav id="nav-menu" class="nav-menu">
+        <nav id="nav-menu" class="nav-menu">
       <a href="index.html" class="nav-link">Početna</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
+      <a href="products.html?category=mdf" class="nav-link">MDF</a>
+      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
+      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
+      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
 

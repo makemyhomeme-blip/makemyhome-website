@@ -21,9 +21,12 @@ const CATEGORY_ORDER = [
   'classic',
   'bambus-kozni',
   'bambus-metalni',
+  'mdf',
   '3d-letvice',
   'akusticni-paneli',
   'aluminijum-lajsne',
+  'pu-kamen',
+  'flex-stone',
   'spc-pod'
 ];
 
