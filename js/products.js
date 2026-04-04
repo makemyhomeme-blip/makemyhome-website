@@ -69,7 +69,7 @@ function renderProductCard(product, lazy = true) {
   const outOfStock = product.inStock === false;
 
   return `
-    <article class="product-card animate-on-scroll${outOfStock ? ' out-of-stock' : ''}" data-category="${product.category}" data-id="${product.id}" onclick="window.location='product.html?id=${product.id}'" style="cursor:pointer;">
+    <article class="product-card${outOfStock ? ' out-of-stock' : ''}" data-category="${product.category}" data-id="${product.id}" onclick="window.location='product.html?id=${product.id}'" style="cursor:pointer;">
       <div class="product-img">
         ${imgContent}
         ${badge}
@@ -221,7 +221,7 @@ function showSubcategoryGrid(parentCat) {
     const subProducts = allProducts.filter(p => p.category === sub.id);
     const firstImg = subProducts.find(p => p.image)?.image || '';
     return `
-      <a href="products.html?cat=${sub.id}" class="cat-card animate-on-scroll">
+      <a href="products.html?cat=${sub.id}" class="cat-card">
         <div class="cat-card-img">
           ${firstImg
             ? `<img src="${firstImg}" alt="${sub.name}" loading="lazy">`
@@ -261,7 +261,7 @@ function showCategoryGrid() {
   });
 
   grid.innerHTML = cats.map(cat => `
-    <a href="products.html?cat=${cat.id}" class="cat-card animate-on-scroll">
+    <a href="products.html?cat=${cat.id}" class="cat-card">
       <div class="cat-card-img">
         ${cat.firstImage
           ? `<img src="${cat.firstImage}" alt="${cat.name}" loading="lazy">`
@@ -354,7 +354,7 @@ async function renderCategories(containerId) {
                 --zoom:${zoom};"></div>`
       : `<span class="category-img-placeholder"><i class="${cat.icon}"></i></span>`;
     return `
-    <a href="products.html?cat=${cat.id}" class="category-card animate-on-scroll">
+    <a href="products.html?cat=${cat.id}" class="category-card">
       <div class="category-img" style="overflow:hidden;position:relative;">
         ${imgInner}
       </div>
