@@ -495,6 +495,15 @@ async function renderProductDetail() {
     : null;
   const coveragePerUnit = getCoveragePerUnit();
 
+  // PU Kamen panel dimensions from features
+  const puDims = product.category === 'pu-kamen' ? (() => {
+    for (const f of (product.features || [])) {
+      const m = f.match(/(\d+)\s*[×x]\s*(\d+)\s*cm/i);
+      if (m) return { w: parseInt(m[1]), h: parseInt(m[2]) };
+    }
+    return null;
+  })() : null;
+
   // SPC floor plank/tile dimensions from features (e.g. "Dimenzije: 122 × 18 cm")
   const spcDims = product.category === 'spc-pod' ? (() => {
     for (const f of (product.features || [])) {
@@ -873,6 +882,40 @@ async function renderProductDetail() {
     113: { total: 13, fiveS: 12, fourS: 1, comments: [
       { name: 'Marko Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Midnight Black je bio hrabar potez za spavaću sobu i nabolja odluka u životu. Mat crna uz bijelu posteljinu i zlatne lampe – svaki gost ostane bez daha. Prijatelji mi se smiju što sam to uradio ali odmah pitaju odakle haha.' },
       { name: 'Sonja K.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Kućni bioskop bez mat crnog zida nije pravi bioskop. Postavio Midnight Black i nema ni jedne refleksije. Brat bio toliko oduševljen da odmah naručio za svoju sobu. Preporučujem svima koji žele nešto dramatično.' }
+    ]},
+    // ── PU Stone Mushroom ──
+    118: { total: 14, fiveS: 12, fourS: 2, comments: [
+      { name: 'Maja S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Dugo sam tražila nešto što izgleda kao pravi bijeli kamen a da nije teško za montažu. Pronašla ovaj panel, naručila, postavila sama za sat i pol. Svaka komšinica koja dođe misli da sam gazila pravi kameni zid. Naručujem još za hodnik.' },
+      { name: 'Luka P.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Postavio u recepciji apartmana i odmah su gosti počeli da fotografišu. Na Booking.com su počeli da pominju "predivan kameni zid" u recenzijama. Vlasnik je bio skeptičan ali sada naručuje za sve apartmane.' }
+    ]},
+    119: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Ivana R.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Bež mushroom kamen sam stavila iza kreveta umjesto tapete i rezultat je magičan. Svako jutro se probudim i ne mogu vjerovati koliko je lijepo. Muž koji je bio protiv sad kaže da je to nabolja odluka u renovaciji.' },
+      { name: 'Nikola J.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Za kafić koji smo renovirali tražili smo nešto autentično ali praktično. Bež mushroom panel je bio tačno to. Gosti ga dodiruju i pitaju da li je pravi kamen. Preporučio sam Make My Home svim vlasnicima lokala koje znam.' }
+    ]},
+    120: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Tamara M.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Braon mushroom kamen u dnevnoj sobi – kombinacija sa zlatnim dodacima je kao iz nekog skupog hotela. Gosti pitaju da li smo angažovali dizajnera. Montirala sama, suprug nije mogao vjerovati kad je vidio rezultat.' },
+      { name: 'Dragan N.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Obložio stubove na terasi braon mushroom kamenom. Preživio je zimu i ljetnju kiše bez ijedne promjene. Svi koji prđu pitaju odakle materijal. Dugotrajan i lijep – preporučujem za spoljne zidove.' }
+    ]},
+    121: { total: 16, fiveS: 14, fourS: 2, comments: [
+      { name: 'Stefan V.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Crni mushroom panel za kućni bar je bio rizik koji se stostruko isplatio. Mat crna kamena tekstura uz pozadinsko osvjetljenje izgleda kao nešto iz Dubaija. Svaki gost odmah uzme telefon. Naručujem još za studio.' },
+      { name: 'Milena B.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Vidjela sam na Instagramu nečiji hodnik s crnim kamenom i tražila sedmicu gdje naći. Kad pronašla – naručila odmah. Hodnik je sad najdramatičniji dio stana, svi koji uđu odmah komentarišu. Nabolji utrošen novac ove godine.' }
+    ]},
+    // ── PU Stone Talas XL ──
+    122: { total: 12, fiveS: 11, fourS: 1, comments: [
+      { name: 'Ana Đ.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bijeli Talas XL je monumentalan. Jedan panel pokriva toliko da smo za cio zid dnevne sobe trebali samo 7 komada. Montaža brza, rezultat kao skupa kamena obloga. Svakom posjetiocu prvo pitanje je o tom zidu.' },
+      { name: 'Petar L.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Hotel koji renoviramo dobio je lobby koji izgleda kao petzvjezdičaski. Bijeli talas na zidu iza recepcije – gosti se fotografišu ispred. Investicija koja se odmah vidi i osjeća.' }
+    ]},
+    123: { total: 10, fiveS: 9, fourS: 1, comments: [
+      { name: 'Jelena K.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Bež Talas XL u trpezariji je pretvorio običan ručak u gastronomski doživljaj. Svi koji sjednu za sto automatski pogledaju zid. Muž koji je bio protiv sad poziva prijatelje da vide "naš kameni zid".' },
+      { name: 'Miloš T.', city: 'Kotor', date: 'Januar 2026', stars: 5, text: 'Za restoran koji vodim bež talas panel je bio idealan – toplo, prirodno, upečatljivo. Od renovacije gosti češće naručuju fotografije hrane uz ovaj zid u pozadini. Instagram nas je popunio rezervacijama.' }
+    ]},
+    124: { total: 8, fiveS: 7, fourS: 1, comments: [
+      { name: 'Bojan M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Khaki Talas je ta boja kamena koju nisi vidio svuda – niti siva niti smeđa, nešto između što odgovara svemu. Dnevna soba sada izgleda kao da je projektovana. Prijatelj arhitekta pitao me koji materijal koristim.' },
+      { name: 'Sandra P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Tražila sam nešto organsko za enterijer koji prati prirodu. Khaki Talas je idealan – uklapa se uz drvo, bambus i zelene biljke. Gosti uvijek komentarišu koliko je soba mirna i prirodna.' }
+    ]},
+    125: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Igor S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Sivi Talas XL u kućnom uredu – svaki video poziv izgleda profesionalno. Kolege pitaju da li sam uzeo novi ured. Hladan sivi kamen uz bijeli stol i crne detalje je savršena kombinacija za moderan radni prostor.' },
+      { name: 'Vesna Đ.', city: 'Cetinje', date: 'Februar 2026', stars: 5, text: 'Renovirali smo spa centar sivim Talasom. Klijentice kažu da su zidovi koji "dišu hladnoćom" dio iskustva relaksacije. Recenzije su nam porasle od renovacije. Naručujem još za novu prostoriju.' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
@@ -1006,6 +1049,11 @@ async function renderProductDetail() {
       <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
         <i class="fas fa-ruler-horizontal"></i>
         <span>Svaka letvica: <strong>280cm visina × ${letvicaDims.w}cm širina</strong> → 1 letvica = ${coveragePerUnit.toFixed(2).replace('.', ',')} m²</span>
+      </div>` : ''}
+      ${puDims ? `
+      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+        <i class="fas fa-ruler-combined"></i>
+        <span>Svaki panel: <strong>${puDims.w} × ${puDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
       </div>` : ''}
       ${spcDims ? `
       <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
@@ -1253,7 +1301,18 @@ async function renderProductDetail() {
     const count = Math.ceil(area / coveragePerUnit);
     const totalPrice = (count * unitPrice).toFixed(2).replace('.', ',');
 
-    if (letvicaDims) {
+    if (puDims) {
+      const areaWithBuffer = area * 1.05;
+      const total = Math.ceil(areaWithBuffer / coveragePerUnit);
+      const totalCost = (total * unitPrice).toFixed(2).replace('.', ',');
+      const label = total === 1 ? 'komad' : total < 5 ? 'komada' : 'komada';
+      res.innerHTML = `
+        <div style="line-height:1.7;">
+          Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
+          <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${puDims.w}×${puDims.h}cm)<br>
+          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+        </div>`;
+    } else if (letvicaDims) {
       const total = Math.ceil(area / coveragePerUnit);
       const totalCost = (total * unitPrice).toFixed(2).replace('.', ',');
       const label = total === 1 ? 'letvica' : total < 5 ? 'letvice' : 'letvica';
