@@ -34,13 +34,13 @@
 <style id="nav-fix">
 @media(min-width:769px){
   .header-inner{flex-wrap:nowrap!important;}
-  .logo{flex-shrink:0!important;margin-right:16px!important;}
+  .logo{flex-shrink:0!important;margin-right:20px!important;}
   .logo-text .name{white-space:nowrap!important;font-size:15px!important;}
   .logo-text .tagline{white-space:nowrap!important;font-size:8.5px!important;}
-  .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;flex:1!important;}
+  .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;margin-left:auto!important;}
   .nav-link{white-space:nowrap!important;font-size:10.5px!important;padding:8px 4px!important;}
   .nav-link.nav-cta{padding:7px 10px!important;margin-left:4px!important;}
-  #desk-search-wrap{flex-shrink:0!important;margin-left:8px!important;}
+  #desk-search-wrap{flex-shrink:0!important;}
 }
 </style>
 </head>
@@ -62,6 +62,18 @@
         <span class="tagline">Dekorativni Bambus Paneli</span>
       </div>
     </a>
+
+    <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
+      <div style="position:relative;">
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off"
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+      </div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
+    </div>
+
         <nav id="nav-menu" class="nav-menu">
       <a href="index.html" class="nav-link">Početna</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
@@ -75,18 +87,6 @@
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
-
-    <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
-      <div style="position:relative;">
-        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
-        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off"
-          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
-          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
-          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
-      </div>
-      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
-    </div>
-
     <button id="hamburger" class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
