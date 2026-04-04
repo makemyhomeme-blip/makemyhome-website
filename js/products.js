@@ -930,25 +930,25 @@ async function renderProductDetail() {
       { name: 'Vesna Đ.', city: 'Cetinje', date: 'Februar 2026', stars: 5, text: 'Renovirali smo spa centar sivim Talasom. Klijentice kažu da su zidovi koji "dišu hladnoćom" dio iskustva relaksacije. Recenzije su nam porasle od renovacije. Naručujem još za novu prostoriju.' }
     ]},
     // ── MDF Paneli ──
-    126: { total: 13, fiveS: 11, fourS: 2, comments: [
-      { name: 'Nikola R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bijeli kaneliran MDF panel je transformisao moju dnevnu sobu. Ugradio sam ga sam za jedan dan, a rezultat izgleda kao da je radio profesionalni dizajner. Svaki posjetilac misli da sam platio puno više nego što sam zapravo dao.' },
-      { name: 'Tijana B.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Tražila sam nešto čisto i moderno za zid iza kreveta. Bijeli kaneliran panel je savršen – žljebovi bacaju lijepe sjene, a bijela boja čini sobu prostornijom. Montaža je bila jednostavna uz dobre upute.' }
+    126: { total: 14, fiveS: 12, fourS: 2, comments: [
+      { name: 'Nikola R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Iskreno nisam očekivao ovako dobar rezultat. Uzeo sam bijeli panel za zid iza TV-a, sam sam ga montirao vikendom i ispalo je odlično. Žena me pitala jesam li uzeo majstora – rekao sam da sam ga sam uradio i nije mi povjerovala haha. Medijapan se odlično sječe, ništa nije pucalo.' },
+      { name: 'Tijana B.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Stavila sam ga iza kreveta umjesto tapete i razlika je nevjerovatna. Bijela boja i oni žljebovi bacaju lijepe sjene kad upalim lampu sa strane. Soba izgleda dvostruko veća. Jedino što bih napomenula – izmjerite dobro prije nego narežete, ali to je normalno za svaki panel.' }
     ]},
-    127: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Marija K.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Topla boja ovog MDF panela savršeno se uklapa uz parket i drveni namještaj. Dnevna soba je dobila topao, elegantan karakter koji nisam mogla postići nijedno bojom. Preporučujem svima koji žele prirodan izgled.' },
-      { name: 'Dejan M.', city: 'Nikšić', date: 'Januar 2026', stars: 5, text: 'Renovirali smo hodnik u stambenom objektu toplo kaneliranim panelom. Stanari kažu da je ulaz dobio karakter koji ranije nije imao. Panel je lako održavan i izgleda odlično i nakon nekoliko mjeseci.' }
+    127: { total: 12, fiveS: 10, fourS: 2, comments: [
+      { name: 'Marija K.', city: 'Budva', date: 'Mart 2026', stars: 5, text: 'Imala sam parket i drveni namještaj u dnevnoj sobi i tražila nešto što će se uklopiti, a ne izgledati jeftino. Topli kaneliran panel je bio tačno to. Sad svi koji dođu pitaju odakle ga nabavila. Ugradnja je super jednostavna, medijapan se lako obrađuje.' },
+      { name: 'Dejan M.', city: 'Nikšić', date: 'Januar 2026', stars: 5, text: 'Uzeo sam za hodnik u stanu. Hodnik je uzan i taman i nikako nisam znao šta da radim s njim. Ovaj topli panel je bio pun pogodak – sad taj hodnik izgleda kao da je namjenski dizajniran. Paneli se lako sijeku i buše, sve sam sam uradio za nekoliko sati.' }
     ]},
-    128: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Stefan J.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamni kaneliran panel u kućnom bioskopu je bio pravi pogodak. Mat tamna površina apsorbuje odbijenu svjetlost, a tekstura žljebova daje dubinu zidu. Gosti uvijek komentarišu kako je prostorija filmski uređena.' },
-      { name: 'Aleksandra P.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Za restoran koji otvaramo birala sam tamne materijale koji daju luksuzni izgled bez prevelikog budžeta. Ovaj panel je bio idealan izbor – elegancija koja impresionira goste, a cijena pristupačna.' }
+    128: { total: 10, fiveS: 9, fourS: 1, comments: [
+      { name: 'Stefan J.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Nisam tip za svijetle boje, htio sam nešto tamno i upečatljivo za spavaću sobu. Ovaj tamni panel je savršen. Uz bočnu lampu sjene u kanelurama izgledaju kao da je zid rađen po mjeri u nekom skupom hotelu. Materijal je dobar, reže se čisto.' },
+      { name: 'Aleksandra P.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Otvaramo kafić i htjela sam tamnu atmosferu bez previše para. Tamni medijapan panel je riješio stvar. Ekipa koja je montirala kaže da je materijal lak za rad i da se fino reže i buši. Rezultat je fenomenalan, gosti već pitaju za detalje i još nismo ni otvorili.' }
     ]},
-    140: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Bojan T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Deblji MDF panel daje zidu pravi volumen – žljebovi su dublji i sjene dramatičnije. Odabrao sam ga za recepciju firme i efekat je bio odmah vidljiv. Klijenti primjećuju i komentarišu već pri ulasku.' },
-      { name: 'Ivana S.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Solidni deblji panel mi se svidio zbog čvrstine i punoće. Zid zvuči drugačije kada ga dodirnete – nema one plastičnosti. Ugradila sam ga u apartman koji iznajmljujem i gosti ga svaki put pohvale u recenzijama.' }
+    140: { total: 11, fiveS: 10, fourS: 1, comments: [
+      { name: 'Bojan T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Uzeo sam deblji model za recepciju firme i odmah se vidi razlika u volumenu i dubini žljebova. Kad dodirnete zid osjetite da je to nešto solidno, nije tanko. Klijenti to primjete čim uđu. Za poslovne prostore bih uvijek preporučio deblji model.' },
+      { name: 'Ivana S.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Iznajmljujem apartman i htjela sam nešto što će izgledati skupo a neće me koštati bogatstvo. Deblji medijapan panel je bio pravo rješenje. Već tri grupe gostiju su ga pohvalile u recenzijama na bookingu. Montaža je brza jer se materijal lako sječe i buši.' }
     ]},
-    141: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Miroslav D.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Lagani tanji panel je bio idealan za moj projekt jer je brži za ugradnju i lakši za rezanje. Rezultat izgleda identično kao kod debljih modela, a uštedeo sam na radnoj snazi. Odlično za veće površine.' },
-      { name: 'Katarina N.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Ugrađivala sam MDF panel u više prostorija i odabrala tanji model za hodnik i kupatilo. Lagan, jednostavan za rad, a izgled je efektan. Već sam preporučila prijateljima koji renoviraju.' }
+    141: { total: 9, fiveS: 8, fourS: 1, comments: [
+      { name: 'Miroslav D.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Trebao sam pokriti veći zid i odabrao tanji model zbog cijene i lakšeg rada. Isplatilo se. Materijal se super sječe, ništa se ne lomi, i montaža ide brzo. Kad završiš ne vidiš razliku od debljeg modela jer žljebovi izgledaju isto.' },
+      { name: 'Katarina N.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Radila sam renovaciju u dva stana i za oba sam uzela tanji panel jer sam trebala više komada. Medijapan je zahvalan materijal – sječeš ga običnom pilom, bušiš lako, prilagođava se svakom uglu. Izgled je odličan i susjedi su pitali odakle materijal.' }
     ]}
   };
   const rv = reviewsData[id] || { total: 8, fiveS: 7, fourS: 1, comments: [
