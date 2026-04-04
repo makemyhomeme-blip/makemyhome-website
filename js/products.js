@@ -401,7 +401,7 @@ async function renderProductDetail() {
   let _galleryIndex = 0;
   const multi = _galleryImages.length > 1;
 
-  function _goToGallery(idx) {
+  const _goToGallery = window._goToGallery = function(idx) {
     _galleryIndex = (idx + _galleryImages.length) % _galleryImages.length;
     const img = document.getElementById('gallery-main-img');
     if (img) {
