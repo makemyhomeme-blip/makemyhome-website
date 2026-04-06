@@ -209,7 +209,7 @@ function showSubcategoryGrid(parentCat) {
   const pageTitle = document.getElementById('page-title');
   if (pageTitle) pageTitle.textContent = parentCat.name;
   const pageSub = document.getElementById('page-subtitle');
-  if (pageSub) pageSub.textContent = 'Odaberite tip panela';
+  if (pageSub) pageSub.textContent = parentCat.id === 'bambus-paneli' ? 'Odaberite tip panela' : 'Pogledajte našu kolekciju';
 
   // Back button goes to all categories
   const btnBack = document.querySelector('.btn-back');
