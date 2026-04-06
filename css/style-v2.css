@@ -166,7 +166,7 @@ ul { list-style: none; }
 }
 
 .logo-img {
-  height: 52px;
+  height: 44px;
   width: auto;
   border-radius: 8px;
 }
@@ -191,16 +191,16 @@ ul { list-style: none; }
 
 .logo-text .name {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--white);
   font-weight: 600;
   white-space: nowrap;
 }
 
 .logo-text .tagline {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--primary);
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -240,7 +240,7 @@ ul { list-style: none; }
 }
 
 .logo-img {
-  height: 52px;
+  height: 44px;
   width: auto;
   border-radius: 8px;
   display: block;
