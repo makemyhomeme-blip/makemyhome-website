@@ -208,8 +208,9 @@ function showSubcategoryGrid(parentCat) {
   if (breadLabel) breadLabel.textContent = parentCat.name;
   const pageTitle = document.getElementById('page-title');
   if (pageTitle) pageTitle.textContent = parentCat.name;
+  const _catSubs = {'bambus-paneli':'Odaberite tip panela','bambus-drveni':'Topla drvena tekstura bambusa – prirodan izgled koji unosi toplinu u svaki prostor','bambus-tekstilni':'Mekana tekstilna površina na bambus osnovi za sofisticiran i elegantan zid','bambus-mermerni':'Mermerni uzorak na bambus panelu – luksuz bez težine i cijene pravog mermera','bambus-metalni':'Metalni sjaj na bambus osnovi za moderan industrijski ili luksuzni enterijer','bambus-kozni':'Kožna površinska obrada za ekskluzivan i taktilno bogat zid','classic':'Klasični paneli s vremenski provjerenim uzorcima prilagođenim svakom stilu','3d-letvice':'Vertikalni rebrasti paneli koji igrom svjetla i sjene transformišu svaki ravni zid','akusticni-paneli':'Poboljšavaju akustiku i smanjuju buku, a pritom izgledaju kao pravi dekorativni element','aluminijum-lajsne':'Profili za završne detalje, ivice i prelaze – savršena finalna tačka svakog enterijera','spc-pod':'Vodootporni laminatni pod koji izdrži kupatilo, kuhinju i svakodnevnu upotrebu','pu-kamen':'Laki poliuretanski paneli koji izgledaju kao pravi kamen, a teže mnogo manje','mdf':'Kaneliran medijapan koji zidovima daje arhitektonski karakter i trodimenzionalnu dubinu','flex-stone':'Savitljivi kameni furnir koji se primjenjuje na ravne, zakrivljene i neravne površine'};
   const pageSub = document.getElementById('page-subtitle');
-  if (pageSub) pageSub.textContent = parentCat.id === 'bambus-paneli' ? 'Odaberite tip panela' : 'Pogledajte našu kolekciju';
+  if (pageSub) pageSub.textContent = _catSubs[parentCat.id] || 'Pogledajte našu kolekciju';
 
   // Back button goes to all categories
   const btnBack = document.querySelector('.btn-back');
