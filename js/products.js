@@ -290,13 +290,11 @@ function showCategoryProducts(catId) {
   const catMap = buildCatMap();
   const cat = catMap[catId] || { name: catId, count: 0 };
 
-  // Update breadcrumb & title
+  // Update breadcrumb & title (subtitle already set by inline script — don't change height)
   const breadLabel = document.getElementById('breadcrumb-label');
   if (breadLabel) breadLabel.textContent = cat.name;
   const pageTitle = document.getElementById('page-title');
   if (pageTitle) pageTitle.textContent = cat.name;
-  const pageSub = document.getElementById('page-subtitle');
-  if (pageSub) pageSub.textContent = `Pogledajte sve ${cat.count} proizvoda u kategoriji ${cat.name}`;
 
   // Find parent category if this is a subcategory
   const parentCat = allCategories.find(c => c.subcategories?.some(s => s.id === catId));
