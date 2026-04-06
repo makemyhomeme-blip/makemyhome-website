@@ -30,31 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
     else header.classList.remove('scrolled');
   });
 
-  // ===== HAMBURGER MENU + REBUILD NAV (uvijek svjež, bez obzira na keš) =====
+  // ===== HAMBURGER MENU + MOBILE SEARCH =====
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
   if (navMenu) {
-    navMenu.innerHTML = `
-      <div id="mob-search-box" style="padding:4px 0 14px;">
-        <div style="position:relative;">
-          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
-          <input id="mob-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
-        </div>
-        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
-      </div>
-      <a href="index.html" class="nav-link">Početna</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
-      <a href="products.html?category=mdf" class="nav-link">MDF</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
-      <a href="about.html" class="nav-link">O Nama</a>
-      <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
-    `;
+    // Nav links already in HTML — no innerHTML rebuild needed
 
     // ── Mobile search logic ──
     let _allProducts = null;
