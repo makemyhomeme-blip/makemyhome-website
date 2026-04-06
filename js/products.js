@@ -131,10 +131,7 @@ async function initProductsPage() {
   const params = new URLSearchParams(window.location.search);
   const cat = params.get('cat') || params.get('category');
 
-  // Clear subtitle (title/grid already handled by inline script in HTML)
-  if (cat) {
-    const ps = document.getElementById('page-subtitle'); if (ps) ps.textContent = '';
-  }
+  // Title/subtitle/grid already handled by inline script in HTML — don't clear
 
   await loadData();
 
