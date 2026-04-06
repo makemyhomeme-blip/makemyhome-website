@@ -555,6 +555,20 @@ ul { list-style: none; }
   padding: 100px 0;
 }
 
+#featured .section-title {
+  background: linear-gradient(135deg, #1a1a1a 0%, #c9a86c 55%, #a07840 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: clamp(32px, 5vw, 50px);
+  font-weight: 800;
+}
+
+#featured .section-subtitle {
+  font-size: 17px;
+  color: #444;
+}
+
 .featured-header {
   display: flex;
   align-items: flex-end;
