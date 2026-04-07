@@ -3,24 +3,7 @@
    =================================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
-  // ===== NAV SINGLE-ROW FIX (injected via JS to bypass CDN cache) =====
-  (function(){
-    var s = document.createElement('style');
-    s.textContent = [
-      '@media(min-width:769px){',
-      '.header-inner{flex-wrap:nowrap!important;}',
-      '.logo{flex-shrink:0!important;max-width:220px;}',
-      '.logo-text .name{white-space:nowrap!important;font-size:16px!important;}',
-      '.logo-text .tagline{white-space:nowrap!important;font-size:9px!important;letter-spacing:1.5px!important;}',
-      '.logo-img{height:44px!important;}',
-      '.nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;}',
-      '.nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 5px!important;}',
-      '.nav-cta{padding:7px 14px!important;font-size:12px!important;}',
-      '#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}',
-      '}'
-    ].join('');
-    document.head.appendChild(s);
-  })();
+  // Nav styles are in HTML nav-fix CSS — no JS injection needed
 
 
   // ===== HEADER SCROLL =====
@@ -125,10 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const wrap = document.getElementById('desk-search-wrap');
     if (!wrap) return;
 
-    // Sakrij desk-search na mobilnom, mob-search-box na desktopu
-    const navResponsive = document.createElement('style');
-    navResponsive.textContent = '@media(max-width:768px){#desk-search-wrap{display:none!important;}}@media(min-width:769px){#mob-search-box{display:none!important;}}';
-    document.head.appendChild(navResponsive);
+    // Search visibility handled by style-v3.css
 
     const input  = document.getElementById('desk-search-input');
     const resBox = document.getElementById('desk-search-results');

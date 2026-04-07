@@ -2597,11 +2597,13 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .showcase-title { font-size: 1.3rem; }
 }
 
-/* ===== DESKTOP NAV FIX ===== */
-/* Hide mobile search box on desktop — it was showing and breaking nav layout */
+/* ===== DESKTOP/MOBILE NAV FIX ===== */
 @media (min-width: 769px) {
   #mob-search-box { display: none !important; }
   .nav-link { white-space: nowrap !important; }
   .logo-text .name { white-space: nowrap !important; }
   .logo-text .tagline { white-space: nowrap !important; }
+}
+@media (max-width: 768px) {
+  #desk-search-wrap { display: none !important; }
 }
