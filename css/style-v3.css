@@ -1175,7 +1175,7 @@ ul { list-style: none; }
   background: radial-gradient(ellipse at 50% 100%, rgba(201,168,108,0.2) 0%, transparent 60%);
 }
 
-.page-hero-content { position: relative; z-index: 1; }
+.page-hero-content { position: relative; z-index: 1; text-align: center; }
 .page-hero .section-title { color: var(--white); margin-bottom: 12px; }
 .page-hero .section-subtitle { color: rgba(255,255,255,0.6); }
 
