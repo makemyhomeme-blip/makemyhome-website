@@ -1717,7 +1717,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .form-row { grid-template-columns: 1fr; }
   .contact-form { padding: 28px 20px; }
 
-  .categories-grid { grid-template-columns: 1fr; }
+  .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .category-body { padding: 14px; }
+  .category-body h3 { font-size: 15px; margin-bottom: 4px; }
+  .category-body p { font-size: 12px; display: none; }
+  .category-icon { width: 36px; height: 36px; font-size: 15px; margin-bottom: 8px; }
+  .category-link { font-size: 12px; }
   .products-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 
   #contact-cta .cta-contact-info { flex-direction: column; gap: 24px; align-items: center; }
@@ -1728,6 +1733,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 @media (max-width: 480px) {
   .container { padding: 0 16px; }
   #categories, #featured, #about-preview, #why-us, #testimonials, #contact-cta { padding: 64px 0; }
+  .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .products-grid { grid-template-columns: 1fr; }
 }
 
