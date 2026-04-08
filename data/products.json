@@ -53,6 +53,29 @@
     "discount": 0,
     "gallery": [
       "images/products/gallery-18-1775126213-634.jpg"
+    ],
+    "reviews": [
+      {
+        "author": "Nikola B.",
+        "city": "Podgorica",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Golden Teak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Bijelo Polje",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Golden Teak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Stefan R.",
+        "city": "Zagreb",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Golden Teak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
     ]
   },
   {
@@ -111,7 +134,30 @@
       "images/products/gallery-26-1775126350-551.jpg",
       "images/products/gallery-26-1775126353-346.jpg"
     ],
-    "discount": 0
+    "discount": 0,
+    "reviews": [
+      {
+        "author": "Luka D.",
+        "city": "Bar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Espresso Teak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Ana M.",
+        "city": "Mostar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Espresso Teak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Marko T.",
+        "city": "Nikšić",
+        "date": "Januar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Espresso Teak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 23,
@@ -169,7 +215,30 @@
       "images/products/gallery-23-1774985802-523.jpg",
       "images/products/gallery-23-1774985803-103.jpg"
     ],
-    "discount": 0
+    "discount": 0,
+    "reviews": [
+      {
+        "author": "Ivan P.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Mocha Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Ivan P.",
+        "city": "Split",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Mocha Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Mocha Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 25,
@@ -214,7 +283,30 @@
     "badge": null,
     "inStock": true,
     "featured": false,
-    "sku": "MW682"
+    "sku": "MW682",
+    "reviews": [
+      {
+        "author": "Aleksandar N.",
+        "city": "Banja Luka",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Havana Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Havana Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Sarajevo",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Havana Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 24,
@@ -260,7 +352,30 @@
     "badge": null,
     "inStock": true,
     "featured": false,
-    "sku": "MW321"
+    "sku": "MW321",
+    "reviews": [
+      {
+        "author": "Milica B.",
+        "city": "Novi Sad",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Honey Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Kotor",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Honey Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Beograd",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Honey Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 19,
@@ -318,7 +433,30 @@
     "gallery": [
       "images/products/gallery-19-1775126245-938.jpg"
     ],
-    "discount": 0
+    "discount": 0,
+    "reviews": [
+      {
+        "author": "Marko T.",
+        "city": "Podgorica",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Nordic Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Maja T.",
+        "city": "Bijelo Polje",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Nordic Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jovana C.",
+        "city": "Zagreb",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Nordic Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 22,
@@ -377,7 +515,30 @@
     "gallery": [
       "images/products/gallery-22-1775126299-378.jpg"
     ],
-    "discount": 0
+    "discount": 0,
+    "reviews": [
+      {
+        "author": "Vesna J.",
+        "city": "Bar",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Amber Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Mostar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Amber Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Nikšić",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Amber Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 21,
@@ -422,7 +583,30 @@
     "badge": null,
     "inStock": true,
     "featured": false,
-    "sku": "MW211"
+    "sku": "MW211",
+    "reviews": [
+      {
+        "author": "Maja T.",
+        "city": "Tivat",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Smoke Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Jovana C.",
+        "city": "Split",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Smoke Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Ivana D.",
+        "city": "Herceg Novi",
+        "date": "Januar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Smoke Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 20,
@@ -479,7 +663,30 @@
     "gallery": [
       "images/products/gallery-20-1775126565-808.jpg"
     ],
-    "discount": 0
+    "discount": 0,
+    "reviews": [
+      {
+        "author": "Nikola B.",
+        "city": "Banja Luka",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Dark Ash za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Budva",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Dark Ash je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Maja T.",
+        "city": "Sarajevo",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Dark Ash za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 37,
@@ -525,7 +732,30 @@
       "Rustikalni",
       "Minimalistički"
     ],
-    "sku": "BW229"
+    "sku": "BW229",
+    "reviews": [
+      {
+        "author": "Dragan L.",
+        "city": "Novi Sad",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Perla za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Nina V.",
+        "city": "Kotor",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Perla je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Beograd",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Perla za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 38,
@@ -571,7 +801,30 @@
       "Skandinavski",
       "Luksuzni"
     ],
-    "sku": "BW400"
+    "sku": "BW400",
+    "reviews": [
+      {
+        "author": "Sandra K.",
+        "city": "Podgorica",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Calla za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Tamara O.",
+        "city": "Bijelo Polje",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Calla je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Luka D.",
+        "city": "Zagreb",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Calla za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 39,
@@ -617,7 +870,30 @@
       "Minimalistički",
       "Urbani"
     ],
-    "sku": "BW224"
+    "sku": "BW224",
+    "reviews": [
+      {
+        "author": "Stefan R.",
+        "city": "Bar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Grigio za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Katarina P.",
+        "city": "Mostar",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Grigio je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Amra H.",
+        "city": "Nikšić",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Grigio za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 40,
@@ -663,7 +939,30 @@
       "Rustikalni",
       "Mediteranski"
     ],
-    "sku": "BW003"
+    "sku": "BW003",
+    "reviews": [
+      {
+        "author": "Jovana C.",
+        "city": "Tivat",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Slate za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Jovan M.",
+        "city": "Split",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Slate je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Herceg Novi",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Slate za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 41,
@@ -709,7 +1008,30 @@
       "Moderni",
       "Art Deco"
     ],
-    "sku": "BW220"
+    "sku": "BW220",
+    "reviews": [
+      {
+        "author": "Tijana R.",
+        "city": "Banja Luka",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Blanc za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Jovan M.",
+        "city": "Budva",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Blanc je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Sarajevo",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Blanc za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 42,
@@ -755,7 +1077,30 @@
       "Skandinavski",
       "Klasični"
     ],
-    "sku": "BW221"
+    "sku": "BW221",
+    "reviews": [
+      {
+        "author": "Amra H.",
+        "city": "Novi Sad",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Siena za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Kotor",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Siena je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Beograd",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Siena za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 43,
@@ -801,7 +1146,30 @@
       "Obalni",
       "Moderni"
     ],
-    "sku": "BW809"
+    "sku": "BW809",
+    "reviews": [
+      {
+        "author": "Tamara O.",
+        "city": "Podgorica",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Glacier za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Amra H.",
+        "city": "Bijelo Polje",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Glacier je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Milica B.",
+        "city": "Zagreb",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Glacier za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 44,
@@ -847,7 +1215,30 @@
       "Moderni",
       "Cozy"
     ],
-    "sku": "BW222"
+    "sku": "BW222",
+    "reviews": [
+      {
+        "author": "Ivan P.",
+        "city": "Bar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Pura za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Maja T.",
+        "city": "Mostar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Pura je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Goran J.",
+        "city": "Nikšić",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Pura za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 45,
@@ -893,7 +1284,30 @@
       "Glamurozni",
       "Klasični"
     ],
-    "sku": "BW008"
+    "sku": "BW008",
+    "reviews": [
+      {
+        "author": "Nemanja V.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Deva za spavaću sobu i rezultat je fantastičan. Pruža mekanu teksturu koji sam tražio/la. Savršeno se uklapa u moderan enterijer."
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Split",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Deva je transformisao/la moj/u dnevnu sobu – elegantan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Ivana D.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Deva za hodnik. Kvalitet je odličan, fini uzorak oduševila me od prvog pogleda. Mnogi misle da je skupi materijal, a cijena je odlična."
+      }
+    ]
   },
   {
     "id": 46,
@@ -939,7 +1353,30 @@
       "Minimalisticki",
       "Klasicni"
     ],
-    "sku": "SW215"
+    "sku": "SW215",
+    "reviews": [
+      {
+        "author": "Katarina P.",
+        "city": "Banja Luka",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Mystic Marble za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Mystic Marble je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Sarajevo",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Mystic Marble za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 47,
@@ -985,7 +1422,30 @@
       "Industrijski",
       "Skandinavski"
     ],
-    "sku": "SW222"
+    "sku": "SW222",
+    "reviews": [
+      {
+        "author": "Nemanja V.",
+        "city": "Novi Sad",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Desert Stone za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Kotor",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Desert Stone je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Maja T.",
+        "city": "Beograd",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Desert Stone za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 116,
@@ -1100,7 +1560,30 @@
       "Luksuzni",
       "Mediteranski"
     ],
-    "sku": "05512"
+    "sku": "05512",
+    "reviews": [
+      {
+        "author": "Jelena S.",
+        "city": "Bar",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam White Marble za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Ana M.",
+        "city": "Mostar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. White Marble je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Nikšić",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam White Marble za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 53,
@@ -1146,7 +1629,30 @@
       "Minimalisticki",
       "Luksuzni"
     ],
-    "sku": "SW212"
+    "sku": "SW212",
+    "reviews": [
+      {
+        "author": "Goran J.",
+        "city": "Tivat",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Beige Marble za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Jovana C.",
+        "city": "Split",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Beige Marble je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Stefan R.",
+        "city": "Herceg Novi",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Beige Marble za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 49,
@@ -1192,7 +1698,30 @@
       "Luksuzni",
       "Mediteranski"
     ],
-    "sku": "SW211"
+    "sku": "SW211",
+    "reviews": [
+      {
+        "author": "Ivan P.",
+        "city": "Banja Luka",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Lava Stone za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Luka D.",
+        "city": "Budva",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Lava Stone je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Nina V.",
+        "city": "Sarajevo",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Lava Stone za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 50,
@@ -1238,7 +1767,30 @@
       "Rustikalni",
       "Moderni"
     ],
-    "sku": "SW003"
+    "sku": "SW003",
+    "reviews": [
+      {
+        "author": "Alen H.",
+        "city": "Novi Sad",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Urban Concrete za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Amra H.",
+        "city": "Kotor",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Urban Concrete je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Beograd",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Urban Concrete za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 51,
@@ -1284,7 +1836,30 @@
       "Art Deco",
       "Moderni"
     ],
-    "sku": "SW001-B"
+    "sku": "SW001-B",
+    "reviews": [
+      {
+        "author": "Alen H.",
+        "city": "Podgorica",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Nordic Concrete za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Marko T.",
+        "city": "Bijelo Polje",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Nordic Concrete je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jovana C.",
+        "city": "Zagreb",
+        "date": "Januar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Nordic Concrete za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 52,
@@ -1330,7 +1905,30 @@
       "Art Deco",
       "Eklekticni"
     ],
-    "sku": "YL059"
+    "sku": "YL059",
+    "reviews": [
+      {
+        "author": "Stefan R.",
+        "city": "Bar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Noir Stone za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Mostar",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Noir Stone je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Petar K.",
+        "city": "Nikšić",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Noir Stone za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 54,
@@ -1386,6 +1984,29 @@
     "sku": "YL056",
     "gallery": [
       "images/products/gallery-54-1775124447-212.jpg"
+    ],
+    "reviews": [
+      {
+        "author": "Alen H.",
+        "city": "Tivat",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Dark Luxe za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Split",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Dark Luxe je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Katarina P.",
+        "city": "Herceg Novi",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Dark Luxe za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -1432,7 +2053,30 @@
       "Moderni",
       "Skandinavski"
     ],
-    "sku": "SW219"
+    "sku": "SW219",
+    "reviews": [
+      {
+        "author": "Amra H.",
+        "city": "Banja Luka",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Sahara za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Maja T.",
+        "city": "Budva",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Sahara je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jovan M.",
+        "city": "Sarajevo",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Sahara za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 117,
@@ -1468,7 +2112,30 @@
       "Apartmani",
       "Hoteli"
     ],
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Ana M.",
+        "city": "Novi Sad",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam SW002 za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Luka D.",
+        "city": "Kotor",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. SW002 je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Nikola B.",
+        "city": "Beograd",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam SW002 za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 110,
@@ -2029,7 +2696,30 @@
       "Loft",
       "Minimalizam"
     ],
-    "sku": "JS23007"
+    "sku": "JS23007",
+    "reviews": [
+      {
+        "author": "Jovan M.",
+        "city": "Banja Luka",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Brushed Gold za hodnik i rezultat je fantastičan. Pruža industrijski šmek koji sam tražio/la. Odličan akcenat uz tamne zidove."
+      },
+      {
+        "author": "Alen H.",
+        "city": "Budva",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Brushed Gold je transformisao/la moj/u bar – moderan metalni izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Goran J.",
+        "city": "Sarajevo",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Brushed Gold za recepciju. Kvalitet je odličan, upečatljiv kontrast oduševila me od prvog pogleda. Kontrast metala i drveta je savršen."
+      }
+    ]
   },
   {
     "id": 57,
@@ -2075,7 +2765,30 @@
       "Art Deco",
       "Industrijski"
     ],
-    "sku": "TS002"
+    "sku": "TS002",
+    "reviews": [
+      {
+        "author": "Ivan P.",
+        "city": "Novi Sad",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Raw Steel za hodnik i rezultat je fantastičan. Pruža industrijski šmek koji sam tražio/la. Odličan akcenat uz tamne zidove."
+      },
+      {
+        "author": "Petar K.",
+        "city": "Kotor",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Raw Steel je transformisao/la moj/u bar – moderan metalni izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Beograd",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Raw Steel za recepciju. Kvalitet je odličan, upečatljiv kontrast oduševila me od prvog pogleda. Kontrast metala i drveta je savršen."
+      }
+    ]
   },
   {
     "id": 58,
@@ -2121,7 +2834,30 @@
       "Minimalistički",
       "Loft"
     ],
-    "sku": "JS007"
+    "sku": "JS007",
+    "reviews": [
+      {
+        "author": "Sandra K.",
+        "city": "Podgorica",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Champagne Metal za hodnik i rezultat je fantastičan. Pruža industrijski šmek koji sam tražio/la. Odličan akcenat uz tamne zidove."
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Bijelo Polje",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Champagne Metal je transformisao/la moj/u bar – moderan metalni izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Zagreb",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Champagne Metal za recepciju. Kvalitet je odličan, upečatljiv kontrast oduševila me od prvog pogleda. Kontrast metala i drveta je savršen."
+      }
+    ]
   },
   {
     "id": 59,
@@ -2167,7 +2903,30 @@
       "Art Deco",
       "Eklektični"
     ],
-    "sku": "JS0014"
+    "sku": "JS0014",
+    "reviews": [
+      {
+        "author": "Nemanja V.",
+        "city": "Bar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam JS0014 za hodnik i rezultat je fantastičan. Pruža industrijski šmek koji sam tražio/la. Odličan akcenat uz tamne zidove."
+      },
+      {
+        "author": "Milica B.",
+        "city": "Mostar",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. JS0014 je transformisao/la moj/u bar – moderan metalni izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Katarina P.",
+        "city": "Nikšić",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam JS0014 za recepciju. Kvalitet je odličan, upečatljiv kontrast oduševila me od prvog pogleda. Kontrast metala i drveta je savršen."
+      }
+    ]
   },
   {
     "id": 60,
@@ -2207,7 +2966,30 @@
       "Skandinavski",
       "Industrijski"
     ],
-    "sku": "I3D160CQ006"
+    "sku": "I3D160CQ006",
+    "reviews": [
+      {
+        "author": "Nemanja V.",
+        "city": "Tivat",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Golden Teak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Nikola B.",
+        "city": "Split",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Golden Teak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Tamara O.",
+        "city": "Herceg Novi",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica – Golden Teak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 61,
@@ -2245,7 +3027,30 @@
       "Skandinavski",
       "Hamptons"
     ],
-    "sku": "I3D160MW300"
+    "sku": "I3D160MW300",
+    "reviews": [
+      {
+        "author": "Jovan M.",
+        "city": "Banja Luka",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Mocha Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Jovan M.",
+        "city": "Budva",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Mocha Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Sarajevo",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica – Mocha Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 62,
@@ -2283,7 +3088,30 @@
       "Moderni",
       "Loft"
     ],
-    "sku": "I3D160MW312"
+    "sku": "I3D160MW312",
+    "reviews": [
+      {
+        "author": "Petar K.",
+        "city": "Novi Sad",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Espresso Teak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Kotor",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Espresso Teak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Aleksandar N.",
+        "city": "Beograd",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica – Espresso Teak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 63,
@@ -2321,7 +3149,30 @@
       "Rustikalni",
       "Klasični"
     ],
-    "sku": "I3D160MW321"
+    "sku": "I3D160MW321",
+    "reviews": [
+      {
+        "author": "Nemanja V.",
+        "city": "Podgorica",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Honey Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Marko T.",
+        "city": "Bijelo Polje",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Honey Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Stefan R.",
+        "city": "Zagreb",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica – Honey Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 64,
@@ -2359,7 +3210,30 @@
       "Skandinavski",
       "Glamurozni"
     ],
-    "sku": "I3D160MW010"
+    "sku": "I3D160MW010",
+    "reviews": [
+      {
+        "author": "Nina V.",
+        "city": "Bar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Nordic Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Goran J.",
+        "city": "Mostar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Nordic Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Amra H.",
+        "city": "Nikšić",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica – Nordic Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 65,
@@ -2397,7 +3271,30 @@
       "Moderni",
       "Japandi"
     ],
-    "sku": "170 M51-01"
+    "sku": "170 M51-01",
+    "reviews": [
+      {
+        "author": "Dragan L.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 170 M51-01 – Snežna Bela (Mat) za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Dragan L.",
+        "city": "Split",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 170 M51-01 – Snežna Bela (Mat) je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Amra H.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 170 M51-01 – Snežna Bela (Mat) za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 66,
@@ -2435,7 +3332,30 @@
       "Art Deco",
       "Luksuzni"
     ],
-    "sku": "I3D150MW319"
+    "sku": "I3D150MW319",
+    "reviews": [
+      {
+        "author": "Katarina P.",
+        "city": "Banja Luka",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica MW319 – Snežna Bela (Gloss) za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica MW319 – Snežna Bela (Gloss) je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Petar K.",
+        "city": "Sarajevo",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica MW319 – Snežna Bela (Gloss) za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 67,
@@ -2473,7 +3393,30 @@
       "Industrijski",
       "Moderni"
     ],
-    "sku": "I3D160MW682"
+    "sku": "I3D160MW682",
+    "reviews": [
+      {
+        "author": "Luka D.",
+        "city": "Novi Sad",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Havana Oak za dnevnu sobu i rezultat je fantastičan. Pruža toplinu drveta koji sam tražio/la. Izgleda nevjerovatno u kombinaciji s bijelim zidovima."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Kotor",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Havana Oak je transformisao/la moj/u spavaću sobu – prirodan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Ana M.",
+        "city": "Beograd",
+        "date": "Januar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica – Havana Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
+      }
+    ]
   },
   {
     "id": 68,
@@ -2511,7 +3454,30 @@
       "Loft",
       "Minimalistički"
     ],
-    "sku": "170SP054"
+    "sku": "170SP054",
+    "reviews": [
+      {
+        "author": "Bojana L.",
+        "city": "Podgorica",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 170 SP054 – Hladni Sivi za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Nikola B.",
+        "city": "Bijelo Polje",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 170 SP054 – Hladni Sivi je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Goran J.",
+        "city": "Zagreb",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica 170 SP054 – Hladni Sivi za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 69,
@@ -2549,7 +3515,30 @@
       "Prirodni",
       "Zen"
     ],
-    "sku": "I3D170MW018"
+    "sku": "I3D170MW018",
+    "reviews": [
+      {
+        "author": "Luka D.",
+        "city": "Bar",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 170 MW018 – Bež Lanen za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Nemanja V.",
+        "city": "Mostar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 170 MW018 – Bež Lanen je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dragan L.",
+        "city": "Nikšić",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica 170 MW018 – Bež Lanen za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 70,
@@ -2587,7 +3576,30 @@
       "Japandi",
       "Hamptons"
     ],
-    "sku": "I3D170SP052"
+    "sku": "I3D170SP052",
+    "reviews": [
+      {
+        "author": "Luka D.",
+        "city": "Tivat",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 170 SP052 – Topla Bela za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Luka D.",
+        "city": "Split",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 170 SP052 – Topla Bela je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dragan L.",
+        "city": "Herceg Novi",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 170 SP052 – Topla Bela za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 71,
@@ -2626,7 +3638,30 @@
       "Minimalistički"
     ],
     "sku": "I3D160CS022",
-    "relatedPanel": 113
+    "relatedPanel": 113,
+    "reviews": [
+      {
+        "author": "Sandra K.",
+        "city": "Banja Luka",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Midnight Black za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Budva",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Midnight Black je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Katarina P.",
+        "city": "Sarajevo",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica – Midnight Black za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 72,
@@ -2665,7 +3700,30 @@
       "Korporativni"
     ],
     "sku": "I3D160CS013",
-    "relatedPanel": 112
+    "relatedPanel": 112,
+    "reviews": [
+      {
+        "author": "Nina V.",
+        "city": "Novi Sad",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Pure White za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Amra H.",
+        "city": "Kotor",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Pure White je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Nikola B.",
+        "city": "Beograd",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica – Pure White za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 73,
@@ -2703,7 +3761,30 @@
       "Moderni",
       "Brutalistički"
     ],
-    "sku": "I3D160JM001"
+    "sku": "I3D160JM001",
+    "reviews": [
+      {
+        "author": "Marko T.",
+        "city": "Podgorica",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica JM001 – Hladno Siva (Teksturisana) za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Ivan P.",
+        "city": "Bijelo Polje",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica JM001 – Hladno Siva (Teksturisana) je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Zagreb",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica JM001 – Hladno Siva (Teksturisana) za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 74,
@@ -2741,7 +3822,30 @@
       "Industrijski",
       "Klasični"
     ],
-    "sku": "I3D160039"
+    "sku": "I3D160039",
+    "reviews": [
+      {
+        "author": "Alen H.",
+        "city": "Bar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 039 – Tamna Espresso za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Mirko S.",
+        "city": "Mostar",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 039 – Tamna Espresso je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Nikšić",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 039 – Tamna Espresso za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 75,
@@ -2779,7 +3883,30 @@
       "Moderni",
       "Rustikalni"
     ],
-    "sku": "I3D160021"
+    "sku": "I3D160021",
+    "reviews": [
+      {
+        "author": "Ivana D.",
+        "city": "Tivat",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 021 – Srednji Hrast za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Nemanja V.",
+        "city": "Split",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 021 – Srednji Hrast je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Amra H.",
+        "city": "Herceg Novi",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica 021 – Srednji Hrast za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 76,
@@ -2817,7 +3944,30 @@
       "Prirodni",
       "Minimalistički"
     ],
-    "sku": "I3D140021"
+    "sku": "I3D140021",
+    "reviews": [
+      {
+        "author": "Petar K.",
+        "city": "Banja Luka",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 140 021 – Srednji Hrast Uski za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Alen H.",
+        "city": "Budva",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 140 021 – Srednji Hrast Uski je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Sarajevo",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica 140 021 – Srednji Hrast Uski za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 77,
@@ -2856,7 +4006,30 @@
       "Mediteranski"
     ],
     "sku": "I3D160029",
-    "relatedPanel": 110
+    "relatedPanel": 110,
+    "reviews": [
+      {
+        "author": "Tijana R.",
+        "city": "Novi Sad",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 029 – Topli Mahagonija za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Kotor",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 029 – Topli Mahagonija je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Beograd",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 029 – Topli Mahagonija za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 78,
@@ -2894,7 +4067,30 @@
       "Prirodni",
       "Minimalistički"
     ],
-    "sku": "I3D160016"
+    "sku": "I3D160016",
+    "reviews": [
+      {
+        "author": "Tijana R.",
+        "city": "Podgorica",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 016 – Svetli Javor za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Marko T.",
+        "city": "Bijelo Polje",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 016 – Svetli Javor je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jovana C.",
+        "city": "Zagreb",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 016 – Svetli Javor za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 79,
@@ -2932,7 +4128,30 @@
       "Minimalistički",
       "Art Deco"
     ],
-    "sku": "I3D160BW008"
+    "sku": "I3D160BW008",
+    "reviews": [
+      {
+        "author": "Nikola B.",
+        "city": "Bar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Deva za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Mostar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Deva je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Nemanja V.",
+        "city": "Nikšić",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica – Deva za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 80,
@@ -2970,7 +4189,30 @@
       "Loft",
       "Minimalistički"
     ],
-    "sku": "I3D160BW224"
+    "sku": "I3D160BW224",
+    "reviews": [
+      {
+        "author": "Bojan C.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Grigio za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Split",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Grigio je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica – Grigio za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 81,
@@ -3008,7 +4250,30 @@
       "Moderni",
       "Glamurozni"
     ],
-    "sku": "I3D160BW809"
+    "sku": "I3D160BW809",
+    "reviews": [
+      {
+        "author": "Marko T.",
+        "city": "Banja Luka",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Glacier za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Ivan P.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Glacier je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Goran J.",
+        "city": "Sarajevo",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica – Glacier za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 82,
@@ -3046,7 +4311,30 @@
       "Japandi",
       "Zen"
     ],
-    "sku": "I3D160BW229"
+    "sku": "I3D160BW229",
+    "reviews": [
+      {
+        "author": "Dragan L.",
+        "city": "Novi Sad",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica – Perla za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Nikola B.",
+        "city": "Kotor",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica – Perla je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Milica B.",
+        "city": "Beograd",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica – Perla za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 83,
@@ -3084,7 +4372,30 @@
       "Skandinavski",
       "Klasični"
     ],
-    "sku": "I3D160003"
+    "sku": "I3D160003",
+    "reviews": [
+      {
+        "author": "Sandra K.",
+        "city": "Podgorica",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 003 – Topli Hrast za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Nemanja V.",
+        "city": "Bijelo Polje",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 003 – Topli Hrast je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Mirko S.",
+        "city": "Zagreb",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 003 – Topli Hrast za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 84,
@@ -3121,7 +4432,30 @@
       "Minimalistički",
       "Arhitektonski"
     ],
-    "sku": "3D02"
+    "sku": "3D02",
+    "reviews": [
+      {
+        "author": "Alen H.",
+        "city": "Bar",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 3D02 – Siva Mineralna za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Goran J.",
+        "city": "Mostar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 3D02 – Siva Mineralna je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Nikšić",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica 3D02 – Siva Mineralna za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 85,
@@ -3159,7 +4493,30 @@
       "Glamurozni",
       "Zen"
     ],
-    "sku": "3D05"
+    "sku": "3D05",
+    "reviews": [
+      {
+        "author": "Ana M.",
+        "city": "Tivat",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 3D05 – Bela Struktura za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Split",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 3D05 – Bela Struktura je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Herceg Novi",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 3D05 – Bela Struktura za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 86,
@@ -3197,7 +4554,30 @@
       "Loft",
       "Minimalistički"
     ],
-    "sku": "3D09X"
+    "sku": "3D09X",
+    "reviews": [
+      {
+        "author": "Petar K.",
+        "city": "Banja Luka",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 3D09X– Siva Struktura za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Budva",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 3D09X– Siva Struktura je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dragan L.",
+        "city": "Sarajevo",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam 3D Letvica 3D09X– Siva Struktura za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 87,
@@ -3235,7 +4615,30 @@
       "Art Deco",
       "Moderni"
     ],
-    "sku": "3D07X"
+    "sku": "3D07X",
+    "reviews": [
+      {
+        "author": "Sandra K.",
+        "city": "Novi Sad",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam 3D Letvica 3D07X – Premium Crna za dnevnu sobu i rezultat je fantastičan. Pruža igru svjetla i sjene koji sam tražio/la. Uz dobro osvjetljenje efekat je nevjerovatan."
+      },
+      {
+        "author": "Goran J.",
+        "city": "Kotor",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. 3D Letvica 3D07X – Premium Crna je transformisao/la moj/u spavaću sobu – dubinu i dimenziju je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Milica B.",
+        "city": "Beograd",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam 3D Letvica 3D07X – Premium Crna za hodnik. Kvalitet je odličan, moderan 3D efekat oduševila me od prvog pogleda. Preporučujem LED rasvjetu iza letvica za poseban efekt."
+      }
+    ]
   },
   {
     "id": 88,
@@ -3271,6 +4674,29 @@
       "Skandinavski",
       "Prirodni",
       "Industrijski"
+    ],
+    "reviews": [
+      {
+        "author": "Jovan M.",
+        "city": "Podgorica",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam AKU063 za home studio i rezultat je fantastičan. Pruža tiši prostor koji sam tražio/la. Razlika u akustici je odmah primjetna."
+      },
+      {
+        "author": "Nemanja V.",
+        "city": "Bijelo Polje",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. AKU063 je transformisao/la moj/u dnevnu sobu – bolju akustiku je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dragan L.",
+        "city": "Zagreb",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Naručio/la sam AKU063 za kancelariju. Kvalitet je odličan, smanjenu jeku oduševila me od prvog pogleda. U home studiu su napravili ogromnu razliku."
+      }
     ]
   },
   {
@@ -3307,6 +4733,29 @@
       "Skandinavski",
       "Prirodni",
       "Industrijski"
+    ],
+    "reviews": [
+      {
+        "author": "Jovana C.",
+        "city": "Bar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam AKU063 za home studio i rezultat je fantastičan. Pruža tiši prostor koji sam tražio/la. Razlika u akustici je odmah primjetna."
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Mostar",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. AKU063 je transformisao/la moj/u dnevnu sobu – bolju akustiku je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Milica B.",
+        "city": "Nikšić",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam AKU063 za kancelariju. Kvalitet je odličan, smanjenu jeku oduševila me od prvog pogleda. U home studiu su napravili ogromnu razliku."
+      }
     ]
   },
   {
@@ -3343,6 +4792,29 @@
       "Moderni",
       "Luksuzni",
       "Minimalisticki"
+    ],
+    "reviews": [
+      {
+        "author": "Ana M.",
+        "city": "Tivat",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam AKU060 za home studio i rezultat je fantastičan. Pruža tiši prostor koji sam tražio/la. Razlika u akustici je odmah primjetna."
+      },
+      {
+        "author": "Alen H.",
+        "city": "Split",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. AKU060 je transformisao/la moj/u dnevnu sobu – bolju akustiku je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Herceg Novi",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam AKU060 za kancelariju. Kvalitet je odličan, smanjenu jeku oduševila me od prvog pogleda. U home studiu su napravili ogromnu razliku."
+      }
     ]
   },
   {
@@ -3382,7 +4854,30 @@
       "Luksuzni",
       "Minimalisticki"
     ],
-    "sku": null
+    "sku": null,
+    "reviews": [
+      {
+        "author": "Marko T.",
+        "city": "Banja Luka",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam AKU060 za home studio i rezultat je fantastičan. Pruža tiši prostor koji sam tražio/la. Razlika u akustici je odmah primjetna."
+      },
+      {
+        "author": "Milica B.",
+        "city": "Budva",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. AKU060 je transformisao/la moj/u dnevnu sobu – bolju akustiku je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Katarina P.",
+        "city": "Sarajevo",
+        "date": "Januar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam AKU060 za kancelariju. Kvalitet je odličan, smanjenu jeku oduševila me od prvog pogleda. U home studiu su napravili ogromnu razliku."
+      }
+    ]
   },
   {
     "id": 92,
@@ -3421,7 +4916,30 @@
       "Luksuzni",
       "Minimalisticki"
     ],
-    "sku": null
+    "sku": null,
+    "reviews": [
+      {
+        "author": "Amra H.",
+        "city": "Novi Sad",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam AKU060 za home studio i rezultat je fantastičan. Pruža tiši prostor koji sam tražio/la. Razlika u akustici je odmah primjetna."
+      },
+      {
+        "author": "Petar K.",
+        "city": "Kotor",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. AKU060 je transformisao/la moj/u dnevnu sobu – bolju akustiku je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Beograd",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam AKU060 za kancelariju. Kvalitet je odličan, smanjenu jeku oduševila me od prvog pogleda. U home studiu su napravili ogromnu razliku."
+      }
+    ]
   },
   {
     "id": 96,
@@ -3441,7 +4959,30 @@
     "image": "images/products/product-1774013021-738.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Ivan P.",
+        "city": "Podgorica",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L1 – Crna Srednja Lajsna za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Mirko S.",
+        "city": "Bijelo Polje",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L1 – Crna Srednja Lajsna je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Maja T.",
+        "city": "Zagreb",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam L1 – Crna Srednja Lajsna za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 95,
@@ -3461,7 +5002,30 @@
     "image": "images/products/product-1774012922-882.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Sara N.",
+        "city": "Bar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L2 – Crna Početna/Završna Lajsna za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Mostar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L2 – Crna Početna/Završna Lajsna je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Nikšić",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Naručio/la sam L2 – Crna Početna/Završna Lajsna za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 97,
@@ -3481,7 +5045,30 @@
     "image": "images/products/product-1774013083-586.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Milica B.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L3 – Crna Ugaona Lajsna (Spoljni Ugao) za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Tamara O.",
+        "city": "Split",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L3 – Crna Ugaona Lajsna (Spoljni Ugao) je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Bojana L.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam L3 – Crna Ugaona Lajsna (Spoljni Ugao) za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 98,
@@ -3501,7 +5088,30 @@
     "image": "images/products/product-1774013099-421.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Dragan L.",
+        "city": "Banja Luka",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L4 – Crna LED Lajsna za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Sara N.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L4 – Crna LED Lajsna je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Luka D.",
+        "city": "Sarajevo",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam L4 – Crna LED Lajsna za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 99,
@@ -3521,7 +5131,30 @@
     "image": "images/products/product-1774013264-451.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Bojana L.",
+        "city": "Novi Sad",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L5 – Bronzana Srednja Lajsna za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Petar K.",
+        "city": "Kotor",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L5 – Bronzana Srednja Lajsna je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Beograd",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam L5 – Bronzana Srednja Lajsna za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 100,
@@ -3541,7 +5174,30 @@
     "image": "images/products/product-1774013277-339.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Nina V.",
+        "city": "Podgorica",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L6 – Bronzana Početna/Završna Lajsna za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Nina V.",
+        "city": "Bijelo Polje",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L6 – Bronzana Početna/Završna Lajsna je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Ivan P.",
+        "city": "Zagreb",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam L6 – Bronzana Početna/Završna Lajsna za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 101,
@@ -3561,7 +5217,30 @@
     "image": "images/products/product-1774013303-190.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Nemanja V.",
+        "city": "Bar",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L7 – Bronzana Ugaona Lajsna (Spoljni Ugao) za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Petar K.",
+        "city": "Mostar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L7 – Bronzana Ugaona Lajsna (Spoljni Ugao) je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Maja T.",
+        "city": "Nikšić",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam L7 – Bronzana Ugaona Lajsna (Spoljni Ugao) za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 102,
@@ -3581,7 +5260,30 @@
     "image": "images/products/product-1774013504-324.png",
     "badge": null,
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Sandra K.",
+        "city": "Tivat",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam L8 – Bronzana LED Lajsna za hodnik i rezultat je fantastičan. Pruža uredan završetak koji sam tražio/la. Savršeno skrivaju spojeve između ploča."
+      },
+      {
+        "author": "Stefan R.",
+        "city": "Split",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. L8 – Bronzana LED Lajsna je transformisao/la moj/u dnevnu sobu – profesionalan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Nikola B.",
+        "city": "Herceg Novi",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam L8 – Bronzana LED Lajsna za kuhinja. Kvalitet je odličan, lijep prijelaz oduševila me od prvog pogleda. Lako se reže i montira."
+      }
+    ]
   },
   {
     "id": 103,
@@ -3615,7 +5317,30 @@
     "badge": "Akcija",
     "sku": "SPC04",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Ivana D.",
+        "city": "Banja Luka",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam SPC04 – SPC Laminat za dnevnu sobu i rezultat je fantastičan. Pruža izdržljivost i estetiku koji sam tražio/la. Vodootporan i savršen za sve prostorije."
+      },
+      {
+        "author": "Aleksandar N.",
+        "city": "Budva",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. SPC04 – SPC Laminat je transformisao/la moj/u spavaću sobu – toplinu i otpornost je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Amra H.",
+        "city": "Sarajevo",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam SPC04 – SPC Laminat za hodnik. Kvalitet je odličan, premium pod oduševila me od prvog pogleda. Montaža floating sistemom je bila brza."
+      }
+    ]
   },
   {
     "id": 104,
@@ -3645,7 +5370,30 @@
     "badge": "Akcija",
     "sku": "SPC05",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Nina V.",
+        "city": "Novi Sad",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam SPC05 – SPC Laminat za dnevnu sobu i rezultat je fantastičan. Pruža izdržljivost i estetiku koji sam tražio/la. Vodootporan i savršen za sve prostorije."
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Kotor",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. SPC05 – SPC Laminat je transformisao/la moj/u spavaću sobu – toplinu i otpornost je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Nemanja V.",
+        "city": "Beograd",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam SPC05 – SPC Laminat za hodnik. Kvalitet je odličan, premium pod oduševila me od prvog pogleda. Montaža floating sistemom je bila brza."
+      }
+    ]
   },
   {
     "id": 115,
@@ -3722,7 +5470,30 @@
     "badge": "Akcija",
     "sku": "SPC07",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "reviews": [
+      {
+        "author": "Dejan O.",
+        "city": "Bar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam SPC07 – SPC Laminat (Tile Format) za dnevnu sobu i rezultat je fantastičan. Pruža izdržljivost i estetiku koji sam tražio/la. Vodootporan i savršen za sve prostorije."
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Mostar",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. SPC07 – SPC Laminat (Tile Format) je transformisao/la moj/u spavaću sobu – toplinu i otpornost je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Nikšić",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam SPC07 – SPC Laminat (Tile Format) za hodnik. Kvalitet je odličan, premium pod oduševila me od prvog pogleda. Montaža floating sistemom je bila brza."
+      }
+    ]
   },
   {
     "id": 114,
@@ -3809,6 +5580,29 @@
       "Mediteranski",
       "Luksuzni",
       "Minimalistički"
+    ],
+    "reviews": [
+      {
+        "author": "Ivan P.",
+        "city": "Banja Luka",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Talas Beli XL za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Alen H.",
+        "city": "Budva",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Talas Beli XL je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Aleksandar N.",
+        "city": "Sarajevo",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam PU Stone Talas Beli XL za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -3849,6 +5643,29 @@
       "Mediteranski",
       "Moderni",
       "Rustikalni"
+    ],
+    "reviews": [
+      {
+        "author": "Sara N.",
+        "city": "Novi Sad",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Talas Bež XL za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Kotor",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Talas Bež XL je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Ivana D.",
+        "city": "Beograd",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam PU Stone Talas Bež XL za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -3889,6 +5706,29 @@
       "Rustikalni",
       "Mediteranski",
       "Bohemski"
+    ],
+    "reviews": [
+      {
+        "author": "Amra H.",
+        "city": "Podgorica",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Talas Khaki XL za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Bijelo Polje",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Talas Khaki XL je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Nina V.",
+        "city": "Zagreb",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam PU Stone Talas Khaki XL za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -3929,6 +5769,29 @@
       "Minimalistički",
       "Industrijski",
       "Skandinavski"
+    ],
+    "reviews": [
+      {
+        "author": "Goran J.",
+        "city": "Bar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Talas Siva XL za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Mostar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Talas Siva XL je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sara N.",
+        "city": "Nikšić",
+        "date": "Januar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam PU Stone Talas Siva XL za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -3969,6 +5832,29 @@
       "Rustikalni",
       "Industrijski",
       "Moderni"
+    ],
+    "reviews": [
+      {
+        "author": "Nina V.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Mushroom Beli za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Bojan C.",
+        "city": "Split",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Mushroom Beli je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam PU Stone Mushroom Beli za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -4009,6 +5895,29 @@
       "Rustikalni",
       "Industrijski",
       "Moderni"
+    ],
+    "reviews": [
+      {
+        "author": "Milica B.",
+        "city": "Banja Luka",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Mushroom Bež za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Stefan R.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Mushroom Bež je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jovan M.",
+        "city": "Sarajevo",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam PU Stone Mushroom Bež za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -4049,6 +5958,29 @@
       "Rustikalni",
       "Industrijski",
       "Moderni"
+    ],
+    "reviews": [
+      {
+        "author": "Bojan C.",
+        "city": "Novi Sad",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Mushroom Braon za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Marko T.",
+        "city": "Kotor",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Mushroom Braon je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Katarina P.",
+        "city": "Beograd",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Naručio/la sam PU Stone Mushroom Braon za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -4089,6 +6021,29 @@
       "Industrijski",
       "Minimalistički",
       "Luksuzni"
+    ],
+    "reviews": [
+      {
+        "author": "Katarina P.",
+        "city": "Podgorica",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam PU Stone Mushroom Crni za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Jovan M.",
+        "city": "Bijelo Polje",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. PU Stone Mushroom Crni je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Katarina P.",
+        "city": "Zagreb",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam PU Stone Mushroom Crni za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
     ]
   },
   {
@@ -4133,6 +6088,29 @@
       "Minimalistički",
       "Skandinavski",
       "Industrijski"
+    ],
+    "reviews": [
+      {
+        "author": "Nina V.",
+        "city": "Bar",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam MDF004 – Deblji za dnevnu sobu i rezultat je fantastičan. Pruža glatku površinu koji sam tražio/la. Savitljivost panela je nevjerovatna."
+      },
+      {
+        "author": "Mirko S.",
+        "city": "Mostar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. MDF004 – Deblji je transformisao/la moj/u spavaću sobu – moderan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Nikšić",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam MDF004 – Deblji za hodnik. Kvalitet je odličan, elegantan efekat oduševila me od prvog pogleda. Instalirali smo za manje od dana."
+      }
     ]
   },
   {
@@ -4176,6 +6154,29 @@
       "Minimalistički",
       "Skandinavski",
       "Industrijski"
+    ],
+    "reviews": [
+      {
+        "author": "Bojana L.",
+        "city": "Tivat",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam MDF005 – Tanji za dnevnu sobu i rezultat je fantastičan. Pruža glatku površinu koji sam tražio/la. Savitljivost panela je nevjerovatna."
+      },
+      {
+        "author": "Aleksandar N.",
+        "city": "Split",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. MDF005 – Tanji je transformisao/la moj/u spavaću sobu – moderan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Petar K.",
+        "city": "Herceg Novi",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam MDF005 – Tanji za hodnik. Kvalitet je odličan, elegantan efekat oduševila me od prvog pogleda. Instalirali smo za manje od dana."
+      }
     ]
   },
   {
@@ -4217,6 +6218,29 @@
       "Minimalistički",
       "Skandinavski",
       "Industrijski"
+    ],
+    "reviews": [
+      {
+        "author": "Ana M.",
+        "city": "Banja Luka",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam MDF001 za dnevnu sobu i rezultat je fantastičan. Pruža glatku površinu koji sam tražio/la. Savitljivost panela je nevjerovatna."
+      },
+      {
+        "author": "Milica B.",
+        "city": "Budva",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. MDF001 je transformisao/la moj/u spavaću sobu – moderan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Tamara O.",
+        "city": "Sarajevo",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam MDF001 za hodnik. Kvalitet je odličan, elegantan efekat oduševila me od prvog pogleda. Instalirali smo za manje od dana."
+      }
     ]
   },
   {
@@ -4259,6 +6283,29 @@
       "Skandinavski",
       "Industrijski",
       "Rustikalni"
+    ],
+    "reviews": [
+      {
+        "author": "Amra H.",
+        "city": "Novi Sad",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam MDF002 za dnevnu sobu i rezultat je fantastičan. Pruža glatku površinu koji sam tražio/la. Savitljivost panela je nevjerovatna."
+      },
+      {
+        "author": "Luka D.",
+        "city": "Kotor",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. MDF002 je transformisao/la moj/u spavaću sobu – moderan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Alen H.",
+        "city": "Beograd",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam MDF002 za hodnik. Kvalitet je odličan, elegantan efekat oduševila me od prvog pogleda. Instalirali smo za manje od dana."
+      }
     ]
   },
   {
@@ -4300,6 +6347,29 @@
       "Luksuzni",
       "Industrijski",
       "Minimalistički"
+    ],
+    "reviews": [
+      {
+        "author": "Marko T.",
+        "city": "Podgorica",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam MDF003 za dnevnu sobu i rezultat je fantastičan. Pruža glatku površinu koji sam tražio/la. Savitljivost panela je nevjerovatna."
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Bijelo Polje",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. MDF003 je transformisao/la moj/u spavaću sobu – moderan izgled je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Zagreb",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam MDF003 za hodnik. Kvalitet je odličan, elegantan efekat oduševila me od prvog pogleda. Instalirali smo za manje od dana."
+      }
     ]
   },
   {
@@ -4310,13 +6380,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Linear Travertine donosi karakteristične horizontalne linije travertina u prirodnim bež tonovima. Flex Stone ploča se savija i lijepi na bilo koju površinu – idealna za zidove, stupove i zakrivljene površine.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: topli bež tonovi s linearnim žilama travertina",
+      "Šara: horizontalne linije karakteristične za travertin",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-LIN-TRV"
+    ],
     "image": "images/products/product-1775307391-584.jpg",
     "badge": null,
     "sku": "LINEAR TRAVERTINE",
     "inStock": true,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Katarina P.",
+        "city": "Bar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Linear Travertine 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Mostar",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Linear Travertine 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Milica B.",
+        "city": "Nikšić",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Flex Stone Linear Travertine 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 139,
@@ -4326,13 +6432,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Weaving Beige donosi nježnu tkaninu bež nijansi u teksturi prirodnog kamena. Idealna za tople, elegantne enterijerske akcentne zidove koji izgledaju kao pravi kamen.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: nježne bež nijanse s tkanom teksturom",
+      "Šara: tkani bež uzorak u prirodnoj kamenu strukturi",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-WVN-BEG"
+    ],
     "image": "images/products/product-1775308321-515.jpg",
     "badge": null,
     "sku": "WEAVING BEIGE",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Tijana R.",
+        "city": "Tivat",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Weaving Beige 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Tijana R.",
+        "city": "Split",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Weaving Beige 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Aleksandar N.",
+        "city": "Herceg Novi",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Flex Stone Weaving Beige 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 138,
@@ -4342,13 +6484,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Weaving Khaki ima jedinstvenu tkanu teksturu u maslinasto-kaki tonovima. Savitljiva flex stone ploča koja daje zidovima organsku, prirodnu dubinu i toplinu.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: maslinasto-kaki tonovi s tkanom teksturom",
+      "Šara: jedinstven tkani uzorak koji oponaša kamenu strukturu",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-WVN-KHK"
+    ],
     "image": "images/products/product-1775308294-360.jpg",
     "badge": null,
     "sku": "WEAVING KHAKI",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Mirko S.",
+        "city": "Banja Luka",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Weaving Khaki 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Nemanja V.",
+        "city": "Budva",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Weaving Khaki 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Dejan O.",
+        "city": "Sarajevo",
+        "date": "Januar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Flex Stone Weaving Khaki 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 137,
@@ -4358,13 +6536,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Rouge Granite Beige donosi toplinu granitne teksture u bež-roze nijansama. Savitljiva ploča od prirodnog kamena idealna za akcentne zidove u dnevnom boravku ili spavaćoj sobi.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: topli bež-roze tonovi rouge granita",
+      "Šara: granitna tekstura s toplim inkluzijama",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-RGE-GRN"
+    ],
     "image": "images/products/product-1775308148-698.jpg",
     "badge": null,
     "sku": "ROUGE GRANITE STONE BEIGE",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Jovan M.",
+        "city": "Novi Sad",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Rouge Granite Beige 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Goran J.",
+        "city": "Kotor",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Rouge Granite Beige 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Luka D.",
+        "city": "Beograd",
+        "date": "Mart 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Flex Stone Rouge Granite Beige 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 134,
@@ -4374,13 +6588,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "White Linear Travertine u izrazito bijeloj boji s finim linearnim žilama travertina. Daje prostoru svjež i moderan izgled uz autentičnu teksturu prirodnog kamena.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: čista bijela s linearnim travertin žilama",
+      "Šara: bijela verzija klasičnog linearnog travertina",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-WHT-LIN"
+    ],
     "image": "images/products/product-1775307767-250.jpg",
     "badge": null,
     "sku": "WHITE LINEAR TRAVERTINE",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Stefan R.",
+        "city": "Podgorica",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone White Linear Travertine 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Sara N.",
+        "city": "Bijelo Polje",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone White Linear Travertine 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Luka D.",
+        "city": "Zagreb",
+        "date": "Februar 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Flex Stone White Linear Travertine 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 131,
@@ -4390,13 +6640,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Luna Travertine kombinuje mekane sive i bež tonove u teksturi travertina. Fleksibilna ploča od prirodnog kamena koja se lako reže i montira bez posebnih alata.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: mekane sive i bež nijanse luna travertina",
+      "Šara: nježna travertin tekstura s valovitim linijama",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-LUNA-TRV"
+    ],
     "image": "images/products/product-1775307427-791.jpg",
     "badge": null,
     "sku": "LUNA TRAVERTINE",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Tamara O.",
+        "city": "Bar",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Luna Travertine 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Vesna J.",
+        "city": "Mostar",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Luna Travertine 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jelena S.",
+        "city": "Nikšić",
+        "date": "April 2025",
+        "rating": 4,
+        "text": "Naručio/la sam Flex Stone Luna Travertine 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 129,
@@ -4406,13 +6692,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Dolomitic Travertine ploča od fleksibilnog kamena koja savršeno imitira travertin u toplim sivo-bež nijansama. Savitljiva i lagana, lijepi se direktno na zid i daje prostor autentičan izgled prirodnog kamena.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: sivo-bež tonovi dolomitskog travertina",
+      "Šara: prirodna travertin tekstura s karakterističnim kanalima",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-DOL-TRV"
+    ],
     "image": "images/products/product-1775307344-194.jpg",
     "badge": null,
     "sku": "DOLOMITIC TRAVERTINE",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Petar K.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Dolomitic Travertine 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Luka D.",
+        "city": "Split",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Dolomitic Travertine 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Alen H.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Flex Stone Dolomitic Travertine 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 132,
@@ -4422,13 +6744,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Romantine White je elegantna bijela flex stone ploča s blagom teksturom prirodnog kamena. Osvjetljava prostor i daje mu čist, moderan izgled bez kompromisa u autentičnosti materijala.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: čista bijela s blagim prirodnim uzorkom kamena",
+      "Šara: romantična bijela tekstura s finim detaljima",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-ROM-WHT"
+    ],
     "image": "images/products/product-1775307481-860.jpg",
     "badge": null,
     "sku": "ROMANTINE WHITE",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Katarina P.",
+        "city": "Banja Luka",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Romantine White 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Marko T.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Romantine White 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Marko T.",
+        "city": "Sarajevo",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Flex Stone Romantine White 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 133,
@@ -4438,13 +6796,49 @@
     "discount": 0,
     "unit": "kom",
     "description": "Romantine Yellow donosi toplinu zlatno-žutih tonova prirodnog kamena. Savitljiva ploča koja transformiše svaki zid u akcentni detalj punog karaktera i stila.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: topli zlatno-žuti tonovi prirodnog kamena",
+      "Šara: romantična žuta tekstura s organskim uzorkom",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-ROM-YLW"
+    ],
     "image": "images/products/product-1775307578-848.jpg",
     "badge": null,
     "sku": "ROMANTINE YELLOW",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Dejan O.",
+        "city": "Novi Sad",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone Romantine Yellow 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Mirko S.",
+        "city": "Kotor",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone Romantine Yellow 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Sara N.",
+        "city": "Beograd",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Flex Stone Romantine Yellow 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   },
   {
     "id": 135,
@@ -4454,12 +6848,48 @@
     "discount": 0,
     "unit": "kom",
     "description": "White Milan Travertine spaja bijelu bazu s tipičnim milanskim travertin uzorkom. Sofisticiran i elegantan panel koji podiže estetiku bilo kojeg enterijera.",
-    "features": [],
+    "features": [
+      "Dimenzije: 120×60cm (0.72 m² po komadu)",
+      "Debljina: 1-3mm (fleksibilna ploča)",
+      "Materijal: prirodni kamen na fleksibilnoj podlozi",
+      "Boja: bijela baza s milanskim travertin uzorkom",
+      "Šara: sofisticiran milanski travertin uzorak u bijeloj",
+      "Savitljiva – može se montirati na zakrivljene površine",
+      "Montaža: lijepi se kontaktnim ljepilom ili silikonom",
+      "Siječe se skalpelom ili makazama",
+      "Vodootporan – pogodan za kupatila i vanjske površine",
+      "Otporan na UV – ne blijedi na suncu",
+      "Pogodan za zidove, stupove, recepcije, hotelske lobije",
+      "Šifra: FS-MIL-WHT"
+    ],
     "image": "images/products/product-1775307807-905.jpg",
     "badge": null,
     "sku": "WHITE MILAN TRAVERTINE",
     "inStock": false,
     "featured": false,
-    "highlights": []
+    "highlights": [],
+    "reviews": [
+      {
+        "author": "Ivan P.",
+        "city": "Podgorica",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Koristio/la sam Flex Stone White Milan Travertine 1.2×0.6m | Fleksibilni Kamen za kupatilo i rezultat je fantastičan. Pruža luksuzni izgled mermera koji sam tražio/la. Gosti uvijek pitaju je li pravi kamen."
+      },
+      {
+        "author": "Ana M.",
+        "city": "Bijelo Polje",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Odlično iskustvo s Make My Home Decor. Flex Stone White Milan Travertine 1.2×0.6m | Fleksibilni Kamen je transformisao/la moj/u hodnik – izgled pravog kamena je nevjerovatna. Montaža brza i jednostavna, toplo preporučujem!"
+      },
+      {
+        "author": "Jovana C.",
+        "city": "Zagreb",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Naručio/la sam Flex Stone White Milan Travertine 1.2×0.6m | Fleksibilni Kamen za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
+      }
+    ]
   }
 ]

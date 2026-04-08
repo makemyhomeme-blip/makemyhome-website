@@ -512,6 +512,15 @@ async function renderProductDetail() {
     return null;
   })() : null;
 
+  // Flex Stone panel dimensions from features (e.g. "Dimenzije: 120×60cm")
+  const flexDims = product.category === 'flex-stone' ? (() => {
+    for (const f of (product.features || [])) {
+      const m = f.match(/(\d+)\s*[×x]\s*(\d+)\s*cm/i);
+      if (m) return { w: parseInt(m[1]), h: parseInt(m[2]) };
+    }
+    return { w: 120, h: 60 };
+  })() : null;
+
   // SPC floor plank/tile dimensions from features (e.g. "Dimenzije: 122 × 18 cm")
   const spcDims = product.category === 'spc-pod' ? (() => {
     for (const f of (product.features || [])) {
@@ -1089,6 +1098,11 @@ async function renderProductDetail() {
         <i class="fas fa-ruler-combined"></i>
         <span>Svaki panel: <strong>${mdfDims.w} × ${mdfDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
       </div>` : ''}
+      ${flexDims ? `
+      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+        <i class="fas fa-ruler-combined"></i>
+        <span>Svaki panel: <strong>${flexDims.w} × ${flexDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
+      </div>` : ''}
       ${spcDims ? `
       <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
         <i class="fas fa-ruler-combined"></i>
@@ -1355,6 +1369,17 @@ async function renderProductDetail() {
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
           <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${mdfDims.w}×${mdfDims.h}cm)<br>
+          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+        </div>`;
+    } else if (flexDims) {
+      const areaWithBuffer = area * 1.05;
+      const total = Math.ceil(areaWithBuffer / coveragePerUnit);
+      const totalCost = (total * unitPrice).toFixed(2).replace('.', ',');
+      const label = total === 1 ? 'komad' : total < 5 ? 'komada' : 'komada';
+      res.innerHTML = `
+        <div style="line-height:1.7;">
+          Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
+          <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${flexDims.w}×${flexDims.h}cm)<br>
           <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
         </div>`;
     } else if (letvicaDims) {
