@@ -57,6 +57,19 @@
     }
   },
   {
+    "id": "3d-letvice",
+    "name": "3D Letvice",
+    "icon": "fas fa-grip-lines",
+    "description": "Dekorativne 3D letvice za moderan enterijer",
+    "color": "#6b4f2a",
+    "image": "images/categories/cat-3d-letvice-1774394494.jpg",
+    "imagePosition": {
+      "posX": 34.8,
+      "posY": 64.49,
+      "zoom": 1.55
+    }
+  },
+  {
     "id": "akusticni-paneli",
     "name": "Akustični Paneli",
     "icon": "fas fa-volume-mute",
@@ -70,17 +83,33 @@
     }
   },
   {
-    "id": "3d-letvice",
-    "name": "3D Letvice",
-    "icon": "fas fa-grip-lines",
-    "description": "Dekorativne 3D letvice za moderan enterijer",
-    "color": "#6b4f2a",
-    "image": "images/categories/cat-3d-letvice-1774394494.jpg",
+    "id": "mdf",
+    "name": "MDF Paneli",
+    "icon": "fas fa-layer-group",
+    "color": "#8B6914",
+    "description": "Medijapan paneli za zidove i plafone",
+    "image": ""
+  },
+  {
+    "id": "pu-kamen",
+    "name": "PU Kamen",
+    "icon": "fas fa-mountain",
+    "description": "Lagani dekorativni PU kameni paneli – realistična tekstura kamena",
+    "color": "#7d6b55",
+    "image": "images/categories/cat-pu-kamen-1774832059.jpg",
     "imagePosition": {
-      "posX": 34.8,
-      "posY": 64.49,
-      "zoom": 1.55
+      "posX": 50,
+      "posY": 50,
+      "zoom": 1.1
     }
+  },
+  {
+    "id": "flex-stone",
+    "name": "Flex Stone",
+    "icon": "fas fa-mountain",
+    "color": "#6B7280",
+    "description": "Fleksibilni kameni furnir",
+    "image": ""
   },
   {
     "id": "aluminijum-lajsne",
@@ -107,34 +136,5 @@
       "posY": 100,
       "zoom": 1.05
     }
-  },
-  {
-    "id": "pu-kamen",
-    "name": "PU Kamen",
-    "icon": "fas fa-mountain",
-    "description": "Lagani dekorativni PU kameni paneli – realistična tekstura kamena",
-    "color": "#7d6b55",
-    "image": "images/categories/cat-pu-kamen-1774832059.jpg",
-    "imagePosition": {
-      "posX": 50,
-      "posY": 50,
-      "zoom": 1.1
-    }
-  },
-  {
-    "id": "mdf",
-    "name": "MDF Paneli",
-    "icon": "fas fa-layer-group",
-    "color": "#8B6914",
-    "description": "Medijapan paneli za zidove i plafone",
-    "image": ""
-  },
-  {
-    "id": "flex-stone",
-    "name": "Flex Stone",
-    "icon": "fas fa-mountain",
-    "color": "#6B7280",
-    "description": "Fleksibilni kameni furnir",
-    "image": ""
   }
 ]
