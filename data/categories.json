@@ -88,7 +88,12 @@
     "icon": "fas fa-layer-group",
     "color": "#8B6914",
     "description": "Medijapan paneli za zidove i plafone",
-    "image": ""
+    "image": "images/categories/cat-mdf-1775496655.jpg",
+    "imagePosition": {
+      "zoom": 1.0,
+      "posX": 50,
+      "posY": 50
+    }
   },
   {
     "id": "pu-kamen",
@@ -109,7 +114,12 @@
     "icon": "fas fa-mountain",
     "color": "#6B7280",
     "description": "Fleksibilni kameni furnir",
-    "image": ""
+    "image": "images/categories/cat-flex-stone-1775496929.jpg",
+    "imagePosition": {
+      "zoom": 1.0,
+      "posX": 50,
+      "posY": 50
+    }
   },
   {
     "id": "aluminijum-lajsne",
