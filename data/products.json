@@ -251,11 +251,18 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: tamna smeđa – bogata, duboka",
+      "Boja: tamna smeđa – bogata",
+      "duboka",
       "Šara: izraženi godovi i bogata drvena šara – egzotični karakter",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -306,7 +313,11 @@
         "rating": 4,
         "text": "Naručio/la sam Havana Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
       }
-    ]
+    ],
+    "gallery": [
+      "images/products/gallery-25-1775676334-158.jpg"
+    ],
+    "discount": 0
   },
   {
     "id": 24,
@@ -606,6 +617,9 @@
         "rating": 4,
         "text": "Naručio/la sam Smoke Oak za hodnik. Kvalitet je odličan, drven ugođaj oduševila me od prvog pogleda. Moja porodica je oduševljena rezultatom."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-21-1775677275-201.jpg"
     ]
   },
   {
@@ -1389,11 +1403,18 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: bež, topla",
+      "Boja: bež",
+      "topla",
       "Šara: hrapava kamena tekstura – pješčenjak efekat",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -1445,7 +1466,68 @@
         "rating": 5,
         "text": "Naručio/la sam Desert Stone za dnevnu sobu. Kvalitet je odličan, dramatičan efekat oduševila me od prvog pogleda. Cijena je jako povoljna za ovakav kvalitet."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-47-1775677087-695.jpg",
+      "images/products/gallery-47-1775677222-552.jpg"
     ]
+  },
+  {
+    "id": 142,
+    "name": "TRAVERTINO",
+    "category": "bambus-mermerni",
+    "price": "86.99",
+    "discount": 0,
+    "unit": "kom",
+    "description": "TRAVERTINO donosi autentičnu ljepotu prirodnog travertina na vaše zidove. Topli bež tonovi s karakterističnim kanalima i šarama stvaraju bogatu, živu teksturu – svaki panel je jedinstven, kao da je izrezan direktno iz kamenoloma.",
+    "features": [
+      "Dimenzije: 280×122cm (3.42 m² po komadu)",
+      "Debljina: 5mm",
+      "Boja: topli bež i kremasti tonovi travertina",
+      "Šara: karakteristični travertin kanali i prirodne šare – svaki panel jedinstven",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, hoteli, restorani, kafići, recepcije",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: TW37"
+    ],
+    "image": "images/products/product-1775676714-908.jpg",
+    "badge": "Novo",
+    "sku": "TW37",
+    "inStock": true,
+    "featured": true,
+    "gallery": [
+      "images/products/gallery-142-1775676758-624.jpg",
+      "images/products/gallery-142-1775676795-366.jpg",
+      "images/products/gallery-142-1775676796-903.jpg"
+    ],
+    "reviews": [
+      {
+        "author": "Milena R.",
+        "city": "Podgorica",
+        "date": "April 2025",
+        "rating": 5,
+        "text": "Postavila sam TRAVERTINO u hodnik i svi koji uđu pitaju je li pravi kamen. Ta topla bež boja i prirodne šare daju prostoru nevjerovatan karakter. Montaža je bila lakša nego što sam mislila – za par sati gotovo."
+      },
+      {
+        "author": "Darko V.",
+        "city": "Budva",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Koristio sam TRAVERTINO za akcentni zid u dnevnoj sobi apartmana. Gosti redovno komentarišu koliko izgleda luksuzno. Kombinacija s toplim osvjetljenjem je savršena – izgleda kao visokobudžetni hotel, a cijena je odlična."
+      },
+      {
+        "author": "Sandra K.",
+        "city": "Herceg Novi",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Dugo sam tražila travertin obloge koje ne koštaju bogatstvo. TRAVERTINO je tačno ono što sam htjela – svaki panel ima drugačiji uzorak, baš kao pravi kamen. Restoran u koji sam ga postavila dobio je potpuno novu atmosferu."
+      }
+    ],
+    "highlights": []
   },
   {
     "id": 116,
@@ -1456,12 +1538,14 @@
     "unit": "kom",
     "description": "Mercury Marble donosi toplinu kremasto-bež mermera s nježnim zlatnim i smeđim žilama koje prolaze kroz površinu poput autorskog potpisa prirode. Za razliku od hladnog bijelog mermera, Mercury Marble unosi toplinu i karakter – savršen za prostore gdje se želi luksuz bez krutosti. Bambus osnova čini panel lakim za montažu i otpornim na vlagu, dok visokosjajni zaštitni sloj daje dubinu i sjaj koji imitira prirodni polirani kamen.",
     "features": [
-      "Dimenzije: 280×122 cm (3,42 m² po komadu)",
+      "Dimenzije: 280×122 cm (3",
+      "42 m² po komadu)",
       "Debljina: 5mm",
       "Materijal: bambus vlakno s mermernim UV printom",
       "Uzorak: kremasto-bež mermer s toplim zlatnim žilama – Mercury Marble",
       "Površinska obrada: visoko-sjajna lak zaštita",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
       "Otporan na vlagu – pogodan za kupatilo",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
@@ -1514,6 +1598,9 @@
         "rating": 5,
         "text": "Koristila sam Mercury Marble kao fokalni zid u dnevnoj sobi. Jedinstven uzorak zlatnih žila daje prostoru karakter koji ne možete naći ni u jednoj drugoj oblozi. Oduševljena sam Make My Home uslugom!"
       }
+    ],
+    "gallery": [
+      "images/products/gallery-116-1775677178-379.jpg"
     ]
   },
   {
