@@ -85,6 +85,10 @@
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
+    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
+    </a>
     <button id="hamburger" class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -339,6 +343,7 @@
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 <script src="js/main-v4.js"></script>
+<script src="js/cart.js"></script>
 <script>
   // Pre-fill product from URL
   const params = new URLSearchParams(window.location.search);

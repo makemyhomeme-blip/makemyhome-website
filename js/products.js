@@ -81,8 +81,8 @@ function renderProductCard(product, lazy = true) {
           <button class="btn-action" title="Brzi pregled" onclick="event.stopPropagation(); openProductModal(${product.id})">
             <i class="fas fa-eye"></i>
           </button>
-          <button class="btn-action" title="Pošalji upit" onclick="event.stopPropagation(); inquireProduct('${product.name}')">
-            <i class="fas fa-envelope"></i>
+          <button class="btn-action btn-action-cart" title="Dodaj u korpu" onclick="event.stopPropagation(); addProductToCartById(${product.id})">
+            <i class="fas fa-cart-plus"></i>
           </button>
         </div>
       </div>
@@ -1148,6 +1148,24 @@ async function renderProductDetail() {
     `}
 
     <div class="product-short-desc">${product.description}</div>
+
+    <!-- Kolicina + Dodaj u korpu -->
+    <div class="pq-qty-row">
+      <div class="pq-qty-wrap">
+        <button type="button" class="pq-qty-btn" onclick="
+          var i=document.getElementById('pq-qty');
+          i.value=Math.max(1,parseInt(i.value||1)-1);">−</button>
+        <input type="number" id="pq-qty" value="1" min="1" max="99"
+          style="width:52px;text-align:center;background:rgba(255,255,255,0.07);border:1.5px solid rgba(201,168,108,0.35);color:#fff;border-radius:8px;font-size:15px;font-weight:600;padding:8px 4px;font-family:inherit;-moz-appearance:textfield;"
+          oninput="this.value=Math.max(1,parseInt(this.value)||1)">
+        <button type="button" class="pq-qty-btn" onclick="
+          var i=document.getElementById('pq-qty');
+          i.value=Math.min(99,parseInt(i.value||1)+1);">+</button>
+      </div>
+      <button class="pq-btn-cart" onclick="addProductToCartById(${product.id}, parseInt(document.getElementById('pq-qty').value)||1)">
+        <i class="fas fa-cart-plus"></i> Dodaj u Korpu
+      </button>
+    </div>
 
     <!-- Akcijska dugmad -->
     <div class="pq-actions">
