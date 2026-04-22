@@ -1167,19 +1167,18 @@ async function renderProductDetail() {
       <button class="pq-btn-cart-main" onclick="addProductToCartById(${product.id}, parseInt(document.getElementById('pq-qty').value)||1)">
         <i class="fas fa-cart-plus"></i> Dodaj u Korpu
       </button>
-      <a href="${waLink}" target="_blank" rel="noopener" class="pq-btn-wa">
-        <i class="fab fa-whatsapp"></i>
-      </a>
     </div>
-    <div class="pq-secondary-links">
-      <button onclick="inquireProduct('${product.name}')" style="background:none;border:none;color:#888;font-size:12px;cursor:pointer;font-family:inherit;padding:0;text-decoration:underline;text-underline-offset:3px;">
-        <i class="fas fa-envelope" style="margin-right:4px;"></i>Pošalji upit
+    <!-- Sekundarna dugmad -->
+    <div class="pq-actions">
+      <button class="pq-btn-primary" onclick="inquireProduct('${product.name}')">
+        <i class="fas fa-envelope"></i> Pošalji Upit
       </button>
-      <span style="color:#444;">·</span>
-      <a href="contact.html" style="color:#888;font-size:12px;text-decoration:underline;text-underline-offset:3px;">
-        <i class="fas fa-circle-question" style="margin-right:4px;"></i>Kako da kupim?
+      <a href="${waLink}" target="_blank" rel="noopener" class="pq-btn-dark">
+        <i class="fab fa-whatsapp"></i> WhatsApp
       </a>
     </div>
+    <div class="pq-howto">
+      <a href="contact.html"><i class="fas fa-circle-question"></i> Kako da kupim?</a>
 
     <!-- Accordion sekcije -->
     <div class="spec-accordion">
