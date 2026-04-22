@@ -11,55 +11,55 @@
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
     /* ── KORPA PAGE STYLES ── */
-    body{background:#1c1916}
+    body{background:#f5f0eb}
     .korpa-wrap{padding:110px 0 80px;min-height:80vh}
-    .korpa-header{padding:0 0 32px;border-bottom:1px solid rgba(255,255,255,0.09);margin-bottom:32px}
-    .korpa-header h1{font-size:28px;font-weight:700;color:#fff;display:flex;align-items:center;gap:12px}
+    .korpa-header{padding:0 0 32px;border-bottom:1px solid rgba(0,0,0,0.08);margin-bottom:32px}
+    .korpa-header h1{font-size:28px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:12px}
     .korpa-header h1 i{color:#c9a86c;font-size:24px}
     .korpa-header .sub{font-size:14px;color:#888;margin-top:4px}
     .korpa-grid{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
 
     /* Items */
-    .korpa-items{display:flex;flex-direction:column;gap:0;background:#251f18;border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden}
-    .korpa-item{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:20px 22px;border-bottom:1px solid rgba(255,255,255,0.07);transition:background .15s}
+    .korpa-items{display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
+    .korpa-item{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:20px 22px;border-bottom:1px solid rgba(0,0,0,0.06);transition:background .15s}
     .korpa-item:last-child{border-bottom:none}
-    .korpa-item:hover{background:rgba(255,255,255,0.04)}
-    .ki-img{width:76px;height:76px;border-radius:10px;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,0.08)}
+    .korpa-item:hover{background:#faf8f4}
+    .ki-img{width:76px;height:76px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#f0ece4}
     .ki-img img{width:100%;height:100%;object-fit:cover;display:block}
     .ki-info{}
-    .ki-name{font-size:14px;font-weight:600;color:#f0ece4;margin-bottom:4px;line-height:1.3}
+    .ki-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px;line-height:1.3}
     .ki-price{font-size:13px;color:#c9a86c;margin-bottom:8px}
-    .ki-price-original{font-size:11px;color:#666;text-decoration:line-through;margin-right:6px}
+    .ki-price-original{font-size:11px;color:#aaa;text-decoration:line-through;margin-right:6px}
     .ki-controls{display:flex;align-items:center;gap:6px}
-    .ki-qty-btn{width:28px;height:28px;border-radius:6px;border:1.5px solid rgba(201,168,108,0.35);background:transparent;color:#c9a86c;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
-    .ki-qty-btn:hover{background:rgba(201,168,108,0.18)}
-    .ki-qty-input{width:38px;text-align:center;background:rgba(255,255,255,0.09);border:1.5px solid rgba(201,168,108,0.3);color:#fff;border-radius:6px;font-size:13px;font-weight:700;padding:4px 2px;font-family:inherit;-moz-appearance:textfield}
+    .ki-qty-btn{width:28px;height:28px;border-radius:6px;border:1.5px solid rgba(201,168,108,0.4);background:transparent;color:#c9a86c;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .ki-qty-btn:hover{background:rgba(201,168,108,0.12)}
+    .ki-qty-input{width:38px;text-align:center;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.35);color:#1a1a1a;border-radius:6px;font-size:13px;font-weight:700;padding:4px 2px;font-family:inherit;-moz-appearance:textfield}
     .ki-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
-    .ki-subtotal{font-size:15px;font-weight:700;color:#f0ece4;white-space:nowrap}
-    .ki-remove{background:none;border:none;color:#555;cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;transition:color .15s,background .15s}
-    .ki-remove:hover{color:#e74c3c;background:rgba(231,76,60,0.1)}
+    .ki-subtotal{font-size:15px;font-weight:700;color:#1a1a1a;white-space:nowrap}
+    .ki-remove{background:none;border:none;color:#bbb;cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;transition:color .15s,background .15s}
+    .ki-remove:hover{color:#e74c3c;background:rgba(231,76,60,0.08)}
 
     /* Summary */
-    .korpa-summary{background:#251f18;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;position:sticky;top:88px}
-    .ks-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+    .korpa-summary{background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px;position:sticky;top:88px;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
+    .ks-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:20px;display:flex;align-items:center;gap:8px}
     .ks-title i{color:#c9a86c}
     .ks-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#888;margin-bottom:10px}
-    .ks-row.ks-total{font-size:18px;font-weight:700;color:#fff;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;margin-top:6px;margin-bottom:0}
+    .ks-row.ks-total{font-size:18px;font-weight:700;color:#1a1a1a;border-top:1px solid rgba(0,0,0,0.08);padding-top:14px;margin-top:6px;margin-bottom:0}
     .ks-total span:last-child{color:#c9a86c;font-size:20px}
-    .ks-delivery{display:flex;align-items:center;gap:8px;background:rgba(201,168,108,0.07);border:1px solid rgba(201,168,108,0.18);border-radius:8px;padding:10px 12px;font-size:12px;color:#aaa;margin:14px 0}
+    .ks-delivery{display:flex;align-items:center;gap:8px;background:#faf8f4;border:1px solid rgba(201,168,108,0.2);border-radius:8px;padding:10px 12px;font-size:12px;color:#888;margin:14px 0}
     .ks-delivery i{color:#c9a86c;font-size:14px;flex-shrink:0}
     .ks-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;font-size:16px;font-weight:700;padding:15px 20px;border-radius:12px;text-decoration:none;width:100%;box-sizing:border-box;transition:background .2s,transform .15s;margin-top:4px;font-family:inherit;border:none;cursor:pointer}
-    .ks-cta:hover{background:#e8d5a3;transform:translateY(-1px)}
-    .ks-clear{width:100%;background:transparent;color:#555;border:1.5px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;font-size:12px;cursor:pointer;margin-top:8px;font-family:inherit;transition:color .15s,border-color .15s}
+    .ks-cta:hover{background:#dfc080;transform:translateY(-1px)}
+    .ks-clear{width:100%;background:transparent;color:#aaa;border:1.5px solid rgba(0,0,0,0.1);border-radius:10px;padding:10px;font-size:12px;cursor:pointer;margin-top:8px;font-family:inherit;transition:color .15s,border-color .15s}
     .ks-clear:hover{color:#e74c3c;border-color:rgba(231,76,60,0.3)}
-    .ks-trust{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#444;margin-top:14px;line-height:1.6}
+    .ks-trust{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#aaa;margin-top:14px;line-height:1.6}
     .ks-trust i{color:#c9a86c;margin-top:2px;flex-shrink:0}
 
     /* Empty */
     .korpa-empty{text-align:center;padding:80px 20px}
-    .korpa-empty-icon{width:90px;height:90px;border-radius:50%;background:rgba(201,168,108,0.08);border:1.5px solid rgba(201,168,108,0.18);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:36px;color:rgba(201,168,108,0.4)}
-    .korpa-empty h2{font-size:22px;color:#fff;margin-bottom:8px}
-    .korpa-empty p{color:#666;font-size:15px;margin-bottom:28px}
+    .korpa-empty-icon{width:90px;height:90px;border-radius:50%;background:rgba(201,168,108,0.08);border:1.5px solid rgba(201,168,108,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:36px;color:rgba(201,168,108,0.5)}
+    .korpa-empty h2{font-size:22px;color:#1a1a1a;margin-bottom:8px}
+    .korpa-empty p{color:#888;font-size:15px;margin-bottom:28px}
 
     @media(max-width:900px){.korpa-grid{grid-template-columns:1fr}.korpa-summary{position:static}}
     @media(max-width:560px){.korpa-item{grid-template-columns:60px 1fr auto}.ki-img{width:60px;height:60px}}

@@ -101,12 +101,6 @@ function renderProductCard(product, lazy = true) {
             Detaljnije <i class="fas fa-arrow-right"></i>
           </a>
         </div>
-        ${outOfStock
-          ? `<div class="btn-card-cart btn-card-cart-oos">Rasprodato</div>`
-          : `<button class="btn-card-cart" onclick="event.stopPropagation(); addProductToCartById(${product.id})">
-               <i class="fas fa-cart-plus"></i> Dodaj u korpu
-             </button>`
-        }
       </div>
     </article>
   `;
