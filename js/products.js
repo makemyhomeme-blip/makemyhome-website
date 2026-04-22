@@ -1153,12 +1153,13 @@ async function renderProductDetail() {
     <div class="product-short-desc">${product.description}</div>
 
     <!-- CTA dugmad -->
-    <div class="pq-cta-row">
-      <button class="pq-btn-cart-main" onclick="addProductToCartById(${product.id}, 1)">
-        <i class="fas fa-cart-plus"></i> Dodaj u Korpu
+    <div class="pq-cta-block">
+      <button class="pq-add-to-cart" onclick="addProductToCartById(${product.id}, 1)">
+        <i class="fas fa-bag-shopping"></i>
+        <span>Dodaj u Korpu</span>
       </button>
-      <a href="${waLink}" target="_blank" rel="noopener" class="pq-btn-wa-sm">
-        <i class="fab fa-whatsapp"></i>
+      <a href="${waLink}" target="_blank" rel="noopener" class="pq-wa-link">
+        <i class="fab fa-whatsapp"></i> Pitaj nas na WhatsApp-u
       </a>
     </div>
 

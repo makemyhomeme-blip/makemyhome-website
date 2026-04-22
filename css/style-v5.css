@@ -3000,49 +3000,59 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .btn-card-detail:hover { color: #c9a86c; }
 
 /* ===== PRODUCT DETAIL — CART CTA ===== */
-.pq-cta-row {
+.pq-cta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0 26px;
+}
+.pq-add-to-cart {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-bottom: 18px;
+  background: #c9a86c;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 14px;
+  padding: 18px 24px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.4px;
+  transition: background .2s, transform .15s, box-shadow .2s;
 }
-.pq-btn-cart-main {
-  flex: 1;
+.pq-add-to-cart:hover {
+  background: #dfc080;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(201,168,108,0.28);
+}
+.pq-wa-link {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  background: #c9a86c;
-  color: #0a0a0a;
-  border: none;
-  border-radius: 12px;
-  padding: 15px 20px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  letter-spacing: 0.3px;
-  transition: background .2s, transform .15s;
-  white-space: nowrap;
-}
-.pq-btn-cart-main:hover { background: #e8d5a3; transform: translateY(-1px); }
-.pq-btn-wa-sm {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  background: rgba(37,211,102,0.1);
-  border: 1.5px solid rgba(37,211,102,0.3);
+  padding: 14px 20px;
+  border: 1.5px solid rgba(37,211,102,0.35);
+  border-radius: 14px;
+  background: rgba(37,211,102,0.07);
   color: #25d366;
-  font-size: 20px;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
-  flex-shrink: 0;
-  transition: background .2s, transform .15s;
+  font-family: inherit;
+  transition: background .2s, border-color .2s;
+  box-sizing: border-box;
 }
-.pq-btn-wa-sm:hover { background: rgba(37,211,102,0.2); transform: translateY(-1px); }
+.pq-wa-link:hover {
+  background: rgba(37,211,102,0.15);
+  border-color: rgba(37,211,102,0.6);
+  text-decoration: none;
+}
 @media (max-width: 480px) {
   .btn-card-cart { border-radius: 10px; margin-top: 8px; }
-  .pq-btn-cart-main { font-size: 15px; padding: 14px 16px; }
+  .pq-add-to-cart { font-size: 16px; padding: 16px 20px; }
 }
