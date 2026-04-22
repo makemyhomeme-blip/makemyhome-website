@@ -1152,33 +1152,15 @@ async function renderProductDetail() {
 
     <div class="product-short-desc">${product.description}</div>
 
-    <!-- Glavni CTA — Dodaj u korpu -->
-    <div class="pq-cart-cta">
-      <div class="pq-qty-row">
-        <span class="pq-qty-label">Količina:</span>
-        <div class="pq-qty-wrap">
-          <button type="button" class="pq-qty-btn" onclick="var i=document.getElementById('pq-qty');i.value=Math.max(1,parseInt(i.value||1)-1);">−</button>
-          <input type="number" id="pq-qty" value="1" min="1" max="99"
-            style="width:48px;text-align:center;background:transparent;border:none;color:#fff;font-size:16px;font-weight:700;padding:4px;font-family:inherit;-moz-appearance:textfield;"
-            oninput="this.value=Math.max(1,parseInt(this.value)||1)">
-          <button type="button" class="pq-qty-btn" onclick="var i=document.getElementById('pq-qty');i.value=Math.min(99,parseInt(i.value||1)+1);">+</button>
-        </div>
-      </div>
-      <button class="pq-btn-cart-main" onclick="addProductToCartById(${product.id}, parseInt(document.getElementById('pq-qty').value)||1)">
+    <!-- CTA dugmad -->
+    <div class="pq-cta-row">
+      <button class="pq-btn-cart-main" onclick="addProductToCartById(${product.id}, 1)">
         <i class="fas fa-cart-plus"></i> Dodaj u Korpu
       </button>
-    </div>
-    <!-- Sekundarna dugmad -->
-    <div class="pq-actions">
-      <button class="pq-btn-primary" onclick="inquireProduct('${product.name}')">
-        <i class="fas fa-envelope"></i> Pošalji Upit
-      </button>
-      <a href="${waLink}" target="_blank" rel="noopener" class="pq-btn-dark">
-        <i class="fab fa-whatsapp"></i> WhatsApp
+      <a href="${waLink}" target="_blank" rel="noopener" class="pq-btn-wa-sm">
+        <i class="fab fa-whatsapp"></i>
       </a>
     </div>
-    <div class="pq-howto">
-      <a href="contact.html"><i class="fas fa-circle-question"></i> Kako da kupim?</a>
 
     <!-- Accordion sekcije -->
     <div class="spec-accordion">
