@@ -2958,3 +2958,135 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .cart-item-total { display: none; }
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* ===== PRODUCT CARD — DODAJ U KORPU BTN ===== */
+.btn-card-cart {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #c9a86c;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 0 0 12px 12px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  transition: background .2s, transform .15s;
+  margin-top: 12px;
+}
+.btn-card-cart:hover { background: #e8d5a3; }
+.btn-card-cart-oos {
+  background: rgba(255,255,255,0.06);
+  color: #666;
+  cursor: default;
+  pointer-events: none;
+}
+.btn-card-detail {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color .2s;
+  white-space: nowrap;
+}
+.btn-card-detail:hover { color: #c9a86c; }
+
+/* ===== PRODUCT DETAIL — CART CTA ===== */
+.pq-cart-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  background: rgba(201,168,108,0.06);
+  border: 1px solid rgba(201,168,108,0.2);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.pq-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.pq-qty-label {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+}
+.pq-qty-wrap {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(201,168,108,0.3);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pq-qty-btn {
+  background: transparent;
+  border: none;
+  color: #c9a86c;
+  width: 30px;
+  height: 34px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+}
+.pq-qty-btn:hover { background: rgba(201,168,108,0.15); }
+.pq-btn-cart-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #c9a86c;
+  color: #0a0a0a;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .2s, transform .15s;
+  white-space: nowrap;
+}
+.pq-btn-cart-main:hover { background: #e8d5a3; transform: translateY(-1px); }
+.pq-btn-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(37,211,102,0.12);
+  border: 1.5px solid rgba(37,211,102,0.35);
+  color: #25d366;
+  font-size: 18px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background .2s, transform .15s;
+}
+.pq-btn-wa:hover { background: rgba(37,211,102,0.22); transform: translateY(-1px); }
+.pq-secondary-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+@media (max-width: 480px) {
+  .pq-cart-cta { flex-wrap: wrap; }
+  .pq-qty-row { order: -1; width: 100%; justify-content: center; }
+  .btn-card-cart { border-radius: 10px; margin-top: 8px; }
+}

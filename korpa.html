@@ -10,28 +10,66 @@
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
+    /* ── KORPA PAGE STYLES ── */
+    body{background:#0f0e0c}
+    .korpa-wrap{padding:110px 0 80px;min-height:80vh}
+    .korpa-header{padding:0 0 32px;border-bottom:1px solid rgba(255,255,255,0.07);margin-bottom:32px}
+    .korpa-header h1{font-size:28px;font-weight:700;color:#fff;display:flex;align-items:center;gap:12px}
+    .korpa-header h1 i{color:#c9a86c;font-size:24px}
+    .korpa-header .sub{font-size:14px;color:#666;margin-top:4px}
+    .korpa-grid{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
+
+    /* Items */
+    .korpa-items{display:flex;flex-direction:column;gap:0;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden}
+    .korpa-item{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,0.05);transition:background .15s}
+    .korpa-item:last-child{border-bottom:none}
+    .korpa-item:hover{background:rgba(255,255,255,0.03)}
+    .ki-img{width:76px;height:76px;border-radius:10px;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,0.06)}
+    .ki-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .ki-info{}
+    .ki-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;line-height:1.3}
+    .ki-price{font-size:13px;color:#c9a86c;margin-bottom:8px}
+    .ki-price-original{font-size:11px;color:#555;text-decoration:line-through;margin-right:6px}
+    .ki-controls{display:flex;align-items:center;gap:6px}
+    .ki-qty-btn{width:28px;height:28px;border-radius:6px;border:1.5px solid rgba(201,168,108,0.3);background:transparent;color:#c9a86c;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .ki-qty-btn:hover{background:rgba(201,168,108,0.15)}
+    .ki-qty-input{width:38px;text-align:center;background:rgba(255,255,255,0.07);border:1.5px solid rgba(201,168,108,0.25);color:#fff;border-radius:6px;font-size:13px;font-weight:700;padding:4px 2px;font-family:inherit;-moz-appearance:textfield}
+    .ki-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+    .ki-subtotal{font-size:15px;font-weight:700;color:#fff;white-space:nowrap}
+    .ki-remove{background:none;border:none;color:#444;cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;transition:color .15s,background .15s}
+    .ki-remove:hover{color:#e74c3c;background:rgba(231,76,60,0.1)}
+
+    /* Summary */
+    .korpa-summary{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;position:sticky;top:88px}
+    .ks-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+    .ks-title i{color:#c9a86c}
+    .ks-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#888;margin-bottom:10px}
+    .ks-row.ks-total{font-size:18px;font-weight:700;color:#fff;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;margin-top:6px;margin-bottom:0}
+    .ks-total span:last-child{color:#c9a86c;font-size:20px}
+    .ks-delivery{display:flex;align-items:center;gap:8px;background:rgba(201,168,108,0.07);border:1px solid rgba(201,168,108,0.18);border-radius:8px;padding:10px 12px;font-size:12px;color:#aaa;margin:14px 0}
+    .ks-delivery i{color:#c9a86c;font-size:14px;flex-shrink:0}
+    .ks-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;font-size:16px;font-weight:700;padding:15px 20px;border-radius:12px;text-decoration:none;width:100%;box-sizing:border-box;transition:background .2s,transform .15s;margin-top:4px;font-family:inherit;border:none;cursor:pointer}
+    .ks-cta:hover{background:#e8d5a3;transform:translateY(-1px)}
+    .ks-clear{width:100%;background:transparent;color:#555;border:1.5px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;font-size:12px;cursor:pointer;margin-top:8px;font-family:inherit;transition:color .15s,border-color .15s}
+    .ks-clear:hover{color:#e74c3c;border-color:rgba(231,76,60,0.3)}
+    .ks-trust{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#444;margin-top:14px;line-height:1.6}
+    .ks-trust i{color:#c9a86c;margin-top:2px;flex-shrink:0}
+
+    /* Empty */
+    .korpa-empty{text-align:center;padding:80px 20px}
+    .korpa-empty-icon{width:90px;height:90px;border-radius:50%;background:rgba(201,168,108,0.08);border:1.5px solid rgba(201,168,108,0.18);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:36px;color:rgba(201,168,108,0.4)}
+    .korpa-empty h2{font-size:22px;color:#fff;margin-bottom:8px}
+    .korpa-empty p{color:#666;font-size:15px;margin-bottom:28px}
+
+    @media(max-width:900px){.korpa-grid{grid-template-columns:1fr}.korpa-summary{position:static}}
+    @media(max-width:560px){.korpa-item{grid-template-columns:60px 1fr auto}.ki-img{width:60px;height:60px}}
   </style>
   <style id="nav-fix">
-  @media(min-width:769px){
-    .header-inner{flex-wrap:nowrap!important;}
-    .logo{flex-shrink:0!important;margin-right:20px!important;}
-    .logo-img{height:44px!important;}
-    .logo-text .name{white-space:nowrap!important;font-size:16px!important;}
-    .logo-text .tagline{white-space:nowrap!important;font-size:9px!important;}
-    .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;margin-left:auto!important;}
-    .nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 5px!important;}
-    .nav-link.nav-cta{padding:7px 14px!important;margin-left:4px!important;}
-    #desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}
-  }
+  @media(min-width:769px){.header-inner{flex-wrap:nowrap!important;}.logo{flex-shrink:0!important;margin-right:20px!important;}.logo-img{height:44px!important;}.logo-text .name{white-space:nowrap!important;font-size:16px!important;}.logo-text .tagline{white-space:nowrap!important;font-size:9px!important;}.nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;margin-left:auto!important;}.nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 5px!important;}.nav-link.nav-cta{padding:7px 14px!important;margin-left:4px!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-4LLQCZ8CV4");
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-4LLQCZ8CV4");</script>
 </head>
 <body>
 
@@ -39,32 +77,17 @@
   <div class="header-inner">
     <a href="index.html" class="logo">
       <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
-      <div class="logo-text">
-        <span class="name">Make My Home Decor</span>
-        <span class="tagline">Dekorativni Bambus Paneli</span>
-      </div>
+      <div class="logo-text"><span class="name">Make My Home Decor</span><span class="tagline">Dekorativni Bambus Paneli</span></div>
     </a>
-
     <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
       <div style="position:relative;">
         <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
-        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off"
-          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
-          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
-          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off" style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;" onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'" onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
       </div>
       <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
     </div>
-
     <nav id="nav-menu" class="nav-menu">
-      <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
-        <div style="position:relative;">
-          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
-          <input id="mob-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
-        </div>
-        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
-      </div>
+      <div id="mob-search-box" style="padding:4px 0 14px;width:100%;"><div style="position:relative;"><i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i><input id="mob-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off" style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;"></div><div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div></div>
       <a href="index.html" class="nav-link">Početna</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
@@ -77,98 +100,75 @@
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
-
     <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
       <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
-    <button id="hamburger" class="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button id="hamburger" class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<!-- Page hero -->
-<section class="page-hero" style="padding:120px 0 40px;">
-  <div class="container">
-    <div class="page-hero-content">
-      <div class="breadcrumb">
-        <a href="index.html">Početna</a>
-        <i class="fas fa-chevron-right"></i>
-        <span>Korpa</span>
-      </div>
-      <h1 class="page-hero-title">Vaša Korpa</h1>
-    </div>
-  </div>
-</section>
-
-<!-- Cart content -->
-<section class="cart-page" style="padding-top:0;">
+<div class="korpa-wrap">
   <div class="container">
 
-    <!-- Empty state -->
-    <div id="cart-empty" class="cart-empty" style="display:none;">
-      <i class="fas fa-shopping-cart"></i>
+    <!-- Prazna korpa -->
+    <div id="korpa-empty" class="korpa-empty" style="display:none;">
+      <div class="korpa-empty-icon"><i class="fas fa-shopping-cart"></i></div>
       <h2>Vaša korpa je prazna</h2>
       <p>Dodajte proizvode iz naše kolekcije</p>
       <a href="products.html" class="btn btn-primary btn-lg">
-        <i class="fas fa-arrow-left"></i> Pogledaj Proizvode
+        <i class="fas fa-arrow-left"></i> Pogledaj Kolekciju
       </a>
     </div>
 
-    <!-- Cart with items -->
-    <div id="cart-content" style="display:none;">
-      <div class="cart-layout">
+    <!-- Korpa sa stavkama -->
+    <div id="korpa-content" style="display:none;">
+      <div class="korpa-header">
+        <h1><i class="fas fa-shopping-cart"></i> Vaša Korpa</h1>
+        <div class="sub" id="korpa-subtitle">0 artikala</div>
+      </div>
 
-        <!-- Items list -->
-        <div>
-          <div class="cart-items-wrap" id="cart-items-list"></div>
-        </div>
+      <div class="korpa-grid">
+        <!-- Stavke -->
+        <div class="korpa-items" id="korpa-items"></div>
 
         <!-- Summary -->
-        <div class="cart-summary">
-          <h3><i class="fas fa-receipt" style="color:#c9a86c;margin-right:8px;"></i>Pregled narudžbe</h3>
-          <div class="cart-summary-row">
-            <span>Broj artikala</span>
-            <span id="s-count">0</span>
-          </div>
-          <div class="cart-summary-row">
-            <span>Dostava</span>
-            <span style="color:#c9a86c;">Po dogovoru</span>
-          </div>
-          <div class="cart-summary-row total">
-            <span>Ukupno</span>
-            <span id="s-total">0,00 €</span>
-          </div>
-          <a href="checkout.html" class="btn-checkout">
-            <i class="fas fa-lock"></i> Nastavi na plaćanje
-          </a>
-          <button class="btn-clear-cart" onclick="if(confirm('Obrisati sve stavke iz korpe?')){clearCart();renderCart();}">
-            <i class="fas fa-trash"></i> Isprazni korpu
-          </button>
-          <p style="font-size:12px;color:#555;text-align:center;margin-top:14px;line-height:1.6;">
-            <i class="fas fa-shield-halved" style="color:#c9a86c;margin-right:4px;"></i>
-            Sigurna narudžba · Potvrda na email · Plaćanje pri dostavi opcija
-          </p>
-        </div>
+        <div class="korpa-summary">
+          <div class="ks-title"><i class="fas fa-receipt"></i> Pregled narudžbe</div>
 
+          <div class="ks-row"><span>Cijene proizvoda</span><span id="ks-subtotal">0,00 €</span></div>
+          <div class="ks-row ks-total"><span>Ukupno</span><span id="ks-total">0,00 €</span></div>
+
+          <div class="ks-delivery">
+            <i class="fas fa-truck"></i>
+            <span>Dostava se dogovara posebno — kontaktiraćemo Vas sa cijenom prema lokaciji</span>
+          </div>
+
+          <a href="checkout.html" class="ks-cta">
+            <i class="fas fa-lock"></i> Nastavi na narudžbu
+          </a>
+          <button class="ks-clear" onclick="if(confirm('Obrisati sve stavke?')){clearCart();renderKorpa();}">
+            <i class="fas fa-trash" style="margin-right:6px;"></i>Isprazni korpu
+          </button>
+
+          <div class="ks-trust">
+            <i class="fas fa-shield-halved"></i>
+            <span>Vaši podaci su sigurni. Narudžba se potvrđuje telefonom ili emailom.</span>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
-</section>
+</div>
 
-<!-- ===== FOOTER ===== -->
 <footer id="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo" style="margin-bottom:16px;display:inline-flex;">
           <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
-          <div class="logo-text">
-            <span class="name">Make My Home Decor</span>
-            <span class="tagline">Dekorativni Bambus Paneli</span>
-          </div>
+          <div class="logo-text"><span class="name">Make My Home Decor</span><span class="tagline">Dekorativni Bambus Paneli</span></div>
         </a>
         <p>Premium zidne obloge za Vaš dom. Podgorica, Crna Gora.</p>
       </div>
@@ -188,9 +188,7 @@
         <p><i class="fas fa-location-dot"></i> Podgorica, Crna Gora</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Make My Home Decor. Sva prava zadržana.</p>
-    </div>
+    <div class="footer-bottom"><p>&copy; 2025 Make My Home Decor. Sva prava zadržana.</p></div>
   </div>
 </footer>
 
@@ -198,81 +196,59 @@
 <script src="js/products.js?v=17"></script>
 <script src="js/cart.js"></script>
 <script>
-function renderCart() {
+function renderKorpa() {
   const cart = getCart();
-  const emptyEl = document.getElementById('cart-empty');
-  const contentEl = document.getElementById('cart-content');
+  document.getElementById('korpa-empty').style.display = cart.length === 0 ? 'block' : 'none';
+  document.getElementById('korpa-content').style.display = cart.length === 0 ? 'none' : 'block';
+  if (cart.length === 0) return;
 
-  if (cart.length === 0) {
-    emptyEl.style.display = 'block';
-    contentEl.style.display = 'none';
-    return;
-  }
-  emptyEl.style.display = 'none';
-  contentEl.style.display = 'block';
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const count = cart.reduce((s,i) => s + i.qty, 0);
 
-  const list = document.getElementById('cart-items-list');
-  list.innerHTML = cart.map(item => `
-    <div class="cart-item" id="ci-${item.id}">
-      <div class="cart-item-img">
-        ${item.image
-          ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<div class=cart-item-img-placeholder><i class=fas fa-image></i></div>'">`
-          : `<div class="cart-item-img-placeholder"><i class="fas fa-image"></i></div>`}
+  document.getElementById('korpa-subtitle').textContent =
+    count + (count === 1 ? ' artikal' : count < 5 ? ' artikla' : ' artikala');
+  document.getElementById('ks-subtotal').textContent = total.toFixed(2).replace('.', ',') + ' €';
+  document.getElementById('ks-total').textContent = total.toFixed(2).replace('.', ',') + ' €';
+
+  document.getElementById('korpa-items').innerHTML = cart.map(item => `
+    <div class="korpa-item" id="ki-${item.id}">
+      <div class="ki-img">
+        ${item.image ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<i class=fas fa-image style=color:#444;font-size:22px;display:flex;height:100%;align-items:center;justify-content:center;></i>'">` : ''}
       </div>
-      <div>
-        <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">
-          ${item.discount > 0
-            ? `<span style="text-decoration:line-through;color:#666;font-size:12px;margin-right:5px;">${item.originalPrice.toFixed(2)} €</span>`
-            : ''}
+      <div class="ki-info">
+        <div class="ki-name">${item.name}</div>
+        <div class="ki-price">
+          ${item.discount > 0 ? `<span class="ki-price-original">${item.originalPrice.toFixed(2)} €</span>` : ''}
           ${item.price.toFixed(2)} € / ${item.unit || 'kom'}
         </div>
+        <div class="ki-controls">
+          <button class="ki-qty-btn" onclick="kiQty(${item.id},-1)">−</button>
+          <input class="ki-qty-input" type="number" value="${item.qty}" min="1" max="99"
+            onchange="kiSet(${item.id},this.value)">
+          <button class="ki-qty-btn" onclick="kiQty(${item.id},1)">+</button>
+        </div>
       </div>
-      <div class="cart-item-qty">
-        <button onclick="changeQty(${item.id},-1)">−</button>
-        <input type="number" value="${item.qty}" min="1" max="99"
-          style="width:42px;text-align:center;background:rgba(255,255,255,0.07);border:1.5px solid rgba(201,168,108,0.3);color:#fff;border-radius:6px;font-size:14px;font-weight:600;padding:5px 2px;font-family:inherit;-moz-appearance:textfield;"
-          onchange="setQty(${item.id},this.value)">
-        <button onclick="changeQty(${item.id},1)">+</button>
+      <div class="ki-right">
+        <div class="ki-subtotal">${(item.price * item.qty).toFixed(2)} €</div>
+        <button class="ki-remove" onclick="kiRemove(${item.id})" title="Ukloni">
+          <i class="fas fa-xmark"></i>
+        </button>
       </div>
-      <div class="cart-item-total">${(item.price * item.qty).toFixed(2)} €</div>
-      <button class="cart-item-remove" onclick="removeItem(${item.id})" title="Ukloni">
-        <i class="fas fa-trash-can"></i>
-      </button>
     </div>
   `).join('');
-
-  // Summary
-  const count = cart.reduce((s,i) => s + i.qty, 0);
-  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
-  document.getElementById('s-count').textContent = count + (count === 1 ? ' artikal' : count < 5 ? ' artikla' : ' artikala');
-  document.getElementById('s-total').textContent = total.toFixed(2).replace('.', ',') + ' €';
 }
 
-function changeQty(id, delta) {
-  const cart = getCart();
-  const item = cart.find(i => i.id === +id);
-  if (!item) return;
-  item.qty = Math.max(1, item.qty + delta);
-  saveCart(cart);
-  renderCart();
+function kiQty(id, d) {
+  const c = getCart(), i = c.find(x => x.id === +id); if(!i) return;
+  i.qty = Math.max(1, i.qty + d); saveCart(c); renderKorpa();
 }
-
-function setQty(id, val) {
-  const cart = getCart();
-  const item = cart.find(i => i.id === +id);
-  if (!item) return;
-  item.qty = Math.max(1, parseInt(val) || 1);
-  saveCart(cart);
-  renderCart();
+function kiSet(id, v) {
+  const c = getCart(), i = c.find(x => x.id === +id); if(!i) return;
+  i.qty = Math.max(1, parseInt(v)||1); saveCart(c); renderKorpa();
 }
+function kiRemove(id) { removeFromCart(id); renderKorpa(); }
 
-function removeItem(id) {
-  removeFromCart(id);
-  renderCart();
-}
-
-document.addEventListener('DOMContentLoaded', renderCart);
+document.addEventListener('DOMContentLoaded', renderKorpa);
 </script>
 </body>
 </html>
