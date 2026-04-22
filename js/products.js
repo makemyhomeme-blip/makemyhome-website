@@ -1153,13 +1153,13 @@ async function renderProductDetail() {
     <div class="product-short-desc">${product.description}</div>
 
     <!-- CTA dugmad -->
-    <div class="pq-cta-block">
-      <button class="pq-add-to-cart" onclick="addProductToCartById(${product.id}, 1)">
-        <i class="fas fa-bag-shopping"></i>
+    <div style="display:flex;flex-direction:column;gap:10px;margin:22px 0 28px;">
+      <button onclick="addProductToCartById(${product.id}, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;transition:background .2s,transform .15s,box-shadow .2s;" onmouseover="this.style.background='#dfc080';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(201,168,108,0.3)'" onmouseout="this.style.background='#c9a86c';this.style.transform='';this.style.boxShadow=''">
+        <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
         <span>Dodaj u Korpu</span>
       </button>
-      <a href="${waLink}" target="_blank" rel="noopener" class="pq-wa-link">
-        <i class="fab fa-whatsapp"></i> Pitaj nas na WhatsApp-u
+      <a href="${waLink}" target="_blank" rel="noopener" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1.5px solid rgba(37,211,102,0.4);border-radius:14px;background:rgba(37,211,102,0.08);color:#25d366;font-size:14px;font-weight:600;text-decoration:none;font-family:inherit;box-sizing:border-box;transition:background .2s;" onmouseover="this.style.background='rgba(37,211,102,0.16)'" onmouseout="this.style.background='rgba(37,211,102,0.08)'">
+        <i class="fab fa-whatsapp" style="font-size:17px;"></i> Pitaj nas na WhatsApp-u
       </a>
     </div>
 
