@@ -1012,7 +1012,7 @@ ul { list-style: none; }
 }
 
 .cta-content .section-title { color: var(--white); }
-.cta-content .section-subtitle { color: rgba(255,255,255,0.65); }
+.cta-content .section-subtitle { color: rgba(255,255,255,0.65); margin-left: auto; margin-right: auto; text-align: center; }
 
 .cta-actions {
   display: flex;
