@@ -2268,24 +2268,24 @@
     "relatedLetvica": 77,
     "reviews": [
       {
-        "name": "Eldin K.",
+        "author": "Eldin K.",
         "city": "Sarajevo",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Kafić koji smo uredili s terrazzo panelima i 3D letvicama izgleda nevjerovatno. Gosti se fotografišu ispred tih zidova svaki dan. Najsretnije ulaganje u dekor."
       },
       {
-        "name": "Vesna J.",
+        "author": "Vesna J.",
         "city": "Banja Luka",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Koristila za hodnik stana. Bijeli terrazzo uz bijele pločice i mesing detalje – hodnik je postao najljepši prostor u stanu. Svi koji dođu odmah ga primijete."
       },
       {
-        "name": "Mladen B.",
+        "author": "Mladen B.",
         "city": "Mostar",
         "date": "Januar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Odličan kvalitet, boja i uzorak su tačno kao na slici. Montaža jednostavna. Kupatilo je dobilo premium izgled za razumnu cijenu."
       }
     ]
@@ -2334,24 +2334,24 @@
     "relatedLetvica": 71,
     "reviews": [
       {
-        "name": "Jasmin A.",
+        "author": "Jasmin A.",
         "city": "Sarajevo",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Mat crni zid iza TV-a uz zlatne police – kombinacija koja svake večeri izgleda kao scena iz filma. Uz dobru rasvjetu je još impresivnije. Preporučujem svima koji se usude."
       },
       {
-        "name": "Katarina L.",
+        "author": "Katarina L.",
         "city": "Banja Luka",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Bila sam uplašena od crne ali arhitekta me uvjerio. Spavaća soba u mat crnoj uz bijelo posteljinu i zlatnu lampicu je najljepša soba u kojoj sam ikad spavala."
       },
       {
-        "name": "Adnan P.",
+        "author": "Adnan P.",
         "city": "Zenica",
         "date": "Januar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Restoran s crnim zidovima, drvenim stolovima i toplom rasvjetom – ambijent koji tjera ljude da se vraćaju. CS022 je dio te jednačine i radi savršeno."
       }
     ]
@@ -2399,24 +2399,24 @@
     ],
     "reviews": [
       {
-        "name": "Anela M.",
+        "author": "Anela M.",
         "city": "Sarajevo",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Uredila spavaću sobu u bijeloj šalviji i imam osjećaj da spavam u šumi. Ta blijedozelena bijela je toliko umirujuća da čak i san je bolji. Zvuči smiješno ali istina."
       },
       {
-        "name": "Goran S.",
+        "author": "Goran S.",
         "city": "Trebinje",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Koristio za spa centar. Klijenti odmah komentarišu kako je prostor opušten i prirodan. CS014 zajedno s drvenim detaljima je kombinacija koja funkcioniše savršeno."
       },
       {
-        "name": "Dina H.",
+        "author": "Dina H.",
         "city": "Tuzla",
         "date": "Januar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Bila sam neodlučna između bijele i ove šalvije – uzela šalviju i ne kajem se ni sekunde. Daje prostoru tu živost i karakter koji čista bijela nema."
       }
     ]
@@ -2465,24 +2465,24 @@
     "relatedLetvica": 72,
     "reviews": [
       {
-        "name": "Stefan N.",
+        "author": "Stefan N.",
         "city": "Banja Luka",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Koristio CS013 panel i odgovarajuću 3D letvicu za cijeli hodnik. Bijela s bijelom letvicom i led rasvjetom – hodnik izgleda kao luksuzni hotel. Nevjerovatna transformacija."
       },
       {
-        "name": "Irma Đ.",
+        "author": "Irma Đ.",
         "city": "Sarajevo",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Ova slomljena bijela je savršena za dnevnu sobu. Nije hladna kao čista bijela, nego topla i prijatna. Uz drveni namještaj izgleda prirodno i skupo istovremeno."
       },
       {
-        "name": "Miroslav K.",
+        "author": "Miroslav K.",
         "city": "Mostar",
         "date": "Januar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Obložio cijeli stan i boja je konzistentna od panela do panela. Kvalitet odličan, montaža brza. Rezultat je stan koji izgleda kao novogradnja."
       }
     ]
@@ -2528,24 +2528,24 @@
     ],
     "reviews": [
       {
-        "name": "Nemanja S.",
+        "author": "Nemanja S.",
         "city": "Trebinje",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Uredili smo trpezariju i htjeli smo nešto posebno. PW007 narandžasta uz bijeli stol i crne stolice – svaki put kad gosti dođu pitaju gdje smo kupili. Pravi razgovor-starter."
       },
       {
-        "name": "Selma B.",
+        "author": "Selma B.",
         "city": "Tuzla",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Stavila u sobu djeteta i naprosto oživjela prostor. Boja je tačno onakva kao na slici – živa, ali ne vrišti. Uz bijeli namještaj izgleda fantastično."
       },
       {
-        "name": "Ivan R.",
+        "author": "Ivan R.",
         "city": "Zenica",
         "date": "Januar 2026",
-        "stars": 4,
+        "rating": 4,
         "text": "Nisam očekivao da će narandžasta tako dobro izgledati u enterijeru, ali ovo je dokaz da treba biti smioniji u izborima. Svi posjetioci komentarišu zid."
       }
     ]
@@ -2591,24 +2591,24 @@
     ],
     "reviews": [
       {
-        "name": "Amela K.",
+        "author": "Amela K.",
         "city": "Sarajevo",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Stavila sam ovaj panel iza bračnog kreveta i svi koji uđu u sobu zastanu. Ta bordo boja uz bijelo posteljinu je kombinacija iz snova. Izgleda kao boutique hotel."
       },
       {
-        "name": "Dragana P.",
+        "author": "Dragana P.",
         "city": "Banja Luka",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Koristila u baru koji smo otvorili. Uz tamno drvo i zlatnu rasvjetu, taj crveni zid je prva stvar koju gosti fotografišu. Oduševljena sam efektom."
       },
       {
-        "name": "Mirza H.",
+        "author": "Mirza H.",
         "city": "Mostar",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Bio sam skeptičan prema crvenoj ali ova bordo nijansa je savršena – nije agresivna, nego bogata i topla. Dnevna soba mi je dobila karakter koji nije imala godinama."
       }
     ]
@@ -2654,24 +2654,24 @@
     ],
     "reviews": [
       {
-        "name": "Lejla Č.",
+        "author": "Lejla Č.",
         "city": "Sarajevo",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Tražila sam nešto između bijele i tamne i ova ledena siva je savršena sredina. Uz bijeli namještaj i crne detalje – zid izgleda kao iz arhitektonskog časopisa."
       },
       {
-        "name": "Ana T.",
+        "author": "Ana T.",
         "city": "Mostar",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Koristila za uredski prostor. Hladna siva daje ozbiljnost i profesionalnost, a kožna tekstura unosi toplinu da ne bude sterilno. Savršena kombinacija."
       },
       {
-        "name": "Bojan M.",
+        "author": "Bojan M.",
         "city": "Banja Luka",
         "date": "Januar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Jednostavna montaža, savršen izgled. Siva je tačno onako hladna i prefinjana kao na slici. Hodnik mi je dobio potpuno novi karakter."
       }
     ]
@@ -2717,24 +2717,24 @@
     ],
     "reviews": [
       {
-        "name": "Damir F.",
+        "author": "Damir F.",
         "city": "Sarajevo",
         "date": "Mart 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Home office s antracit kožnim panelom i zlatnom rasvjetom – svaki Zoom poziv dobiva kompliment na pozadinu. Izgleda skuplje nego što jeste i to je poenta."
       },
       {
-        "name": "Nikolina V.",
+        "author": "Nikolina V.",
         "city": "Herceg Novi",
         "date": "Februar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Spavaća soba u tamnom antracitu uz bijelo posteljinu je kombinacija koja oduzima dah. Gosti uvijek komentarišu koliko je soba dramatična i lijepa."
       },
       {
-        "name": "Tarik O.",
+        "author": "Tarik O.",
         "city": "Zenica",
         "date": "Januar 2026",
-        "stars": 5,
+        "rating": 5,
         "text": "Boja je tačno onako duboka i tamna kao na slici – nije siva koja razočara, nego pravi tamni antracit. Montaža jednostavna, kvalitet odličan."
       }
     ]
