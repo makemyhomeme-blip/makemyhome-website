@@ -52,7 +52,10 @@
     "sku": "CQ006",
     "discount": 0,
     "gallery": [
-      "images/products/gallery-18-1775126213-634.jpg"
+      "images/products/gallery-18-1775126213-634.jpg",
+      "images/products/gallery-18-1774942050-514.jpg",
+      "images/products/gallery-18-1774943336-476.jpg",
+      "images/products/gallery-18-1776877371-114.jpg"
     ],
     "reviews": [
       {
@@ -132,7 +135,9 @@
     "sku": "MW312",
     "gallery": [
       "images/products/gallery-26-1775126350-551.jpg",
-      "images/products/gallery-26-1775126353-346.jpg"
+      "images/products/gallery-26-1775126353-346.jpg",
+      "images/products/gallery-26-1774942442-638.jpg",
+      "images/products/gallery-26-1774942445-828.jpg"
     ],
     "discount": 0,
     "reviews": [
@@ -213,7 +218,9 @@
     "sku": "MW300",
     "gallery": [
       "images/products/gallery-23-1774985802-523.jpg",
-      "images/products/gallery-23-1774985803-103.jpg"
+      "images/products/gallery-23-1774985803-103.jpg",
+      "images/products/gallery-23-1774942879-972.jpg",
+      "images/products/gallery-23-1774950477-944.jpg"
     ],
     "discount": 0,
     "reviews": [
@@ -386,6 +393,9 @@
         "rating": 5,
         "text": "Odlična nijansa za one koji vole hrast ali ne žele ni previse tamno ni previše svijetlo. Honey Oak je tačno ta sredina. Lako se montira, paneli lepo nalegnu jedan na drugi. Preporučujem svima koji traže klasičan drveni izgled."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-24-1774943459-297.jpg"
     ]
   },
   {
@@ -524,7 +534,9 @@
     "featured": false,
     "sku": "MW013",
     "gallery": [
-      "images/products/gallery-22-1775126299-378.jpg"
+      "images/products/gallery-22-1775126299-378.jpg",
+      "images/products/gallery-22-1774950423-725.jpg",
+      "images/products/gallery-22-1774950424-486.jpg"
     ],
     "discount": 0,
     "reviews": [
@@ -838,6 +850,11 @@
         "rating": 5,
         "text": "Odlična alternativa pločicama. Calla boja je nježna i topla, savršena za kupatilo. Djevojčice su oduševljene novim izgledom kupatila. Montaža prošla bez problema, muž sam uradio za popodne."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-38-1774942362-395.jpg",
+      "images/products/gallery-38-1774942365-402.jpg",
+      "images/products/gallery-38-1776876660-369.jpg"
     ]
   },
   {
@@ -1114,6 +1131,9 @@
         "rating": 4,
         "text": "Siena boja je jedinstvena na tržištu — nisam vidio nigdje drugdje taj topli terakota ton za zidne panele. Koristio u SPA zoni hotela koji smo renovirali. Gosti kažu da je to najopušteniji prostor u hotelu."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-42-1774950604-132.jpg"
     ]
   },
   {
@@ -1502,7 +1522,10 @@
     "gallery": [
       "images/products/gallery-142-1775676758-624.jpg",
       "images/products/gallery-142-1775676795-366.jpg",
-      "images/products/gallery-142-1775676796-903.jpg"
+      "images/products/gallery-142-1775676796-903.jpg",
+      "images/products/gallery-142-1775490215-232.jpg",
+      "images/products/gallery-142-1775490215-472.jpg",
+      "images/products/gallery-142-1775490216-721.jpg"
     ],
     "reviews": [
       {
@@ -1600,7 +1623,8 @@
       }
     ],
     "gallery": [
-      "images/products/gallery-116-1775677178-379.jpg"
+      "images/products/gallery-116-1775677178-379.jpg",
+      "images/products/gallery-116-1775489871-634.jpg"
     ]
   },
   {
@@ -1877,6 +1901,9 @@
         "rating": 4,
         "text": "Siva betonska tekstura ide savršeno uz moderan minimalistički stil. Stavila u hodnik i kombinirano sa hrastovim parketom — divna igra toplih i hladnih tonova."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-50-1774874124-479.jpg"
     ]
   },
   {
@@ -2288,6 +2315,9 @@
         "rating": 5,
         "text": "Odličan kvalitet, boja i uzorak su tačno kao na slici. Montaža jednostavna. Kupatilo je dobilo premium izgled za razumnu cijenu."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-110-1774873911-972.jpg"
     ]
   },
   {
@@ -3076,6 +3106,10 @@
         "rating": 4,
         "text": "Solidan kvalitet, boja tačna kao na slici. Golden Teak nijansa je topla i prirodna. Malo pažnje treba pri rezanju ali rezultat je vrijedan."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-60-1774943349-119.jpg",
+      "images/products/gallery-60-1774943349-798.jpg"
     ]
   },
   {
@@ -3137,6 +3171,9 @@
         "rating": 4,
         "text": "Dobra boja i kvalitet. Mocha Oak je neutralna, topla smeđa koja ide uz sve. Montaža zahtijeva strpljenje ali rezultat je odličan."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-61-1774942944-681.jpg"
     ]
   },
   {
@@ -4725,6 +4762,9 @@
         "rating": 5,
         "text": "Konačno pronašla bijelu letvicu koja zaista izgleda premium. Nije tanka ni jeftina — vidljivo kvalitetnija od ostalih koje sam gledala. Postavila u spavaćoj sobi i sad imam osjećaj da spavam u hotelu. Definitivno vrijedna svake pare."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-87-1774874142-722.jpg"
     ]
   },
   {
