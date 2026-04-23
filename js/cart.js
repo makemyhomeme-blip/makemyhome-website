@@ -27,6 +27,7 @@ function addToCart(product, qty) {
     cart.push({
       id: product.id,
       name: product.name,
+      sku: product.sku || '',
       price: effectivePrice,
       originalPrice: +product.price,
       discount: product.discount || 0,

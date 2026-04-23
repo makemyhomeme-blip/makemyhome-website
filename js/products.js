@@ -1040,7 +1040,7 @@ async function renderProductDetail() {
   info.innerHTML = `
     <div class="product-category">${categoryName}</div>
     <h1 class="product-name">${product.name}</h1>
-    ${product.sku ? `<div style="font-size:12px;color:#999;font-family:monospace;margin-top:-6px;margin-bottom:4px;">Šifra: ${product.sku}</div>` : ''}
+    ${product.sku ? `<div style="display:inline-flex;align-items:center;gap:6px;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin-top:-4px;margin-bottom:10px;"><span style="font-size:10px;color:#c9a86c;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;">${product.sku}</span></div>` : ''}
     <div class="product-rating">
       <span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
       <span class="rating-count">(4.8) · Odlično</span>

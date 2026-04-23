@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
   `).join('');
 
   document.getElementById('cos-total').textContent = total.toFixed(2).replace('.',',') + ' €';
-  document.getElementById('f-order').value = cart.map(i=>`${i.name} ×${i.qty} = ${(i.price*i.qty).toFixed(2)}€`).join(' | ');
+  document.getElementById('f-order').value = cart.map(i=>`${i.sku ? i.sku : i.name} ×${i.qty} = ${(i.price*i.qty).toFixed(2)}€`).join(' | ');
   document.getElementById('f-total').value = total.toFixed(2) + ' €';
 
   document.getElementById('order-form').addEventListener('submit', function(e) {
