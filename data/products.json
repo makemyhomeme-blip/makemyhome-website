@@ -4729,12 +4729,12 @@
   },
   {
     "id": 88,
-    "name": "AKU063",
+    "name": "AKU063 – Prirodni Hrast",
     "category": "akusticni-paneli",
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "AKU063 akusticni panel spaja dvije funkcije u jednom: smanjuje odraz zvuka i eho u prostoriji te istovremeno donosi toplinu prirodnog drveta na zid. Savrsen za home cinema, studije, otvorene urede i dnevne sobe s visokim plafonima gdje zvuk neugodno odzvanja. Jednostavna montaza bez majstora – postavlja se kao dekorativni panel.",
+    "description": "Akustični panel AKU063 u toploj nijansi prirodnog hrasta. Široke drvene lamele na crnoj akustičnoj spužvi smanjuju odjek i reverberaciju, dok prirodni zlatni ton hrasta unosi toplinu u svaki prostor. Idealan za dnevne sobe, urede i home cinema.",
     "features": [
       "Dimenzije: 275×60cm po panelu",
       "Materijal: akusticna spuzva s dekorativnom drvenom oblogom",
@@ -4743,7 +4743,7 @@
       "Povrsina: prirodna drvena obloga u toplim tonovima",
       "Montaža: lepi se lepilom ili sistem kuka",
       "Pogodan za dnevne sobe, urede, studije i cinema sobe",
-      "Sifra: AKU063"
+      "Sifra: AKU063-N"
     ],
     "image": "images/products/product-1774011747-477.jpg",
     "badge": null,
@@ -4784,16 +4784,17 @@
         "rating": 4,
         "text": "Dobra akustična izolacija, razlika se odmah osjeti. Postavljao sam sam bez problema. Jedina napomena — preporučujem kombinaciju s mekim namještajem za maksimalni efekat."
       }
-    ]
+    ],
+    "sku": "AKU063-N"
   },
   {
     "id": 89,
-    "name": "AKU063",
+    "name": "AKU063 – Orašasti Hrast",
     "category": "akusticni-paneli",
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "AKU063 akusticni panel spaja dvije funkcije u jednom: smanjuje odraz zvuka i eho u prostoriji te istovremeno donosi toplinu prirodnog drveta na zid. Savrsen za home cinema, studije, otvorene urede i dnevne sobe s visokim plafonima gdje zvuk neugodno odzvanja. Jednostavna montaza bez majstora – postavlja se kao dekorativni panel.",
+    "description": "Akustični panel AKU063 u tamnijoj nijansi orašastog hrasta. Uže drvene lamele na crnoj akustičnoj spužvi pružaju visoku zvučnu apsorpciju uz sofisticirani izgled tamnog drveta. Savršen za biblioteke, kancelarije i muzičke sobe.",
     "features": [
       "Dimenzije: 275×60cm po panelu",
       "Materijal: akusticna spuzva s dekorativnom drvenom oblogom",
@@ -4802,7 +4803,7 @@
       "Povrsina: prirodna drvena obloga u toplim tonovima",
       "Montaža: lepi se lepilom ili sistem kuka",
       "Pogodan za dnevne sobe, urede, studije i cinema sobe",
-      "Sifra: AKU063"
+      "Sifra: AKU063-W"
     ],
     "image": "images/products/product-1774011763-194.jpg",
     "badge": null,
@@ -4843,16 +4844,17 @@
         "rating": 4,
         "text": "Dobra akustična ploča, razlika se jasno osjeti. Postavljeno u spavaćoj sobi zbog buke s ulice. Nije čudo ali vidno poboljšanje. Kombinirano s debelim zavjesama — odlično."
       }
-    ]
+    ],
+    "sku": "AKU063-W"
   },
   {
     "id": 90,
-    "name": "AKU060",
+    "name": "AKU060 – Topli Orah",
     "category": "akusticni-paneli",
     "price": "94.99",
     "discount": 0,
     "unit": "kom",
-    "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
+    "description": "Premium akustični panel AKU060 u toploj orah nijansi. Visokogusti akustični filc s drvenom oblogom toplog smeđeg tona pruža NRC koeficijent 0.80–0.95 — idealan za glazbene studije, home theatre i konferencijske sale.",
     "features": [
       "Dimenzije: 275×60cm po panelu",
       "Materijal: visokogusti akusticni filc s drvenom oblogom",
@@ -4861,7 +4863,7 @@
       "Povrsina: drvena obloga u tamnijem tonu",
       "Montaža: lepi se lepilom ili sistem kuka",
       "Pogodan za glazbene studije, home theatre, konferencijske sale",
-      "Sifra: AKU060"
+      "Sifra: AKU060-W"
     ],
     "image": "images/products/product-1774011807-750.jpg",
     "badge": null,
@@ -4902,16 +4904,17 @@
         "rating": 4,
         "text": "Dobar akustični panel za cijenu. Postavljao u muzičku sobu i odjek se smanjio vidljivo. Za profesionalni studio trebate više slojeva, ali za hobi namjenu savršeno."
       }
-    ]
+    ],
+    "sku": "AKU060-W"
   },
   {
     "id": 91,
-    "name": "AKU060",
+    "name": "AKU060 – Tamni Antracit",
     "category": "akusticni-paneli",
     "price": "94.99",
     "discount": 30,
     "unit": "kom",
-    "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
+    "description": "Premium akustični panel AKU060 u tamnoj antracit sivoj. Industrijska estetika tamne sive u kombinaciji s vrhunskom zvučnom apsorpcijom. Savršen za moderne kancelarije, gaming sobe i profesionalne studije.",
     "features": [
       "Dimenzije: 275×60cm po panelu",
       "Materijal: visokogusti akusticni filc s drvenom oblogom",
@@ -4922,7 +4925,7 @@
       "Pogodan za glazbene studije",
       "home theatre",
       "konferencijske sale",
-      "Sifra: AKU060"
+      "Sifra: AKU060-A"
     ],
     "image": "images/products/product-1774011821-454.jpg",
     "badge": null,
@@ -4941,7 +4944,7 @@
       "Luksuzni",
       "Minimalisticki"
     ],
-    "sku": null,
+    "sku": "AKU060-A",
     "reviews": [
       {
         "author": "Vesna R.",
@@ -4968,12 +4971,12 @@
   },
   {
     "id": 92,
-    "name": "AKU060",
+    "name": "AKU060 – Crni Talas",
     "category": "akusticni-paneli",
     "price": "94.99",
     "discount": 30,
     "unit": "kom",
-    "description": "AKU060 je vrhunski akusticni panel za ozbiljnu kontrolu zvuka – viši NRC koeficijent znaci da apsorbira vise frekvencija i efektivnije eliminise neljeni odjek. Drvena obloga u tamnijem tonu daje prostorijama karakter studija ili premium ureda, a ne samo akusticnu prostoriju. Idealan za konferencijske sale, home theatre i glazbene studije.",
+    "description": "Premium akustični panel AKU060 u jedinstvenom valovitom dizajnu — crna pozadina s krem valovitim uzorkom od drveta. Kombinuje vrhunsku akustičnu apsorpciju s skulpturalnim vizuelnim efektom. Pravi statement komad za svaki prostor.",
     "features": [
       "Dimenzije: 275×60cm po panelu",
       "Materijal: visokogusti akusticni filc s drvenom oblogom",
@@ -4984,7 +4987,7 @@
       "Pogodan za glazbene studije",
       "home theatre",
       "konferencijske sale",
-      "Sifra: AKU060"
+      "Sifra: AKU060-T"
     ],
     "image": "images/products/product-1774011837-259.jpg",
     "badge": "Akcija",
@@ -5003,7 +5006,7 @@
       "Luksuzni",
       "Minimalisticki"
     ],
-    "sku": null,
+    "sku": "AKU060-T",
     "reviews": [
       {
         "author": "Alen B.",
@@ -5069,7 +5072,8 @@
         "rating": 4,
         "text": "Dobra crna lajsna, precizno izrezana. Odgovara dimenzijama opisanim. Uz crne 3D letvice daje čist i moderan završetak. Sitnica koja pravi razliku u ukupnom izgledu."
       }
-    ]
+    ],
+    "sku": "L1"
   },
   {
     "id": 95,
@@ -5112,7 +5116,8 @@
         "rating": 4,
         "text": "Kvalitetna lajsna, dobro izrezana. Crna boja je duboka i mat, lijepo prati crne panele. Jedina napomena — naručite malo više nego što mislite da vam treba, za greške pri montaži."
       }
-    ]
+    ],
+    "sku": "L2"
   },
   {
     "id": 97,
@@ -5155,7 +5160,8 @@
         "rating": 4,
         "text": "Dobra ugaona lajsna. Crna boja odgovara. Malo sam se mučio s pravilnim postavljanjem na uglu ali uz malo strpljenja ispalo savršeno. Bitna sitnica za profesionalni izgled."
       }
-    ]
+    ],
+    "sku": "L3"
   },
   {
     "id": 98,
@@ -5198,7 +5204,8 @@
         "rating": 5,
         "text": "Uzela LED lajsnu uz 3D letvice i to je bila odluka koja je promijenila sve. Ambient osvjetljenje iza letvica noću je magično. Svim prijateljima koji pitaju — obavezno uzmite LED lajsnu."
       }
-    ]
+    ],
+    "sku": "L4"
   },
   {
     "id": 99,
@@ -5241,7 +5248,8 @@
         "rating": 4,
         "text": "Bronzana lajsna izgleda premium. Boja je topla i konzistentna. Uz honey oak panele i bronzane armature — svi detalji govore istim jezikom. Preporučujem warm stil ljubiteljima."
       }
-    ]
+    ],
+    "sku": "L5"
   },
   {
     "id": 100,
@@ -5284,7 +5292,8 @@
         "rating": 4,
         "text": "Dobra bronzana lajsna, boja topla i lijepa. Naručila uz bronzane armature u kupatilu i savršeno se slaže. Sitnica koja kompletira cijelu priču."
       }
-    ]
+    ],
+    "sku": "L6"
   },
   {
     "id": 101,
@@ -5327,7 +5336,8 @@
         "rating": 4,
         "text": "Dobra ugaona lajsna u bronzanom tonu. Malo zahtjevnija montaža na uglu ali s uputama ide. Krajnji rezultat je čist i profesionalan. Bronza lijepo prati tople panele."
       }
-    ]
+    ],
+    "sku": "L7"
   },
   {
     "id": 102,
@@ -5370,7 +5380,8 @@
         "rating": 5,
         "text": "LED lajsna u bronzanom tonu je završni detalj koji sve spaja. Kanal je dobro dizajniran za LED trake. Uz warm panele i toplu rasvjetu — prostor koji grije dušu noću."
       }
-    ]
+    ],
+    "sku": "L8"
   },
   {
     "id": 103,
