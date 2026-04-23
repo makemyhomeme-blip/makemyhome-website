@@ -3324,12 +3324,12 @@
   },
   {
     "id": 65,
-    "name": "3D Letvica 170 M51-01 – Snežna Bela (Mat)",
+    "name": "3D Letvica 170 M51-01 – Topli Tik (Mat)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "M51-01 je mat varijanta snežne bele – ista čistoća bijele, ali s mekšim odsjajom koji smanjuje refleksije i daje zidu topliji karakter. Idealna za prostorije s jakim prirodnim osvjetljenjem gdje sjajna površina može biti previše intenzivna.",
+    "description": "M51-01 donosi toplinu tik-drveta u 170mm mat profilu. Ravna, izražena šara uz mat završnu obradu stvara zid koji je topao i prirodan – bez bliještanja, samo čista dubina drveta. Idealan za dnevne sobe i spavaće sobe gdje tražite prirodan luksuz.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 160mm",
@@ -3385,12 +3385,12 @@
   },
   {
     "id": 66,
-    "name": "3D Letvica MW319 – Snežna Bela (Gloss)",
+    "name": "3D Letvica MW319 – Tamni Orah (Gloss)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "MW319 je gloss varijanta snežne bele koja maksimizira refleksiju svjetla – sjajna bela površina vizualno uvećava prostoriju i dodaje joj glamurozni sjaj. 3D profil u sjajnoj obradi stvara dramatičan kontrast sene i svjetlosti, posebno efektan uz usmjerenu rasvjetu.",
+    "description": "MW319 nosi boju tamnog oraha u sjajnoj gloss obradi – toplo, bogato smeđa nijansa s finim zrnom drveta koje pod svjetlom dolazi do punog izražaja. Sjaj između letvica multiplicira dubinu sjenki i daje zidu dramatičan, luksuzni karakter.",
     "features": [
       "Dimenzije: 280×14cm po letvici",
       "Širina: 140mm",
@@ -3507,12 +3507,12 @@
   },
   {
     "id": 68,
-    "name": "3D Letvica 170 SP054 – Hladni Sivi",
+    "name": "3D Letvica 170 SP054 – Topli Orah",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "SP054 dolazi u širem 170mm profilu koji daje zidu veći vizualni udar po letvici. Hladna siva nijansa savršeno korespondira s betonskim, čeličnim i staklenim elementima – boja arhitekture, preciznosti i modernog dizajna. Širi profil znači manji broj letvica, brža montaža, bolder rezultat.",
+    "description": "SP054 kombinuje toplinu orahovog drveta s dramatičnim crnim razmakom između letvica u 170mm profilu. Kontrast između toplog smeđeg tona i tamnih sjenki stvara zid koji izgleda kao arhitektonska instalacija. Savršen za iza sofe ili kao fokalna tačka dnevne sobe.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 170mm (širi profil)",
@@ -3568,12 +3568,12 @@
   },
   {
     "id": 69,
-    "name": "3D Letvica 170 MW018 – Bež Lanen",
+    "name": "3D Letvica 170 MW018 – Tamna Pepeljasta",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "MW018 u 170mm formatu donosi toplinu prirodnih vlakana – beja s blagim lanen podtonom koja je ni previše topla ni previše hladna, nego savršeno neutralna. Širi profil stvara ritmičan, umirujući uzorak na zidu koji opušta i harmonizuje prostor.",
+    "description": "MW018 u 170mm formatu donosi hladnu pepeljasto-sivu s finim drvenim uzorkom. U kombinaciji s crnim razmakom između letvica, dobijate industrijski-elegantnu kompoziciju koja odlično ide uz beton, metal i tamne enterijere. Ista boja panela MW018 – savršen spoj.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 170mm (širi profil)",
@@ -3629,12 +3629,12 @@
   },
   {
     "id": 70,
-    "name": "3D Letvica 170 SP052 – Topla Bela",
+    "name": "3D Letvica 170 SP052 – Prirodni Javor",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "SP052 je posebna serija – 170mm profil s teksturom koja oponaša drvenaste pruge u toploj beloj osnovi. Rezultat je zid koji se čini da diše: bela boja donosi svjetlost i prostor, a drvenasta tekstura daje toplinu i karakter koji čista bela nema.",
+    "description": "SP052 donosi svjetlost prirodnog javora u 170mm profilu s crnim razmakom koji ističe svaku letvicu ponaosob. Topla zlatasto-siva nijansa prirodnog drveta na tamnoj osnovi stvara kontrast koji prostor čini i toplim i modernim istovremeno. Skandinavski karakter u premium obliku.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 170mm (širi profil – posebna serija)",
@@ -3875,12 +3875,12 @@
   },
   {
     "id": 74,
-    "name": "3D Letvica 039 – Tamna Espresso",
+    "name": "3D Letvica 039 – Krem Bijela",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "Broj 039 nosi boju toplih espresso tonova – tamno-smeđa s toplim podtonom koja je gotovo crna, ali zadržava toplinu drveta. Ovaj letvice stvara intimnu, koktelbar atmosferu: idealna za zid iza TV-a, radne sobe ili restorana gdje se želi osjećaj luksuzne topline.",
+    "description": "Kod 039 nosi nježnu krem-bijelu nijansuu – toplija od čiste bijele, blaže od bjelokoske. Glatka površina bez uočljivog uzorka naglašava čistoću forme i geometriju sjene između letvica. Idealna za minimalistički ili skandinavski enterijer gdje svjetlost i oblik govore sami.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 160mm",
@@ -3936,12 +3936,12 @@
   },
   {
     "id": 75,
-    "name": "3D Letvica 021 – Srednji Hrast",
+    "name": "3D Letvica 021 – Topla Bež",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "021 je boja klasičnog hrasta u punoj zrelosti – ni previše svjetla ni previše tamna, sa zlatnim podtonovima koji unose toplinu i vedrinu. Ovo je ta neutralna, universalna drvenasta nijansa koja pristaje uz beli, sivi, krem ili bež enterijer. Klasik koji nikad ne izlazi iz mode.",
+    "description": "Kod 021 donosi toplu bež – ni bijelo ni smeđe, nego onaj prirodni pijesak koji smiruje prostoriju. Suptilna tekstura površine oponaša prirodna vlakna i daje letvici dubinu bez drvetnih uzoraka. Odlično ide uz drveni namještaj, kožu i prirodne materijale.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 160mm",
@@ -3997,12 +3997,12 @@
   },
   {
     "id": 76,
-    "name": "3D Letvica 140 021 – Srednji Hrast Uski",
+    "name": "3D Letvica 140 021 – Topla Bež (Uži profil)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "Isti topli hrastov ton 021, ali u užem 140mm profilu. Uže letvice postavljene zajedno stvaraju gušći, finiji ritam na zidu – gotovo poput tekstilne površine. Efektan izbor za manje prostorije gdje širi profil bi bio previše dominantan.",
+    "description": "Ista topla bež nijansa kao 3D Letvica 021, u užem 140mm profilu. Uže letvice stvaraju gušći ritam vertikalnih linija i daju prostoru teksturu koja je delikatnija i elegantnija. Idealno za manje prostore ili kad tražite finiji, sofisticiraniji zidni reljef.",
     "features": [
       "Dimenzije: 280×14cm po letvici",
       "Širina: 140mm (uži profil – finiji ritam)",
@@ -4058,12 +4058,12 @@
   },
   {
     "id": 77,
-    "name": "3D Letvica 029 – Topli Mahagonija",
+    "name": "3D Letvica 029 – Terrazzo",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "Kod 029 nosi boju zrelog mahagonijaa – crvenkasto-smeđa nijansa s toplim, gotovo svečanim karakterom. Ovo nije boja za timidne enterijer – to je boja knjižnica, sudnica i plemićkih dvorana. 3D profil joj daje suvremenu notu, spajajući klasičnu eleganciju s modernom formom.",
+    "description": "Letvica 029 prenosi terrazzo uzorak panela CS029 u trodimenzionalnu formu – šareni fragmenti u krem osnovi dobijaju dodatnu dubinu kroz igru sjenki između letvica. Kombinirajte s bambus panelom CS029 za potpun i ujednačen zidni izgled. Jedinstven izbor za enterijer pun karaktera.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 160mm",
@@ -4120,12 +4120,12 @@
   },
   {
     "id": 78,
-    "name": "3D Letvica 016 – Svetli Javor",
+    "name": "3D Letvica 016 – Hladno Siva",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "016 donosi lakoću i svježinu svijetlog javora – blago zlatasta bela koja kupaonicu, spavaću ili dnevnu sobu čini svetlijom i vedrijom. Jedna od najuniverzalnijih nijansi u kolekciji: dovoljno neutralna da ide uz sve, dovoljno topla da prostoru dá dušu.",
+    "description": "Kod 016 donosi čistu, hladnu sivu koja ne pripada ni betonu ni metalnoj estetici, nego stoji samostalno kao nijansa preciznosti i mira. Suptilna površinska tekstura daje letvici dubinu bez uzorka koji odvlači pažnju. Idealna za moderne, neutralne enterijere.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 160mm",
@@ -4425,12 +4425,12 @@
   },
   {
     "id": 83,
-    "name": "3D Letvica 003 – Topli Hrast",
+    "name": "3D Letvica 003 – Zlatna Žuta",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "003 je osnovna, autentična hrastova nijansa – topla, prirodna, bezvremenski lepa. Nema tu eksperimenta s bojom: samo čisti hrast koji se slaže s gotovo svim stilovima i bojama interijera. Pouzdana, klasična, dugotrajna – kao pravi hrast.",
+    "description": "Letvica 003 je smjela, sunčana zlatno-žuta – boja koja ne traži pratnju. Trodimenzionalne sjenke između letvica daju toj živahnoj nijanci dubinu i plasticitet koji je čine posebnom. Savršen akcentni zid u dječijoj sobi, kreativnom prostoru ili svuda gdje hoćete da prostorija pokreće energiju.",
     "features": [
       "Dimenzije: 280×16cm po letvici",
       "Širina: 160mm",
@@ -4486,12 +4486,12 @@
   },
   {
     "id": 84,
-    "name": "3D Letvica 3D02 – Siva Mineralna",
+    "name": "3D Letvica 3D02 – Prirodni Hrast",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "Model 3D02 dolazi s posebnim oblikom profila koji stvara gušći i dinamičniji 3D uzorak nego standardne letvice. Siva mineralna nijansa podsjeća na prirodni kamen i mineral – hladna, ali s karakterom. Ovaj model je izbor za one koji žele nešto drugačije od uobičajenih linija.",
+    "description": "Model 3D02 donosi srednji, prirodni ton hrasta u zaobljenom profilu koji baca mekše, dublje sjene od standardnih letvica. Topla hrastova nijansa odlično ide uz sve stilove – od klasičnog do modernog skandinavskog. Jedan od najpristupačnijih prirodnih tonova u kolekciji.",
     "features": [
       "Poseban dizajn profila 3D02 – gušći 3D efekt",
       "Boja: siva mineralna",
@@ -4546,12 +4546,12 @@
   },
   {
     "id": 85,
-    "name": "3D Letvica 3D05 – Bela Struktura",
+    "name": "3D Letvica 3D05 – Tamna Siva",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "3D05 profil se odlikuje izrazitijim reljefom koji baca dublje sene i stvara jači vizualni udar. U beloj nijansi ovaj efekt je posebno izražen – kontrast između osvjetljenih vrhova i zasjenjenih udubina stvara gotovo skulpturalni dojam na zidu.",
+    "description": "Model 3D05 nosi tamnu sivo-smeđu nijansu s izraženim drvenim uzorkom u zaobljenom profilu koji naglašava sjenu između svake letvice. Kombinacija tamnog tona i trodimenzionalnog profila daje zidu težinu i karakter. Savršen uz industrijski ili tamni moderni enterijer.",
     "features": [
       "Poseban dizajn profila 3D05 – izrazitiji reljef",
       "Boja: bela",
@@ -4607,12 +4607,12 @@
   },
   {
     "id": 86,
-    "name": "3D Letvica 3D09X– Siva Struktura",
+    "name": "3D Letvica 3D09X – Topli Mahagonij",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "3D09X je siva varijanta struktura profila – isti izraziti 3D reljef koji u sivoj nijansi dobiva urbaniji, suvremeniji karakter. Tamo gdje bela verzija daje svečanost, siva daje urbanost. Odlična za moderne, industrijski inspirirane prostore.",
+    "description": "Model 3D09X nosi boju zrelog mahagonija u ekstra izraženom zaobljenom profilu. X oznaka znači dublji reljef – sjenke između letvica su snažnije i dramatičnije nego kod standardnih profila. Topla crvenkasto-smeđa uz naglašen 3D efekat – za prostorije koje zahtijevaju pažnju.",
     "features": [
       "Poseban dizajn profila 3D09X – izrazitiji reljef",
       "Boja: siva",
@@ -4668,12 +4668,12 @@
   },
   {
     "id": 87,
-    "name": "3D Letvica 3D07X – Premium Crna",
+    "name": "3D Letvica 3D07X – Bijela (Premium profil)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
     "unit": "kom",
-    "description": "3D07X je premium model – X oznaka znači ekstra izražen profil koji pruža najdublju trodimenzionalnost u cijeloj kolekciji. U crnoj nijansi ovaj model je apsolutni showstopper: dramatičan, moćan, nezaboravan. Jedan zid s ovim letvicama postaje centralni element čitave prostorije.",
+    "description": "Model 3D07X je premium bijela letvica s ekstra izraženim zaobljenim profilom. X oznaka donosi veći vizualni udar – mekoće zaobljenih formi i čistote bijele zajedno stvaraju nešto između skulpture i arhitekture. Pod bočnim svjetlom, sjene između letvica daju zidu fascinantnu plastičnost.",
     "features": [
       "Premium dizajn profila 3D07X – maksimalna dubina 3D efekta",
       "Boja: premium crna",
