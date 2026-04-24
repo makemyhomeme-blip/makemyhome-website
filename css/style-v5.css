@@ -1073,7 +1073,20 @@ ul { list-style: none; }
 
 .footer-social {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+}
+
+.footer-social::before {
+  content: "Zapratite nas";
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c9a86c;
+  margin-bottom: 6px;
 }
 
 .social-section-label {
