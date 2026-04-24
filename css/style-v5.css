@@ -1076,29 +1076,41 @@ ul { list-style: none; }
   gap: 10px;
 }
 
+.social-section-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 12px;
+}
+
 .social-btn {
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 24px;
   transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
-.social-btn[title="Instagram"] { color: #e1306c; background: rgba(225,48,108,0.12); }
-.social-btn[title="WhatsApp"]  { color: #25d366; background: rgba(37,211,102,0.12); }
-.social-btn[title="Viber"]     { color: #7360f2; background: rgba(115,96,242,0.12); }
-.social-btn[title="TikTok"]    { color: #ee1d52; background: rgba(238,29,82,0.12); }
-.social-btn[title="Email"]     { color: #c9a86c; background: rgba(201,168,108,0.12); }
-.social-btn[title="Facebook"]  { color: #1877f2; background: rgba(24,119,242,0.12); }
+.social-btn[title="Instagram"] { background: #e1306c; }
+.social-btn[title="WhatsApp"]  { background: #25d366; }
+.social-btn[title="Viber"]     { background: #7360f2; }
+.social-btn[title="TikTok"]    { background: #010101; }
+.social-btn[title="Email"]     { background: #c9a86c; }
+.social-btn[title="Facebook"]  { background: #1877f2; }
 
 .social-btn:hover {
-  background: var(--primary);
-  color: var(--dark);
-  transform: translateY(-2px);
+  filter: brightness(1.18);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
 
 .footer-title {
