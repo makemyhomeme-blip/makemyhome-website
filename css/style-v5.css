@@ -1089,6 +1089,13 @@ ul { list-style: none; }
   transition: var(--transition);
 }
 
+.social-btn[title="Instagram"] { color: #e1306c; }
+.social-btn[title="WhatsApp"]  { color: #25d366; }
+.social-btn[title="Viber"]     { color: #7360f2; }
+.social-btn[title="TikTok"]    { color: #ee1d52; }
+.social-btn[title="Email"]     { color: #c9a86c; }
+.social-btn[title="Facebook"]  { color: #1877f2; }
+
 .social-btn:hover {
   background: var(--primary);
   color: var(--dark);
