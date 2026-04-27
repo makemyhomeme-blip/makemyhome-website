@@ -86,6 +86,7 @@ function renderProductCard(product, lazy = true) {
       <div class="product-body">
         <div class="product-category">${categoryName}</div>
         <h3 class="product-name">${product.name}</h3>
+        ${product.sku ? `<div class="product-sku">Šifra: <strong>${product.sku}</strong></div>` : ''}
         <p class="product-desc">${product.description}</p>
         <div class="product-footer">
           <div class="product-price">
