@@ -1,28 +1,709 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make My Home Decor</title>
+<html lang="sr">
+<head><meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Make My Home Decor - Prodaja zidnih panela, 3D letvica, akustičnih panela i dekorativnih obloga u Crnoj Gori. Podgorica. Posjetite naš showroom.">
+  <meta name="keywords" content="zidni paneli, 3D letvice, akustični paneli, dekorativni paneli, flex stone, PU stone, UV paneli, Podgorica, Crna Gora">
+  <meta property="og:title" content="Make My Home Decor – Zidni Paneli & 3D Letvice">
+  <meta property="og:description" content="Transformišite svoj dom uz premium zidne panele i 3D letvice. Podgorica, Crna Gora.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://makemyhome.me">
+  <title>Make My Home Decor – Zidni Paneli & 3D Letvice | Podgorica</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/png" href="images/favicon-512.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style-v5.css?v=9">
+  <style>
+    #showcase{background:var(--light);padding:70px 0 0}
+    .showcase-img-wrap{width:100%;line-height:0;margin-top:48px;padding:0 32px;box-sizing:border-box}
+    .showcase-img-wrap img{width:100%;height:auto;display:block;border-radius:8px}
+    .showcase-btn-wrap{padding:40px 0 70px}
+    @media(max-width:768px){#desk-search-wrap{display:none!important;}}
+    @media(max-width:768px){
+      #showcase{padding:48px 0 0}
+      .showcase-img-wrap{margin-top:32px;padding:0 16px}
+      .showcase-btn-wrap{padding:28px 0 48px}
+    }
+    .featured-btn-mobile-wrap{display:none}
+    /* NAV FIT — more items */
+    @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
+    /* ABOUT IMAGE — show full without cropping */
+    .about-img-main{height:auto!important;}
+    .about-img-main img{height:auto!important;object-fit:contain!important;}
+    /* ===== HERO SLIDER ===== */
+    #hs-bg{z-index:1}
+    #hero .container{position:relative;z-index:3}
+    #hs-dots{z-index:3!important}
+    #hs-track{display:flex;width:100%;height:100%;transition:transform .65s cubic-bezier(.4,0,.2,1);will-change:transform}
+    #hs-track img{min-width:100%;width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0}
+    .hs-dot{width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.5);cursor:pointer;padding:0;transition:all .3s;background:transparent;pointer-events:all}
+    .hs-dot.active{background:#c9a86c;border-color:#c9a86c;transform:scale(1.3)}
+    /* ===== MOBILE NAV FIX ===== */
+    @media(max-width:768px){
+      .nav-menu{max-height:calc(100svh - 75px);overflow-y:auto}
+    }
+    /* ===== MOBILE HERO OPTIMIZACIJA ===== */
+    @media(max-width:768px){
+      #hero{min-height:100svh;padding-top:70px;padding-bottom:80px;align-items:flex-end;display:flex}
+      /* Jači gradient pri dnu da tekst bude čitljiv */
+      #hs-overlay{background:linear-gradient(to top,rgba(5,5,5,.92) 0%,rgba(5,5,5,.55) 45%,rgba(5,5,5,.1) 100%)!important}
+      .hero-badge{font-size:10px;padding:5px 11px;margin-bottom:12px}
+      .hero-title{font-size:24px!important;line-height:1.15!important;margin-bottom:10px}
+      .hero-desc{font-size:13px!important;line-height:1.5!important;margin-bottom:14px!important;opacity:.88}
+      .hero-actions{gap:8px;margin-bottom:0}
+      .hero-actions .btn-lg{padding:12px 18px;font-size:14px}
+      .hero-stats{gap:0;margin-top:20px;justify-content:space-between;width:100%}
+      .stat-item{flex:1;text-align:center}
+      .stat-item .number{font-size:22px}
+      .stat-item .label{font-size:10px}
+      #hs-track img{object-position:center center}
+      #hs-dots{bottom:52px!important}
+      /* 2-kolonski grid za "Zašto mi" kartice */
+      .why-grid{grid-template-columns:repeat(2,1fr)!important;gap:14px!important;margin-top:32px!important}
+      .why-card{padding:22px 14px!important}
+      .why-icon{width:48px!important;height:48px!important;font-size:18px!important;margin-bottom:12px!important}
+      .why-card h3{font-size:14px!important;margin-bottom:8px!important}
+      .why-card p{font-size:13px!important;line-height:1.5!important}
+      /* Ikona + naziv u istom redu na kategorijama */
+      .category-body{display:grid!important;grid-template-columns:44px 1fr!important;column-gap:12px!important;align-items:center!important;padding:16px!important}
+      .category-icon{margin-bottom:0!important;grid-column:1;grid-row:1}
+      .category-body h3{grid-column:2;grid-row:1;font-size:16px!important;margin-bottom:0!important}
+      .category-body p{grid-column:1/-1;grid-row:2;font-size:13px!important;margin-top:10px!important;margin-bottom:8px!important}
+      .category-link{grid-column:1/-1;grid-row:3}
+      /* Istaknuti Proizvodi — naslov centriraj, dugme ispod proizvoda */
+      .featured-btn-desktop{display:none!important}
+      .featured-btn-mobile-wrap{display:flex;justify-content:center;margin-top:28px}
+      .featured-btn-mobile-wrap .btn-dark{width:100%;justify-content:center}
+      .featured-header{align-items:center!important;text-align:center!important;margin-bottom:28px!important}
+      .featured-header>div .gold-line{margin:0 auto 12px}
+      /* Testimonijali — 2 kolone na mobilnom */
+      .testimonials-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important;margin-top:24px!important}
+      .testimonial-card{padding:16px!important}
+      .testimonial-card .quote-icon{font-size:28px!important;line-height:1!important;margin-bottom:6px!important}
+      .testimonial-card .stars{font-size:11px!important;margin-bottom:8px!important}
+      .testimonial-card .testimonial-text{font-size:12px!important;line-height:1.5!important;margin-bottom:12px!important}
+      .testimonial-card .author-avatar{width:30px!important;height:30px!important;font-size:13px!important}
+      .testimonial-card .name{font-size:12px!important}
+      .testimonial-card .location{font-size:11px!important}
+      /* Footer brand — centriraj na mobilnom, veće ikone */
+      .footer-brand{text-align:center!important}
+      .footer-brand .logo{justify-content:center}
+      .footer-brand .footer-desc{font-size:14px!important;line-height:1.6!important}
+      .footer-social{justify-content:center!important;gap:12px!important;margin-top:16px!important}
+      .social-btn{width:42px!important;height:42px!important;font-size:18px!important}
+    }
+  </style>
+<style id="cat-grid-fix">
+  .categories-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:28px!important;}
+  @media(max-width:1100px){.categories-grid{grid-template-columns:repeat(3,1fr)!important;}}
+  @media(max-width:768px){.categories-grid{grid-template-columns:repeat(2,1fr)!important;gap:16px!important;}}
+  @media(max-width:480px){.categories-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px!important;}}
+  .footer-links-grid{display:block!important;column-count:2!important;column-gap:20px!important;}
+  .footer-links-grid li{break-inside:avoid;margin-bottom:8px;font-size:13px;}
+</style>
+<style id="nav-fix">
+@media(min-width:769px){
+  .header-inner{flex-wrap:nowrap!important;}
+  .logo{flex-shrink:0!important;margin-right:20px!important;}
+  .logo-img{height:44px!important;}
+  .logo-text .name{white-space:nowrap!important;font-size:16px!important;}
+  .logo-text .tagline{white-space:nowrap!important;font-size:9px!important;}
+  .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;margin-left:auto!important;}
+  .nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 5px!important;}
+  .nav-link.nav-cta{padding:7px 14px!important;margin-left:4px!important;}
+  #desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}
+}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-4LLQCZ8CV4");
+</script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Make My Home Decor</h1>
-        <p>Contact us: <a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></p>
-        <p>Phone: 069105222</p>
-        <p>Location: Vojvode Maša Djurovića 41, City Kvart, Podgorica</p>
-    </header>
-    <main>
-        <section>
-            <h2>Our Products</h2>
-            <ul>
-                <li>Wall Coverings</li>
-                <li>Decorative Panels</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Make My Home Decor</p>
-    </footer>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <!-- OLD LOGO (backup):
+      <div class="logo-icon"><i class="fas fa-home"></i></div>
+      <div class="logo-text">
+        <span class="name">Make My Home Decor</span>
+        <span class="tagline">Dekorativni Bambus Paneli</span>
+      </div>
+-->
+      <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
+      <div class="logo-text">
+        <span class="name">Make My Home Decor</span>
+        <span class="tagline">Dekorativni Bambus Paneli</span>
+      </div>
+    </a>
+
+    <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
+      <div style="position:relative;">
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off"
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+      </div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
+    </div>
+
+        <nav id="nav-menu" class="nav-menu">
+      <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
+        <div style="position:relative;">
+          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
+          <input id="mob-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
+            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
+        </div>
+        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
+      </div>
+      <a href="index.html" class="nav-link">Početna</a>
+      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
+      <a href="products.html?category=mdf" class="nav-link">MDF</a>
+      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Aluminijum Lajsne</a>
+      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
+      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
+    </nav>
+    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
+    </a>
+    <button id="hamburger" class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <!-- Fallback tamna pozadina -->
+  <div class="hero-bg"></div>
+  <!-- Slider slike: z-index iznad hero-bg, ispod teksta -->
+  <div id="hs-bg" style="position:absolute;inset:0;overflow:hidden;display:none;">
+    <div id="hs-track"></div>
+    <div id="hs-overlay" style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,.72) 0%,rgba(10,10,10,.52) 50%,rgba(10,10,10,.67) 100%);pointer-events:none;"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-award"></i>
+        Premium Zidne Obloge · Podgorica, CG
+      </div>
+      <h1 class="hero-title">
+        Transformišite<br>Vaš Dom sa<br><span class="accent">Stilom i Elegancijom</span>
+      </h1>
+      <p class="hero-desc">
+        Prodajemo premium zidne panele i 3D letvice koji pretvaraju svaki prostor u remek-djelo.
+        Veliku kolekciju materijala i dizajna prilagođavamo Vašoj viziji.
+      </p>
+      <div class="hero-actions">
+        <a href="products.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-th-large"></i> Pogledaj Proizvode
+        </a>
+        <a href="contact.html" class="btn btn-outline btn-lg">
+          <i class="fas fa-phone"></i> Pozovite Nas
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="number">8+</div>
+          <div class="label">Kategorija proizvoda</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">4000+</div>
+          <div class="label">Zadovoljnih kupaca</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">90+</div>
+          <div class="label">Modela i dezena</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Skrolujte</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+  <!-- Dots za slider -->
+  <div id="hs-dots" style="position:absolute;bottom:68px;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:4;pointer-events:none;"></div>
+</section>
+
+<!-- ===== SHOWCASE SEKCIJA ===== -->
+<section id="showcase">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Make My Home Decor –<br>sve što vam treba za savršen enterijer.</h2>
+      <p class="section-subtitle">Svaki zid, svaki ugao može izgledati drugačije — od bambusovih panela i 3D letvica do akustičnih obloga i SPC podova. Posjetite naš showroom i pronađite materijal koji odgovara vašem stilu.</p>
+    </div>
+  </div>
+  <div class="showcase-img-wrap animate-on-scroll">
+    <img src="images/showcase-room.jpg" alt="Make My Home Decor – Kompletna rješenja za enterijer" loading="lazy">
+  </div>
+  <div class="container">
+    <div class="text-center showcase-btn-wrap">
+      <a href="products.html" class="btn btn-primary">Pogledaj sve proizvode <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KATEGORIJE ===== -->
+<section id="categories">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Naše Kategorije</h2>
+      <p class="section-subtitle">
+        Od 3D letvica do akustičnih panela – pronađite savršeno rješenje za svaki prostor
+      </p>
+    </div>
+    <div class="categories-grid" id="categories-grid">
+      <!-- Učitava se dinamički -->
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section id="featured">
+  <div class="container">
+    <div class="featured-header">
+      <div style="text-align:center;flex:1;">
+        <div class="gold-line" style="margin:0 auto 12px;"></div>
+        <h2 class="section-title">Istaknuti Proizvodi</h2>
+        <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Naši najpopularniji i najprodavaniji modeli</p>
+      </div>
+      <a href="products.html" class="btn btn-dark featured-btn-desktop">
+        Svi Proizvodi <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="products-grid" id="featured-products">
+      <!-- Učitava se dinamički -->
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+    </div>
+    <div class="featured-btn-mobile-wrap">
+      <a href="products.html" class="btn btn-dark">
+        Svi Proizvodi <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== O NAMA PREVIEW ===== -->
+<section id="about-preview">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrapper animate-on-scroll">
+        <div class="about-img-main">
+          <img src="images/about-showroom.jpg" alt="Make My Home Decor Showroom"
+            onerror="this.parentElement.innerHTML='<i class=\'fas fa-store\' style=\'font-size:120px;color:rgba(255,255,255,0.2)\'></i>'">
+        </div>
+        <div class="about-img-badge">
+          <div class="years">5+</div>
+          <div class="years-text">Godina iskustva</div>
+        </div>
+      </div>
+      <div class="about-content animate-on-scroll">
+        <div class="gold-line"></div>
+        <h2 class="section-title">Vaš Partner za Ljepši Dom</h2>
+        <p class="section-subtitle">
+          Make My Home Decor je specijalizovana firma za prodaju premium zidnih panela i dekorativnih obloga u Podgorici.
+          Nudimo kvalitetne materijale koji transformišu enterijer uz laku montažu i povoljne cijene.
+        </p>
+        <ul class="about-list">
+          <li><i class="fas fa-check-circle"></i> Premium kvalitet materijala po pristupačnim cijenama</li>
+          <li><i class="fas fa-check-circle"></i> Stručni savjeti za odabir pravog materijala</li>
+          <li><i class="fas fa-check-circle"></i> Brza isporuka na teritoriji Crne Gore</li>
+          <li><i class="fas fa-check-circle"></i> Montaža u saradnji sa provjerenim majstorima</li>
+          <li><i class="fas fa-check-circle"></i> Showroom u centru Podgorice – City Kvart</li>
+        </ul>
+        <a href="about.html" class="btn btn-primary">
+          <i class="fas fa-info-circle"></i> Saznaj Više
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ZAŠTO MI ===== -->
+<section id="why-us">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Zašto Izabrati Make My Home Decor?</h2>
+      <p class="section-subtitle">Nudimo kompletno rješenje za uređenje Vašeg doma ili poslovnog prostora</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-medal"></i></div>
+        <h3>Premium Kvalitet</h3>
+        <p>Svi naši proizvodi prolaze stroge kontrole kvaliteta. Radimo isključivo sa provjerenim dobavljačima i certificiranim materijalima.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-palette"></i></div>
+        <h3>Širok Asortiman</h3>
+        <p>Preko 90 modela u 8 kategorija – bambus paneli, 3D letvice, akustični paneli, mermerni, tekstilni, metalni, aluminijum lajsne i SPC podovi.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-tools"></i></div>
+        <h3>Laka Montaža</h3>
+        <p>Montaža je jednostavna – silikon i gotovo. Ko želi sam, može bez problema. A za one koji preferiraju majstora, sarađujemo s provjerenim ekipama koje znaju šta rade.</p>
+      </div>
+      <div class="why-card animate-on-scroll">
+        <div class="why-icon"><i class="fas fa-truck"></i></div>
+        <h3>Brza Isporuka</h3>
+        <p>Dostava na cijeloj teritoriji Crne Gore. Materijal uvijek na lageru, bez čekanja i odlaganja vaših projekata.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Šta Kažu Naši Kupci</h2>
+      <p class="section-subtitle">Pravi komentari zadovoljnih kupaca koji su uredili svoje domove</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">Nevjerovatna transformacija dnevnog boravka! 3D letvice u hrast dezenu izgledaju luksuzno i skupo, a cijena je bila pristupačna. Montaža je bila jednostavna. Preporučujem svima!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">L</div>
+          <div class="author-info">
+            <div class="name">Lea Bulatovic</div>
+            <div class="location">Podgorica</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">Odlučio sam se za bambus panele u hodnik i oduševljen sam kako je ispalo. Pogotovo što imaju iste bambus panele i 3D lervice istog dezena – sve je savršeno usklađeno. A LED lajsne koje su preporučili su finale koje je sve vezalo u jednu cjelinu. Preporučujem svima!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">L</div>
+          <div class="author-info">
+            <div class="name">Luka Gogic</div>
+            <div class="location">Podgorica</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">Uzeo sam bambus panele za spavaću sobu – savršeno se uklapaju uz 3D letvice koje sam postavio na susjedni zid. Kombinacija izgleda fenomenalno, kao iz kataloga.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <div class="name">Andrija Adzic</div>
+            <div class="location">Budva</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">3D letvice su mi potpuno promijenile dnevni boravak. Tekstilni paneli na drugom zidu savršeno prate isti stil – mekani, elegantni i jako laki za montažu. Sve pohvale ekipi!</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">N</div>
+          <div class="author-info">
+            <div class="name">Nikola Scepanovic</div>
+            <div class="location">Podgorica</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">Tekstilni paneli su blago iznenađenje – nisam znala da mogu biti toliko lijepi. Uz 3D tekstilne letvice čine savršen par. Soba je dobila toplu, modernu atmosferu.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">D</div>
+          <div class="author-info">
+            <div class="name">Dragana Boskovic</div>
+            <div class="location">Cetinje</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll">
+        <div class="quote-icon">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testimonial-text">Akustični paneli su savršeni za naš kućni studio. Zvuk je drastično bolji, a prostorija izgleda profesionalno. Brza isporuka i odlična komunikacija sa firmom.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">D</div>
+          <div class="author-info">
+            <div class="name">Dragana Mrvic</div>
+            <div class="location">Nikšić</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTAGRAM FEED ===== -->
+<section id="instagram-feed">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Pratite nas na Instagramu</h2>
+      <p class="section-subtitle">
+        Svakodnevna inspiracija, novi proizvodi i realizovani projekti –
+        <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="insta-handle">@makemyhome.decor</a>
+      </p>
+    </div>
+
+    <div class="insta-cta-box">
+      <div class="insta-cta-icon">
+        <i class="fab fa-instagram"></i>
+      </div>
+      <div class="insta-cta-text">
+        <h3>@makemyhome.decor</h3>
+        <p>Pogledajte naše posljednje objave, projekte i inspiraciju na Instagramu</p>
+      </div>
+      <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="btn btn-gold">
+        Posjetite profil &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT CTA ===== -->
+<section id="contact-cta">
+  <div class="container">
+    <div class="cta-content" style="text-align:center;">
+      <div class="gold-line" style="margin:0 auto 20px;"></div>
+      <h2 class="section-title">Spremni za Transformaciju?</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">
+        Posjetite nas u showroomu ili nas kontaktirajte – dajte nam dimenzije i mi ćemo Vam izračunati tačne količine i cijenu
+      </p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary btn-lg">
+          <i class="fas fa-envelope"></i> Pošalji Upit
+        </a>
+        <a href="products.html" class="btn btn-outline btn-lg">
+          <i class="fas fa-th-large"></i> Pogledaj Katalog
+        </a>
+      </div>
+      <div class="cta-contact-info">
+        <div class="cta-contact-item">
+          <i class="fas fa-phone"></i>
+          <span>069 105 222</span>
+        </div>
+        <div class="cta-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>makemyhome.me@gmail.com</span>
+        </div>
+        <div class="cta-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Vojvode Maša Đurovića 41, City Kvart, Podgorica</span>
+        </div>
+        <div class="cta-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <!-- OLD LOGO (backup):
+      <div class="logo-icon"><i class="fas fa-home"></i></div>
+      <div class="logo-text">
+        <span class="name">Make My Home Decor</span>
+        <span class="tagline">Dekorativni Bambus Paneli</span>
+      </div>
+-->
+      <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
+      <div class="logo-text">
+        <span class="name">Make My Home Decor</span>
+        <span class="tagline">Dekorativni Bambus Paneli</span>
+      </div>
+        </a>
+        <p class="footer-desc">
+          Specijalizovana prodavnica premium zidnih panela i 3D letvica u Podgorici.
+          Transformišite Vaš prostor uz kvalitetne materijale po povoljnim cijenama.
+        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
+        </p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/makemyhome.decor" target="_blank" class="social-btn" title="Instagram" style="background:#d62976;color:#fff;"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/38269105222" target="_blank" class="social-btn" title="WhatsApp" style="background:#25d366;color:#fff;"><i class="fab fa-whatsapp"></i></a>
+          <a href="viber://contact?number=%2B38269105222" class="social-btn" title="Viber" style="background:#665cac;color:#fff;"><i class="fab fa-viber"></i></a>
+          <a href="https://www.tiktok.com/@makemyhome.me" target="_blank" class="social-btn" title="TikTok" style="background:#ee1d52;color:#fff;"><i class="fab fa-tiktok"></i></a>
+          <a href="mailto:makemyhome.me@gmail.com" class="social-btn" title="Email" style="background:#c9a86c;color:#fff;"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Navigacija</h4>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Početna</a></li>
+          <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> O Nama</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Kontakt</a></li>
+
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Kategorije</h4>
+        <ul class="footer-links footer-links-grid">
+          <li><a href="products.html?category=bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
+          <li><a href="products.html?category=bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
+          <li><a href="products.html?category=bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
+          <li><a href="products.html?category=bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
+          <li><a href="products.html?category=classic"><i class="fas fa-chevron-right"></i> Classic Paneli</a></li>
+          <li><a href="products.html?category=bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
+          <li><a href="products.html?category=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="products.html?category=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="products.html?category=aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
+          <li><a href="products.html?category=spc-pod"><i class="fas fa-chevron-right"></i> SPC Pod</a></li>
+          <li><a href="products.html?category=pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
+          <li><a href="products.html?category=mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
+          <li><a href="products.html?category=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Kontakt</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Vojvode Maša Đurovića 41, City Kvart, Podgorica</span>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <span><a href="tel:+38269105222">069 105 222</a></span>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span>
+          </li>
+          <li>
+            <i class="fas fa-clock"></i>
+            <span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-map">
+      <h4 class="footer-title" style="margin-bottom:14px;"><i class="fas fa-map-marker-alt" style="color:var(--primary);margin-right:8px;"></i>Naša Lokacija – City Kvart, Podgorica</h4>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d320.2356161235833!2d19.23287406340214!3d42.43946309494073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134deb7c2e5241b7%3A0xa37eb19095d4b6!2sMake%20My%20Home%20Decor!5e1!3m2!1sen!2s!4v1773917315332!5m2!1sen!2s"
+        width="100%" height="280" style="border:0;border-radius:12px;filter:grayscale(20%);"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Make My Home Decor lokacija">
+      </iframe>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Make My Home Decor. Sva prava zadržana.</p>
+      <p>Dizajnirano za <a href="#">makemyhome.me</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FLOATING ===== -->
+<div id="whatsapp-float">
+  <a href="https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20vi%C5%A1e%20informacija%20o%20va%C5%A1im%20zidnim%20panelima." target="_blank" rel="noopener" aria-label="Kontaktirajte nas na WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="white"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.736 5.469 2.027 7.774L0 32l8.469-2.003A15.93 15.93 0 0 0 16 32c8.836 0 16-7.163 16-16S24.836 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.856l-.485-.288-5.028 1.188 1.215-4.895-.316-.503A13.247 13.247 0 0 1 2.667 16C2.667 8.636 8.637 2.667 16 2.667S29.333 8.636 29.333 16 23.363 29.333 16 29.333zm7.27-9.907c-.398-.199-2.355-1.162-2.72-1.295-.365-.133-.63-.199-.896.199-.265.398-1.028 1.295-1.26 1.56-.232.265-.464.298-.862.1-.398-.199-1.681-.62-3.203-1.977-1.184-1.056-1.984-2.36-2.216-2.758-.232-.398-.025-.613.174-.811.178-.178.398-.465.597-.697.199-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.896-2.162-1.228-2.96-.323-.776-.651-.67-.896-.683l-.763-.013c-.265 0-.696.1-.1061.497-.365.398-1.393 1.362-1.393 3.322s1.427 3.854 1.626 4.119c.199.265 2.808 4.286 6.804 6.014.951.41 1.693.655 2.271.838.954.303 1.823.26 2.51.158.765-.114 2.355-.963 2.688-1.893.333-.93.333-1.727.232-1.893-.1-.165-.365-.265-.763-.464z"/></svg>
+  </a>
+  <span class="wa-tooltip">Pišite nam na WhatsApp</span>
+</div>
+
+<!-- ===== SCROLL TO TOP ===== -->
+<button id="scroll-top" aria-label="Nazad na vrh">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script src="js/main-v4.js"></script>
+<script src="js/products.js?v=17"></script>
+<script src="js/cart.js"></script>
+<script>
+  // Učitaj kategorije i featured proizvode
+  renderCategories('categories-grid');
+  renderFeatured('featured-products', 6);
+</script>
+<script>
+(function(){
+  fetch('data/hero-slides.json?v=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(slidesData){
+      var isMobile = window.innerWidth <= 768;
+      // Support both old format (array of strings) and new format (array of objects with d/m keys)
+      var slides = (slidesData || []).filter(function(s){
+        return s && (typeof s === 'string' ? s : s.d);
+      });
+      if(!slides.length) return;
+      var hero  = document.getElementById('hero');
+      var track = document.getElementById('hs-track');
+      var dotsEl  = document.getElementById('hs-dots');
+      var v = Date.now();
+      slides.forEach(function(s, i){
+        var src = (typeof s === 'string') ? s : ((isMobile && s.m) ? s.m : s.d);
+        var img = document.createElement('img');
+        img.src = src + '?v=' + v;
+        img.alt = 'Enterijer ' + (i+1);
+        img.loading = i === 0 ? 'eager' : 'lazy';
+        track.appendChild(img);
+        var dot = document.createElement('button');
+        dot.className = 'hs-dot' + (i===0?' active':'');
+        dot.setAttribute('aria-label','Slajd '+(i+1));
+        dot.addEventListener('click', function(){ stopTimer(); goTo(i); startTimer(); });
+        dotsEl.appendChild(dot);
+      });
+      // Kad postoje slike: overlay postaje samo tamni gradient (bez hero-bg.jpg)
+      // Prikaži slider (pokrij fallback pozadinu)
+      var hsBg = document.getElementById('hs-bg');
+      if (hsBg) hsBg.style.display = '';
+      var current = 0, timer;
+      function goTo(n){
+        current = ((n % slides.length) + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + (current*100) + '%)';
+        dotsEl.querySelectorAll('.hs-dot').forEach(function(d,i){
+          d.classList.toggle('active', i===current);
+        });
+      }
+      function startTimer(){ timer = setInterval(function(){ goTo(current+1); }, 5000); }
+      function stopTimer(){ clearInterval(timer); }
+      startTimer();
+      hero.addEventListener('mouseenter', stopTimer);
+      hero.addEventListener('mouseleave', startTimer);
+      var tx = 0;
+      track.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend', function(e){
+        var dx = e.changedTouches[0].clientX - tx;
+        if(Math.abs(dx) > 40){ stopTimer(); goTo(current + (dx<0?1:-1)); startTimer(); }
+      }, {passive:true});
+    })
+    .catch(function(){});
+})();
+</script>
 </body>
 </html>
+

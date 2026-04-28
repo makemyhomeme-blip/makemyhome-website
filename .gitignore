@@ -1,0 +1,13 @@
+# Data files managed via admin panel - NEVER overwrite from git
+data/products.json
+data/categories.json
+data/inquiries.json
+data/*.backup-*.json
+
+# Uploads managed on server
+images/categories/
+images/products/
+
+# System files
+.DS_Store
+Thumbs.db
