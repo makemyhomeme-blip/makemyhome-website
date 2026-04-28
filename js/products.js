@@ -9,7 +9,7 @@ let allCategories = [];
 
 // Start fetching data immediately when script loads — don't wait for initProductsPage()
 const _dataPromise = Promise.all([
-  fetch('data/products.json?v=6').then(r => r.json()),
+  fetch('data/products.json?v=20260428').then(r => r.json()),
   fetch('data/categories.json?v=5').then(r => r.json())
 ]).catch(() => [[], []]);
 
