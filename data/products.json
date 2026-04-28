@@ -46,15 +46,14 @@
       "Tropski"
     ],
     "image": "images/products/cq006.jpg",
-    "badge": "Bestseller",
+    "badge": "Akcija",
     "inStock": true,
     "featured": true,
     "sku": "CQ006",
-    "discount": 0,
+    "discount": 20,
     "gallery": [
       "images/products/gallery-18-1775126213-634.jpg",
       "images/products/gallery-18-1774942050-514.jpg",
-      "images/products/gallery-18-1774943336-476.jpg",
       "images/products/gallery-18-1776877371-114.jpg"
     ],
     "reviews": [
@@ -129,7 +128,7 @@
       "Noir"
     ],
     "image": "images/products/mw312.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "sku": "MW312",
@@ -139,7 +138,7 @@
       "images/products/gallery-26-1774942442-638.jpg",
       "images/products/gallery-26-1774942445-828.jpg"
     ],
-    "discount": 0,
+    "discount": 20,
     "reviews": [
       {
         "author": "Stefan P.",
@@ -212,7 +211,7 @@
       "Rustikalni"
     ],
     "image": "images/products/mw300.jpg",
-    "badge": "Najpopularniji",
+    "badge": "Akcija",
     "inStock": true,
     "featured": true,
     "sku": "MW300",
@@ -222,7 +221,7 @@
       "images/products/gallery-23-1774942879-972.jpg",
       "images/products/gallery-23-1774950477-944.jpg"
     ],
-    "discount": 0,
+    "discount": 20,
     "reviews": [
       {
         "author": "Ivana K.",
@@ -294,7 +293,7 @@
       "Bohemian"
     ],
     "image": "images/products/mw682.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "sku": "MW682",
@@ -324,7 +323,7 @@
     "gallery": [
       "images/products/gallery-25-1775676334-158.jpg"
     ],
-    "discount": 0
+    "discount": 20
   },
   {
     "id": 24,
@@ -367,7 +366,7 @@
       "Skandinavski"
     ],
     "image": "images/products/mw321.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "sku": "MW321",
@@ -396,7 +395,8 @@
     ],
     "gallery": [
       "images/products/gallery-24-1774943459-297.jpg"
-    ]
+    ],
+    "discount": 20
   },
   {
     "id": 19,
@@ -447,14 +447,14 @@
       "Boho"
     ],
     "image": "images/products/mw010.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "sku": "MW010",
     "gallery": [
       "images/products/gallery-19-1775126245-938.jpg"
     ],
-    "discount": 0,
+    "discount": 20,
     "reviews": [
       {
         "author": "Kristina H.",
@@ -529,7 +529,7 @@
       "Boho"
     ],
     "image": "images/products/mw013.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "sku": "MW013",
@@ -538,7 +538,7 @@
       "images/products/gallery-22-1774950423-725.jpg",
       "images/products/gallery-22-1774950424-486.jpg"
     ],
-    "discount": 0,
+    "discount": 20,
     "reviews": [
       {
         "author": "Zoran K.",
@@ -603,7 +603,7 @@
       "Scandi"
     ],
     "image": "images/products/mw211.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "sku": "MW211",
@@ -632,7 +632,8 @@
     ],
     "gallery": [
       "images/products/gallery-21-1775677275-201.jpg"
-    ]
+    ],
+    "discount": 20
   },
   {
     "id": 20,
@@ -682,14 +683,14 @@
       "Noir"
     ],
     "image": "images/products/mw301.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "sku": "MW301",
     "gallery": [
       "images/products/gallery-20-1775126565-808.jpg"
     ],
-    "discount": 0,
+    "discount": 20,
     "reviews": [
       {
         "author": "Bojan M.",
@@ -719,7 +720,7 @@
     "name": "Perla",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Perla donosi toplinu tkanine na vaš zid. Krupna pletena tekstura u bijelo-bež nijansama stvara osjećaj udobnosti i doma – savršeno uz prirodne materijale, drvo i posteljinu u toplim tonovima.",
     "features": [
@@ -737,7 +738,7 @@
       "Šifra: BW229"
     ],
     "image": "images/products/product-1774006203-686.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Tkana toplina na svakom zidu",
@@ -788,7 +789,7 @@
     "name": "Calla",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Calla je bijela kao svježe platno – ali s karakterom. Grublja tkana površina daje dubinu i teksturu tamošno gdje glatka boja bila bi dosadna. Idealna za čiste, moderne prostore koji ipak žele toplinu.",
     "features": [
@@ -806,7 +807,7 @@
       "Šifra: BW400"
     ],
     "image": "images/products/product-1774006240-870.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Čista bijela s bogatom teksturom",
@@ -862,7 +863,7 @@
     "name": "Grigio",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Grigio je siva kakvu zaslužuje moderan enterijer. Gruba tkana površina daje industrijalnu energiju bez tvrdoće – savršen partner za beton, čelik i tamno drvo u loft i urban dizajnu.",
     "features": [
@@ -880,7 +881,7 @@
       "Šifra: BW224"
     ],
     "image": "images/products/product-1774006266-913.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Industrijska siva s karakterom tkanine",
@@ -931,7 +932,7 @@
     "name": "Slate",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Slate je finija, svjetlija siva koja radi u svakom prostoru. Delikatna tkana šara daje suptilnu teksturu bez dominacije – neutralan panel koji se uklapa uz svaku boju namještaja i podova.",
     "features": [
@@ -949,7 +950,7 @@
       "Šifra: BW003"
     ],
     "image": "images/products/product-1774006317-836.jpg",
-    "badge": "Limitirano",
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Suptilna siva koja se uklapa svuda",
@@ -1000,7 +1001,7 @@
     "name": "Blanc",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Blanc je čistoća u svom najluksuznijem obliku. Bogata bouclé tekstura daje zidu dimenziju i karakter uz zadržavanje čiste bijele boje – elegancija koja podsjeća na haute couture interijere.",
     "features": [
@@ -1018,7 +1019,7 @@
       "Šifra: BW220"
     ],
     "image": "images/products/product-1774006385-983.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Luksuzna bijela bouclé tekstura",
@@ -1069,7 +1070,7 @@
     "name": "Siena",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Siena igra svjetlom i sjenom. Svilenkasta sivo-zlatna površina mijenja ton ovisno o osvjetljenju – ujutro hladna i mirna, navečer topla i glamurozna. Panel koji transformiše prostoriju kroz dan.",
     "features": [
@@ -1087,7 +1088,7 @@
       "Šifra: BW221"
     ],
     "image": "images/products/product-1774006410-646.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Svilenkast sjaj koji se mijenja s osvjetljenjem",
@@ -1141,7 +1142,7 @@
     "name": "Glacier",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Glacier je najfiniji tekstilni panel u kolekciji. Ultrafina horizontalna šara u gotovo bijeloj boji stvara čist, miran zid koji diše – kao polarna površina, savršen i nedodirljiv.",
     "features": [
@@ -1159,7 +1160,7 @@
       "Šifra: BW809"
     ],
     "image": "images/products/product-1774006432-776.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Ultrafinoa čistoća ledene površine",
@@ -1210,7 +1211,7 @@
     "name": "Pura",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Pura je bijela koja grli. Mekana tkana tekstura u toploj bijeloj nijansama unosi osjećaj čistoće i opuštenosti – kao svježe oprana posteljina. Savršen izbor za spavaće sobe i wellness prostore.",
     "features": [
@@ -1228,7 +1229,7 @@
       "Šifra: BW222"
     ],
     "image": "images/products/product-1774006463-976.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Mekana bijela koja opušta",
@@ -1279,7 +1280,7 @@
     "name": "Deva",
     "category": "bambus-tekstilni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Deva je glamur u tkaninoj formi. Svilenkaste horizontalne niti u zlatno-sivoj boji hvataju svjetlost i odbacuju je poput satena – panel koji pretvara svaki zid u centralnu tačku prostorije.",
     "features": [
@@ -1297,7 +1298,7 @@
       "Šifra: BW008"
     ],
     "image": "images/products/product-1774006512-598.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Svilenkast zlatni sjaj koji osvaja poglede",
@@ -1348,7 +1349,7 @@
     "name": "Mystic Marble",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Mystic Marble donosi dušu prirodnog mermera bez cijene prirodnog mermera. Dramatične žile u smeđim nijansama vijugaju kroz bijelo-sivu površinu – svaki panel je jedinstven, kao da je izrezan direktno iz kamenoloma.",
     "features": [
@@ -1366,7 +1367,7 @@
       "Šifra: SW215"
     ],
     "image": "images/products/product-1774008515-675.jpg",
-    "badge": "Limitirano",
+    "badge": "Akcija",
     "inStock": true,
     "featured": true,
     "highlight": "Dramatične žile pravog mermera",
@@ -1417,7 +1418,7 @@
     "name": "Desert Stone",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Desert Stone evocira toplinu pustinjskog pješčenjaka. Hrapava kamena tekstura u bež tonovima unosi prirodnu zemaljsku energiju u svaki prostor – sirovo, autentično, bezvremensko.",
     "features": [
@@ -1442,7 +1443,7 @@
       "Šifra: SW222"
     ],
     "image": "images/products/product-1774008575-466.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Autentična tekstura pustinjskog kamena",
@@ -1497,7 +1498,7 @@
     "name": "TRAVERTINO",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "TRAVERTINO donosi autentičnu ljepotu prirodnog travertina na vaše zidove. Topli bež tonovi s karakterističnim kanalima i šarama stvaraju bogatu, živu teksturu – svaki panel je jedinstven, kao da je izrezan direktno iz kamenoloma.",
     "features": [
@@ -1506,8 +1507,14 @@
       "Boja: topli bež i kremasti tonovi travertina",
       "Šara: karakteristični travertin kanali i prirodne šare – svaki panel jedinstven",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, hoteli, restorani, kafići, recepcije",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "hoteli",
+      "restorani",
+      "kafići",
+      "recepcije",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -1515,8 +1522,8 @@
       "Šifra: TW37"
     ],
     "image": "images/products/product-1775676714-908.jpg",
-    "badge": "Novo",
-    "sku": "TW37",
+    "badge": "Akcija",
+    "sku": "TR1",
     "inStock": true,
     "featured": true,
     "gallery": [
@@ -1557,7 +1564,7 @@
     "name": "Mercury Marble",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Mercury Marble donosi toplinu kremasto-bež mermera s nježnim zlatnim i smeđim žilama koje prolaze kroz površinu poput autorskog potpisa prirode. Za razliku od hladnog bijelog mermera, Mercury Marble unosi toplinu i karakter – savršen za prostore gdje se želi luksuz bez krutosti. Bambus osnova čini panel lakim za montažu i otpornim na vlagu, dok visokosjajni zaštitni sloj daje dubinu i sjaj koji imitira prirodni polirani kamen.",
     "features": [
@@ -1577,7 +1584,7 @@
       "Šifra: SW216"
     ],
     "image": "images/products/product-1774541368-499.jpg",
-    "badge": "Novo",
+    "badge": "Akcija",
     "sku": "SW216",
     "inStock": true,
     "featured": true,
@@ -1623,8 +1630,7 @@
       }
     ],
     "gallery": [
-      "images/products/gallery-116-1775677178-379.jpg",
-      "images/products/gallery-116-1775489871-634.jpg"
+      "images/products/gallery-116-1775677178-379.jpg"
     ]
   },
   {
@@ -1632,7 +1638,7 @@
     "name": "White Marble",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "White Marble je klasik koji nikad ne izlazi iz mode. Tamne sive žile na čistoj bijeloj podlozi repliciraju najljepše mermere Carrare i Calacatte – luksuz dostupan svakom prostoru.",
     "features": [
@@ -1650,7 +1656,7 @@
       "Šifra: 05512"
     ],
     "image": "images/products/product-1774008649-735.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Carraranski bijeli mermer na svakom zidu",
@@ -1701,7 +1707,7 @@
     "name": "Beige Marble",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Beige Marble je mermer koji topli. Blage nježne žile u toplim bež tonovima stvaraju elegantnu, opuštenu atmosferu – savršeno za spavaće sobe, kupaonice i prostore za relaksaciju.",
     "features": [
@@ -1719,7 +1725,7 @@
       "Šifra: SW212"
     ],
     "image": "images/products/product-1774009018-208.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Topli mermer koji smiruje i opušta",
@@ -1770,7 +1776,7 @@
     "name": "Lava Stone",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Lava Stone donosi snagu vulkanskog kamena u vaš enterijer. Tamna, hrapava površina u sivim tonovima stvara moćan vizuelni efekt – idealan za prostore koji žele komunicirati snagu i trajnost.",
     "features": [
@@ -1788,7 +1794,7 @@
       "Šifra: SW211"
     ],
     "image": "images/products/product-1774008688-517.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Snaga vulkanskog kamena",
@@ -1839,7 +1845,7 @@
     "name": "Urban Concrete",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Urban Concrete donosi estetiku brutalizma u savremeni enterijer. Glatka betonska površina u neutralnoj sivoj boji savršena je pozadina za svaki stil – minimalistički, industrijski ili skandinavski.",
     "features": [
@@ -1857,7 +1863,7 @@
       "Šifra: SW003"
     ],
     "image": "images/products/product-1774008744-316.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Urbana betonska estetika bez betona",
@@ -1911,7 +1917,7 @@
     "name": "Nordic Concrete",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Nordic Concrete je svjetlija, sofisticiranija verzija industrijskog betona. Hrapava tekstura u hladnoj sivoj boji daje prostor suptilnu dubinu bez dominacije – skandinavski dizajn u svom čistom obliku.",
     "features": [
@@ -1929,7 +1935,7 @@
       "Šifra: SW001-B"
     ],
     "image": "images/products/product-1774008913-825.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Skandinavski beton – hladnoća i elegancija",
@@ -1980,7 +1986,7 @@
     "name": "Noir Stone",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Noir Stone je najdramatičniji panel u kolekciji. Bijele i sive žile vijugaju kroz gotovo crnu mermernu površinu kao munje – snažan, luksuzni akcentni zid koji ostavlja bez daha.",
     "features": [
@@ -1998,7 +2004,7 @@
       "Šifra: YL059"
     ],
     "image": "images/products/product-1774009000-287.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Najdramatičniji kontrast u kolekciji",
@@ -2128,7 +2134,7 @@
     "name": "Sahara",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Sahara donosi toplinu mediteranskog zida – onu boju i teksturu starih kamenih kuća na suncu. Hrapava gipsana površina u toploj bež boji unosi zemaljsku eleganciju koja istovremeno modernizira i opušta.",
     "features": [
@@ -2146,7 +2152,7 @@
       "Šifra: SW219"
     ],
     "image": "images/products/product-1774009181-772.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Mediteranska toplina kamenog zida",
@@ -2197,7 +2203,7 @@
     "name": "SW002",
     "category": "bambus-mermerni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "SW002 donosi čistu eleganciju mermera na vaše zidove. Bijela površina s finim sivim žilama oponaša prirodni kamen – lagan za montažu, bez težine i troškova pravog mermera.",
     "features": [
@@ -2215,7 +2221,7 @@
       "Šifra: SW002"
     ],
     "image": "images/products/product-1774546387-799.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "SW002",
     "inStock": false,
     "featured": false,
@@ -2256,7 +2262,7 @@
     "name": "Terrazzo",
     "category": "classic",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Terrazzo je povratak najljepše tradicije talijanskog dizajna. Šareni fragmenti kamena, mramora i stakla na bijeloj podlozi stvaraju živahan, jedinstven uzorak koji nikad ne izgleda isto – svježe, moderno i vječno u isto vrijeme.",
     "features": [
@@ -2270,7 +2276,7 @@
       "Šifra: CS029"
     ],
     "image": "images/products/product-1774455189-225.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "CS029",
     "inStock": true,
     "featured": false,
@@ -2325,7 +2331,7 @@
     "name": "Midnight Black",
     "category": "classic",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Midnight Black je odlučan i neobjašnjivo luksuzno. Duboka crna mat površina bez kompromisa – akcentni zid koji preuzima kontrolu nad prostorom i postavlja ton za sve ostalo. Za one koji znaju što hoće.",
     "features": [
@@ -2339,7 +2345,7 @@
       "Šifra: CS022"
     ],
     "image": "images/products/product-1774455282-287.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "CS022",
     "inStock": true,
     "featured": false,
@@ -2391,7 +2397,7 @@
     "name": "Soft Beige",
     "category": "classic",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Soft Beige je neutralnost koja ima karakter. Topla siva u mat završnici ne privlači previše pažnje – ali svaki prostor u kojem se nalazi izgleda promišljeno i elegantno. Savršen za one koji vole suptilnost.",
     "features": [
@@ -2405,7 +2411,7 @@
       "Šifra: CS014"
     ],
     "image": "images/products/product-1774455226-834.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "CS014",
     "inStock": true,
     "featured": false,
@@ -2456,7 +2462,7 @@
     "name": "Pure White",
     "category": "classic",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Pure White je čistoća u svom najčišćem obliku. Glatka, apsolutno bijela površina bez šara ili teksture stvara savršenu pozadinu za svaki prostor – platno na koje možete nadograditi bilo koji stil.",
     "features": [
@@ -2470,7 +2476,7 @@
       "Šifra: CS013"
     ],
     "image": "images/products/product-1774455257-458.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "CS013",
     "inStock": true,
     "featured": false,
@@ -2522,7 +2528,7 @@
     "name": "Kožni Panel PW007 – Hermès Narandžasta",
     "category": "bambus-kozni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "PW007 nije za plašljive – i to je upravo njegova snaga. Živa narandžasta koža u prostoru radi ono što nijedno bijelo ili sivo ne može: unosi energiju, toplinu i neponovljiv karakter. Jedan akcentni zid u narandžastoj transformiše dosadan prostor u nešto što se pamti danima. Posebno efektan u kombinaciji s crnim ili bijelo-sivim namještajem.",
     "features": [
@@ -2539,7 +2545,7 @@
       "Šifra: PW007"
     ],
     "image": "images/products/product-1774454850-237.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "PW007",
     "inStock": true,
     "featured": false,
@@ -2585,7 +2591,7 @@
     "name": "Kožni Panel PW001 – Bordo Crvena",
     "category": "bambus-kozni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "PW001 je panel koji ne prolazi nezapaženo — niti treba. Duboka bordo crvena s kožnom teksturom odmah daje prostoru karakter i odvažnost. Nije za one koji se boje boje. Jedan zid u ovoj nijansi pretvara spavaću sobu u suite, a dnevnu sobu u prostor koji se pamti. Uz neutralni namještaj efekt je spektakularan.",
     "features": [
@@ -2602,7 +2608,7 @@
       "Šifra: PW001"
     ],
     "image": "images/products/product-1774454787-918.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "PW001",
     "inStock": true,
     "featured": false,
@@ -2648,7 +2654,7 @@
     "name": "Kožni Panel PW005 – Ledena Siva",
     "category": "bambus-kozni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "PW005 je siva kakvoj nema premca – hladna, prefinjana, sofisticirana. Kožna tekstura u ovoj svjetlosivoj nijansi daje prostoru onaj \"high-end\" osjećaj koji inače dobijate samo skupim materijalima. Ide uz sve – bijeli, crni, drveni, metalni namještaj. Minimalistički san u jednom panelu.",
     "features": [
@@ -2665,7 +2671,7 @@
       "Šifra: PW005"
     ],
     "image": "images/products/product-1774455044-368.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "PW005",
     "inStock": true,
     "featured": false,
@@ -2711,7 +2717,7 @@
     "name": "Kožni Panel PW003 – Tamni Antracit",
     "category": "bambus-kozni",
     "price": "86.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "PW003 je za one koji znaju šta hoće. Tamni antracit s kožnom teksturom – gotovo crn, ali s onom tankom linijom karaktera koja ga izdvaja od pune crne. Snažan, muževan, neobuzdano elegantan. Uz zlatne ili bronzane detalje postaje luksuz. Uz bijeli namještaj postaje drama. U svakom slučaju – postaje centar pažnje.",
     "features": [
@@ -2728,7 +2734,7 @@
       "Šifra: PW003"
     ],
     "image": "images/products/product-1774455070-350.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "sku": "PW003",
     "inStock": true,
     "featured": false,
@@ -2774,7 +2780,7 @@
     "name": "Brushed Gold",
     "category": "bambus-metalni",
     "price": "114.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Brushed Gold donosi zlatni glamur u modernom industrijskom izdanju. Brušena metalna tekstura hvata svjetlost i raspršuje je u toplim zlatnim nijansama – luksuz koji ne viče, nego šapće.",
     "features": [
@@ -2792,7 +2798,7 @@
       "Šifra: JS23007"
     ],
     "image": "images/products/product-1774009566-250.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Zlatni glamur u industrijskom izdanju",
@@ -2843,7 +2849,7 @@
     "name": "Raw Steel",
     "category": "bambus-metalni",
     "price": "114.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Raw Steel je čelik koji diše. Tamna industrijska siva sa autentičnom metalnom teksturom donosi snagu fabrike u savremeni enterijer – savršeno uz crni metal, beton i tamno drvo u loft prostorima.",
     "features": [
@@ -2861,7 +2867,7 @@
       "Šifra: TS002"
     ],
     "image": "images/products/product-1774009589-918.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Industrijska snaga sirovog čelika",
@@ -2912,7 +2918,7 @@
     "name": "Champagne Metal",
     "category": "bambus-metalni",
     "price": "114.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Champagne Metal je sofisticiraniji brat Brushed Golda. Svilenkasta zlatno-siva metalna površina odaje blještavilo šampanjca – suptilniji luksuz koji funkcioniše u dnevnim i večernjim prostorima jednako dobro.",
     "features": [
@@ -2930,7 +2936,7 @@
       "Šifra: JS007"
     ],
     "image": "images/products/product-1774009612-205.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Svilenkast sjaj šampanjca na zidu",
@@ -2981,7 +2987,7 @@
     "name": "JS0014",
     "category": "bambus-metalni",
     "price": "114.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "JS0014 panel u bronzanoj metalnoj obradi evocira starinske patinirane surface, ali u potpuno savremenom obliku. Topla bronza na bambus podlozi daje prostorijama taj rijedak kvalitet – starinsku dušu u modernom ruhu. Savršen izbor za ugostiteljske objekte, studije ili spavaće sobe koji traže nešto više od uobičajenog.",
     "features": [
@@ -2999,7 +3005,7 @@
       "Šifra: JS0014"
     ],
     "image": "images/products/product-1774009629-455.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Bronzana patina – vintage susreće moderno",
@@ -3050,7 +3056,7 @@
     "name": "3D Letvica – Golden Teak",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Kada želite zid koji govori – bez slika, bez tapeta, samo čista forma i sena. CQ006 letvica donosi toplu tik paletu u modernom 3D obliku: svaka letva baca blagu sjenu na susjednu, stvarajući živi, promjenjivi uzorak ovisno o kutu svjetla. Savršena za fokalni zid u dnevnoj sobi ili iza kreveta.",
     "features": [
@@ -3067,7 +3073,7 @@
       "45 m²)"
     ],
     "image": "images/products/product-1774010978-346.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Trodimenzionalna dubina u toplim tik-tonovima",
@@ -3117,7 +3123,7 @@
     "name": "3D Letvica – Mocha Oak",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Bela ne mora biti dosadna. MW300 letvica u prirodno beloj nijansi unosi svjetlost i osjećaj prostranstva u svaki kutak. 3D profil stvara suptilne sene koje zidu daju karakter, a ne samo boju. Idealna za minimalističke enterijer gdje detalj mora biti savršen.",
     "features": [
@@ -3132,7 +3138,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011058-682.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Čista bijela koja daje prostoru dah",
@@ -3181,7 +3187,7 @@
     "name": "3D Letvica – Espresso Teak",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "MW312 nosi u sebi hladnoću skandinavskih šuma – ton pepeljastog hrasta koji je istovremeno prirodan i sofisticiran. 3D profil naglašava dubinu drvenaste teksture, a hladni podton savršeno odgovara metalnim, betonskim i staklenim elementima modernog interijera.",
     "features": [
@@ -3196,7 +3202,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011072-999.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Hladna elegancija pepeljaste hrast nijanse",
@@ -3242,7 +3248,7 @@
     "name": "3D Letvica – Honey Oak",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Postoje boje koje odmah donose osjećaj topline i domačnosti – MW321 je jedna od njih. Zlatno-kestena nijansa s blagim žutim podtonom osvjetljava prostor i stvara atmosferu udobnosti. 3D profil dodaje dubinu i teksturu koja je vidljiva i opipljiva.",
     "features": [
@@ -3257,7 +3263,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011085-475.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Topli zlatno-kesteni ton za udoban dom",
@@ -3303,7 +3309,7 @@
     "name": "3D Letvica – Nordic Oak",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "MW010 je bela u najčišćem obliku – snežna, hladna i precizna. Ova letvica transformira obični zid u arhitektonski element: svaka letva je savršeno definisana, a igra svjetla i sene između 3D profila stvara dinamičan uzorak koji se mijenja tokom dana.",
     "features": [
@@ -3318,7 +3324,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011100-591.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Besprijekorna bijela za savršen fokalni zid",
@@ -3364,7 +3370,7 @@
     "name": "3D Letvica 170 M51-01 – Topli Tik (Mat)",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "M51-01 donosi toplinu tik-drveta u 170mm mat profilu. Ravna, izražena šara uz mat završnu obradu stvara zid koji je topao i prirodan – bez bliještanja, samo čista dubina drveta. Idealan za dnevne sobe i spavaće sobe gdje tražite prirodan luksuz.",
     "features": [
@@ -3379,7 +3385,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011113-813.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Mat bijela s diskretnim 3D efektom",
@@ -3425,7 +3431,7 @@
     "name": "3D Letvica MW319 – Tamni Orah (Gloss)",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "MW319 nosi boju tamnog oraha u sjajnoj gloss obradi – toplo, bogato smeđa nijansa s finim zrnom drveta koje pod svjetlom dolazi do punog izražaja. Sjaj između letvica multiplicira dubinu sjenki i daje zidu dramatičan, luksuzni karakter.",
     "features": [
@@ -3440,7 +3446,7 @@
       "Cijena po m²: ~50.99 €/m² (1 letvica pokriva 0,39 m²)"
     ],
     "image": "images/products/product-1774011127-211.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Sjajna bijela koja odbija svjetlo i uvećava prostor",
@@ -3486,7 +3492,7 @@
     "name": "3D Letvica – Havana Oak",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "MW682 nosi sobom ozbiljnost i luksuz tamnog oraha – boja koja asocira na biblioteke, kožne fotelje i prostorije u kojima se donose važne odluke. 3D profil u ovoj tamnoj nijansi stvara dramatičan kontrast sa svjetlim zidovima i belim plafonima, dajući prostoru karakter i dubinu.",
     "features": [
@@ -3501,7 +3507,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011139-663.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Bogata tamno-orahova nijansa za luksuzni enterijer",
@@ -3547,7 +3553,7 @@
     "name": "3D Letvica 170 SP054 – Topli Orah",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "SP054 kombinuje toplinu orahovog drveta s dramatičnim crnim razmakom između letvica u 170mm profilu. Kontrast između toplog smeđeg tona i tamnih sjenki stvara zid koji izgleda kao arhitektonska instalacija. Savršen za iza sofe ili kao fokalna tačka dnevne sobe.",
     "features": [
@@ -3562,7 +3568,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011169-606.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Širi profil u hladnoj sivoj – modernost na kvadrat",
@@ -3608,7 +3614,7 @@
     "name": "3D Letvica 170 MW018 – Tamna Pepeljasta",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "MW018 u 170mm formatu donosi hladnu pepeljasto-sivu s finim drvenim uzorkom. U kombinaciji s crnim razmakom između letvica, dobijate industrijski-elegantnu kompoziciju koja odlično ide uz beton, metal i tamne enterijere. Ista boja panela MW018 – savršen spoj.",
     "features": [
@@ -3623,7 +3629,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011187-463.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Široki 170mm profil u toplom lanen-bežu",
@@ -3669,7 +3675,7 @@
     "name": "3D Letvica 170 SP052 – Prirodni Javor",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "SP052 donosi svjetlost prirodnog javora u 170mm profilu s crnim razmakom koji ističe svaku letvicu ponaosob. Topla zlatasto-siva nijansa prirodnog drveta na tamnoj osnovi stvara kontrast koji prostor čini i toplim i modernim istovremeno. Skandinavski karakter u premium obliku.",
     "features": [
@@ -3684,7 +3690,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011242-938.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Poseban 170mm profil u toploj bijeloj s drvenim efektom",
@@ -3730,7 +3736,7 @@
     "name": "3D Letvica – Midnight Black",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "CS022 donosi estetiku industrijskog betona bez hladnoće i težine pravog betona. Siva nijansa s blagim toplim podtonom savršeno imitira glatkani beton, a 3D profil dodaje onu strukturu i reljef koji betonski zidovi imaju prirodno. Urban, moderan, autentičan.",
     "features": [
@@ -3745,7 +3751,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011253-906.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Urbani betonski ton s trodimenzionalnom teksturom",
@@ -3792,7 +3798,7 @@
     "name": "3D Letvica – Pure White",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "CS013 je siva kakvu arhitekti vole – hladna, precizna, bez kompromisa. Ova nijansa nije ni tamna ni svijetla, nego savršeno balansirana srednja siva koja funkcioniše kao neutralna pozadina za svaki stil. 3D profil daje joj dubinu i teksturu, pretvarajući neutralnu boju u vizualni doživljaj.",
     "features": [
@@ -3807,7 +3813,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011266-297.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Precizna hladna siva za profesionalne enterijer",
@@ -3854,7 +3860,7 @@
     "name": "3D Letvica JM001 – Hladno Siva (Teksturisana)",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "JM001 je teksturisana varijanta hladne sive – isti hladni sivi ton, ali s naglašenijim reljefom koji daje zidu snažniju taktilnu i vizualnu dimenziju. Savršena kada želite da siva bude nešto više od boje – da postane materijal koji se vidi i osjeća.",
     "features": [
@@ -3869,7 +3875,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011278-208.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Teksturisana varijanta hladne sive za dodatnu dubinu",
@@ -3915,7 +3921,7 @@
     "name": "3D Letvica 039 – Krem Bijela",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Kod 039 nosi nježnu krem-bijelu nijansuu – toplija od čiste bijele, blaže od bjelokoske. Glatka površina bez uočljivog uzorka naglašava čistoću forme i geometriju sjene između letvica. Idealna za minimalistički ili skandinavski enterijer gdje svjetlost i oblik govore sami.",
     "features": [
@@ -3930,7 +3936,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011294-937.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Duboka espresso nijansa za dramatičan zid",
@@ -3976,7 +3982,7 @@
     "name": "3D Letvica 021 – Topla Bež",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Kod 021 donosi toplu bež – ni bijelo ni smeđe, nego onaj prirodni pijesak koji smiruje prostoriju. Suptilna tekstura površine oponaša prirodna vlakna i daje letvici dubinu bez drvetnih uzoraka. Odlično ide uz drveni namještaj, kožu i prirodne materijale.",
     "features": [
@@ -3991,7 +3997,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011310-815.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Klasični srednje-hrastov ton za svaki enterijer",
@@ -4037,7 +4043,7 @@
     "name": "3D Letvica 140 021 – Topla Bež (Uži profil)",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Ista topla bež nijansa kao 3D Letvica 021, u užem 140mm profilu. Uže letvice stvaraju gušći ritam vertikalnih linija i daju prostoru teksturu koja je delikatnija i elegantnija. Idealno za manje prostore ili kad tražite finiji, sofisticiraniji zidni reljef.",
     "features": [
@@ -4052,7 +4058,7 @@
       "Cijena po m²: ~50.99 €/m² (1 letvica pokriva 0,39 m²)"
     ],
     "image": "images/products/product-1774011321-786.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Uži 140mm profil u hrastovoj nijansi – gušći ritam",
@@ -4098,7 +4104,7 @@
     "name": "3D Letvica 029 – Terrazzo",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Letvica 029 prenosi terrazzo uzorak panela CS029 u trodimenzionalnu formu – šareni fragmenti u krem osnovi dobijaju dodatnu dubinu kroz igru sjenki između letvica. Kombinirajte s bambus panelom CS029 za potpun i ujednačen zidni izgled. Jedinstven izbor za enterijer pun karaktera.",
     "features": [
@@ -4113,7 +4119,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011345-739.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Crvenkasti mahagonij ton s luksuznim karakterom",
@@ -4160,7 +4166,7 @@
     "name": "3D Letvica 016 – Hladno Siva",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Kod 016 donosi čistu, hladnu sivu koja ne pripada ni betonu ni metalnoj estetici, nego stoji samostalno kao nijansa preciznosti i mira. Suptilna površinska tekstura daje letvici dubinu bez uzorka koji odvlači pažnju. Idealna za moderne, neutralne enterijere.",
     "features": [
@@ -4175,7 +4181,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011373-836.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Svijetla javorova nijansa za prozračan enterijer",
@@ -4221,7 +4227,7 @@
     "name": "3D Letvica – Deva",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "BW008 je tamno-crna – gotovo bezbojna u svojoj intenzivnosti. Ova letvica ne mumlа: stavlja tačku u prostoriji i kaže što želi. Idealna za fokalni zid koji će biti zvijezda interijera, posebno u kombinaciji s belim zidovima, zlatnim dodacima ili toplim osvjetljenjem.",
     "features": [
@@ -4236,7 +4242,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011390-105.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Tamna kao noć – crna ebonija za maksimalan kontrast",
@@ -4282,7 +4288,7 @@
     "name": "3D Letvica – Grigio",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "BW224 je boja antracita – tamna, ali ne crna. Dovoljno duboka da dominira prostorom, dovoljno mekana da ne zaplaši. Savršena za enterijer koji želi karakter bez ekstravagancije. U kombinaciji s toplim drvenim tonovima ili betonskim elementima, antracit stvara savršen kontrast.",
     "features": [
@@ -4297,7 +4303,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011402-320.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Prefinjen antracit između crne i sive",
@@ -4343,7 +4349,7 @@
     "name": "3D Letvica – Glacier",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "BW809 grafit ima nešto što čista crna nema – topao metalični podton koji ga čini živim. Ova nijansa upija svjetlo i odbija ga na specifičan način koji se mijenja tokom dana. Savršena za profesionalne i luksuzne enterijer gdje materijal mora stati i biti prepoznat.",
     "features": [
@@ -4358,7 +4364,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011420-164.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Grafitna tamnoća s toplim metalnim podtonom",
@@ -4404,7 +4410,7 @@
     "name": "3D Letvica – Perla",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "BW229 imitira boju tamnog škriljevca – hladna, duboka siva s plavičastim podtonom koja asocira na planinska jezera i kišne oblake. Ova nijansa je sofisticirana alternativa crnoj: dovoljno tamna za drama, dovoljno plemenita za eleganciju.",
     "features": [
@@ -4419,7 +4425,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011449-644.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Škriljevac nijansa – prirodna tamnoća kamena",
@@ -4465,7 +4471,7 @@
     "name": "3D Letvica 003 – Zlatna Žuta",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Letvica 003 je smjela, sunčana zlatno-žuta – boja koja ne traži pratnju. Trodimenzionalne sjenke između letvica daju toj živahnoj nijanci dubinu i plasticitet koji je čine posebnom. Savršen akcentni zid u dječijoj sobi, kreativnom prostoru ili svuda gdje hoćete da prostorija pokreće energiju.",
     "features": [
@@ -4480,7 +4486,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011471-225.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Klasični topli hrast u čistom 3D profilu",
@@ -4526,7 +4532,7 @@
     "name": "3D Letvica 3D02 – Prirodni Hrast",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Model 3D02 donosi srednji, prirodni ton hrasta u zaobljenom profilu koji baca mekše, dublje sjene od standardnih letvica. Topla hrastova nijansa odlično ide uz sve stilove – od klasičnog do modernog skandinavskog. Jedan od najpristupačnijih prirodnih tonova u kolekciji.",
     "features": [
@@ -4540,7 +4546,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011493-381.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Mineralna siva u posebnom 3D02 dizajnu profila",
@@ -4586,7 +4592,7 @@
     "name": "3D Letvica 3D05 – Tamna Siva",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Model 3D05 nosi tamnu sivo-smeđu nijansu s izraženim drvenim uzorkom u zaobljenom profilu koji naglašava sjenu između svake letvice. Kombinacija tamnog tona i trodimenzionalnog profila daje zidu težinu i karakter. Savršen uz industrijski ili tamni moderni enterijer.",
     "features": [
@@ -4601,7 +4607,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011506-585.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Model 3D05 s naglašenim reljefom u bijeloj",
@@ -4647,7 +4653,7 @@
     "name": "3D Letvica 3D09X – Topli Mahagonij",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Model 3D09X nosi boju zrelog mahagonija u ekstra izraženom zaobljenom profilu. X oznaka znači dublji reljef – sjenke između letvica su snažnije i dramatičnije nego kod standardnih profila. Topla crvenkasto-smeđa uz naglašen 3D efekat – za prostorije koje zahtijevaju pažnju.",
     "features": [
@@ -4662,7 +4668,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011543-890.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Isti 3D05 profil u sivoj za urbani efekt",
@@ -4708,7 +4714,7 @@
     "name": "3D Letvica 3D07X – Bijela (Premium profil)",
     "category": "3d-letvice",
     "price": "19.99",
-    "discount": 0,
+    "discount": 20,
     "unit": "kom",
     "description": "Model 3D07X je premium bijela letvica s ekstra izraženim zaobljenim profilom. X oznaka donosi veći vizualni udar – mekoće zaobljenih formi i čistote bijele zajedno stvaraju nešto između skulpture i arhitekture. Pod bočnim svjetlom, sjene između letvica daju zidu fascinantnu plastičnost.",
     "features": [
@@ -4723,7 +4729,7 @@
       "Cijena po m²: ~44.62 €/m² (1 letvica pokriva 0,45 m²)"
     ],
     "image": "images/products/product-1774011594-795.jpg",
-    "badge": null,
+    "badge": "Akcija",
     "inStock": true,
     "featured": false,
     "highlight": "Ekstra profil 3D07X – premium crna za maksimalan statement",
@@ -6208,7 +6214,7 @@
     "image": "images/products/product-1775489604-493.jpg",
     "badge": null,
     "sku": "TW33",
-    "inStock": true,
+    "inStock": false,
     "featured": false,
     "gallery": [],
     "highlight": "Deblji kaneliran panel od medijapana – veća debljina znači dublje žljebove i dramatičnije sjene na zidu. Zid dobija volumen i osjećaj kvaliteta koji se vidi na prvi pogled. Medijapan je savitljiv materijal koji se prilagođava svakom prostoru. Kompaktan format 280×60cm posebno je praktičan za prostore s mnogo detalja poput vrata, prozora i uglova.",
@@ -6275,7 +6281,7 @@
     "image": "images/products/product-1775489621-901.jpg",
     "badge": null,
     "sku": "TW32",
-    "inStock": true,
+    "inStock": false,
     "featured": false,
     "highlight": "Tanji kaneliran panel od medijapana – isti lijepi kaneliran uzorak, lakši i praktičniji za ugradnju. Medijapan je savitljiv materijal koji se lako prilagođava svakom prostoru bez obzira na neravnine ili prepreke. Odličan izbor za stanove, apartmane i prostore gdje treba pokriti veće površine. Izgleda identično kao deblji model, ali je ekonomičniji za veće projekte.",
     "idealFor": [
