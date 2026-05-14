@@ -58,8 +58,19 @@ function getBadgeClass(badge) {
 
 // ===== GENERIŠI KARTICU PROIZVODA =====
 function renderProductCard(product, lazy = true) {
-  const badge = product.badge
+  const isPreorder = product.badge && (product.badge.toLowerCase().includes('poručivanje') || product.badge.toLowerCase().includes('porucivanje'));
+
+  const badge = product.badge && !isPreorder
     ? `<div class="product-badge ${getBadgeClass(product.badge)}">${product.badge}</div>`
+    : '';
+
+  const preorderOverlay = isPreorder
+    ? `<div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:3;border-radius:inherit;">
+        <div style="background:#e67e22;color:#fff;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:10px 20px;border-radius:8px;text-align:center;line-height:1.4;box-shadow:0 4px 16px rgba(0,0,0,0.3);">
+          <i class="fas fa-clock" style="display:block;font-size:22px;margin-bottom:6px;"></i>
+          Samo za<br>poručivanje
+        </div>
+      </div>`
     : '';
 
   const categoryName = allCategories.find(c => c.id === product.category)?.name || product.category;
@@ -77,6 +88,7 @@ function renderProductCard(product, lazy = true) {
       <div class="product-img">
         ${imgContent}
         ${badge}
+        ${preorderOverlay}
         ${outOfStock ? `<div class="oos-tag">Rasprodato</div>` : ''}
         <div class="product-actions">
           <button class="btn-action" title="Brzi pregled" onclick="event.stopPropagation(); openProductModal(${product.id})">
