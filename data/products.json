@@ -81,89 +81,6 @@
     ]
   },
   {
-    "id": 26,
-    "name": "Espresso Teak",
-    "category": "bambus-drveni",
-    "price": "86.99",
-    "unit": "kom",
-    "highlight": "Luksuzna dubina talasastih žila",
-    "description": "Espresso Teak je luksuz u tamnim tonovima. Talasaste žile koje teku kroz duboku smeđu površinu čine svaki panel jedinstvenim – kao da je izrezan direktno iz stoljetnog tik-drveta.",
-    "features": [
-      "Dimenzije: 280×122cm (3.42 m² po komadu)",
-      "Debljina: 5mm",
-      "Boja: tamna",
-      "duboka smeđa – espresso tonovi",
-      "Šara: talasaste žile",
-      "bogata tik tekstura",
-      "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom",
-      "siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe",
-      "spavaće sobe",
-      "kafići",
-      "restorani",
-      "hoteli",
-      "uredi",
-      "Vodootporan – ne nabrekne i ne deformiše se od vode",
-      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
-      "Vatrootporan (klasa B1) – usporava širenje plamena",
-      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
-      "Šifra: MW312"
-    ],
-    "idealFor": [
-      "Spavaća soba",
-      "Kućni bioskop",
-      "Bar/kafić",
-      "VIP lounge",
-      "Hodnici",
-      "Recepcije",
-      "Trpezarije",
-      "Apartmani",
-      "Hoteli"
-    ],
-    "styleMatch": [
-      "Moderni luksuz",
-      "Art Deco",
-      "Glamour",
-      "Noir"
-    ],
-    "image": "images/products/mw312.jpg",
-    "badge": "",
-    "inStock": true,
-    "featured": false,
-    "sku": "MW312",
-    "gallery": [
-      "images/products/gallery-26-1775126350-551.jpg",
-      "images/products/gallery-26-1775126353-346.jpg",
-      "images/products/gallery-26-1774942442-638.jpg",
-      "images/products/gallery-26-1774942445-828.jpg"
-    ],
-    "discount": 0,
-    "reviews": [
-      {
-        "author": "Stefan P.",
-        "city": "Novi Sad",
-        "date": "Januar 2025",
-        "rating": 5,
-        "text": "Espresso Teak je taman onaj tamni, bogati ton koji sam tražio za biblioteku. Uz kožnu fotelju i toplu rasvjetu, prostorija izgleda kao iz nekog luksuznog hotela. Kvalitet materijala je odličan, nema nikakvih deformacija ni po rubu."
-      },
-      {
-        "author": "Dragana V.",
-        "city": "Zagreb",
-        "date": "Mart 2025",
-        "rating": 5,
-        "text": "Tamna espresso boja je hrabra odluka ali se isplatilo. Postavila na jedan zid u hodnik i odmah se osjetio karakter koji smo htjeli. Kombinovano sa bijelim zidom s druge strane — jak kontrast koji funkcioniše savršeno."
-      },
-      {
-        "author": "Bojan Č.",
-        "city": "Tivat",
-        "date": "Februar 2025",
-        "rating": 5,
-        "text": "Ove panele sam uzeo za kancelariju — cijeli zid iza radnog stola. Tamni teak daje ozbiljan i profesionalan izgled. Korisnici i poslovni partneri koji dođu uvijek primijete i komentarišu. Solidna investicija."
-      }
-    ]
-  },
-  {
     "id": 23,
     "name": "Mocha Oak",
     "category": "bambus-drveni",
@@ -293,7 +210,7 @@
       "Bohemian"
     ],
     "image": "images/products/mw682.jpg",
-    "badge": "",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "sku": "MW682",
@@ -397,6 +314,89 @@
       "images/products/gallery-24-1774943459-297.jpg"
     ],
     "discount": 0
+  },
+  {
+    "id": 26,
+    "name": "Espresso Teak",
+    "category": "bambus-drveni",
+    "price": "86.99",
+    "unit": "kom",
+    "highlight": "Luksuzna dubina talasastih žila",
+    "description": "Espresso Teak je luksuz u tamnim tonovima. Talasaste žile koje teku kroz duboku smeđu površinu čine svaki panel jedinstvenim – kao da je izrezan direktno iz stoljetnog tik-drveta.",
+    "features": [
+      "Dimenzije: 280×122cm (3.42 m² po komadu)",
+      "Debljina: 5mm",
+      "Boja: tamna",
+      "duboka smeđa – espresso tonovi",
+      "Šara: talasaste žile",
+      "bogata tik tekstura",
+      "Površinska UV zaštita – ne blijedi na suncu",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
+      "Vodootporan – ne nabrekne i ne deformiše se od vode",
+      "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+      "Vatrootporan (klasa B1) – usporava širenje plamena",
+      "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+      "Šifra: MW312"
+    ],
+    "idealFor": [
+      "Spavaća soba",
+      "Kućni bioskop",
+      "Bar/kafić",
+      "VIP lounge",
+      "Hodnici",
+      "Recepcije",
+      "Trpezarije",
+      "Apartmani",
+      "Hoteli"
+    ],
+    "styleMatch": [
+      "Moderni luksuz",
+      "Art Deco",
+      "Glamour",
+      "Noir"
+    ],
+    "image": "images/products/mw312.jpg",
+    "badge": "",
+    "inStock": false,
+    "featured": false,
+    "sku": "MW312",
+    "gallery": [
+      "images/products/gallery-26-1775126350-551.jpg",
+      "images/products/gallery-26-1775126353-346.jpg",
+      "images/products/gallery-26-1774942442-638.jpg",
+      "images/products/gallery-26-1774942445-828.jpg"
+    ],
+    "discount": 0,
+    "reviews": [
+      {
+        "author": "Stefan P.",
+        "city": "Novi Sad",
+        "date": "Januar 2025",
+        "rating": 5,
+        "text": "Espresso Teak je taman onaj tamni, bogati ton koji sam tražio za biblioteku. Uz kožnu fotelju i toplu rasvjetu, prostorija izgleda kao iz nekog luksuznog hotela. Kvalitet materijala je odličan, nema nikakvih deformacija ni po rubu."
+      },
+      {
+        "author": "Dragana V.",
+        "city": "Zagreb",
+        "date": "Mart 2025",
+        "rating": 5,
+        "text": "Tamna espresso boja je hrabra odluka ali se isplatilo. Postavila na jedan zid u hodnik i odmah se osjetio karakter koji smo htjeli. Kombinovano sa bijelim zidom s druge strane — jak kontrast koji funkcioniše savršeno."
+      },
+      {
+        "author": "Bojan Č.",
+        "city": "Tivat",
+        "date": "Februar 2025",
+        "rating": 5,
+        "text": "Ove panele sam uzeo za kancelariju — cijeli zid iza radnog stola. Tamni teak daje ozbiljan i profesionalan izgled. Korisnici i poslovni partneri koji dođu uvijek primijete i komentarišu. Solidna investicija."
+      }
+    ]
   },
   {
     "id": 19,
@@ -736,11 +736,18 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: bijelo-bež, topla",
+      "Boja: bijelo-bež",
+      "topla",
       "Šara: krupnija tkana tekstura – pletena površina",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -748,7 +755,7 @@
       "Šifra: BW229"
     ],
     "image": "images/products/product-1774006203-686.jpg",
-    "badge": "",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "highlight": "Tkana toplina na svakom zidu",
@@ -792,6 +799,10 @@
         "rating": 4,
         "text": "Perla boja izgleda drugačije na različitim osvjetljenjima — ponekad gotovo bijela, ponekad ima blag sivi odsjaj. To je i razlog zašto sam je odabrala. Kupatilo je sada svjetlosna igra. Preporučujem uz dobru rasvjetu."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-37-1778597880-745.jpg",
+      "images/products/gallery-37-1778597883-725.jpg"
     ]
   },
   {
@@ -805,11 +816,18 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: bijela, topla",
+      "Boja: bijela",
+      "topla",
       "Šara: grublja tkana tekstura – bouclé efekat",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -817,7 +835,7 @@
       "Šifra: BW400"
     ],
     "image": "images/products/product-1774006240-870.jpg",
-    "badge": "",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "highlight": "Čista bijela s bogatom teksturom",
@@ -863,9 +881,8 @@
       }
     ],
     "gallery": [
-      "images/products/gallery-38-1774942362-395.jpg",
-      "images/products/gallery-38-1774942365-402.jpg",
-      "images/products/gallery-38-1776876660-369.jpg"
+      "images/products/gallery-38-1776876660-369.jpg",
+      "images/products/gallery-38-1778670475-968.jpg"
     ]
   },
   {
@@ -879,11 +896,18 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: siva, hladna",
+      "Boja: siva",
+      "hladna",
       "Šara: gruba tkana tekstura – industrijski karakter",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -891,7 +915,7 @@
       "Šifra: BW224"
     ],
     "image": "images/products/product-1774006266-913.jpg",
-    "badge": "",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "highlight": "Industrijska siva s karakterom tkanine",
@@ -935,6 +959,9 @@
         "rating": 5,
         "text": "Grigio u kombinaciji sa bijelom je klasika koja nikad ne zastarijeva. Postavio u kupatilu i tušu. Paneli su vodootporni i nakon 3 mjeseca nema ni traga od vlage ili promjene boje. Solidna kupovina."
       }
+    ],
+    "gallery": [
+      "images/products/gallery-39-1778768733-316.jpg"
     ]
   },
   {
@@ -5092,6 +5119,214 @@
         "text": "Crni Talas je hrabra odluka ali jedina prava za moj studio za fotografiju. Valoviti uzorak na crnoj je savršena pozadina za portretne snimke — gosti traže da se fotografišu ispred njega. I akustika studija je znatno bolja."
       }
     ]
+  },
+  {
+    "id": 143,
+    "name": "AKU051 – Zlatni Hrast Geometrik",
+    "category": "akusticni-paneli",
+    "price": "60",
+    "discount": 0,
+    "unit": "kom",
+    "description": "AKU051 je akustični panel koji spaja funkciju i dizajn na jedinstven način. Geometrijski uzorak sa dijagonalnim i horizontalnim lamelama u toploj zlatno-hrast nijansi na crnoj akustičnoj podlozi stvara vizuelni efekat koji zaustavlja pogled. Svaka ugradnja pretvoriti zid u pravo arhitektonsko rješenje, a istovremeno znatno smanjiti odjek u prostoriji.",
+    "features": [
+      "Dimenzije: 60×60cm (0.36 m² po komadu)",
+      "Materijal: prirodni hrast furnir na visokogusti akustični filc",
+      "Boja: topla zlatno-hrast nijansa na crnoj podlozi",
+      "Dizajn: geometrijski uzorak – dijagonalne i horizontalne lamele",
+      "NRC koeficijent: 0.65 – efikasna apsorpcija zvuka",
+      "Montaža: lijepljenje na ravnu zidnu površinu",
+      "Težina: ~1.8 kg/kom",
+      "Primjena: zidovi i plafoni unutar prostora",
+      "Šifra: AKU051"
+    ],
+    "image": "images/products/product-1778759718-379.jpg",
+    "badge": "Samo za poručivanje",
+    "sku": "AKU051",
+    "inStock": true,
+    "featured": false,
+    "gallery": [
+      "images/products/gallery-143-1778759865-483.jpg"
+    ],
+    "reviews": [
+      {
+        "author": "Bojan M.",
+        "city": "Podgorica",
+        "date": "April 2026",
+        "rating": 5,
+        "text": "Postavio sam ove panele u dnevnoj sobi i odmah primijetio razliku u zvuku – eho je praktično nestao. A izgled je nevjerovatan, geometrijski uzorak daje prostoru karakter koji nemaju obični paneli. Više komšija je pitalo odakle mi ovo, niko nije vjerovao da su akustični."
+      },
+      {
+        "author": "Milena T.",
+        "city": "Nikšić",
+        "date": "Mart 2026",
+        "rating": 5,
+        "text": "Imala sam studio za jogu i akustika je bila loša – zvuk se vraćao i ometao koncentraciju. Ovi zlatni Geometrik paneli su savršeni izbor – i zvuk je umirio i izgled sobe je dobio toplinu koja se uklapa uz drvene detalje. Klijentkinje ih redovno komentarišu."
+      },
+      {
+        "author": "Igor V.",
+        "city": "Bar",
+        "date": "Februar 2026",
+        "rating": 5,
+        "text": "Radio sam home office i video pozivi su odjekivali. Naručio ove panele jer mi se svidjela kombinacija akustike i izgleda. Montaža super, drže se čvrsto. Kolege na pozivima su primijetile i zvuk i pozadinu – izgledalo je profesionalno od prvog dana."
+      }
+    ],
+    "highlight": "Zlatni Hrast Geometrik"
+  },
+  {
+    "id": 144,
+    "name": "AKU050 – Bijeli Pepeo Geometrik",
+    "category": "akusticni-paneli",
+    "price": "60",
+    "discount": 0,
+    "unit": "kom",
+    "description": "AKU050 donosi sofisticirani geometrijski dizajn u hladnijoj, pepeljasto-bijeloj paleti. Lamele pepeljasto-bijelog hrasta postavljene u dijagonalnom geometrijskom obrascu na crnoj akustičnoj osnovi daju prostoru moderan, gotovo nordijski karakter. Idealan za minimalistički i skandinavski enterijer gdje bijela boja treba nositi i akustičku i estetsku ulogu.",
+    "features": [
+      "Dimenzije: 60×60cm (0.36 m² po komadu)",
+      "Materijal: pepeljasto-bijeli hrast furnir na visokogusti akustični filc",
+      "Boja: hladna bijelo-pepeljasta nijansa na crnoj podlozi",
+      "Dizajn: geometrijski uzorak – dijagonalne i horizontalne lamele",
+      "NRC koeficijent: 0.65 – efikasna apsorpcija zvuka",
+      "Montaža: lijepljenje na ravnu zidnu površinu",
+      "Težina: ~1.8 kg/kom",
+      "Primjena: zidovi i plafoni unutar prostora",
+      "Šifra: AKU050"
+    ],
+    "image": "images/products/product-1778759835-556.jpg",
+    "badge": "Samo za poručivanje",
+    "sku": "AKU050",
+    "inStock": true,
+    "featured": false,
+    "gallery": [
+      "images/products/gallery-144-1778759881-623.jpg"
+    ],
+    "reviews": [
+      {
+        "author": "Ana K.",
+        "city": "Budva",
+        "date": "April 2026",
+        "rating": 5,
+        "text": "Bijela verzija geometrijskog panela je bila upravo ono što mi je trebalo za minimalističku spavaću sobu. Uz bijele zidove i crne detalje izgleda nevjerovatno. Akustika je poboljšana, nema više odjeka. Dizajn je toliko dekorativan da ih svi zamišljaju kao uramljenu umjetnost."
+      },
+      {
+        "author": "Marko P.",
+        "city": "Herceg Novi",
+        "date": "Mart 2026",
+        "rating": 5,
+        "text": "Postavio u recepciji malog hotela koji radim u nordijskom stilu. Ovi bijeli geometrik paneli su upotpunili cijelu koncepciju prostora. Gosti ih fotografišu i pitaju odakle. Zvuk je smiren, razgovor u recepciji je čišći. Naručujem još za restoranski dio."
+      },
+      {
+        "author": "Jovana S.",
+        "city": "Podgorica",
+        "date": "Februar 2026",
+        "rating": 4,
+        "text": "Kupila za kancelariju – htjela nešto što nije tipičan ured ali i smanjuje buku. Bijeli Geometrik je bio pravo rješenje. Jedino što bih dodala je da je montaža malo zahtjevnija zbog preciznosti uzorka, ali rezultat je savršen. Svaka posjeta ureda komentarište zidove."
+      }
+    ],
+    "highlight": "Bijeli Pepeo Geometrik"
+  },
+  {
+    "id": 145,
+    "name": "AKU054 – Medeni Hrast Linear",
+    "category": "akusticni-paneli",
+    "price": "60",
+    "discount": 0,
+    "unit": "kom",
+    "description": "AKU054 je čisti linearni akustični panel u toploj medenoj hrast nijansi. Horizontalne lamele jednoobrazno raspoređene na crnoj akustičnoj podlozi daju prostoru mirnu, uređenu estetiku bez kompromisa u pogledu akustičnih performansi. Savršen za prostore gdje se želi toplina prirodnog drveta bez vizuelne buke – čist, smiren i elegantan.",
+    "features": [
+      "Dimenzije: 60×60cm (0.36 m² po komadu)",
+      "Materijal: hrast furnir u medenoj nijansi na visokogusti akustični filc",
+      "Boja: topla medena hrast – prirodna, neutralna",
+      "Dizajn: horizontalne linearne lamele – čist minimalistički uzorak",
+      "NRC koeficijent: 0.65 – efikasna apsorpcija zvuka",
+      "Montaža: lijepljenje na ravnu zidnu površinu",
+      "Težina: ~1.8 kg/kom",
+      "Primjena: zidovi i plafoni unutar prostora",
+      "Šifra: AKU054"
+    ],
+    "image": "images/products/product-1778759994-632.jpg",
+    "badge": "Samo za poručivanje",
+    "sku": "AKU054",
+    "inStock": true,
+    "featured": false,
+    "gallery": [
+      "images/products/gallery-145-1778760111-446.jpg"
+    ],
+    "reviews": [
+      {
+        "author": "Dragan R.",
+        "city": "Podgorica",
+        "date": "April 2026",
+        "rating": 5,
+        "text": "Medeni Hrast Linear je savršen za moju trpezariju. Topla boja uz drveni stol i stolice izgleda kao da je dio originalnog projekta sobe. Gosti za stolom više ne govore glasno da bi se čuli – akustika je riješena, razgovor je opušten. Ovo je investicija koja se vidi i čuje svaki dan."
+      },
+      {
+        "author": "Tamara N.",
+        "city": "Tivat",
+        "date": "Mart 2026",
+        "rating": 5,
+        "text": "Stavila u spavaću sobu na akcentni zid iza kreveta. Medena boja je savršena za opuštenu, toplu atmosferu. Soba izgleda kao iz časopisa, a zvuk je prigušen što pomaže za spavanje. Muž koji je bio skeptičan sad govori da je to bila najljepša promjena u stanu."
+      },
+      {
+        "author": "Aleksandar B.",
+        "city": "Nikšić",
+        "date": "Februar 2026",
+        "rating": 5,
+        "text": "Uredio sam kancelariju kod kuće i htio neutralan panel koji ne odvlači pažnju ali poboljšava zvuk. Medeni Hrast Linear je idealan – prirodna boja ne dominira prostorom ali daje mu toplinu. Na video pozivima izgleda profesionalno i uglađeno. Preporučujem svima koji rade od kuće."
+      }
+    ],
+    "highlight": "Medeni Hrast Linear"
+  },
+  {
+    "id": 146,
+    "name": "AKU053 – Zlatni Bambus Linear",
+    "category": "akusticni-paneli",
+    "price": "60",
+    "discount": 0,
+    "unit": "kom",
+    "description": "AKU053 kombinuje tople zlatno-bambus tonove sa čistim linearnim dizajnom koji daje prostoru egzotičan ali ugodan karakter. Horizontalne lamele zlatne bambus teksture na crnoj akustičnoj osnovi stvaraju igru boje i materijala koja prostoriju obogaćuje vizuelno, dok istovremeno znatno smanjuje odjek i poboljšava kvalitetu zvuka.",
+    "features": [
+      "Dimenzije: 60×60cm (0.36 m² po komadu)",
+      "Materijal: bambus furnir u zlatnoj nijansi na visokogusti akustični filc",
+      "Boja: topla zlatno-bambus nijansa – egzotična i udobna",
+      "Dizajn: horizontalne linearne lamele – bambus tekstura",
+      "NRC koeficijent: 0.65 – efikasna apsorpcija zvuka",
+      "Montaža: lijepljenje na ravnu zidnu površinu",
+      "Težina: ~1.8 kg/kom",
+      "Primjena: zidovi i plafoni unutar prostora",
+      "Šifra: AKU053"
+    ],
+    "image": "images/products/product-1778760039-129.jpg",
+    "badge": "Samo za poručivanje",
+    "sku": "AKU053",
+    "inStock": true,
+    "featured": false,
+    "gallery": [
+      "images/products/gallery-146-1778760130-432.jpg"
+    ],
+    "reviews": [
+      {
+        "author": "Jelena M.",
+        "city": "Bar",
+        "date": "April 2026",
+        "rating": 5,
+        "text": "Zlatni Bambus Linear je dao mojoj dnevnoj sobi toplinu Azije bez prevelike egzotike. Uz biljke i ratanske detalje izgleda savršeno. Zvuk u sobi je smiren – eho koji smo imali od visokog plafona je nestao. Svaki put kad dođem kući osjećam se kao da sam u spau."
+      },
+      {
+        "author": "Nemanja K.",
+        "city": "Podgorica",
+        "date": "Mart 2026",
+        "rating": 5,
+        "text": "Otvorio sam wellness centar i trebao akustičan zid koji odgovara prirodnoj estetici prostora. Zlatni Bambus Linear je bio savršen izbor. Klijenti odmah komentarišu toplinu i mir koji prostor odaje. Akustika je odlična – meditacija i masaže su sada na drugom nivou."
+      },
+      {
+        "author": "Ivana P.",
+        "city": "Budva",
+        "date": "Januar 2026",
+        "rating": 5,
+        "text": "Restoran koji vodimo ima visoke plafone i odjek je bio problem – gosti su se žalili da je bučno. Zlatni Bambus Linear je na tri zida riješio problem i dao restoranu toplinu kakvu nismo imali. Sad gosti duže ostaju i opušteni razgovaraju. Prihodi su porasli – svi su primijetili ugodnost prostora."
+      }
+    ],
+    "highlight": "Zlatni Bambus Linear"
   },
   {
     "id": 96,
