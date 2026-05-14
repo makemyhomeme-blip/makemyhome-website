@@ -52,6 +52,7 @@ function getBadgeClass(badge) {
   if (lower.includes('akcija') || lower.includes('sale')) return 'sale';
   if (lower.includes('limitirano')) return 'limited';
   if (lower.includes('preporučujemo')) return 'recommended';
+  if (lower.includes('poručivanje') || lower.includes('porucivanje')) return 'preorder';
   return '';
 }
 
