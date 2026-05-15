@@ -1312,7 +1312,11 @@ ul { list-style: none; }
 .gallery-thumbs {
   display: flex;
   gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.gallery-thumbs::-webkit-scrollbar { display: none; }
 
 .gallery-thumb {
   width: 80px;
