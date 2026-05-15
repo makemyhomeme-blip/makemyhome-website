@@ -239,7 +239,17 @@ switch ($action) {
         unset($p);
 
         if (!saveProducts($products, $productsFile)) {
+            if (!empty($_POST['ajax'])) {
+                header('Content-Type: application/json');
+                echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']);
+                exit;
+            }
             redirect('', 'GREŠKA: Izmjene nisu sačuvane – problem sa diskom ili dozvolama.', 'products');
+        }
+        if (!empty($_POST['ajax'])) {
+            header('Content-Type: application/json');
+            echo json_encode(['ok' => true, 'msg' => "Proizvod '{$name}' je uspješno ažuriran!"]);
+            exit;
         }
         redirect("Proizvod '{$name}' je uspješno ažuriran!", '', 'products');
         break;
@@ -667,6 +677,26 @@ switch ($action) {
         if (str_starts_with($img, 'images/products/')) {
             @unlink(__DIR__ . '/../' . $img);
         }
+        if (!saveProducts($products, $productsFile)) {
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']); exit;
+        }
+        echo json_encode(['ok' => true]); exit;
+
+    case 'gallery_reorder':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $id    = (int)($_POST['id'] ?? 0);
+        $order = json_decode($_POST['order'] ?? '[]', true);
+        if (!$id || !is_array($order)) {
+            echo json_encode(['ok' => false, 'error' => 'Nedostaju podaci.']); exit;
+        }
+        foreach ($products as &$p) {
+            if ($p['id'] === $id) {
+                $p['gallery'] = array_values($order);
+                break;
+            }
+        }
+        unset($p);
         if (!saveProducts($products, $productsFile)) {
             echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']); exit;
         }

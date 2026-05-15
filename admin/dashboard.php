@@ -23,8 +23,8 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
 ?>
 <!DOCTYPE html>
 <html lang="bs">
-<head>
-  <meta charset="UTF-8">
+<head><meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | Make My Home</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -445,7 +445,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                 foreach ($products as $p):
                   $isFeatured = !empty($p['featured']);
                   $curBadge   = $p['badge'] ?? null;
-                  $badgeOptions = ['Bestseller', 'Najpopularniji', 'Novo', 'Akcija', 'Preporučujemo', 'Limitirano'];
+                  $badgeOptions = ['Bestseller', 'Najpopularniji', 'Novo', 'Akcija', 'Preporučujemo', 'Limitirano', 'Samo za poručivanje'];
                   $cat = $p['category'] ?? '';
                   if ($cat !== $lastCat):
                     $lastCat = $cat;
@@ -586,6 +586,12 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                   </optgroup>
                   <optgroup label="── PU Kamen ──">
                     <option value="pu-kamen">PU Kamen</option>
+                  </optgroup>
+                  <optgroup label="── MDF ──">
+                    <option value="mdf">MDF Paneli</option>
+                  </optgroup>
+                  <optgroup label="── Flex Stone ──">
+                    <option value="flex-stone">Flex Stone</option>
                   </optgroup>
                 </select>
               </div>
@@ -1129,6 +1135,12 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             <optgroup label="── PU Kamen ──">
               <option value="pu-kamen">PU Kamen</option>
             </optgroup>
+            <optgroup label="── MDF ──">
+              <option value="mdf">MDF Paneli</option>
+            </optgroup>
+            <optgroup label="── Flex Stone ──">
+              <option value="flex-stone">Flex Stone</option>
+            </optgroup>
           </select>
         </div>
         <div class="form-group">
@@ -1275,13 +1287,42 @@ function renderGalleryGrid(gallery) {
     grid.innerHTML = '<span style="color:#bbb;font-size:12px;align-self:center;">Nema dodatnih slika</span>';
     return;
   }
-  grid.innerHTML = gallery.map(img => `
-    <div style="position:relative;width:80px;height:80px;flex-shrink:0;">
-      <img src="../${img}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid #e8e2da;display:block;">
-      <button type="button" onclick="removeGalleryImage('${img}')"
-        style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#e74c3c;color:#fff;border:none;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;line-height:1;">✕</button>
+  const last = gallery.length - 1;
+  grid.innerHTML = gallery.map((img, i) => `
+    <div style="position:relative;width:80px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;">
+      <div style="position:relative;width:80px;height:80px;">
+        <img src="../${img}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:2px solid #e8e2da;display:block;">
+        <button type="button" onclick="removeGalleryImage('${img}')"
+          style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#e74c3c;color:#fff;border:none;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;line-height:1;">✕</button>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.45);border-radius:0 0 6px 6px;display:flex;justify-content:space-between;padding:2px 3px;">
+          <button type="button" onclick="moveGalleryImage(${i},-1)"
+            style="background:none;border:none;color:#fff;font-size:14px;cursor:pointer;padding:1px 4px;line-height:1;${i===0?'opacity:0.2;pointer-events:none;':''}">‹</button>
+          <button type="button" onclick="moveGalleryImage(${i},1)"
+            style="background:none;border:none;color:#fff;font-size:14px;cursor:pointer;padding:1px 4px;line-height:1;${i===last?'opacity:0.2;pointer-events:none;':''}">›</button>
+        </div>
+      </div>
+      <span style="font-size:10px;color:#aaa;">${i+1}</span>
     </div>
   `).join('');
+}
+
+async function moveGalleryImage(index, dir) {
+  if (!_editingProductId) return;
+  const p = products.find(x => x.id === _editingProductId);
+  if (!p || !p.gallery) return;
+  const g = [...p.gallery];
+  const newIndex = index + dir;
+  if (newIndex < 0 || newIndex >= g.length) return;
+  [g[index], g[newIndex]] = [g[newIndex], g[index]];
+  p.gallery = g;
+  renderGalleryGrid(g);
+  const fd = new FormData();
+  fd.append('action', 'gallery_reorder');
+  fd.append('id', _editingProductId);
+  fd.append('order', JSON.stringify(g));
+  const r = await fetch('actions.php', { method: 'POST', body: fd });
+  const j = await r.json();
+  if (!j.ok) alert('Greška pri čuvanju redosljeda: ' + (j.error || ''));
 }
 
 async function uploadGalleryImages(input) {
@@ -1961,6 +2002,60 @@ async function deleteInquiry(id, btn) {
   const style = document.createElement('style');
   style.textContent = '.sortable-ghost { opacity:0.4; background:#f8f4ec !important; } .drag-handle:active { cursor: grabbing; }';
   document.head.appendChild(style);
+})();
+</script>
+
+
+<script>
+// AJAX edit form submit - prevents page reload/scroll to top
+(function() {
+  const form = document.getElementById('edit-form');
+  if (!form) return;
+
+  function notify(msg, ok) {
+    let el = document.getElementById('_ajaxNotify');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = '_ajaxNotify';
+      el.style.cssText = 'position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;color:#fff;z-index:99999;display:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:opacity 0.3s;';
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.background = ok ? '#27ae60' : '#e74c3c';
+    el.style.display = 'block';
+    el.style.opacity = '1';
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.style.display = 'none', 300); }, 2500);
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const origText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Čuvam...';
+    btn.disabled = true;
+
+    const fd = new FormData(form);
+    fd.append('ajax', '1');
+
+    try {
+      const res = await fetch('actions.php', { method: 'POST', body: fd });
+      const text = await res.text();
+      let data;
+      try { data = JSON.parse(text); } catch(e) { data = { ok: false, error: 'Server greška.' }; }
+      if (data.ok) {
+        notify('✓ Sačuvano!', true);
+        closeModal();
+      } else {
+        notify('✗ ' + (data.error || 'Greška.'), false);
+      }
+    } catch(err) {
+      notify('✗ Greška mreže.', false);
+    } finally {
+      btn.innerHTML = origText;
+      btn.disabled = false;
+    }
+  });
 })();
 </script>
 
