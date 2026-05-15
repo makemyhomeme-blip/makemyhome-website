@@ -1286,13 +1286,22 @@ ul { list-style: none; }
   align-items: start;
 }
 
+.product-detail-grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .product-gallery {
   position: sticky;
   top: 100px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .gallery-main {
   height: 480px;
+  max-width: 100%;
+  box-sizing: border-box;
   background: var(--light);
   border-radius: 16px;
   overflow: hidden;
