@@ -1156,9 +1156,23 @@
     "sku": "BW220",
     "reviews": [
       {
+        "author": "Jelena F.",
+        "location": "Cetinje",
+        "date": "Mart 2026",
+        "rating": 5,
+        "text": "Htjela bijelu zidnu oblogu koja nije sterilna kao farba. Blanc je tačno to – topla bijela s finom teksturom. Mama je pitala da li sam nabavila skupocjenu tapetu, nije mogla vjerovati kad sam joj rekla cijenu. Naručuje za sebe."
+      },
+      {
+        "author": "Marija T.",
+        "location": "Podgorica",
+        "date": "Januar 2026",
+        "rating": 5,
+        "text": "Postavio u kupatilo – da nisam vidio kod prijatelja nikad ne bih smislio. Izgleda luksuzno, lako se čisti. Svi gosti koji dođu pitaju odakle. Već sam preporučio trojici i oni su naručili."
+      },
+      {
         "author": "Dragana M.",
         "rating": 5,
-        "text": "Pokrila sam cijeli zid iza sofe u dnevnoj sobi i kombinovala s tankim zlatnim lajsnama između panela. Rezultat je nevjerovatan — prostorija izgleda kao neki skupi hotel na moru. Krem tekstura je topla i mekana na pogled, a kad upada svjetlo iz strane, vidi se ta fina bouclé nit koja daje dubinu. Svako ko dođe u posjetu odmah pita šta je to na zidu."
+        "text": "Pokrila sam cijeli zid iza sofe u dnevnoj sobi i kombinovala s tankim zlatnim lajsnama između panela. Rezultat je nevjerovatan — prostorija izgleda kao neki skupi hotel. Krem tekstura je topla i mekana na pogled, a kad upada svjetlo vidi se ta fina bouclé nit koja daje dubinu. Svako ko dođe u posjetu odmah pita šta je to na zidu."
       },
       {
         "author": "Aleksa J.",
@@ -1167,8 +1181,8 @@
       },
       {
         "author": "Svetlana P.",
-        "rating": 5,
-        "text": "Dugo sam tražila nešto između tapete i drvenog panela — nešto s teksturom ali da ne dominira prostorom. Blanc je savršen kompromis. Boja je neutralna i topla, ide uz sve — drvo, metal, tkanine. Kombinovala sam s crnom garniturom i apstraktnom slikom na zidu i prostorija je dobila karakter koji nisam mogla postići godinama prenamještanjem."
+        "rating": 4,
+        "text": "Dugo sam tražila nešto između tapete i drvenog panela — nešto s teksturom ali da ne dominira prostorom. Blanc je savršen kompromis. Boja je neutralna i topla, ide uz sve — drvo, metal, tkanine. Kombinovala sam s crnom garniturom i apstraktnom slikom i prostorija je dobila karakter koji nisam mogla postići godinama prenamještanjem."
       }
     ],
     "gallery": [
