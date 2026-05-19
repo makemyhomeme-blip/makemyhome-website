@@ -1103,16 +1103,16 @@
   },
   {
     "id": 41,
-    "name": "Black",
+    "name": "Blanc",
     "category": "bambus-tekstilni",
     "price": "86.99",
     "discount": 0,
     "unit": "kom",
-    "description": "Black je bouclé panel koji unosi dramatičnu eleganciju u svaki prostor. Duboka, mat crna boja s bogatom teksturom pletene niti stvara zid koji privlači pažnju i daje prostoriji karakter luksuznog butik enterijera. Savršen kontrast uz bijele zidove, beton ili drvo – jedna akcentna površina koja mijenja cijeli dojam prostorije.",
+    "description": "Blanc je zidni panel koji mijenja osjećaj svakog prostora. Bogata bouclé tekstura u toploj krem nijansi unosi dubinu i mekoću u zid koji bi inače bio prazan. Lanen izgled i gusto prepletena nit daju prostoriji karakter skupih hotelskih soba i nordijskog dizajna — a postavlja se za sat vremena, bez majstora.",
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: crna, mat",
+      "Boja: topla krem, prirodni lanen ton",
       "Šara: grublja bouclé tekstura – visoka gustoća niti",
       "Površinska UV zaštita – ne blijedi na suncu",
       "Montaža: lijepi se silikonom, siječe se skalpelom",
@@ -1123,7 +1123,7 @@
       "Otporan na prljavštinu – lako se čisti vlažnom krpom",
       "Šifra: BW220"
     ],
-    "image": "images/products/product-1774006385-983.jpg",
+    "image": "images/products/product-1779210968-847.jpg",
     "badge": "",
     "inStock": true,
     "featured": false,
@@ -1148,19 +1148,19 @@
     "sku": "BW220",
     "reviews": [
       {
-        "author": "Stefan K.",
+        "author": "Jelena S.",
         "rating": 5,
-        "text": "Stavio sam Black panel iza televizora u dnevnoj sobi i gosti stalno pitaju da li sam angažovao dizajnera. Crna bouclé tekstura je nevjerovatno bogata i elegantna. Ni jedan foto ne pravi dovoljno pravde – to treba vidjeti uživo."
+        "text": "Pokrila sam jedan zid u spavaćoj sobi i soba je izgledala kao iz časopisa odmah nakon montaže. Tekstura je nevjerovatno bogata, podsjeća na skupi tapison. Krem nijansa ide uz sve — bijeli namještaj, drvo, beton. Preporučujem svakome ko želi veliku promjenu bez remonta."
       },
       {
-        "author": "Anja M.",
+        "author": "Nikola P.",
         "rating": 5,
-        "text": "Tražila sam nešto što će akcentovati ulazni hodnik bez skupih renovacija. Black panel je tačno to – jedna strana zida, sat posla, i hodnik izgleda kao iz časopisa. Crna tekstura je mat i sofisticirana, bez ikakvog plastičnog sjaja."
+        "text": "Stavio sam Blanc panele u spavaćoj i u hodniku. Svaki gost koji uđe odmah pita za zidove. Postavljanje je bila šala — nema prašine, nema majstora, gotovo za pola dana. Kvalitet materijala je odličan, tekstura se ne deformiše ni nakon godinu dana."
       },
       {
-        "author": "Marko T.",
+        "author": "Maja V.",
         "rating": 5,
-        "text": "Otvorio sam kafić i koristio Black panele na dvije strane prostora. Atmosfera je odmah dobila onaj tamni, intimni karakter koji sam tražio. Mnogo klijenata me pita za zidove – svaki put im kažem da su paneli, niko ne vjeruje da je tako lako."
+        "text": "Dugo sam tražila nešto između tapete i obloge — nešto s teksturom ali da ne izgleda pretenciozno. Blanc je tačno to. Krem boja je topla i prirodna, a bouclé nit daje tu posebnu dubinu kad upada svjetlo. Džabe sam oklijevala — trebalo je odmah naručiti."
       }
     ]
   },
