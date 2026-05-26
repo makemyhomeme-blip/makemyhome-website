@@ -363,7 +363,7 @@
     ],
     "image": "images/products/mw312.jpg",
     "badge": "",
-    "inStock": false,
+    "inStock": true,
     "featured": false,
     "sku": "MW312",
     "gallery": [
@@ -1187,11 +1187,18 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: sivo-zlatna, svilenkasta",
+      "Boja: sivo-zlatna",
+      "svilenkasta",
       "Šara: svilenkasta tkana tekstura – horizontalne linije",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
@@ -1199,7 +1206,7 @@
       "Šifra: BW221"
     ],
     "image": "images/products/product-1774006410-646.jpg",
-    "badge": "",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "highlight": "Svilenkast sjaj koji se mijenja s osvjetljenjem",
@@ -1245,7 +1252,8 @@
       }
     ],
     "gallery": [
-      "images/products/gallery-42-1774950604-132.jpg"
+      "images/products/gallery-42-1779712110-175.jpg",
+      "images/products/gallery-42-1779712113-306.jpg"
     ]
   },
   {
@@ -1259,19 +1267,26 @@
     "features": [
       "Dimenzije: 280×122cm (3.42 m² po komadu)",
       "Debljina: 5mm",
-      "Boja: bijela, topla i mekana",
+      "Boja: bijela",
+      "topla i mekana",
       "Šara: mekana tkana tekstura – topla bijela",
       "Površinska UV zaštita – ne blijedi na suncu",
-      "Montaža: lijepi se silikonom, siječe se skalpelom",
-      "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+      "Montaža: lijepi se silikonom",
+      "siječe se skalpelom",
+      "Pogodan za zidove i plafone – dnevne sobe",
+      "spavaće sobe",
+      "kafići",
+      "restorani",
+      "hoteli",
+      "uredi",
       "Vodootporan – ne nabrekne i ne deformiše se od vode",
       "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
       "Vatrootporan (klasa B1) – usporava širenje plamena",
       "Otporan na prljavštinu – lako se čisti vlažnom krpom",
       "Šifra: BW222"
     ],
-    "image": "images/products/product-1774006463-976.jpg",
-    "badge": "",
+    "image": "images/products/product-1779790666-407.jpg",
+    "badge": null,
     "inStock": true,
     "featured": false,
     "highlight": "Mekana bijela koja opušta",
@@ -3409,7 +3424,7 @@
   },
   {
     "id": 65,
-    "name": "3D Letvica 170 M51-01 – Topli Tik (Mat)",
+    "name": "3D Letvica – Topli Tik (Mat)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -3470,7 +3485,7 @@
   },
   {
     "id": 66,
-    "name": "3D Letvica MW319 – Tamni Orah (Gloss)",
+    "name": "3D Letvica – Tamni Orah (Gloss)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -3592,7 +3607,7 @@
   },
   {
     "id": 68,
-    "name": "3D Letvica 170 SP054 – Topli Orah",
+    "name": "3D Letvica – Topli Orah",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -3653,7 +3668,7 @@
   },
   {
     "id": 69,
-    "name": "3D Letvica 170 MW018 – Tamna Pepeljasta",
+    "name": "3D Letvica – Tamna Pepeljasta",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -3714,7 +3729,7 @@
   },
   {
     "id": 70,
-    "name": "3D Letvica 170 SP052 – Prirodni Javor",
+    "name": "3D Letvica – Prirodni Javor",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -3899,7 +3914,7 @@
   },
   {
     "id": 73,
-    "name": "3D Letvica JM001 – Hladno Siva (Teksturisana)",
+    "name": "3D Letvica – Hladno Siva (Teksturisana)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -3960,7 +3975,7 @@
   },
   {
     "id": 74,
-    "name": "3D Letvica 039 – Krem Bijela",
+    "name": "3D Letvica – Krem Bijela",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4021,7 +4036,7 @@
   },
   {
     "id": 75,
-    "name": "3D Letvica 021 – Topla Bež",
+    "name": "3D Letvica – Topla Bež",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4082,7 +4097,7 @@
   },
   {
     "id": 76,
-    "name": "3D Letvica 140 021 – Topla Bež (Uži profil)",
+    "name": "3D Letvica – Topla Bež (Uži profil)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4143,7 +4158,7 @@
   },
   {
     "id": 77,
-    "name": "3D Letvica 029 – Terrazzo",
+    "name": "3D Letvica – Terrazzo",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4205,7 +4220,7 @@
   },
   {
     "id": 78,
-    "name": "3D Letvica 016 – Hladno Siva",
+    "name": "3D Letvica – Hladno Siva",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4510,7 +4525,7 @@
   },
   {
     "id": 83,
-    "name": "3D Letvica 003 – Zlatna Žuta",
+    "name": "3D Letvica – Zlatna Žuta",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4571,7 +4586,7 @@
   },
   {
     "id": 84,
-    "name": "3D Letvica 3D02 – Prirodni Hrast",
+    "name": "3D Letvica – Prirodni Hrast",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4631,7 +4646,7 @@
   },
   {
     "id": 85,
-    "name": "3D Letvica 3D05 – Tamna Siva",
+    "name": "3D Letvica – Tamna Siva",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4692,7 +4707,7 @@
   },
   {
     "id": 86,
-    "name": "3D Letvica 3D09X – Topli Mahagonij",
+    "name": "3D Letvica – Topli Mahagonij",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
@@ -4753,7 +4768,7 @@
   },
   {
     "id": 87,
-    "name": "3D Letvica 3D07X – Bijela (Premium profil)",
+    "name": "3D Letvica – Bijela (Premium profil)",
     "category": "3d-letvice",
     "price": "19.99",
     "discount": 0,
