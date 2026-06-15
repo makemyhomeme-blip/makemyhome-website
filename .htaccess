@@ -1,5 +1,23 @@
 DirectoryIndex index.html index.php
 
+# 301 redirects: stare WordPress stranice → nove HTML stranice
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteRule ^proizvodi/?$ /products.html [R=301,L]
+RewriteRule ^decor-paneli/?$ /products.html [R=301,L]
+RewriteRule ^paneli/?$ /products.html [R=301,L]
+RewriteRule ^shop/?$ /products.html [R=301,L]
+RewriteRule ^prodavnica/?$ /products.html [R=301,L]
+RewriteRule ^3d-letvice/?$ /products.html?category=3d-letvice [R=301,L]
+RewriteRule ^akusticni-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
+RewriteRule ^dekorativni-zidni-paneli/?$ /products.html [R=301,L]
+RewriteRule ^product/(.+)/?$ /products.html [R=301,L]
+
+RewriteRule ^product\.html$ product.php [QSA,L]
+RewriteRule ^products\.html$ products.php [QSA,L]
+</IfModule>
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
