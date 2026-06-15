@@ -37,7 +37,30 @@ $pageTitle = $product
   <meta property="og:url" content="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>">
   <meta property="og:locale" content="sr_RS">
+  <link rel="canonical" href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <title><?= $pageTitle ?></title>
+<?php if ($product): $price = $product['price'] ?? ''; $inStock = $product['inStock'] ?? true; ?>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>",
+    "description": "<?= $ogDesc ?>",
+    "image": "<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>",
+    "sku": "<?= htmlspecialchars($product['sku'] ?? $product['name'], ENT_QUOTES) ?>",
+    "brand": { "@type": "Brand", "name": "Make My Home Decor" },
+    "offers": {
+      "@type": "Offer",
+      "url": "<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>",
+      "price": "<?= htmlspecialchars($price, ENT_QUOTES) ?>",
+      "priceCurrency": "EUR",
+      "availability": "<?= $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' ?>",
+      "seller": { "@type": "Organization", "name": "Make My Home Decor", "url": "https://makemyhome.me" }
+    },
+    "isRelatedTo": { "@type": "WebPage", "url": "https://makemyhome.me/products.html" }
+  }
+  </script>
+<?php endif; ?>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

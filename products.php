@@ -39,9 +39,28 @@ $catName  = isset($catNames[$cat]) ? $catNames[$cat] : 'Katalog Proizvoda';
 $imgPath  = isset($catImages[$cat]) ? $catImages[$cat] : 'images/products/cq006.jpg';
 $ogImage  = 'https://makemyhome.me/' . $imgPath;
 $ogTitle  = $catName . ' | Make My Home Decor';
-$ogDesc   = $cat ? "Pregledajte $catName – Make My Home Decor Podgorica, Crna Gora." : 'Kompletan katalog zidnih panela, 3D letvica, akustičnih panela. Make My Home Decor Podgorica.';
+$catDescs = [
+  'bambus-tekstilni' => 'Tekstilni zidni paneli 280x122cm – premium tkanina na bambusovoj podlozi. Topao i elegantan dekor za dnevne sobe i spavaće sobe.',
+  'bambus-drveni'    => 'Drveni zidni paneli 280x122cm – prirodna drvenasta tekstura za moderan i klasičan enterijer. Visoka trajnost i jednostavna ugradnja.',
+  'bambus-mermerni'  => 'Mermerni zidni paneli 280x122cm – luksuzni izgled mermera bez cijene prirodnog kamena. Idealni za kupaonice i hodnici.',
+  'bambus-metalni'   => 'Metalni zidni paneli 280x122cm – industrijski šik za moderan enterijer. Čelik i aluminijum izgled bez hladnoće pravog metala.',
+  'bambus-kozni'     => 'Kožni zidni paneli 280x122cm – luksuzna koža tekstura za ekskluzivne enterijere. Toplo i sofisticirano.',
+  '3d-letvice'       => '3D dekorativne letvice 280x16cm – kreativne kombinacije, beskonačne mogućnosti dizajna. Idealne za akcente zidova.',
+  'akusticni-paneli' => 'Akustični zidni paneli – smanje buku i uljepšaju prostor istovremeno. Idealni za home office, studije i dnevne sobe.',
+  'aluminijum-lajsne'=> 'Aluminijum lajsne – završni detalji koji spajaju panele profesionalno i elegantno.',
+  'spc-pod'          => 'SPC podovi – vodootporni, trajni i estetski laminat za svaki prostor. Laka ugradnja i dugotrajnost.',
+  'pu-kamen'         => 'Poliuretanski kamen – realistična imitacija kamena bez težine i troškova pravog kamena. Set od 4 komada pokriva 1.74m².',
+  'classic'          => 'Classic zidni paneli – timeless dizajn koji odgovara svakom enterijeru. Bijela i neutralne boje.',
+  'mdf'              => 'MDF zidni paneli – precizno obrađeni paneli od MDF materijala za moderan i elegantan zid.',
+  'flex-stone'       => 'Flex Stone – fleksibilni kameni furnir koji se savija i lijepi na bilo koju površinu.',
+];
+$ogDesc   = $cat
+  ? ($catDescs[$cat] ?? "Pregledajte {$catName} – Make My Home Decor Podgorica, Crna Gora. Zidni paneli i dekorativne obloge.")
+  : 'Kompletan katalog zidnih panela, 3D letvica, akustičnih panela, SPC podova i PU kamena. Make My Home Decor Podgorica.';
 $ogUrl    = 'https://makemyhome.me/products.html' . ($cat ? '?category=' . $cat : '');
-$pageTitle = ($cat ? $catName . ' | ' : '') . 'Make My Home Decor';
+$pageTitle = $cat
+  ? $catName . ' – Zidni Paneli | Make My Home Decor'
+  : 'Katalog Proizvoda – Zidni Paneli & 3D Letvice | Make My Home Decor';
 ?>
 <!DOCTYPE html>
 <html lang="sr">
@@ -57,6 +76,16 @@ $pageTitle = ($cat ? $catName . ' | ' : '') . 'Make My Home Decor';
   <meta property="og:locale" content="sr_RS">
   <link rel="canonical" href="<?= htmlspecialchars($ogUrl) ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/" },
+      { "@type": "ListItem", "position": 2, "name": "<?= htmlspecialchars($catName) ?>", "item": "<?= htmlspecialchars($ogUrl) ?>" }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
