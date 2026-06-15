@@ -1,15 +1,20 @@
 <?php
 /**
  * Make My Home – File sync from GitHub
- * Access: /admin/sync.php?key=mkhsync2025
+ * Web:  /admin/sync.php?key=mkhsync2025  (requires admin session)
+ * CLI:  php sync.php
  */
-session_start();
-if (empty($_SESSION['admin_logged'])) {
-    http_response_code(403);
-    die('Pristup odbijen – mora si prijavljen kao admin.');
-}
-if (($_GET['key'] ?? '') !== 'mkhsync2025') {
-    die('Pogre&scaron;an klju&ccaron;. Dodaj ?key=mkhsync2025 u URL.');
+$isCli = (php_sapi_name() === 'cli');
+
+if (!$isCli) {
+    session_start();
+    if (empty($_SESSION['admin_logged'])) {
+        http_response_code(403);
+        die('Pristup odbijen – mora si prijavljen kao admin.');
+    }
+    if (($_GET['key'] ?? '') !== 'mkhsync2025') {
+        die('Pogre&scaron;an klju&ccaron;. Dodaj ?key=mkhsync2025 u URL.');
+    }
 }
 
 $branch = 'claude/build-product-website-6CvHG';
@@ -46,35 +51,86 @@ $files = [
     __DIR__ . '/sync.php'       => $base . '/admin/sync.php',
 ];
 
-echo '<pre style="font-family:monospace;font-size:14px;padding:20px;background:#111;color:#eee;min-height:100vh;">';
-echo "=== Make My Home &ndash; Sync fajlova ===\n\n";
+/** Fetch a URL using best available method */
+function fetchUrl(string $url): string|false {
+    // Method 1: PHP curl extension
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_USERAGENT      => 'MakeMyHome-Sync/1.0',
+        ]);
+        $data = curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if ($data !== false && $code === 200 && strlen($data) > 5) return $data;
+    }
+    // Method 2: exec curl binary
+    if (function_exists('exec')) {
+        $out = []; $ret = 0;
+        exec("curl -sL --max-time 30 " . escapeshellarg($url) . " 2>/dev/null", $out, $ret);
+        if ($ret === 0 && !empty($out)) {
+            $data = implode("\n", $out);
+            if (strlen($data) > 5) return $data;
+        }
+    }
+    // Method 3: file_get_contents (needs allow_url_fopen=On)
+    if (ini_get('allow_url_fopen')) {
+        $ctx  = stream_context_create(['http' => ['timeout' => 30]]);
+        $data = @file_get_contents($url, false, $ctx);
+        if ($data !== false && strlen($data) > 5) return $data;
+    }
+    return false;
+}
+
+if ($isCli) {
+    echo "=== Make My Home – Sync fajlova (CLI) ===\n\n";
+} else {
+    echo '<pre style="font-family:monospace;font-size:14px;padding:20px;background:#111;color:#eee;min-height:100vh;">';
+    echo "=== Make My Home &ndash; Sync fajlova ===\n\n";
+}
 
 $allOk = true;
 foreach ($files as $dest => $url) {
-    $label = str_replace($root . '/', '', $dest);
-    echo str_pad("Preuzimam: $label", 45) . " ... ";
-    $ctx = stream_context_create(['http' => ['timeout' => 20]]);
-    $content = @file_get_contents($url, false, $ctx);
-    if ($content === false || strlen($content) < 10) {
-        echo "<span style='color:#e74c3c;'>GREŠKA – nije moguće preuzeti fajl.</span>\n";
+    $label   = str_replace($root . '/', '', $dest);
+    $padded  = str_pad("Preuzimam: $label", 45);
+    if ($isCli) echo $padded . " ... ";
+    else        echo $padded . " ... ";
+    flush();
+
+    $content = fetchUrl($url);
+    if ($content === false) {
+        $msg = "GREŠKA – nije moguće preuzeti fajl.";
+        echo $isCli ? "$msg\n" : "<span style='color:#e74c3c;'>$msg</span>\n";
         $allOk = false;
     } else {
         $bytes = file_put_contents($dest, $content);
         if ($bytes === false) {
-            echo "<span style='color:#e74c3c;'>GREŠKA – nije moguće pisati na disk.</span>\n";
+            $msg = "GREŠKA – nije moguće pisati na disk.";
+            echo $isCli ? "$msg\n" : "<span style='color:#e74c3c;'>$msg</span>\n";
             $allOk = false;
         } else {
-            echo "<span style='color:#2ecc71;'>OK (" . round($bytes / 1024, 1) . " KB)</span>\n";
+            $msg = "OK (" . round($bytes / 1024, 1) . " KB)";
+            echo $isCli ? "$msg\n" : "<span style='color:#2ecc71;'>$msg</span>\n";
         }
     }
+    if (!$isCli) ob_flush();
 }
 
 echo "\n";
 if ($allOk) {
-    echo "<span style='color:#c9a86c;font-weight:bold;'>Sve ažurirano! Svi fajlovi su sinhronizovani.</span>\n";
+    $msg = "Sve ažurirano! Svi fajlovi su sinhronizovani.";
+    echo $isCli ? "$msg\n" : "<span style='color:#c9a86c;font-weight:bold;'>$msg</span>\n";
 } else {
-    echo "<span style='color:#e74c3c;'>Neke stavke NISU ažurirane. Provjeri greške iznad.</span>\n";
+    $msg = "Neke stavke NISU ažurirane. Provjeri greške iznad.";
+    echo $isCli ? "$msg\n" : "<span style='color:#e74c3c;'>$msg</span>\n";
 }
-echo "\n<a href='../index.html' style='color:#c9a86c;'>&rarr; Otvori sajt</a>  ";
-echo "<a href='dashboard.php' style='color:#c9a86c;margin-left:20px;'>&rarr; Admin panel</a>\n";
-echo '</pre>';
+
+if (!$isCli) {
+    echo "\n<a href='../index.html' style='color:#c9a86c;'>&rarr; Otvori sajt</a>  ";
+    echo "<a href='dashboard.php' style='color:#c9a86c;margin-left:20px;'>&rarr; Admin panel</a>\n";
+    echo '</pre>';
+}
