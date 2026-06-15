@@ -280,6 +280,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     </a>
   </nav>
   <div class="sidebar-footer">
+    <a href="sync.php?key=mkhsync2025" class="sidebar-link" style="padding:10px 0;color:#c9a86c;" title="Sinhronizuj fajlove sa GitHuba">
+      <i class="fas fa-sync-alt"></i> Sync fajlova
+    </a>
     <a href="logout.php" class="sidebar-link" style="padding:10px 0;">
       <i class="fas fa-sign-out-alt"></i> Odjava
     </a>

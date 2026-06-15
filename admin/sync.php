@@ -27,14 +27,23 @@ $files = [
     $root . '/korpa.html'       => $base . '/korpa.html',
     $root . '/checkout.html'    => $base . '/checkout.html',
     $root . '/hvala.html'       => $base . '/hvala.html',
+    // PHP
+    $root . '/product.php'      => $base . '/product.php',
+    $root . '/products.php'     => $base . '/products.php',
     // JS
     $root . '/js/cart.js'       => $base . '/js/cart.js',
     $root . '/js/products.js'   => $base . '/js/products.js',
     // CSS
     $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
+    // SEO
+    $root . '/robots.txt'       => $base . '/robots.txt',
+    $root . '/sitemap.xml'      => $base . '/sitemap.xml',
+    // Server config
+    $root . '/.htaccess'        => $base . '/.htaccess',
     // Admin
     __DIR__ . '/dashboard.php'  => $base . '/admin/dashboard.php',
     __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
+    __DIR__ . '/sync.php'       => $base . '/admin/sync.php',
 ];
 
 echo '<pre style="font-family:monospace;font-size:14px;padding:20px;background:#111;color:#eee;min-height:100vh;">';
