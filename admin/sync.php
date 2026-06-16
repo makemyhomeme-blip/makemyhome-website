@@ -24,6 +24,7 @@ $root   = dirname(__DIR__);
 
 $files = [
     // HTML stranice
+    $root . '/404.html'         => $base . '/404.html',
     $root . '/index.html'       => $base . '/index.html',
     $root . '/product.html'     => $base . '/product.html',
     $root . '/products.html'    => $base . '/products.html',

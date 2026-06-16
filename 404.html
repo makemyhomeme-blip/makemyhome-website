@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stranica nije pronađena | Make My Home Decor</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .logo { margin-bottom: 40px; }
+    .logo img { height: 48px; }
+    .logo-text { font-size: 22px; font-weight: 700; color: #c9a86c; letter-spacing: 1px; }
+    .error-code { font-size: 120px; font-weight: 900; color: #c9a86c; line-height: 1; margin-bottom: 16px; opacity: 0.15; position: absolute; }
+    .icon { font-size: 64px; color: #c9a86c; margin-bottom: 24px; position: relative; z-index: 1; }
+    .content { position: relative; }
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    p { font-size: 16px; color: #aaa; margin-bottom: 36px; max-width: 400px; line-height: 1.6; }
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s;
+    }
+    .btn-primary { background: #c9a86c; color: #1a1a1a; }
+    .btn-primary:hover { background: #a8863f; transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: #c9a86c; border: 1.5px solid #c9a86c; }
+    .btn-secondary:hover { background: rgba(201,168,108,0.1); transform: translateY(-2px); }
+    .divider { width: 60px; height: 2px; background: #c9a86c; margin: 0 auto 32px; opacity: 0.4; }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <div class="logo-text">Make My Home Decor</div>
+  </div>
+
+  <div class="content">
+    <div class="error-code">404</div>
+    <div class="icon"><i class="fas fa-home"></i></div>
+    <h1>Stranica nije pronađena</h1>
+    <div class="divider"></div>
+    <p>Stranica koju tražiš ne postoji ili je premještena. Vrati se na početnu ili pogledaj naše proizvode.</p>
+    <div class="buttons">
+      <a href="/" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Početna</a>
+      <a href="/products.html" class="btn btn-secondary"><i class="fas fa-th-large"></i> Proizvodi</a>
+    </div>
+  </div>
+</body>
+</html>
