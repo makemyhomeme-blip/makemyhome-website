@@ -60,7 +60,7 @@ $ogDesc   = $cat
 $ogUrl    = 'https://makemyhome.me/products.html' . ($cat ? '?category=' . $cat : '');
 $pageTitle = $cat
   ? $catName . ' – Zidni Paneli | Make My Home Decor'
-  : 'Katalog Proizvoda – Zidni Paneli & 3D Letvice | Make My Home Decor';
+  : 'Zidni Paneli i Bambus Obloge | Make My Home Decor';
 ?>
 <!DOCTYPE html>
 <html lang="sr">
