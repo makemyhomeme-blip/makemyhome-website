@@ -53,6 +53,7 @@ $files = [
     __DIR__ . '/dashboard.php'  => $base . '/admin/dashboard.php',
     __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
     __DIR__ . '/sync.php'       => $base . '/admin/sync.php',
+    __DIR__ . '/janitor.php'    => $base . '/admin/janitor.php',
 ];
 
 /** Fetch a URL using best available method */
@@ -72,13 +73,13 @@ function fetchUrl(string $url): string|false {
         curl_close($ch);
         if ($data !== false && $code === 200 && strlen($data) > 5) return $data;
     }
-    // Method 2: exec curl binary
+    // Method 2: exec curl binary (-f = fail on HTTP >= 400, ne snimaj error stranice)
     if (function_exists('exec')) {
         $out = []; $ret = 0;
-        exec("curl -sL --max-time 30 " . escapeshellarg($url) . " 2>/dev/null", $out, $ret);
+        exec("curl -fsSL --max-time 30 " . escapeshellarg($url) . " 2>/dev/null", $out, $ret);
         if ($ret === 0 && !empty($out)) {
             $data = implode("\n", $out);
-            if (strlen($data) > 5) return $data;
+            if (strlen($data) > 5 && trim($data) !== '404: Not Found') return $data;
         }
     }
     // Method 3: file_get_contents (needs allow_url_fopen=On)
