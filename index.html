@@ -16,31 +16,88 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["HomeGoodsStore", "LocalBusiness"],
     "name": "Make My Home Decor",
+    "alternateName": "Make My Home",
     "url": "https://makemyhome.me",
     "logo": "https://makemyhome.me/images/logo.svg",
-    "description": "Prodaja dekorativnih zidnih panela, 3D letvica, akustičnih panela i SPC podova u Podgorici, Crna Gora.",
+    "description": "Prodaja dekorativnih zidnih panela, 3D letvica, akustičnih panela i SPC podova u Podgorici, Crna Gora. Showroom u Podgorici.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Podgorica",
+      "addressRegion": "Podgorica",
       "addressCountry": "ME"
     },
     "telephone": "+38269105222",
     "email": "makemyhome.me@gmail.com",
-    "image": "https://makemyhome.me/images/products/cq006.jpg",
+    "image": [
+      "https://makemyhome.me/images/products/cq006.jpg",
+      "https://makemyhome.me/images/showcase-room.jpg"
+    ],
     "sameAs": [
       "https://www.instagram.com/makemyhome.decor",
       "https://www.tiktok.com/@makemyhome.me"
     ],
-    "openingHours": "Mo-Sa 09:00-18:00",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ],
     "priceRange": "€€",
     "currenciesAccepted": "EUR",
     "paymentAccepted": "Cash, Credit Card",
     "areaServed": {
       "@type": "Country",
       "name": "Montenegro"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Dekorativni Zidni Paneli i Podovi",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Bambus Zidni Paneli 280x122cm"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "3D Dekorativne Letvice 280x16cm"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Akustični Paneli"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "SPC Laminatni Pod"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "PU Kamen Dekorativni Panel"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Flex Stone Obloge"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "MDF Dekorativni Paneli"}}
+      ]
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Gdje mogu kupiti zidne panele u Podgorici?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Make My Home Decor ima showroom u Podgorici gdje možete vidjeti i kupiti zidne panele, 3D letvice, akustične panele i SPC podove. Posjetite nas ili nas kontaktirajte na +382 69 105 222."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Koje vrste zidnih panela prodajete?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prodajemo bambus panele (drveni, tekstilni, mermerni, metalni, kožni), 3D dekorativne letvice, akustične panele, MDF panele, PU kamen, Flex Stone obloge, Aluminijum lajsne i SPC podove."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Koje su dimenzije zidnih panela?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bambus zidni paneli su dimenzija 280x122cm. 3D letvice su dimenzija 280x16cm. Dostupne su različite debljine i uzorci."
+        }
+      }
+    ]
   }
   </script>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
