@@ -76,7 +76,7 @@ function renderProductCard(product, lazy = true) {
   const categoryName = allCategories.find(c => c.id === product.category)?.name || product.category;
 
   const imgContent = `
-    <img src="${product.image}" alt="${product.name}"
+    <img src="${product.image}" alt="${product.name} – ${categoryName} | Make My Home Decor Podgorica"
       onerror="this.parentElement.innerHTML='<span class=\'product-img-placeholder\'><i class=\'fas fa-image\'></i></span>'"
       ${lazy ? 'loading="lazy"' : ''}>
   `;
