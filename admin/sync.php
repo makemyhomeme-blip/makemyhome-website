@@ -53,6 +53,7 @@ $files = [
     __DIR__ . '/dashboard.php'  => $base . '/admin/dashboard.php',
     __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
     __DIR__ . '/sync.php'       => $base . '/admin/sync.php',
+    __DIR__ . '/delbak.php'     => $base . '/admin/delbak.php',
 ];
 
 /** Fetch a URL using best available method */
