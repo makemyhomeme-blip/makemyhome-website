@@ -40,6 +40,9 @@ $files = [
     $root . '/js/products.js'   => $base . '/js/products.js',
     // CSS
     $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
+    // Images / favicon
+    $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
+    $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
     // SEO
     $root . '/robots.txt'       => $base . '/robots.txt',
     $root . '/sitemap.xml'      => $base . '/sitemap.xml',
