@@ -19,9 +19,23 @@ RewriteRule ^products\.html$ products.php [QSA,L]
 </IfModule>
 
 <IfModule mod_headers.c>
-  <FilesMatch "\.(html|htm|css|json|js)$">
+  # HTML i JSON - uvijek svježe (sadržaj se mijenja)
+  <FilesMatch "\.(html|htm|json)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
     Header set Pragma "no-cache"
     Header set Expires "0"
   </FilesMatch>
+  # CSS i JS - cache 1 godina (fajlovi su verzionisani: style-v5.css)
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Slike - cache 30 dana
+  <FilesMatch "\.(jpg|jpeg|png|gif|ico|webp|svg)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+# Kompresija za brže učitavanje
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
 </IfModule>
