@@ -14,7 +14,14 @@ $ogTitle = $product
 $rawDesc = $product && !empty($product['description'])
     ? strip_tags($product['description'])
     : 'Detalji proizvoda – Make My Home Decor Podgorica. Zidni paneli i 3D letvice.';
-$ogDesc = htmlspecialchars(mb_substr($rawDesc, 0, 160), ENT_QUOTES);
+// Skrati na ~155 znakova ali na granici riječi (ne siječi usred riječi)
+if (mb_strlen($rawDesc) > 155) {
+    $cut = mb_substr($rawDesc, 0, 155);
+    $lastSpace = mb_strrpos($cut, ' ');
+    if ($lastSpace !== false) $cut = mb_substr($cut, 0, $lastSpace);
+    $rawDesc = rtrim($cut, " ,.;:-") . '…';
+}
+$ogDesc = htmlspecialchars($rawDesc, ENT_QUOTES);
 
 $ogImage = ($product && !empty($product['image']))
     ? 'https://makemyhome.me/' . $product['image']
