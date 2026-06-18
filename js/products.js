@@ -582,40 +582,40 @@ async function renderProductDetail() {
     ]},
     // ── Tekstilni paneli ──
     37: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Vidjela sam kod prijateljice na rođendanu i odmah pitala odakle. Naručila za spavaću sobu i ne mogu prestati gledati taj zid. Kremasto-biserna boja s lanennom teksturom – mama je mislila da sam kupila pravi tekstil. Naručujem još za dnevnu sobu.' },
-      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Bio sam skeptičan prema panelima generalno ali Perla me je uvjerila. Izgleda skuplje nego što košta. Svi koji dođu kažu "ma lijepo je kod tebe" i odmah znaju za taj zid. Preporučujem svima.' }
+      { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bijelo-bež boja s krupnom pletenom teksturom izgleda kao topli vuneni pulover na zidu. Naručila za spavaću i ne mogu prestati gledati taj zid.' },
+      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Bio sam skeptičan prema tekstilnim panelima ali Perla me uvjerila. Bijelo-bež nijansa izgleda mnogo skuplje nego što jeste.' }
     ]},
     38: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Čista bijela ali nije dosadna bijela – tekstura daje dubinu i zid živi. Muž je odmah primijetio razliku bez da je znao šta sam promijenila. Kaže soba izgleda veća i ljepša. Kupujem još za spavaću.' },
-      { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Vidio u nekom interijer magazinu, tražio na internetu i pronašao ovo. Montirao sam, malo muke s uglovima ali rezultat je savršen. Komšija je pitao da li sam uzeo majstora. Presrećan s kupovinom.' }
+      { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Čista bijela ali nije dosadna bijela – grublja tekstura daje dubinu i zid živi. Kupujem još za spavaću.' },
+      { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Tražio sam bijelo rješenje koje ima teksturu, ne ravnu farbu. Calla je tačno to. Montirao sam, malo muke s uglovima ali rezultat je savršen.' }
     ]},
     39: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Tražila nešto neutralno za ured ali da nije dosadna farbana siva. Grigio je bio odgovor. Klijenti stalno pitaju što sam uradila s prostorom – kažem panel na zidu i svi budu iznenađeni. Jedna me pitala da joj preporučim gdje kupiti.' },
-      { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Vidio kod kolege i odmah pitao odakle. Postavio isti i kažem ti razlika je ogromna. Sivi tekstilni panel niti je topao niti hladan – uvijek elegantno. Svako ko dođe primijeti i komentariše.' }
+      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Tražila nešto neutralno za ured ali da nije dosadna farbana siva. Gruba tkana siva Grigia je bila pravi odgovor.' },
+      { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Industrijska siva boja uz grubu teksturu ide savršeno uz beton i čelik u kancelariji. Postavio isti dan kad sam vidio uzorak.' }
     ]},
     40: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Ana R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Slate je taj panel koji ide uz doslovno sve. Naručila za dnevnu sobu pa naručila još za spavaću pa sad i hodnik haha. Sestra je vidjela i odmah bila ljubomorna i naručila za sebe.' },
-      { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Boja je tačno kao na slikama, što je rijetko za online kupovinu. Silikon drži odlično, montaža laka. Žena kaže da je Slate bila njena omiljena promjena u renovaciji. Definitivno naručujemo još.' }
+      { name: 'Ana R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Svjetlija, finija siva s delikatnom teksturom ide uz doslovno sve. Naručila za dnevnu sobu pa odmah još za spavaću.' },
+      { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Boja je tačno kao na slikama – suptilnija i svjetlija siva nego što sam očekivao. Montaža laka, silikon drži odlično.' }
     ]},
     41: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Htjela bijelu zidnu oblogu koja nije sterilna kao farba. Blanc je tačno to – topla bijela s finom teksturom. Mama je pitala da li sam nabavila skupocjenu tapetu, nije mogla vjerovati kad sam joj rekla cijenu. Naručuje za sebe.' },
-      { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Postavila u kupatilo – da nisam vidjela kod prijateljice nikad ne bih smislila. Izgleda luksuzno, lako se čisti. Svi gosti koji dođu pitaju odakle. Već sam preporučila trojici i svi su naručili.' }
+      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Htjela bijelu zidnu oblogu koja nije sterilna kao farba. Blanc je topla krem nijansa s bouclé teksturom, baš kao laneni tekstil.' },
+      { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Bouclé tekstura izgleda mnogo skuplje nego što jeste. Postavila u dnevnoj sobi i svi gosti pitaju da li je pravi tekstil.' }
     ]},
     42: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Petar L.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Siena se ne može opisati riječima – ta topla sivo-smeđa s tekstilnom površinom. Vidio na nekoj fotografiji interijera i dva dana tražio koji je panel. Kad sam pronašao naručio odmah. Uživo je još ljepše nego na slici.' },
-      { name: 'Sandra N.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Radim u coworking prostoru i predložila sam šefu Sienu umjesto klasične farbe za zid iza recepcije. Rezultat je toliko dobar da nas zakupci pitaju ko nam je radio enterijer. Sad širimo panel i na sale za sastanke.' }
+      { name: 'Petar L.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Siena se ne može opisati riječima – ta svilenkasta sivo-zlatna boja mijenja ton tokom dana. Uživo je još ljepše nego na slici.' },
+      { name: 'Sandra N.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Zlatno-sivi sjaj Siene izgleda drugačije ujutro nego navečer, baš kao što piše u opisu. Predložila sam je šefu za zid iza recepcije.' }
     ]},
     43: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Bojan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Glacier je nešto između bijele i ledeno plave i tačno to daje moderan, svjež izgled. Postavljeno u kupatilu i žena u početku nije bila sigurna da je to dobra ideja – sada sama pokaže taj zid svakom gostu prije nego što ja stignem. Najbolja odluka za to kupatilo.' },
-      { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Vidjela u jednoj privatnoj klinici i odmah pitala recepciju odakle materijal. Naručila za ured i svi kažu da je prostor mnogo mirniji. Kupujem još za hodnik, jednostavno mi se sviđa ovaj panel.' }
+      { name: 'Bojan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Glacier je gotovo bijela s ultrafinom horizontalnom šarom – miran, čist zid bez ičega što upada previše u oči. Postavljeno u kupatilu, izgled je smirujući.' },
+      { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Tražila sam nešto fino i mirno za ured. Glacier je upravo to – gotovo bijela, jedva primjetna tekstura. Svi kažu da je prostor mnogo mirniji.' }
     ]},
     44: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Buklé tekstura na panelu – nisam znala da postoji a sad ne mogu zamisliti spavaću sobu bez nje. Vidjela kod drugarice i mislila da je pravi tekstil na zidu. Kad sam saznala da je panel naručila odmah. Sad i drugarice pitaju pa sam im dala kontakt.' },
-      { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Za recepciju smo tražili nešto upečatljivo, Pura buklé je bila savršen izbor. Svaki klijent koji dođe komentariše taj zid. Već naručili još za konferencijsku salu. Niko ne pogađa da je panel.' }
+      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Mekana tkana tekstura u toploj bijeloj boji izgleda kao svježe oprana posteljina na zidu. Ne mogu zamisliti spavaću sobu bez nje.' },
+      { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Za recepciju smo tražili nešto čisto i opuštajuće, topla bijela Pura je bila savršen izbor. Svaki klijent komentariše taj zid.' }
     ]},
     45: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Milena D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Šampanjac tekstilni panel sam vidjela u hotelu u Bečićima i pitala recepciju. Uputili me ovdje, naručila za dnevnu sobu. Sad dvije drugarice naručile isti nakon što su bile u posjeti. Niko ne može vjerovati da nije pravi tekstil.' },
-      { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Postavio u trpezariji uz lustere – svaki put kad imamo goste komentarišu taj zid. Jedna drugarica odmah uzela broj i naručila za sebe isti dan. Definitivno kupujem još, ne mogu se zamisliti bez Deve.' }
+      { name: 'Milena D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Zlatno-siva boja sa satenskim sjajem hvata svjetlo kao pravi tekstil. Naručila za dnevnu sobu i sad je to centralna tačka prostorije.' },
+      { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Svilenkaste niti uz lustere u trpezariji izgledaju glamurozno svaki put kad imamo goste. Ne mogu se zamisliti bez Deve.' }
     ]},
     // ── Mermerni paneli ──
     46: { total: 11, fiveS: 10, fourS: 1, comments: [
