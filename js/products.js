@@ -545,40 +545,40 @@ async function renderProductDetail() {
   const reviewsData = {
     // ── Drveni paneli ──
     18: { total: 15, fiveS: 13, fourS: 2, comments: [
-      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Vidio sam ovo kod prijatelja na večeri i odmah znao da moram imati isto. Pitao ga odakle, sljedeće sedmice naručio. Montirao sam sam za 2 sata bez majstora. Svako ko sada dođe pita isto što i ja tada – odakle je to.' },
-      { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Kupila za spavaću sobu, muž je bio skeptičan. Sad mi govori da je to bila njegova omiljena promjena u stanu haha. Topla zlatna nijansa tika izgleda kao pravo drvo. Definitivno kupujem još za hodnik.' }
+      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Boja je tačno ona topla zlatna nijansa sa slika, ni svjetlija ni tamnija. Postavio sam ga sam za jedno popodne iza TV-a.' },
+      { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Kupila sam ga za spavaću sobu. Zlatna nijansa tika daje toplinu koju farba nikad ne bi dala. Definitivno uzimam još za hodnik.' }
     ]},
     19: { total: 10, fiveS: 8, fourS: 2, comments: [
-      { name: 'Tijana R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Vidjela sam na Instagramu nečiji stan i dva dana tražila koji je panel. Kad sam pronašla – odmah naručila. Montirala sama uz YouTube video. Komšinica kad je vidjela nije mogla vjerovati da je panel. Naručila je isti za sebe.' },
-      { name: 'Stefan K.', city: 'Budva', date: 'Januar 2026', stars: 4, text: 'Nordic Oak u spavaćoj je bio savršen izbor. Svaki put kad uđem u sobu malo se osmiješim, toliko je lijep nordijski hrast. Žena već traži da postavimo i u dnevnu sobu. Montaža je bila jednostavnija nego što sam očekivao.' }
+      { name: 'Tijana R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tražila sam nešto svijetlo umjesto bijele farbe. Nordic Oak je tačno taj efekat – svijetlo, ali ne sterilno. Montirala sama za dva sata.' },
+      { name: 'Stefan K.', city: 'Budva', date: 'Januar 2026', stars: 4, text: 'Spavaća soba mi je djelovala premalo zbog tamnijeg namještaja. Svijetla nijansa hrasta je odmah proširila prostor. Jedina zamjerka – trebalo mi je malo više silikona nego što sam očekivao.' }
     ]},
     20: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Htio nešto tamno za spavaću sobu al me bilo strah. Naručio uzorak, vidio uživo i odmah naručio 10 paketa. Žena je nervozno čekala rezultat – kad je vidjela nije imala šta da kaže. Svi gosti pitaju da li smo uzeli dizajnera.' },
-      { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Vidjela kod komšije Dark Ash iza kreveta i odmah pitala gdje kupio. Postavila i kod sebe i kombinacija tamne pepeljaste boje s bijelom posteljinom je kao u skupim hotelima. Prijatelj koji je majstor za enterijer pitao me odakle materijal.' }
+      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Htio sam nešto dramatično za akcentni zid. Dark Ash je upravo to – skoro crna, ozbiljna boja. Gosti odmah primijete čim uđu.' },
+      { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Tamno pepeljasta boja u kombinaciji s bijelom posteljinom izgleda kao iz hotela. Postavila sam je iza kreveta i vrijedi svake pare.' }
     ]},
     21: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Smoke Oak je tačno ta nijansa koju sam tražio – dimljeno siva s drvenim uzorkom, niti previše toplo niti hladno. Postavio u kućnom uredu i videopozivi su mi izgledali mnogo profesionalnije odmah haha. Svi komentarišu pozadinu.' },
-      { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Poslala sliku prijateljici kako izgleda u dnevnoj sobi i odmah je naručila isti. Neutralna boja s karakterom – ide uz sve. Montaža mi je trebala sat i po, sve sama bez pomoći.' }
+      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Tražio sam sivu nijansu koja nije ni hladna ni dosadna. Smoke Oak je tačno to – dimljeno siva, uklapa se uz beton i drvo. Stavio u kućnom uredu.' },
+      { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Neutralna siva boja koja ide uz sve što već imam u stanu. Montaža mi je trajala sat i po, sve sama bez pomoći.' }
     ]},
     22: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Vidio sam u jednom kafiću u Budvi, pitao konobaricu i evo me ovdje. Topla jantarna nijansa hrasta daje onaj kafić-ugođaj koji sam tražio za dnevnu sobu. Svako ko dođe pita – odakle ti ovo.' },
-      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Naručila za trpezariju. Kad su roditelji došli na ručak mama je mislila da sam postavila pravo drvo. Morala je prstom da pipa da povjeruje. Kupujem još za hodnik, ne mogu se zamisliti bez ovog panela.' }
+      { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Tražio sam toplu bež-smeđu boju za dnevnu sobu. Jantarna nijansa Amber Oaka je tačno to – ugodna, ne upadljiva.' },
+      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Trpezarija nam je bila hladna sa bijelim zidovima. Mekana bež-smeđa boja je to odmah promijenila, uklapa se savršeno uz drveni sto.' }
     ]},
     23: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Pratio sam stranicu dugo, napokon naručio i ne kajem se ni sekunde. Mocha Oak iza sofe je magičan – neutralno smeđi ali živ i topao. Drugarice su pitale odakle u isto popodne kad su vidjele. Naručujem još.' },
-      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Imamo mali kafić u centru i tražili smo nešto što neće izgledati kao svaki drugi lokal. Mocha Oak iza šanka je upravo to – gosti ga često fotografišu prije nego što sjednu. Vlasnik je odmah naručio još za terasu.' }
+      { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Naručio nakon što sam dugo gledao slike. Boja kafe s mlijekom izgleda baš tako uživo – ni previše tamno ni previše svijetlo.' },
+      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Imamo mali kafić i tražili smo nešto elegantno za zid iza šanka. Mocha Oak se uklopio savršeno, gosti ga često fotografišu.' }
     ]},
     24: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Honey Oak izgleda kao pravo drvo, ta medeno-topla nijansa je autentična. Postavio iza sofe i efekt je nevjerovatan. Dnevna soba je dobila dušu kakvu nije imala s bijelim zidovima. Komšija koji je majstor pitao odakle materijal.' },
-      { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Kupila umjesto farbanja zidova. Za manje novca nego što bi platila majstora za farbanje imam zid koji izgleda deset puta bolje. Kad gledam natrag ne mogu vjerovati da nisam ranije to uradila.' }
+      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Medeno-topla nijansa izgleda kao pravo drvo. Postavio sam ga iza sofe i soba je odmah dobila dušu.' },
+      { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Kupila sam ga umjesto farbanja zida. Za manje novca dobila sam zid koji izgleda mnogo bolje od farbe.' }
     ]},
     25: { total: 5, fiveS: 4, fourS: 1, comments: [
-      { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Havana Oak za biblioteku – bio sam nesiguran ali prijateljica me uvjerila. Sada je to moja omiljena soba u stanu. Svako ko uđe sjedne i kaže "ma ovde je lijepo". Kupujem još za spavaću.' },
-      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Vidjela u jednom hotelu u Baru i tražila po internetu dok nisam pronašla ovo. Postavila iza kreveta. Muž je bio toliko oduševljen da je odmah pozvao mamu da vidi. Nevjerovatan panel.' }
+      { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Tamna, bogata smeđa boja s izraženim šarama izgleda skupo. Stavio sam ga u biblioteci i prostor je dobio karakter koji prije nije imao.' },
+      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Duboka, bogata smeđa boja izgleda baš kao na fotografijama, možda i ljepša uživo. Postavila sam je iza kreveta u spavaćoj sobi.' }
     ]},
     26: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Teak je moja jedina žalba što nisam naručio ranije. Tamna elegancija bez pretjerivanja. Drugar koji radi enterijer pitao me gdje sam našao ovaj materijal – rekao mu i sada on preporučuje klijentima.' },
-      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Postavila u kancelariju pa pozvala klijente na sastanak. Komentarišu od ulaska. Jedna klijentica pitala gdje nabaviti pa sam joj preporučila odmah. Definitivno uzimam još za dom.' }
+      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamna, elegantna boja bez pretjerivanja. Žalim samo što nisam naručio ranije.' },
+      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Kancelarija nam je trebala izgledati ozbiljnije za sastanke s klijentima. Duboka espresso boja je upravo taj utisak – klijenti komentarišu zid čim uđu.' }
     ]},
     // ── Tekstilni paneli ──
     37: { total: 12, fiveS: 11, fourS: 1, comments: [
