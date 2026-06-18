@@ -1171,7 +1171,7 @@ async function renderProductDetail() {
       </a>
     </div>
 
-    ${(product.category !== 'aluminijum-lajsne' && product.category !== 'spc-pod') ? `
+    ${product.category.startsWith('bambus') ? `
     <a href="products.html?category=aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:0 0 24px;text-decoration:none;color:inherit;transition:background .2s;" onmouseover="this.style.background='rgba(201,168,108,0.18)'" onmouseout="this.style.background='rgba(201,168,108,0.1)'">
       <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
       <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#c9a86c;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
