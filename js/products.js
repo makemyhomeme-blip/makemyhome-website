@@ -1124,6 +1124,13 @@ async function renderProductDetail() {
         </div>
       </div>` : ''}
 
+    </div>
+
+    <!-- Trust row -->
+    <div class="product-trust-row">
+      <div class="trust-item"><i class="fas fa-truck"></i><span>Dostava Crna Gora</span></div>
+      <div class="trust-item"><i class="fas fa-tools"></i><span>Savjeti za montažu</span></div>
+      <div class="trust-item"><i class="fas fa-money-bill-wave"></i><span>Plaćanje pouzećem</span></div>
     </div>`;
 
   info.innerHTML = `
@@ -1253,15 +1260,8 @@ async function renderProductDetail() {
       </a>
     </div>
 
-    <!-- Accordion sekcije (na desktopu se prikazuju ispod glavne slike) -->
+    <!-- Accordion sekcije + trust row (na desktopu se prikazuju ispod glavne slike) -->
     <div class="accordion-mobile-only">${accordionHtml}</div>
-
-    <!-- Trust row -->
-    <div class="product-trust-row">
-      <div class="trust-item"><i class="fas fa-truck"></i><span>Dostava Crna Gora</span></div>
-      <div class="trust-item"><i class="fas fa-tools"></i><span>Savjeti za montažu</span></div>
-      <div class="trust-item"><i class="fas fa-undo"></i><span>Zamjena u 7 dana</span></div>
-    </div>
 
   `;
 
