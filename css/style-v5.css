@@ -1300,6 +1300,11 @@ ul { list-style: none; }
 
 .gallery-specs-desktop { display: none; }
 
+/* Na desktopu su sve sekcije (Karakteristike, Idealno za & Stil, O Proizvodu) uvijek otvorene */
+.gallery-specs-desktop .spec-body { display: block !important; }
+.gallery-specs-desktop .spec-arrow { transform: rotate(180deg) !important; }
+.gallery-specs-desktop .spec-header { cursor: default; }
+
 @media (min-width: 1025px) {
   .gallery-specs-desktop { display: block; margin-top: 20px; }
   .product-info .accordion-mobile-only { display: none; }
