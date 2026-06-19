@@ -1298,6 +1298,8 @@ ul { list-style: none; }
   max-width: 100%;
 }
 
+.gallery-specs-desktop { display: none; }
+
 @media (min-width: 1025px) {
   .gallery-specs-desktop { display: block; margin-top: 20px; }
   .product-info .spec-item-karakteristike { display: none; }
@@ -1346,9 +1348,6 @@ ul { list-style: none; }
 
 .gallery-thumb.active, .gallery-thumb:hover { border-color: var(--primary); }
 .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Karakteristike: na desktopu se prikazuju ispod glavne slike, na mobilnom unutar opisa */
-.gallery-specs-desktop { display: none; }
 
 .product-info .product-category { font-size: 12px; margin-bottom: 8px; }
 .product-info .product-name { font-size: 32px; margin-bottom: 12px; }
