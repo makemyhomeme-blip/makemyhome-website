@@ -404,9 +404,9 @@ async function renderProductDetail() {
   const galleryThumbs = document.getElementById('gallery-thumbs');
 
   // Build image list — expose globally so lightbox can navigate
-  const _galleryImages = [{ src: product.image, label: 'Proizvod' }];
-  if (product.roomImage) _galleryImages.push({ src: product.roomImage, label: 'U prostoru' });
-  (product.gallery || []).forEach((src, i) => _galleryImages.push({ src, label: 'Slika ' + (i + 1) }));
+  const _galleryImages = [{ src: product.image, label: `${product.name} – ${categoryName} | Make My Home Decor` }];
+  if (product.roomImage) _galleryImages.push({ src: product.roomImage, label: `${product.name} u enterijeru – ${categoryName} | Make My Home Decor` });
+  (product.gallery || []).forEach((src, i) => _galleryImages.push({ src, label: `${product.name} detalj ${i + 1} – ${categoryName}` }));
   window._lbImages = _galleryImages;
   let _galleryIndex = 0;
   const multi = _galleryImages.length > 1;
@@ -418,6 +418,7 @@ async function renderProductDetail() {
       img.style.opacity = '0';
       setTimeout(() => {
         img.src = _galleryImages[_galleryIndex].src;
+        img.alt = _galleryImages[_galleryIndex].label;
         img.onclick = () => openImageLightbox(img.src, product.name);
         img.style.opacity = '1';
       }, 120);
@@ -445,7 +446,7 @@ async function renderProductDetail() {
       </div>` : '';
     galleryMain.innerHTML = `
       <div style="position:relative;width:100%;height:100%;">
-        <img id="gallery-main-img" src="${_galleryImages[0].src}" alt="${product.name}"
+        <img id="gallery-main-img" src="${_galleryImages[0].src}" alt="${_galleryImages[0].label}"
           onclick="openImageLightbox(this.src, '${product.name}')"
           style="cursor:zoom-in;transition:opacity .12s ease;width:100%;height:100%;object-fit:cover;border-radius:16px;"
           onerror="this.style.display='none'">
@@ -1522,7 +1523,7 @@ function openImageLightbox(src, name) {
   // Wire buttons using lb.querySelector — works before lb is in the document
   function updateState() {
     const img = lb.querySelector('#lb-img');
-    if (img) { img.style.opacity = '0'; setTimeout(() => { img.src = images[lbIdx].src; img.style.opacity = '1'; }, 100); }
+    if (img) { img.style.opacity = '0'; setTimeout(() => { img.src = images[lbIdx].src; img.alt = images[lbIdx].label; img.style.opacity = '1'; }, 100); }
     lb.querySelectorAll('.lb-dot').forEach((d, i) => {
       d.style.background = i === lbIdx ? '#c9a86c' : 'rgba(255,255,255,0.3)';
       d.style.transform   = i === lbIdx ? 'scale(1.3)' : 'scale(1)';
