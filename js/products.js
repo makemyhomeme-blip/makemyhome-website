@@ -90,11 +90,6 @@ function renderProductCard(product, lazy = true) {
         ${badge}
         ${preorderOverlay}
         ${outOfStock ? `<div class="oos-tag">Rasprodato</div>` : ''}
-        <div class="product-actions">
-          <button class="btn-action" title="Brzi pregled" onclick="event.stopPropagation(); openProductModal(${product.id})">
-            <i class="fas fa-eye"></i>
-          </button>
-        </div>
       </div>
       <div class="product-body">
         <div class="product-category">${categoryName}</div>
@@ -1583,53 +1578,6 @@ function changeQty(delta) {
   let val = parseInt(input.value) + delta;
   if (val < 1) val = 1;
   input.value = val;
-}
-
-// ===== PRODUCT MODAL (Brzi pregled) =====
-function openProductModal(id) {
-  const product = allProducts.find(p => p.id === id);
-  if (!product) return;
-  const categoryName = allCategories.find(c => c.id === product.category)?.name || '';
-
-  const overlay = document.createElement('div');
-  overlay.id = 'product-modal';
-  overlay.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;
-    display:flex;align-items:center;justify-content:center;padding:20px;`;
-  overlay.innerHTML = `
-    <div style="background:#fff;border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
-      <button onclick="document.getElementById('product-modal').remove()"
-        style="position:absolute;top:16px;right:16px;border:none;background:rgba(0,0,0,0.08);
-        width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;z-index:1;
-        display:flex;align-items:center;justify-content:center;">✕</button>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
-        <div style="height:300px;background:#f5f0eb;border-radius:20px 0 0 20px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-          <img src="${product.image}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;"
-            onerror="this.parentElement.innerHTML='<i class=\'fas fa-image\' style=\'font-size:64px;color:#ccc\'></i>'">
-        </div>
-        <div style="padding:32px 28px;">
-          <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--primary);font-weight:600;margin-bottom:8px;">${categoryName}</div>
-          <h2 style="font-family:var(--font-heading);font-size:22px;margin-bottom:8px;">${product.name}</h2>
-          <div style="font-size:28px;font-family:var(--font-heading);font-weight:700;color:var(--dark);margin-bottom:8px;">
-            ${product.price} € <span style="font-size:14px;font-weight:400;color:#888;font-family:var(--font-body)">/ ${product.unit}</span>
-          </div>
-          <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:20px;">${product.description}</p>
-          <ul style="list-style:none;padding:0;margin-bottom:24px;">
-            ${product.features.slice(0,3).map(f => `<li style="font-size:13px;color:#444;display:flex;align-items:center;gap:8px;margin-bottom:6px;"><i class="fas fa-check" style="color:var(--primary)"></i>${f}</li>`).join('')}
-          </ul>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="product.html?id=${product.id}" class="btn btn-primary" style="justify-content:center;">
-              <i class="fas fa-eye"></i> Pogledaj Detalje
-            </a>
-            <button class="btn btn-dark" onclick="inquireProduct('${product.name}');document.getElementById('product-modal').remove();" style="justify-content:center;">
-              <i class="fas fa-envelope"></i> Pošalji Upit
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
-  document.body.appendChild(overlay);
 }
 
 // ===== UPIT ZA PROIZVOD =====
