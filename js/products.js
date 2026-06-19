@@ -545,77 +545,77 @@ async function renderProductDetail() {
   const reviewsData = {
     // ── Drveni paneli ──
     18: { total: 15, fiveS: 13, fourS: 2, comments: [
-      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Boja je tačno ona topla zlatna nijansa sa slika, ni svjetlija ni tamnija. Postavio sam ga sam za jedno popodne iza TV-a.' },
-      { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Kupila sam ga za spavaću sobu. Zlatna nijansa tika daje toplinu koju farba nikad ne bi dala. Definitivno uzimam još za hodnik.' }
+      { name: 'Marko T.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Stavio sam Golden Teak u dnevnoj sobi. Boja je baš lijepa, zlatno-smeđa. Veoma sam zadovoljan.' },
+      { name: 'Jovana M.', city: 'Bar', date: 'Februar 2026', stars: 5, text: 'Uzela sam Golden Teak za spavaću sobu, boja je topla i zlatna. Baš mi se dopada.' }
     ]},
     19: { total: 10, fiveS: 8, fourS: 2, comments: [
-      { name: 'Tijana R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tražila sam nešto svijetlo umjesto bijele farbe. Nordic Oak je tačno taj efekat – svijetlo, ali ne sterilno. Montirala sama za dva sata.' },
-      { name: 'Stefan K.', city: 'Budva', date: 'Januar 2026', stars: 4, text: 'Spavaća soba mi je djelovala premalo zbog tamnijeg namještaja. Svijetla nijansa hrasta je odmah proširila prostor. Jedina zamjerka – trebalo mi je malo više silikona nego što sam očekivao.' }
+      { name: 'Tijana R.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Nordic Oak sam stavila u spavaću sobu. Svijetla boja lijepo otvara prostor, preporučujem ga svima.' },
+      { name: 'Stefan K.', city: 'Budva', date: 'Januar 2026', stars: 4, text: 'Postavio sam Nordic Oak u sobi. Svijetao je i lijepo izgleda, montaža je bila brza.' }
     ]},
     20: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Htio sam nešto dramatično za akcentni zid. Dark Ash je upravo to – skoro crna, ozbiljna boja. Gosti odmah primijete čim uđu.' },
-      { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Tamno pepeljasta boja u kombinaciji s bijelom posteljinom izgleda kao iz hotela. Postavila sam je iza kreveta i vrijedi svake pare.' }
+      { name: 'Nikola V.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Uzeo sam Dark Ash za akcentni zid. Boja je tamna, skoro crna, baš ono što sam tražio.' },
+      { name: 'Milica Đ.', city: 'Herceg Novi', date: 'Januar 2026', stars: 5, text: 'Stavila sam Dark Ash iza kreveta. Tamno siva boja izgleda jako lijepo uz bijelu posteljinu.' }
     ]},
     21: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Tražio sam sivu nijansu koja nije ni hladna ni dosadna. Smoke Oak je tačno to – dimljeno siva, uklapa se uz beton i drvo. Stavio u kućnom uredu.' },
-      { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Neutralna siva boja koja ide uz sve što već imam u stanu. Montaža mi je trajala sat i po, sve sama bez pomoći.' }
+      { name: 'Petar S.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Smoke Oak sam stavio u kućnom uredu. Lijepa siva boja, baš paše uz ostali namještaj.' },
+      { name: 'Jelena B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Uzela sam Smoke Oak za dnevnu sobu. Siva je neutralna i ide uz sve, zadovoljna sam.' }
     ]},
     22: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Tražio sam toplu bež-smeđu boju za dnevnu sobu. Jantarna nijansa Amber Oaka je tačno to – ugodna, ne upadljiva.' },
-      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Trpezarija nam je bila hladna sa bijelim zidovima. Mekana bež-smeđa boja je to odmah promijenila, uklapa se savršeno uz drveni sto.' }
+      { name: 'Dragan L.', city: 'Bar', date: 'Mart 2026', stars: 5, text: 'Amber Oak sam stavio u dnevnoj sobi. Topla bež-smeđa boja, jako lijepo izgleda.' },
+      { name: 'Sanja N.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Uzela sam Amber Oak za trpezariju. Boja je topla i prijatna, baš mi se svidjela.' }
     ]},
     23: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Naručio nakon što sam dugo gledao slike. Boja kafe s mlijekom izgleda baš tako uživo – ni previše tamno ni previše svijetlo.' },
-      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Imamo mali kafić i tražili smo nešto elegantno za zid iza šanka. Mocha Oak se uklopio savršeno, gosti ga često fotografišu.' }
+      { name: 'Igor M.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Postavio sam Mocha Oak iza sofe. Lijepa srednje smeđa boja, super izgleda.' },
+      { name: 'Vesna K.', city: 'Kotor', date: 'Februar 2026', stars: 5, text: 'Stavili smo Mocha Oak u kafiću iza šanka. Topla smeđa boja, svima se sviđa.' }
     ]},
     24: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Medeno-topla nijansa izgleda kao pravo drvo. Postavio sam ga iza sofe i soba je odmah dobila dušu.' },
-      { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Kupila sam ga umjesto farbanja zida. Za manje novca dobila sam zid koji izgleda mnogo bolje od farbe.' }
+      { name: 'Luka P.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Honey Oak sam stavio iza sofe. Medeno-zlatna boja izgleda baš kao pravo drvo.' },
+      { name: 'Ivana C.', city: 'Budva', date: 'Januar 2026', stars: 5, text: 'Uzela sam Honey Oak umjesto da farbam zid. Boja je topla i lijepa, ne žalim.' }
     ]},
     25: { total: 5, fiveS: 4, fourS: 1, comments: [
-      { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Tamna, bogata smeđa boja s izraženim šarama izgleda skupo. Stavio sam ga u biblioteci i prostor je dobio karakter koji prije nije imao.' },
-      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Duboka, bogata smeđa boja izgleda baš kao na fotografijama, možda i ljepša uživo. Postavila sam je iza kreveta u spavaćoj sobi.' }
+      { name: 'Radovan T.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Havana Oak sam stavio u biblioteci. Tamna, bogata smeđa boja, izgleda skupo.' },
+      { name: 'Nataša B.', city: 'Podgorica', date: 'Februar 2026', stars: 4, text: 'Postavila sam Havana Oak iza kreveta. Tamno smeđa boja baš lijepo izgleda.' }
     ]},
     26: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Tamna, elegantna boja bez pretjerivanja. Žalim samo što nisam naručio ranije.' },
-      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Kancelarija nam je trebala izgledati ozbiljnije za sastanke s klijentima. Duboka espresso boja je upravo taj utisak – klijenti komentarišu zid čim uđu.' }
+      { name: 'Bojan S.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Espresso Teak sam stavio u dnevnoj sobi. Tamna, elegantna boja, šteta što nisam ranije uzeo.' },
+      { name: 'Maja F.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Uzela sam Espresso Teak za kancelariju. Tamna smeđa boja izgleda jako ozbiljno i lijepo.' }
     ]},
     // ── Tekstilni paneli ──
     37: { total: 12, fiveS: 11, fourS: 1, comments: [
-      { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Bijelo-bež boja s krupnom pletenom teksturom izgleda kao topli vuneni pulover na zidu. Naručila za spavaću i ne mogu prestati gledati taj zid.' },
-      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Bio sam skeptičan prema tekstilnim panelima ali Perla me uvjerila. Bijelo-bež nijansa izgleda mnogo skuplje nego što jeste.' }
+      { name: 'Tijana K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Perla sam stavila u spavaću sobu. Boja je bijelo-bež i tekstura je baš lijepa na dodir.' },
+      { name: 'Srđan P.', city: 'Nikšić', date: 'Februar 2026', stars: 5, text: 'Uzeo sam Perlu, baš mi se svidjela. Bijelo-bež boja izgleda toplo i prijatno.' }
     ]},
     38: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Čista bijela ali nije dosadna bijela – grublja tekstura daje dubinu i zid živi. Kupujem još za spavaću.' },
-      { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Tražio sam bijelo rješenje koje ima teksturu, ne ravnu farbu. Calla je tačno to. Montirao sam, malo muke s uglovima ali rezultat je savršen.' }
+      { name: 'Jovana M.', city: 'Tivat', date: 'Mart 2026', stars: 5, text: 'Stavila sam Callu u spavaću sobu. Bijela je ali nije dosadna, tekstura joj daje život.' },
+      { name: 'Lazar Đ.', city: 'Bar', date: 'Januar 2026', stars: 4, text: 'Postavio sam Callu u dnevnoj sobi. Bijela boja sa teksturom izgleda baš lijepo.' }
     ]},
     39: { total: 8, fiveS: 7, fourS: 1, comments: [
-      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Tražila nešto neutralno za ured ali da nije dosadna farbana siva. Gruba tkana siva Grigia je bila pravi odgovor.' },
-      { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Industrijska siva boja uz grubu teksturu ide savršeno uz beton i čelik u kancelariji. Postavio isti dan kad sam vidio uzorak.' }
+      { name: 'Maja S.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Grigio sam stavila u kancelariju. Siva boja je moderna i nije dosadna, baš mi se sviđa.' },
+      { name: 'Nikola B.', city: 'Podgorica', date: 'Februar 2026', stars: 5, text: 'Uzeo sam Grigio za kancelariju. Siva boja lijepo ide uz ostali namještaj.' }
     ]},
     40: { total: 11, fiveS: 10, fourS: 1, comments: [
-      { name: 'Ana R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Svjetlija, finija siva s delikatnom teksturom ide uz doslovno sve. Naručila za dnevnu sobu pa odmah još za spavaću.' },
-      { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Boja je tačno kao na slikama – suptilnija i svjetlija siva nego što sam očekivao. Montaža laka, silikon drži odlično.' }
+      { name: 'Ana R.', city: 'Herceg Novi', date: 'Mart 2026', stars: 5, text: 'Slate sam stavila u dnevnu sobu. Svjetlija siva boja ide uz sve, baš sam zadovoljna.' },
+      { name: 'Dejan V.', city: 'Budva', date: 'Februar 2026', stars: 5, text: 'Postavio sam Slate, boja je tačno kao na slici. Svjetlija siva i lijepo izgleda.' }
     ]},
     41: { total: 7, fiveS: 6, fourS: 1, comments: [
-      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Htjela bijelu zidnu oblogu koja nije sterilna kao farba. Blanc je topla krem nijansa s bouclé teksturom, baš kao laneni tekstil.' },
-      { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Bouclé tekstura izgleda mnogo skuplje nego što jeste. Postavila u dnevnoj sobi i svi gosti pitaju da li je pravi tekstil.' }
+      { name: 'Jelena F.', city: 'Cetinje', date: 'Mart 2026', stars: 5, text: 'Blanc sam stavila u dnevnu sobu. Topla krem boja, tekstura je mekana i baš lijepa.' },
+      { name: 'Marija T.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Uzela sam Blanc za dnevnu sobu. Tekstura izgleda skupo, svi gosti pitaju odakle mi.' }
     ]},
     42: { total: 9, fiveS: 8, fourS: 1, comments: [
-      { name: 'Petar L.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Siena se ne može opisati riječima – ta svilenkasta sivo-zlatna boja mijenja ton tokom dana. Uživo je još ljepše nego na slici.' },
-      { name: 'Sandra N.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Zlatno-sivi sjaj Siene izgleda drugačije ujutro nego navečer, baš kao što piše u opisu. Predložila sam je šefu za zid iza recepcije.' }
+      { name: 'Petar L.', city: 'Tivat', date: 'Februar 2026', stars: 5, text: 'Sienu sam stavio u kancelariju. Sivo-zlatna boja mijenja se sa svjetlom, baš lijepo izgleda.' },
+      { name: 'Sandra N.', city: 'Bar', date: 'Januar 2026', stars: 5, text: 'Postavila sam Sienu kod nas u kancelariji. Sivo-zlatna boja izgleda drugačije ujutro i uveče.' }
     ]},
     43: { total: 6, fiveS: 5, fourS: 1, comments: [
-      { name: 'Bojan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Glacier je gotovo bijela s ultrafinom horizontalnom šarom – miran, čist zid bez ičega što upada previše u oči. Postavljeno u kupatilu, izgled je smirujući.' },
-      { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Tražila sam nešto fino i mirno za ured. Glacier je upravo to – gotovo bijela, jedva primjetna tekstura. Svi kažu da je prostor mnogo mirniji.' }
+      { name: 'Bojan K.', city: 'Podgorica', date: 'Mart 2026', stars: 5, text: 'Glacier sam stavio u kupatilo. Skoro bijela boja, baš je mirna i lijepa.' },
+      { name: 'Vesna M.', city: 'Budva', date: 'Februar 2026', stars: 4, text: 'Uzela sam Glacier za ured. Skoro bijela boja, prostor djeluje mnogo mirnije.' }
     ]},
     44: { total: 10, fiveS: 9, fourS: 1, comments: [
-      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Mekana tkana tekstura u toploj bijeloj boji izgleda kao svježe oprana posteljina na zidu. Ne mogu zamisliti spavaću sobu bez nje.' },
-      { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Za recepciju smo tražili nešto čisto i opuštajuće, topla bijela Pura je bila savršen izbor. Svaki klijent komentariše taj zid.' }
+      { name: 'Ivana S.', city: 'Nikšić', date: 'Mart 2026', stars: 5, text: 'Puru sam stavila u spavaću sobu. Topla bijela boja, tekstura je mekana i prijatna.' },
+      { name: 'Aleksandar P.', city: 'Podgorica', date: 'Januar 2026', stars: 5, text: 'Postavio sam Puru na recepciji. Topla bijela boja, svima se sviđa.' }
     ]},
     45: { total: 13, fiveS: 12, fourS: 1, comments: [
-      { name: 'Milena D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Zlatno-siva boja sa satenskim sjajem hvata svjetlo kao pravi tekstil. Naručila za dnevnu sobu i sad je to centralna tačka prostorije.' },
-      { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Svilenkaste niti uz lustere u trpezariji izgledaju glamurozno svaki put kad imamo goste. Ne mogu se zamisliti bez Deve.' }
+      { name: 'Milena D.', city: 'Kotor', date: 'Mart 2026', stars: 5, text: 'Devu sam stavila u dnevnu sobu. Zlatno-siva boja sija na svjetlu, baš lijepo izgleda.' },
+      { name: 'Stefan J.', city: 'Herceg Novi', date: 'Februar 2026', stars: 5, text: 'Postavio sam Devu u trpezariji. Zlatno-siva boja izgleda glamurozno uz lustere.' }
     ]},
     // ── Mermerni paneli ──
     46: { total: 11, fiveS: 10, fourS: 1, comments: [
