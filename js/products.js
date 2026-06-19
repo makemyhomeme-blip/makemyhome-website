@@ -1052,7 +1052,7 @@ async function renderProductDetail() {
   const waLink = `https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20${encodeURIComponent(waIdentifier)}`;
 
   const karakteristikeHtml = `
-      <div class="spec-item spec-item-karakteristike">
+      <div class="spec-item">
         <button class="spec-header" onclick="toggleSpec(this)">
           <span><i class="fas fa-list-check"></i> Karakteristike</span>
           <i class="fas fa-chevron-down spec-arrow"></i>
@@ -1095,6 +1095,36 @@ async function renderProductDetail() {
           </ul>
         </div>
       </div>`;
+
+  const accordionHtml = `
+    <div class="spec-accordion">
+
+      ${karakteristikeHtml}
+
+      ${idealForHtml || styleMatchHtml ? `
+      <div class="spec-item">
+        <button class="spec-header" onclick="toggleSpec(this)">
+          <span><i class="fas fa-heart"></i> Idealno za & Stil</span>
+          <i class="fas fa-chevron-down spec-arrow"></i>
+        </button>
+        <div class="spec-body">
+          ${idealForHtml ? `<div class="ideal-for-grid" style="margin-bottom:12px;">${idealForHtml}</div>` : ''}
+          ${styleMatchHtml ? `<div class="style-match-row">${styleMatchHtml}</div>` : ''}
+        </div>
+      </div>` : ''}
+
+      ${product.highlight ? `
+      <div class="spec-item">
+        <button class="spec-header" onclick="toggleSpec(this)">
+          <span><i class="fas fa-quote-left"></i> O Proizvodu</span>
+          <i class="fas fa-chevron-down spec-arrow"></i>
+        </button>
+        <div class="spec-body">
+          <div class="product-highlight">${product.highlight}</div>
+        </div>
+      </div>` : ''}
+
+    </div>`;
 
   info.innerHTML = `
     <div class="product-category">${categoryName}</div>
@@ -1223,35 +1253,8 @@ async function renderProductDetail() {
       </a>
     </div>
 
-    <!-- Accordion sekcije -->
-    <div class="spec-accordion">
-
-      ${karakteristikeHtml}
-
-      ${idealForHtml || styleMatchHtml ? `
-      <div class="spec-item">
-        <button class="spec-header" onclick="toggleSpec(this)">
-          <span><i class="fas fa-heart"></i> Idealno za & Stil</span>
-          <i class="fas fa-chevron-down spec-arrow"></i>
-        </button>
-        <div class="spec-body">
-          ${idealForHtml ? `<div class="ideal-for-grid" style="margin-bottom:12px;">${idealForHtml}</div>` : ''}
-          ${styleMatchHtml ? `<div class="style-match-row">${styleMatchHtml}</div>` : ''}
-        </div>
-      </div>` : ''}
-
-      ${product.highlight ? `
-      <div class="spec-item">
-        <button class="spec-header" onclick="toggleSpec(this)">
-          <span><i class="fas fa-quote-left"></i> O Proizvodu</span>
-          <i class="fas fa-chevron-down spec-arrow"></i>
-        </button>
-        <div class="spec-body">
-          <div class="product-highlight">${product.highlight}</div>
-        </div>
-      </div>` : ''}
-
-    </div>
+    <!-- Accordion sekcije (na desktopu se prikazuju ispod glavne slike) -->
+    <div class="accordion-mobile-only">${accordionHtml}</div>
 
     <!-- Trust row -->
     <div class="product-trust-row">
@@ -1262,9 +1265,9 @@ async function renderProductDetail() {
 
   `;
 
-  // Na desktopu se Karakteristike prikazuju ispod glavne slike umjesto u praznom prostoru
+  // Na desktopu se Karakteristike, Idealno za & Stil i O Proizvodu prikazuju ispod glavne slike
   const gallerySpecs = document.getElementById('gallery-specs');
-  if (gallerySpecs) gallerySpecs.innerHTML = `<div class="spec-accordion">${karakteristikeHtml}</div>`;
+  if (gallerySpecs) gallerySpecs.innerHTML = accordionHtml;
 
   // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
   const matchingPairs = {

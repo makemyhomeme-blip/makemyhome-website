@@ -91,7 +91,7 @@ $pageTitle = $cat
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preload" href="data/products.json?v=5" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="data/categories.json?v=5" as="fetch" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style-v5.css?v=12">
+  <link rel="stylesheet" href="css/style-v5.css?v=13">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -425,7 +425,7 @@ $pageTitle = $cat
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=25"></script>
+<script src="js/products.js?v=26"></script>
 <script src="js/cart.js"></script>
 <script>
   initProductsPage();

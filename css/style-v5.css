@@ -1302,7 +1302,7 @@ ul { list-style: none; }
 
 @media (min-width: 1025px) {
   .gallery-specs-desktop { display: block; margin-top: 20px; }
-  .product-info .spec-item-karakteristike { display: none; }
+  .product-info .accordion-mobile-only { display: none; }
 }
 
 .gallery-main {
