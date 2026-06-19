@@ -1051,6 +1051,51 @@ async function renderProductDetail() {
   const waIdentifier = product.sku ? `šifra: ${product.sku}` : product.name;
   const waLink = `https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20${encodeURIComponent(waIdentifier)}`;
 
+  const karakteristikeHtml = `
+      <div class="spec-item spec-item-karakteristike">
+        <button class="spec-header" onclick="toggleSpec(this)">
+          <span><i class="fas fa-list-check"></i> Karakteristike</span>
+          <i class="fas fa-chevron-down spec-arrow"></i>
+        </button>
+        <div class="spec-body open">
+          <ul class="spec-feature-list">
+            ${(() => {
+              const protMap = [
+                { k: 'Vodootporan',            icon: 'fa-droplet',           color: '#1a7abf' },
+                { k: 'Otporan na buđ',         icon: 'fa-shield-halved',     color: '#2e9e6b' },
+                { k: 'Vatrootporan',           icon: 'fa-fire-flame-curved', color: '#d4620a' },
+                { k: 'Otporan na prljavštinu', icon: 'fa-hand-sparkles',     color: '#7b5ea7' },
+              ];
+              // Group: lines starting with lowercase are continuations of the line above
+              const groups = [];
+              for (const f of product.features) {
+                if (f.startsWith('Šifra:')) continue;
+                const isContd = /^[a-zšđčćžа-я]/.test(f);
+                if (isContd && groups.length > 0) {
+                  groups[groups.length - 1].cont.push(f);
+                } else {
+                  groups.push({ main: f, cont: [] });
+                }
+              }
+              return groups.map(({ main, cont }) => {
+                // Skip "Pogodan za" — covered by "Idealno za" section
+                if (/^Pogodan za/i.test(main)) return '';
+                const prot = protMap.find(p => main.startsWith(p.k));
+                if (prot) {
+                  return `<li style="background:${prot.color}14;border:1px solid ${prot.color}33;border-radius:8px;padding:8px 12px;margin-bottom:4px;">
+                    <i class="fas ${prot.icon}" style="color:${prot.color};"></i>
+                    <strong style="color:${prot.color}dd;">${main}</strong>
+                  </li>`;
+                }
+                // Join all continuations inline — no chips, no separate lines
+                const full = cont.length > 0 ? main + ', ' + cont.join(', ') : main;
+                return `<li><i class="fas fa-check"></i>${full}</li>`;
+              }).join('');
+            })()}
+          </ul>
+        </div>
+      </div>`;
+
   info.innerHTML = `
     <div class="product-category">${categoryName}</div>
     <h1 class="product-name">${product.name}</h1>
@@ -1181,49 +1226,7 @@ async function renderProductDetail() {
     <!-- Accordion sekcije -->
     <div class="spec-accordion">
 
-      <div class="spec-item">
-        <button class="spec-header" onclick="toggleSpec(this)">
-          <span><i class="fas fa-list-check"></i> Karakteristike</span>
-          <i class="fas fa-chevron-down spec-arrow"></i>
-        </button>
-        <div class="spec-body open">
-          <ul class="spec-feature-list">
-            ${(() => {
-              const protMap = [
-                { k: 'Vodootporan',            icon: 'fa-droplet',           color: '#1a7abf' },
-                { k: 'Otporan na buđ',         icon: 'fa-shield-halved',     color: '#2e9e6b' },
-                { k: 'Vatrootporan',           icon: 'fa-fire-flame-curved', color: '#d4620a' },
-                { k: 'Otporan na prljavštinu', icon: 'fa-hand-sparkles',     color: '#7b5ea7' },
-              ];
-              // Group: lines starting with lowercase are continuations of the line above
-              const groups = [];
-              for (const f of product.features) {
-                if (f.startsWith('Šifra:')) continue;
-                const isContd = /^[a-zšđčćžа-я]/.test(f);
-                if (isContd && groups.length > 0) {
-                  groups[groups.length - 1].cont.push(f);
-                } else {
-                  groups.push({ main: f, cont: [] });
-                }
-              }
-              return groups.map(({ main, cont }) => {
-                // Skip "Pogodan za" — covered by "Idealno za" section
-                if (/^Pogodan za/i.test(main)) return '';
-                const prot = protMap.find(p => main.startsWith(p.k));
-                if (prot) {
-                  return `<li style="background:${prot.color}14;border:1px solid ${prot.color}33;border-radius:8px;padding:8px 12px;margin-bottom:4px;">
-                    <i class="fas ${prot.icon}" style="color:${prot.color};"></i>
-                    <strong style="color:${prot.color}dd;">${main}</strong>
-                  </li>`;
-                }
-                // Join all continuations inline — no chips, no separate lines
-                const full = cont.length > 0 ? main + ', ' + cont.join(', ') : main;
-                return `<li><i class="fas fa-check"></i>${full}</li>`;
-              }).join('');
-            })()}
-          </ul>
-        </div>
-      </div>
+      ${karakteristikeHtml}
 
       ${idealForHtml || styleMatchHtml ? `
       <div class="spec-item">
@@ -1258,6 +1261,10 @@ async function renderProductDetail() {
     </div>
 
   `;
+
+  // Na desktopu se Karakteristike prikazuju ispod glavne slike umjesto u praznom prostoru
+  const gallerySpecs = document.getElementById('gallery-specs');
+  if (gallerySpecs) gallerySpecs.innerHTML = `<div class="spec-accordion">${karakteristikeHtml}</div>`;
 
   // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
   const matchingPairs = {
