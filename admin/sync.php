@@ -54,6 +54,7 @@ $files = [
     __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
     __DIR__ . '/sync.php'       => $base . '/admin/sync.php',
     __DIR__ . '/optimize-gallery-images.php' => $base . '/admin/optimize-gallery-images.php',
+    __DIR__ . '/optimize-main-images.php'    => $base . '/admin/optimize-main-images.php',
 ];
 
 /** Fetch a URL using best available method */
