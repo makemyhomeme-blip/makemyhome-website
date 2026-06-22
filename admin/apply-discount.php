@@ -21,10 +21,13 @@ $products     = json_decode(@file_get_contents($productsFile), true) ?: [];
 
 $targetCategories = ['bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni', 'bambus-kozni', 'bambus-metalni', '3d-letvice'];
 $newDiscount      = 20;
+$revert           = ($_GET['revert'] ?? '') === '1';
 $dryRun           = ($_GET['apply'] ?? '') !== '1';
 
 echo '<pre style="font-family:monospace;font-size:13px;padding:20px;background:#111;color:#eee;min-height:100vh;">';
-echo "=== Postavljanje popusta ({$newDiscount}%) na bambus + 3D letvice ===\n";
+echo $revert
+    ? "=== Skidanje popusta ({$newDiscount}%) sa bambus + 3D letvice ===\n"
+    : "=== Postavljanje popusta ({$newDiscount}%) na bambus + 3D letvice ===\n";
 echo "Kategorije: " . implode(', ', $targetCategories) . "\n";
 echo $dryRun
     ? "\nMOD: PROBNI (dry-run) – ništa se ne mijenja na disku.\nDodaj &amp;apply=1 u URL da stvarno primijeniš izmjene.\n\n"
@@ -35,6 +38,19 @@ $skipped  = 0;
 foreach ($products as &$p) {
     if (!in_array($p['category'] ?? '', $targetCategories, true)) continue;
     $current = (int)($p['discount'] ?? 0);
+
+    if ($revert) {
+        if ($current !== $newDiscount) {
+            $skipped++;
+            printf("PRESKOČENO (popust %d%%, nije %d%% koji smo dodali): #%d %s\n", $current, $newDiscount, $p['id'], $p['name']);
+            continue;
+        }
+        printf("%s #%-4d %-30s %d%% -> 0%%\n", $dryRun ? '[BI]' : '[OK]', $p['id'], $p['name'], $current);
+        if (!$dryRun) $p['discount'] = 0;
+        $changed++;
+        continue;
+    }
+
     if ($current > 0) {
         $skipped++;
         printf("PRESKOČENO (već ima popust %d%%): #%d %s\n", $current, $p['id'], $p['name']);
