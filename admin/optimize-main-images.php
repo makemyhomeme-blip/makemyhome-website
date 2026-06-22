@@ -25,9 +25,9 @@ foreach ($products as $p) {
 }
 
 $dryRun           = ($_GET['apply'] ?? '') !== '1';
-$maxW             = 1920;
-$maxH             = 1440;
-$quality          = 87;
+$maxW             = 1600;
+$maxH             = 1200;
+$quality          = 82;
 $minSizeToProcess = 150 * 1024; // ispod ovoga se ne dira (već dovoljno male)
 
 $backupDir = $root . '/images/products-backup/';
@@ -82,20 +82,44 @@ foreach (array_keys($toProcess) as $relPath) {
     $dstW  = max(1, (int)round($srcW * $ratio));
     $dstH  = max(1, (int)round($srcH * $ratio));
     $dst   = imagecreatetruecolor($dstW, $dstH);
+
+    $isPng  = ($mime === 'image/png');
+    $isWebp = ($mime === 'image/webp');
+    if ($isPng || $isWebp) {
+        // Sačuvaj providnost (alpha kanal)
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+        $transparent = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+        imagefilledrectangle($dst, 0, 0, $dstW, $dstH, $transparent);
+    }
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $dstW, $dstH, $srcW, $srcH);
     imagedestroy($src);
 
+    $writeFn = $isPng ? function ($img, $path) { imagepng($img, $path, 6); }
+        : ($isWebp ? function ($img, $path) use ($quality) { imagewebp($img, $path, $quality); }
+        : function ($img, $path) use ($quality) { imagejpeg($img, $path, $quality); });
+
+    // Uvijek prvo izračunaj u privremeni fajl, pa uporedi - nikad ne pogoršavaj
+    $ext = $isPng ? 'png' : ($isWebp ? 'webp' : 'jpg');
+    $tmp = tempnam(sys_get_temp_dir(), 'opt') . '.' . $ext;
+    $writeFn($dst, $tmp);
+    $sizeAfter = filesize($tmp);
+    imagedestroy($dst);
+
+    if ($sizeAfter >= $sizeBefore) {
+        unlink($tmp);
+        $skipped++;
+        echo "PRESKOČENO (već optimalno, obrada bi povećala fajl): $relPath\n";
+        continue;
+    }
+
     if ($dryRun) {
-        $tmp = tempnam(sys_get_temp_dir(), 'opt');
-        imagejpeg($dst, $tmp, $quality);
-        $sizeAfter = filesize($tmp);
         unlink($tmp);
     } else {
         copy($fullPath, $backupDir . basename($fullPath));
-        imagejpeg($dst, $fullPath, $quality);
-        $sizeAfter = filesize($fullPath);
+        copy($tmp, $fullPath);
+        unlink($tmp);
     }
-    imagedestroy($dst);
 
     $totalBefore += $sizeBefore;
     $totalAfter  += $sizeAfter;
@@ -104,7 +128,7 @@ foreach (array_keys($toProcess) as $relPath) {
     printf("%-55s %6d KB -> %6d KB  (-%d%%)  %dx%d -> %dx%d\n", $relPath, $sizeBefore / 1024, $sizeAfter / 1024, $pct, $srcW, $srcH, $dstW, $dstH);
 }
 
-echo "\nObrađeno: $count slika | Preskočeno (već male): $skipped\n";
+echo "\nObrađeno: $count slika | Preskočeno (već male/optimalne): $skipped\n";
 if ($count > 0) {
     $savedMb = ($totalBefore - $totalAfter) / 1024 / 1024;
     $pctTotal = round((1 - $totalAfter / $totalBefore) * 100);
