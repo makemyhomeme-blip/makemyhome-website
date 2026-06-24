@@ -46,7 +46,9 @@ foreach ($products as $p) {
 // Alati – backupi
 $jsonBackups = [];
 foreach (glob(__DIR__ . '/../data/products.bak.*.json') ?: [] as $f) {
-  $ts   = (int)preg_replace('/.*\.bak\.(\d+)\.json/', '$1', $f);
+  preg_match('/\.bak\.(\d{14})\.json$/', $f, $m);
+  $dt = $m[1] ?? '';
+  $ts = $dt ? (DateTime::createFromFormat('YmdHis', $dt)?->getTimestamp() ?? 0) : 0;
   $jsonBackups[] = ['file' => basename($f), 'size' => filesize($f), 'ts' => $ts];
 }
 usort($jsonBackups, fn($a,$b) => $b['ts'] - $a['ts']);
@@ -1146,43 +1148,43 @@ $imgBackupSize  = array_sum(array_map('filesize', $imgBackupFiles));
 
     <!-- Bulk Popust -->
     <div class="card">
-      <div class="card-header"><span class="card-title"><i class="fas fa-tag" style="color:#c9a86c;margin-right:8px"></i>Bulk Popust</span></div>
+      <div class="card-header"><span class="card-title"><i class="fas fa-tag" style="color:#c9a86c;margin-right:8px"></i>Popusti na kategorije</span></div>
       <div style="padding:20px">
-        <p style="font-size:13px;color:#aaa;margin-bottom:16px">Postavi ili ukloni popust na više kategorija odjednom.</p>
+        <p style="font-size:13px;color:#aaa;margin-bottom:16px">Odaberi kategorije, unesi procenat i klikni Primijeni. Unesi 0% da ukloniš popust.</p>
 
         <div style="margin-bottom:14px">
-          <label style="font-size:12px;color:#888;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Kategorije</label>
-          <div style="display:flex;flex-wrap:wrap;gap:8px" id="bulk-cat-list">
+          <label style="font-size:12px;color:#888;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Odaberi kategorije</label>
+          <div style="display:flex;flex-wrap:wrap;gap:6px" id="bulk-cat-list">
             <?php foreach ($toolCategories as $id => $name): ?>
-            <label style="display:flex;align-items:center;gap:6px;background:#222;border:1px solid #333;border-radius:6px;padding:5px 10px;cursor:pointer;font-size:13px;user-select:none">
-              <input type="checkbox" class="bulk-cat-cb" value="<?= $id ?>" style="accent-color:#c9a86c">
-              <?= htmlspecialchars($name) ?>
+            <label style="display:flex;align-items:center;gap:6px;background:#1e1e1e;border:1px solid #3a3a3a;border-radius:6px;padding:6px 11px;cursor:pointer;font-size:13px;color:#ddd;user-select:none;transition:border-color .15s">
+              <input type="checkbox" class="bulk-cat-cb" value="<?= $id ?>" style="accent-color:#c9a86c;width:15px;height:15px;flex-shrink:0">
+              <span><?= htmlspecialchars($name) ?></span>
               <span style="color:#666;font-size:11px">(<?= $catCounts[$id] ?? 0 ?>)</span>
             </label>
             <?php endforeach; ?>
           </div>
-          <div style="margin-top:8px;display:flex;gap:8px">
-            <button onclick="bulkSelectAll(true)" style="font-size:11px;background:none;border:1px solid #444;color:#aaa;border-radius:5px;padding:3px 10px;cursor:pointer">Sve</button>
-            <button onclick="bulkSelectAll(false)" style="font-size:11px;background:none;border:1px solid #444;color:#aaa;border-radius:5px;padding:3px 10px;cursor:pointer">Ništa</button>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button onclick="bulkSelectAll(true)" style="font-size:11px;background:none;border:1px solid #444;color:#ccc;border-radius:5px;padding:4px 12px;cursor:pointer">Sve</button>
+            <button onclick="bulkSelectAll(false)" style="font-size:11px;background:none;border:1px solid #444;color:#ccc;border-radius:5px;padding:4px 12px;cursor:pointer">Ništa</button>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
           <div>
             <label style="font-size:12px;color:#888;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Popust %</label>
             <input type="number" id="bulk-discount-val" min="0" max="99" value="20" style="width:100%;background:#1a1a1a;border:1px solid #333;color:#fff;border-radius:6px;padding:8px 12px;font-size:15px">
             <p style="font-size:11px;color:#666;margin-top:4px">Unesi 0 da ukloniš popust</p>
           </div>
           <div style="display:flex;flex-direction:column;justify-content:flex-end">
-            <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#aaa;cursor:pointer;padding-bottom:24px">
-              <input type="checkbox" id="bulk-overwrite" style="accent-color:#c9a86c">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#ccc;cursor:pointer;padding-bottom:24px">
+              <input type="checkbox" id="bulk-overwrite" style="accent-color:#c9a86c;width:15px;height:15px">
               Prepiši postojeće popuste
             </label>
           </div>
         </div>
 
         <button onclick="applyBulkDiscount()" class="btn btn-primary" style="width:100%">
-          <i class="fas fa-check"></i> Primijeni
+          <i class="fas fa-check"></i> Primijeni popust
         </button>
         <div id="bulk-disc-msg" style="margin-top:12px;font-size:13px;display:none;padding:8px 12px;border-radius:6px"></div>
       </div>
@@ -1190,32 +1192,24 @@ $imgBackupSize  = array_sum(array_map('filesize', $imgBackupFiles));
 
     <!-- Optimizacija Slika -->
     <div class="card">
-      <div class="card-header"><span class="card-title"><i class="fas fa-compress-arrows-alt" style="color:#c9a86c;margin-right:8px"></i>Optimizacija Slika</span></div>
-      <div style="padding:20px;display:flex;flex-direction:column;gap:12px">
-        <p style="font-size:13px;color:#aaa">Smanjuje rezoluciju i veličinu slika da bi se sajt brže učitavao. Uvijek prvobitno radi <em>probni mod</em> da vidiš šta će se promijeniti.</p>
+      <div class="card-header"><span class="card-title"><i class="fas fa-compress-arrows-alt" style="color:#c9a86c;margin-right:8px"></i>Optimizacija slika</span></div>
+      <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+        <p style="font-size:13px;color:#aaa;margin:0">Smanjuje veličinu slika da bi se sajt brže učitavao. Originalne slike se automatski čuvaju kao backup prije svake promjene.</p>
 
-        <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:14px">
-          <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:#eee"><i class="fas fa-image" style="color:#c9a86c;margin-right:6px"></i>Glavne slike (product image)</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <a href="optimize-main-images.php?key=mkhimgopt2025" target="_blank" class="btn btn-sm" style="background:#222;color:#aaa;border:1px solid #333">
-              <i class="fas fa-eye"></i> Probni mod
-            </a>
-            <a href="optimize-main-images.php?key=mkhimgopt2025&apply=1" target="_blank" class="btn btn-sm btn-primary" onclick="return confirm('Pokrenuti optimizaciju GLAVNIH slika? Originali se čuvaju u backup folderu.')">
-              <i class="fas fa-play"></i> Primijeni
-            </a>
-          </div>
+        <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:16px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;color:#eee"><i class="fas fa-image" style="color:#c9a86c;margin-right:6px"></i>Glavne slike proizvoda</div>
+          <p style="font-size:12px;color:#777;margin:0 0 12px">Prva slika svakog proizvoda (ona koja se vidi na listingu).</p>
+          <a href="optimize-main-images.php?key=mkhimgopt2025&apply=1" target="_blank" class="btn btn-sm btn-primary" style="display:inline-block" onclick="return confirm('Pokrenuti optimizaciju glavnih slika?\n\nOriginali će biti sačuvani u backup folderu.')">
+            <i class="fas fa-bolt"></i> Optimiziraj glavne slike
+          </a>
         </div>
 
-        <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:14px">
-          <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:#eee"><i class="fas fa-images" style="color:#c9a86c;margin-right:6px"></i>Galerijske slike (room / detalji)</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <a href="optimize-gallery-images.php?key=mkhimgopt2025" target="_blank" class="btn btn-sm" style="background:#222;color:#aaa;border:1px solid #333">
-              <i class="fas fa-eye"></i> Probni mod
-            </a>
-            <a href="optimize-gallery-images.php?key=mkhimgopt2025&apply=1" target="_blank" class="btn btn-sm btn-primary" onclick="return confirm('Pokrenuti optimizaciju galerijskih slika?')">
-              <i class="fas fa-play"></i> Primijeni
-            </a>
-          </div>
+        <div style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:16px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:6px;color:#eee"><i class="fas fa-images" style="color:#c9a86c;margin-right:6px"></i>Galerijske slike</div>
+          <p style="font-size:12px;color:#777;margin:0 0 12px">Slike prostorija i detalja unutar pojedinog proizvoda.</p>
+          <a href="optimize-gallery-images.php?key=mkhimgopt2025&apply=1" target="_blank" class="btn btn-sm btn-primary" style="display:inline-block" onclick="return confirm('Pokrenuti optimizaciju galerijskih slika?\n\nOriginali će biti sačuvani u backup folderu.')">
+            <i class="fas fa-bolt"></i> Optimiziraj galerijske slike
+          </a>
         </div>
       </div>
     </div>
@@ -1223,14 +1217,15 @@ $imgBackupSize  = array_sum(array_map('filesize', $imgBackupFiles));
     <!-- Backup Fajlovi -->
     <div class="card">
       <div class="card-header">
-        <span class="card-title"><i class="fas fa-archive" style="color:#c9a86c;margin-right:8px"></i>Backup Fajlovi</span>
+        <span class="card-title"><i class="fas fa-archive" style="color:#c9a86c;margin-right:8px"></i>Backup fajlovi</span>
       </div>
       <div style="padding:20px">
 
         <div style="margin-bottom:20px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <span style="font-size:13px;font-weight:600;color:#eee"><i class="fas fa-database" style="color:#c9a86c;margin-right:6px"></i>products.json backupi</span>
+            <span style="font-size:13px;font-weight:600;color:#eee"><i class="fas fa-database" style="color:#c9a86c;margin-right:6px"></i>Backup liste proizvoda</span>
           </div>
+          <p style="font-size:12px;color:#666;margin:0 0 10px">Automatski se pravi backup kad se mijenjaju proizvodi. Možeš obrisati stare.</p>
           <?php if (empty($jsonBackups)): ?>
             <p style="font-size:13px;color:#666">Nema backup fajlova.</p>
           <?php else: ?>
@@ -1238,7 +1233,7 @@ $imgBackupSize  = array_sum(array_map('filesize', $imgBackupFiles));
             <?php foreach ($jsonBackups as $bk): ?>
             <div id="bk-<?= htmlspecialchars($bk['file']) ?>" style="display:flex;justify-content:space-between;align-items:center;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;padding:8px 12px">
               <div>
-                <div style="font-size:12px;color:#aaa"><?= date('d.m.Y. H:i', $bk['ts']) ?></div>
+                <div style="font-size:12px;color:#ddd"><?= date('d.m.Y. H:i', $bk['ts']) ?></div>
                 <div style="font-size:11px;color:#666"><?= round($bk['size']/1024, 1) ?> KB</div>
               </div>
               <button onclick="deleteJsonBackup('<?= htmlspecialchars($bk['file']) ?>')" style="background:none;border:1px solid #e74c3c33;color:#e74c3c;border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer">
@@ -1251,12 +1246,13 @@ $imgBackupSize  = array_sum(array_map('filesize', $imgBackupFiles));
         </div>
 
         <div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <span style="font-size:13px;font-weight:600;color:#eee"><i class="fas fa-images" style="color:#c9a86c;margin-right:6px"></i>Backup slika</span>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <span style="font-size:13px;font-weight:600;color:#eee"><i class="fas fa-images" style="color:#c9a86c;margin-right:6px"></i>Backup originalnih slika</span>
           </div>
+          <p style="font-size:12px;color:#666;margin:0 0 10px">Originalne slike sačuvane pri optimizaciji. Obriši kad si siguran da su nove slike uredu.</p>
           <div id="img-backup-row" style="display:flex;justify-content:space-between;align-items:center;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;padding:12px">
             <div>
-              <div style="font-size:18px;font-weight:700;color:#eee" id="img-backup-count"><?= $imgBackupCount ?></div>
+              <div style="font-size:18px;font-weight:700;color:#eee" id="img-backup-count"><?= $imgBackupCount ?> fajlova</div>
               <div style="font-size:12px;color:#666"><?= round($imgBackupSize/1024/1024, 1) ?> MB</div>
             </div>
             <?php if ($imgBackupCount > 0): ?>
@@ -1265,7 +1261,6 @@ $imgBackupSize  = array_sum(array_map('filesize', $imgBackupFiles));
             </button>
             <?php endif; ?>
           </div>
-          <p style="font-size:11px;color:#555;margin-top:6px">Ovo su originalne slike koje su sačuvane kao sigurnosna kopija pri optimizaciji. Možeš ih obrisati kad si siguran da su optimizovane slike dobre.</p>
         </div>
 
       </div>
