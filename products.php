@@ -86,6 +86,44 @@ $pageTitle = $cat
     ]
   }
   </script>
+<?php
+$_allProds  = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+$_listProds = $cat
+  ? array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat))
+  : $_allProds;
+$_items = [];
+foreach (array_slice($_listProds, 0, 20) as $i => $p) {
+  $pOrig  = (float)($p['price'] ?? 0);
+  $pDisc  = (int)($p['discount'] ?? 0);
+  $pFinal = $pDisc > 0 ? round($pOrig * (1 - $pDisc / 100), 2) : $pOrig;
+  $_items[] = [
+    '@type' => 'ListItem',
+    'position' => $i + 1,
+    'item' => [
+      '@type'  => 'Product',
+      'name'   => $p['name'] ?? '',
+      'url'    => 'https://makemyhome.me/product.html?id=' . (int)$p['id'],
+      'image'  => 'https://makemyhome.me/' . ($p['image'] ?? ''),
+      'offers' => [
+        '@type'        => 'Offer',
+        'price'        => (string)$pFinal,
+        'priceCurrency'=> 'EUR',
+        'availability' => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      ],
+    ],
+  ];
+}
+echo '<script type="application/ld+json">' . "\n";
+echo json_encode([
+  '@context'       => 'https://schema.org',
+  '@type'          => 'ItemList',
+  'name'           => $catName,
+  'url'            => $ogUrl,
+  'numberOfItems'  => count($_listProds),
+  'itemListElement'=> $_items,
+], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+echo "\n</script>\n";
+?>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

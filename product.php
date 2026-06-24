@@ -46,27 +46,43 @@ $pageTitle = $product
   <meta property="og:locale" content="sr_RS">
   <link rel="canonical" href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <title><?= $pageTitle ?></title>
-<?php if ($product): $price = $product['price'] ?? ''; $inStock = $product['inStock'] ?? true; ?>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>",
-    "description": "<?= $ogDesc ?>",
-    "image": "<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>",
-    "sku": "<?= htmlspecialchars($product['sku'] ?? $product['name'], ENT_QUOTES) ?>",
-    "brand": { "@type": "Brand", "name": "Make My Home Decor" },
-    "offers": {
-      "@type": "Offer",
-      "url": "<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>",
-      "price": "<?= htmlspecialchars($price, ENT_QUOTES) ?>",
-      "priceCurrency": "EUR",
-      "availability": "<?= $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' ?>",
-      "seller": { "@type": "Organization", "name": "Make My Home Decor", "url": "https://makemyhome.me" }
-    },
-    "isRelatedTo": { "@type": "WebPage", "url": "https://makemyhome.me/products.html" }
+<?php if ($product):
+  $price     = (float)($product['price'] ?? 0);
+  $discount  = (int)($product['discount'] ?? 0);
+  $salePrice = $discount > 0 ? round($price * (1 - $discount / 100), 2) : $price;
+  $inStock   = $product['inStock'] ?? true;
+  $images    = array_filter(array_merge(
+    [$ogImage],
+    array_map(fn($g) => 'https://makemyhome.me/' . $g, $product['gallery'] ?? [])
+  ));
+  $offers = [
+    '@type'        => 'Offer',
+    'url'          => $ogUrl,
+    'price'        => (string)$salePrice,
+    'priceCurrency'=> 'EUR',
+    'availability' => $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+    'seller'       => ['@type' => 'Organization', 'name' => 'Make My Home Decor', 'url' => 'https://makemyhome.me'],
+  ];
+  if ($discount > 0) {
+    $offers['priceSpecification'] = [
+      ['@type' => 'UnitPriceSpecification', 'price' => (string)$salePrice,  'priceCurrency' => 'EUR'],
+      ['@type' => 'UnitPriceSpecification', 'priceType' => 'https://schema.org/ListPrice', 'price' => (string)$price, 'priceCurrency' => 'EUR'],
+    ];
   }
-  </script>
+  $schema = [
+    '@context'   => 'https://schema.org',
+    '@type'      => 'Product',
+    'name'       => $product['name'] ?? '',
+    'description'=> html_entity_decode($ogDesc, ENT_QUOTES),
+    'image'      => array_values($images),
+    'sku'        => $product['sku'] ?? $product['name'],
+    'brand'      => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
+    'offers'     => $offers,
+  ];
+  echo '<script type="application/ld+json">' . "\n";
+  echo json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  echo "\n</script>\n";
+?>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
