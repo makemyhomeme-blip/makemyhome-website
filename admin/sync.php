@@ -56,6 +56,7 @@ $files = [
     __DIR__ . '/optimize-gallery-images.php' => $base . '/admin/optimize-gallery-images.php',
     __DIR__ . '/optimize-main-images.php'    => $base . '/admin/optimize-main-images.php',
     __DIR__ . '/apply-discount.php'          => $base . '/admin/apply-discount.php',
+    __DIR__ . '/server-status.php'           => $base . '/admin/server-status.php',
 ];
 
 /** Fetch a URL using best available method */
