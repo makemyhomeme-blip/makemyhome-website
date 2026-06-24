@@ -46,9 +46,14 @@ foreach ($products as $p) {
 // Alati – backupi
 $jsonBackups = [];
 foreach (glob(__DIR__ . '/../data/products.bak.*.json') ?: [] as $f) {
-  preg_match('/\.bak\.(\d{14})\.json$/', $f, $m);
+  preg_match('/\.bak\.(\d{8}-\d{6}|\d{14})\.json$/', $f, $m);
   $dt = $m[1] ?? '';
-  $ts = $dt ? (DateTime::createFromFormat('YmdHis', $dt)?->getTimestamp() ?? 0) : 0;
+  if ($dt) {
+    $fmt = str_contains($dt, '-') ? 'Ymd-His' : 'YmdHis';
+    $ts  = DateTime::createFromFormat($fmt, $dt)?->getTimestamp() ?? 0;
+  } else {
+    $ts = filemtime($f) ?: 0;
+  }
   $jsonBackups[] = ['file' => basename($f), 'size' => filesize($f), 'ts' => $ts];
 }
 usort($jsonBackups, fn($a,$b) => $b['ts'] - $a['ts']);
