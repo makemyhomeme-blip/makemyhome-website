@@ -283,6 +283,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     <a href="sync.php?key=mkhsync2025" class="sidebar-link" style="padding:10px 0;color:#c9a86c;" title="Sinhronizuj fajlove sa GitHuba">
       <i class="fas fa-sync-alt"></i> Sync fajlova
     </a>
+    <a href="server-status.php?key=mkhstatus2025" class="sidebar-link" style="padding:10px 0;color:#c9a86c;" title="Status servera – CPU, RAM, disk">
+      <i class="fas fa-server"></i> Server Status
+    </a>
     <a href="logout.php" class="sidebar-link" style="padding:10px 0;">
       <i class="fas fa-sign-out-alt"></i> Odjava
     </a>
