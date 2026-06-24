@@ -702,6 +702,56 @@ switch ($action) {
         }
         echo json_encode(['ok' => true]); exit;
 
+    case 'bulk_discount':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $categories = json_decode($_POST['categories'] ?? '[]', true);
+        $discount   = max(0, min(99, (int)($_POST['discount'] ?? 0)));
+        $overwrite  = !empty($_POST['overwrite']);
+        if (!is_array($categories) || empty($categories)) {
+            echo json_encode(['ok' => false, 'error' => 'Nema odabranih kategorija.']); exit;
+        }
+        $changed = 0;
+        foreach ($products as &$p) {
+            if (!in_array($p['category'] ?? '', $categories, true)) continue;
+            if (!$overwrite && (int)($p['discount'] ?? 0) > 0) continue;
+            $p['discount'] = $discount;
+            $changed++;
+        }
+        unset($p);
+        if (!saveProducts($products, $productsFile)) {
+            echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']); exit;
+        }
+        $verb = $discount === 0 ? 'Uklonjen popust sa' : "Postavljen {$discount}% popust na";
+        echo json_encode(['ok' => true, 'changed' => $changed, 'msg' => "{$verb} {$changed} proizvoda."]);
+        exit;
+
+    case 'delete_json_backup':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $file = basename($_POST['file'] ?? '');
+        if (!$file || !preg_match('/^products\.bak\.\d+\.json$/', $file)) {
+            echo json_encode(['ok' => false, 'error' => 'Nevažeći naziv fajla.']); exit;
+        }
+        $path = __DIR__ . '/../data/' . $file;
+        if (!file_exists($path)) {
+            echo json_encode(['ok' => false, 'error' => 'Fajl ne postoji.']); exit;
+        }
+        @unlink($path);
+        echo json_encode(['ok' => true]);
+        exit;
+
+    case 'delete_all_image_backups':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $backupDir = __DIR__ . '/../images/products-backup/';
+        $deleted = 0;
+        foreach (glob($backupDir . '*') ?: [] as $f) {
+            if (is_file($f)) { @unlink($f); $deleted++; }
+        }
+        echo json_encode(['ok' => true, 'deleted' => $deleted, 'msg' => "Obrisano {$deleted} backup slika."]);
+        exit;
+
     default:
         redirect('', 'Nepoznata akcija.');
 }
