@@ -102,12 +102,33 @@ foreach (glob($imgDir . '*.{jpg,jpeg,png,webp}', GLOB_BRACE) ?: [] as $f) {
     $imgTotal += filesize($f); $imgCount++;
 }
 
-// ── error log (last 5 lines) ─────────────────────────────────────────────────
-$errorLog = ini_get('error_log');
-$lastErrors = '';
-if ($errorLog && is_readable($errorLog)) {
-    $lines = array_filter(explode("\n", sh("tail -20 " . escapeshellarg($errorLog))));
-    $lastErrors = implode("\n", array_slice(array_values($lines), -5));
+// ── error log ────────────────────────────────────────────────────────────────
+$errorLog  = ini_get('error_log');
+$errorLines = [];
+$logCleared = false;
+$logWritable = $errorLog && is_writable($errorLog);
+
+// Clear action
+if (($_POST['action'] ?? '') === 'clear_log' && $logWritable) {
+    file_put_contents($errorLog, '');
+    $logCleared = true;
+}
+
+if ($errorLog && is_readable($errorLog) && !$logCleared) {
+    $raw = sh("tail -30 " . escapeshellarg($errorLog));
+    foreach (array_filter(explode("\n", $raw)) as $line) {
+        $age = '';
+        if (preg_match('/\[(\d{2}-\w{3}-\d{4} \d{2}:\d{2}:\d{2} UTC)\]/', $line, $m)) {
+            $ts  = @strtotime($m[1]);
+            $diff = time() - $ts;
+            if ($diff < 3600)      $age = round($diff/60) . ' min staro';
+            elseif ($diff < 86400) $age = round($diff/3600) . ' h staro';
+            elseif ($diff < 2592000) $age = round($diff/86400) . ' dan/a staro';
+            else                   $age = round($diff/2592000) . ' mj. staro';
+        }
+        $errorLines[] = ['text' => $line, 'age' => $age];
+    }
+    $errorLines = array_slice($errorLines, -5);
 }
 
 $refreshSec = 30;
@@ -304,9 +325,32 @@ pre.errors { background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 8px;
 
 </div>
 
-<?php if ($lastErrors): ?>
-<div class="section-title">Posljednje PHP greške</div>
-<pre class="errors"><?= htmlspecialchars($lastErrors) ?></pre>
+<?php if ($logCleared || !empty($errorLines)): ?>
+<div class="section-title" style="display:flex;align-items:center;justify-content:space-between;">
+  <span>Posljednje PHP greške</span>
+  <?php if ($logWritable): ?>
+  <form method="post" style="margin:0" onsubmit="return confirm('Obrisati cijeli error log?')">
+    <input type="hidden" name="action" value="clear_log">
+    <button type="submit" style="background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:5px 14px;font-size:12px;cursor:pointer;">
+      🗑 Obriši log
+    </button>
+  </form>
+  <?php endif; ?>
+</div>
+<?php if ($logCleared): ?>
+  <p style="color:#2ecc71;font-size:13px;margin-bottom:12px">✓ Log je uspješno obrisan.</p>
+<?php else: ?>
+  <div style="display:flex;flex-direction:column;gap:6px">
+  <?php foreach ($errorLines as $e): ?>
+    <div style="background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;padding:10px 14px;display:flex;gap:12px;align-items:flex-start">
+      <?php if ($e['age']): ?>
+      <span style="flex-shrink:0;background:#2a1a1a;color:#e74c3c;border-radius:5px;padding:2px 8px;font-size:11px;white-space:nowrap;margin-top:1px"><?= htmlspecialchars($e['age']) ?></span>
+      <?php endif; ?>
+      <code style="font-size:11px;color:#e74c3c;word-break:break-all;line-height:1.5"><?= htmlspecialchars($e['text']) ?></code>
+    </div>
+  <?php endforeach; ?>
+  </div>
+<?php endif; ?>
 <?php endif; ?>
 
 </body>
