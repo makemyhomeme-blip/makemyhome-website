@@ -122,6 +122,7 @@ foreach ($files as $dest => $url) {
     } else {
         @mkdir(dirname($dest), 0755, true);
         $bytes = file_put_contents($dest, $content);
+        if ($bytes !== false && function_exists('opcache_invalidate')) opcache_invalidate($dest, true);
         if ($bytes === false) {
             $msg = "GREŠKA – nije moguće pisati na disk.";
             echo $isCli ? "$msg\n" : "<span style='color:#e74c3c;'>$msg</span>\n";
