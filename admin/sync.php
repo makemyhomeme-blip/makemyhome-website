@@ -48,9 +48,8 @@ $files = [
     $root . '/robots.txt'       => $base . '/robots.txt',
     $root . '/sitemap.xml'      => $base . '/sitemap.xml',
     // Server config
-    $root . '/.htaccess'        => $base . '/.htaccess',
-    $root . '/product/.htaccess'  => $base . '/product/.htaccess',
-    $root . '/product/index.php'  => $base . '/product/index.php',
+    $root . '/.htaccess'           => $base . '/.htaccess',
+    $root . '/product-redirect.php'=> $base . '/product-redirect.php',
     // Admin
     __DIR__ . '/dashboard.php'  => $base . '/admin/dashboard.php',
     __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
@@ -117,6 +116,7 @@ foreach ($files as $dest => $url) {
         echo $isCli ? "$msg\n" : "<span style='color:#e74c3c;'>$msg</span>\n";
         $allOk = false;
     } else {
+        @mkdir(dirname($dest), 0755, true);
         $bytes = file_put_contents($dest, $content);
         if ($bytes === false) {
             $msg = "GREŠKA – nije moguće pisati na disk.";
