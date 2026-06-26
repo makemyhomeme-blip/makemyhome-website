@@ -1,5 +1,5 @@
 DirectoryIndex index.html index.php
-ErrorDocument 404 /404.html
+ErrorDocument 404 /404.php
 Options -MultiViews +FollowSymLinks
 
 # 301 redirects: stare WordPress stranice → nove HTML stranice
@@ -20,7 +20,6 @@ RewriteRule ^prodavnica/?$ /products.html [R=301,L]
 RewriteRule ^3d-letvice/?$ /products.html?category=3d-letvice [R=301,L]
 RewriteRule ^akusticni-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
 RewriteRule ^dekorativni-zidni-paneli/?$ /products.html [R=301,L]
-RewriteRule ^product/.+ /products.html [R=301,L]
 
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]

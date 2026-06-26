@@ -48,6 +48,7 @@ $files = [
     $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
     $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
     // SEO
+    $root . '/404.php'          => $base . '/404.php',
     $root . '/robots.txt'       => $base . '/robots.txt',
     $root . '/sitemap.xml'      => $base . '/sitemap.xml',
     // Server config
