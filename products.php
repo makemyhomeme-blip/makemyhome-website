@@ -96,23 +96,13 @@ if (!$cat) {
 } else {
   $_listProds = array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat));
 }
-$_shipping = [
-  '@type'               => 'OfferShippingDetails',
-  'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '0', 'currency' => 'EUR'],
-  'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'ME'],
-  'deliveryTime'        => [
-    '@type'        => 'ShippingDeliveryTime',
-    'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 2, 'unitCode' => 'DAY'],
-    'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 3, 'unitCode' => 'DAY'],
-  ],
-];
 $_returnPolicy = [
-  '@type'                 => 'MerchantReturnPolicy',
-  'applicableCountry'     => 'ME',
-  'returnPolicyCategory'  => 'https://schema.org/MerchantReturnFiniteReturnWindow',
-  'merchantReturnDays'    => 14,
-  'returnMethod'          => 'https://schema.org/ReturnByMail',
-  'returnFees'            => 'https://schema.org/FreeReturn',
+  '@type'                => 'MerchantReturnPolicy',
+  'applicableCountry'    => 'ME',
+  'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+  'merchantReturnDays'   => 7,
+  'returnMethod'         => 'https://schema.org/ReturnByMail',
+  'returnFees'           => 'https://schema.org/FreeReturn',
 ];
 $_items = [];
 foreach (array_slice($_listProds, 0, 20) as $i => $p) {
@@ -135,7 +125,6 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       'price'                  => (string)$pFinal,
       'priceCurrency'          => 'EUR',
       'availability'           => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      'shippingDetails'        => $_shipping,
       'hasMerchantReturnPolicy'=> $_returnPolicy,
     ],
   ];

@@ -62,21 +62,11 @@ $pageTitle = $product
     'priceCurrency'=> 'EUR',
     'availability' => $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     'seller'       => ['@type' => 'Organization', 'name' => 'Make My Home Decor', 'url' => 'https://makemyhome.me'],
-    'shippingDetails' => [
-      '@type'               => 'OfferShippingDetails',
-      'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '0', 'currency' => 'EUR'],
-      'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'ME'],
-      'deliveryTime'        => [
-        '@type'        => 'ShippingDeliveryTime',
-        'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 2, 'unitCode' => 'DAY'],
-        'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 3, 'unitCode' => 'DAY'],
-      ],
-    ],
     'hasMerchantReturnPolicy' => [
       '@type'                => 'MerchantReturnPolicy',
       'applicableCountry'    => 'ME',
       'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
-      'merchantReturnDays'   => 14,
+      'merchantReturnDays'   => 7,
       'returnMethod'         => 'https://schema.org/ReturnByMail',
       'returnFees'           => 'https://schema.org/FreeReturn',
     ],
