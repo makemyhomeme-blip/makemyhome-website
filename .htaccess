@@ -20,7 +20,7 @@ RewriteRule ^prodavnica/?$ /products.html [R=301,L]
 RewriteRule ^3d-letvice/?$ /products.html?category=3d-letvice [R=301,L]
 RewriteRule ^akusticni-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
 RewriteRule ^dekorativni-zidni-paneli/?$ /products.html [R=301,L]
-RewriteRule ^product/([^/]+)/?$ /products.html [R=301,L]
+RewriteRule ^product/.+ /products.html [R=301,L]
 
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
