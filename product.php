@@ -69,6 +69,12 @@ $pageTitle = $product
       ['@type' => 'UnitPriceSpecification', 'priceType' => 'https://schema.org/ListPrice', 'price' => (string)$price, 'priceCurrency' => 'EUR'],
     ];
   }
+  // Reviews & aggregate rating
+  $reviews    = $product['reviews'] ?? [];
+  $revCount   = count($reviews);
+  $avgRating  = $revCount > 0 ? round(array_sum(array_column($reviews, 'rating')) / $revCount, 1) : null;
+  $monthMap   = ['Januar'=>'01','Februar'=>'02','Mart'=>'03','April'=>'04','Maj'=>'05','Juni'=>'06',
+                 'Juli'=>'07','Avgust'=>'08','Septembar'=>'09','Oktobar'=>'10','Novembar'=>'11','Decembar'=>'12'];
   $schema = [
     '@context'   => 'https://schema.org',
     '@type'      => 'Product',
@@ -79,6 +85,28 @@ $pageTitle = $product
     'brand'      => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
     'offers'     => $offers,
   ];
+  if ($avgRating !== null) {
+    $schema['aggregateRating'] = [
+      '@type'       => 'AggregateRating',
+      'ratingValue' => (string)$avgRating,
+      'bestRating'  => '5',
+      'worstRating' => '1',
+      'reviewCount' => $revCount,
+    ];
+    $schema['review'] = array_map(function($r) use ($monthMap) {
+      $date = '';
+      if (preg_match('/^(\w+)\s+(\d{4})$/', trim($r['date'] ?? ''), $m)) {
+        $date = $m[2] . '-' . ($monthMap[$m[1]] ?? '01') . '-01';
+      }
+      return [
+        '@type'        => 'Review',
+        'author'       => ['@type' => 'Person', 'name' => $r['author'] ?? ''],
+        'datePublished'=> $date,
+        'reviewRating' => ['@type' => 'Rating', 'ratingValue' => (string)($r['rating'] ?? 5), 'bestRating' => '5', 'worstRating' => '1'],
+        'reviewBody'   => $r['text'] ?? '',
+      ];
+    }, $reviews);
+  }
   echo '<script type="application/ld+json">' . "\n";
   echo json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
   echo "\n</script>\n";
