@@ -374,7 +374,35 @@ echo "\n</script>\n";
         <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
         <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
       </div>
-      <div class="products-grid" id="products-container" style="display:none;padding-top:20px;">
+      <div class="products-grid" id="products-container" style="display:<?= ($cat && $cat !== 'bambus-paneli') ? 'grid' : 'none' ?>;padding-top:20px;">
+        <?php if ($cat && $cat !== 'bambus-paneli'): ?>
+        <?php foreach ($_listProds as $p):
+          $pO = (float)($p['price'] ?? 0);
+          $pD = (int)($p['discount'] ?? 0);
+          $pF = $pD > 0 ? round($pO * (1 - $pD / 100), 2) : $pO;
+          $pHl = mb_substr(strip_tags($p['highlight'] ?? $p['description'] ?? ''), 0, 140);
+        ?>
+        <article class="product-card" data-ssr="1">
+          <a href="product.html?id=<?= (int)$p['id'] ?>" class="product-link" style="text-decoration:none;color:inherit;display:block;">
+            <div class="product-img">
+              <img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($p['name'] ?? '') ?>" loading="lazy" width="400" height="300" style="width:100%;height:auto;display:block;">
+            </div>
+            <div class="product-body" style="padding:16px;">
+              <h2 class="product-name" style="font-size:1em;font-weight:700;margin-bottom:8px;color:#1a1a1a;"><?= htmlspecialchars($p['name'] ?? '') ?></h2>
+              <p class="product-price" style="margin-bottom:6px;">
+                <?php if ($pD > 0): ?>
+                <span style="font-weight:700;color:#c9a86c;"><?= number_format($pF, 2, ',', '.') ?> €</span>
+                <span style="text-decoration:line-through;color:#aaa;font-size:.85em;margin-left:6px;"><?= number_format($pO, 2, ',', '.') ?> €</span>
+                <?php else: ?>
+                <span style="font-weight:700;color:#c9a86c;"><?= number_format($pF, 2, ',', '.') ?> €</span>
+                <?php endif; ?>
+              </p>
+              <?php if ($pHl): ?><p style="font-size:.82em;color:#666;line-height:1.5;"><?= htmlspecialchars($pHl) ?></p><?php endif; ?>
+            </div>
+          </a>
+        </article>
+        <?php endforeach; ?>
+        <?php endif; ?>
       </div>
       <script>(function(){
         var p=new URLSearchParams(location.search),cat=p.get('cat')||p.get('category');

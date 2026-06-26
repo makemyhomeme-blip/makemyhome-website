@@ -5,6 +5,11 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
+# Force HTTPS i non-www (canonical URL) — bez ovoga Google tretira http://www. kao duplikat
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://makemyhome.me%{REQUEST_URI} [R=301,L]
+
 RewriteRule ^proizvodi/?$ /products.html [R=301,L]
 RewriteRule ^decor-paneli/?$ /products.html [R=301,L]
 RewriteRule ^paneli/?$ /products.html [R=301,L]

@@ -232,7 +232,33 @@ $pageTitle = $product
 
       <div class="product-info">
         <div id="product-info-content">
+          <?php if ($product): ?>
+          <div id="ssr-pinfo">
+            <h1 class="product-title" style="font-size:1.6em;font-weight:800;color:#1a1a1a;margin-bottom:12px;"><?= htmlspecialchars($product['name'] ?? '') ?></h1>
+            <div style="margin-bottom:16px;">
+              <?php if ($discount > 0): ?>
+              <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($salePrice, 2, ',', '.') ?> €</span>
+              <span style="text-decoration:line-through;color:#aaa;font-size:1.1em;margin-left:10px;"><?= number_format($price, 2, ',', '.') ?> €</span>
+              <span style="background:#e74c3c;color:#fff;font-size:.75em;font-weight:700;padding:3px 8px;border-radius:20px;margin-left:8px;">-<?= $discount ?>%</span>
+              <?php else: ?>
+              <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($price, 2, ',', '.') ?> €</span>
+              <?php endif; ?>
+            </div>
+            <?php if (!empty($product['highlight'])): ?>
+            <p style="font-size:1em;color:#444;line-height:1.65;margin-bottom:14px;"><?= htmlspecialchars(strip_tags($product['highlight'])) ?></p>
+            <?php endif; ?>
+            <?php $fullDesc = strip_tags($product['description'] ?? ''); if ($fullDesc): ?>
+            <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars(mb_substr($fullDesc, 0, 600))) ?></div>
+            <?php endif; ?>
+            <?php if ($inStock): ?>
+            <p style="color:#27ae60;font-weight:600;margin-top:14px;">&#10003; Na stanju</p>
+            <?php else: ?>
+            <p style="color:#e74c3c;font-weight:600;margin-top:14px;">Privremeno nedostupno</p>
+            <?php endif; ?>
+          </div>
+          <?php else: ?>
           <div class="loading-placeholder" style="height:400px;"></div>
+          <?php endif; ?>
         </div>
       </div>
 
