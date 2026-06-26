@@ -14,6 +14,9 @@ RewriteRule ^ https://makemyhome.me%{REQUEST_URI} [R=301,L]
 # index.html → homepage (bez ovoga Google vidi index.html kao posebnu stranicu)
 RewriteRule ^index\.html$ /? [R=301,L]
 
+# Stare WordPress /product-category/ URL-ovi (WooCommerce) → products
+RewriteRule ^product-category/.*$ /products.html? [R=301,L]
+
 # Stare WordPress kategorije → products (? na kraju čisti stare ?add-to-cart= parametre)
 RewriteRule ^proizvodi/?$ /products.html? [R=301,L]
 RewriteRule ^decor-paneli/?$ /products.html? [R=301,L]
