@@ -4,6 +4,8 @@ ErrorDocument 404 /404.html
 # 301 redirects: stare WordPress stranice → nove HTML stranice
 <IfModule mod_rewrite.c>
 RewriteEngine On
+Options -MultiViews
+RewriteBase /
 
 # Force HTTPS i non-www (canonical URL) — bez ovoga Google tretira http://www. kao duplikat
 RewriteCond %{HTTPS} off [OR]
