@@ -78,6 +78,24 @@ $catDescs = [
 $ogDesc   = $cat
   ? ($catDescs[$cat] ?? "Pregledajte {$catName} – Make My Home Decor Podgorica, Crna Gora. Zidni paneli i dekorativne obloge.")
   : 'Kompletan katalog zidnih panela, 3D letvica, akustičnih panela, SPC podova i PU kamena. Make My Home Decor Podgorica.';
+
+// SEO uvodni tekst po kategoriji – prikazuje se na stranici (vidi ga kupac i Google)
+$catSeoText = [
+  'bambus-paneli'    => '<p>Bambus zidni paneli su jedno od najtraženijih rješenja za dekoraciju zidova u Crnoj Gori. Spajaju prirodnu drvenu teksturu sa modernim dizajnom i daju toplinu svakom prostoru – dnevnoj sobi, spavaćoj sobi, hodniku ili poslovnom prostoru. Standardne dimenzije su 280x122cm, što omogućava brzo prekrivanje velikih površina uz minimalan broj spojeva.</p><p>U ponudi Make My Home Decor showrooma u Podgorici imate bambus panele u više varijanti – drveni, tekstilni, mermerni, metalni i kožni. Svi paneli su otporni na vlagu, jednostavni za montažu i lako se održavaju. Dostavljamo širom Crne Gore – Podgorica, Nikšić, Bar, Budva, Herceg Novi i ostali gradovi.</p>',
+  'bambus-drveni'    => '<p>Drveni bambus paneli unose toplu, prirodnu drvenu teksturu u svaki enterijer. Idealni su za moderne i klasične prostore – dnevne sobe, spavaće sobe i poslovne prostore. Dimenzije 280x122cm, visoka trajnost i jednostavna ugradnja na svaku ravnu površinu.</p><p>Drvo izgleda bez održavanja pravog drveta – paneli su otporni na vlagu i ne deformišu se. Dostupni u Make My Home Decor showroomu u Podgorici, sa dostavom širom Crne Gore.</p>',
+  'bambus-tekstilni' => '<p>Tekstilni bambus paneli imaju mekanu tkaninu na bambusovoj podlozi, što daje sofisticiran i elegantan izgled zidu. Savršeni za spavaće sobe i dnevne boravke gdje želite topao, prijatan ambijent. Dimenzije 280x122cm.</p><p>Premium tekstilna površina je otporna i lako se održava. Pogledajte uzorke u našem showroomu u Podgorici – dostava dostupna širom Crne Gore.</p>',
+  'bambus-mermerni'  => '<p>Mermerni bambus paneli donose luksuzni izgled prirodnog mermera bez velike cijene i težine pravog kamena. Idealni za kupaonice, hodnici i akcentne zidove u dnevnom boravku. Dimenzije 280x122cm, otporni na vlagu.</p><p>Mermerni uzorak izgleda izuzetno realistično, a montaža je jednostavna. Dostupno u Make My Home Decor Podgorica, sa dostavom širom Crne Gore.</p>',
+  'bambus-metalni'   => '<p>Metalni bambus paneli daju industrijski šik i moderan izgled bez hladnoće pravog metala. Čelik i aluminijum efekat na toploj bambus osnovi – idealno za moderne enterijere i poslovne prostore. Dimenzije 280x122cm.</p><p>Pogledajte metalne panele uživo u našem showroomu u Podgorici. Dostava dostupna širom Crne Gore.</p>',
+  'bambus-kozni'     => '<p>Kožni bambus paneli imaju luksuznu kožnu teksturu za ekskluzivne enterijere. Toplo, sofisticirano i taktilno bogato rješenje za zid. Dimenzije 280x122cm, jednostavna ugradnja.</p><p>Dostupno u Make My Home Decor showroomu u Podgorici, sa dostavom širom Crne Gore.</p>',
+  '3d-letvice'       => '<p>3D dekorativne letvice transformišu svaki ravni zid kroz igru svjetla i sjene. Vertikalni rebrasti dizajn daje prostoru dubinu i moderan karakter. Dimenzije 280x16cm, kombinacijom letvica kreirate beskonačne mogućnosti dizajna.</p><p>Idealne za akcente iza TV-a, u hodnicima, spavaćim sobama i poslovnim prostorima. Pogledajte ih uživo u Make My Home Decor showroomu u Podgorici – dostava širom Crne Gore.</p>',
+  'akusticni-paneli' => '<p>Akustični zidni paneli smanjuju buku i odjek u prostoru, a istovremeno izgledaju kao pravi dekorativni element. Idealni za home office, studije, dnevne sobe i poslovne prostore gdje je važna dobra akustika.</p><p>Spajaju funkcionalnost i estetiku – poboljšavaju zvuk i uljepšavaju zid. Dostupni u našem showroomu u Podgorici, sa dostavom širom Crne Gore.</p>',
+  'aluminijum-lajsne'=> '<p>Aluminijum lajsne su završni profili koji spajaju panele profesionalno i elegantno. Pokrivaju ivice, prelaze i spojeve i daju instalaciji čist, dovršen izgled.</p><p>Dostupne u više boja i profila u Make My Home Decor showroomu u Podgorici. Dostava širom Crne Gore.</p>',
+  'spc-pod'          => '<p>SPC podovi su vodootporni laminatni podovi koji izdrže kupatilo, kuhinju i svakodnevnu upotrebu. Izuzetno su trajni, otporni na ogrebotine i jednostavni za ugradnju click sistemom.</p><p>Idealni za stambene i poslovne prostore gdje je potreban izdržljiv i lijep pod. Pogledajte uzorke u našem showroomu u Podgorici – dostava širom Crne Gore.</p>',
+  'pu-kamen'         => '<p>PU kamen (poliuretanski kamen) je realistična imitacija prirodnog kamena bez težine i troškova pravog kamena. Set od 4 komada pokriva 1.74m². Idealan za akcentne zidove, kamine i fasadne detalje.</p><p>Lagani paneli se jednostavno lijepe na zid i izgledaju kao pravi kamen. Dostupno u Make My Home Decor Podgorica, sa dostavom širom Crne Gore.</p>',
+  'mdf'              => '<p>MDF zidni paneli sa kaneliranom (rebrastom) površinom daju zidovima arhitektonski karakter i trodimenzionalnu dubinu. Precizno obrađeni, idealni za moderne i elegantne enterijere.</p><p>Pogledajte MDF panele uživo u našem showroomu u Podgorici. Dostava dostupna širom Crne Gore.</p>',
+  'flex-stone'       => '<p>Flex Stone je savitljivi kameni furnir koji se primjenjuje na ravne, zakrivljene i neravne površine. Pravi kamen u tankom, fleksibilnom obliku – idealno za stubove, lukove i nestandardne površine.</p><p>Jedinstveno rješenje dostupno u Make My Home Decor showroomu u Podgorici, sa dostavom širom Crne Gore.</p>',
+  'classic'          => '<p>Classic zidni paneli imaju bezvremenski dizajn koji odgovara svakom enterijeru. Bijele i neutralne boje, jednostavna ugradnja i dugotrajan izgled.</p><p>Dostupno u Make My Home Decor showroomu u Podgorici, sa dostavom širom Crne Gore.</p>',
+];
 $ogUrl    = 'https://makemyhome.me/products.html' . ($cat ? '?category=' . $cat : '');
 $pageTitle = $cat
   ? $catName . ' – Zidni Paneli | Make My Home Decor'
@@ -425,6 +443,12 @@ echo "\n</script>\n";
         <?php endforeach; ?>
         <?php endif; ?>
       </div>
+      <?php if ($cat && isset($catSeoText[$cat])): ?>
+      <section class="cat-seo-text" style="max-width:860px;margin:56px auto 0;padding:32px 24px 8px;border-top:1px solid rgba(0,0,0,0.08);color:#555;line-height:1.8;font-size:15px;">
+        <h2 style="font-size:1.3em;color:#1a1a1a;margin-bottom:18px;"><?= htmlspecialchars($catName) ?> u Crnoj Gori</h2>
+        <?= $catSeoText[$cat] ?>
+      </section>
+      <?php endif; ?>
       <script>(function(){
         var p=new URLSearchParams(location.search),cat=p.get('cat')||p.get('category');
         if(!cat)return;

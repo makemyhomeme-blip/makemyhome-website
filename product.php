@@ -31,6 +31,18 @@ $ogUrl = 'https://makemyhome.me/product.html' . ($id ? '?id=' . $id : '');
 $pageTitle = $product
     ? htmlspecialchars($product['name'], ENT_QUOTES) . ' | Make My Home Decor'
     : 'Proizvod | Make My Home Decor';
+
+// Keyword za H1 – mapa kategorija (dodaje se uz ime proizvoda za bolji SEO)
+$catKeywords = [
+    'bambus-paneli' => 'Bambus Zidni Panel', 'bambus-drveni' => 'Drveni Zidni Panel',
+    'bambus-tekstilni' => 'Tekstilni Zidni Panel', 'bambus-mermerni' => 'Mermerni Zidni Panel',
+    'bambus-metalni' => 'Metalni Zidni Panel', 'bambus-kozni' => 'Kožni Zidni Panel',
+    '3d-letvice' => '3D Dekorativna Letvica', 'akusticni-paneli' => 'Akustični Panel',
+    'aluminijum-lajsne' => 'Aluminijum Lajsna', 'spc-pod' => 'SPC Pod',
+    'pu-kamen' => 'PU Kamen Panel', 'mdf' => 'MDF Zidni Panel',
+    'flex-stone' => 'Flex Stone Obloga', 'classic' => 'Classic Zidni Panel',
+];
+$h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catKeywords[$product['category']] : '';
 ?>
 <!DOCTYPE html>
 <html lang="sr">
@@ -234,7 +246,7 @@ $pageTitle = $product
         <div id="product-info-content">
           <?php if ($product): ?>
           <div id="ssr-pinfo">
-            <h1 class="product-title" style="font-size:1.6em;font-weight:800;color:#1a1a1a;margin-bottom:12px;"><?= htmlspecialchars($product['name'] ?? '') ?></h1>
+            <h1 class="product-title" style="font-size:1.6em;font-weight:800;color:#1a1a1a;margin-bottom:12px;"><?= htmlspecialchars($product['name'] ?? '') ?><?= $h1Keyword ? ' <span style="font-weight:600;color:#888;">– ' . htmlspecialchars($h1Keyword) . '</span>' : '' ?></h1>
             <div style="margin-bottom:16px;">
               <?php if ($discount > 0): ?>
               <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($salePrice, 2, ',', '.') ?> €</span>
