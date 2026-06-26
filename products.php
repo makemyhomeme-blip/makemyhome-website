@@ -1,4 +1,25 @@
 <?php
+// Redirect stari WordPress /product/slug/ URL-ovi
+if (!empty($_GET['slug'])) {
+    $slug     = strtolower(trim($_GET['slug'], '/'));
+    $products = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+    $bestId   = null;
+    $bestPct  = 0;
+    foreach ($products as $p) {
+        $sku      = strtolower($p['sku']  ?? '');
+        $nameSlug = preg_replace('/[^a-z0-9]+/', '-', strtolower($p['name'] ?? ''));
+        $nameSlug = trim($nameSlug, '-');
+        if ($sku === $slug || $nameSlug === $slug) { $bestId = $p['id']; break; }
+        similar_text($slug, $nameSlug, $pct);
+        if ($pct > $bestPct && $pct > 55) { $bestPct = $pct; $bestId = $p['id']; }
+    }
+    $target = $bestId
+        ? 'https://makemyhome.me/product.html?id=' . (int)$bestId
+        : 'https://makemyhome.me/products.html';
+    header('Location: ' . $target, true, 301);
+    exit;
+}
+
 $cat = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['category'] ?? $_GET['cat'] ?? ''));
 
 $catNames = [

@@ -18,7 +18,7 @@ RewriteRule ^prodavnica/?$ /products.html [R=301,L]
 RewriteRule ^3d-letvice/?$ /products.html?category=3d-letvice [R=301,L]
 RewriteRule ^akusticni-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
 RewriteRule ^dekorativni-zidni-paneli/?$ /products.html [R=301,L]
-RewriteRule ^product/([^?]+?)/?$ /product-redirect.php?slug=$1 [QSA,L]
+RewriteRule ^product/([^/]+)/?$ /products.php?slug=$1 [QSA,L]
 
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
