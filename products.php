@@ -98,25 +98,33 @@ if (!$cat) {
 }
 $_items = [];
 foreach (array_slice($_listProds, 0, 20) as $i => $p) {
-  $pOrig  = (float)($p['price'] ?? 0);
-  $pDisc  = (int)($p['discount'] ?? 0);
-  $pFinal = $pDisc > 0 ? round($pOrig * (1 - $pDisc / 100), 2) : $pOrig;
-  $_items[] = [
-    '@type' => 'ListItem',
-    'position' => $i + 1,
-    'item' => [
-      '@type'  => 'Product',
-      'name'   => $p['name'] ?? '',
-      'url'    => 'https://makemyhome.me/product.html?id=' . (int)$p['id'],
-      'image'  => 'https://makemyhome.me/' . ($p['image'] ?? ''),
-      'offers' => [
-        '@type'        => 'Offer',
-        'price'        => (string)$pFinal,
-        'priceCurrency'=> 'EUR',
-        'availability' => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      ],
+  $pOrig    = (float)($p['price'] ?? 0);
+  $pDisc    = (int)($p['discount'] ?? 0);
+  $pFinal   = $pDisc > 0 ? round($pOrig * (1 - $pDisc / 100), 2) : $pOrig;
+  $pRevs    = $p['reviews'] ?? [];
+  $pRevCnt  = count($pRevs);
+  $pItem = [
+    '@type'  => 'Product',
+    'name'   => $p['name'] ?? '',
+    'url'    => 'https://makemyhome.me/product.html?id=' . (int)$p['id'],
+    'image'  => 'https://makemyhome.me/' . ($p['image'] ?? ''),
+    'offers' => [
+      '@type'        => 'Offer',
+      'price'        => (string)$pFinal,
+      'priceCurrency'=> 'EUR',
+      'availability' => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     ],
   ];
+  if ($pRevCnt > 0) {
+    $pItem['aggregateRating'] = [
+      '@type'       => 'AggregateRating',
+      'ratingValue' => (string)round(array_sum(array_column($pRevs, 'rating')) / $pRevCnt, 1),
+      'bestRating'  => '5',
+      'worstRating' => '1',
+      'reviewCount' => $pRevCnt,
+    ];
+  }
+  $_items[] = ['@type' => 'ListItem', 'position' => $i + 1, 'item' => $pItem];
 }
 echo '<script type="application/ld+json">' . "\n";
 echo json_encode([
