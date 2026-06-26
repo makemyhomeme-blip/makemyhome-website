@@ -2,16 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /php/
-Disallow: /wp-includes/
-Disallow: /wp-content/
-Disallow: /wp-admin/
 Disallow: /wp-login.php
-Disallow: /wp-json/
-Disallow: /xmlrpc.php
-Disallow: /feed/
-Disallow: /comments/feed/
-Disallow: /?s=
-Disallow: /?author=
-Disallow: /?p=
 
 Sitemap: https://makemyhome.me/sitemap.xml
