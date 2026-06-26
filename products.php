@@ -374,8 +374,8 @@ echo "\n</script>\n";
         <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
         <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
       </div>
-      <div class="products-grid" id="products-container" style="display:<?= ($cat && $cat !== 'bambus-paneli') ? 'grid' : 'none' ?>;padding-top:20px;">
-        <?php if ($cat && $cat !== 'bambus-paneli'): ?>
+      <div class="products-grid" id="products-container" style="display:<?= $cat ? 'grid' : 'none' ?>;padding-top:20px;">
+        <?php if ($cat): ?>
         <?php foreach ($_listProds as $p):
           $pO = (float)($p['price'] ?? 0);
           $pD = (int)($p['discount'] ?? 0);
