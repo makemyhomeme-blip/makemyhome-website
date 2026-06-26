@@ -49,6 +49,8 @@ $files = [
     $root . '/sitemap.xml'      => $base . '/sitemap.xml',
     // Server config
     $root . '/.htaccess'        => $base . '/.htaccess',
+    $root . '/product/.htaccess'  => $base . '/product/.htaccess',
+    $root . '/product/index.php'  => $base . '/product/index.php',
     // Admin
     __DIR__ . '/dashboard.php'  => $base . '/admin/dashboard.php',
     __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
