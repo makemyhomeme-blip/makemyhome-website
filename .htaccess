@@ -11,14 +11,21 @@ RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://makemyhome.me%{REQUEST_URI} [R=301,L]
 
-RewriteRule ^proizvodi/?$ /products.html [R=301,L]
-RewriteRule ^decor-paneli/?$ /products.html [R=301,L]
-RewriteRule ^paneli/?$ /products.html [R=301,L]
-RewriteRule ^shop/?$ /products.html [R=301,L]
-RewriteRule ^prodavnica/?$ /products.html [R=301,L]
+# index.html → homepage (bez ovoga Google vidi index.html kao posebnu stranicu)
+RewriteRule ^index\.html$ /? [R=301,L]
+
+# Stare WordPress kategorije → products (? na kraju čisti stare ?add-to-cart= parametre)
+RewriteRule ^proizvodi/?$ /products.html? [R=301,L]
+RewriteRule ^decor-paneli/?$ /products.html? [R=301,L]
+RewriteRule ^paneli/?$ /products.html? [R=301,L]
+RewriteRule ^shop/?$ /products.html? [R=301,L]
+RewriteRule ^prodavnica/?$ /products.html? [R=301,L]
+RewriteRule ^dekorativni-zidni-paneli/?$ /products.html? [R=301,L]
+RewriteRule ^aku-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
+RewriteRule ^bambus-paneli/?$ /products.html?category=bambus-paneli [R=301,L]
+RewriteRule ^pu-stone/?$ /products.html? [R=301,L]
 RewriteRule ^3d-letvice/?$ /products.html?category=3d-letvice [R=301,L]
 RewriteRule ^akusticni-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
-RewriteRule ^dekorativni-zidni-paneli/?$ /products.html [R=301,L]
 
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
