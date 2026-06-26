@@ -17,8 +17,8 @@ RewriteRule ^index\.html$ /? [R=301,L]
 # Stare WordPress /product-category/ URL-ovi (WooCommerce) → products
 RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 
-# Stari WordPress ?p=XXX post ID URL-ovi vraćaju 200 (homepage sa prljavim URL-om)
-RewriteCond %{QUERY_STRING} (^|&)p=\d
+# Stari WordPress/WooCommerce query parametri koji renderuju homepage kao duplikat
+RewriteCond %{QUERY_STRING} (^|&)(p|s|cat|author|attachment_id|wc-ajax|product-page|add-to-cart|paged)=
 RewriteRule .* /? [R=301,L]
 
 # Stare WordPress kategorije → products (? na kraju čisti stare ?add-to-cart= parametre)
