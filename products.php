@@ -87,9 +87,12 @@ $pageTitle = $cat
   }
   </script>
 <?php
-$_allProds  = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
-$_listProds = $cat
-  ? array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat))
+$_allProds   = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+$_bambusCats = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-kozni','bambus-metalni'];
+$_listProds  = $cat
+  ? array_values(array_filter($_allProds, fn($p) => $cat === 'bambus-paneli'
+      ? in_array($p['category'] ?? '', $_bambusCats)
+      : ($p['category'] ?? '') === $cat))
   : $_allProds;
 $_items = [];
 foreach (array_slice($_listProds, 0, 20) as $i => $p) {
