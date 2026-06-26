@@ -4,6 +4,9 @@
  * Web:  /admin/sync.php?key=mkhsync2025  (requires admin session)
  * CLI:  php sync.php
  */
+// OPcache reset — mora biti na vrhu da bi novi fajlovi odmah bili aktivni
+if (function_exists('opcache_reset')) opcache_reset();
+
 $isCli = (php_sapi_name() === 'cli');
 
 if (!$isCli) {
