@@ -18,7 +18,8 @@ RewriteRule ^index\.html$ /? [R=301,L]
 RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 
 # Stari WordPress/WooCommerce query parametri koji renderuju homepage kao duplikat
-RewriteCond %{QUERY_STRING} (^|&)(p|s|cat|author|attachment_id|wc-ajax|product-page|add-to-cart|paged)=
+# PAŽNJA: cat= i category= su naši parametri — NE smiju biti u ovom redirectu
+RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|wc-ajax|product-page|add-to-cart|paged)=
 RewriteRule .* /? [R=301,L]
 
 # Stare WordPress kategorije → products (? na kraju čisti stare ?add-to-cart= parametre)
