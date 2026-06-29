@@ -82,6 +82,23 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
       'returnMethod'         => 'https://schema.org/ReturnByMail',
       'returnFees'           => 'https://schema.org/FreeReturn',
     ],
+    'shippingDetails' => [
+      '@type'              => 'OfferShippingDetails',
+      'shippingRate'       => [
+        '@type'    => 'MonetaryAmount',
+        'value'    => '20',
+        'currency' => 'EUR',
+      ],
+      'shippingDestination' => [
+        '@type'          => 'DefinedRegion',
+        'addressCountry' => 'ME',
+      ],
+      'deliveryTime' => [
+        '@type'        => 'ShippingDeliveryTime',
+        'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 0, 'maxValue' => 2, 'unitCode' => 'DAY'],
+        'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 4, 'unitCode' => 'DAY'],
+      ],
+    ],
   ];
   if ($discount > 0) {
     $offers['priceSpecification'] = [
