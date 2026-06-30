@@ -104,13 +104,27 @@ function optimizeImage($tmpPath, $destPath, $maxW = 1200, $maxH = 900, $quality 
 }
 
 function handleImageUpload($fieldName) {
-    if (empty($_FILES[$fieldName]['tmp_name'])) return null;
-    $file    = $_FILES[$fieldName];
+    // Korisnik nije izabrao novu sliku — zadrži postojeću (nije greška)
+    if (empty($_FILES[$fieldName]) || ($_FILES[$fieldName]['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+    $file = $_FILES[$fieldName];
+    // Slika JE poslata ali sa greškom — NE laži "sačuvano", prikaži pravu grešku
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        $msg = in_array($file['error'], [UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE])
+            ? 'Slika je prevelika za server (maksimum 15 MB). Smanji sliku i pokušaj ponovo.'
+            : 'Slika nije uploadovana (greška ' . $file['error'] . '). Pokušaj ponovo.';
+        redirect('', $msg);
+    }
     $allowed = ['image/jpeg','image/jpg','image/png','image/webp'];
     $finfo   = new finfo(FILEINFO_MIME_TYPE);
     $mime    = $finfo->file($file['tmp_name']);
-    if (!in_array($mime, $allowed)) return null;
-    if ($file['size'] > 8 * 1024 * 1024) return null;
+    if (!in_array($mime, $allowed)) {
+        redirect('', 'Slika mora biti JPG, PNG ili WEBP format. Slika nije sačuvana.');
+    }
+    if ($file['size'] > 15 * 1024 * 1024) {
+        redirect('', 'Slika je prevelika (' . round($file['size'] / 1048576, 1) . ' MB). Maksimum je 15 MB — smanji je i pokušaj ponovo.');
+    }
     $filename  = 'product-' . time() . '-' . rand(100,999) . '.jpg';
     $uploadDir = __DIR__ . '/../images/products/';
     if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
@@ -122,7 +136,7 @@ function handleImageUpload($fieldName) {
     if (move_uploaded_file($file['tmp_name'], $destPath)) {
         return 'images/products/' . $filename;
     }
-    return null;
+    redirect('', 'Slika se nije mogla obraditi na serveru. Pokušaj sa JPG slikom manje rezolucije.');
 }
 
 function getNextId($products) {
