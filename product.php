@@ -189,6 +189,12 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
   gtag("js", new Date());
   gtag("config", "G-4LLQCZ8CV4");
 </script>
+<style>
+  /* Footer kategorije: čiste 2 kolone bez lomljenja u dva reda */
+  .footer-links-grid{display:block!important;column-count:2!important;column-gap:18px!important;}
+  .footer-links-grid li{break-inside:avoid;margin-bottom:9px;}
+  .footer-links-grid a{font-size:13px!important;white-space:nowrap;}
+</style>
 </head>
 <body>
 
