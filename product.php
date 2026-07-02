@@ -14,6 +14,8 @@ $ogTitle = $product
 $rawDesc = $product && !empty($product['description'])
     ? strip_tags($product['description'])
     : 'Detalji proizvoda – Make My Home Decor Podgorica. Zidni paneli i 3D letvice.';
+// Pun opis za Product schema (Google dozvoljava do 5000 znakova) — meta description se skraćuje, schema NE
+$schemaDesc = $rawDesc;
 // Skrati na ~155 znakova ali na granici riječi (ne siječi usred riječi)
 if (mb_strlen($rawDesc) > 155) {
     $cut = mb_substr($rawDesc, 0, 155);
@@ -116,7 +118,7 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
     '@context'   => 'https://schema.org',
     '@type'      => 'Product',
     'name'       => $product['name'] ?? '',
-    'description'=> html_entity_decode($ogDesc, ENT_QUOTES),
+    'description'=> $schemaDesc,
     'image'      => array_values($images),
     'sku'        => $product['sku'] ?? $product['name'],
     'brand'      => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
