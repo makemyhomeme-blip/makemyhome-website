@@ -562,7 +562,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=29"></script>
+<script src="js/products.js?v=30"></script>
 <script src="js/cart.js"></script>
 <script>
   initProductsPage();

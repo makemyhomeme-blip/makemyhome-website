@@ -282,7 +282,13 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
             <?php if (!empty($product['highlight'])): ?>
             <p style="font-size:1em;color:#444;line-height:1.65;margin-bottom:14px;"><?= htmlspecialchars(strip_tags($product['highlight'])) ?></p>
             <?php endif; ?>
-            <?php $fullDesc = strip_tags($product['description'] ?? ''); if ($fullDesc): ?>
+            <?php
+            // Prikaži samo narativni dio opisa — "Karakteristike:" i dalje ostaju u schema za Google,
+            // a na stranici su već prikazane kao uredna lista (bez dupliranja)
+            $fullDesc = strip_tags($product['description'] ?? '');
+            $cutAt = mb_strpos($fullDesc, 'Karakteristike:');
+            if ($cutAt !== false) $fullDesc = trim(mb_substr($fullDesc, 0, $cutAt));
+            if ($fullDesc): ?>
             <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars(mb_substr($fullDesc, 0, 600))) ?></div>
             <?php endif; ?>
             <?php if ($inStock): ?>
@@ -385,7 +391,7 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=29"></script>
+<script src="js/products.js?v=30"></script>
 <script src="js/cart.js"></script>
 <script>
   renderProductDetail();

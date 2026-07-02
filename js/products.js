@@ -1124,7 +1124,7 @@ async function renderProductDetail() {
 
     <!-- Trust row -->
     <div class="product-trust-row">
-      <div class="trust-item"><i class="fas fa-truck"></i><span>Dostava Crna Gora</span></div>
+      <div class="trust-item"><i class="fas fa-truck"></i><span>Dostava kurirskom službom — okvirno 20 €</span></div>
       <div class="trust-item"><i class="fas fa-tools"></i><span>Savjeti za montažu</span></div>
       <div class="trust-item"><i class="fas fa-money-bill-wave"></i><span>Plaćanje pouzećem</span></div>
     </div>`;
@@ -1243,7 +1243,7 @@ async function renderProductDetail() {
     </div>
     `}
 
-    <div class="product-short-desc">${product.description}</div>
+    <div class="product-short-desc">${(product.description || '').split('Karakteristike:')[0].trim()}</div>
 
     <!-- CTA dugmad -->
     <div style="display:flex;flex-direction:column;gap:10px;margin:22px 0 28px;">
