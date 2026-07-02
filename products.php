@@ -143,6 +143,16 @@ $_returnPolicy = [
   'returnMethod'         => 'https://schema.org/ReturnByMail',
   'returnFees'           => 'https://schema.org/FreeReturn',
 ];
+$_shippingDetails = [
+  '@type'               => 'OfferShippingDetails',
+  'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '20', 'currency' => 'EUR'],
+  'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'ME'],
+  'deliveryTime'        => [
+    '@type'        => 'ShippingDeliveryTime',
+    'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 0, 'maxValue' => 2, 'unitCode' => 'DAY'],
+    'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 4, 'unitCode' => 'DAY'],
+  ],
+];
 $_items = [];
 foreach (array_slice($_listProds, 0, 20) as $i => $p) {
   $pOrig    = (float)($p['price'] ?? 0);
@@ -165,6 +175,7 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       'priceCurrency'          => 'EUR',
       'availability'           => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       'hasMerchantReturnPolicy'=> $_returnPolicy,
+      'shippingDetails'        => $_shippingDetails,
     ],
   ];
   if ($pRevCnt > 0) {
