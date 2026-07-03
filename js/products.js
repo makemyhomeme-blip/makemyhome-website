@@ -157,7 +157,7 @@ async function initProductsPage() {
   const footerCats = document.getElementById('footer-cats');
   if (footerCats) {
     footerCats.innerHTML = allCategories.map(c =>
-      `<li><a href="products.html?cat=${c.id}"><i class="fas fa-chevron-right"></i> ${c.name}</a></li>`
+      `<li><a href="products.html?category=${c.id}"><i class="fas fa-chevron-right"></i> ${c.name}</a></li>`
     ).join('');
   }
 }
@@ -228,7 +228,7 @@ function showSubcategoryGrid(parentCat) {
     const subProducts = allProducts.filter(p => p.category === sub.id);
     const firstImg = subProducts.find(p => p.image)?.image || '';
     return `
-      <a href="products.html?cat=${sub.id}" class="cat-card">
+      <a href="products.html?category=${sub.id}" class="cat-card">
         <div class="cat-card-img">
           ${firstImg
             ? `<img src="${firstImg}" alt="${sub.name}" loading="lazy">`
@@ -268,7 +268,7 @@ function showCategoryGrid() {
   });
 
   grid.innerHTML = cats.map(cat => `
-    <a href="products.html?cat=${cat.id}" class="cat-card">
+    <a href="products.html?category=${cat.id}" class="cat-card">
       <div class="cat-card-img">
         ${cat.firstImage
           ? `<img src="${cat.firstImage}" alt="${cat.name}" loading="lazy">`
@@ -317,7 +317,7 @@ function showCategoryProducts(catId) {
   // Back button: go to parent if subcategory, else go to all categories
   const btnBack = document.querySelector('.btn-back');
   if (btnBack && parentCat) {
-    btnBack.href = `products.html?cat=${parentCat.id}`;
+    btnBack.href = `products.html?category=${parentCat.id}`;
     btnBack.innerHTML = `<i class="fas fa-arrow-left"></i> ${parentCat.name}`;
   }
 
@@ -359,7 +359,7 @@ async function renderCategories(containerId) {
                 --zoom:${zoom};"></div>`
       : `<span class="category-img-placeholder"><i class="${cat.icon}"></i></span>`;
     return `
-    <a href="products.html?cat=${cat.id}" class="category-card">
+    <a href="products.html?category=${cat.id}" class="category-card">
       <div class="category-img" style="overflow:hidden;position:relative;">
         ${imgInner}
       </div>

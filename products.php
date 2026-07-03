@@ -20,6 +20,14 @@ if (!empty($_GET['slug'])) {
     exit;
 }
 
+// Normalizuj ?cat= na ?category= (301) — jedna kanonska verzija URL-a,
+// bez "Alternate page with canonical" zapisa u GSC
+if (isset($_GET['cat']) && !isset($_GET['category'])) {
+    $catNorm = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['cat']));
+    header('Location: https://makemyhome.me/products.html' . ($catNorm !== '' ? '?category=' . $catNorm : ''), true, 301);
+    exit;
+}
+
 $cat = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['category'] ?? $_GET['cat'] ?? ''));
 
 $catNames = [
@@ -573,7 +581,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=30"></script>
+<script src="js/products.js?v=31"></script>
 <script src="js/cart.js"></script>
 <script>
   initProductsPage();

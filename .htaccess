@@ -41,6 +41,8 @@ RewriteRule ^dekorativni-zidni-paneli/?$ /products.html? [R=301,L]
 RewriteRule ^aku-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
 RewriteRule ^bambus-paneli/?$ /products.html?category=bambus-paneli [R=301,L]
 RewriteRule ^pu-stone/?$ /products.html? [R=301,L]
+RewriteRule ^uv-paneli/?$ /products.html? [R=301,L]
+RewriteRule ^flex-stone/?$ /products.html?category=flex-stone [R=301,L]
 RewriteRule ^3d-letvice/?$ /products.html?category=3d-letvice [R=301,L]
 RewriteRule ^akusticni-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
 
