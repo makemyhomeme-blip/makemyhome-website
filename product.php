@@ -120,7 +120,7 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
     'name'       => $product['name'] ?? '',
     'description'=> $schemaDesc,
     'image'      => array_values($images),
-    'sku'        => $product['sku'] ?? $product['name'],
+    'sku'        => preg_replace('/\s+/', '-', trim($product['sku'] ?? $product['name'] ?? '')),
     'brand'      => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
     'offers'     => $offers,
   ];

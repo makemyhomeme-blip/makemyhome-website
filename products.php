@@ -176,7 +176,7 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
     'url'         => 'https://makemyhome.me/product.html?id=' . (int)$p['id'],
     'image'       => 'https://makemyhome.me/' . ($p['image'] ?? ''),
     'brand'       => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
-    'sku'         => $p['sku'] ?? $p['name'] ?? '',
+    'sku'         => preg_replace('/\s+/', '-', trim($p['sku'] ?? $p['name'] ?? '')),
     'offers'      => [
       '@type'                  => 'Offer',
       'price'                  => (string)$pFinal,
