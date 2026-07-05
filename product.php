@@ -137,13 +137,15 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
       if (preg_match('/^(\w+)\s+(\d{4})$/', trim($r['date'] ?? ''), $m)) {
         $date = $m[2] . '-' . ($monthMap[$m[1]] ?? '01') . '-01';
       }
-      return [
+      $rev = [
         '@type'        => 'Review',
         'author'       => ['@type' => 'Person', 'name' => $r['author'] ?? ''],
-        'datePublished'=> $date,
         'reviewRating' => ['@type' => 'Rating', 'ratingValue' => (string)($r['rating'] ?? 5), 'bestRating' => '5', 'worstRating' => '1'],
         'reviewBody'   => $r['text'] ?? '',
       ];
+      // datePublished samo ako je datum validan — prazan string bi Google prijavio kao invalid value
+      if ($date !== '') $rev['datePublished'] = $date;
+      return $rev;
     }, $reviews);
   }
   echo '<script type="application/ld+json">' . "\n";
