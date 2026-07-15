@@ -5,6 +5,8 @@ ErrorDocument 404 /404.php
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
+# NAPOMENA: hosting na nivou servera već 301-redirectuje sve */feed/ adrese na početnu
+# (prije .htaccess) — zato feed pravila ovdje pokrivaju samo root /feed/
 
 # Force HTTPS i non-www (canonical URL) — bez ovoga Google tretira http://www. kao duplikat
 RewriteCond %{HTTPS} off [OR]
@@ -22,8 +24,7 @@ RewriteRule ^wp-content/ - [G,L]
 RewriteRule ^wp-admin/ - [G,L]
 RewriteRule ^wp-json - [G,L]
 RewriteRule ^xmlrpc\.php$ - [G,L]
-RewriteCond %{REQUEST_URI} !^/product/
-RewriteRule (^|/)feed/?$ /? [R=301,L]
+RewriteRule ^(?!product/)(.*/)?feed/?$ /? [R=301,L]
 RewriteRule ^comments/ - [G,L]
 
 # index.html → homepage (bez ovoga Google vidi index.html kao posebnu stranicu)
