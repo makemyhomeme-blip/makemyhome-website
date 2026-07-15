@@ -2,7 +2,7 @@
 // Redirect stari WordPress /product/slug/ URL-ovi na ispravne produkt stranice
 $uri = strtolower(trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/'));
 
-if (preg_match('#^product/([^/]+)/?$#', $uri, $m)) {
+if (preg_match('#^product/([^/]+)(/feed)?/?$#', $uri, $m)) {
     $slug     = $m[1];
     $products = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
     $bestId   = null;

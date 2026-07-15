@@ -12,7 +12,7 @@ RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://makemyhome.me%{REQUEST_URI} [R=301,L]
 
 # Stari WordPress feed URL-ovi → 301 na odgovarajuću stranicu (čisti GSC 404 izvještaj)
-RewriteRule ^product/([^/]+)/feed/?$ /product/$1/ [R=301,L]
+# (product/slug/feed obrađuje 404.php koji zna da nađe pravi proizvod)
 RewriteRule ^feed/?$ /? [R=301,L]
 RewriteRule ^comments/feed/?$ /? [R=301,L]
 
@@ -22,6 +22,7 @@ RewriteRule ^wp-content/ - [G,L]
 RewriteRule ^wp-admin/ - [G,L]
 RewriteRule ^wp-json - [G,L]
 RewriteRule ^xmlrpc\.php$ - [G,L]
+RewriteCond %{REQUEST_URI} !^/product/
 RewriteRule (^|/)feed/?$ /? [R=301,L]
 RewriteRule ^comments/ - [G,L]
 
