@@ -83,11 +83,16 @@ function renderProductCard(product, lazy = true) {
 
   const outOfStock = product.inStock === false;
 
+  const discountRibbon = (product.discount > 0 && !isPreorder && !outOfStock)
+    ? `<div style="position:absolute;top:10px;right:10px;background:#e74c3c;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;box-shadow:0 3px 10px rgba(231,76,60,0.45);letter-spacing:0.3px;">−${product.discount}%</div>`
+    : '';
+
   return `
     <article class="product-card${outOfStock ? ' out-of-stock' : ''}" data-category="${product.category}" data-id="${product.id}" onclick="window.location='product.html?id=${product.id}'" style="cursor:pointer;">
       <div class="product-img">
         ${imgContent}
         ${badge}
+        ${discountRibbon}
         ${preorderOverlay}
         ${outOfStock ? `<div class="oos-tag">Rasprodato</div>` : ''}
       </div>
