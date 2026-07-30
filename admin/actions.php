@@ -542,6 +542,41 @@ switch ($action) {
         }
         echo json_encode(['ok' => true]); exit;
 
+    case 'upload_decorbox':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        // slot: 'banner' (pored teksta) ili 'fabrika' (sekcija fabrike)
+        $slot = $_POST['slot'] ?? '';
+        $map  = [
+            'banner'  => ['file' => 'decor-box-banner.jpg',  'w' => 1400, 'h' => 1000],
+            'fabrika' => ['file' => 'decor-box-fabrika.jpg', 'w' => 1400, 'h' => 1000],
+        ];
+        if (!isset($map[$slot])) {
+            echo json_encode(['ok' => false, 'error' => 'Nepoznat slot.']); exit;
+        }
+        if (!isset($_FILES['decorbox_image']) || $_FILES['decorbox_image']['error'] !== UPLOAD_ERR_OK) {
+            $err = $_FILES['decorbox_image']['error'] ?? UPLOAD_ERR_NO_FILE;
+            $msg = in_array($err, [UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE])
+                ? 'Slika je prevelika za server (maksimum 15 MB).'
+                : 'Nije odabrana slika ili upload nije uspio.';
+            echo json_encode(['ok' => false, 'error' => $msg]); exit;
+        }
+        $file  = $_FILES['decorbox_image'];
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime  = $finfo->file($file['tmp_name']);
+        if (!in_array($mime, ['image/jpeg','image/jpg','image/png','image/webp'])) {
+            echo json_encode(['ok' => false, 'error' => 'Dozvoljeni formati: JPG, PNG, WEBP.']); exit;
+        }
+        if ($file['size'] > 15 * 1024 * 1024) {
+            echo json_encode(['ok' => false, 'error' => 'Slika je prevelika. Maksimalno 15MB.']); exit;
+        }
+        $dest  = __DIR__ . '/../images/' . $map[$slot]['file'];
+        $saved = optimizeImage($file['tmp_name'], $dest, $map[$slot]['w'], $map[$slot]['h'], 88);
+        if (!$saved && !move_uploaded_file($file['tmp_name'], $dest)) {
+            echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']); exit;
+        }
+        echo json_encode(['ok' => true, 'file' => 'images/' . $map[$slot]['file']]); exit;
+
     case 'upload_hero_slide':
         ob_end_clean();
         header('Content-Type: application/json');

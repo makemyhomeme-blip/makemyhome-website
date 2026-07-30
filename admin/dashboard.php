@@ -275,6 +275,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     <button class="sidebar-link" onclick="showSection('hero-slides')">
       <i class="fas fa-film"></i> Hero Slike (Slider)
     </button>
+    <button class="sidebar-link" onclick="showSection('decorbox-img')">
+      <i class="fas fa-handshake"></i> Decor Box Slike
+    </button>
     <div class="nav-section-label">Web sajt</div>
     <a href="../index.html" target="_blank" class="sidebar-link">
       <i class="fas fa-external-link-alt"></i> Pogledaj Sajt
@@ -913,6 +916,76 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
             <div id="showcase-msg" style="display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-weight:600;"></div>
           </form>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== DECOR BOX SLIKE ===== -->
+    <section id="section-decorbox-img" class="section">
+      <div style="max-width:760px;">
+        <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:6px;">Decor Box Slike</h2>
+        <p style="color:var(--gray);margin-bottom:28px;">
+          Dvije slike na stranici <a href="../decor-box.html" target="_blank" style="color:var(--primary);font-weight:600;">Decor Box</a>.
+          Uploaduj sliku u odgovarajuće polje — odmah se mijenja na sajtu.
+        </p>
+
+        <?php
+        $dbSlots = [
+          'banner'  => [
+            'file'  => 'decor-box-banner.jpg',
+            'title' => 'Slika 1 — Pored uvodnog teksta',
+            'desc'  => 'Prikazuje se desno od teksta "Program saradnje za profesionalce" (npr. Decor Box banner ili showroom).',
+          ],
+          'fabrika' => [
+            'file'  => 'decor-box-fabrika.jpg',
+            'title' => 'Slika 2 — Sekcija "Sopstvena proizvodnja"',
+            'desc'  => 'Prikazuje se u tamnoj sekciji o fabrici (npr. fotografija fabrike / centra).',
+          ],
+        ];
+        foreach ($dbSlots as $slot => $info):
+          $path = __DIR__ . '/../images/' . $info['file'];
+          $url  = '../images/' . $info['file'];
+        ?>
+        <div style="background:var(--white);border-radius:12px;padding:24px;border:1px solid #eee;margin-bottom:24px;">
+          <div style="font-weight:700;font-size:15px;margin-bottom:4px;"><?= $info['title'] ?></div>
+          <div style="font-size:13px;color:var(--gray);margin-bottom:18px;"><?= $info['desc'] ?></div>
+
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);font-weight:600;margin-bottom:10px;">Trenutna slika</div>
+          <?php if (file_exists($path)): ?>
+            <img id="db-cur-<?= $slot ?>" src="<?= $url ?>?v=<?= filemtime($path) ?>" alt="Decor Box <?= $slot ?>"
+                 style="width:100%;border-radius:8px;display:block;margin-bottom:18px;">
+          <?php else: ?>
+            <div id="db-cur-wrap-<?= $slot ?>" style="background:#f5f0eb;border-radius:8px;height:150px;display:flex;align-items:center;justify-content:center;color:var(--gray);margin-bottom:18px;">
+              <div style="text-align:center;">
+                <i class="fas fa-image" style="font-size:32px;margin-bottom:8px;display:block;opacity:.4;"></i>
+                Slika još nije uploadovana
+              </div>
+            </div>
+          <?php endif; ?>
+
+          <form id="db-form-<?= $slot ?>" enctype="multipart/form-data">
+            <div id="db-drop-<?= $slot ?>" style="border:2px dashed #ddd;border-radius:10px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:14px;"
+              onclick="document.getElementById('db-input-<?= $slot ?>').click()"
+              ondragover="event.preventDefault();this.style.borderColor='var(--primary)';this.style.background='#fdf8f0';"
+              ondragleave="this.style.borderColor='#ddd';this.style.background='';"
+              ondrop="handleDbDrop(event,'<?= $slot ?>')">
+              <i class="fas fa-cloud-upload-alt" style="font-size:28px;color:var(--primary);margin-bottom:8px;display:block;"></i>
+              <div style="font-weight:600;margin-bottom:4px;">Prevuci sliku ovdje ili klikni</div>
+              <div style="font-size:13px;color:var(--gray);">JPG, PNG, WEBP – preporučeno min 1200px široko</div>
+              <input type="file" id="db-input-<?= $slot ?>" accept="image/*" style="display:none" onchange="previewDb(this,'<?= $slot ?>')">
+            </div>
+
+            <div id="db-prev-wrap-<?= $slot ?>" style="display:none;margin-bottom:14px;">
+              <img id="db-prev-<?= $slot ?>" style="width:100%;border-radius:8px;display:block;">
+            </div>
+
+            <button type="button" id="db-btn-<?= $slot ?>" onclick="uploadDb('<?= $slot ?>')" style="display:none;width:100%;padding:14px;background:var(--primary);color:var(--dark);border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;">
+              <i class="fas fa-upload"></i> Sačuvaj na sajt
+            </button>
+
+            <div id="db-msg-<?= $slot ?>" style="display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-weight:600;"></div>
+          </form>
+        </div>
+        <?php endforeach; ?>
       </div>
     </section>
 
@@ -1804,6 +1877,78 @@ async function uploadShowcase() {
     msg.textContent = 'Greška pri uploadu. Pokušaj ponovo.';
   }
   btn.textContent = 'Sačuvaj na sajt';
+  btn.disabled = false;
+}
+
+// ===== DECOR BOX SLIKE =====
+const DB_FILES = { banner: 'decor-box-banner.jpg', fabrika: 'decor-box-fabrika.jpg' };
+
+function previewDb(input, slot) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('db-prev-' + slot).src = e.target.result;
+    document.getElementById('db-prev-wrap-' + slot).style.display = 'block';
+    document.getElementById('db-btn-' + slot).style.display = 'block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function handleDbDrop(e, slot) {
+  e.preventDefault();
+  const dz = document.getElementById('db-drop-' + slot);
+  dz.style.borderColor = '#ddd'; dz.style.background = '';
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer(); dt.items.add(file);
+  const input = document.getElementById('db-input-' + slot);
+  input.files = dt.files;
+  previewDb(input, slot);
+}
+
+async function uploadDb(slot) {
+  const input = document.getElementById('db-input-' + slot);
+  const btn   = document.getElementById('db-btn-' + slot);
+  const msg   = document.getElementById('db-msg-' + slot);
+  if (!input.files || !input.files[0]) return;
+
+  btn.textContent = 'Uploaduje se...';
+  btn.disabled = true;
+  msg.style.display = 'none';
+
+  const fd = new FormData();
+  fd.append('action', 'upload_decorbox');
+  fd.append('slot', slot);
+  fd.append('decorbox_image', input.files[0]);
+
+  try {
+    const res  = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    msg.style.display = 'block';
+    if (data.ok) {
+      msg.style.background = '#e8f5e9';
+      msg.style.color = '#2e7d32';
+      msg.textContent = 'Slika je sačuvana na sajtu!';
+      const ts  = Date.now();
+      const cur = document.getElementById('db-cur-' + slot);
+      if (cur) {
+        cur.src = '../images/' + DB_FILES[slot] + '?v=' + ts;
+      } else {
+        const wrap = document.getElementById('db-cur-wrap-' + slot);
+        if (wrap) wrap.outerHTML = '<img id="db-cur-' + slot + '" src="../images/' + DB_FILES[slot] + '?v=' + ts + '" style="width:100%;border-radius:8px;display:block;margin-bottom:18px;">';
+      }
+    } else {
+      msg.style.background = '#fdecea';
+      msg.style.color = '#c62828';
+      msg.textContent = data.error || 'Greška pri uploadu.';
+    }
+  } catch(e) {
+    msg.style.display = 'block';
+    msg.style.background = '#fdecea';
+    msg.style.color = '#c62828';
+    msg.textContent = 'Greška pri uploadu. Pokušaj ponovo.';
+  }
+  btn.innerHTML = '<i class="fas fa-upload"></i> Sačuvaj na sajt';
   btn.disabled = false;
 }
 
