@@ -986,6 +986,57 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           </form>
         </div>
         <?php endforeach; ?>
+
+        <?php
+        $dbStyleFile = __DIR__ . '/../data/decor-box-style.json';
+        $dbStyle = is_file($dbStyleFile) ? (json_decode(file_get_contents($dbStyleFile), true) ?: []) : [];
+        $sv = function($slot, $key, $def) use ($dbStyle) { return $dbStyle[$slot][$key] ?? $def; };
+        ?>
+        <!-- Veličina prikaza -->
+        <div style="background:var(--white);border-radius:12px;padding:24px;border:1px solid #eee;">
+          <div style="font-weight:700;font-size:15px;margin-bottom:4px;">Veličina slika na sajtu</div>
+          <div style="font-size:13px;color:var(--gray);margin-bottom:20px;">
+            <strong>Automatski</strong> = slika se prikazuje cijela, u svojoj proporciji (nema crne ivice).<br>
+            <strong>Fiksna visina</strong> = slika se opseca na zadatu visinu (ujednačen izgled, ali može odsjeći dio slike).
+          </div>
+
+          <form id="db-style-form">
+            <?php foreach (['banner' => 'Slika 1 (pored teksta)', 'fabrika' => 'Slika 2 (fabrika)'] as $slot => $label): ?>
+            <div style="border:1px solid #eee;border-radius:10px;padding:16px;margin-bottom:14px;">
+              <div style="font-weight:700;font-size:14px;margin-bottom:12px;"><?= $label ?></div>
+              <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;">
+                <label style="font-size:13px;">
+                  <span style="display:block;color:var(--gray);margin-bottom:5px;">Prikaz</span>
+                  <select name="<?= $slot ?>_mode" id="db-mode-<?= $slot ?>" onchange="toggleDbHeight('<?= $slot ?>')"
+                          style="padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;">
+                    <option value="auto"  <?= $sv($slot,'mode','auto')==='auto'?'selected':'' ?>>Automatski (cijela slika)</option>
+                    <option value="fixed" <?= $sv($slot,'mode','auto')==='fixed'?'selected':'' ?>>Fiksna visina</option>
+                  </select>
+                </label>
+                <label style="font-size:13px;" id="db-h-wrap-<?= $slot ?>">
+                  <span style="display:block;color:var(--gray);margin-bottom:5px;">Visina (px)</span>
+                  <input type="number" name="<?= $slot ?>_height" min="160" max="900" step="10"
+                         value="<?= (int)$sv($slot,'height',340) ?>"
+                         style="width:110px;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;">
+                </label>
+                <label style="font-size:13px;">
+                  <span style="display:block;color:var(--gray);margin-bottom:5px;">Uklapanje</span>
+                  <select name="<?= $slot ?>_fit"
+                          style="padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;">
+                    <option value="cover"   <?= $sv($slot,'fit','cover')==='cover'?'selected':'' ?>>Ispuni okvir (može opseći)</option>
+                    <option value="contain" <?= $sv($slot,'fit','cover')==='contain'?'selected':'' ?>>Cijela slika vidljiva</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <?php endforeach; ?>
+
+            <button type="button" onclick="saveDbStyle()" style="width:100%;padding:14px;background:var(--primary);color:var(--dark);border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;">
+              <i class="fas fa-save"></i> Sačuvaj veličinu
+            </button>
+            <div id="db-style-msg" style="display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-weight:600;"></div>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -1950,6 +2001,38 @@ async function uploadDb(slot) {
   }
   btn.innerHTML = '<i class="fas fa-upload"></i> Sačuvaj na sajt';
   btn.disabled = false;
+}
+
+function toggleDbHeight(slot) {
+  const mode = document.getElementById('db-mode-' + slot).value;
+  const wrap = document.getElementById('db-h-wrap-' + slot);
+  if (wrap) wrap.style.display = (mode === 'fixed') ? '' : 'none';
+}
+document.addEventListener('DOMContentLoaded', () => {
+  ['banner','fabrika'].forEach(s => { if (document.getElementById('db-mode-' + s)) toggleDbHeight(s); });
+});
+
+async function saveDbStyle() {
+  const msg = document.getElementById('db-style-msg');
+  const fd  = new FormData(document.getElementById('db-style-form'));
+  fd.append('action', 'save_decorbox_style');
+  msg.style.display = 'none';
+  try {
+    const res  = await fetch('actions.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    msg.style.display = 'block';
+    if (data.ok) {
+      msg.style.background = '#e8f5e9'; msg.style.color = '#2e7d32';
+      msg.textContent = 'Sačuvano! Osvježi decor-box.html da vidiš promjenu.';
+    } else {
+      msg.style.background = '#fdecea'; msg.style.color = '#c62828';
+      msg.textContent = data.error || 'Greška pri snimanju.';
+    }
+  } catch(e) {
+    msg.style.display = 'block';
+    msg.style.background = '#fdecea'; msg.style.color = '#c62828';
+    msg.textContent = 'Greška pri snimanju. Pokušaj ponovo.';
+  }
 }
 
 // ===== ABOUT IMAGE =====

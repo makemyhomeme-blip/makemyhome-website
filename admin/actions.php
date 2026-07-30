@@ -577,6 +577,51 @@ switch ($action) {
         }
         echo json_encode(['ok' => true, 'file' => 'images/' . $map[$slot]['file']]); exit;
 
+    case 'save_decorbox_style':
+        ob_end_clean();
+        header('Content-Type: application/json');
+        $page = __DIR__ . '/../decor-box.html';
+        if (!is_file($page) || !is_writable($page)) {
+            echo json_encode(['ok' => false, 'error' => 'decor-box.html nije dostupan za upis.']); exit;
+        }
+        // banner = slika pored teksta, fabrika = slika u sekciji proizvodnje
+        $cfg = [];
+        foreach (['banner' => '.db-intro-img', 'fabrika' => '.db-factory-img'] as $slot => $sel) {
+            $mode = ($_POST[$slot . '_mode'] ?? 'auto') === 'fixed' ? 'fixed' : 'auto';
+            $h    = max(160, min(900, (int)($_POST[$slot . '_height'] ?? 340)));
+            $fit  = ($_POST[$slot . '_fit'] ?? 'cover') === 'contain' ? 'contain' : 'cover';
+            $cfg[$slot] = ['sel' => $sel, 'mode' => $mode, 'height' => $h, 'fit' => $fit];
+        }
+
+        $css = "    /* DB-IMG-SETTINGS-START — ovaj blok mijenja admin (Decor Box Slike) */\n";
+        foreach ($cfg as $c) {
+            if ($c['mode'] === 'fixed') {
+                $css .= "    {$c['sel']}{min-height:{$c['height']}px;}\n";
+                $css .= "    {$c['sel']} img{height:{$c['height']}px;object-fit:{$c['fit']};}\n";
+            } else {
+                $css .= "    {$c['sel']}{min-height:auto;}\n";
+                $css .= "    {$c['sel']} img{height:auto;object-fit:{$c['fit']};}\n";
+            }
+        }
+        $css .= "    /* DB-IMG-SETTINGS-END */";
+
+        $html = file_get_contents($page);
+        $pattern = '/[ \t]*\/\* DB-IMG-SETTINGS-START.*?DB-IMG-SETTINGS-END \*\//s';
+        if (!preg_match($pattern, $html)) {
+            echo json_encode(['ok' => false, 'error' => 'Marker blok nije nađen u decor-box.html.']); exit;
+        }
+        $new = preg_replace($pattern, str_replace('$', '\\$', $css), $html, 1);
+        if ($new === null || $new === '' || strlen($new) < strlen($html) - 400) {
+            echo json_encode(['ok' => false, 'error' => 'Sigurnosna provjera: izmjena odbijena.']); exit;
+        }
+        // backup pa upis
+        @copy($page, __DIR__ . '/../decor-box.html.bak');
+        if (file_put_contents($page, $new) === false) {
+            echo json_encode(['ok' => false, 'error' => 'Upis u decor-box.html nije uspio.']); exit;
+        }
+        @file_put_contents(__DIR__ . '/../data/decor-box-style.json', json_encode($cfg, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+        echo json_encode(['ok' => true]); exit;
+
     case 'upload_hero_slide':
         ob_end_clean();
         header('Content-Type: application/json');
