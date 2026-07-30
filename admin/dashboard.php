@@ -992,42 +992,60 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
         $dbStyle = is_file($dbStyleFile) ? (json_decode(file_get_contents($dbStyleFile), true) ?: []) : [];
         $sv = function($slot, $key, $def) use ($dbStyle) { return $dbStyle[$slot][$key] ?? $def; };
         ?>
-        <!-- Veličina prikaza -->
+        <!-- Veličina prikaza — prevlačenjem -->
         <div style="background:var(--white);border-radius:12px;padding:24px;border:1px solid #eee;">
           <div style="font-weight:700;font-size:15px;margin-bottom:4px;">Veličina slika na sajtu</div>
           <div style="font-size:13px;color:var(--gray);margin-bottom:20px;">
-            <strong>Automatski</strong> = slika se prikazuje cijela, u svojoj proporciji (nema crne ivice).<br>
-            <strong>Fiksna visina</strong> = slika se opseca na zadatu visinu (ujednačen izgled, ali može odsjeći dio slike).
+            <i class="fas fa-arrows-up-down" style="color:var(--primary);"></i>
+            <strong>Prevuci donju ivicu slike</strong> (gore/dolje) da namjestiš visinu — vidiš uživo kako će izgledati na sajtu.
+            Kad si zadovoljan, klikni <strong>Sačuvaj</strong>.
           </div>
 
           <form id="db-style-form">
-            <?php foreach (['banner' => 'Slika 1 (pored teksta)', 'fabrika' => 'Slika 2 (fabrika)'] as $slot => $label): ?>
-            <div style="border:1px solid #eee;border-radius:10px;padding:16px;margin-bottom:14px;">
-              <div style="font-weight:700;font-size:14px;margin-bottom:12px;"><?= $label ?></div>
-              <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;">
-                <label style="font-size:13px;">
-                  <span style="display:block;color:var(--gray);margin-bottom:5px;">Prikaz</span>
-                  <select name="<?= $slot ?>_mode" id="db-mode-<?= $slot ?>" onchange="toggleDbHeight('<?= $slot ?>')"
-                          style="padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;">
-                    <option value="auto"  <?= $sv($slot,'mode','auto')==='auto'?'selected':'' ?>>Automatski (cijela slika)</option>
-                    <option value="fixed" <?= $sv($slot,'mode','auto')==='fixed'?'selected':'' ?>>Fiksna visina</option>
-                  </select>
-                </label>
-                <label style="font-size:13px;" id="db-h-wrap-<?= $slot ?>">
-                  <span style="display:block;color:var(--gray);margin-bottom:5px;">Visina (px)</span>
-                  <input type="number" name="<?= $slot ?>_height" min="160" max="900" step="10"
-                         value="<?= (int)$sv($slot,'height',340) ?>"
-                         style="width:110px;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;">
-                </label>
-                <label style="font-size:13px;">
-                  <span style="display:block;color:var(--gray);margin-bottom:5px;">Uklapanje</span>
-                  <select name="<?= $slot ?>_fit"
-                          style="padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;">
-                    <option value="cover"   <?= $sv($slot,'fit','cover')==='cover'?'selected':'' ?>>Ispuni okvir (može opseći)</option>
-                    <option value="contain" <?= $sv($slot,'fit','cover')==='contain'?'selected':'' ?>>Cijela slika vidljiva</option>
-                  </select>
-                </label>
+            <?php foreach (['banner' => 'Slika 1 — pored teksta', 'fabrika' => 'Slika 2 — fabrika'] as $slot => $label):
+              $f = 'decor-box-' . ($slot === 'banner' ? 'banner' : 'fabrika') . '.jpg';
+              $p = __DIR__ . '/../images/' . $f;
+              $mode0 = $sv($slot, 'mode', 'auto');
+              $h0    = (int)$sv($slot, 'height', 340);
+            ?>
+            <div style="border:1px solid #eee;border-radius:10px;padding:16px;margin-bottom:18px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+                <div style="font-weight:700;font-size:14px;"><?= $label ?></div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                  <button type="button" id="db-auto-btn-<?= $slot ?>" onclick="dbSetAuto('<?= $slot ?>',true)"
+                    style="padding:7px 13px;border-radius:20px;border:1.5px solid #ddd;background:#fff;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;">
+                    Cijela slika
+                  </button>
+                  <button type="button" id="db-fix-btn-<?= $slot ?>" onclick="dbSetAuto('<?= $slot ?>',false)"
+                    style="padding:7px 13px;border-radius:20px;border:1.5px solid #ddd;background:#fff;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;">
+                    Podesi visinu
+                  </button>
+                  <span id="db-hlabel-<?= $slot ?>" style="font-size:12.5px;color:var(--gray);font-weight:600;min-width:74px;text-align:right;"></span>
+                </div>
               </div>
+
+              <?php if (file_exists($p)): ?>
+              <div style="max-width:540px;">
+                <div id="db-rz-<?= $slot ?>" style="width:100%;overflow:hidden;border-radius:10px;background:#f0ece4;position:relative;">
+                  <img id="db-img-<?= $slot ?>" src="../images/<?= $f ?>?v=<?= filemtime($p) ?>" alt="<?= $label ?>"
+                       style="width:100%;display:block;object-fit:cover;" draggable="false">
+                </div>
+                <div id="db-grip-<?= $slot ?>" onmousedown="dbGripStart(event,'<?= $slot ?>')" ontouchstart="dbGripStart(event,'<?= $slot ?>')"
+                     style="display:none;margin-top:-1px;height:26px;border-radius:0 0 10px 10px;background:var(--primary);color:var(--dark);
+                            align-items:center;justify-content:center;cursor:ns-resize;font-size:12px;font-weight:700;user-select:none;">
+                  <i class="fas fa-grip-lines"></i>&nbsp; prevuci gore/dolje
+                </div>
+                <div style="font-size:12px;color:var(--gray);margin-top:8px;">Prikaz je približno kao na sajtu (desktop).</div>
+              </div>
+              <?php else: ?>
+                <div style="background:#f5f0eb;border-radius:8px;padding:26px;text-align:center;color:var(--gray);font-size:13px;">
+                  Prvo uploaduj sliku gore, pa možeš podešavati visinu.
+                </div>
+              <?php endif; ?>
+
+              <input type="hidden" name="<?= $slot ?>_mode"   id="db-mode-<?= $slot ?>"   value="<?= $mode0 ?>">
+              <input type="hidden" name="<?= $slot ?>_height" id="db-height-<?= $slot ?>" value="<?= $h0 ?>">
+              <input type="hidden" name="<?= $slot ?>_fit"    value="cover">
             </div>
             <?php endforeach; ?>
 
@@ -2003,13 +2021,83 @@ async function uploadDb(slot) {
   btn.disabled = false;
 }
 
-function toggleDbHeight(slot) {
+// --- Podešavanje visine prevlačenjem ---
+const DB_MIN_H = 160, DB_MAX_H = 900;
+
+function dbApply(slot) {
+  const box  = document.getElementById('db-rz-' + slot);
+  const img  = document.getElementById('db-img-' + slot);
+  const grip = document.getElementById('db-grip-' + slot);
+  const lbl  = document.getElementById('db-hlabel-' + slot);
   const mode = document.getElementById('db-mode-' + slot).value;
-  const wrap = document.getElementById('db-h-wrap-' + slot);
-  if (wrap) wrap.style.display = (mode === 'fixed') ? '' : 'none';
+  const h    = parseInt(document.getElementById('db-height-' + slot).value || '340', 10);
+  const aBtn = document.getElementById('db-auto-btn-' + slot);
+  const fBtn = document.getElementById('db-fix-btn-' + slot);
+
+  if (aBtn && fBtn) {
+    const on  = 'background:var(--primary);border-color:var(--primary);color:var(--dark);';
+    const off = 'background:#fff;border-color:#ddd;color:inherit;';
+    aBtn.style.cssText = aBtn.style.cssText.replace(/background:[^;]*;|border-color:[^;]*;|color:[^;]*;/g,'') + (mode === 'auto' ? on : off);
+    fBtn.style.cssText = fBtn.style.cssText.replace(/background:[^;]*;|border-color:[^;]*;|color:[^;]*;/g,'') + (mode === 'fixed' ? on : off);
+  }
+  if (!box || !img) { if (lbl) lbl.textContent = ''; return; }
+
+  if (mode === 'auto') {
+    box.style.height = 'auto';
+    img.style.height = 'auto';
+    if (grip) grip.style.display = 'none';
+    if (lbl)  lbl.textContent = 'cijela slika';
+  } else {
+    box.style.height = h + 'px';
+    img.style.height = h + 'px';
+    if (grip) grip.style.display = 'flex';
+    if (lbl)  lbl.textContent = h + ' px';
+  }
 }
+
+function dbSetAuto(slot, isAuto) {
+  const modeEl = document.getElementById('db-mode-' + slot);
+  const hEl    = document.getElementById('db-height-' + slot);
+  modeEl.value = isAuto ? 'auto' : 'fixed';
+  if (!isAuto) {
+    const box = document.getElementById('db-rz-' + slot);
+    // startna visina = trenutna visina slike, zaokruženo u granice
+    let cur = box ? Math.round(box.getBoundingClientRect().height) : 340;
+    cur = Math.max(DB_MIN_H, Math.min(DB_MAX_H, cur || 340));
+    hEl.value = cur;
+  }
+  dbApply(slot);
+}
+
+let dbDrag = null;
+function dbGripStart(e, slot) {
+  e.preventDefault();
+  const box = document.getElementById('db-rz-' + slot);
+  const y   = (e.touches ? e.touches[0].clientY : e.clientY);
+  dbDrag = { slot, startY: y, startH: Math.round(box.getBoundingClientRect().height) };
+  document.body.style.userSelect = 'none';
+}
+function dbGripMove(e) {
+  if (!dbDrag) return;
+  const y  = (e.touches ? e.touches[0].clientY : e.clientY);
+  let h    = dbDrag.startH + (y - dbDrag.startY);
+  h = Math.max(DB_MIN_H, Math.min(DB_MAX_H, Math.round(h)));
+  document.getElementById('db-height-' + dbDrag.slot).value = h;
+  dbApply(dbDrag.slot);
+  if (e.cancelable) e.preventDefault();
+}
+function dbGripEnd() {
+  if (!dbDrag) return;
+  dbDrag = null;
+  document.body.style.userSelect = '';
+}
+document.addEventListener('mousemove', dbGripMove);
+document.addEventListener('mouseup', dbGripEnd);
+document.addEventListener('touchmove', dbGripMove, { passive: false });
+document.addEventListener('touchend', dbGripEnd);
+
 document.addEventListener('DOMContentLoaded', () => {
-  ['banner','fabrika'].forEach(s => { if (document.getElementById('db-mode-' + s)) toggleDbHeight(s); });
+  ['banner','fabrika'].forEach(s => { if (document.getElementById('db-mode-' + s)) dbApply(s); });
 });
 
 async function saveDbStyle() {
