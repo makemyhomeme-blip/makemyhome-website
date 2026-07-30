@@ -199,6 +199,18 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
   .footer-links-grid li{break-inside:avoid;margin-bottom:9px;}
   .footer-links-grid a{font-size:13px!important;white-space:nowrap;}
 </style>
+<style id="nav-wide">
+/* Široki ekrani: header koristi više prostora, stavke razmaknute */
+@media(min-width:1400px){
+  .header-inner{max-width:1560px!important;}
+  .nav-link{font-size:13px!important;padding:8px 10px!important;}
+  #desk-search-wrap{width:250px!important;}
+}
+@media(min-width:1700px){
+  .header-inner{max-width:1720px!important;}
+  .nav-link{font-size:13.5px!important;padding:8px 13px!important;}
+}
+</style>
 </head>
 <body>
 
