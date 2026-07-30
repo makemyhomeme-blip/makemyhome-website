@@ -5,3 +5,6 @@ Disallow: /php/
 Disallow: /wp-login.php
 
 Sitemap: https://makemyhome.me/sitemap.xml
+
+# AI/LLM opis sajta
+# https://makemyhome.me/llms.txt
