@@ -501,6 +501,14 @@ echo "\n</script>\n";
         <h2 style="font-size:1.3em;color:#1a1a1a;margin-bottom:18px;"><?= htmlspecialchars($catName) ?> u Crnoj Gori</h2>
         <?= $catSeoText[$cat] ?>
       </section>
+      <?php elseif (!$cat): ?>
+      <section class="cat-seo-text" style="max-width:860px;margin:56px auto 0;padding:32px 24px 8px;border-top:1px solid rgba(0,0,0,0.08);color:#555;line-height:1.8;font-size:15px;">
+        <h2 style="font-size:1.3em;color:#1a1a1a;margin-bottom:18px;">Zidne obloge i paneli za zid u Crnoj Gori</h2>
+        <p>Make My Home Decor je specijalizovana prodavnica dekorativnih zidnih obloga u <strong>Podgorici</strong>. U našem showroomu u City Kvartu na jednom mjestu možete vidjeti i opipati kompletnu ponudu – <strong>bambus zidne panele</strong> (drvene, tekstilne, mermerne, metalne i kožne), <strong>3D dekorativne letvice</strong>, <strong>akustične panele</strong>, <strong>MDF kanelirane panele</strong>, <strong>PU dekorativni kamen</strong>, <strong>Flex Stone</strong> savitljivi kameni furnir, <strong>aluminijum lajsne</strong> i <strong>SPC vodootporne podove</strong>.</p>
+        <p>Bambus paneli dimenzija 280x122cm prekrivaju 3,42 m² po komadu, pa se veliki zid obnovi brzo i sa malo spojeva. Vodootporni su, otporni na buđ i vlagu, vatrootporni klase B1 i imaju UV zaštitu. Kao moderna zamjena za klasičnu <strong>lamperiju</strong>, montiraju se lijepljenjem – bez bušenja, letvica i majstora, a mogu se postaviti i preko starog maltera, gipsa ili pločica. Popularni su za <strong>TV zid</strong>, akcentni zid iza kreveta, kupatilo, kuhinju, hodnike, kao i za kafiće, restorane, hotele i poslovne prostore.</p>
+        <p>Sve cijene su jasno navedene uz svaki proizvod, a na stranici proizvoda imate <strong>kalkulator</strong> koji na osnovu dimenzija zida izračuna potreban broj komada. Dostava kurirskom službom širom <strong>Crne Gore</strong> – Podgorica, Nikšić, Bar, Budva, Herceg Novi, Kotor, Tivat, Bijelo Polje, Berane i ostali gradovi, uz mogućnost plaćanja pouzećem ili ličnog preuzimanja u showroomu.</p>
+        <p>Niste sigurni šta odgovara vašem prostoru? Pogledajte <a href="faq.html" style="color:#c9a86c;font-weight:600;">česta pitanja</a> ili nas pozovite na <a href="tel:+38269105222" style="color:#c9a86c;font-weight:600;">069 105 222</a> – savjetujemo bez obaveze. Arhitektama, dizajnerima i izvođačima nudimo posebne uslove kroz program <a href="decor-box.html" style="color:#c9a86c;font-weight:600;">Decor Box</a>.</p>
+      </section>
       <?php endif; ?>
       <script>(function(){
         var p=new URLSearchParams(location.search),cat=p.get('cat')||p.get('category');
