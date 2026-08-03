@@ -3,7 +3,7 @@
    =================================================== */
 
 /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+/* Fontovi se ucitavaju iz css/fonts.css (lokalno, paralelno) — @import je bio lancan i blokirao iscrtavanje */
 
 /* ===== CSS VARIJABLE ===== */
 :root {
