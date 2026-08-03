@@ -64,6 +64,24 @@ $catImages = [
   'flex-stone'       => 'images/products/product-1775307391-584.jpg',
 ];
 
+// H1 po kategoriji — svaka stranica mora imati SVOJ glavni naslov sa svojim ključnim riječima
+$catH1 = [
+  'bambus-paneli'    => 'Bambus Zidni Paneli u Podgorici',
+  'bambus-drveni'    => 'Drveni Zidni Paneli – Bambus Obloge Podgorica',
+  'bambus-tekstilni' => 'Tekstilni Zidni Paneli – Podgorica',
+  'bambus-mermerni'  => 'Mermerni Zidni Paneli – Imitacija Mermera',
+  'bambus-metalni'   => 'Metalni Zidni Paneli – Moderan Enterijer',
+  'bambus-kozni'     => 'Kožni Zidni Paneli – Luksuzne Obloge',
+  'classic'          => 'Classic Zidni Paneli – Klasične Obloge za Zid',
+  '3d-letvice'       => '3D Dekorativne Letvice za Zid – Podgorica',
+  'akusticni-paneli' => 'Akustični Paneli za Zid – Zvučna Izolacija',
+  'aluminijum-lajsne'=> 'Aluminijum Lajsne za Zidne Panele',
+  'spc-pod'          => 'SPC Vodootporni Pod – Podgorica, Crna Gora',
+  'pu-kamen'         => 'PU Dekorativni Kamen za Zid – Imitacija Kamena',
+  'mdf'              => 'MDF Kanelirani Zidni Paneli',
+  'flex-stone'       => 'Flex Stone – Savitljivi Kameni Furnir',
+];
+
 $catName  = isset($catNames[$cat]) ? $catNames[$cat] : 'Katalog Proizvoda';
 $imgPath  = isset($catImages[$cat]) ? $catImages[$cat] : 'images/products/cq006.jpg';
 $ogImage  = 'https://makemyhome.me/' . $imgPath;
@@ -417,7 +435,9 @@ echo "\n</script>\n";
         <i class="fas fa-chevron-right"></i>
         <span id="breadcrumb-label">Proizvodi</span>
       </div>
-      <h1 class="section-title" id="page-title">Zidni Paneli, Bambus Obloge i 3D Letvice</h1>
+      <h1 class="section-title" id="page-title"<?= $cat && isset($catNames[$cat]) ? ' data-seo="1"' : '' ?>><?= $cat && isset($catNames[$cat])
+        ? htmlspecialchars($catH1[$cat] ?? ($catNames[$cat] . ' – Zidni Paneli Podgorica'), ENT_QUOTES)
+        : 'Zidni Paneli, Bambus Obloge i 3D Letvice u Podgorici' ?></h1>
       <p class="section-subtitle" id="page-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">
         Kompletna kolekcija obloga za zid u Podgorici — bambus paneli, 3D letvice, akustični paneli, MDF, PU kamen, Flex Stone i SPC podovi
       </p>
@@ -597,7 +617,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=33"></script>
+<script src="js/products.js?v=34"></script>
 <script src="js/cart.js"></script>
 <script>
   initProductsPage();
