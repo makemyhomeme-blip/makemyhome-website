@@ -280,7 +280,25 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
           <!-- Thumbnails -->
         </div>
         <p class="gallery-open-hint"><i class="fas fa-search-plus"></i> Tapni na sliku za prikaz u punoj rezoluciji</p>
-        <div id="gallery-specs" class="gallery-specs-desktop"></div>
+        <div id="gallery-specs" class="gallery-specs-desktop"><?php
+          // SSR specifikacije — Google ih vidi odmah (JS ih zamijeni istim sadržajem za korisnika)
+          if ($product && !empty($product['features'])):
+        ?><div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:20px 22px;margin-top:18px;">
+            <h2 style="font-size:1.05em;color:#1a1a1a;margin:0 0 14px;">Karakteristike – <?= htmlspecialchars($product['name']) ?></h2>
+            <ul style="list-style:none;padding:0;margin:0;font-size:.92em;color:#555;line-height:1.75;">
+              <?php foreach ($product['features'] as $f): ?>
+              <li style="padding-left:18px;position:relative;margin-bottom:6px;"><span style="position:absolute;left:0;color:#c9a86c;">&#10003;</span><?= htmlspecialchars($f) ?></li>
+              <?php endforeach; ?>
+            </ul>
+            <?php if (!empty($product['idealFor'])): ?>
+            <p style="font-size:.92em;color:#555;margin:14px 0 0;line-height:1.7;"><strong>Idealno za:</strong> <?= htmlspecialchars(implode(', ', $product['idealFor'])) ?>.</p>
+            <?php endif; ?>
+            <p style="font-size:.9em;color:#666;margin:12px 0 0;line-height:1.7;">
+              <?= htmlspecialchars($product['name']) ?><?= $h1Keyword ? ' je ' . htmlspecialchars(mb_strtolower($h1Keyword)) : '' ?> iz ponude Make My Home Decor showrooma u Podgorici.
+              Dostupno odmah, sa dostavom širom Crne Gore – Podgorica, Nikšić, Bar, Budva, Herceg Novi, Kotor i ostali gradovi.
+              Za savjet pri izboru pozovite 069 105 222 ili posjetite naš showroom u City Kvartu.
+            </p>
+          </div><?php endif; ?></div>
       </div>
 
       <div class="product-info">
@@ -324,7 +342,17 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
     </div>
 
     <!-- Recenzije -->
-    <div id="product-reviews" style="margin-top:60px;"></div>
+    <div id="product-reviews" style="margin-top:60px;"><?php
+      // SSR recenzije — Google ih vidi odmah (JS ih zamijeni bogatijim prikazom)
+      if ($product && !empty($reviews)):
+    ?><h2 style="font-size:1.25em;color:#1a1a1a;margin-bottom:18px;">Ocjene kupaca – <?= htmlspecialchars($product['name']) ?></h2>
+      <p style="color:#666;font-size:.95em;margin-bottom:18px;">Prosječna ocjena <strong><?= htmlspecialchars((string)$avgRating) ?>/5</strong> na osnovu <?= $revCount ?> recenzija kupaca.</p>
+      <?php foreach ($reviews as $r): ?>
+      <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:16px 18px;margin-bottom:12px;">
+        <p style="font-weight:600;color:#1a1a1a;margin:0 0 4px;font-size:.95em;"><?= htmlspecialchars($r['author'] ?? '') ?><?= !empty($r['location']) ? ' · ' . htmlspecialchars($r['location']) : '' ?> — <?= (int)($r['rating'] ?? 5) ?>/5</p>
+        <p style="color:#555;font-size:.93em;line-height:1.7;margin:0;"><?= htmlspecialchars($r['text'] ?? '') ?></p>
+      </div>
+      <?php endforeach; ?><?php endif; ?></div>
 
     <!-- Slični proizvodi -->
     <div style="margin-top:80px;">
