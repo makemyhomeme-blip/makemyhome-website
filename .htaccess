@@ -88,6 +88,13 @@ RewriteRule ^products\.html$ products.php [QSA,L]
   <FilesMatch "\.(jpg|jpeg|png|gif|ico|webp|svg)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
+  # Fontovi - cache 1 godina (imena su hesirana, nikad se ne mijenjaju)
+  <FilesMatch "\.(woff2|woff|ttf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+  # Dodatna zastita
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
 </IfModule>
 
 # Kompresija za brže učitavanje
