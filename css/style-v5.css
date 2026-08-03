@@ -357,7 +357,7 @@ ul { list-style: none; }
   inset: 0;
   background:
     linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 50%, rgba(26,26,26,0.85) 100%),
-    url('images/hero/hero-bg.jpg') center/cover no-repeat;
+    url('../images/hero-desktop.jpg') center/cover no-repeat;
 }
 
 .hero-bg::before {
@@ -976,7 +976,7 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('images/hero/cta-bg.jpg') center/cover no-repeat;
+  background: url('../images/showcase-room.jpg') center/cover no-repeat;
   opacity: 0.15;
 }
 

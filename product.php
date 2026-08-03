@@ -45,6 +45,20 @@ $catKeywords = [
     'flex-stone' => 'Flex Stone Obloga', 'classic' => 'Classic Zidni Panel',
 ];
 $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catKeywords[$product['category']] : '';
+
+// Naziv kategorije za breadcrumb (vidljiv + schema)
+$catNames = [
+    'bambus-tekstilni' => 'Tekstilni Paneli', 'bambus-drveni' => 'Drveni Paneli',
+    'bambus-mermerni'  => 'Mermerni Paneli',  'bambus-metalni' => 'Metalni Paneli',
+    'bambus-kozni'     => 'Kožni Paneli',     'bambus-paneli'  => 'Bambus Paneli',
+    '3d-letvice'       => '3D Letvice',       'akusticni-paneli' => 'Akustični Paneli',
+    'aluminijum-lajsne'=> 'Aluminijum Lajsne','spc-pod'        => 'SPC Pod',
+    'pu-kamen'         => 'PU Kamen',         'classic'        => 'Classic Paneli',
+    'mdf'              => 'MDF Paneli',       'flex-stone'     => 'Flex Stone',
+];
+$prodCat     = $product['category'] ?? '';
+$prodCatName = $catNames[$prodCat] ?? '';
+$prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . $prodCat : '';
 ?>
 <!DOCTYPE html>
 <html lang="sr-ME">
@@ -164,7 +178,10 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/" },
       { "@type": "ListItem", "position": 2, "name": "Proizvodi", "item": "https://makemyhome.me/products.html" },
-      { "@type": "ListItem", "position": 3, "name": "<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>", "item": "<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>" }
+<?php if ($prodCatName): ?>      { "@type": "ListItem", "position": 3, "name": "<?= htmlspecialchars($prodCatName, ENT_QUOTES) ?>", "item": "<?= htmlspecialchars($prodCatUrl, ENT_QUOTES) ?>" },
+      { "@type": "ListItem", "position": 4, "name": "<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>", "item": "<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>" }
+<?php else: ?>      { "@type": "ListItem", "position": 3, "name": "<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>", "item": "<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>" }
+<?php endif; ?>
     ]
   }
   </script>
@@ -174,7 +191,7 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style-v5.css?v=15">
+  <link rel="stylesheet" href="css/style-v5.css?v=16">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -277,6 +294,17 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
 
 <section class="product-detail-section" style="padding-top:140px;">
   <div class="container">
+<?php if ($product): ?>
+    <nav class="breadcrumb" aria-label="Navigacija" style="margin-bottom:18px;font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#8a8a8a;">
+      <a href="index.html" style="color:#8a8a8a;text-decoration:none;">Početna</a>
+      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
+      <a href="products.html" style="color:#8a8a8a;text-decoration:none;">Proizvodi</a>
+<?php if ($prodCatName): ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
+      <a href="products.html?category=<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#c9a86c;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
+<?php endif; ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
+      <span style="color:#5a5a5a;"><?= htmlspecialchars($product['name']) ?></span>
+    </nav>
+<?php endif; ?>
     <div class="product-detail-grid">
 
       <div class="product-gallery">
