@@ -54,12 +54,12 @@ $catImages = [
   'bambus-metalni'   => 'images/products/product-1774009566-250.jpg',
   'bambus-kozni'     => 'images/products/product-1774454850-237.jpg',
   'bambus-paneli'    => 'images/products/cq006.jpg',
-  '3d-letvice'       => 'images/products/product-1774010978-346.jpg',
+  '3d-letvice'       => 'images/products/product-1785262175-466.jpg',
   'akusticni-paneli' => 'images/products/product-1774011747-477.jpg',
   'aluminijum-lajsne'=> 'images/products/product-1774013021-738.png',
   'spc-pod'          => 'images/products/product-1774536767-824.jpg',
   'pu-kamen'         => 'images/products/product-1775121365-536.jpg',
-  'classic'          => 'images/products/product-1774455189-225.jpg',
+  'classic'          => 'images/products/product-1784309442-679.jpg',
   'mdf'              => 'images/products/product-1775489604-493.jpg',
   'flex-stone'       => 'images/products/product-1775307391-584.jpg',
 ];
@@ -357,8 +357,33 @@ echo "\n</script>\n";
   gtag("config", "G-4LLQCZ8CV4");
 </script>
 <style id="nav-wide">
+/* Laptopovi 769–1599px: sve stavke MORAJU stati u red (Kontakt je ranije ispadao van ekrana) */
+@media(min-width:769px) and (max-width:1599px){
+  .header-inner{max-width:100%!important;padding-left:14px!important;padding-right:14px!important;}
+  .nav-menu{gap:0!important;flex-wrap:nowrap!important;}
+  .nav-link{font-size:11.5px!important;padding:8px 4px!important;letter-spacing:0!important;}
+  .nav-link.nav-cta{padding:7px 11px!important;margin-left:3px!important;}
+  .logo{margin-right:8px!important;}
+  .logo-img{height:36px!important;}
+  .logo-text .name{font-size:13.5px!important;}
+  .logo-text .tagline{display:none!important;}
+  #desk-search-wrap{width:150px!important;margin-right:4px!important;}
+}
+/* 769–1099px: previše stavki za jedan red — koristi se hamburger meni (kao na telefonu) */
+@media(min-width:769px) and (max-width:1149px){
+  .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
+    background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
+    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;overflow-y:auto!important;}
+  .nav-menu.open{display:flex!important;}
+  .hamburger{display:flex!important;}
+  .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
+  .nav-link.nav-cta{width:100%!important;margin-left:0!important;padding:11px 8px!important;}
+  #mob-search-box{display:block!important;}
+  #desk-search-wrap{display:none!important;}
+  .logo-text .tagline{display:none!important;}
+}
 /* Široki ekrani: header koristi više prostora, stavke razmaknute */
-@media(min-width:1400px){
+@media(min-width:1600px){
   .header-inner{max-width:1560px!important;}
   .nav-link{font-size:13px!important;padding:8px 10px!important;}
   #desk-search-wrap{width:250px!important;}
