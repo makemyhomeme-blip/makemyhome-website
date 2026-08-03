@@ -7,6 +7,14 @@ foreach ($products as $p) {
     if ((int)$p['id'] === $id) { $product = $p; break; }
 }
 
+// Nepostojeci proizvod MORA vratiti 404, ne 200.
+// Inace Google to vidi kao "soft 404" i moze indeksirati beskonacno smecih URL-ova
+// (?id=99999, ?id=abc...). Vidi: Google Search Central – Soft 404 errors.
+if (!$product) {
+    http_response_code(404);
+    header('X-Robots-Tag: noindex', true);
+}
+
 $ogTitle = $product
     ? htmlspecialchars($product['name'], ENT_QUOTES) . ' | Make My Home Decor'
     : 'Proizvod | Make My Home Decor';
@@ -30,8 +38,24 @@ $ogImage = ($product && !empty($product['image']))
     : 'https://makemyhome.me/images/products/cq006.jpg';
 
 $ogUrl = 'https://makemyhome.me/product.html' . ($id ? '?id=' . $id : '');
+// <title> mora stati u ~60 znakova da ga Google ne siječe u rezultatima.
+// Duga imena skraćujemo: prvo pada dio iza " | ", pa zagrada, pa rez na razmaku.
+$titleName = $product['name'] ?? '';
+$suffix    = ' | Make My Home Decor';
+if (mb_strlen($titleName . $suffix) > 60 && mb_strpos($titleName, ' | ') !== false) {
+    $titleName = trim(mb_substr($titleName, 0, mb_strpos($titleName, ' | ')));
+}
+if (mb_strlen($titleName . $suffix) > 60 && preg_match('/^(.*?)\s*\([^)]*\)\s*$/u', $titleName, $mm)) {
+    $titleName = trim($mm[1]);
+}
+if (mb_strlen($titleName . $suffix) > 60) {
+    $cut = mb_substr($titleName, 0, 60 - mb_strlen($suffix));
+    $sp  = mb_strrpos($cut, ' ');
+    if ($sp !== false && $sp > 10) $cut = mb_substr($cut, 0, $sp);
+    $titleName = rtrim($cut, " -–—,.");
+}
 $pageTitle = $product
-    ? htmlspecialchars($product['name'], ENT_QUOTES) . ' | Make My Home Decor'
+    ? htmlspecialchars($titleName, ENT_QUOTES) . $suffix
     : 'Proizvod | Make My Home Decor';
 
 // Keyword za H1 – mapa kategorija (dodaje se uz ime proizvoda za bolji SEO)
@@ -205,7 +229,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="preload" href="fa/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=18">
+  <link rel="stylesheet" href="css/style-v5.css?v=19">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -333,6 +357,33 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 
 <section class="product-detail-section" style="padding-top:140px;">
   <div class="container">
+<?php if (!$product): ?>
+    <div style="max-width:640px;margin:0 auto;text-align:center;padding:30px 16px 60px;">
+      <i class="fas fa-box-open" style="font-size:56px;color:#c9a86c;margin-bottom:22px;display:block;"></i>
+      <h1 style="font-size:1.7em;color:#1a1a1a;margin-bottom:14px;">Proizvod nije pronađen</h1>
+      <p style="color:#5a6672;line-height:1.75;margin-bottom:10px;">
+        Ovaj proizvod više nije u ponudi ili je link pogrešan. Cijela ponuda zidnih panela,
+        bambus obloga, 3D letvica, akustičnih panela, PU kamena i SPC podova je i dalje dostupna u katalogu.
+      </p>
+      <p style="color:#5a6672;line-height:1.75;margin-bottom:26px;">
+        Ako tražite određeni dezen, pozovite nas na <a href="tel:+38269105222" style="color:#c9a86c;font-weight:600;">069 105 222</a>
+        ili svratite u showroom u Podgorici — Vojvode Maša Đurovića 41, City Kvart.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="products.html" class="btn btn-gold">Pogledaj sve proizvode</a>
+        <a href="contact.html" class="btn btn-outline">Kontakt</a>
+      </div>
+      <div style="margin-top:34px;text-align:left;">
+        <p style="font-weight:700;color:#1a1a1a;margin-bottom:10px;">Popularne kategorije:</p>
+        <ul style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;">
+          <?php foreach ($catNames as $ck => $cn): ?>
+          <li><a href="products.html?category=<?= htmlspecialchars($ck, ENT_QUOTES) ?>"
+                 style="display:inline-block;background:#f5f0eb;color:#8a6d2f;padding:6px 13px;border-radius:18px;font-size:13px;text-decoration:none;"><?= htmlspecialchars($cn) ?></a></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+<?php endif; ?>
 <?php if ($product): ?>
     <nav class="breadcrumb" aria-label="Navigacija" style="margin-bottom:18px;font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#8a8a8a;">
       <a href="index.html" style="color:#8a8a8a;text-decoration:none;">Početna</a>
@@ -515,7 +566,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
         </div>
       </div>
       <div>
-        <h4 class="footer-title">Navigacija</h4>
+        <h3 class="footer-title">Navigacija</h3>
         <ul class="footer-links">
           <li><a href="index.html"><i class="fas fa-chevron-right"></i> Početna</a></li>
           <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
@@ -526,7 +577,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
         </ul>
       </div>
       <div>
-        <h4 class="footer-title">Kategorije</h4>
+        <h3 class="footer-title">Kategorije</h3>
         <ul class="footer-links footer-links-grid">
           <li><a href="products.html?category=bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
           <li><a href="products.html?category=bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
@@ -543,7 +594,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
         </ul>
       </div>
       <div>
-        <h4 class="footer-title">Kontakt</h4>
+        <h3 class="footer-title">Kontakt</h3>
         <ul class="footer-contact-list">
           <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
           <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
@@ -571,5 +622,6 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <script>
   renderProductDetail();
 </script>
+<script src="js/analytics-events.js?v=3" defer></script>
 </body>
 </html>

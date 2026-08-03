@@ -3093,3 +3093,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .btn-card-cart { border-radius: 10px; margin-top: 8px; }
   .pq-add-to-cart { font-size: 16px; padding: 16px 20px; }
 }
+
+
+/* ===== TAP TARGETS (mobilni) — Google trazi min ~24-48px visine za linkove ===== */
+@media (max-width: 768px) {
+  .btn-card-detail { padding: 9px 4px !important; min-height: 34px; display: inline-flex; align-items: center; }
+  .footer-contact-list a,
+  .footer-contact-list li { min-height: 32px; display: flex; align-items: center; }
+  .insta-handle { display: inline-block; padding: 7px 0; }
+}

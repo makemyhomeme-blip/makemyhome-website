@@ -82,6 +82,13 @@ $catH1 = [
   'flex-stone'       => 'Flex Stone – Savitljivi Kameni Furnir',
 ];
 
+// Nepoznata kategorija (?category=nesto-cega-nema) MORA vratiti 404, ne 200 —
+// inace je to "soft 404" i Google moze indeksirati beskonacno varijanti.
+if ($cat !== '' && !isset($catNames[$cat])) {
+    http_response_code(404);
+    header('X-Robots-Tag: noindex', true);
+    $catNotFound = true;
+}
 $catName  = isset($catNames[$cat]) ? $catNames[$cat] : 'Katalog Proizvoda';
 $imgPath  = isset($catImages[$cat]) ? $catImages[$cat] : 'images/products/cq006.jpg';
 $ogImage  = 'https://makemyhome.me/' . $imgPath;
@@ -237,7 +244,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="data/products.json?v=5" as="fetch" crossorigin="anonymous">
   <link rel="preload" href="data/categories.json?v=5" as="fetch" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style-v5.css?v=18">
+  <link rel="stylesheet" href="css/style-v5.css?v=19">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -634,7 +641,7 @@ echo "\n</script>\n";
         </div>
       </div>
       <div>
-        <h4 class="footer-title">Navigacija</h4>
+        <h3 class="footer-title">Navigacija</h3>
         <ul class="footer-links">
           <li><a href="index.html"><i class="fas fa-chevron-right"></i> Početna</a></li>
           <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
@@ -645,11 +652,11 @@ echo "\n</script>\n";
         </ul>
       </div>
       <div>
-        <h4 class="footer-title">Kategorije</h4>
+        <h3 class="footer-title">Kategorije</h3>
         <ul class="footer-links" id="footer-cats"></ul>
       </div>
       <div>
-        <h4 class="footer-title">Kontakt</h4>
+        <h3 class="footer-title">Kontakt</h3>
         <ul class="footer-contact-list">
           <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 41, City Kvart, Podgorica</span></li>
           <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
@@ -679,5 +686,6 @@ echo "\n</script>\n";
 <script>
   initProductsPage();
 </script>
+<script src="js/analytics-events.js?v=3" defer></script>
 </body>
 </html>
