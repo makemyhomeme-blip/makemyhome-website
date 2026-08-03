@@ -103,6 +103,33 @@ function optimizeImage($tmpPath, $destPath, $maxW = 1200, $maxH = 900, $quality 
     return $ok ? $destPath : false;
 }
 
+/**
+ * Napravi (ili osvježi) .webp pored .jpg. Ako WebP nije podržan ili snimanje padne,
+ * ukloni postojeći .webp da <picture> nikad ne posluži staru sliku.
+ */
+function syncWebp($destPath, $gdImage = null, $quality = 82) {
+    $webpPath = preg_replace('/\.(jpe?g|png)$/i', '.webp', $destPath);
+    if ($webpPath === $destPath) return false;
+    $made = false;
+    if (function_exists('imagewebp')) {
+        $img = $gdImage;
+        $own = false;
+        if (!$img && is_file($destPath)) {
+            $info = @getimagesize($destPath);
+            if ($info) {
+                $img = $info[2] === IMAGETYPE_PNG ? @imagecreatefrompng($destPath) : @imagecreatefromjpeg($destPath);
+                $own = true;
+            }
+        }
+        if ($img) {
+            $made = @imagewebp($img, $webpPath, $quality);
+            if ($own) imagedestroy($img);
+        }
+    }
+    if (!$made && is_file($webpPath)) @unlink($webpPath);
+    return $made;
+}
+
 function handleImageUpload($fieldName) {
     // Korisnik nije izabrao novu sliku — zadrži postojeću (nije greška)
     if (empty($_FILES[$fieldName]) || ($_FILES[$fieldName]['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
@@ -517,6 +544,7 @@ switch ($action) {
                 exit;
             }
         }
+        syncWebp($dest);
         echo json_encode(['ok' => true]);
         exit;
 
@@ -540,6 +568,7 @@ switch ($action) {
         if (!$saved && !move_uploaded_file($file['tmp_name'], $dest)) {
             echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']); exit;
         }
+        syncWebp($dest);
         echo json_encode(['ok' => true]); exit;
 
     case 'upload_decorbox':
@@ -575,6 +604,7 @@ switch ($action) {
         if (!$saved && !move_uploaded_file($file['tmp_name'], $dest)) {
             echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']); exit;
         }
+        syncWebp($dest);
         echo json_encode(['ok' => true, 'file' => 'images/' . $map[$slot]['file']]); exit;
 
     case 'save_decorbox_style':

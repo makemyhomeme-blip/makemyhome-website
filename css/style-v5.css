@@ -2544,6 +2544,20 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .rv-verified { font-size: 12px; color: #2a7d3f; font-weight: 500; display: flex; align-items: center; gap: 5px; }
 .rv-verified i { font-size: 12px; }
 
+/* Prikaz samo prva 3 komentara — ostali iza dugmeta (tekst svih ostaje u HTML-u za Google) */
+.rv-card--hidden { display: none; }
+.rv-wrap.rv-expanded .rv-card--hidden { display: block; }
+.rv-more-btn {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  width: 100%; margin-top: 14px;
+  background: #fff; color: #1a1a1a;
+  border: 1.5px solid rgba(201,168,108,0.55); border-radius: 12px;
+  padding: 13px 18px; font-family: inherit; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: background .2s, border-color .2s;
+}
+.rv-more-btn:hover { background: #faf7f2; border-color: #c9a86c; }
+.rv-more-btn i { font-size: 12px; color: #c9a86c; }
+
 /* ===== GALLERY LIGHTBOX ===== */
 .gallery-main img { cursor: zoom-in; }
 .gallery-open-hint {

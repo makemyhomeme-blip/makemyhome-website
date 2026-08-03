@@ -78,10 +78,9 @@
   </script>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style-v5.css?v=17">
+  <link rel="preload" href="fa/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fa/css/all.min.css?v=1">
+  <link rel="stylesheet" href="css/style-v5.css?v=18">
   <style>
     /* NAV FIT — more items */
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
@@ -252,8 +251,11 @@
     <div class="about-grid">
       <div class="about-img-wrapper animate-on-scroll">
         <div class="about-img-main" style="background:var(--dark-2);">
-          <img src="images/about-showroom.jpg" alt="Make My Home Decor prodavnica"
-            onerror="this.parentElement.innerHTML='<i class=\'fas fa-store\' style=\'font-size:100px;color:rgba(255,255,255,0.2)\'></i>'">
+          <picture>
+            <source srcset="images/about-showroom.webp" type="image/webp">
+            <img src="images/about-showroom.jpg" alt="Make My Home Decor prodavnica"
+              onerror="this.parentElement.parentElement.innerHTML='<i class=\'fas fa-store\' style=\'font-size:100px;color:rgba(255,255,255,0.2)\'></i>'">
+          </picture>
         </div>
         <div class="about-img-badge">
           <div class="years">5+</div>

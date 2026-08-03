@@ -203,10 +203,9 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <?php endif; ?>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style-v5.css?v=17">
+  <link rel="preload" href="fa/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fa/css/all.min.css?v=1">
+  <link rel="stylesheet" href="css/style-v5.css?v=18">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -455,8 +454,8 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
           </div>
         </div>
         <div class="rv-list">
-          <?php foreach ($reviews as $r): ?>
-          <div class="rv-card">
+          <?php $rvI = 0; foreach ($reviews as $r): $rvI++; ?>
+          <div class="rv-card<?= $rvI > 3 ? ' rv-card--hidden' : '' ?>">
             <div class="rv-card-top">
               <div class="rv-avatar"><?= htmlspecialchars(mb_substr($r['author'] ?? '?', 0, 1)) ?></div>
               <div class="rv-card-meta">
@@ -470,6 +469,13 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
           </div>
           <?php endforeach; ?>
         </div>
+        <?php if ($revCount > 3): ?>
+        <button type="button" class="rv-more-btn" id="rv-more-btn"
+                onclick="var w=this.closest('.rv-wrap');w.classList.add('rv-expanded');this.remove();">
+          Prikaži još <?= $revCount - 3 ?> <?= ($revCount - 3) === 1 ? 'komentar' : 'komentara' ?>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <?php endif; ?>
       </div>
     </div>
     <?php endif; ?>
