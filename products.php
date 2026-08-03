@@ -128,7 +128,7 @@ $pageTitle = $cat
   : 'Zidni Paneli i Bambus Obloge | Make My Home Decor';
 ?>
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="sr-ME">
 <head><meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -138,7 +138,7 @@ $pageTitle = $cat
   <meta property="og:type" content="website">
   <meta property="og:url" content="<?= htmlspecialchars($ogUrl) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
-  <meta property="og:locale" content="sr_RS">
+  <meta property="og:locale" content="sr_ME">
   <link rel="canonical" href="<?= htmlspecialchars($ogUrl) ?>">
   <title><?= htmlspecialchars($pageTitle) ?></title>
   <script type="application/ld+json">

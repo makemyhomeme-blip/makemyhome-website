@@ -47,7 +47,7 @@ $catKeywords = [
 $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catKeywords[$product['category']] : '';
 ?>
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="sr-ME">
 <head><meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,7 +57,7 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
   <meta property="og:type" content="product">
   <meta property="og:url" content="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>">
-  <meta property="og:locale" content="sr_RS">
+  <meta property="og:locale" content="sr_ME">
   <link rel="canonical" href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <title><?= $pageTitle ?></title>
 <?php if ($product):
