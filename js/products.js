@@ -1330,8 +1330,10 @@ async function renderProductDetail() {
     }
   }
 
-  // Append reviews directly to info
-  info.insertAdjacentHTML('beforeend', reviewsHtml);
+  // Recenzije: ako ih je server vec iscrtao (data-ssr="1"), ne crtaj ih ponovo —
+  // inace bi se blok "Ocjene kupaca" pojavio dva puta na stranici.
+  const ssrReviews = document.querySelector('#product-reviews[data-ssr="1"]');
+  if (!ssrReviews) info.insertAdjacentHTML('beforeend', reviewsHtml);
 
   // Tab switch
   window.switchPqTab = function(tab, btn) {

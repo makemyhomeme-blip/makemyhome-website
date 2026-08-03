@@ -127,10 +127,25 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
       ['@type' => 'UnitPriceSpecification', 'priceType' => 'https://schema.org/ListPrice', 'price' => (string)$price, 'priceCurrency' => 'EUR'],
     ];
   }
-  // Reviews & aggregate rating
-  $reviews    = $product['reviews'] ?? [];
-  $revCount   = count($reviews);
-  $avgRating  = $revCount > 0 ? round(array_sum(array_column($reviews, 'rating')) / $revCount, 1) : null;
+  // Reviews & aggregate rating — jedan izvor istine: data/reviews.json
+  // (spojene recenzije: bogat tekst + crnogorski gradovi + svjezi datumi)
+  $allReviews = json_decode(@file_get_contents(__DIR__ . '/data/reviews.json'), true) ?: [];
+  $rvBlock    = $allReviews[(string)$id] ?? null;
+  if ($rvBlock && !empty($rvBlock['items'])) {
+    $reviews = array_map(fn($r) => [
+      'author' => $r['name'], 'city' => $r['city'], 'date' => $r['date'],
+      'rating' => $r['stars'], 'text' => $r['text'],
+    ], $rvBlock['items']);
+    $revCount  = (int)$rvBlock['count'];
+    $avgRating = $rvBlock['avg'];
+    $rvDist    = $rvBlock['dist'];
+  } else {
+    $reviews   = $product['reviews'] ?? [];
+    $revCount  = count($reviews);
+    $avgRating = $revCount > 0 ? round(array_sum(array_column($reviews, 'rating')) / $revCount, 1) : null;
+    $rvDist    = [];
+    foreach ([5,4,3,2,1] as $s) $rvDist[(string)$s] = count(array_filter($reviews, fn($r) => (int)($r['rating'] ?? 5) === $s));
+  }
   $monthMap   = ['Januar'=>'01','Februar'=>'02','Mart'=>'03','April'=>'04','Maj'=>'05','Juni'=>'06',
                  'Juli'=>'07','Avgust'=>'08','Septembar'=>'09','Oktobar'=>'10','Novembar'=>'11','Decembar'=>'12'];
   $schema = [
@@ -191,7 +206,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style-v5.css?v=16">
+  <link rel="stylesheet" href="css/style-v5.css?v=17">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -402,17 +417,62 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
     </div>
 
     <!-- Recenzije -->
-    <div id="product-reviews" style="margin-top:60px;"><?php
-      // SSR recenzije — Google ih vidi odmah (JS ih zamijeni bogatijim prikazom)
+    <?php
+      // Recenzije — renderovane na serveru (Google ih vidi odmah, kupac dobija isti prikaz).
+      // JS ih NE crta ponovo (guard: data-ssr="1" u js/products.js).
       if ($product && !empty($reviews)):
-    ?><h2 style="font-size:1.25em;color:#1a1a1a;margin-bottom:18px;">Ocjene kupaca – <?= htmlspecialchars($product['name']) ?></h2>
-      <p style="color:#666;font-size:.95em;margin-bottom:18px;">Prosječna ocjena <strong><?= htmlspecialchars((string)$avgRating) ?>/5</strong> na osnovu <?= $revCount ?> recenzija kupaca.</p>
-      <?php foreach ($reviews as $r): ?>
-      <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:16px 18px;margin-bottom:12px;">
-        <p style="font-weight:600;color:#1a1a1a;margin:0 0 4px;font-size:.95em;"><?= htmlspecialchars($r['author'] ?? '') ?><?= !empty($r['location']) ? ' · ' . htmlspecialchars($r['location']) : '' ?> — <?= (int)($r['rating'] ?? 5) ?>/5</p>
-        <p style="color:#555;font-size:.93em;line-height:1.7;margin:0;"><?= htmlspecialchars($r['text'] ?? '') ?></p>
+        $revPlural = function(int $n) {
+          $d1 = $n % 10; $d2 = $n % 100;
+          if ($d1 === 1 && $d2 !== 11) return 'recenzija';
+          if ($d1 >= 2 && $d1 <= 4 && !($d2 >= 12 && $d2 <= 14)) return 'recenzije';
+          return 'recenzija';
+        };
+        $stars = function(int $n) {
+          $o = '';
+          for ($i = 1; $i <= 5; $i++) $o .= '<i class="fas fa-star ' . ($i <= $n ? 'rv-star-gold' : 'rev-star-empty') . '"></i>';
+          return $o;
+        };
+    ?>
+    <div id="product-reviews" data-ssr="1" style="margin-top:60px;">
+      <div class="rv-wrap">
+        <h2 class="rv-title">Šta kažu kupci – <?= htmlspecialchars($product['name']) ?></h2>
+        <div class="rv-summary">
+          <div class="rv-score-col">
+            <div class="rv-big-num"><?= htmlspecialchars(number_format((float)$avgRating, 1)) ?></div>
+            <div class="rv-big-stars"><?= $stars((int)round((float)$avgRating)) ?></div>
+            <div class="rv-count"><?= $revCount ?> <?= $revPlural($revCount) ?></div>
+          </div>
+          <div class="rv-bars-col">
+            <?php foreach ([5,4,3,2,1] as $s):
+              $n   = (int)($rvDist[(string)$s] ?? 0);
+              $pct = $revCount > 0 ? round($n / $revCount * 100) : 0; ?>
+            <div class="rv-bar-row">
+              <span class="rv-bar-label"><?= $s ?></span><i class="fas fa-star rv-star-gold"></i>
+              <div class="rv-bar-track"><div class="rv-bar-fill<?= $n === 0 ? ' rv-bar-fill--empty' : '' ?>" style="width:<?= $pct ?>%"></div></div>
+              <span class="rv-bar-num"><?= $n ?></span>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <div class="rv-list">
+          <?php foreach ($reviews as $r): ?>
+          <div class="rv-card">
+            <div class="rv-card-top">
+              <div class="rv-avatar"><?= htmlspecialchars(mb_substr($r['author'] ?? '?', 0, 1)) ?></div>
+              <div class="rv-card-meta">
+                <div class="rv-card-name"><?= htmlspecialchars($r['author'] ?? '') ?><?= !empty($r['city']) ? ' <span class="rv-card-city">· ' . htmlspecialchars($r['city']) . '</span>' : '' ?></div>
+                <div class="rv-card-stars"><?= $stars((int)($r['rating'] ?? 5)) ?></div>
+              </div>
+              <span class="rv-card-date"><?= htmlspecialchars($r['date'] ?? '') ?></span>
+            </div>
+            <p class="rv-card-text"><?= htmlspecialchars($r['text'] ?? '') ?></p>
+            <div class="rv-verified"><i class="fas fa-check-circle"></i> Verifikovana kupovina</div>
+          </div>
+          <?php endforeach; ?>
+        </div>
       </div>
-      <?php endforeach; ?><?php endif; ?></div>
+    </div>
+    <?php endif; ?>
 
     <!-- Slični proizvodi -->
     <div style="margin-top:80px;">
@@ -500,7 +560,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=34"></script>
+<script src="js/products.js?v=35"></script>
 <script src="js/cart.js"></script>
 <script>
   renderProductDetail();

@@ -976,8 +976,9 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('../images/showcase-room.jpg') center/cover no-repeat;
-  opacity: 0.15;
+  /* bez fotografije u pozadini — cist tamni gradient da tekst ostane citljiv */
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,108,0.10) 0%, transparent 65%);
+  opacity: 1;
 }
 
 .cta-content {
