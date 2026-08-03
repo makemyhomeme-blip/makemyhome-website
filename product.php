@@ -58,6 +58,11 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
   <meta property="og:url" content="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>">
   <meta property="og:locale" content="sr_ME">
+  <meta property="og:site_name" content="Make My Home Decor">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?= $ogTitle ?>">
+  <meta name="twitter:description" content="<?= $ogDesc ?>">
+  <meta name="twitter:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <title><?= $pageTitle ?></title>
 <?php if ($product):
@@ -166,6 +171,8 @@ $h1Keyword = $product && isset($catKeywords[$product['category'] ?? '']) ? $catK
 <?php endif; ?>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style-v5.css?v=15">
   <style>
