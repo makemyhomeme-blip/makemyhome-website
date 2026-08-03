@@ -600,7 +600,8 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
         <ul class="footer-contact-list">
           <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
           <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
-          <li><i class="fas fa-map-marker-alt"></i><span>City Kvart, Podgorica</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 41, City Kvart, Podgorica 81000</span></li>
+          <li><i class="fas fa-clock"></i><span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span></li>
         </ul>
       </div>
     </div>
