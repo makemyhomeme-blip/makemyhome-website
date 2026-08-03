@@ -315,6 +315,23 @@ echo "\n</script>\n";
       background: #f5f0eb; color: #c9a86c;
       padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
     }
+    /* TELEFON: bez praznog prostora ispod hero-a i bez stiskanja u jedan red */
+    @media (max-width: 768px) {
+      .products-section { padding: 22px 0 60px !important; }
+      .back-bar {
+        flex-wrap: wrap; align-items: center;
+        gap: 10px; padding: 0 0 16px;
+      }
+      .btn-back { order: 1; padding: 9px 15px; font-size: 13px; }
+      .back-bar .count-badge {
+        order: 2; margin-left: auto;
+        font-size: 12px; padding: 4px 11px; white-space: nowrap;
+      }
+      .back-bar h2 {
+        order: 3; width: 100%;
+        font-size: 20px; line-height: 1.25; margin: 0;
+      }
+    }
     /* OUT OF STOCK */
     .out-of-stock .product-img img { }
     .oos-tag {

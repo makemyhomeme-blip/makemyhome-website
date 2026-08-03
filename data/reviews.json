@@ -961,9 +961,9 @@
  },
  "142": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -982,28 +982,56 @@
     "city": "Budva",
     "stars": 5,
     "text": "Koristio sam TRAVERTINO za akcentni zid u dnevnoj sobi apartmana. Gosti redovno komentarišu koliko izgleda luksuzno. Kombinacija s toplim osvjetljenjem je savršena – izgleda kao visokobudžetni hotel, a cijena je odlična.",
-    "date": "Februar 2026"
+    "date": "April 2026"
    },
    {
     "name": "Milena R.",
     "city": "Podgorica",
     "stars": 5,
     "text": "Postavila sam TRAVERTINO u hodnik i svi koji uđu pitaju je li pravi kamen. Ta topla bež boja i prirodne šare daju prostoru nevjerovatan karakter. Montaža je bila lakša nego što sam mislila – za par sati gotovo.",
+    "date": "Februar 2026"
+   },
+   {
+    "name": "Vesna K.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Travertino ima tople bež i kremaste tonove, ne ono hladno sivo. Uzela sam dva panela za dnevnu sobu i zid izgleda kao da je od pravog kamena. Za razliku od kamena, mogu ga obrisati krpom i gotovo.",
+    "date": "Januar 2026"
+   },
+   {
+    "name": "Marko Ž.",
+    "city": "Ulcinj",
+    "stars": 5,
+    "text": "Uzeo za restoran, četiri panela. Gosti stalno pitaju je li to pravi travertin. Panel je 5mm i lagan, sam sam ga digao i zalijepio, nije trebala nikakva potkonstrukcija ni majstor.",
     "date": "Decembar 2025"
    }
   ]
  },
  "116": {
-  "avg": 5.0,
-  "count": 3,
+  "avg": 4.8,
+  "count": 5,
   "dist": {
-   "5": 3,
-   "4": 0,
+   "5": 4,
+   "4": 1,
    "3": 0,
    "2": 0,
    "1": 0
   },
   "items": [
+   {
+    "name": "Dragana P.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Mercury Marble sam uzela za zid iza kade. Sive žile idu nekako mirno, ne upada u oči kao neki mermerni dezeni koje sam gledala. Majstor je rekao da mu je ovo prvi put da radi panel umjesto pločica i da je gotov za pola dana. Fuge više ne moram da ribam, to mi je najveća stvar.",
+    "date": "April 2026"
+   },
+   {
+    "name": "Vladimir K.",
+    "city": "Tivat",
+    "stars": 4,
+    "text": "Uzeo dva komada za hodnik u apartmanu. Izgleda skupo, gosti misle da je pravi mermer. Jedina zamjerka mi je što na jakom svjetlu vidiš da je sjajno, pa treba paziti gdje ide lampa. Za ovu cijenu nemam šta više da tražim.",
+    "date": "Mart 2026"
+   },
    {
     "name": "Sonja K.",
     "city": "Herceg Novi",
@@ -1413,15 +1441,22 @@
  },
  "117": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
    "1": 0
   },
   "items": [
+   {
+    "name": "Snežana M.",
+    "city": "Nikšić",
+    "stars": 5,
+    "text": "SW002 je čisto bijeli sa finim sivim žilicama i baš to sam tražila za kupatilo. Prostorija mi je mala i bojala sam se da će mermer biti pretežak, ali ispalo je suprotno — soba djeluje veća i svjetlija. Panel se lijepi silikonom, muž je sam sve odradio.",
+    "date": "Juli 2026"
+   },
    {
     "name": "Maja P.",
     "city": "Podgorica",
@@ -1441,6 +1476,13 @@
     "city": "Kotor",
     "stars": 5,
     "text": "Renovirali smo recepciju ureda i SW002 je dala savršen, profesionalan izgled. Klijenti uvijek komentarišu koliko je elegantno. Lagan za čišćenje i ne pokazuje prašinu. Definitivno naručujemo i za drugi ured.",
+    "date": "Novembar 2025"
+   },
+   {
+    "name": "Đorđe R.",
+    "city": "Budva",
+    "stars": 5,
+    "text": "Radim renoviranja i sve češće nudim ljudima ovo umjesto pločica. SW002 je najprodavaniji jer se uklapa svuda. Jedan panel pokrije 3.42 m² pa nema tih silnih spojeva. Naručujem redovno.",
     "date": "Oktobar 2025"
    }
   ]
@@ -3607,9 +3649,9 @@
  },
  "143": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -3621,30 +3663,44 @@
     "city": "Podgorica",
     "stars": 5,
     "text": "Postavio sam ove panele u dnevnoj sobi i odmah primijetio razliku u zvuku – eho je praktično nestao. A izgled je nevjerovatan, geometrijski uzorak daje prostoru karakter koji nemaju obični paneli. Više komšija je pitalo odakle mi ovo, niko nije vjerovao da su akustični.",
-    "date": "Juni 2026"
+    "date": "Juli 2026"
    },
    {
     "name": "Milena T.",
     "city": "Nikšić",
     "stars": 5,
     "text": "Imala sam studio za jogu i akustika je bila loša – zvuk se vraćao i ometao koncentraciju. Ovi zlatni Geometrik paneli su savršeni izbor – i zvuk je umirio i izgled sobe je dobio toplinu koja se uklapa uz drvene detalje. Klijentkinje ih redovno komentarišu.",
-    "date": "Oktobar 2025"
+    "date": "Juni 2026"
    },
    {
     "name": "Igor V.",
     "city": "Bar",
     "stars": 5,
     "text": "Radio sam home office i video pozivi su odjekivali. Naručio ove panele jer mi se svidjela kombinacija akustike i izgleda. Montaža super, drže se čvrsto. Kolege na pozivima su primijetile i zvuk i pozadinu – izgledalo je profesionalno od prvog dana.",
+    "date": "Novembar 2025"
+   },
+   {
+    "name": "Vuk P.",
+    "city": "Nikšić",
+    "stars": 5,
+    "text": "Geometrijski uzorak je ono što me privuklo, nije obična ravna letva. Uzeo sam dvanaest ploča 60×60 i složio ih u pravougaonik iza TV-a. Zvuk u sobi je odmah mekši, a zid je postao glavna stvar u prostoriji.",
+    "date": "Oktobar 2025"
+   },
+   {
+    "name": "Milica N.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "AKU051 sam uzela za sobu u kojoj radim online. Prije se čula svaka jeka na sastancima, sad kolege kažu da me čuju mnogo jasnije. Zlatni hrast na crnom filcu izgleda ozbiljno, ne kao neka pjena za zvuk.",
     "date": "Septembar 2025"
    }
   ]
  },
  "144": {
-  "avg": 4.7,
-  "count": 3,
+  "avg": 4.6,
+  "count": 5,
   "dist": {
-   "5": 2,
-   "4": 1,
+   "5": 3,
+   "4": 2,
    "3": 0,
    "2": 0,
    "1": 0
@@ -3655,29 +3711,43 @@
     "city": "Budva",
     "stars": 5,
     "text": "Bijela verzija geometrijskog panela je bila upravo ono što mi je trebalo za minimalističku spavaću sobu. Uz bijele zidove i crne detalje izgleda nevjerovatno. Akustika je poboljšana, nema više odjeka. Dizajn je toliko dekorativan da ih svi zamišljaju kao uramljenu umjetnost.",
-    "date": "Maj 2026"
+    "date": "Juli 2026"
    },
    {
     "name": "Jovana S.",
     "city": "Podgorica",
     "stars": 4,
     "text": "Kupila za kancelariju – htjela nešto što nije tipičan ured ali i smanjuje buku. Bijeli Geometrik je bio pravo rješenje. Jedino što bih dodala je da je montaža malo zahtjevnija zbog preciznosti uzorka, ali rezultat je savršen. Svaka posjeta ureda komentarište zidove.",
-    "date": "Mart 2026"
+    "date": "Maj 2026"
    },
    {
     "name": "Marko P.",
     "city": "Herceg Novi",
     "stars": 5,
     "text": "Postavio u recepciji malog hotela koji radim u nordijskom stilu. Ovi bijeli geometrik paneli su upotpunili cijelu koncepciju prostora. Gosti ih fotografišu i pitaju odakle. Zvuk je smiren, razgovor u recepciji je čišći. Naručujem još za restoranski dio.",
+    "date": "Mart 2026"
+   },
+   {
+    "name": "Jelena S.",
+    "city": "Budva",
+    "stars": 5,
+    "text": "Bijeli Pepeo je hladnija nijansa i to sam baš tražila jer imam sve u bijelo-sivom. Stavila sam u dnevnoj iza sofe. Osim što izgleda lijepo, primijetila sam da se televizor bolje čuje, manje odzvanja.",
     "date": "Oktobar 2025"
+   },
+   {
+    "name": "Danilo M.",
+    "city": "Podgorica",
+    "stars": 4,
+    "text": "Ploče su kvalitetne i lako se slažu, filc je gust i težak što je dobar znak. Meni je trebalo malo strpljenja da poravnam prvi red, poslije toga sve ide samo. Za home office savršeno.",
+    "date": "Septembar 2025"
    }
   ]
  },
  "145": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -3689,30 +3759,44 @@
     "city": "Podgorica",
     "stars": 5,
     "text": "Medeni Hrast Linear je savršen za moju trpezariju. Topla boja uz drveni stol i stolice izgleda kao da je dio originalnog projekta sobe. Gosti za stolom više ne govore glasno da bi se čuli – akustika je riješena, razgovor je opušten. Ovo je investicija koja se vidi i čuje svaki dan.",
-    "date": "Januar 2026"
+    "date": "Maj 2026"
    },
    {
     "name": "Aleksandar B.",
     "city": "Nikšić",
     "stars": 5,
     "text": "Uredio sam kancelariju kod kuće i htio neutralan panel koji ne odvlači pažnju ali poboljšava zvuk. Medeni Hrast Linear je idealan – prirodna boja ne dominira prostorom ali daje mu toplinu. Na video pozivima izgleda profesionalno i uglađeno. Preporučujem svima koji rade od kuće.",
-    "date": "Novembar 2025"
+    "date": "Januar 2026"
    },
    {
     "name": "Tamara N.",
     "city": "Tivat",
     "stars": 5,
     "text": "Stavila u spavaću sobu na akcentni zid iza kreveta. Medena boja je savršena za opuštenu, toplu atmosferu. Soba izgleda kao iz časopisa, a zvuk je prigušen što pomaže za spavanje. Muž koji je bio skeptičan sad govori da je to bila najljepša promjena u stanu.",
+    "date": "Novembar 2025"
+   },
+   {
+    "name": "Aleksandra V.",
+    "city": "Herceg Novi",
+    "stars": 5,
+    "text": "AKU054 medena nijansa je topla i prirodna, ne ono narandžasto kao kod nekih. Uzela sam za dječiju sobu, i zbog izgleda i zbog toga što manje odjekuje kad se igraju. Dvije muve jednim udarcem.",
+    "date": "Oktobar 2025"
+   },
+   {
+    "name": "Radovan T.",
+    "city": "Kolašin",
+    "stars": 5,
+    "text": "Postavio u apartmanu koji izdajem preko zime skijašima. Gosti su ostavili komentar da im je soba bila tiha i prijatna. Furnir je pravi hrast, vidi se struktura, nije nalijepljena folija.",
     "date": "Septembar 2025"
    }
   ]
  },
  "146": {
-  "avg": 5.0,
-  "count": 3,
+  "avg": 4.8,
+  "count": 5,
   "dist": {
-   "5": 3,
-   "4": 0,
+   "5": 4,
+   "4": 1,
    "3": 0,
    "2": 0,
    "1": 0
@@ -3737,6 +3821,20 @@
     "city": "Bar",
     "stars": 5,
     "text": "Zlatni Bambus Linear je dao mojoj dnevnoj sobi toplinu Azije bez prevelike egzotike. Uz biljke i ratanske detalje izgleda savršeno. Zvuk u sobi je smiren – eho koji smo imali od visokog plafona je nestao. Svaki put kad dođem kući osjećam se kao da sam u spau.",
+    "date": "Decembar 2025"
+   },
+   {
+    "name": "Sara M.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Zlatni Bambus Linear ima uspravne linije pa plafon djeluje viši. To mi je bilo bitno jer stan ima niske plafone. Bambus je svjetliji od hrasta i lijepo se slaže sa bijelim zidovima okolo.",
+    "date": "Novembar 2025"
+   },
+   {
+    "name": "Nemanja K.",
+    "city": "Berane",
+    "stars": 4,
+    "text": "Dobar akustični panel, u sobi se osjeti razlika čim uđeš. Zlatna nijansa je malo jača nego na slici, ali meni je to na kraju bilo bolje. Montaža sa zavrtnjima kroz filc, drži čvrsto.",
     "date": "Septembar 2025"
    }
   ]
@@ -4367,9 +4465,9 @@
  },
  "147": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -4396,6 +4494,20 @@
     "stars": 5,
     "text": "Bila sam skeptična prema poliuretanu ali ovo je promijenilo mišljenje. Težina je zanemariva u odnosu na pravi kamen, montaža je jednostavna i bijela tekstura u hodniku izgleda kao iz nekog skupog hotela. Cijena je više nego poštena za ovaj izgled.",
     "date": "Decembar 2025"
+   },
+   {
+    "name": "Žarko D.",
+    "city": "Danilovgrad",
+    "stars": 5,
+    "text": "Poliuretan je lagan kao stiropor, digao sam cijeli set jednom rukom. Zalijepio sam sam, bez majstora, uz malo silikona. Prvo sam htio pravi kamen ali bi mi trebala armatura na zidu, ovako nije trebalo ništa.",
+    "date": "Oktobar 2025"
+   },
+   {
+    "name": "Biljana R.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Set od četiri različita komada je pun pogodak jer se uzorak nigdje ne ponavlja. Zid izgleda kao pravi zid od kamena, a ne kao tapeta. Stavili smo iza kamina i sad je to centar dnevne sobe.",
+    "date": "Septembar 2025"
    }
   ]
  },
@@ -5025,9 +5137,9 @@
  },
  "130": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -5039,13 +5151,20 @@
     "city": "Tivat",
     "stars": 5,
     "text": "Linear Travertine je savršena kombinacija – karakteristične horizontalne linije travertina u toplim bež tonovima. Postavila u hodnik i izgleda kao skupocjena kamena obloga. Ploča se savija pa sam pokrila i stup – nevjerovatno.",
-    "date": "April 2026"
+    "date": "Maj 2026"
    },
    {
     "name": "Stefan J.",
     "city": "Nikšić",
     "stars": 5,
     "text": "Tražio sam travertin oblogu za TV zid ali bez bušenja i prljanja. Linear Travertine je rješenje – lijepi se direktno, reže škarama. Horizontalne linije izgledaju premium. Žena je oduševljena, odmah naručila još za kupatilo.",
+    "date": "April 2026"
+   },
+   {
+    "name": "Jovana T.",
+    "city": "Herceg Novi",
+    "stars": 5,
+    "text": "Linear Travertine ima te ravne linije koje idu horizontalno i to zidu daje mir. Stavili smo iza šanka u lokalu i sad izgleda kao neki butik hotel. Vlažne krpe i to je sve od održavanja, a kod nas se dosta prosipa.",
     "date": "Februar 2026"
    },
    {
@@ -5054,14 +5173,21 @@
     "stars": 5,
     "text": "Odabrala Linear Travertine za akcentni zid u trpezariji. Bež ton s linijama savršeno ide uz naš stol od hrastovine. Lagan, ne teži zid, i montaža je bila laka. Svi gosti na večeri pitaju odakle ta obloga.",
     "date": "Januar 2026"
+   },
+   {
+    "name": "Rade N.",
+    "city": "Bar",
+    "stars": 5,
+    "text": "Kupio za špalete oko prozora jer je tu sve bilo krivo i nijedna pločica nije htjela. Fleksibilna ploča od 1-3mm se savila bez pucanja. Sjekao sam makazama za lim, ide lako. Uštedio sam bar tri dana posla.",
+    "date": "Novembar 2025"
    }
   ]
  },
  "139": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -5080,23 +5206,37 @@
     "city": "Danilovgrad",
     "stars": 5,
     "text": "Koristila Weaving Beige za ured – htjela nešto toplo ali profesionalno. Fina tkana kamena tekstura u bež tonu je idealna za poslovni prostor. Klijenti uvijek komentarišu da je prostor ugodan i moderan. Toplo preporučujem.",
-    "date": "Mart 2026"
+    "date": "April 2026"
    },
    {
     "name": "Danilo S.",
     "city": "Podgorica",
     "stars": 5,
     "text": "Weaving Beige je bio sigurna opcija za hodnik stana – bež tonovi s organskom tkanom teksturom nikad ne greše. Montaža ljepilom, sve gotovo za par sati. Žena kaže da je hodnik sada njen omiljeni dio stana. Kupujem još.",
+    "date": "Mart 2026"
+   },
+   {
+    "name": "Nataša Đ.",
+    "city": "Tivat",
+    "stars": 5,
+    "text": "Weaving Beige je mekši i mirniji od khaki varijante, uzela sam ga za spavaću. Djeluje kao neka tkanina od kamena, teško je opisati dok ne vidiš uživo. Preporučujem da odete u showroom i opipate.",
     "date": "Januar 2026"
+   },
+   {
+    "name": "Igor B.",
+    "city": "Bar",
+    "stars": 5,
+    "text": "Radim enterijere i ovo koristim kad klijent traži nešto što nema svako. Pletena struktura u bež tonu ide uz sve, i uz drvo i uz bijelo. Kupci uvijek reaguju kad im pokažem uzorak.",
+    "date": "Septembar 2025"
    }
   ]
  },
  "138": {
-  "avg": 5.0,
-  "count": 3,
+  "avg": 4.8,
+  "count": 5,
   "dist": {
-   "5": 3,
-   "4": 0,
+   "5": 4,
+   "4": 1,
    "3": 0,
    "2": 0,
    "1": 0
@@ -5114,22 +5254,36 @@
     "city": "Podgorica",
     "stars": 5,
     "text": "Weaving Khaki ima jedinstvenu tkanu teksturu u maslinasto-kaki tonovima – nešto što nisi vidio nigdje drugdje. Postavio u radnoj sobi i daje taj prirodni, zemaljski osjećaj koji pomaže koncentraciji. Svi koji uđu pitaju što je na zidu.",
-    "date": "Novembar 2025"
+    "date": "Decembar 2025"
    },
    {
     "name": "Alen R.",
     "city": "Bijelo Polje",
     "stars": 5,
     "text": "Weaving Khaki ide savršeno uz boho enterijer koji sam radio u stanu. Kaki nijansa s organskom tkanom teksturom – izgleda kao da je zid obučen u prirodni materijal. Savitljivost mi je omogućila montažu i na niše u zidu.",
+    "date": "Novembar 2025"
+   },
+   {
+    "name": "Lidija S.",
+    "city": "Budva",
+    "stars": 5,
+    "text": "Weaving Khaki ima taj pleteni uzorak koji nisam nigdje drugdje vidjela. Uzela sam za zid u salonu za nokte i sad je to zid ispred kojeg se sve slika. Vrijedilo je i te razlike u cijeni u odnosu na obične.",
     "date": "Oktobar 2025"
+   },
+   {
+    "name": "Goran M.",
+    "city": "Podgorica",
+    "stars": 4,
+    "text": "Uzorak je jak, pa treba pažljivo birati gdje ide. Kod mene je otišao samo na jedan zid u dnevnoj i to je taman. Da sam stavio na dva bilo bi previše. Sam materijal je odličan, savija se bez problema.",
+    "date": "Septembar 2025"
    }
   ]
  },
  "137": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -5155,15 +5309,29 @@
     "city": "Bar",
     "stars": 5,
     "text": "Rouge Granite Beige kombinuje toplu bež s roze inkluzijama granita – nešto unikatno. Vidjela na Pinterestu, tražila dugo dok nisam pronašla ovdje. Postavila u kupaonici i svaka osoba koja dođe odmah to primijeti. Savršeno.",
+    "date": "Januar 2026"
+   },
+   {
+    "name": "Anđela R.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Rouge Granite Beige ima sitnu zrnastu strukturu, više liči na granit nego na travertin. Stavila sam na zid u kuhinji iza radne ploče. Masnoća se briše krpom, ne ostaje trag. To mi je bilo najvažnije.",
+    "date": "Decembar 2025"
+   },
+   {
+    "name": "Dušan I.",
+    "city": "Pljevlja",
+    "stars": 5,
+    "text": "Uzeo sam za spoljni zid ispod nadstrešnice, prošla je zima i ništa mu nije. Ni boja nije izblijedjela. Mislio sam da neće izdržati vani ali izdržalo je.",
     "date": "Oktobar 2025"
    }
   ]
  },
  "134": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -5175,69 +5343,104 @@
     "city": "Podgorica",
     "stars": 5,
     "text": "White Linear Travertine je savršena bijela obloga s karakterom. Horizontalne linije travertina u bijeloj boji daju moderan i čist izgled. Postavila u kuhinji iza radnog pulta i svaki gost to primijeti. Odlično se čisti.",
-    "date": "April 2026"
+    "date": "Juli 2026"
    },
    {
     "name": "Marko D.",
     "city": "Nikšić",
     "stars": 5,
     "text": "Koristio White Linear Travertine za TV zid u dnevnoj sobi – bijela boja osvjetljava prostor, a linije daju dubinu. Izgleda premium. Jedino Flex Stone može se lijepit direktno bez majstora. Svako ko dođe pita odakle.",
-    "date": "Februar 2026"
+    "date": "April 2026"
    },
    {
     "name": "Ivana R.",
     "city": "Herceg Novi",
     "stars": 5,
     "text": "Bijeli travertin za kupatilo – bila sam sigurna da ću pogriješiti ali White Linear Travertine je bio savršen izbor. Soba izgleda veća, svjetlija i luksuzna. Ploče su se savile bez problema na malo zakrivljeni zid.",
+    "date": "Februar 2026"
+   },
+   {
+    "name": "Sanja L.",
+    "city": "Bar",
+    "stars": 5,
+    "text": "White Linear Travertine u dnevnoj sobi, cijeli zid iza TV-a. Linije idu vodoravno pa zid izgleda duži. Svekar je stolar i pitao me ko mi je radio kamen, nije vjerovao da je ploča od 2mm.",
     "date": "Januar 2026"
+   },
+   {
+    "name": "Stefan A.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Naručio sam za kancelariju, deset komada. Stiglo za dva dana kurirskom, sve upakovano kako treba, ništa nije napuklo. Montaža bez majstora, gledali smo snimak i to je to.",
+    "date": "Septembar 2025"
    }
   ]
  },
  "131": {
-  "avg": 5.0,
-  "count": 3,
+  "avg": 4.8,
+  "count": 5,
   "dist": {
-   "5": 3,
-   "4": 0,
+   "5": 4,
+   "4": 1,
    "3": 0,
    "2": 0,
    "1": 0
   },
   "items": [
    {
+    "name": "Tamara V.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Luna Travertine je svjetliji nego što sam očekivala i to mi je odgovaralo jer je soba okrenuta na sjever. Uzela sam šest komada za zid iza kreveta. Muž je montirao za jedno popodne, ja sam samo držala. Sad mi je ta soba omiljena u kući.",
+    "date": "Juli 2026"
+   },
+   {
     "name": "Tijana L.",
     "city": "Podgorica",
     "stars": 5,
     "text": "Luna Travertine sam kombinovala s toplom LED rasvjetom na hodniku – igra svjetla po valovitoj teksturi je hipnotička. Više volim ovaj hodnik nego cijeli stan haha. Preporučujem svima koji žele nešto elegantno i mirno.",
-    "date": "Februar 2026"
+    "date": "Mart 2026"
    },
    {
     "name": "Marina R.",
     "city": "Kotor",
     "stars": 5,
     "text": "Luna Travertine je ta nježna nijansa između sive i bež koja mi je dugo nedostajala. Valovite linije daju zidu dubinu i karakter. Postavila u spavaću sobu i osjećam se kao u dizajnerskom hotelu. Odlična kupovina.",
-    "date": "Januar 2026"
+    "date": "Februar 2026"
    },
    {
     "name": "Dragan P.",
     "city": "Bar",
     "stars": 5,
     "text": "Postavio Luna Travertine ploče u wellness prostor bazena – oko zakrivljenih zidova. Samo Flex Stone može pratiti takve oblike. Mekani sivo-bež tonovi daju savršenu relaks atmosferu. Vlasnik kompleksa presretan.",
+    "date": "Januar 2026"
+   },
+   {
+    "name": "Nikola S.",
+    "city": "Cetinje",
+    "stars": 4,
+    "text": "Kamen je stvarno prirodan, svaka ploča je malo drugačija, što je dobro jer se ne vidi ponavljanje. Meni je trebalo malo više vremena da uklopim šare nego što sam mislio, ali kad se završi izgleda vrhunski.",
     "date": "Novembar 2025"
    }
   ]
  },
  "129": {
-  "avg": 5.0,
-  "count": 3,
+  "avg": 4.8,
+  "count": 5,
   "dist": {
-   "5": 3,
-   "4": 0,
+   "5": 4,
+   "4": 1,
    "3": 0,
    "2": 0,
    "1": 0
   },
   "items": [
+   {
+    "name": "Milena B.",
+    "city": "Kotor",
+    "stars": 5,
+    "text": "Dolomitic Travertine sam stavila oko kamina u staroj kući. Zid je bio krivudav i ništa mi nije htjelo da legne, a ova ploča se savila kao da je platno. Na dodir je pravi kamen, hladan i hrapav. Komšinice stalno pitaju odakle mi.",
+    "date": "Juli 2026"
+   },
    {
     "name": "Igor S.",
     "city": "Budva",
@@ -5250,6 +5453,13 @@
     "city": "Podgorica",
     "stars": 5,
     "text": "Postavila Dolomitic Travertine ploče u kupatilo na zakrivljeni zid oko kada – jedino Flex Stone može to. Rezultat je neverovatan, gosti uvijek pitaju odakle kamen. Topla sivo-bež boja daje prostoru toplinu prave kamenice.",
+    "date": "April 2026"
+   },
+   {
+    "name": "Aleksandar J.",
+    "city": "Podgorica",
+    "stars": 4,
+    "text": "Odlična stvar za stubove i lukove, tu mu nema ravnog. Uzeo sam osam komada za recepciju. Savjet iz iskustva: kupite malo bolje ljepilo nego što mislite da vam treba i dobro pritisnite ivice, tu se najviše griješi.",
     "date": "Mart 2026"
    },
    {
@@ -5263,9 +5473,9 @@
  },
  "132": {
   "avg": 5.0,
-  "count": 3,
+  "count": 5,
   "dist": {
-   "5": 3,
+   "5": 5,
    "4": 0,
    "3": 0,
    "2": 0,
@@ -5277,30 +5487,44 @@
     "city": "Budva",
     "stars": 5,
     "text": "Renovirali smo apartman za iznajmljivanje s Romantine White pločama. Gosti uvijek napišu u recenziji da je kupatilo prelijepo. Bijela boja čini mali prostor većim i svjetlijim. Investicija koja se vraća kroz bolje ocjene.",
-    "date": "Decembar 2025"
+    "date": "Mart 2026"
    },
    {
     "name": "Ana C.",
     "city": "Podgorica",
     "stars": 5,
     "text": "Romantine White je čisto bijela ali nikako dosadna – fina tekstura kamena daje joj život. Postavila u kupatilu i izgleda savršeno čisto i elegantno. Lako se čisti, ne prima fleke. Ponovo bih naručila bez razmišljanja.",
-    "date": "Novembar 2025"
+    "date": "Januar 2026"
+   },
+   {
+    "name": "Ivana G.",
+    "city": "Budva",
+    "stars": 5,
+    "text": "Romantine White sam uzela za kupatilo u apartmanu koji izdajem. Bijelo, mirno, i svi gosti to slikaju. Nema fuga, nema plijesni po uglovima, i to je za mene bilo presudno. Preporučila sam i komšinici koja radi isto.",
+    "date": "Decembar 2025"
    },
    {
     "name": "Sandra V.",
     "city": "Herceg Novi",
     "stars": 5,
     "text": "Tražila sam bijelu kamenu oblogu za spa kupatilo. Romantine White savršeno imitira bijeli mermer, a savitljivost Flex Stone ploča mi je omogućila da obložim zaobljene dijelove kabine. Fantastičan materijal.",
+    "date": "Novembar 2025"
+   },
+   {
+    "name": "Petar M.",
+    "city": "Tivat",
+    "stars": 5,
+    "text": "Bijela varijanta je najzahvalnija ako imate mali prostor. Postavio sam u hodniku od 1.2 metra širine i sad taj hodnik izgleda dvostruko veći. Ploča se lijepi bez potkonstrukcije, direktno na malter.",
     "date": "Oktobar 2025"
    }
   ]
  },
  "133": {
-  "avg": 5.0,
-  "count": 3,
+  "avg": 4.8,
+  "count": 5,
   "dist": {
-   "5": 3,
-   "4": 0,
+   "5": 4,
+   "4": 1,
    "3": 0,
    "2": 0,
    "1": 0
@@ -5311,30 +5535,44 @@
     "city": "Podgorica",
     "stars": 5,
     "text": "Romantine Yellow donosi toplinu u svaki prostor. Ta zlatno-žuta nijansa prirodnog kamena je drugačija od svega što sam vidjela – živa i topla. Postavila u dnevnoj sobi i svi kažu da je sada najtopliji prostor u stanu. Predivno.",
-    "date": "April 2026"
+    "date": "Juni 2026"
    },
    {
     "name": "Jelena P.",
     "city": "Tivat",
     "stars": 5,
     "text": "Romantine Yellow je hrabar izbor ali se isplatio. Ta žuta-med nijansa kamena ne liči ni na šta drugo. Mama je bila skeptična dok nije vidjela – sad kaže da bi i ona iste ploče uzela za kuću. Savitljive i lako se montiraju.",
-    "date": "Januar 2026"
+    "date": "April 2026"
+   },
+   {
+    "name": "Bojan K.",
+    "city": "Nikšić",
+    "stars": 4,
+    "text": "Dobar proizvod, žuto-bež nijansa je toplija uživo nego na slici, meni je to bio plus. Skinuo bih pola zvjezdice samo zato što treba dobro očistiti zid prije lijepljenja, na prašnjavu podlogu ne prima kako treba.",
+    "date": "Februar 2026"
    },
    {
     "name": "Bojan K.",
     "city": "Bar",
     "stars": 5,
     "text": "Odabrao Romantine Yellow za akcentni zid u restoranu. Uz toplu rasvjetu izgleda kao zlato na zidu. Gosti sjede u tom dijelu najduže i uvijek komentarišu ambijent. Svima koji imaju lokal toplo preporučujem.",
+    "date": "Januar 2026"
+   },
+   {
+    "name": "Marija Đ.",
+    "city": "Podgorica",
+    "stars": 5,
+    "text": "Romantine Yellow ima topao pješčani ton koji lijepo ide uz drvo. Kombinovala sam ga sa hrastovim podom i ispalo je tačno kako sam zamislila. Slikala sam prije i poslije, razlika je kao da je druga kuća.",
     "date": "Septembar 2025"
    }
   ]
  },
  "135": {
-  "avg": 5.0,
-  "count": 3,
+  "avg": 4.8,
+  "count": 5,
   "dist": {
-   "5": 3,
-   "4": 0,
+   "5": 4,
+   "4": 1,
    "3": 0,
    "2": 0,
    "1": 0
@@ -5348,17 +5586,31 @@
     "date": "Mart 2026"
    },
    {
+    "name": "Katarina P.",
+    "city": "Kotor",
+    "stars": 5,
+    "text": "White Milan Travertine je najsvjetliji od svih koje sam gledala u showroomu. Uzela sam za kupatilo jer nemam prozor pa mi je trebalo nešto što vraća svjetlo. Sad je prostorija neuporedivo vedrija, a ne osjeti se hladno kao kod pločica.",
+    "date": "Februar 2026"
+   },
+   {
     "name": "Darko N.",
     "city": "Budva",
     "stars": 5,
     "text": "Milan Travertine ploče sam postavio u hotelsku sobu kao akcentni zid iza kreveta. Bijela boja s finim milanskim uzorkom daje sobama premium osjećaj. Gosti redovno pišu da je dekoracija lijepa. Naručujem još za ostale sobe.",
-    "date": "Februar 2026"
+    "date": "Decembar 2025"
    },
    {
     "name": "Maja B.",
     "city": "Kotor",
     "stars": 5,
     "text": "Tražila sam nešto elegantno ali ne previše hladno za spavaću sobu. White Milan Travertine je savršen kompromis – bijel ali živ, sa uzorkom koji privlači pogled. Lako se montira i reže skalpelom. Presretna sam s izborom.",
+    "date": "Novembar 2025"
+   },
+   {
+    "name": "Miloš V.",
+    "city": "Herceg Novi",
+    "stars": 4,
+    "text": "Zadovoljan sam, izgleda skupo za ovaj novac. Jedino bih rekao ljudima da naruče jedan komad više nego što izračunaju, jer se pri sječenju uglova uvijek nešto potroši.",
     "date": "Septembar 2025"
    }
   ]
