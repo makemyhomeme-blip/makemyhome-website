@@ -1,0 +1,584 @@
+<?php
+// Cijene se citaju UZIVO iz data/products.json — cjenovnik nikad ne moze zastarjeti.
+$cjP = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+$cjNames = [
+  'bambus-drveni'=>'Drveni bambus paneli', 'bambus-tekstilni'=>'Tekstilni paneli',
+  'bambus-mermerni'=>'Mermerni paneli', 'bambus-metalni'=>'Metalni paneli',
+  'bambus-kozni'=>'Kožni paneli', 'classic'=>'Classic paneli',
+  '3d-letvice'=>'3D dekorativne letvice', 'akusticni-paneli'=>'Akustični paneli',
+  'mdf'=>'MDF kanelirani paneli', 'pu-kamen'=>'PU dekorativni kamen',
+  'flex-stone'=>'Flex Stone savitljivi kamen', 'spc-pod'=>'SPC vodootporni pod',
+  'aluminijum-lajsne'=>'Aluminijum lajsne',
+];
+$cjDim = [
+  'bambus-drveni'=>'280×122 cm · 3,42 m²', 'bambus-tekstilni'=>'280×122 cm · 3,42 m²',
+  'bambus-mermerni'=>'280×122 cm · 3,42 m²', 'bambus-metalni'=>'280×122 cm · 3,42 m²',
+  'bambus-kozni'=>'280×122 cm · 3,42 m²', 'classic'=>'280×122 cm · 3,42 m²',
+  '3d-letvice'=>'280×16 cm · 0,45 m²', 'akusticni-paneli'=>'60×60 cm · 0,36 m²',
+  'mdf'=>'razne dimenzije', 'pu-kamen'=>'set 290×60 cm · 1,74 m²',
+  'flex-stone'=>'120×60 cm · 0,72 m²', 'spc-pod'=>'prodaje se po m²',
+  'aluminijum-lajsne'=>'dužina 270 cm',
+];
+$cjArea = [
+  'bambus-drveni'=>3.42,'bambus-tekstilni'=>3.42,'bambus-mermerni'=>3.42,'bambus-metalni'=>3.42,
+  'bambus-kozni'=>3.42,'classic'=>3.42,'3d-letvice'=>0.45,'akusticni-paneli'=>0.36,
+  'pu-kamen'=>1.74,'flex-stone'=>0.72,'spc-pod'=>1.0,
+];
+$cjRows = [];
+foreach ($cjP as $x) {
+    $c = $x['category'] ?? '';
+    if (!isset($cjNames[$c])) continue;
+    $pr = (float)($x['price'] ?? 0);
+    $dc = (int)($x['discount'] ?? 0);
+    $sp = $dc > 0 ? round($pr * (1 - $dc / 100), 2) : $pr;
+    $cjRows[$c][] = ['puna'=>$pr, 'akcija'=>$sp, 'popust'=>$dc, 'jed'=>$x['unit'] ?? 'kom'];
+}
+$cjOrder = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-metalni','bambus-kozni','classic','3d-letvice','akusticni-paneli','mdf','pu-kamen','flex-stone','spc-pod','aluminijum-lajsne'];
+$fmt = fn($v) => number_format($v, 2, ',', '.');
+?>
+<!DOCTYPE html>
+<html lang="sr-ME">
+<head><meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Koliko koštaju zidni paneli, 3D letvice, akustični paneli, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko panela vam treba.">
+  <meta name="keywords" content="cijena zidnih panela, cjenovnik zidni paneli, koliko koštaju paneli, cijena 3d letvica, cijena akustičnih panela, cijena spc pod, cijena pu kamen, Podgorica, Crna Gora">
+  <meta property="og:title" content="Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor">
+  <meta property="og:description" content="Koliko koštaju zidni paneli, 3D letvice, akustični paneli, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko panela vam treba.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://makemyhome.me/cjenovnik.html">
+  <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
+  <meta property="og:locale" content="sr_ME">
+  <meta property="og:site_name" content="Make My Home Decor">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor">
+  <meta name="twitter:description" content="Koliko koštaju zidni paneli, 3D letvice, akustični paneli, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko panela vam treba.">
+  <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
+  <link rel="canonical" href="https://makemyhome.me/cjenovnik.html">
+  <title>Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/png" href="images/favicon-512.png">
+  <link rel="preload" href="fa/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fa/css/all.min.css?v=1">
+  <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css?v=1">
+  <link rel="stylesheet" href="css/style-v5.css?v=22">
+  <style>
+    @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
+    @media(max-width:768px){#desk-search-wrap{display:none!important;}}
+
+    /* ===== FAQ ===== */
+    .faq-wrap{padding:66px 0 80px;}
+    .faq-group{margin-bottom:44px;}
+    .faq-group-title{display:flex;align-items:center;gap:12px;font-family:var(--font-heading);font-size:22px;color:var(--dark);margin:0 0 20px;padding-bottom:12px;border-bottom:2px solid rgba(201,168,108,0.3);}
+    .faq-group-title i{color:var(--primary);font-size:18px;}
+    .faq-item{background:#fff;border:1px solid rgba(0,0,0,0.07);border-radius:14px;padding:22px 24px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
+    .faq-item h3{font-size:17px;color:var(--dark);margin:0 0 10px;line-height:1.4;display:flex;gap:10px;align-items:flex-start;}
+    .faq-item h3 span.q{color:var(--primary);font-weight:800;flex-shrink:0;}
+    .faq-item p{font-size:15px;color:var(--dark-2);line-height:1.8;margin:0;}
+    .faq-item p + p{margin-top:10px;}
+    .faq-intro{max-width:760px;margin:0 auto 44px;text-align:center;font-size:16px;color:var(--gray);line-height:1.8;}
+    .faq-cta{background:var(--dark);border-radius:20px;padding:44px 32px;text-align:center;margin-top:16px;}
+    .faq-cta h2{color:#fff;font-size:26px;margin-bottom:10px;}
+    .faq-cta p{color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:26px;}
+    .faq-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    @media(max-width:768px){
+      .faq-group-title{font-size:19px;}
+      .faq-item{padding:18px 18px;}
+      .faq-item h3{font-size:16px;}
+      .faq-cta-btns{flex-direction:column;align-items:center;}
+      .faq-cta-btns .btn{width:100%;max-width:320px;justify-content:center;}
+    }
+  </style>
+  <style id="nav-fix">
+  @media(min-width:769px){
+    .header-inner{flex-wrap:nowrap!important;}
+    .logo{flex-shrink:0!important;margin-right:20px!important;}
+    .logo-img{height:44px!important;}
+    .logo-text .name{white-space:nowrap!important;font-size:16px!important;}
+    .logo-text .tagline{white-space:nowrap!important;font-size:9px!important;}
+    .nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;margin-left:auto!important;}
+    .nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 5px!important;}
+    .nav-link.nav-cta{padding:7px 14px!important;margin-left:4px!important;}
+    #desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}
+  }
+  </style>
+  <style>
+    .footer-links-grid{display:block!important;column-count:2!important;column-gap:18px!important;}
+    .footer-links-grid li{break-inside:avoid;margin-bottom:9px;}
+    .footer-links-grid a{font-size:13px!important;white-space:nowrap;}
+    .page-hero .section-subtitle{margin-left:auto!important;margin-right:auto!important;text-align:center!important;}
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-4LLQCZ8CV4");
+  </script>
+<style id="nav-wide">
+/* Laptopovi 769–1599px: sve stavke MORAJU stati u red (Kontakt je ranije ispadao van ekrana) */
+@media(min-width:769px) and (max-width:1599px){
+  .header-inner{max-width:100%!important;padding-left:14px!important;padding-right:14px!important;}
+  .nav-menu{gap:0!important;flex-wrap:nowrap!important;}
+  .nav-link{font-size:11.5px!important;padding:8px 4px!important;letter-spacing:0!important;}
+  .nav-link.nav-cta{padding:7px 11px!important;margin-left:3px!important;}
+  .logo{margin-right:8px!important;}
+  .logo-img{height:36px!important;}
+  .logo-text .name{font-size:13.5px!important;}
+  .logo-text .tagline{display:none!important;}
+  #desk-search-wrap{width:150px!important;margin-right:4px!important;}
+}
+/* 769–1099px: previše stavki za jedan red — koristi se hamburger meni (kao na telefonu) */
+@media(min-width:769px) and (max-width:1149px){
+  .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
+    background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
+    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;overflow-y:auto!important;}
+  .nav-menu.open{display:flex!important;}
+  .hamburger{display:flex!important;}
+  .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
+  .nav-link.nav-cta{width:100%!important;margin-left:0!important;padding:11px 8px!important;}
+  #mob-search-box{display:block!important;}
+  #desk-search-wrap{display:none!important;}
+  .logo-text .tagline{display:none!important;}
+}
+/* Široki ekrani: header koristi više prostora, stavke razmaknute */
+@media(min-width:1600px){
+  .header-inner{max-width:1560px!important;}
+  .nav-link{font-size:13px!important;padding:8px 10px!important;}
+  #desk-search-wrap{width:250px!important;}
+}
+@media(min-width:1700px){
+  .header-inner{max-width:1720px!important;}
+  .nav-link{font-size:13.5px!important;padding:8px 13px!important;}
+}
+</style>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/" },
+    { "@type": "ListItem", "position": 2, "name": "Cijene", "item": "https://makemyhome.me/cjenovnik.html" }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Koliko košta zidni panel po m²?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bambus panel od 3,42 m² košta oko 69,59 € sa popustom, što je oko 20 € po m². 3D letvica od 0,45 m² košta 15,99 €, oko 36 € po m² zbog uskog profila. SPC pod se prodaje po m² i košta 17,49 €."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Koliko košta dostava?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dostava kurirskom službom širom Crne Gore je okvirno 20 € i zavisi od količine i dimenzija paketa. Za veće narudžbe i partnere iz Decor Box programa dogovaramo posebne uslove."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Da li su cijene sa PDV-om?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da, sve cijene na sajtu su konačne maloprodajne cijene. Za pravna lica izdajemo predračun i fakturu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kako se plaća?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gotovinom pri preuzimanju od kurira, u showroomu ili virmanski za firme uz fakturu. Nema avansa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Da li ima popusta za veće količine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Da. Za veće projekte i za arhitekte, izvođače i prodavnice imamo Decor Box partnerski program sa posebnim cijenama."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Zašto su neke kategorije jeftinije po m²?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Veliki paneli 280×122 cm pokrivaju mnogo površine odjednom pa im je cijena po m² niža. Uski profili poput 3D letvica i mali formati poput akustičnih ploča 60×60 cm imaju višu cijenu po m² jer traže više komada za istu površinu."
+      }
+    }
+  ]
+}
+  </script>
+<style id="info-page">
+  .info-wrap { padding: 46px 0 70px; background: #fff; }
+  .info-wrap .container { max-width: 900px; }
+  .info-lead { font-size: 17px; color: #5a6672; line-height: 1.8; margin-bottom: 30px; }
+  .info-wrap h2 { font-size: 25px; color: #1a1a1a; margin: 40px 0 14px; line-height: 1.3; }
+  .info-wrap h3 { font-size: 18px; color: #1a1a1a; margin: 26px 0 10px; }
+  .info-wrap p { color: #5a6672; line-height: 1.8; margin-bottom: 14px; }
+  .info-wrap ul, .info-wrap ol { color: #5a6672; line-height: 1.8; padding-left: 22px; margin-bottom: 16px; }
+  .info-wrap li { margin-bottom: 8px; }
+  .info-wrap a { color: #c9a86c; font-weight: 600; }
+  .step { display: flex; gap: 18px; align-items: flex-start; background: #faf7f2;
+          border: 1px solid rgba(201,168,108,0.28); border-radius: 14px; padding: 20px 22px; margin-bottom: 14px; }
+  .step-n { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: #c9a86c; color: #1a1a1a;
+            font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .step h3 { margin: 4px 0 6px; font-size: 17px; }
+  .step p { margin: 0; font-size: 14.5px; }
+  .note { background: #fff8e6; border-left: 4px solid #e0a800; border-radius: 8px; padding: 15px 18px; margin: 18px 0; }
+  .note p { margin: 0; font-size: 14.5px; color: #6b5620; }
+  .info-table { width: 100%; border-collapse: collapse; margin: 18px 0 8px; font-size: 14.5px; }
+  .info-table th { background: #1a1a1a; color: #fff; text-align: left; padding: 12px 14px; font-weight: 700; }
+  .info-table td { padding: 12px 14px; border-bottom: 1px solid rgba(0,0,0,0.07); color: #5a6672; }
+  .info-table tr:hover td { background: #faf7f2; }
+  .info-table a { white-space: nowrap; }
+  .tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .calc { background: #faf7f2; border: 1px solid rgba(201,168,108,0.35); border-radius: 16px; padding: 24px; margin: 22px 0; }
+  .calc-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .calc-f { flex: 1; min-width: 140px; }
+  .calc-f label { display: block; font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .calc-f input, .calc-f select {
+    width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid rgba(0,0,0,0.14);
+    border-radius: 10px; font-size: 15px; font-family: inherit; background: #fff; color: #1a1a1a;
+  }
+  .calc-f input:focus, .calc-f select:focus { outline: none; border-color: #c9a86c; }
+  .calc-out { background: #fff; border-radius: 12px; padding: 18px 20px; margin-top: 6px; border: 1px solid rgba(0,0,0,0.08); }
+  .calc-out .big { font-size: 27px; font-weight: 800; color: #1a1a1a; }
+  .calc-out .sub { font-size: 14px; color: #5a6672; line-height: 1.7; margin-top: 6px; }
+  .info-cta { background: #faf7f2; border: 1px solid rgba(201,168,108,0.35); border-radius: 16px;
+              padding: 26px; text-align: center; margin-top: 40px; }
+  .info-cta h2 { margin: 0 0 8px; font-size: 22px; }
+  .info-cta p { margin: 0 0 18px; }
+  .info-cta .btn { margin: 4px; }
+  @media (max-width: 768px) {
+    .info-wrap h2 { font-size: 21px; }
+    .step { padding: 16px; gap: 14px; }
+    .calc { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
+      <div class="logo-text">
+        <span class="name">Make My Home Decor</span>
+        <span class="tagline">Dekorativni Bambus Paneli</span>
+      </div>
+    </a>
+    <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
+      <div style="position:relative;">
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off"
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+      </div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
+    </div>
+    <nav id="nav-menu" class="nav-menu">
+      <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
+        <div style="position:relative;">
+          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
+          <input id="mob-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
+            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
+        </div>
+        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
+      </div>
+      <a href="index.html" class="nav-link">Početna</a>
+      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
+      <a href="products.html?category=mdf" class="nav-link">MDF</a>
+      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
+      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
+      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="decor-box.html" class="nav-link">Decor Box</a>
+      <a href="faq.html" class="nav-link">Pitanja</a>
+      <a href="about.html" class="nav-link">O Nama</a>
+      <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
+    </nav>
+    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
+    </a>
+    <button id="hamburger" class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Početna</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Cijene</span>
+      </div>
+      <h1 class="section-title">Cijene Zidnih Panela u Crnoj Gori</h1>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">
+        Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko vam komada treba
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="info-wrap">
+  <div class="container">
+    <p class="info-lead">
+      Ovdje su cijene svih kategorija koje držimo na stanju. Tabela se povlači direktno iz naše baze
+      proizvoda, pa ne može zastarjeti — ono što ovdje vidite je ono što plaćate danas.
+      Sve cijene su konačne maloprodajne, u eurima.
+    </p>
+
+    <h2>Cjenovnik po kategorijama</h2>
+    <div class="tbl-scroll">
+    <table class="info-table">
+      <thead>
+        <tr>
+          <th>Kategorija</th>
+          <th>Dimenzija</th>
+          <th>Cijena</th>
+          <th>Po m²</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+<?php foreach ($cjOrder as $c):
+  if (empty($cjRows[$c])) continue;
+  $lo = min(array_column($cjRows[$c], 'akcija'));
+  $hi = max(array_column($cjRows[$c], 'akcija'));
+  $loPuna = min(array_column($cjRows[$c], 'puna'));
+  $maxPop = max(array_column($cjRows[$c], 'popust'));
+  $jed = $cjRows[$c][0]['jed'];
+  $povrsina = $cjArea[$c] ?? null;
+  $poM2 = $povrsina ? $lo / $povrsina : null;
+?>
+        <tr>
+          <td><strong><?= htmlspecialchars($cjNames[$c]) ?></strong><br>
+              <span style="font-size:12.5px;color:#8a8a8a;"><?= count($cjRows[$c]) ?> dezena</span></td>
+          <td><?= htmlspecialchars($cjDim[$c] ?? '—') ?></td>
+          <td>
+            <?php if ($maxPop > 0): ?>
+              <strong style="color:#c9a86c;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
+              <span style="display:block;font-size:12px;color:#aaa;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
+              <span style="display:inline-block;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;">−<?= $maxPop ?>%</span>
+            <?php else: ?>
+              <strong style="font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
+            <?php endif; ?>
+            <span style="display:block;font-size:12px;color:#8a8a8a;">/ <?= htmlspecialchars($jed) ?></span>
+          </td>
+          <td><?= $poM2 ? '~' . $fmt($poM2) . ' €' : '—' ?></td>
+          <td><a href="products.html?category=<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj &rsaquo;</a></td>
+        </tr>
+<?php endforeach; ?>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:13px;color:#8a8a8a;">
+      Cijene su ažurirane <?= date('d.m.Y.') ?> i mijenjaju se automatski kada promijenimo cijenu u ponudi.
+      Kolona „po m²" je informativna — računa se iz najniže cijene u kategoriji.
+    </p>
+
+    <h2 id="kalkulator">Kalkulator – koliko panela vam treba</h2>
+    <p>Unesite mjere zida i odaberite šta vas zanima. Račun uključuje 10% rezerve na sječenje.</p>
+    <div class="calc">
+      <div class="calc-row">
+        <div class="calc-f">
+          <label for="cw">Širina zida (m)</label>
+          <input type="number" id="cw" value="4" min="0.1" step="0.1" inputmode="decimal">
+        </div>
+        <div class="calc-f">
+          <label for="ch">Visina zida (m)</label>
+          <input type="number" id="ch" value="2.6" min="0.1" step="0.1" inputmode="decimal">
+        </div>
+        <div class="calc-f">
+          <label for="ck">Šta postavljate</label>
+          <select id="ck">
+<?php foreach ($cjOrder as $c):
+  if (empty($cjRows[$c]) || empty($cjArea[$c])) continue;
+  $lo = min(array_column($cjRows[$c], 'akcija'));
+?>
+            <option value="<?= $cjArea[$c] ?>|<?= $lo ?>|<?= htmlspecialchars($cjNames[$c], ENT_QUOTES) ?>|<?= htmlspecialchars($c, ENT_QUOTES) ?>"><?= htmlspecialchars($cjNames[$c]) ?></option>
+<?php endforeach; ?>
+          </select>
+        </div>
+      </div>
+      <div class="calc-out" id="cout">
+        <div class="big">—</div>
+        <div class="sub">Unesite mjere zida</div>
+      </div>
+    </div>
+
+    <h2>Šta utiče na konačnu cijenu</h2>
+    <ul>
+      <li><strong>Površina zida.</strong> Veliki paneli 280×122 cm pokrivaju 3,42 m² odjednom, pa je cijena po m² najniža kod njih.</li>
+      <li><strong>Otpad na sječenju.</strong> Računajte 5–10% više od tačne kvadrature, zavisno od toga koliko uglova i otvora ima zid.</li>
+      <li><strong>Lajsne.</strong> Aluminijum lajsne za ivice i uglove su odvojena stavka, obično 20–40 € po zidu.</li>
+      <li><strong>Silikon.</strong> Jedna tuba montažnog silikona pokrije 2–3 panela, oko 5 € po tubi.</li>
+      <li><strong>Dostava.</strong> Okvirno 20 € kurirskom službom širom Crne Gore, zavisno od količine.</li>
+    </ul>
+
+    <h2>Primjer: koliko košta zid od 10 m²</h2>
+    <p>
+      Zid širine 4 m i visine 2,6 m ima 10,4 m². Sa 10% rezerve to je 11,4 m², odnosno
+      <strong>4 bambus panela</strong>. Uz aktuelnu cijenu to je oko <strong>278 €</strong> za panele,
+      plus oko 35 € za lajsne i silikon, plus 20 € dostava — <strong>ukupno oko 333 €</strong>.
+      Isti zid u pločicama traži majstora, ljepilo, fugu i tri do četiri dana rada.
+    </p>
+    <p>
+      Ako niste sigurni šta vam odgovara, dođite u showroom u Podgorici sa mjerama zida ili nam ih pošaljite —
+      izračunamo količinu i cijenu istog dana. Pogledajte i <a href="montaza.html">uputstvo za montažu</a>
+      da vidite koliko je posao jednostavan.
+    </p>
+
+    <h2>Česta pitanja o cijenama</h2>
+    <h3>Koliko košta zidni panel po m²?</h3>
+    <p>Bambus panel od 3,42 m² košta oko 69,59 € sa popustom, što je oko 20 € po m². 3D letvica od 0,45 m² košta 15,99 €, oko 36 € po m² zbog uskog profila. SPC pod se prodaje po m² i košta 17,49 €.</p>
+    <h3>Koliko košta dostava?</h3>
+    <p>Dostava kurirskom službom širom Crne Gore je okvirno 20 € i zavisi od količine i dimenzija paketa. Za veće narudžbe i partnere iz Decor Box programa dogovaramo posebne uslove.</p>
+    <h3>Da li su cijene sa PDV-om?</h3>
+    <p>Da, sve cijene na sajtu su konačne maloprodajne cijene. Za pravna lica izdajemo predračun i fakturu.</p>
+    <h3>Kako se plaća?</h3>
+    <p>Gotovinom pri preuzimanju od kurira, u showroomu ili virmanski za firme uz fakturu. Nema avansa.</p>
+    <h3>Da li ima popusta za veće količine?</h3>
+    <p>Da. Za veće projekte i za arhitekte, izvođače i prodavnice imamo Decor Box partnerski program sa posebnim cijenama.</p>
+    <h3>Zašto su neke kategorije jeftinije po m²?</h3>
+    <p>Veliki paneli 280×122 cm pokrivaju mnogo površine odjednom pa im je cijena po m² niža. Uski profili poput 3D letvica i mali formati poput akustičnih ploča 60×60 cm imaju višu cijenu po m² jer traže više komada za istu površinu.</p>
+
+    <div class="info-cta">
+      <h2>Treba vam tačan izračun?</h2>
+      <p>Pošaljite mjere zida — dobićete ponudu istog dana, bez obaveze kupovine.</p>
+      <a href="tel:+38269105222" class="btn btn-gold btn-lg"><i class="fas fa-phone"></i> 069 105 222</a>
+      <a href="contact.html" class="btn btn-outline btn-lg"><i class="fas fa-envelope"></i> Pošalji upit</a>
+      <a href="decor-box.html" class="btn btn-outline btn-lg"><i class="fas fa-handshake"></i> Partnerske cijene</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var w = document.getElementById('cw'), h = document.getElementById('ch'),
+      k = document.getElementById('ck'), out = document.getElementById('cout');
+  if (!w || !h || !k || !out) return;
+  function calc() {
+    var sw = parseFloat(w.value), sh = parseFloat(h.value);
+    var parts = k.value.split('|');
+    var area = parseFloat(parts[0]), cijena = parseFloat(parts[1]), naziv = parts[2], slug = parts[3];
+    if (!(sw > 0) || !(sh > 0)) {
+      out.innerHTML = '<div class="big">—</div><div class="sub">Unesite mjere zida</div>';
+      return;
+    }
+    var m2 = sw * sh, sRezervom = m2 * 1.1;
+    var kom = Math.ceil(sRezervom / area);
+    var ukupno = kom * cijena;
+    var jed = slug === 'spc-pod' ? 'm²' : 'kom';
+    out.innerHTML =
+      '<div class="big">' + kom + ' ' + jed + ' &middot; ' + ukupno.toFixed(2).replace('.', ',') + ' €</div>' +
+      '<div class="sub">Zid ' + m2.toFixed(2).replace('.', ',') + ' m² (' + sRezervom.toFixed(2).replace('.', ',') +
+      ' m² sa 10% rezerve) &middot; ' + naziv +
+      '<br>Bez lajsni, silikona i dostave (okvirno 20 €). ' +
+      '<a href="products.html?category=' + slug + '">Pogledaj ' + naziv.toLowerCase() + ' &rsaquo;</a></div>';
+    if (typeof window.mmhTrack === 'function') window.mmhTrack('kalkulator_koristen', { kategorija: slug, kom: kom });
+  }
+  [w, h, k].forEach(function (el) { el.addEventListener('input', calc); el.addEventListener('change', calc); });
+  calc();
+})();
+</script>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
+          <div class="logo-text">
+            <span class="name">Make My Home Decor</span>
+            <span class="tagline">Dekorativni Bambus Paneli</span>
+          </div>
+        </a>
+        <p class="footer-desc">Premium zidni paneli i 3D letvice u Podgorici. Transformišite Vaš prostor.
+        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
+        </p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/makemyhome.decor" target="_blank" class="social-btn" title="Instagram" style="background:#d62976;color:#fff;"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/61571886302133" target="_blank" rel="noopener" class="social-btn" title="Facebook" style="background:#1877f2;color:#fff;"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://wa.me/38269105222" target="_blank" class="social-btn" title="WhatsApp" style="background:#25d366;color:#fff;"><i class="fab fa-whatsapp"></i></a>
+          <a href="viber://contact?number=%2B38269105222" class="social-btn" title="Viber" style="background:#665cac;color:#fff;"><i class="fab fa-viber"></i></a>
+          <a href="https://www.tiktok.com/@makemyhome.me" target="_blank" class="social-btn" title="TikTok" style="background:#ee1d52;color:#fff;"><i class="fab fa-tiktok"></i></a>
+          <a href="mailto:makemyhome.me@gmail.com" class="social-btn" title="Email" style="background:#c9a86c;color:#fff;"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer-title">Navigacija</h3>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Početna</a></li>
+          <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
+          <li><a href="decor-box.html"><i class="fas fa-chevron-right"></i> Decor Box</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> Česta Pitanja</a></li>
+          <li><a href="cjenovnik.html"><i class="fas fa-chevron-right"></i> Cijene</a></li>
+          <li><a href="montaza.html"><i class="fas fa-chevron-right"></i> Montaža panela</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> O Nama</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Kategorije</h3>
+        <ul class="footer-links footer-links-grid">
+          <li><a href="products.html?category=bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
+          <li><a href="products.html?category=bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
+          <li><a href="products.html?category=bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
+          <li><a href="products.html?category=bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
+          <li><a href="products.html?category=bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
+          <li><a href="products.html?category=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="products.html?category=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="products.html?category=aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
+          <li><a href="products.html?category=pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
+          <li><a href="products.html?category=mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
+          <li><a href="products.html?category=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Kontakt</h3>
+        <ul class="footer-contact-list">
+          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 41-43, City Kvart, Podgorica</span></li>
+          <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
+          <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
+          <li><i class="fas fa-clock"></i><span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Make My Home Decor. Sva prava zadržana.</p>
+      <p>Dizajnirano za <a href="#">makemyhome.me</a></p>
+    </div>
+  </div>
+</footer>
+
+<div id="whatsapp-float">
+  <a href="https://wa.me/38269105222?text=Zdravo%2C%20imam%20pitanje%20o%20zidnim%20panelima." target="_blank" rel="noopener" aria-label="Kontaktirajte nas na WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="white"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.822.736 5.469 2.027 7.774L0 32l8.469-2.003A15.93 15.93 0 0 0 16 32c8.836 0 16-7.163 16-16S24.836 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.856l-.485-.288-5.028 1.188 1.215-4.895-.316-.503A13.247 13.247 0 0 1 2.667 16C2.667 8.636 8.637 2.667 16 2.667S29.333 8.636 29.333 16 23.363 29.333 16 29.333zm7.27-9.907c-.398-.199-2.355-1.162-2.72-1.295-.365-.133-.63-.199-.896.199-.265.398-1.028 1.295-1.26 1.56-.232.265-.464.298-.862.1-.398-.199-1.681-.62-3.203-1.977-1.184-1.056-1.984-2.36-2.216-2.758-.232-.398-.025-.613.174-.811.178-.178.398-.465.597-.697.199-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.896-2.162-1.228-2.96-.323-.776-.651-.67-.896-.683l-.763-.013c-.265 0-.696.1-.1061.497-.365.398-1.393 1.362-1.393 3.322s1.427 3.854 1.626 4.119c.199.265 2.808 4.286 6.804 6.014.951.41 1.693.655 2.271.838.954.303 1.823.26 2.51.158.765-.114 2.355-.963 2.688-1.893.333-.93.333-1.727.232-1.893-.1-.165-.365-.265-.763-.464z"/></svg></a>
+  <span class="wa-tooltip">Pišite nam na WhatsApp</span>
+</div>
+
+<button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
+<script src="js/main-v4.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/analytics-events.js?v=3" defer></script>
+</body>
+</html>

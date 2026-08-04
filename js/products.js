@@ -1129,7 +1129,7 @@ async function renderProductDetail() {
     <!-- Trust row -->
     <div class="product-trust-row">
       <div class="trust-item"><i class="fas fa-truck"></i><span>Dostava kurirskom službom — okvirno 20 €</span></div>
-      <div class="trust-item"><i class="fas fa-tools"></i><span>Savjeti za montažu</span></div>
+      <div class="trust-item"><i class="fas fa-tools"></i><a href="montaza.html" style="color:inherit;text-decoration:underline;">Savjeti za montažu</a></div>
       <div class="trust-item"><i class="fas fa-money-bill-wave"></i><span>Plaćanje pouzećem</span></div>
     </div>`;
 

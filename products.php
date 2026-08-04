@@ -649,6 +649,8 @@ echo "\n</script>\n";
           <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
           <li><a href="decor-box.html"><i class="fas fa-chevron-right"></i> Decor Box</a></li>
           <li><a href="faq.html"><i class="fas fa-chevron-right"></i> Česta Pitanja</a></li>
+          <li><a href="cjenovnik.html"><i class="fas fa-chevron-right"></i> Cijene</a></li>
+          <li><a href="montaza.html"><i class="fas fa-chevron-right"></i> Montaža panela</a></li>
           <li><a href="about.html"><i class="fas fa-chevron-right"></i> O Nama</a></li>
           <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Kontakt</a></li>
         </ul>
@@ -683,7 +685,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=36"></script>
+<script src="js/products.js?v=37"></script>
 <script src="js/cart.js"></script>
 <script>
   initProductsPage();

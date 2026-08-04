@@ -1,3 +1,9 @@
+# MultiViews servira /faq isto sto i /faq.html -> dva URL-a za istu stranicu.
+# Gasimo ga da bi postojala samo jedna verzija svakog URL-a.
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+
 DirectoryIndex index.html index.php
 ErrorDocument 404 /404.php
 
@@ -19,6 +25,15 @@ RewriteRule ^feed/?$ /? [R=301,L]
 RewriteRule ^comments/feed/?$ /? [R=301,L]
 
 # Stari WordPress sistemski fajlovi → 410 Gone (najjači signal Googleu: trajno obrisano, izbaci iz indeksa)
+# Ostaci starog WordPress sajta — vracaju 410 Gone da ih Google brzo izbaci iz indeksa.
+# Fajlovi ostaju na disku, samo nisu dostupni preko weba.
+# index.php je stari WP front koji trazi wp-blog-header.php (ne postoji) i vracao je 500.
+RewriteRule ^index\.php$ - [G,L]
+RewriteRule ^index\.html_$ - [G,L]
+RewriteRule ^index_override\.php$ - [G,L]
+RewriteRule ^wp-.*\.php$ - [G,L]
+RewriteRule ^readme\.html$ - [G,L]
+RewriteRule ^license\.txt$ - [G,L]
 RewriteRule ^wp-includes/ - [G,L]
 RewriteRule ^wp-content/ - [G,L]
 RewriteRule ^wp-admin/ - [G,L]
@@ -57,12 +72,26 @@ RewriteRule ^o-nama/?$ /about.html? [R=301,L]
 RewriteRule ^onama/?$ /about.html? [R=301,L]
 RewriteRule ^galerija/?$ /products.html? [R=301,L]
 RewriteRule ^usluge/?$ /products.html? [R=301,L]
-RewriteRule ^cjenovnik/?$ /products.html? [R=301,L]
-RewriteRule ^cenovnik/?$ /products.html? [R=301,L]
+RewriteRule ^cjenovnik/?$ /cjenovnik.html? [R=301,L]
+RewriteRule ^cenovnik/?$ /cjenovnik.html? [R=301,L]
+RewriteRule ^cijene/?$ /cjenovnik.html? [R=301,L]
+RewriteRule ^montaza/?$ /montaza.html? [R=301,L]
+RewriteRule ^montaža/?$ /montaza.html? [R=301,L]
 RewriteRule ^blog/?$ /? [R=301,L]
 RewriteRule ^3d-letvice/?$ /products.html?category=3d-letvice [R=301,L]
 RewriteRule ^akusticni-paneli/?$ /products.html?category=akusticni-paneli [R=301,L]
 
+# /index i /index/ -> pocetna (bez ovoga /index vraca 500 zbog MultiViews-a)
+RewriteRule ^index/?$ /? [R=301,L]
+
+# URL bez ekstenzije -> .html verzija (301).
+# Hosting ima ukljucen MultiViews pa je /faq servirao ISTI sadrzaj kao /faq.html —
+# dva URL-a za istu stranicu, sto Google prijavljuje kao "Alternate page with canonical".
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^/.]+)/?$ /$1.html [R=301,L]
+
+RewriteRule ^cjenovnik\.html$ cjenovnik.php [QSA,L]
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
 </IfModule>
