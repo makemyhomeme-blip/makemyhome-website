@@ -72,6 +72,18 @@ function saveCategories($cats, $file) {
  * Smanji i kompresuje sliku na max dimenzije, sačuvaj kao JPEG.
  * Vraća putanju sačuvanog fajla ili false ako ne uspije.
  */
+/**
+ * Karakteristike: jedna po redu. Ako korisnik nije koristio nove redove
+ * (stari nacin unosa), tek onda cijepamo po zarezu.
+ */
+function mmhParseFeatures(string $raw): array {
+    $raw = trim($raw);
+    if ($raw === '') return [];
+    $sep = (strpos($raw, "\n") !== false) ? "\n" : ',';
+    $out = array_map('trim', explode($sep, str_replace("\r", '', $raw)));
+    return array_values(array_filter($out, fn($x) => $x !== ''));
+}
+
 function optimizeImage($tmpPath, $destPath, $maxW = 1200, $maxH = 900, $quality = 82) {
     $finfo    = new finfo(FILEINFO_MIME_TYPE);
     $mimeReal = $finfo->file($tmpPath);
@@ -192,9 +204,10 @@ switch ($action) {
             redirect('', 'Naziv i kategorija su obavezni.');
         }
 
-        $features = $featuresRaw
-            ? array_map('trim', explode(',', $featuresRaw))
-            : [];
+        // Cijepamo po NOVOM REDU, ne po zarezu — inace se "Montaza: lijepi se silikonom,
+        // sijece se skalpelom" razbijalo u dvije stavke pri svakom snimanju.
+        // Stari unosi u jednom redu i dalje rade (fallback na zarez).
+        $features = mmhParseFeatures($featuresRaw);
 
         $newProduct = [
             'id'          => getNextId($products),
@@ -249,9 +262,10 @@ switch ($action) {
             redirect('', 'Nedostaju podaci.');
         }
 
-        $features = $featuresRaw
-            ? array_map('trim', explode(',', $featuresRaw))
-            : [];
+        // Cijepamo po NOVOM REDU, ne po zarezu — inace se "Montaza: lijepi se silikonom,
+        // sijece se skalpelom" razbijalo u dvije stavke pri svakom snimanju.
+        // Stari unosi u jednom redu i dalje rade (fallback na zarez).
+        $features = mmhParseFeatures($featuresRaw);
 
         foreach ($products as &$p) {
             if ($p['id'] === $id) {

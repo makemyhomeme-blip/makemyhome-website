@@ -628,8 +628,8 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
                 <textarea name="description" placeholder="Opišite proizvod..."></textarea>
               </div>
               <div class="form-group full">
-                <label>Karakteristike (odvojite zarezom)</label>
-                <input type="text" name="features" placeholder="Prirodno drvo, Laka montaža, UV zaštita, Dimenzije: 270x12x2cm">
+                <label>Karakteristike <span style="font-weight:400;opacity:.7;">(jedna po redu — zarez unutar reda se više ne cijepa)</span></label>
+                <textarea name="features" rows="8" style="font-family:inherit;width:100%;box-sizing:border-box;" placeholder="Dimenzije: 280×122cm (3.42 m² po komadu)&#10;Debljina: 5mm&#10;Montaža: lijepi se silikonom, siječe se skalpelom&#10;Vodootporan – ne nabrekne i ne deformiše se"></textarea>
               </div>
               <div class="form-group full">
                 <label>Slika proizvoda</label>
@@ -1316,8 +1316,8 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           <textarea name="description" id="edit-description"></textarea>
         </div>
         <div class="form-group full">
-          <label>Karakteristike (odvojite zarezom)</label>
-          <input type="text" name="features" id="edit-features">
+          <label>Karakteristike <span style="font-weight:400;opacity:.7;">(jedna po redu)</span></label>
+          <textarea name="features" id="edit-features" rows="10" style="font-family:inherit;width:100%;box-sizing:border-box;"></textarea>
         </div>
         <div class="form-group full">
           <label>Slika proizvoda</label>
@@ -1413,7 +1413,7 @@ function editProduct(id) {
   document.getElementById('edit-discount').value = p.discount || 0;
   document.getElementById('edit-unit').value = p.unit;
   document.getElementById('edit-description').value = p.description || '';
-  document.getElementById('edit-features').value = (p.features || []).join(', ');
+  document.getElementById('edit-features').value = (p.features || []).join('\n');
   document.getElementById('edit-image').value = p.image || '';
   document.getElementById('edit-sku').value = p.sku || '';
   document.getElementById('edit-badge').value = p.badge || '';
