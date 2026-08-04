@@ -170,6 +170,18 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
     $rvDist    = [];
     foreach ([5,4,3,2,1] as $s) $rvDist[(string)$s] = count(array_filter($reviews, fn($r) => (int)($r['rating'] ?? 5) === $s));
   }
+  // Pomocne funkcije za prikaz ocjena — definisane RANO jer ih koristi i bocni blok i recenzije
+  $revPlural = function(int $n) {
+    $d1 = $n % 10; $d2 = $n % 100;
+    if ($d1 === 1 && $d2 !== 11) return 'recenzija';
+    if ($d1 >= 2 && $d1 <= 4 && !($d2 >= 12 && $d2 <= 14)) return 'recenzije';
+    return 'recenzija';
+  };
+  $stars = function(int $n) {
+    $o = '';
+    for ($i = 1; $i <= 5; $i++) $o .= '<i class="fas fa-star ' . ($i <= $n ? 'rv-star-gold' : 'rev-star-empty') . '"></i>';
+    return $o;
+  };
   $monthMap   = ['Januar'=>'01','Februar'=>'02','Mart'=>'03','April'=>'04','Maj'=>'05','Juni'=>'06',
                  'Juli'=>'07','Avgust'=>'08','Septembar'=>'09','Oktobar'=>'10','Novembar'=>'11','Decembar'=>'12'];
   $schema = [
@@ -231,7 +243,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=20">
+  <link rel="stylesheet" href="css/style-v5.css?v=21">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -464,6 +476,43 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
           <div class="loading-placeholder" style="height:400px;"></div>
           <?php endif; ?>
         </div>
+
+        <?php if ($product): ?>
+        <!-- Bocni blok: popunjava prazninu pored duge liste karakteristika i
+             daje kupcu razloge da kupi bas ovdje (ocjena, dostava, showroom, kontakt) -->
+        <aside class="p-side">
+          <?php if ($avgRating !== null): ?>
+          <a href="#product-reviews" class="p-side-rating">
+            <span class="p-side-rating-num"><?= htmlspecialchars(number_format((float)$avgRating, 1)) ?></span>
+            <span>
+              <span class="p-side-rating-stars"><?= $stars((int)round((float)$avgRating)) ?></span>
+              <span class="p-side-rating-txt"><?= $revCount ?> <?= $revCount === 1 ? 'recenzija kupca' : ($revCount < 5 ? 'recenzije kupaca' : 'recenzija kupaca') ?> &rsaquo;</span>
+            </span>
+          </a>
+          <?php endif; ?>
+
+          <ul class="p-side-list">
+            <li><i class="fas fa-truck"></i><span><strong>Dostava za 1–4 dana</strong> kurirskom službom na adresu, širom Crne Gore</span></li>
+            <li><i class="fas fa-hand-holding-dollar"></i><span><strong>Plaćate kad preuzmete</strong> — gotovinom kuriru, bez avansa</span></li>
+            <li><i class="fas fa-rotate-left"></i><span><strong>Zamjena u roku od 7 dana</strong> ako niste zadovoljni</span></li>
+            <li><i class="fas fa-screwdriver-wrench"></i><span><strong>Montaža bez majstora</strong> — lijepi se silikonom, siječe skalpelom</span></li>
+          </ul>
+
+          <div class="p-side-box">
+            <p class="p-side-box-t"><i class="fas fa-store"></i> Pogledajte uživo prije kupovine</p>
+            <p class="p-side-box-p">
+              Uzorak možete opipati u našem showroomu u Podgorici — <strong>Vojvode Maša Đurovića 41, City Kvart</strong>.
+              Donesite mjere zida i na licu mjesta vam izračunamo koliko komada treba i koliko će koštati.
+            </p>
+            <p class="p-side-box-h"><i class="fas fa-clock"></i> Pon–Pet 09:00–20:00 &nbsp;·&nbsp; Sub 10:00–17:00</p>
+            <div class="p-side-btns">
+              <a href="tel:+38269105222" class="p-side-btn p-side-btn--call"><i class="fas fa-phone"></i> 069 105 222</a>
+              <a href="https://wa.me/38269105222?text=<?= rawurlencode('Zdravo, zanima me ' . ($product['name'] ?? 'proizvod') . ' — koliko komada mi treba?') ?>"
+                 target="_blank" rel="noopener" class="p-side-btn p-side-btn--wa"><i class="fab fa-whatsapp"></i> Pitaj na WhatsApp-u</a>
+            </div>
+          </div>
+        </aside>
+        <?php endif; ?>
       </div>
 
     </div>
@@ -473,17 +522,6 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
       // Recenzije — renderovane na serveru (Google ih vidi odmah, kupac dobija isti prikaz).
       // JS ih NE crta ponovo (guard: data-ssr="1" u js/products.js).
       if ($product && !empty($reviews)):
-        $revPlural = function(int $n) {
-          $d1 = $n % 10; $d2 = $n % 100;
-          if ($d1 === 1 && $d2 !== 11) return 'recenzija';
-          if ($d1 >= 2 && $d1 <= 4 && !($d2 >= 12 && $d2 <= 14)) return 'recenzije';
-          return 'recenzija';
-        };
-        $stars = function(int $n) {
-          $o = '';
-          for ($i = 1; $i <= 5; $i++) $o .= '<i class="fas fa-star ' . ($i <= $n ? 'rv-star-gold' : 'rev-star-empty') . '"></i>';
-          return $o;
-        };
     ?>
     <div id="product-reviews" data-ssr="1" style="margin-top:60px;">
       <div class="rv-wrap">

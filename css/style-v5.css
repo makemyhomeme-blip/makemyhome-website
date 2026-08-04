@@ -3102,3 +3102,54 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .footer-contact-list li { min-height: 32px; display: flex; align-items: center; }
   .insta-handle { display: inline-block; padding: 7px 0; }
 }
+
+
+/* ===== BOCNI BLOK NA STRANICI PROIZVODA =====
+   Popunjava prazninu pored duge liste karakteristika (desktop je imao ~700px praznog). */
+.p-side { margin-top: 26px; }
+
+.p-side-rating {
+  display: flex; align-items: center; gap: 14px;
+  background: #faf7f2; border: 1px solid rgba(201,168,108,0.3);
+  border-radius: 14px; padding: 14px 18px; margin-bottom: 16px;
+  text-decoration: none; transition: background .2s, border-color .2s;
+}
+.p-side-rating:hover { background: #f5efe4; border-color: #c9a86c; }
+.p-side-rating-num { font-size: 30px; font-weight: 800; color: #1a1a1a; line-height: 1; }
+.p-side-rating-stars { display: block; margin-bottom: 3px; }
+.p-side-rating-stars i { font-size: 13px; }
+.p-side-rating-txt { font-size: 13px; color: #7a7a7a; font-weight: 600; }
+
+.p-side-list { list-style: none; padding: 0; margin: 0 0 18px; }
+.p-side-list li {
+  display: flex; gap: 13px; align-items: flex-start;
+  padding: 11px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 13.5px; color: #5a6672; line-height: 1.55;
+}
+.p-side-list li:last-child { border-bottom: none; }
+.p-side-list i { color: #c9a86c; font-size: 15px; width: 20px; flex-shrink: 0; margin-top: 2px; text-align: center; }
+.p-side-list strong { color: #1a1a1a; font-weight: 700; }
+
+.p-side-box {
+  background: #1a1a1a; border-radius: 16px; padding: 22px 22px 20px;
+  border: 1px solid rgba(201,168,108,0.25);
+}
+.p-side-box-t { color: #c9a86c; font-size: 14.5px; font-weight: 800; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+.p-side-box-p { color: rgba(255,255,255,0.72); font-size: 13.5px; line-height: 1.7; margin: 0 0 12px; }
+.p-side-box-p strong { color: #fff; }
+.p-side-box-h { color: rgba(255,255,255,0.55); font-size: 12.5px; margin: 0 0 16px; display: flex; align-items: center; gap: 7px; }
+.p-side-btns { display: flex; flex-direction: column; gap: 9px; }
+.p-side-btn {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 12px 16px; border-radius: 11px; font-size: 14px; font-weight: 700;
+  text-decoration: none; transition: opacity .2s, background .2s;
+}
+.p-side-btn--call { background: #c9a86c; color: #1a1a1a; }
+.p-side-btn--call:hover { background: #dfc080; }
+.p-side-btn--wa { background: rgba(37,211,102,0.12); color: #25d366; border: 1.5px solid rgba(37,211,102,0.4); }
+.p-side-btn--wa:hover { background: rgba(37,211,102,0.2); }
+
+@media (max-width: 768px) {
+  .p-side { margin-top: 22px; }
+  .p-side-box { padding: 18px 16px 16px; }
+}
