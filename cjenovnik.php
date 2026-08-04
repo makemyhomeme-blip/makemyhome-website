@@ -41,10 +41,10 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 <head><meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Koliko koštaju zidni paneli, 3D letvice, akustični paneli, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko panela vam treba.">
+  <meta name="description" content="Koliko koštaju zidni paneli, 3D letvice, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene i kalkulator koliko komada vam treba.">
   <meta name="keywords" content="cijena zidnih panela, cjenovnik zidni paneli, koliko koštaju paneli, cijena 3d letvica, cijena akustičnih panela, cijena spc pod, cijena pu kamen, Podgorica, Crna Gora">
   <meta property="og:title" content="Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor">
-  <meta property="og:description" content="Koliko koštaju zidni paneli, 3D letvice, akustični paneli, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko panela vam treba.">
+  <meta property="og:description" content="Koliko koštaju zidni paneli, 3D letvice, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene i kalkulator koliko komada vam treba.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://makemyhome.me/cjenovnik.html">
   <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
@@ -52,7 +52,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor">
-  <meta name="twitter:description" content="Koliko koštaju zidni paneli, 3D letvice, akustični paneli, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko panela vam treba.">
+  <meta name="twitter:description" content="Koliko koštaju zidni paneli, 3D letvice, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene i kalkulator koliko komada vam treba.">
   <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
   <link rel="canonical" href="https://makemyhome.me/cjenovnik.html">
   <title>Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor</title>
