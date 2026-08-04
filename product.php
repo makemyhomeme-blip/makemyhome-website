@@ -194,7 +194,13 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
     'brand'      => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
     'offers'     => $offers,
   ];
-  if ($avgRating !== null) {
+  // ---- OCJENE U STRUKTURIRANIM PODACIMA — NAMJERNO ISKLJUCENO ----
+  // Google (Review snippet – General guidelines): "Ratings must be sourced directly from users".
+  // Dok se ne potvrdi da svaka recenzija dolazi od stvarnog kupca, aggregateRating i review
+  // NE saljemo Google-u. Rizik je rucna kazna i gubitak zvjezdica na CIJELOM sajtu.
+  // Recenzije i dalje stoje vidljivo na stranici (to je dozvoljeno) — samo nisu oznacene u schemi.
+  // Kada budu iz forme koju popunjavaju kupci, ovaj blok se vraca uklanjanjem "false &&".
+  if (false && $avgRating !== null) {
     $schema['aggregateRating'] = [
       '@type'       => 'AggregateRating',
       'ratingValue' => (string)$avgRating,
@@ -243,7 +249,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=21">
+  <link rel="stylesheet" href="css/style-v5.css?v=22">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -507,8 +513,8 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
             <p class="p-side-box-h"><i class="fas fa-clock"></i> Pon–Pet 09:00–20:00 &nbsp;·&nbsp; Sub 10:00–17:00</p>
             <div class="p-side-btns">
               <a href="tel:+38269105222" class="p-side-btn p-side-btn--call"><i class="fas fa-phone"></i> 069 105 222</a>
-              <a href="https://wa.me/38269105222?text=<?= rawurlencode('Zdravo, zanima me ' . ($product['name'] ?? 'proizvod') . ' — koliko komada mi treba?') ?>"
-                 target="_blank" rel="noopener" class="p-side-btn p-side-btn--wa"><i class="fab fa-whatsapp"></i> Pitaj na WhatsApp-u</a>
+              <a href="https://maps.google.com/?cid=46019722303886518" target="_blank" rel="noopener"
+                 class="p-side-btn p-side-btn--map"><i class="fas fa-location-dot"></i> Otvori lokaciju u Google Mapama</a>
             </div>
           </div>
         </aside>
@@ -556,7 +562,6 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
               <span class="rv-card-date"><?= htmlspecialchars($r['date'] ?? '') ?></span>
             </div>
             <p class="rv-card-text"><?= htmlspecialchars($r['text'] ?? '') ?></p>
-            <div class="rv-verified"><i class="fas fa-check-circle"></i> Verifikovana kupovina</div>
           </div>
           <?php endforeach; ?>
         </div>
@@ -658,7 +663,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js"></script>
-<script src="js/products.js?v=35"></script>
+<script src="js/products.js?v=36"></script>
 <script src="js/cart.js"></script>
 <script>
   renderProductDetail();

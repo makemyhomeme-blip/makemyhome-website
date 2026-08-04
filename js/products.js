@@ -1020,7 +1020,6 @@ async function renderProductDetail() {
               <span class="rv-card-date">${r.date}</span>
             </div>
             <p class="rv-card-text">${r.text}</p>
-            <div class="rv-verified"><i class="fas fa-check-circle"></i> Verifikovana kupovina</div>
           </div>
         `).join('')}
       </div>
