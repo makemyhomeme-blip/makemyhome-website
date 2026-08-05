@@ -2964,12 +2964,12 @@
     "price": "114.99",
     "discount": 20,
     "unit": "kom",
-    "description": "JS0014 panel u bronzanoj metalnoj obradi evocira starinske patinirane surface, ali u potpuno savremenom obliku. Topla bronza na bambus podlozi daje prostorijama taj rijedak kvalitet – starinsku dušu u modernom ruhu. Savršen izbor za ugostiteljske objekte, studije ili spavaće sobe koji traže nešto više od uobičajenog.",
+    "description": "JS0014 je jedini panel u metalnoj seriji koji ide u hladnom pravcu. Srebrno-siva površina sa blagim plavičastim podtonom i mekim, raspršenim odsjajem — ne ogleda se kao ogledalo, nego vraća svjetlo kao brušeni metal.\n\nZbog toga radi tamo gdje bronza i zlato budu pretopli: u kupatilu uz hrom i staklo, u kuhinji uz inox aparate, u kancelariji gdje sve ostalo treba da bude mirno. Uz bijele i sive zidove nastavlja istu priču, samo dodaje teksturu koju obična boja nema.\n\nAko birate unutar metalne serije: Brushed Gold i Champagne Metal griju prostor, Raw Steel je tamna industrijska siva, a JS0014 je najsvjetliji i najhladniji od sva četiri.\n\nPanel je 280×122 cm (3,42 m² po komadu), debljine 5 mm, bambusova osnova sa metalik obradom. Vodootporan i otporan na buđ, vatrootporan klasa B1. Lijepi se silikonom, siječe skalpelom.",
     "features": [
       "Dimenzije: 280×122cm (3,42 m² po komadu)",
       "Debljina: 5mm",
       "Materijal: bambus vlakno s metalnim završetkom",
-      "Boja: topla bronzana – bronzano-metallic ton",
+      "Boja: srebrno-siva sa hladnim podtonom (JS0014)",
       "Površinska obrada: metallic lak s patina efektom",
       "Montaža: lijepi se silikonom, siječe se skalpelom",
       "Pogodan za unutrašnje suhe prostorije",
@@ -2983,7 +2983,7 @@
     "badge": "",
     "inStock": true,
     "featured": false,
-    "highlight": "Bronzana patina – vintage susreće moderno",
+    "highlight": "Hladan srebrno-sivi metal sa mekim odsjajem",
     "idealFor": [
       "Spavaća soba",
       "Restoran",
@@ -2996,10 +2996,10 @@
       "Hotel"
     ],
     "styleMatch": [
-      "Vintage",
+      "Moderni",
       "Industrijski",
-      "Art Deco",
-      "Eklektični"
+      "Minimalistički",
+      "Skandinavski"
     ],
     "sku": "JS0014",
     "reviews": [
