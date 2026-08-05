@@ -1,25 +1,97 @@
+<?php
+// Sve fotografije prostora koje se dodaju kroz admin (polje "gallery"), na jednom mjestu.
+// Nista se ne upisuje rucno — cim se u adminu doda slika nekom proizvodu, pojavi se ovdje.
+$insP = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+if (isset($insP['products'])) $insP = $insP['products'];
+
+$insNames = [
+  'bambus-drveni'=>'Drveni Paneli','bambus-tekstilni'=>'Tekstilni Paneli','bambus-mermerni'=>'Mermerni Paneli',
+  'bambus-metalni'=>'Metalni Paneli','bambus-kozni'=>'Kožni Paneli','bambus-paneli'=>'Bambus Paneli',
+  '3d-letvice'=>'3D Letvice','akusticni-paneli'=>'Akustični Paneli','aluminijum-lajsne'=>'Alu Lajsne',
+  'spc-pod'=>'SPC Pod','pu-kamen'=>'PU Kamen','classic'=>'Classic Paneli','mdf'=>'MDF Paneli','flex-stone'=>'Flex Stone',
+];
+
+// Slike grupisane po proizvodu
+$insPo = [];
+foreach ($insP as $p) {
+    if (empty($p['gallery'])) continue;
+    $insPo[$p['id']] = ['p' => $p, 'g' => array_values($p['gallery'])];
+}
+// Redoslijed proizvoda tako da se kategorije smjenjuju
+$poKat = [];
+foreach ($insPo as $id => $v) $poKat[$v['p']['category'] ?? ''][] = $id;
+$redom = [];
+while ($poKat) {
+    foreach (array_keys($poKat) as $k) {
+        $redom[] = array_shift($poKat[$k]);
+        if (!$poKat[$k]) unset($poKat[$k]);
+    }
+}
+// Naizmjenicno uzimaj po jednu sliku od svakog proizvoda — nikad dvije iste sobe zaredom
+$insSlike = [];
+$krug = 0;
+while (true) {
+    $dodato = false;
+    foreach ($redom as $id) {
+        if (isset($insPo[$id]['g'][$krug])) {
+            $insSlike[] = ['src' => $insPo[$id]['g'][$krug], 'p' => $insPo[$id]['p']];
+            $dodato = true;
+        }
+    }
+    if (!$dodato) break;
+    $krug++;
+}
+// U posljednjim krugovima ostane samo par proizvoda sa mnogo slika, pa se ista soba
+// zna pojaviti dva puta zaredom. Prolaz koji ih razmakne: trazi zamjenu koja rjesava
+// oba mjesta, i i j, a ne kvari nijedno.
+$n = count($insSlike);
+$idAt = function ($k) use (&$insSlike, $n) {
+    return ($k < 0 || $k >= $n) ? null : $insSlike[$k]['p']['id'];
+};
+for ($i = 1; $i < $n; $i++) {
+    if ($idAt($i) !== $idAt($i - 1)) continue;
+    for ($j = 0; $j < $n; $j++) {
+        if ($j === $i) continue;
+        $a = $idAt($i); $b = $idAt($j);
+        if ($b === $a) continue;
+        // $b dolazi na mjesto $i
+        if ($b === $idAt($i - 1) || $b === $idAt($i + 1)) continue;
+        // $a dolazi na mjesto $j
+        if ($a === $idAt($j - 1) || $a === $idAt($j + 1)) continue;
+        $t = $insSlike[$i]; $insSlike[$i] = $insSlike[$j]; $insSlike[$j] = $t;
+        break;
+    }
+}
+
+$insKat = [];
+foreach ($insSlike as $s) {
+    $c = $s['p']['category'] ?? '';
+    if ($c) $insKat[$c] = ($insKat[$c] ?? 0) + 1;
+}
+arsort($insKat);
+?>
 <!DOCTYPE html>
 <html lang="sr-ME">
 <head><meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pošteno poređenje zidnih panela i lamperije: montaža, vlaga, cijena, koliko prostora oduzimaju i gdje je lamperija zaista bolja.">
-  <meta name="keywords" content="paneli ili lamperija, lamperija vs paneli, zidne obloge poređenje, bambus paneli, drvena lamperija, Crna Gora">
-  <meta property="og:title" content="Paneli ili Lamperija – Šta Izabrati | Make My Home Decor">
-  <meta property="og:description" content="Pošteno poređenje zidnih panela i lamperije: montaža, vlaga, cijena, koliko prostora oduzimaju i gdje je lamperija zaista bolja.">
+  <meta name="description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
+  <meta name="keywords" content="zidni paneli enterijer, ideje za zid, dnevna soba paneli, spavaća soba zid, kupatilo paneli, inspiracija, Podgorica, Crna Gora">
+  <meta property="og:title" content="Inspiracija – Paneli u Pravim Prostorima | Make My Home Decor">
+  <meta property="og:description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://makemyhome.me/paneli-ili-lamperija.html">
+  <meta property="og:url" content="https://makemyhome.me/inspiracija.html">
   <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
   <meta property="og:image:width" content="1714">
   <meta property="og:image:height" content="800">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Paneli ili Lamperija – Šta Izabrati | Make My Home Decor">
-  <meta name="twitter:description" content="Pošteno poređenje zidnih panela i lamperije: montaža, vlaga, cijena, koliko prostora oduzimaju i gdje je lamperija zaista bolja.">
+  <meta name="twitter:title" content="Inspiracija – Paneli u Pravim Prostorima | Make My Home Decor">
+  <meta name="twitter:description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
   <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
-  <link rel="canonical" href="https://makemyhome.me/paneli-ili-lamperija.html">
-  <title>Paneli ili Lamperija – Šta Izabrati | Make My Home</title>
+  <link rel="canonical" href="https://makemyhome.me/inspiracija.html">
+  <title>Inspiracija – Paneli u Pravim Prostorima | Make My Home</title>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="apple-touch-icon" sizes="512x512" href="images/favicon-512.png">
@@ -166,10 +238,16 @@
   .calc-out .big { font-size: 27px; font-weight: 800; color: #1a1a1a; }
   .calc-out .sub { font-size: 14px; color: #5a6672; line-height: 1.7; margin-top: 6px; }
   .info-cta { background: #faf7f2; border: 1px solid rgba(201,168,108,0.35); border-radius: 16px;
-              padding: 26px; text-align: center; margin-top: 40px; }
-  .info-cta h2 { margin: 0 0 8px; font-size: 22px; }
-  .info-cta p { margin: 0 0 18px; }
-  .info-cta .btn { margin: 4px; }
+              padding: 30px 26px; text-align: center; margin-top: 44px; }
+  .info-cta h2 { margin: 0 0 10px; font-size: 22px; color: #1a1a1a; line-height: 1.3; }
+  .info-cta p { margin: 0 auto 22px; color: #5a6672; max-width: 46ch; line-height: 1.7; }
+  .info-cta-dugmad { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .info-cta .btn { margin: 0; }
+  @media (max-width: 600px) {
+    .info-cta { padding: 24px 18px; }
+    .info-cta-dugmad { flex-direction: column; }
+    .info-cta .btn { width: 100%; justify-content: center; }
+  }
   @media (max-width: 768px) {
     .info-wrap h2 { font-size: 21px; }
     .step { padding: 16px; gap: 14px; }
@@ -234,92 +312,81 @@
 <section class="page-hero">
   <div class="container">
     <div class="page-hero-content">
-      <div class="breadcrumb"><a href="/">Početna</a><i class="fas fa-chevron-right"></i><span>Paneli ili Lamperija</span></div>
-      <h1 class="section-title">Paneli ili Lamperija – Šta Izabrati</h1>
-      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">Montaža, vlaga, cijena i gdje je lamperija zaista bolja</p>
+      <div class="breadcrumb"><a href="/">Početna</a><i class="fas fa-chevron-right"></i><span>Inspiracija</span></div>
+      <h1 class="section-title">Naši paneli u pravim prostorima</h1>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">
+        <?= count($insSlike) ?> fotografija iz stanova, kuća i poslovnih prostora u Crnoj Gori.
+        Kliknite na sobu koja vam se svidi i odmah vidite koji je panel na njoj.
+      </p>
     </div>
   </div>
 </section>
 
-<section class="info-wrap">
+<section class="insp-wrap">
   <div class="container">
 
-<p class="info-lead">Pitanje koje najčešće čujemo u showroomu. Lamperija je drvo, panel je bambus
-ili PVC — a razlika u praksi je mnogo veća od materijala. Evo poštenog poređenja, uključujući i ono
-u čemu je lamperija bolja.</p>
+    <div class="insp-filter" role="group" aria-label="Filter po vrsti panela">
+      <button type="button" class="insp-chip is-on" data-k="">Sve <span><?= count($insSlike) ?></span></button>
+      <?php foreach ($insKat as $k => $n): ?>
+      <button type="button" class="insp-chip" data-k="<?= htmlspecialchars($k, ENT_QUOTES) ?>">
+        <?= htmlspecialchars($insNames[$k] ?? $k) ?> <span><?= $n ?></span>
+      </button>
+      <?php endforeach; ?>
+    </div>
 
-<h2>Ukratko</h2>
-<div class="tbl-scroll">
-<table class="info-table">
-  <thead><tr><th></th><th>Lamperija</th><th>Zidni paneli</th></tr></thead>
-  <tbody>
-    <tr><td><strong>Montaža</strong></td><td>letve na zid, pa daska po daska</td><td>lijepi se silikonom direktno</td></tr>
-    <tr><td><strong>Vrijeme</strong></td><td>1–2 dana sa majstorom</td><td>2–4 sata, sami</td></tr>
-    <tr><td><strong>Gubi prostor</strong></td><td>3–5 cm zbog podkonstrukcije</td><td>5 mm</td></tr>
-    <tr><td><strong>Vlaga</strong></td><td>radi, upija, treba lakiranje</td><td>vodootporan, ne mijenja se</td></tr>
-    <tr><td><strong>Kupatilo</strong></td><td>nije preporučljivo</td><td>da</td></tr>
-    <tr><td><strong>Održavanje</strong></td><td>lakiranje na par godina</td><td>vlažna krpa</td></tr>
-    <tr><td><strong>Izbor izgleda</strong></td><td>drvo</td><td>drvo, mermer, kamen, tekstil, metal</td></tr>
-    <tr><td><strong>Cijena po m²</strong></td><td>zavisi od vrste drveta</td><td>vidi <a href="cjenovnik.html">Cijene</a></td></tr>
-  </tbody>
-</table>
-</div>
+    <div class="insp-grid" id="insp-grid">
+      <?php foreach ($insSlike as $i => $s):
+        $p = $s['p'];
+        $kat = $insNames[$p['category'] ?? ''] ?? 'Zidni panel';
+        $alt = $p['name'] . ' u enterijeru – ' . $kat . ' | Make My Home Decor Podgorica';
+      ?>
+      <a class="insp-kart" href="product.html?id=<?= (int)$p['id'] ?>"
+         data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>">
+        <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
+             alt="<?= htmlspecialchars($alt, ENT_QUOTES) ?>"
+             loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async">
+        <span class="insp-info">
+          <strong><?= htmlspecialchars($p['name']) ?></strong>
+          <em><?= htmlspecialchars($kat) ?> &rsaquo;</em>
+        </span>
+      </a>
+      <?php endforeach; ?>
+    </div>
 
-<h2>Gdje je lamperija bolja</h2>
-<p>Da ne ispadne da samo hvalimo svoje. Lamperija je pravo drvo — miriše na drvo, stari kao drvo i
-ima dubinu koju print ne može da ponovi. Ako pravite planinsku kuću, saunu ili prostor gdje se
-namjerno traži rustika, lamperija je pravi izbor.</p>
-<p>Takođe: lamperija se može brusiti i prefarbati. Panel se ne može — kad vam dosadi, mijenja se.</p>
+    <p class="insp-prazno" id="insp-prazno" hidden>Nema fotografija u ovoj kategoriji.</p>
 
-<h2>Gdje su paneli bolji</h2>
-<h3>Montaža</h3>
-<p>Lamperija traži podkonstrukciju: letve na zid, nivelisanje, pa tek onda daske. To je majstor i
-dva dana. Panel se lijepi silikonom direktno na zid ili čak preko pločica, siječe se skalpelom i
-metar zida ide za nekoliko minuta.</p>
-<h3>Prostor</h3>
-<p>Podkonstrukcija pojede 3 do 5 cm sa svakog zida. U sobi od 3 × 3 m to je skoro pola kvadrata.
-Panel je 5 mm.</p>
-<h3>Vlaga</h3>
-<p>Drvo radi — širi se i skuplja sa vlagom. U kupatilu ili kuhinji to znači fuge koje se otvaraju
-i lak koji se ljušti. <a href="products.html?category=bambus-paneli">Bambusovi paneli</a> su
-vodootporni i otporni na buđ, pa ih stavljamo i u kupatilo. Više o tome na stranici
-<a href="paneli-za-kupatilo.html">Paneli za kupatilo</a>.</p>
-<h3>Izbor</h3>
-<p>Lamperija je drvo i tu se priča završava. Panelom možete dobiti
-<a href="products.html?category=bambus-mermerni">mermer</a>,
-<a href="products.html?category=pu-kamen">kamen</a>,
-<a href="products.html?category=bambus-tekstilni">tkaninu</a>,
-<a href="products.html?category=bambus-metalni">metal</a> — isti način montaže, potpuno drugi zid.</p>
-
-<h2>A 3D letvice — jesu li to lamperija?</h2>
-<p>Nisu, iako liče. <a href="products.html?category=3d-letvice">3D letvica</a> je PVC profil sa
-reljefom koji se lijepi pojedinačno, širine 16 cm. Daje vertikalni ritam i igru sjenki kakvu ravna
-lamperija nema, a montira se bez ijedne letve.</p>
-<p>Jedna letvica pokriva 0,45 m² — aktuelnu cijenu vidite na stranici <a href="cjenovnik.html">Cijene</a>.</p>
-
-<h2>Šta bismo mi izabrali</h2>
-<ul class="info-list">
-  <li><strong>Stan, dnevna soba, spavaća</strong> — paneli. Brže, tanje, veći izbor.</li>
-  <li><strong>Kupatilo ili kuhinja</strong> — paneli, bez dileme. Lamperija tu ne ide.</li>
-  <li><strong>Planinska kuća, sauna, rustika</strong> — lamperija. Tu pravo drvo ima smisla.</li>
-  <li><strong>Iznajmljeni stan</strong> — paneli. Skidaju se bez razaranja zida.</li>
-</ul>
-<p>Nijansu i teksturu je najbolje vidjeti uživo. Uzorci su u showroomu u Podgorici, City Kvart.</p>
-
-    <h2>Česta pitanja</h2>
-    <div class="faq-q"><h3>Šta je jeftinije, lamperija ili paneli?</h3><p>Zavisi od vrste drveta, ali kod panela treba računati i uštedu na montaži — nema podkonstrukcije i nema majstora. Aktuelne cijene po kategorijama su na stranici Cijene, gdje ima i kalkulator koliko komada treba za vaš zid.</p></div>
-    <div class="faq-q"><h3>Mogu li paneli u kupatilo, a lamperija ne?</h3><p>Da. Bambusovi paneli su vodootporni i otporni na buđ. Lamperija je drvo koje upija vlagu, radi i traži lakiranje, pa je u kupatilu ne preporučujemo.</p></div>
-    <div class="faq-q"><h3>Koliko prostora oduzima lamperija?</h3><p>Podkonstrukcija od letvi pojede 3 do 5 cm sa svakog zida. Panel je debljine 5 mm i lijepi se direktno.</p></div>
-    <div class="faq-q"><h3>Jesu li 3D letvice isto što i lamperija?</h3><p>Nisu. 3D letvica je PVC profil sa reljefom koji se lijepi pojedinačno, bez podkonstrukcije. Daje vertikalni ritam i igru sjenki kakvu ravna lamperija nema.</p></div>
-    <div class="vodic-cta">
-      <p><strong>Niste sigurni šta vam treba?</strong> Pozovite <a href="tel:+38269105222">069 105 222</a>
-      ili dođite u showroom — Vojvode Maša Đurovića 41, City Kvart, Podgorica.
-      Donesite mjere zida i na licu mjesta izračunamo koliko komada treba i koliko košta.</p>
-      <p><a href="products.html" class="btn btn-gold">Pogledaj sve proizvode</a>
-         <a href="cjenovnik.html" class="btn btn-outline">Cijene i kalkulator</a></p>
+    <div class="insp-cta">
+      <h2>Vidjeli ste nešto što vam se svidjelo?</h2>
+      <p>Kliknite na sliku i otvoriće vam se tačno taj panel — sa cijenom, dimenzijama i koliko komada
+         treba za vaš zid. Ako niste sigurni, pošaljite nam mjere i izračunamo isti dan.</p>
+      <div class="insp-cta-dugmad">
+        <a href="tel:+38269105222" class="btn btn-gold btn-lg"><i class="fas fa-phone"></i> 069 105 222</a>
+        <a href="products.html" class="btn btn-outline btn-lg"><i class="fas fa-th-large"></i> Svi proizvodi</a>
+        <a href="cjenovnik.html" class="btn btn-outline btn-lg"><i class="fas fa-tags"></i> Cijene</a>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  var grid = document.getElementById('insp-grid');
+  var prazno = document.getElementById('insp-prazno');
+  document.querySelectorAll('.insp-chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.dataset.k;
+      document.querySelectorAll('.insp-chip').forEach(function (o) { o.classList.toggle('is-on', o === b); });
+      var vidljivih = 0;
+      grid.querySelectorAll('.insp-kart').forEach(function (a) {
+        var ok = !k || a.dataset.k === k;
+        a.hidden = !ok;
+        if (ok) vidljivih++;
+      });
+      prazno.hidden = vidljivih > 0;
+    });
+  });
+})();
+</script>
 
 <footer id="footer">
   <div class="container">
@@ -350,7 +417,6 @@ lamperija nema, a montira se bez ijedne letve.</p>
           <li><a href="/"><i class="fas fa-chevron-right"></i> Početna</a></li>
           <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
           <li><a href="decor-box.html"><i class="fas fa-chevron-right"></i> Decor Box</a></li>
-          <li><a href="inspiracija.html"><i class="fas fa-chevron-right"></i> Inspiracija</a></li>
           <li><a href="faq.html"><i class="fas fa-chevron-right"></i> Česta Pitanja</a></li>
           <li><a href="cjenovnik.html"><i class="fas fa-chevron-right"></i> Cijene</a></li>
           <li><a href="montaza.html"><i class="fas fa-chevron-right"></i> Montaža panela</a></li>
@@ -402,10 +468,7 @@ lamperija nema, a montira se bez ijedne letve.</p>
 <script src="js/cart.js?v=2"></script>
 <script src="js/analytics-events.js?v=3" defer></script>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Šta je jeftinije, lamperija ili paneli?", "acceptedAnswer": {"@type": "Answer", "text": "Zavisi od vrste drveta, ali kod panela treba računati i uštedu na montaži — nema podkonstrukcije i nema majstora. Paneli kod nas kreću od 20,35 € po kvadratu."}}, {"@type": "Question", "name": "Mogu li paneli u kupatilo, a lamperija ne?", "acceptedAnswer": {"@type": "Answer", "text": "Da. Bambusovi paneli su vodootporni i otporni na buđ. Lamperija je drvo koje upija vlagu, radi i traži lakiranje, pa je u kupatilu ne preporučujemo."}}, {"@type": "Question", "name": "Koliko prostora oduzima lamperija?", "acceptedAnswer": {"@type": "Answer", "text": "Podkonstrukcija od letvi pojede 3 do 5 cm sa svakog zida. Panel je debljine 5 mm i lijepi se direktno."}}, {"@type": "Question", "name": "Jesu li 3D letvice isto što i lamperija?", "acceptedAnswer": {"@type": "Answer", "text": "Nisu. 3D letvica je PVC profil sa reljefom koji se lijepi pojedinačno, bez podkonstrukcije. Daje vertikalni ritam i igru sjenki kakvu ravna lamperija nema."}}]}
-</script>
-<script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/"}, {"@type": "ListItem", "position": 2, "name": "Paneli ili Lamperija", "item": "https://makemyhome.me/paneli-ili-lamperija.html"}]}
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/"}, {"@type": "ListItem", "position": 2, "name": "Inspiracija", "item": "https://makemyhome.me/inspiracija.html"}]}
 </script>
 </body>
 </html>

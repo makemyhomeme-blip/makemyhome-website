@@ -147,6 +147,7 @@ RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^([^/.]+)/?$ /$1.html [R=301,L]
 
 RewriteRule ^cjenovnik\.html$ cjenovnik.php [QSA,L]
+RewriteRule ^inspiracija\.html$ inspiracija.php [QSA,L]
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
 </IfModule>

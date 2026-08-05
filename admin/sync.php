@@ -52,6 +52,7 @@ $files = [
     $root . '/product.php'      => $base . '/product.php',
     $root . '/products.php'     => $base . '/products.php',
     $root . '/cjenovnik.php'    => $base . '/cjenovnik.php',
+    $root . '/inspiracija.php'  => $base . '/inspiracija.php',
     $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
     $root . '/php/contact.php'    => $base . '/php/contact.php',
     // JS
