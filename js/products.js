@@ -1096,6 +1096,27 @@ async function renderProductDetail() {
                 return `<li><i class="fas fa-check"></i>${full}</li>`;
               }).join('');
             })()}
+            ${(() => {
+              // Cijena po m² — racuna se iz ZIVE cijene, isto kao u product.php.
+              // Bez ovoga bi je vidio samo Google (PHP je ispisuje), a kupac ne bi,
+              // jer JS ovdje prepisuje cijeli blok karakteristika.
+              let pov = null;
+              for (const f of product.features || []) {
+                let m = f.match(/\(([\d.,]+)\s*m²\s*po\s+\S+\)/);
+                if (m) { pov = parseFloat(m[1].replace(',', '.')); break; }
+                m = f.match(/Dimenzije[^:]*:\s*(\d+(?:[.,]\d+)?)\s*[×x]\s*(\d+(?:[.,]\d+)?)\s*cm/);
+                if (m) {
+                  pov = (parseFloat(m[1].replace(',', '.')) / 100) * (parseFloat(m[2].replace(',', '.')) / 100);
+                  break;
+                }
+              }
+              if (!pov || pov <= 0.05 || !product.price) return '';
+              pov = Math.round(pov * 100) / 100;
+              const puna  = parseFloat(String(product.price).replace(',', '.'));
+              const placa = puna * (1 - (parseFloat(product.discount) || 0) / 100);
+              const fmt = n => n.toFixed(2).replace('.', ',');
+              return `<li><i class="fas fa-check"></i>Cijena po m²: ${fmt(placa / pov)} €/m² (1 komad pokriva ${fmt(pov)} m²)</li>`;
+            })()}
           </ul>
         </div>
       </div>`;

@@ -450,13 +450,17 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
               // Ranije je stajala upisana u features kao fiksan broj racunat na punu cijenu:
               // stranica je prikazivala 15,99 € a lista "44,62 €/m²" — 25 proizvoda je imalo
               // taj raskorak. Ovako se mijenja sama kad se promijeni cijena ili popust.
+              // Povrsina po komadu: prvo iz zagrade "(3.42 m² po komadu / setu / plocici)",
+              // pa iz dimenzija. Prihvata i decimalni zarez ("61,5 × 31 cm") i "Dimenzije seta:".
               $povrsina = null;
               foreach ($product['features'] as $f) {
-                  if (preg_match('/\(([\d.,]+)\s*m²\s*po komadu\)/u', $f, $m)) {
+                  if (preg_match('/\(([\d.,]+)\s*m²\s*po\s+\p{L}+\)/u', $f, $m)) {
                       $povrsina = (float) str_replace(',', '.', $m[1]); break;
                   }
-                  if (preg_match('/Dimenzije:\s*(\d+)\s*[×x]\s*(\d+)\s*cm/u', $f, $m)) {
-                      $povrsina = ((int) $m[1] / 100) * ((int) $m[2] / 100); break;
+                  if (preg_match('/Dimenzije[^:]*:\s*([\d]+(?:[.,][\d]+)?)\s*[×x]\s*([\d]+(?:[.,][\d]+)?)\s*cm/u', $f, $m)) {
+                      $a = (float) str_replace(',', '.', $m[1]);
+                      $b = (float) str_replace(',', '.', $m[2]);
+                      $povrsina = ($a / 100) * ($b / 100); break;
                   }
               }
               if ($povrsina && $povrsina > 0.05 && !empty($product['price'])) {
@@ -711,7 +715,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=4"></script>
-<script src="js/products.js?v=39"></script>
+<script src="js/products.js?v=40"></script>
 <script src="js/cart.js?v=2"></script>
 <script>
   renderProductDetail();
