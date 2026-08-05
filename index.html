@@ -196,7 +196,7 @@
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=23">
+  <link rel="stylesheet" href="css/style-v5.css?v=24">
   <style>
     #showcase{background:var(--light);padding:70px 0 0}
     .showcase-img-wrap{width:100%;line-height:0;margin-top:48px;padding:0 32px;box-sizing:border-box}
@@ -298,9 +298,11 @@
   #desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}
 }
 </style>
-<!-- Google tag (gtag.js) — Consent Mode v2.
-     Analitika je podrazumijevano ISKLJUCENA i pali se tek kada posjetilac pristane
-     na traci za kolacice. Bez ovoga se GA4 pokretao svakome bez saglasnosti. -->
+  <!-- Google Analytics u rezimu BEZ KOLACICA (Consent Mode v2, trajno "denied").
+       GA4 ne postavlja nijedan kolacic i ne cuva identifikator na uredjaju posjetioca,
+       pa traka za saglasnost nije potrebna. Statistika i dalje stize u agregatnom obliku:
+       posjete, izvori, najgledanije stranice, uredjaji, drzave. -->
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -309,10 +311,6 @@
     analytics_storage:'denied', functionality_storage:'granted',
     security_storage:'granted', wait_for_update:500
   });
-  try{ if(localStorage.getItem('mmh-kolacici')==='da'){
-    gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',
-      ad_personalization:'granted',analytics_storage:'granted'});
-  } }catch(e){}
   gtag("js", new Date());
   gtag("config", "G-4LLQCZ8CV4");
 </script>
@@ -1113,7 +1111,6 @@
     .catch(function(){});
 })();
 </script>
-<script src="js/kolacici.js?v=1" defer></script>
 <script src="js/analytics-events.js?v=3" defer></script>
 </body>
 </html>

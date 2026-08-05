@@ -66,7 +66,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=23">
+  <link rel="stylesheet" href="css/style-v5.css?v=24">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -113,7 +113,11 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
     .footer-links-grid a{font-size:13px!important;white-space:nowrap;}
     .page-hero .section-subtitle{margin-left:auto!important;margin-right:auto!important;text-align:center!important;}
   </style>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics u rezimu BEZ KOLACICA (Consent Mode v2, trajno "denied").
+       GA4 ne postavlja nijedan kolacic i ne cuva identifikator na uredjaju posjetioca,
+       pa traka za saglasnost nije potrebna. Statistika i dalje stize u agregatnom obliku:
+       posjete, izvori, najgledanije stranice, uredjaji, drzave. -->
+  
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -122,10 +126,6 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       analytics_storage:'denied', functionality_storage:'granted',
       security_storage:'granted', wait_for_update:500
     });
-    try{ if(localStorage.getItem('mmh-kolacici')==='da'){
-      gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',
-        ad_personalization:'granted',analytics_storage:'granted'});
-    } }catch(e){}
     gtag("js", new Date());
     gtag("config", "G-4LLQCZ8CV4");
   </script>
@@ -595,7 +595,6 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 <script src="js/main-v4.js?v=4"></script>
 <script src="js/cart.js?v=2"></script>
-<script src="js/kolacici.js?v=1" defer></script>
 <script src="js/analytics-events.js?v=3" defer></script>
 </body>
 </html>
