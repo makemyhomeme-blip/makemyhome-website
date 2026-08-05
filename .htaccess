@@ -76,10 +76,23 @@ RewriteRule ^product-category/bambus(-paneli)?(/.*)?$ /products.html?category=ba
 RewriteRule ^product-category/decor-paneli(/.*)?$ /products.html?category=bambus-paneli [R=301,L]
 RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 
-# Stari WordPress/WooCommerce query parametri koji renderuju homepage kao duplikat
+# WooCommerce akcije korpe (?add-to-cart=, ?wc-ajax=) → 410 Gone.
+# GSC pokazuje 166 ovakvih URL-ova u "Crawled - currently not indexed": 301 ih drzi
+# zivima u Google-ovom redu za crawl unedogled, 410 ih trajno izbacuje.
+# Nas sajt nigdje ne koristi ove parametre (korpa radi preko localStorage).
+RewriteCond %{QUERY_STRING} (^|&)(add-to-cart|wc-ajax|removed_item|undo_item)=
+RewriteRule .* - [G,L]
+
+# Ostali stari WordPress query parametri koji renderuju homepage kao duplikat
 # PAŽNJA: cat= i category= su naši parametri — NE smiju biti u ovom redirectu
-RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|wc-ajax|product-page|add-to-cart|paged)=
+RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|paged)=
 RewriteRule .* /? [R=301,L]
+
+# /proizvodi/ i /product-category/ sa starom paginacijom → prava kategorija, ne homepage
+RewriteCond %{QUERY_STRING} (^|&)product-page=
+RewriteRule ^proizvodi/?$ /products.html? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)product-page=
+RewriteRule .* /products.html? [R=301,L]
 
 # Stare WordPress kategorije → products (? na kraju čisti stare ?add-to-cart= parametre)
 RewriteRule ^proizvodi/?$ /products.html? [R=301,L]
