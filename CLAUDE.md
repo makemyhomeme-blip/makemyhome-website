@@ -64,7 +64,10 @@ Ako se fajl deployuje preko cPanela prije push-a, prvi sljedeci sync ga vrati na
 
 ## Important Rules
 
-- **NEVER touch** `data/products.json` or `images/products/*` without explicit permission
+- **NEVER deploy** `data/products.json` from local to the server. Vlasnik ga mijenja preko
+  admina (slike, galerije, cijene) i svaki deploy sa lokalnog brise te izmjene.
+  Ako se sadrzaj mijenja: **prvo povuci sa servera**, izmijeni tu verziju, pa vrati.
+  Isto vazi za `images/products/*`.
 - **NEVER touch** main/first product images without explicit permission
 - **Always test** `.htaccess` changes: `Options` directive is NOT allowed on this hosting (causes 500 for all pages). Use `<IfModule>` blocks only.
 - Respond in **Latin script** (latinica), never Cyrillic
