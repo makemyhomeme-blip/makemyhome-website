@@ -36,20 +36,30 @@ $files = [
     $root . '/korpa.html'       => $base . '/korpa.html',
     $root . '/checkout.html'    => $base . '/checkout.html',
     $root . '/hvala.html'       => $base . '/hvala.html',
+    $root . '/faq.html'         => $base . '/faq.html',
+    $root . '/montaza.html'     => $base . '/montaza.html',
+    $root . '/decor-box.html'   => $base . '/decor-box.html',
     // PHP
     $root . '/product.php'      => $base . '/product.php',
     $root . '/products.php'     => $base . '/products.php',
+    $root . '/cjenovnik.php'    => $base . '/cjenovnik.php',
+    $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
+    $root . '/php/contact.php'    => $base . '/php/contact.php',
     // JS
     $root . '/js/cart.js'       => $base . '/js/cart.js',
     $root . '/js/products.js'   => $base . '/js/products.js',
+    $root . '/js/main-v4.js'    => $base . '/js/main-v4.js',
+    $root . '/js/analytics-events.js' => $base . '/js/analytics-events.js',
     // CSS
     $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
+    $root . '/css/fonts.css'    => $base . '/css/fonts.css',
     // Images / favicon
     $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
     $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
     // SEO
     $root . '/404.php'          => $base . '/404.php',
     $root . '/robots.txt'       => $base . '/robots.txt',
+    $root . '/llms.txt'         => $base . '/llms.txt',
     $root . '/sitemap.xml'      => $base . '/sitemap.xml',
     // Server config
     $root . '/.htaccess'           => $base . '/.htaccess',
@@ -57,6 +67,10 @@ $files = [
     __DIR__ . '/dashboard.php'  => $base . '/admin/dashboard.php',
     __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
     __DIR__ . '/sync.php'       => $base . '/admin/sync.php',
+    __DIR__ . '/index.php'      => $base . '/admin/index.php',
+    __DIR__ . '/logout.php'     => $base . '/admin/logout.php',
+    __DIR__ . '/oporavak.php'   => $base . '/admin/oporavak.php',
+    __DIR__ . '/sifre.php'      => $base . '/admin/sifre.php',
     __DIR__ . '/optimize-gallery-images.php' => $base . '/admin/optimize-gallery-images.php',
     __DIR__ . '/optimize-main-images.php'    => $base . '/admin/optimize-main-images.php',
     __DIR__ . '/apply-discount.php'          => $base . '/admin/apply-discount.php',
@@ -144,7 +158,7 @@ if ($allOk) {
 }
 
 if (!$isCli) {
-    echo "\n<a href='../index.html' style='color:#c9a86c;'>&rarr; Otvori sajt</a>  ";
+    echo "\n<a href='../' style='color:#c9a86c;'>&rarr; Otvori sajt</a>  ";
     echo "<a href='dashboard.php' style='color:#c9a86c;margin-left:20px;'>&rarr; Admin panel</a>\n";
     echo '</pre>';
 }
