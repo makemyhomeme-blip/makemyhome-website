@@ -283,9 +283,9 @@ document.addEventListener('DOMContentLoaded', function () {
           if (data.success) contactForm.reset();
         })
         .catch(() => {
-          msgDiv.className = 'form-msg success';
-          msgDiv.textContent = 'Poruka je primljena! Kontaktiraćemo vas uskoro.';
-          contactForm.reset();
+          msgDiv.className = 'form-msg error';
+          msgDiv.innerHTML = 'Poruka nije poslata — veza je prekinuta. ' +
+            'Pozovite nas na <a href="tel:+38269105222" style="color:inherit;font-weight:700;">069 105 222</a>.';
         })
         .finally(() => {
           btn.disabled = false;

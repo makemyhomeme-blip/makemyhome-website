@@ -235,9 +235,13 @@ document.addEventListener('DOMContentLoaded', function () {
           if (data.success) contactForm.reset();
         })
         .catch(() => {
-          msgDiv.className = 'form-msg success';
-          msgDiv.textContent = 'Poruka je primljena! Kontaktiraćemo vas uskoro.';
-          contactForm.reset();
+          // Ranije je ovdje stajala ZELENA poruka "Poruka je primljena!" i forma se
+          // praznila — i kad zahtjev uopste nije prosao. Kupac je mislio da je poslao,
+          // a poruka nije stigla nikuda. Sada mu se kaze istina i daje drugi put.
+          msgDiv.className = 'form-msg error';
+          msgDiv.innerHTML = 'Poruka nije poslata — veza je prekinuta. ' +
+            'Pozovite nas na <a href="tel:+38269105222" style="color:inherit;font-weight:700;">069 105 222</a> ' +
+            'ili pišite na <a href="viber://chat?number=%2B38269105222" style="color:inherit;font-weight:700;">Viber</a>.';
         })
         .finally(() => {
           btn.disabled = false;

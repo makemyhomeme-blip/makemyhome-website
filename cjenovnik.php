@@ -561,7 +561,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       <div>
         <h3 class="footer-title">Kontakt</h3>
         <ul class="footer-contact-list">
-          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 41-43, City Kvart, Podgorica</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 41, City Kvart, Podgorica</span></li>
           <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
           <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
           <li><i class="fas fa-clock"></i><span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span></li>
@@ -581,7 +581,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 </div>
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
-<script src="js/main-v4.js?v=3"></script>
+<script src="js/main-v4.js?v=4"></script>
 <script src="js/cart.js?v=2"></script>
 <script src="js/analytics-events.js?v=3" defer></script>
 </body>
