@@ -258,6 +258,44 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   .info-table tr:hover td { background: #faf7f2; }
   .info-table a { white-space: nowrap; }
   .tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Na telefonu tabela od 5 kolona se ne moze procitati — svaki red postaje kartica. */
+  @media (max-width: 720px) {
+    .tbl-scroll { overflow-x: visible; }
+    .info-table, .info-table tbody, .info-table tr, .info-table td { display: block; width: 100%; }
+    .info-table thead { display: none; }
+    .info-table tr {
+      background: #fff; border: 1px solid rgba(0,0,0,.09); border-radius: 12px;
+      padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    }
+    .info-table td { border: none; padding: 0; }
+    .info-table td[data-l] {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
+      padding: 9px 0; border-top: 1px solid rgba(0,0,0,.06);
+    }
+    .info-table td[data-l]::before {
+      content: attr(data-l); color: #8a8a8a; font-size: 13px; flex-shrink: 0;
+    }
+    .info-table td[data-l] > * { text-align: right; }
+    /* Cijena zna imati raspon + precrtanu cijenu + bedz popusta — u redu se lomi,
+       pa joj dajemo svoj red ispod oznake. */
+    .info-table td[data-l="Cijena"] {
+      display: block; padding: 10px 0;
+    }
+    .info-table td[data-l="Cijena"]::before {
+      display: block; margin-bottom: 5px;
+    }
+    .info-table td[data-l="Cijena"] > * { text-align: left; }
+    .info-table td[data-l="Cijena"] strong { font-size: 19px !important; }
+    .info-table td[data-l="Cijena"] span { vertical-align: middle; }
+    .info-table td.cj-naziv { font-size: 17px; color: #1a1a1a; padding-bottom: 4px; }
+    .info-table td.cj-naziv strong { font-size: 17px; }
+    .info-table td.cj-link { padding-top: 12px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,.06); }
+    .info-table td.cj-link a {
+      display: block; text-align: center; background: #1a1a1a; color: #fff;
+      padding: 11px; border-radius: 9px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .info-table tr:hover td { background: transparent; }
+  }
   .calc { background: #faf7f2; border: 1px solid rgba(201,168,108,0.35); border-radius: 16px; padding: 24px; margin: 22px 0; }
   .calc-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
   .calc-f { flex: 1; min-width: 140px; }
@@ -390,10 +428,10 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   $poM2 = $povrsina ? $lo / $povrsina : null;
 ?>
         <tr>
-          <td><strong><?= htmlspecialchars($cjNames[$c]) ?></strong><br>
+          <td class="cj-naziv"><strong><?= htmlspecialchars($cjNames[$c]) ?></strong><br>
               <span style="font-size:12.5px;color:#8a8a8a;"><?= count($cjRows[$c]) ?> dezena</span></td>
-          <td><?= htmlspecialchars($cjDim[$c] ?? '—') ?></td>
-          <td>
+          <td data-l="Dimenzija"><?= htmlspecialchars($cjDim[$c] ?? '—') ?></td>
+          <td data-l="Cijena">
             <?php if ($maxPop > 0): ?>
               <strong style="color:#c9a86c;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
               <span style="display:block;font-size:12px;color:#aaa;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
@@ -403,8 +441,8 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
             <?php endif; ?>
             <span style="display:block;font-size:12px;color:#8a8a8a;">/ <?= htmlspecialchars($jed) ?></span>
           </td>
-          <td><?= $poM2 ? '~' . $fmt($poM2) . ' €' : '—' ?></td>
-          <td><a href="products.html?category=<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj &rsaquo;</a></td>
+          <td data-l="Po m&sup2;"><?= $poM2 ? '~' . $fmt($poM2) . ' €' : '—' ?></td>
+          <td class="cj-link"><a href="products.html?category=<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj proizvode &rsaquo;</a></td>
         </tr>
 <?php endforeach; ?>
       </tbody>
