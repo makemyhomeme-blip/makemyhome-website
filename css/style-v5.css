@@ -3338,8 +3338,15 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 
 /* Inspiracija u navigaciji — istaknuta jer je ulaz u fotografije prostora */
-.nav-link.nav-insp { color: #c9a86c !important; font-weight: 700 !important; }
-.nav-link.nav-insp:hover { color: #dfc080 !important; }
+/* Zlatan okvir, ne zlatna slova — zlatna slova su oznaka stranice na kojoj se
+   posjetilac nalazi, pa je Inspiracija izgledala kao da je otvorena.
+   Okvir je unutrasnja sjenka da ne dodaje sirinu i ne lomi navigaciju u dva reda. */
+.nav-link.nav-insp {
+  color: #fff !important; font-weight: 700 !important;
+  box-shadow: inset 0 0 0 1px rgba(201,168,108,.65);
+}
+.nav-link.nav-insp:hover { color: #c9a86c !important; box-shadow: inset 0 0 0 1px rgba(201,168,108,.95); }
+.nav-link.nav-insp.active { color: #c9a86c !important; box-shadow: inset 0 0 0 1px #c9a86c; }
 
 /* ===== Traka soba na pocetnoj strani — ulaz u Inspiraciju =====
    Tamna traka da fotografije iskoce sa strane, slike se smjenjuju same. */

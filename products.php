@@ -251,7 +251,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=35">
+  <link rel="stylesheet" href="css/style-v5.css?v=36">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -723,7 +723,7 @@ echo "\n</script>\n";
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js?v=4"></script>
+<script src="js/main-v4.js?v=5"></script>
 <script src="js/products.js?v=41"></script>
 <script src="js/cart.js?v=2"></script>
 <script>

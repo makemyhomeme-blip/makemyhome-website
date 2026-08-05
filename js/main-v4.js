@@ -184,7 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   // ===== ACTIVE NAV =====
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  // .php se izjednacava sa .html jer stranice imaju oba oblika (product.php -> product.html)
+  const currentPage = (window.location.pathname.split('/').pop() || 'index.html').replace(/\.php$/, '.html');
   const currentSearch = window.location.search;
   document.querySelectorAll('.nav-link').forEach(link => {
     const href = link.getAttribute('href');
