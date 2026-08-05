@@ -39,6 +39,9 @@ $files = [
     $root . '/faq.html'         => $base . '/faq.html',
     $root . '/montaza.html'     => $base . '/montaza.html',
     $root . '/decor-box.html'   => $base . '/decor-box.html',
+    $root . '/privatnost.html'  => $base . '/privatnost.html',
+    $root . '/uslovi.html'      => $base . '/uslovi.html',
+    $root . '/reklamacije.html' => $base . '/reklamacije.html',
     // PHP
     $root . '/product.php'      => $base . '/product.php',
     $root . '/products.php'     => $base . '/products.php',
@@ -50,6 +53,7 @@ $files = [
     $root . '/js/products.js'   => $base . '/js/products.js',
     $root . '/js/main-v4.js'    => $base . '/js/main-v4.js',
     $root . '/js/analytics-events.js' => $base . '/js/analytics-events.js',
+    $root . '/js/kolacici.js'   => $base . '/js/kolacici.js',
     // CSS
     $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
     $root . '/css/fonts.css'    => $base . '/css/fonts.css',
