@@ -47,6 +47,18 @@ RewriteRule ^xmlrpc\.php$ - [G,L]
 RewriteRule ^(?!product/)(.*/)?feed/?$ /? [R=301,L]
 RewriteRule ^comments/ - [G,L]
 
+# ── Arhive, backupi i dev fajlovi — 403 Forbidden ──────────────────────────────
+# nas-sajt-backup-*.zip je sadrzao admin/index.php sa lozinkom u citljivom obliku
+# i wp-config.php sa lozinkom baze. Bio je javno skidljiv. Ovo je zastita u dubinu:
+# fajlovi se brisu sa diska, a ovo pravilo sprjecava da ih iko ikad opet izlozi.
+RewriteRule \.(zip|tar|gz|bz2|rar|7z|sql|bak|old|orig|swp|log|md|ini|env|dist)$ - [F,L]
+RewriteRule ^error_log$ - [F,L]
+RewriteRule ^_.*\.php$ - [F,L]
+RewriteRule ^(ads|test|tmp)\.html?$ - [G,L]
+# Stare kopije resursa u rootu (prave kopije su u /css i /js)
+RewriteRule ^(products|script)\.js$ - [G,L]
+RewriteRule ^(style|styles)\.css$ - [G,L]
+
 # index.html → homepage (bez ovoga Google vidi index.html kao posebnu stranicu)
 RewriteRule ^index\.html$ /? [R=301,L]
 
