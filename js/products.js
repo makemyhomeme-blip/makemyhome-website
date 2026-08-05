@@ -108,10 +108,10 @@ function renderProductCard(product, lazy = true) {
         <div class="product-footer">
           <div class="product-price">
             ${product.discount > 0
-              ? `<span style="text-decoration:line-through;color:#aaa;font-size:13px;display:block;">${product.price} €</span>
+              ? `<span style="text-decoration:line-through;color:#767676;font-size:13px;display:block;">${product.price} €</span>
                  <span style="color:#e74c3c;font-weight:700;">${(product.price*(1-product.discount/100)).toFixed(2)} €</span>
                  <span style="background:#e74c3c;color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:4px;">-${product.discount}%</span>
-                 <span style="color:#888;font-size:12px;"> / ${product.unit}</span>`
+                 <span style="color:#666e7a;font-size:12px;"> / ${product.unit}</span>`
               : `${product.price} € <span>/ ${product.unit}</span>`
             }
           </div>
@@ -478,7 +478,8 @@ async function renderProductDetail() {
     if (multi) {
       galleryThumbs.innerHTML = _galleryImages.map((img, i) => `
         <div class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="_goToGallery(${i})">
-          <img src="${img.src}" alt="${img.label}">
+          <img src="${img.src}" alt="${img.label}"
+            onerror="this.onerror=null;this.closest(&quot;.gallery-thumb&quot;).style.display='none'">
         </div>`).join('');
       galleryThumbs.style.display = 'flex';
     } else {
@@ -1169,10 +1170,10 @@ async function renderProductDetail() {
 
     ${product.discount > 0
       ? `<div class="product-price-lg">
-           <span style="text-decoration:line-through;color:#aaa;font-size:18px;font-weight:400;">${product.price} €</span>
+           <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;">${product.price} €</span>
            <span style="margin-left:8px;">${(product.price*(1-product.discount/100)).toFixed(2)} €</span>
            <span style="background:#e74c3c;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle;">-${product.discount}% POPUST</span>
-           <span style="color:#888;font-size:14px;"> / ${product.unit}</span>
+           <span style="color:#666e7a;font-size:14px;"> / ${product.unit}</span>
          </div>`
       : `<div class="product-price-lg">${product.price} € <span>/ ${product.unit}</span></div>`
     }

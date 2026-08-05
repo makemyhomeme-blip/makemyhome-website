@@ -262,7 +262,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=36">
+  <link rel="stylesheet" href="css/style-v5.css?v=37">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -320,7 +320,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -429,9 +429,9 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <?php endif; ?>
 <?php if ($product): ?>
     <nav class="breadcrumb" aria-label="Navigacija" style="margin-bottom:18px;font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#8a8a8a;">
-      <a href="/" style="color:#8a8a8a;text-decoration:none;">Početna</a>
+      <a href="/" style="color:#666e7a;text-decoration:none;">Početna</a>
       <i class="fas fa-chevron-right" style="font-size:9px;"></i>
-      <a href="products.html" style="color:#8a8a8a;text-decoration:none;">Proizvodi</a>
+      <a href="products.html" style="color:#666e7a;text-decoration:none;">Proizvodi</a>
 <?php if ($prodCatName): ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <a href="products.html?category=<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#c9a86c;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
 <?php endif; ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
@@ -505,7 +505,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
             <div style="margin-bottom:16px;">
               <?php if ($discount > 0): ?>
               <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($salePrice, 2, ',', '.') ?> €</span>
-              <span style="text-decoration:line-through;color:#aaa;font-size:1.1em;margin-left:10px;"><?= number_format($price, 2, ',', '.') ?> €</span>
+              <span style="text-decoration:line-through;color:#767676;font-size:1.1em;margin-left:10px;"><?= number_format($price, 2, ',', '.') ?> €</span>
               <span style="background:#e74c3c;color:#fff;font-size:.75em;font-weight:700;padding:3px 8px;border-radius:20px;margin-left:8px;">-<?= $discount ?>%</span>
               <?php else: ?>
               <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($price, 2, ',', '.') ?> €</span>
@@ -726,7 +726,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=5"></script>
-<script src="js/products.js?v=41"></script>
+<script src="js/products.js?v=42"></script>
 <script src="js/cart.js?v=2"></script>
 <script>
   renderProductDetail();

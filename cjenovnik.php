@@ -66,7 +66,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=36">
+  <link rel="stylesheet" href="css/style-v5.css?v=37">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -147,7 +147,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -430,17 +430,17 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 ?>
         <tr>
           <td class="cj-naziv"><strong><?= htmlspecialchars($cjNames[$c]) ?></strong><br>
-              <span style="font-size:12.5px;color:#8a8a8a;"><?= count($cjRows[$c]) ?> dezena</span></td>
+              <span style="font-size:12.5px;color:#666e7a;"><?= count($cjRows[$c]) ?> dezena</span></td>
           <td data-l="Dimenzija"><?= htmlspecialchars($cjDim[$c] ?? '—') ?></td>
           <td data-l="Cijena">
             <?php if ($maxPop > 0): ?>
               <strong style="color:#c9a86c;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
-              <span style="display:block;font-size:12px;color:#aaa;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
+              <span style="display:block;font-size:12px;color:#767676;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
               <span style="display:inline-block;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;">−<?= $maxPop ?>%</span>
             <?php else: ?>
               <strong style="font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
             <?php endif; ?>
-            <span style="display:block;font-size:12px;color:#8a8a8a;">/ <?= htmlspecialchars($jed) ?></span>
+            <span style="display:block;font-size:12px;color:#666e7a;">/ <?= htmlspecialchars($jed) ?></span>
           </td>
           <td data-l="Po m&sup2;"><?= $poM2 ? '~' . $fmt($poM2) . ' €' : '—' ?></td>
           <td class="cj-link"><a href="products.html?category=<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj proizvode &rsaquo;</a></td>
@@ -449,7 +449,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       </tbody>
     </table>
     </div>
-    <p style="font-size:13px;color:#8a8a8a;">
+    <p style="font-size:13px;color:#666e7a;">
       Cijene su ažurirane <?= date('d.m.Y.') ?> i mijenjaju se automatski kada promijenimo cijenu u ponudi.
       Kolona „po m²" je informativna — računa se iz najniže cijene u kategoriji.
     </p>

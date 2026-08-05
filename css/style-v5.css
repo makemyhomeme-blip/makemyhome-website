@@ -13,7 +13,7 @@
   --dark: #1a1a1a;
   --dark-2: #2c2c2c;
   --dark-3: #3a3a3a;
-  --gray: #888;
+  --gray: #666e7a;   /* bilo #888 — kontrast 3,5 na bijeloj, sitan tekst se lose citao na telefonu */
   --gray-light: #ccc;
   --light: #f5f0eb;
   --white: #ffffff;
@@ -30,7 +30,12 @@
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+/* text-size-adjust: iOS Safari sam uvecava slova kad se telefon okrene u sirinu
+   i tako razbija razmake — 100% mu to zabranjuje. */
+html {
+  scroll-behavior: smooth; font-size: 16px; overflow-x: hidden;
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+}
 
 body {
   font-family: var(--font-body);
@@ -689,7 +694,7 @@ ul { list-style: none; }
 
 .product-sku {
   font-size: 11px;
-  color: #999;
+  color: #666e7a;
   margin-bottom: 6px;
   letter-spacing: 0.03em;
 }
@@ -1551,7 +1556,7 @@ ul { list-style: none; }
   box-shadow: 0 0 0 3px rgba(201,168,108,0.15);
 }
 
-.form-control::placeholder { color: var(--gray-light); }
+.form-control::placeholder { color: #8a8a8a; }
 
 textarea.form-control { resize: vertical; min-height: 130px; }
 
@@ -2563,7 +2568,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .gallery-open-hint {
   text-align: center;
   font-size: 11px;
-  color: #bbb;
+  color: #666e7a;
   margin-top: 8px;
   letter-spacing: 0.3px;
 }
@@ -3024,7 +3029,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   pointer-events: none;
 }
 .btn-card-detail {
-  color: #aaa;
+  color: #666e7a;
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
@@ -3118,7 +3123,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .p-side-rating-num { font-size: 30px; font-weight: 800; color: #1a1a1a; line-height: 1; }
 .p-side-rating-stars { display: block; margin-bottom: 3px; }
 .p-side-rating-stars i { font-size: 13px; }
-.p-side-rating-txt { font-size: 13px; color: #7a7a7a; font-weight: 600; }
+.p-side-rating-txt { font-size: 13px; color: #666e7a; font-weight: 600; }
 
 .p-side-list { list-style: none; padding: 0; margin: 0 0 18px; }
 .p-side-list li {
@@ -3137,7 +3142,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .p-side-box-t { color: #8a6d2f; font-size: 14.5px; font-weight: 800; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
 .p-side-box-p { color: #5a6672; font-size: 13.5px; line-height: 1.7; margin: 0 0 12px; }
 .p-side-box-p strong { color: #1a1a1a; }
-.p-side-box-h { color: #8a8a8a; font-size: 12.5px; margin: 0 0 16px; display: flex; align-items: center; gap: 7px; }
+.p-side-box-h { color: #666e7a; font-size: 12.5px; margin: 0 0 16px; display: flex; align-items: center; gap: 7px; }
 .p-side-btns { display: flex; flex-direction: column; gap: 9px; }
 .p-side-btn {
   display: flex; align-items: center; justify-content: center; gap: 9px;
@@ -3177,7 +3182,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   background: #c9a86c; color: #fff; font-weight: 700; font-size: 13px;
   display: flex; align-items: center; justify-content: center;
 }
-.info-wrap p a { color: #a8863f; text-decoration: underline; text-underline-offset: 2px; }
+.info-wrap p a { color: #8a6d2e; text-decoration: underline; text-underline-offset: 2px; }
 .info-wrap p a:hover { color: #c9a86c; }
 
 /* ===== Vodiči (kupatilo, TV zid, lamperija, akustika, SPC, dostava) ===== */
@@ -3295,7 +3300,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .insp-info strong { display: block; font-size: 14.5px; font-weight: 700; line-height: 1.3; }
 .insp-info em { display: block; font-style: normal; font-size: 12.5px; color: #c9a86c; margin-top: 3px; font-weight: 600; }
 .insp-kart:focus-visible { outline: 2px solid #c9a86c; outline-offset: 3px; }
-.insp-prazno { text-align: center; color: #8a8a8a; padding: 40px 0; }
+.insp-prazno { text-align: center; color: #666e7a; padding: 40px 0; }
 
 .insp-cta {
   margin-top: 46px; padding: 30px 26px; text-align: center;
@@ -3398,3 +3403,25 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .ideja-slika b em { font-size: 12.5px; }
   .ideja-akcija .btn { width: 100%; justify-content: center; font-size: 16px; padding: 16px 20px; }
 }
+
+/* ===== iPhone: polja za unos ne smiju biti ispod 16px =====
+   Safari na iPhoneu automatski zumira cijelu stranicu cim se dodirne polje
+   sa slovima manjim od 16px, i onda ostane zumirano. Zato na sirinama gdje se
+   koristi hamburger meni sva polja idu na 16px. Kolicina u korpi dobija i vecu
+   sirinu da broj ne bi ispao iz okvira. */
+@media (max-width: 1149px) {
+  input, select, textarea,
+  .form-control, #mob-search-input, #desk-search-input,
+  .co-field input, .co-field select, .co-field textarea,
+  .insp-select { font-size: 16px !important; }
+  .ki-qty-input { font-size: 16px !important; width: 48px !important; }
+}
+
+/* ===== Citljivost teksta na bijeloj pozadini =====
+   Zlatna #c9a86c na bijeloj daje kontrast 2,26 — na telefonu, pogotovo napolju,
+   takvi linkovi se jedva citaju. Dugmad zadrzavaju svoju boju (a:not(.btn)). */
+.info-wrap a:not(.btn), .info-wrap li a:not(.btn), .info-wrap strong a:not(.btn) {
+  color: #8a6d2e;
+}
+.info-wrap a:not(.btn):hover { color: #a8863f; }
+.info-wrap .vodic-cta a:not(.btn) { color: #c9a86c; }   /* tamna kutija — zlatna je ovdje citljiva */

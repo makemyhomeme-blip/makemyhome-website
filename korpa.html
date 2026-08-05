@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=36">
+  <link rel="stylesheet" href="css/style-v5.css?v=37">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -24,7 +24,7 @@
     .korpa-header{padding:0 0 32px;border-bottom:1px solid rgba(0,0,0,0.08);margin-bottom:32px}
     .korpa-header h1{font-size:28px;font-weight:700;color:#1a1a1a;display:flex;align-items:center;gap:12px}
     .korpa-header h1 i{color:#c9a86c;font-size:24px}
-    .korpa-header .sub{font-size:14px;color:#888;margin-top:4px}
+    .korpa-header .sub{font-size:14px;color:#666e7a;margin-top:4px}
     .korpa-grid{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
 
     /* Items */
@@ -37,37 +37,37 @@
     .ki-info{}
     .ki-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px;line-height:1.3}
     .ki-price{font-size:13px;color:#c9a86c;margin-bottom:8px}
-    .ki-price-original{font-size:11px;color:#aaa;text-decoration:line-through;margin-right:6px}
+    .ki-price-original{font-size:11px;color:#767676;text-decoration:line-through;margin-right:6px}
     .ki-controls{display:flex;align-items:center;gap:6px}
     .ki-qty-btn{width:28px;height:28px;border-radius:6px;border:1.5px solid rgba(201,168,108,0.4);background:transparent;color:#c9a86c;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
     .ki-qty-btn:hover{background:rgba(201,168,108,0.12)}
     .ki-qty-input{width:38px;text-align:center;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.35);color:#1a1a1a;border-radius:6px;font-size:13px;font-weight:700;padding:4px 2px;font-family:inherit;-moz-appearance:textfield}
     .ki-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
     .ki-subtotal{font-size:15px;font-weight:700;color:#1a1a1a;white-space:nowrap}
-    .ki-remove{background:none;border:none;color:#bbb;cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;transition:color .15s,background .15s}
+    .ki-remove{background:none;border:none;color:#8a8a8a;cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;transition:color .15s,background .15s}
     .ki-remove:hover{color:#e74c3c;background:rgba(231,76,60,0.08)}
 
     /* Summary */
     .korpa-summary{background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:24px;position:sticky;top:88px;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
     .ks-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:20px;display:flex;align-items:center;gap:8px}
     .ks-title i{color:#c9a86c}
-    .ks-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#888;margin-bottom:10px}
+    .ks-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#666e7a;margin-bottom:10px}
     .ks-row.ks-total{font-size:18px;font-weight:700;color:#1a1a1a;border-top:1px solid rgba(0,0,0,0.08);padding-top:14px;margin-top:6px;margin-bottom:0}
     .ks-total span:last-child{color:#c9a86c;font-size:20px}
-    .ks-delivery{display:flex;align-items:center;gap:8px;background:#faf8f4;border:1px solid rgba(201,168,108,0.2);border-radius:8px;padding:10px 12px;font-size:12px;color:#888;margin:14px 0}
+    .ks-delivery{display:flex;align-items:center;gap:8px;background:#faf8f4;border:1px solid rgba(201,168,108,0.2);border-radius:8px;padding:10px 12px;font-size:12px;color:#666e7a;margin:14px 0}
     .ks-delivery i{color:#c9a86c;font-size:14px;flex-shrink:0}
     .ks-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;font-size:16px;font-weight:700;padding:15px 20px;border-radius:12px;text-decoration:none;width:100%;box-sizing:border-box;transition:background .2s,transform .15s;margin-top:4px;font-family:inherit;border:none;cursor:pointer}
     .ks-cta:hover{background:#dfc080;transform:translateY(-1px)}
-    .ks-clear{width:100%;background:transparent;color:#aaa;border:1.5px solid rgba(0,0,0,0.1);border-radius:10px;padding:10px;font-size:12px;cursor:pointer;margin-top:8px;font-family:inherit;transition:color .15s,border-color .15s}
+    .ks-clear{width:100%;background:transparent;color:#666e7a;border:1.5px solid rgba(0,0,0,0.1);border-radius:10px;padding:10px;font-size:12px;cursor:pointer;margin-top:8px;font-family:inherit;transition:color .15s,border-color .15s}
     .ks-clear:hover{color:#e74c3c;border-color:rgba(231,76,60,0.3)}
-    .ks-trust{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#aaa;margin-top:14px;line-height:1.6}
+    .ks-trust{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#666e7a;margin-top:14px;line-height:1.6}
     .ks-trust i{color:#c9a86c;margin-top:2px;flex-shrink:0}
 
     /* Empty */
     .korpa-empty{text-align:center;padding:80px 20px}
     .korpa-empty-icon{width:90px;height:90px;border-radius:50%;background:rgba(201,168,108,0.08);border:1.5px solid rgba(201,168,108,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:36px;color:rgba(201,168,108,0.5)}
     .korpa-empty h2{font-size:22px;color:#1a1a1a;margin-bottom:8px}
-    .korpa-empty p{color:#888;font-size:15px;margin-bottom:28px}
+    .korpa-empty p{color:#666e7a;font-size:15px;margin-bottom:28px}
 
     @media(max-width:900px){.korpa-grid{grid-template-columns:1fr}.korpa-summary{position:static}}
     @media(max-width:560px){.korpa-item{grid-template-columns:60px 1fr auto}.ki-img{width:60px;height:60px}}
@@ -115,7 +115,7 @@
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -305,7 +305,7 @@
 
 
 <script src="js/main-v4.js?v=5"></script>
-<script src="js/products.js?v=41"></script>
+<script src="js/products.js?v=42"></script>
 <script src="js/cart.js?v=2"></script>
 <script>
 function renderKorpa() {
