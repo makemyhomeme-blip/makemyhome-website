@@ -1,63 +1,25 @@
-<?php
-// Cijene se citaju UZIVO iz data/products.json — cjenovnik nikad ne moze zastarjeti.
-$cjP = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
-$cjNames = [
-  'bambus-drveni'=>'Drveni bambus paneli', 'bambus-tekstilni'=>'Tekstilni paneli',
-  'bambus-mermerni'=>'Mermerni paneli', 'bambus-metalni'=>'Metalni paneli',
-  'bambus-kozni'=>'Kožni paneli', 'classic'=>'Classic paneli',
-  '3d-letvice'=>'3D dekorativne letvice', 'akusticni-paneli'=>'Akustični paneli',
-  'mdf'=>'MDF kanelirani paneli', 'pu-kamen'=>'PU dekorativni kamen',
-  'flex-stone'=>'Flex Stone savitljivi kamen', 'spc-pod'=>'SPC vodootporni pod',
-  'aluminijum-lajsne'=>'Aluminijum lajsne',
-];
-$cjDim = [
-  'bambus-drveni'=>'280×122 cm · 3,42 m²', 'bambus-tekstilni'=>'280×122 cm · 3,42 m²',
-  'bambus-mermerni'=>'280×122 cm · 3,42 m²', 'bambus-metalni'=>'280×122 cm · 3,42 m²',
-  'bambus-kozni'=>'280×122 cm · 3,42 m²', 'classic'=>'280×122 cm · 3,42 m²',
-  '3d-letvice'=>'280×16 cm · 0,45 m²', 'akusticni-paneli'=>'60×60 cm · 0,36 m²',
-  'mdf'=>'razne dimenzije', 'pu-kamen'=>'set 290×60 cm · 1,74 m²',
-  'flex-stone'=>'120×60 cm · 0,72 m²', 'spc-pod'=>'prodaje se po m²',
-  'aluminijum-lajsne'=>'dužina 270 cm',
-];
-$cjArea = [
-  'bambus-drveni'=>3.42,'bambus-tekstilni'=>3.42,'bambus-mermerni'=>3.42,'bambus-metalni'=>3.42,
-  'bambus-kozni'=>3.42,'classic'=>3.42,'3d-letvice'=>0.45,'akusticni-paneli'=>0.36,
-  'pu-kamen'=>1.74,'flex-stone'=>0.72,'spc-pod'=>1.0,
-];
-$cjRows = [];
-foreach ($cjP as $x) {
-    $c = $x['category'] ?? '';
-    if (!isset($cjNames[$c])) continue;
-    $pr = (float)($x['price'] ?? 0);
-    $dc = (int)($x['discount'] ?? 0);
-    $sp = $dc > 0 ? round($pr * (1 - $dc / 100), 2) : $pr;
-    $cjRows[$c][] = ['puna'=>$pr, 'akcija'=>$sp, 'popust'=>$dc, 'jed'=>$x['unit'] ?? 'kom'];
-}
-$cjOrder = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-metalni','bambus-kozni','classic','3d-letvice','akusticni-paneli','mdf','pu-kamen','flex-stone','spc-pod','aluminijum-lajsne'];
-$fmt = fn($v) => number_format($v, 2, ',', '.');
-?>
 <!DOCTYPE html>
 <html lang="sr-ME">
 <head><meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Koliko koštaju zidni paneli, 3D letvice, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene i kalkulator koliko komada vam treba.">
-  <meta name="keywords" content="cijena zidnih panela, cjenovnik zidni paneli, koliko koštaju paneli, cijena 3d letvica, cijena akustičnih panela, cijena spc pod, cijena pu kamen, Podgorica, Crna Gora">
-  <meta property="og:title" content="Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor">
-  <meta property="og:description" content="Koliko koštaju zidni paneli, 3D letvice, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene i kalkulator koliko komada vam treba.">
+  <meta name="description" content="Politika privatnosti Make My Home Decor – koje podatke prikupljamo kada naručite, zašto, ko im još pristupa i kako ih možete obrisati.">
+  <meta name="keywords" content="politika privatnosti, zaštita podataka, kolačići, Make My Home Decor, Podgorica">
+  <meta property="og:title" content="Politika Privatnosti | Make My Home Decor">
+  <meta property="og:description" content="Politika privatnosti Make My Home Decor – koje podatke prikupljamo kada naručite, zašto, ko im još pristupa i kako ih možete obrisati.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://makemyhome.me/cjenovnik.html">
+  <meta property="og:url" content="https://makemyhome.me/privatnost.html">
   <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
   <meta property="og:image:width" content="1714">
   <meta property="og:image:height" content="800">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor">
-  <meta name="twitter:description" content="Koliko koštaju zidni paneli, 3D letvice, PU kamen i SPC pod u Crnoj Gori. Aktuelne cijene i kalkulator koliko komada vam treba.">
+  <meta name="twitter:title" content="Politika Privatnosti | Make My Home Decor">
+  <meta name="twitter:description" content="Politika privatnosti Make My Home Decor – koje podatke prikupljamo kada naručite, zašto, ko im još pristupa i kako ih možete obrisati.">
   <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
-  <link rel="canonical" href="https://makemyhome.me/cjenovnik.html">
-  <title>Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor</title>
+  <link rel="canonical" href="https://makemyhome.me/privatnost.html">
+  <title>Politika Privatnosti | Make My Home Decor</title>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="apple-touch-icon" sizes="512x512" href="images/favicon-512.png">
@@ -170,69 +132,85 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 
   <script type="application/ld+json">
   {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/" },
-    { "@type": "ListItem", "position": 2, "name": "Cijene", "item": "https://makemyhome.me/cjenovnik.html" }
-  ]
-}
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/" },
+      { "@type": "ListItem", "position": 2, "name": "Montaža panela", "item": "https://makemyhome.me/montaza.html" }
+    ]
+  }
   </script>
   <script type="application/ld+json">
   {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Koliko košta zidni panel po m²?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Bambus panel od 3,42 m² košta oko 69,59 € sa popustom, što je oko 20 € po m². 3D letvica od 0,45 m² košta 15,99 €, oko 36 € po m² zbog uskog profila. SPC pod se prodaje po m² i košta 17,49 €."
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Da li mi treba majstor za montažu zidnih panela?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ne. Panel se lijepi silikonom direktno na ravan zid i siječe se skalpelom ili ubodnom testerom. Većina naših kupaca montira sama, u paru, za jedno popodne. Majstor je potreban samo ako zid mora prvo da se izravna."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Na koju podlogu se mogu lijepiti paneli?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Na svaku čvrstu i ravnu podlogu — malter, gips-karton, stari pločice, beton, drvo, čak i na staru boju ako ne otpada. Podloga mora biti suva, čista i bez prašine."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kojim ljepilom se lijepe zidni paneli?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Montažnim silikonom (MS polimer) u pištolju. Nanosi se u vertikalnim linijama na poleđinu panela, na razmaku od oko 20 cm. Ne koristite obično akrilno ljepilo za pločice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kako se siječe panel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Skalpelom uz metalnu lajsnu za ravne rezove, ili ubodnom testerom sa finim listom za izrezivanje otvora za utičnice. Uvijek mjerite dva puta, siječite jednom."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Šta sa uglovima i ivicama?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Za to služe aluminijum lajsne — F profil za završetak, unutrašnji i spoljni ugao za uglove. One pokrivaju rez i daju instalaciji dovršen, profesionalan izgled."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mogu li paneli u kupatilo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Da. Naši paneli su vodootporni, ne nabreknu i ne deformišu se. Jedino ih ne stavljajte direktno u tuš kabinu gdje voda stalno udara po površini."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Koliko dugo traje montaža?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prosječan zid od 10 m² dvoje ljudi završi za 3–5 sati, uključujući mjerenje i sječenje. Najviše vremena odlazi na pripremu, ne na lijepljenje."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kako se održavaju paneli poslije montaže?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vlažnom krpom i blagim deterdžentom. Bez abrazivnih sredstava i bez žice za ribanje. To je sve."
+        }
       }
-    },
-    {
-      "@type": "Question",
-      "name": "Koliko košta dostava?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Dostava kurirskom službom širom Crne Gore je okvirno 20 € i zavisi od količine i dimenzija paketa. Za veće narudžbe i partnere iz Decor Box programa dogovaramo posebne uslove."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Da li su cijene sa PDV-om?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Da, sve cijene na sajtu su konačne maloprodajne cijene. Za pravna lica izdajemo predračun i fakturu."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Kako se plaća?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Gotovinom pri preuzimanju od kurira, u showroomu ili virmanski za firme uz fakturu. Nema avansa."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Da li ima popusta za veće količine?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Da. Za veće projekte i za arhitekte, izvođače i prodavnice imamo Decor Box partnerski program sa posebnim cijenama."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Zašto su neke kategorije jeftinije po m²?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Veliki paneli 280×122 cm pokrivaju mnogo površine odjednom pa im je cijena po m² niža. Uski profili poput 3D letvica i mali formati poput akustičnih ploča 60×60 cm imaju višu cijenu po m² jer traže više komada za istu površinu."
-      }
-    }
-  ]
-}
+    ]
+  }
   </script>
 <style id="info-page">
   .info-wrap { padding: 46px 0 70px; background: #fff; }
@@ -342,178 +320,97 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       <div class="breadcrumb">
         <a href="/">Početna</a>
         <i class="fas fa-chevron-right"></i>
-        <span>Cijene</span>
+        <span>Politika Privatnosti</span>
       </div>
-      <h1 class="section-title">Cijene Zidnih Panela u Crnoj Gori</h1>
-      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">
-        Aktuelne cijene po kategoriji, cijena dostave i kalkulator koliko vam komada treba
-      </p>
+      <h1 class="section-title">Politika Privatnosti</h1>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">Kako čuvamo vaše podatke i šta možete tražiti od nas</p>
     </div>
   </div>
 </section>
 
 <section class="info-wrap">
   <div class="container">
-    <p class="info-lead">
-      Ovdje su cijene svih kategorija koje držimo na stanju. Tabela se povlači direktno iz naše baze
-      proizvoda, pa ne može zastarjeti — ono što ovdje vidite je ono što plaćate danas.
-      Sve cijene su konačne maloprodajne, u eurima.
+
+<p class="info-lead">Ova politika objašnjava koje podatke prikupljamo kada naručite kod nas ili nam pišete,
+zašto ih prikupljamo, koliko dugo ih čuvamo i šta možete tražiti od nas u vezi sa njima.
+Pisana je jednostavno, bez pravničkog jezika, jer treba da je razumijete.</p>
+
+<h2>Ko obrađuje vaše podatke</h2>
+<p>Make My Home Decor d.o.o., Vojvode Maša Đurovića 41, City Kvart, 81000 Podgorica, Crna Gora. Telefon <a href="tel:+38269105222">069 105 222</a>, e-mail
+<a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a>. Za sva pitanja o vašim podacima obratite se na te kontakte.</p>
+
+<h2>Koje podatke prikupljamo</h2>
+<h3>Kada naručite</h3>
+<p>Ime i prezime, broj telefona, e-mail adresu, adresu i grad isporuke, te sadržaj narudžbe.
+Bez tih podataka narudžbu ne možemo ni preuzeti ni dostaviti.</p>
+<h3>Kada nam pišete preko forme</h3>
+<p>Ime, e-mail, broj telefona ako ga unesete i tekst vaše poruke.</p>
+<h3>Kada samo razgledate sajt</h3>
+<p>Ako pristanete na kolačiće, Google Analytics bilježi anonimne podatke o posjeti — koje ste
+stranice gledali, koliko ste se zadržali, sa kog uređaja i iz koje države dolazite. Ti podaci nas
+ne mogu odvesti do vas lično. <strong>Ako ne pristanete, analitika se ne pokreće.</strong></p>
+
+<h2>Zašto ih koristimo</h2>
+<ul class="info-list">
+  <li><strong>Da izvršimo narudžbu</strong> — da vas pozovemo, potvrdimo mjere i pošaljemo robu.
+      Osnov je ugovor koji sklapate kada naručite.</li>
+  <li><strong>Da odgovorimo na vaše pitanje</strong> — kada nam sami pišete.</li>
+  <li><strong>Da poboljšamo sajt</strong> — samo uz vašu saglasnost, kroz anonimnu statistiku.</li>
+</ul>
+<p>Vaše podatke <strong>ne prodajemo nikome</strong> i ne koristimo ih za reklame koje vas prate po internetu.</p>
+
+<h2>Ko još vidi vaše podatke</h2>
+<ul class="info-list">
+  <li><strong>Kurirska služba</strong> — dobija ime, adresu i telefon, jer bez toga ne može dostaviti paket.</li>
+  <li><strong>FormSubmit</strong> — servis koji prosljeđuje narudžbe sa sajta na našu e-mail adresu.</li>
+  <li><strong>Google Analytics</strong> — samo ako ste pristali na kolačiće, i samo anonimno.</li>
+</ul>
+<p>Osim njih, nikome. Podatke odajemo državnom organu jedino ako nas zakon na to obaveže.</p>
+
+<h2>Koliko dugo ih čuvamo</h2>
+<p>Podatke o narudžbi čuvamo dok traje garantni rok i dok teku zakonske obaveze vezane za prodaju.
+Poruke iz kontakt forme brišemo kada završimo razgovor sa vama, najkasnije godinu dana od poruke.
+Statistiku posjeta Google čuva prema svojim rokovima, u anonimnom obliku.</p>
+
+<h2>Šta možete tražiti od nas</h2>
+<ul class="info-list">
+  <li>Da vam kažemo koje tačno podatke o vama imamo</li>
+  <li>Da ih ispravimo ako su netačni</li>
+  <li>Da ih obrišemo, kada za njihovo čuvanje više nema osnova</li>
+  <li>Da prestanemo sa obradom kojoj se protivite</li>
+  <li>Da vam ih izdamo u obliku koji možete prenijeti drugome</li>
+  <li>Da povučete saglasnost za kolačiće — u svakom trenutku, dugmetom na dnu ove stranice</li>
+</ul>
+<p>Javite se na <a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a> ili pozovite
+<a href="tel:+38269105222">069 105 222</a> i odgovaramo u najkraćem roku.
+Ako smatrate da smo pogriješili, imate pravo da se obratite <strong>Agenciji za zaštitu ličnih
+podataka i slobodan pristup informacijama Crne Gore</strong>.</p>
+
+<h2>Kolačići</h2>
+<p>Kolačić je mali fajl koji sajt ostavlja u vašem pretraživaču. Mi ih koristimo u dvije svrhe:</p>
+<ul class="info-list">
+  <li><strong>Neophodni</strong> — pamte šta ste stavili u korpu i vaš izbor oko kolačića.
+      Bez njih sajt ne radi, pa se ne mogu isključiti.</li>
+  <li><strong>Statistički</strong> — Google Analytics. <strong>Uključuju se tek kada ih prihvatite.</strong>
+      Ako ih odbijete, ne postavljaju se uopšte.</li>
+</ul>
+<p>Predomislili ste se? Kliknite ovdje:
+<button type="button" id="opet-kolacici" class="btn btn-outline" style="margin-top:6px;">Promijeni izbor o kolačićima</button></p>
+
+<h2>Sigurnost</h2>
+<p>Sajt radi isključivo preko šifrovane HTTPS veze. Ne primamo i ne čuvamo podatke o platnim
+karticama — kod nas se plaća gotovinom kuriru pri preuzimanju.</p>
+
+<h2>Izmjene</h2>
+<p>Ako ovu politiku izmijenimo, nova verzija stoji na ovoj adresi sa novim datumom ispod.</p>
+
+    <p style="font-size:13px;color:#8a8a8a;margin-top:38px;border-top:1px solid rgba(0,0,0,.08);padding-top:16px;">
+      Posljednja izmjena: 05.08.2026. &middot; Pitanja? Pozovite
+      <a href="tel:+38269105222">069 105 222</a> ili pišite na
+      <a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a>.
     </p>
-
-    <h2>Cjenovnik po kategorijama</h2>
-    <div class="tbl-scroll">
-    <table class="info-table">
-      <thead>
-        <tr>
-          <th>Kategorija</th>
-          <th>Dimenzija</th>
-          <th>Cijena</th>
-          <th>Po m²</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-<?php foreach ($cjOrder as $c):
-  if (empty($cjRows[$c])) continue;
-  $lo = min(array_column($cjRows[$c], 'akcija'));
-  $hi = max(array_column($cjRows[$c], 'akcija'));
-  $loPuna = min(array_column($cjRows[$c], 'puna'));
-  $maxPop = max(array_column($cjRows[$c], 'popust'));
-  $jed = $cjRows[$c][0]['jed'];
-  $povrsina = $cjArea[$c] ?? null;
-  $poM2 = $povrsina ? $lo / $povrsina : null;
-?>
-        <tr>
-          <td><strong><?= htmlspecialchars($cjNames[$c]) ?></strong><br>
-              <span style="font-size:12.5px;color:#8a8a8a;"><?= count($cjRows[$c]) ?> dezena</span></td>
-          <td><?= htmlspecialchars($cjDim[$c] ?? '—') ?></td>
-          <td>
-            <?php if ($maxPop > 0): ?>
-              <strong style="color:#c9a86c;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
-              <span style="display:block;font-size:12px;color:#aaa;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
-              <span style="display:inline-block;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;">−<?= $maxPop ?>%</span>
-            <?php else: ?>
-              <strong style="font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
-            <?php endif; ?>
-            <span style="display:block;font-size:12px;color:#8a8a8a;">/ <?= htmlspecialchars($jed) ?></span>
-          </td>
-          <td><?= $poM2 ? '~' . $fmt($poM2) . ' €' : '—' ?></td>
-          <td><a href="products.html?category=<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj &rsaquo;</a></td>
-        </tr>
-<?php endforeach; ?>
-      </tbody>
-    </table>
-    </div>
-    <p style="font-size:13px;color:#8a8a8a;">
-      Cijene su ažurirane <?= date('d.m.Y.') ?> i mijenjaju se automatski kada promijenimo cijenu u ponudi.
-      Kolona „po m²" je informativna — računa se iz najniže cijene u kategoriji.
-    </p>
-
-    <h2 id="kalkulator">Kalkulator – koliko panela vam treba</h2>
-    <p>Unesite mjere zida i odaberite šta vas zanima. Račun uključuje 10% rezerve na sječenje.</p>
-    <div class="calc">
-      <div class="calc-row">
-        <div class="calc-f">
-          <label for="cw">Širina zida (m)</label>
-          <input type="number" id="cw" value="4" min="0.1" step="0.1" inputmode="decimal">
-        </div>
-        <div class="calc-f">
-          <label for="ch">Visina zida (m)</label>
-          <input type="number" id="ch" value="2.6" min="0.1" step="0.1" inputmode="decimal">
-        </div>
-        <div class="calc-f">
-          <label for="ck">Šta postavljate</label>
-          <select id="ck">
-<?php foreach ($cjOrder as $c):
-  if (empty($cjRows[$c]) || empty($cjArea[$c])) continue;
-  $lo = min(array_column($cjRows[$c], 'akcija'));
-?>
-            <option value="<?= $cjArea[$c] ?>|<?= $lo ?>|<?= htmlspecialchars($cjNames[$c], ENT_QUOTES) ?>|<?= htmlspecialchars($c, ENT_QUOTES) ?>"><?= htmlspecialchars($cjNames[$c]) ?></option>
-<?php endforeach; ?>
-          </select>
-        </div>
-      </div>
-      <div class="calc-out" id="cout">
-        <div class="big">—</div>
-        <div class="sub">Unesite mjere zida</div>
-      </div>
-    </div>
-
-    <h2>Šta utiče na konačnu cijenu</h2>
-    <ul>
-      <li><strong>Površina zida.</strong> Veliki paneli 280×122 cm pokrivaju 3,42 m² odjednom, pa je cijena po m² najniža kod njih.</li>
-      <li><strong>Otpad na sječenju.</strong> Računajte 5–10% više od tačne kvadrature, zavisno od toga koliko uglova i otvora ima zid.</li>
-      <li><strong>Lajsne.</strong> Aluminijum lajsne za ivice i uglove su odvojena stavka, obično 20–40 € po zidu.</li>
-      <li><strong>Silikon.</strong> Jedna tuba montažnog silikona pokrije 2–3 panela, oko 5 € po tubi.</li>
-      <li><strong>Dostava.</strong> Okvirno 20 € kurirskom službom širom Crne Gore, zavisno od količine.</li>
-    </ul>
-
-    <h2>Primjer: koliko košta zid od 10 m²</h2>
-    <p>
-      Zid širine 4 m i visine 2,6 m ima 10,4 m². Sa 10% rezerve to je 11,4 m², odnosno
-      <strong>4 bambus panela</strong>. Uz aktuelnu cijenu to je oko <strong>278 €</strong> za panele,
-      plus oko 35 € za lajsne i silikon, plus 20 € dostava — <strong>ukupno oko 333 €</strong>.
-      Isti zid u pločicama traži majstora, ljepilo, fugu i tri do četiri dana rada.
-    </p>
-    <p>
-      Ako niste sigurni šta vam odgovara, dođite u showroom u Podgorici sa mjerama zida ili nam ih pošaljite —
-      izračunamo količinu i cijenu istog dana. Pogledajte i <a href="montaza.html">uputstvo za montažu</a>
-      da vidite koliko je posao jednostavan.
-    </p>
-
-    <h2>Česta pitanja o cijenama</h2>
-    <h3>Koliko košta zidni panel po m²?</h3>
-    <p>Bambus panel od 3,42 m² košta oko 69,59 € sa popustom, što je oko 20 € po m². 3D letvica od 0,45 m² košta 15,99 €, oko 36 € po m² zbog uskog profila. SPC pod se prodaje po m² i košta 17,49 €.</p>
-    <h3>Koliko košta dostava?</h3>
-    <p>Dostava kurirskom službom širom Crne Gore je okvirno 20 € i zavisi od količine i dimenzija paketa. Za veće narudžbe i partnere iz Decor Box programa dogovaramo posebne uslove.</p>
-    <h3>Da li su cijene sa PDV-om?</h3>
-    <p>Da, sve cijene na sajtu su konačne maloprodajne cijene. Za pravna lica izdajemo predračun i fakturu.</p>
-    <h3>Kako se plaća?</h3>
-    <p>Gotovinom pri preuzimanju od kurira, u showroomu ili virmanski za firme uz fakturu. Nema avansa.</p>
-    <h3>Da li ima popusta za veće količine?</h3>
-    <p>Da. Za veće projekte i za arhitekte, izvođače i prodavnice imamo Decor Box partnerski program sa posebnim cijenama.</p>
-    <h3>Zašto su neke kategorije jeftinije po m²?</h3>
-    <p>Veliki paneli 280×122 cm pokrivaju mnogo površine odjednom pa im je cijena po m² niža. Uski profili poput 3D letvica i mali formati poput akustičnih ploča 60×60 cm imaju višu cijenu po m² jer traže više komada za istu površinu.</p>
-
-    <div class="info-cta">
-      <h2>Treba vam tačan izračun?</h2>
-      <p>Pošaljite mjere zida — dobićete ponudu istog dana, bez obaveze kupovine.</p>
-      <a href="tel:+38269105222" class="btn btn-gold btn-lg"><i class="fas fa-phone"></i> 069 105 222</a>
-      <a href="contact.html" class="btn btn-outline btn-lg"><i class="fas fa-envelope"></i> Pošalji upit</a>
-      <a href="decor-box.html" class="btn btn-outline btn-lg"><i class="fas fa-handshake"></i> Partnerske cijene</a>
-    </div>
   </div>
 </section>
-
-<script>
-(function () {
-  var w = document.getElementById('cw'), h = document.getElementById('ch'),
-      k = document.getElementById('ck'), out = document.getElementById('cout');
-  if (!w || !h || !k || !out) return;
-  function calc() {
-    var sw = parseFloat(w.value), sh = parseFloat(h.value);
-    var parts = k.value.split('|');
-    var area = parseFloat(parts[0]), cijena = parseFloat(parts[1]), naziv = parts[2], slug = parts[3];
-    if (!(sw > 0) || !(sh > 0)) {
-      out.innerHTML = '<div class="big">—</div><div class="sub">Unesite mjere zida</div>';
-      return;
-    }
-    var m2 = sw * sh, sRezervom = m2 * 1.1;
-    var kom = Math.ceil(sRezervom / area);
-    var ukupno = kom * cijena;
-    var jed = slug === 'spc-pod' ? 'm²' : 'kom';
-    out.innerHTML =
-      '<div class="big">' + kom + ' ' + jed + ' &middot; ' + ukupno.toFixed(2).replace('.', ',') + ' €</div>' +
-      '<div class="sub">Zid ' + m2.toFixed(2).replace('.', ',') + ' m² (' + sRezervom.toFixed(2).replace('.', ',') +
-      ' m² sa 10% rezerve) &middot; ' + naziv +
-      '<br>Bez lajsni, silikona i dostave (okvirno 20 €). ' +
-      '<a href="products.html?category=' + slug + '">Pogledaj ' + naziv.toLowerCase() + ' &rsaquo;</a></div>';
-    if (typeof window.mmhTrack === 'function') window.mmhTrack('kalkulator_koristen', { kategorija: slug, kom: kom });
-  }
-  [w, h, k].forEach(function (el) { el.addEventListener('input', calc); el.addEventListener('change', calc); });
-  calc();
-})();
-</script>
 
 <footer id="footer">
   <div class="container">
@@ -597,5 +494,10 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 <script src="js/cart.js?v=2"></script>
 <script src="js/kolacici.js?v=1" defer></script>
 <script src="js/analytics-events.js?v=3" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Početna","item":"https://makemyhome.me/"},
+{"@type":"ListItem","position":2,"name":"Politika Privatnosti","item":"https://makemyhome.me/privatnost.html"}]}
+</script>
 </body>
 </html>

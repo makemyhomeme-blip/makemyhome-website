@@ -85,14 +85,25 @@
   .nav-link{font-size:13.5px!important;padding:8px 13px!important;}
 }
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
+<!-- Google tag (gtag.js) — Consent Mode v2.
+     Analitika je podrazumijevano ISKLJUCENA i pali se tek kada posjetilac pristane
+     na traci za kolacice. Bez ovoga se GA4 pokretao svakome bez saglasnosti. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{
+    ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied',
+    analytics_storage:'denied', functionality_storage:'granted',
+    security_storage:'granted', wait_for_update:500
+  });
+  try{ if(localStorage.getItem('mmh-kolacici')==='da'){
+    gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',
+      ad_personalization:'granted',analytics_storage:'granted'});
+  } }catch(e){}
   gtag("js", new Date());
   gtag("config", "G-4LLQCZ8CV4");
 </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
 </head>
 <body>
   <div class="logo">
@@ -110,6 +121,7 @@
       <a href="/products.html" class="btn btn-secondary"><i class="fas fa-th-large"></i> Proizvodi</a>
     </div>
   </div>
+<script src="js/kolacici.js?v=1" defer></script>
 <script src="js/analytics-events.js?v=3" defer></script>
 </body>
 </html>

@@ -3154,3 +3154,54 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .p-side { margin-top: 22px; }
   .p-side-box { padding: 18px 16px 16px; }
 }
+
+/* ===== Pravne stranice: privatnost / uslovi / reklamacije ===== */
+.info-wrap h3 { font-size: 18px; color: #1a1a1a; margin: 26px 0 8px; line-height: 1.35; }
+.info-wrap .info-list { list-style: none; padding: 0; margin: 14px 0 20px; }
+.info-wrap .info-list li {
+  position: relative; padding-left: 26px; margin-bottom: 10px;
+  color: #5a6672; line-height: 1.75; font-size: 15.5px;
+}
+.info-wrap .info-list li::before {
+  content: "\2713"; position: absolute; left: 0; top: 0;
+  color: #c9a86c; font-weight: 700;
+}
+.info-wrap .info-steps { counter-reset: korak; list-style: none; padding: 0; margin: 16px 0 22px; }
+.info-wrap .info-steps li {
+  counter-increment: korak; position: relative; padding-left: 40px;
+  margin-bottom: 14px; color: #5a6672; line-height: 1.75; font-size: 15.5px;
+}
+.info-wrap .info-steps li::before {
+  content: counter(korak); position: absolute; left: 0; top: -1px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #c9a86c; color: #fff; font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+}
+.info-wrap p a { color: #a8863f; text-decoration: underline; text-underline-offset: 2px; }
+.info-wrap p a:hover { color: #c9a86c; }
+
+/* ===== Traka za kolačiće ===== */
+#kolacici {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 9000;
+  max-width: 720px; margin: 0 auto; background: #1a1a1a; color: #f0eee9;
+  border: 1px solid rgba(201,168,108,.35); border-radius: 14px;
+  padding: 18px 20px; box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  font-size: 14px; line-height: 1.6;
+}
+#kolacici p { margin: 0; flex: 1 1 320px; }
+#kolacici a { color: #c9a86c; text-decoration: underline; }
+#kolacici .kolacici-btns { display: flex; gap: 10px; flex-shrink: 0; }
+#kolacici button {
+  font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 9px;
+  cursor: pointer; border: 1px solid rgba(255,255,255,.25);
+  background: transparent; color: #f0eee9; white-space: nowrap;
+}
+#kolacici button.da { background: #c9a86c; border-color: #c9a86c; color: #1a1a1a; }
+#kolacici button:hover { filter: brightness(1.12); }
+#kolacici button:focus-visible { outline: 2px solid #c9a86c; outline-offset: 2px; }
+@media (max-width: 560px) {
+  #kolacici { flex-direction: column; align-items: stretch; padding: 16px; }
+  #kolacici .kolacici-btns { justify-content: stretch; }
+  #kolacici button { flex: 1; }
+}

@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=22">
+  <link rel="stylesheet" href="css/style-v5.css?v=23">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -91,8 +91,22 @@
   <style id="nav-fix">
   @media(min-width:769px){.header-inner{flex-wrap:nowrap!important;}.logo{flex-shrink:0!important;margin-right:20px!important;}.logo-img{height:44px!important;}.logo-text .name{white-space:nowrap!important;font-size:16px!important;}.logo-text .tagline{white-space:nowrap!important;font-size:9px!important;}.nav-menu{gap:0!important;flex-wrap:nowrap!important;flex-shrink:1!important;margin-left:auto!important;}.nav-link{white-space:nowrap!important;font-size:12px!important;padding:8px 5px!important;}.nav-link.nav-cta{padding:7px 14px!important;margin-left:4px!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   </style>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{
+    ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied',
+    analytics_storage:'denied', functionality_storage:'granted',
+    security_storage:'granted', wait_for_update:500
+  });
+  try{ if(localStorage.getItem('mmh-kolacici')==='da'){
+    gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',
+      ad_personalization:'granted',analytics_storage:'granted'});
+  } }catch(e){}
+  gtag("js", new Date());
+  gtag("config", "G-4LLQCZ8CV4");
+</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-4LLQCZ8CV4");</script>
 <style>
   .footer-links-grid{display:block!important;column-count:2!important;column-gap:18px!important;}
   .footer-links-grid li{break-inside:avoid;margin-bottom:9px;}
@@ -355,6 +369,9 @@
           <li><a href="decor-box.html"><i class="fas fa-chevron-right"></i> Decor Box</a></li>
           <li><a href="about.html"><i class="fas fa-chevron-right"></i> O Nama</a></li>
           <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Kontakt</a></li>
+          <li><a href="uslovi.html"><i class="fas fa-chevron-right"></i> Uslovi kupovine</a></li>
+          <li><a href="reklamacije.html"><i class="fas fa-chevron-right"></i> Reklamacije i povrat</a></li>
+          <li><a href="privatnost.html"><i class="fas fa-chevron-right"></i> Politika privatnosti</a></li>
         </ul>
       </div>
       <div>
@@ -442,6 +459,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<script src="js/kolacici.js?v=1" defer></script>
 <script src="js/analytics-events.js?v=3" defer></script>
 </body>
 </html>
