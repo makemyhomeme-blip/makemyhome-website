@@ -28,7 +28,8 @@ curl -sk --cacert /root/.ccr/ca-bundle.crt -u "mmhdecor:fhgkwqjd0F6K" -X POST \
 
 - **URL:** https://makemyhome.me/admin/
 - **Username:** `admin`
-- **Password:** `makemyhome2026`
+- **Password:** NIJE u repou. Cita se sa servera iz `/home/mmhdecor/.mmh-admin-pass`
+  (izvan `public_html`, nedostupno preko weba). Procitati preko cPanel API-ja kad zatreba.
 - **Sync:** `https://makemyhome.me/admin/sync.php?key=mkhsync2025`
 
 ### Admin sync via curl
@@ -50,6 +51,9 @@ curl -sk --cacert /root/.ccr/ca-bundle.crt -b /tmp/mkh_cookies.txt \
 - **Always push to this branch, never to main/master**
 
 ## Deploy Workflow
+
+**REDOSLIJED JE OBAVEZAN — sync povlaci sa GitHuba i prepisuje server.
+Ako se fajl deployuje preko cPanela prije push-a, prvi sljedeci sync ga vrati na staro.**
 
 1. Edit files locally
 2. `git add <files> && git commit && git push -u origin claude/build-product-website-6CvHG`

@@ -6,17 +6,35 @@
 session_start();
 
 define('ADMIN_USER', 'admin');
-define('ADMIN_PASS', '$2y$10$' . 'PROMIJENITE_LOZINKU'); // Generišite sa: password_hash('vasa_lozinka', PASSWORD_DEFAULT)
-// Za brzo testiranje, privremena lozinka je: makemyhome2026
-define('ADMIN_PASS_PLAIN', 'makemyhome2026');
+
+/**
+ * Lozinka se NE drzi u ovom fajlu. Repo je javan i sync.php ga povlaci sa
+ * raw.githubusercontent.com bez tokena — sve sto stoji ovdje moze procitati bilo ko.
+ * Prava lozinka je u fajlu izvan public_html, koji web server ne servira:
+ *
+ *     /home/mmhdecor/.mmh-admin-pass
+ *
+ * Ako fajl nedostaje, prijava je onemogucena (sigurniji ishod od poznate lozinke).
+ */
+function mmhAdminPass(): string {
+    foreach ([dirname($_SERVER['DOCUMENT_ROOT'] ?? '') . '/.mmh-admin-pass',
+              '/home/mmhdecor/.mmh-admin-pass'] as $p) {
+        if (is_file($p) && is_readable($p)) {
+            $v = trim((string) @file_get_contents($p));
+            if ($v !== '') return $v;
+        }
+    }
+    return '';
+}
 
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $_POST['username'] ?? '';
     $pass = $_POST['password'] ?? '';
+    $real = mmhAdminPass();
 
-    if ($user === ADMIN_USER && $pass === ADMIN_PASS_PLAIN) {
+    if ($real !== '' && $user === ADMIN_USER && hash_equals($real, $pass)) {
         $_SESSION['admin_logged'] = true;
         $_SESSION['admin_time']   = time();
         header('Location: dashboard.php');
