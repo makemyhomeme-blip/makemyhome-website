@@ -3225,3 +3225,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .kat-vodic a:hover { color: #a8863f; }
 .kat-vodic p { margin: 5px 0 0; font-size: 14.5px; color: #5a6672; line-height: 1.65; }
 @media (max-width: 560px) { .kat-vodic { margin: 32px 16px 0; padding: 18px; } }
+
+/* ===== Pravne stranice u dnu futera — dostupne, ali ne u glavnoj navigaciji ===== */
+.footer-pravne { display: flex; gap: 18px; flex-wrap: wrap; }
+.footer-pravne a {
+  font-size: 12.5px; color: rgba(255,255,255,.42); text-decoration: none;
+}
+.footer-pravne a:hover { color: rgba(201,168,108,.9); text-decoration: underline; }
+@media (max-width: 560px) { .footer-pravne { gap: 12px; justify-content: center; } }
