@@ -436,6 +436,27 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
               <?php foreach ($product['features'] as $f): ?>
               <li style="padding-left:18px;position:relative;margin-bottom:6px;"><span style="position:absolute;left:0;color:#c9a86c;">&#10003;</span><?= htmlspecialchars($f) ?></li>
               <?php endforeach; ?>
+              <?php
+              // Cijena po m² se racuna iz ZIVE cijene i povrsine iz "Dimenzije:".
+              // Ranije je stajala upisana u features kao fiksan broj racunat na punu cijenu:
+              // stranica je prikazivala 15,99 € a lista "44,62 €/m²" — 25 proizvoda je imalo
+              // taj raskorak. Ovako se mijenja sama kad se promijeni cijena ili popust.
+              $povrsina = null;
+              foreach ($product['features'] as $f) {
+                  if (preg_match('/\(([\d.,]+)\s*m²\s*po komadu\)/u', $f, $m)) {
+                      $povrsina = (float) str_replace(',', '.', $m[1]); break;
+                  }
+                  if (preg_match('/Dimenzije:\s*(\d+)\s*[×x]\s*(\d+)\s*cm/u', $f, $m)) {
+                      $povrsina = ((int) $m[1] / 100) * ((int) $m[2] / 100); break;
+                  }
+              }
+              if ($povrsina && $povrsina > 0.05 && !empty($product['price'])) {
+                  $puna    = (float) str_replace(',', '.', (string) $product['price']);
+                  $placa   = $puna * (1 - ((float) ($product['discount'] ?? 0)) / 100);
+                  $poM2    = $placa / $povrsina;
+              ?>
+              <li style="padding-left:18px;position:relative;margin-bottom:6px;"><span style="position:absolute;left:0;color:#c9a86c;">&#10003;</span>Cijena po m&sup2;: <?= number_format($poM2, 2, ',', '.') ?> &euro;/m&sup2; (1 komad pokriva <?= number_format($povrsina, 2, ',', '.') ?> m&sup2;)</li>
+              <?php } ?>
             </ul>
             <?php if (!empty($product['idealFor'])): ?>
             <p style="font-size:.92em;color:#555;margin:14px 0 0;line-height:1.7;"><strong>Idealno za:</strong> <?= htmlspecialchars(implode(', ', $product['idealFor'])) ?>.</p>
