@@ -453,6 +453,9 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
               if ($povrsina && $povrsina > 0.05 && !empty($product['price'])) {
                   $puna    = (float) str_replace(',', '.', (string) $product['price']);
                   $placa   = $puna * (1 - ((float) ($product['discount'] ?? 0)) / 100);
+                  // Racunaj iz ZAOKRUZENE povrsine koja se i prikazuje, da kupac koji
+                  // provjeri racun dobije isti broj (0,448 m² se prikazuje kao 0,45).
+                  $povrsina = round($povrsina, 2);
                   $poM2    = $placa / $povrsina;
               ?>
               <li style="padding-left:18px;position:relative;margin-bottom:6px;"><span style="position:absolute;left:0;color:#c9a86c;">&#10003;</span>Cijena po m&sup2;: <?= number_format($poM2, 2, ',', '.') ?> &euro;/m&sup2; (1 komad pokriva <?= number_format($povrsina, 2, ',', '.') ?> m&sup2;)</li>
