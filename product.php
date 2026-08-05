@@ -466,13 +466,21 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
             <p style="font-size:1em;color:#444;line-height:1.65;margin-bottom:14px;"><?= htmlspecialchars(strip_tags($product['highlight'])) ?></p>
             <?php endif; ?>
             <?php
-            // Prikaži samo narativni dio opisa — "Karakteristike:" i dalje ostaju u schema za Google,
-            // a na stranici su već prikazane kao uredna lista (bez dupliranja)
+            // "Karakteristike:" je nekada stajalo i u opisu i u listi ispod — ista lista dva puta
+            // na istoj stranici. Sada je iz opisa uklonjeno; ovaj rez ostaje za slucaj da se
+            // preko admina opet unese takav tekst.
             $fullDesc = strip_tags($product['description'] ?? '');
             $cutAt = mb_strpos($fullDesc, 'Karakteristike:');
             if ($cutAt !== false) $fullDesc = trim(mb_substr($fullDesc, 0, $cutAt));
+            // Rez na 2000 znakova (bio 600) — novi opisi su 700-800 znakova i sjekli su se
+            // usred recenice. Sjece se na granici recenice, nikad usred rijeci.
+            if (mb_strlen($fullDesc) > 2000) {
+                $cut = mb_substr($fullDesc, 0, 2000);
+                $end = max(mb_strrpos($cut, '. '), mb_strrpos($cut, "\n"));
+                $fullDesc = $end > 1200 ? mb_substr($cut, 0, $end + 1) : $cut;
+            }
             if ($fullDesc): ?>
-            <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars(mb_substr($fullDesc, 0, 600))) ?></div>
+            <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars($fullDesc)) ?></div>
             <?php endif; ?>
             <?php if ($inStock): ?>
             <p style="color:#27ae60;font-weight:600;margin-top:14px;">&#10003; Na stanju</p>
