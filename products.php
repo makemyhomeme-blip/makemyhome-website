@@ -100,6 +100,24 @@ $ogDesc   = $cat
   : 'Kompletan katalog zidnih panela, 3D letvica, akustičnih panela, SPC podova i PU kamena. Make My Home Decor Podgorica.';
 
 // SEO uvodni tekst po kategoriji – prikazuje se na stranici (vidi ga kupac i Google)
+// Vodic koji odgovara kategoriji — da posjetilac dodje do njega odakle i gleda proizvode
+$catVodic = [
+  'bambus-mermerni'   => ['paneli-za-kupatilo.html','Paneli za kupatilo','Mermerni paneli su najcesci izbor za kupatilo. Evo koji smiju, kako se lijepe preko plocica i koliko to kosta.'],
+  'bambus-drveni'     => ['paneli-ili-lamperija.html','Paneli ili lamperija','Poredjenje sa lamperijom — montaza, vlaga, cijena i gdje je lamperija zaista bolja.'],
+  'bambus-tekstilni'  => ['akusticni-paneli-kancelarija.html','Akustika u prostoriji','Tekstilna tekstura smiruje zvuk. Ako vam smeta eho, evo koliko panela treba i gdje idu.'],
+  'bambus-kozni'      => ['tv-zid.html','Zid iza televizora','Kozni panel iza TV-a — mat ili sjaj, koliko sirok i gdje ide LED traka.'],
+  'bambus-metalni'    => ['tv-zid.html','Zid iza televizora','Kako urediti zid iza televizora bez odsjaja.'],
+  'bambus-paneli'     => ['paneli-ili-lamperija.html','Paneli ili lamperija','Poredjenje sa lamperijom — montaza, vlaga, cijena i gdje je lamperija bolja.'],
+  'classic'           => ['tv-zid.html','Zid iza televizora','Jednobojni panel iza TV-a — kako da ne bude previse ravno.'],
+  '3d-letvice'        => ['tv-zid.html','Zid iza televizora','Letvice najbolje rade iza TV-a. Koliko sirok zid, gdje ide LED i koliko komada treba.'],
+  'akusticni-paneli'  => ['akusticni-paneli-kancelarija.html','Akustika u kancelariji','Koliko panela treba za vasu prostoriju, na koji zid idu i sta znaci NRC 0,65-0,85.'],
+  'spc-pod'           => ['spc-ili-laminat.html','SPC ili laminat','Sta izdrzava vodu, sta ide na podno grijanje i gdje je laminat zaista bolji.'],
+  'pu-kamen'          => ['paneli-za-kupatilo.html','Paneli za kupatilo','PU kamen je vodootporan. Evo sta jos smije u kupatilo i kako se lijepi.'],
+  'flex-stone'        => ['paneli-za-kupatilo.html','Paneli za kupatilo','Flex Stone ide i oko zaobljenih uglova. Evo kako se postavlja u kupatilu.'],
+  'mdf'               => ['paneli-ili-lamperija.html','Paneli ili lamperija','Kanelirani MDF naspram klasicne lamperije — sta je brze i sta traje.'],
+  'aluminijum-lajsne' => ['montaza.html','Montaza korak po korak','Gdje tacno ide koja lajsna, kako se rezu uglovi i sta treba od alata.'],
+];
+
 $catSeoText = [
   'bambus-paneli'    => '<p>Bambus zidni paneli su jedno od najtraženijih rješenja za dekoraciju zidova u Crnoj Gori. Spajaju prirodnu drvenu teksturu sa modernim dizajnom i daju toplinu svakom prostoru – dnevnoj sobi, spavaćoj sobi, hodniku ili poslovnom prostoru. Standardne dimenzije su 280x122cm, što omogućava brzo prekrivanje velikih površina uz minimalan broj spojeva. Kao moderna zamjena za klasičnu lamperiju, ovi vodootporni paneli su pogodni i za kupatilo i kuhinju, a posebno su popularni za TV zid – akcentni zid iza televizora ili iza kreveta.</p><p>U ponudi Make My Home Decor showrooma u Podgorici imate bambus panele u više varijanti – drveni, tekstilni, mermerni, metalni i kožni. Svi paneli su otporni na vlagu, jednostavni za montažu (montaža panela lijepljenjem – bez majstora) i lako se održavaju. Dostavljamo širom Crne Gore – Podgorica, Nikšić, Bar, Budva, Herceg Novi i ostali gradovi.</p>',
   'bambus-drveni'    => '<p>Drveni bambus paneli unose toplu, prirodnu drvenu teksturu u svaki enterijer – moderna zamjena za klasičnu drvenu lamperiju. Idealni su za moderne i klasične prostore – dnevne sobe, spavaće sobe, TV zidove i poslovne prostore. Dimenzije 280x122cm, visoka trajnost i jednostavna ugradnja na svaku ravnu površinu.</p><p>Drvo izgleda bez održavanja pravog drveta – paneli su vodootporni i ne deformišu se, pa su pogodni i za kupatilo. Dostupni u Make My Home Decor showroomu u Podgorici, sa dostavom širom Crne Gore.</p>',
@@ -233,7 +251,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=25">
+  <link rel="stylesheet" href="css/style-v5.css?v=26">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -561,6 +579,16 @@ echo "\n</script>\n";
         <?php endforeach; ?>
         <?php endif; ?>
       </div>
+      <?php if ($cat && isset($catVodic[$cat])):
+        [$vU,$vN,$vO] = $catVodic[$cat]; ?>
+      <aside class="kat-vodic">
+        <i class="fas fa-circle-info"></i>
+        <div>
+          <a href="<?= $vU ?>"><?= htmlspecialchars($vN) ?> &rsaquo;</a>
+          <p><?= htmlspecialchars($vO) ?></p>
+        </div>
+      </aside>
+      <?php endif; ?>
       <?php if ($cat && isset($catSeoText[$cat])): ?>
       <section class="cat-seo-text" style="max-width:860px;margin:56px auto 0;padding:32px 24px 8px;border-top:1px solid rgba(0,0,0,0.08);color:#555;line-height:1.8;font-size:15px;">
         <h2 style="font-size:1.3em;color:#1a1a1a;margin-bottom:18px;"><?= htmlspecialchars($catName) ?> u Crnoj Gori</h2>
