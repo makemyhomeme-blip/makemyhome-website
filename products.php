@@ -251,7 +251,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=32">
+  <link rel="stylesheet" href="css/style-v5.css?v=33">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -474,9 +474,10 @@ echo "\n</script>\n";
         <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
       </div>
       <a href="/" class="nav-link">Početna</a>
+      <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
+      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični</a>
       <a href="products.html?category=mdf" class="nav-link">MDF</a>
       <a href="products.html?category=aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
       <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>

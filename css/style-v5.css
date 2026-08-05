@@ -3312,3 +3312,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   letter-spacing: .06em; text-transform: uppercase;
   padding: 4px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
+
+/* Inspiracija u navigaciji — istaknuta jer je ulaz u fotografije prostora */
+.nav-link.nav-insp { color: #c9a86c !important; font-weight: 700 !important; }
+.nav-link.nav-insp:hover { color: #dfc080 !important; }
