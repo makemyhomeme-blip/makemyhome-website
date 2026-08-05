@@ -42,6 +42,12 @@ $files = [
     $root . '/privatnost.html'  => $base . '/privatnost.html',
     $root . '/uslovi.html'      => $base . '/uslovi.html',
     $root . '/reklamacije.html' => $base . '/reklamacije.html',
+    $root . '/paneli-za-kupatilo.html' => $base . '/paneli-za-kupatilo.html',
+    $root . '/tv-zid.html' => $base . '/tv-zid.html',
+    $root . '/paneli-ili-lamperija.html' => $base . '/paneli-ili-lamperija.html',
+    $root . '/akusticni-paneli-kancelarija.html' => $base . '/akusticni-paneli-kancelarija.html',
+    $root . '/spc-ili-laminat.html' => $base . '/spc-ili-laminat.html',
+    $root . '/dostava-crna-gora.html' => $base . '/dostava-crna-gora.html',
     // PHP
     $root . '/product.php'      => $base . '/product.php',
     $root . '/products.php'     => $base . '/products.php',
