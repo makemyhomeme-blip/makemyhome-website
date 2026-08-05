@@ -570,7 +570,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Make My Home Decor. Sva prava zadržana.</p>
-      <p>Dizajnirano za <a href="#">makemyhome.me</a></p>
+      <p>Dizajnirano za <a href="/">makemyhome.me</a></p>
     </div>
   </div>
 </footer>
