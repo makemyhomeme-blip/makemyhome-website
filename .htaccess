@@ -130,11 +130,13 @@ RewriteRule ^products\.html$ products.php [QSA,L]
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
-  # HTML i JSON - uvijek svježe (sadržaj se mijenja)
+  # HTML i JSON - uvijek se provjeri kod servera, ali dozvoli 304 (brži povratni posjet).
+  # no-store je namjerno uklonjen: zabranjivao je i uslovni zahtjev, pa se svaka stranica
+  # skidala iznova pri svakom povratku na sajt.
   <FilesMatch "\.(html|htm|json)$">
-    Header set Cache-Control "no-cache, no-store, must-revalidate"
-    Header set Pragma "no-cache"
-    Header set Expires "0"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+    Header unset Pragma
+    Header unset Expires
   </FilesMatch>
   # CSS i JS - cache 1 godina (fajlovi su verzionisani: style-v5.css)
   <FilesMatch "\.(css|js)$">

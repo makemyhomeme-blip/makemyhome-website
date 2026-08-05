@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
       </div>
-      <a href="index.html" class="nav-link">Početna</a>
+      <a href="/" class="nav-link">Početna</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
       <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>

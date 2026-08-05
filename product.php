@@ -325,8 +325,8 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 
 <header id="header">
   <div class="header-inner">
-    <a href="index.html" class="logo">
-      <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
+    <a href="/" class="logo">
+      <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img" width="567" height="567">
       <div class="logo-text">
         <span class="name">Make My Home Decor</span>
         <span class="tagline">Dekorativni Bambus Paneli</span>
@@ -353,7 +353,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
         </div>
         <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
       </div>
-      <a href="index.html" class="nav-link">Početna</a>
+      <a href="/" class="nav-link">Početna</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
       <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>
@@ -408,7 +408,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <?php endif; ?>
 <?php if ($product): ?>
     <nav class="breadcrumb" aria-label="Navigacija" style="margin-bottom:18px;font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#8a8a8a;">
-      <a href="index.html" style="color:#8a8a8a;text-decoration:none;">Početna</a>
+      <a href="/" style="color:#8a8a8a;text-decoration:none;">Početna</a>
       <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <a href="products.html" style="color:#8a8a8a;text-decoration:none;">Proizvodi</a>
 <?php if ($prodCatName): ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
@@ -593,8 +593,8 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img">
+        <a href="/" class="logo">
+          <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img" width="567" height="567">
           <div class="logo-text">
             <span class="name">Make My Home Decor</span>
             <span class="tagline">Dekorativni Bambus Paneli</span>
@@ -604,18 +604,18 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
         <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
         </p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/makemyhome.decor" target="_blank" class="social-btn" title="Instagram" style="background:#d62976;color:#fff;"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="social-btn" title="Instagram" style="background:#d62976;color:#fff;"><i class="fab fa-instagram"></i></a>
           <a href="https://www.facebook.com/61571886302133" target="_blank" rel="noopener" class="social-btn" title="Facebook" style="background:#1877f2;color:#fff;"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/38269105222" target="_blank" class="social-btn" title="WhatsApp" style="background:#25d366;color:#fff;"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/38269105222" target="_blank" rel="noopener" class="social-btn" title="WhatsApp" style="background:#25d366;color:#fff;"><i class="fab fa-whatsapp"></i></a>
           <a href="viber://contact?number=%2B38269105222" class="social-btn" title="Viber" style="background:#665cac;color:#fff;"><i class="fab fa-viber"></i></a>
-          <a href="https://www.tiktok.com/@makemyhome.me" target="_blank" class="social-btn" title="TikTok" style="background:#ee1d52;color:#fff;"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.tiktok.com/@makemyhome.me" target="_blank" rel="noopener" class="social-btn" title="TikTok" style="background:#ee1d52;color:#fff;"><i class="fab fa-tiktok"></i></a>
           <a href="mailto:makemyhome.me@gmail.com" class="social-btn" title="Email" style="background:#c9a86c;color:#fff;"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
       <div>
         <h3 class="footer-title">Navigacija</h3>
         <ul class="footer-links">
-          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Početna</a></li>
+          <li><a href="/"><i class="fas fa-chevron-right"></i> Početna</a></li>
           <li><a href="products.html"><i class="fas fa-chevron-right"></i> Svi Proizvodi</a></li>
           <li><a href="faq.html"><i class="fas fa-chevron-right"></i> Česta Pitanja</a></li>
           <li><a href="cjenovnik.html"><i class="fas fa-chevron-right"></i> Cijene</a></li>
@@ -666,9 +666,9 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js"></script>
-<script src="js/products.js?v=37"></script>
-<script src="js/cart.js"></script>
+<script src="js/main-v4.js?v=2"></script>
+<script src="js/products.js?v=38"></script>
+<script src="js/cart.js?v=2"></script>
 <script>
   renderProductDetail();
 </script>

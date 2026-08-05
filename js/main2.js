@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <div id="desk-search-results" style="display:none;margin-top:6px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);"></div>
         </div>
       </div>
-      <a href="index.html" class="nav-link">Početna</a>
+      <a href="/" class="nav-link">Početna</a>
       <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
       <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
       <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični Paneli</a>

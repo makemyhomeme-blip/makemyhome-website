@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = navMenu.querySelector('#mob-search-input');
     const resultsBox  = navMenu.querySelector('#mob-search-results');
 
+    if (searchInput && resultsBox) {
     searchInput.addEventListener('focus', () => loadProductsOnce());
     searchInput.addEventListener('input', async () => {
       const q = searchInput.value.trim().toLowerCase();
@@ -80,16 +81,17 @@ document.addEventListener('DOMContentLoaded', function () {
       }).join('');
       resultsBox.style.display = 'block';
     });
+    }
 
     if (hamburger) {
       hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('open');
         if (navMenu.classList.contains('open')) {
-          setTimeout(() => searchInput.focus(), 120);
+          if (searchInput) setTimeout(() => searchInput.focus(), 120);
         } else {
-          resultsBox.style.display = 'none';
-          searchInput.value = '';
+          if (resultsBox) resultsBox.style.display = 'none';
+          if (searchInput) searchInput.value = '';
         }
       });
     }
@@ -97,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
       link.addEventListener('click', () => {
         if (hamburger) hamburger.classList.remove('active');
         navMenu.classList.remove('open');
-        resultsBox.style.display = 'none';
-        searchInput.value = '';
+        if (resultsBox) resultsBox.style.display = 'none';
+        if (searchInput) searchInput.value = '';
       });
     });
   }
@@ -187,10 +189,12 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.nav-link').forEach(link => {
     const href = link.getAttribute('href');
     const [hPage, hSearch] = href.split('?');
+    const isHomeLink = (href === '/' || href === 'index.html');
+    const onHome = (currentPage === '' || currentPage === 'index.html');
     if (
-      href === currentPage ||
-      (currentPage === '' && href === 'index.html') ||
-      (hPage === currentPage && hSearch && currentSearch.includes(hSearch.split('=')[1]))
+      (isHomeLink && onHome) ||
+      (!isHomeLink && href === currentPage) ||
+      (!isHomeLink && hPage === currentPage && hSearch && currentSearch.includes(hSearch.split('=')[1]))
     ) {
       link.classList.add('active');
     }

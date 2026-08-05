@@ -77,7 +77,7 @@ function renderProductCard(product, lazy = true) {
 
   const imgContent = `
     <img src="${product.image}" alt="${product.name} – ${categoryName} | Make My Home Decor Podgorica"
-      onerror="this.parentElement.innerHTML='<span class=\'product-img-placeholder\'><i class=\'fas fa-image\'></i></span>'"
+      onerror="this.onerror=null;this.parentElement.innerHTML='<span class=&quot;product-img-placeholder&quot;><i class=&quot;fas fa-image&quot;></i></span>'"
       ${lazy ? 'loading="lazy"' : ''}>
   `;
 
