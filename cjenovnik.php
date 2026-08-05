@@ -66,7 +66,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=27">
+  <link rel="stylesheet" href="css/style-v5.css?v=30">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -271,10 +271,16 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   .calc-out .big { font-size: 27px; font-weight: 800; color: #1a1a1a; }
   .calc-out .sub { font-size: 14px; color: #5a6672; line-height: 1.7; margin-top: 6px; }
   .info-cta { background: #faf7f2; border: 1px solid rgba(201,168,108,0.35); border-radius: 16px;
-              padding: 26px; text-align: center; margin-top: 40px; }
-  .info-cta h2 { margin: 0 0 8px; font-size: 22px; }
-  .info-cta p { margin: 0 0 18px; }
-  .info-cta .btn { margin: 4px; }
+              padding: 30px 26px; text-align: center; margin-top: 44px; }
+  .info-cta h2 { margin: 0 0 10px; font-size: 22px; color: #1a1a1a; line-height: 1.3; }
+  .info-cta p { margin: 0 auto 22px; color: #5a6672; max-width: 46ch; line-height: 1.7; }
+  .info-cta-dugmad { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .info-cta .btn { margin: 0; }
+  @media (max-width: 600px) {
+    .info-cta { padding: 24px 18px; }
+    .info-cta-dugmad { flex-direction: column; }
+    .info-cta .btn { width: 100%; justify-content: center; }
+  }
   @media (max-width: 768px) {
     .info-wrap h2 { font-size: 21px; }
     .step { padding: 16px; gap: 14px; }
@@ -478,9 +484,12 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
     <div class="info-cta">
       <h2>Treba vam tačan izračun?</h2>
       <p>Pošaljite mjere zida — dobićete ponudu istog dana, bez obaveze kupovine.</p>
+      <div class="info-cta-dugmad">
       <a href="tel:+38269105222" class="btn btn-gold btn-lg"><i class="fas fa-phone"></i> 069 105 222</a>
-      <a href="contact.html" class="btn btn-outline btn-lg"><i class="fas fa-envelope"></i> Pošalji upit</a>
-      <a href="decor-box.html" class="btn btn-outline btn-lg"><i class="fas fa-handshake"></i> Partnerske cijene</a>
+        <a href="contact.html" class="btn btn-outline btn-lg"><i class="fas fa-envelope"></i> Pošalji upit</a>
+        <a href="decor-box.html" class="btn btn-outline btn-lg"><i class="fas fa-handshake"></i> Partnerske cijene</a>
+    </div>
+  
     </div>
   </div>
 </section>

@@ -3187,19 +3187,19 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .info-wrap .faq-q h3 { margin: 0 0 6px; font-size: 17px; color: #1a1a1a; }
 .info-wrap .faq-q p  { margin: 0; color: #5a6672; line-height: 1.75; font-size: 15.5px; }
-.info-wrap .info-cta {
+.info-wrap .vodic-cta {
   margin-top: 40px; padding: 26px 28px; border-radius: 14px;
   background: linear-gradient(135deg, #1f1e1b 0%, #2a2723 100%); color: #ece9e2;
 }
-.info-wrap .info-cta p { color: #ece9e2; margin: 0 0 16px; line-height: 1.75; }
-.info-wrap .info-cta p:last-child { margin-bottom: 0; display: flex; gap: 12px; flex-wrap: wrap; }
-.info-wrap .info-cta a[href^="tel"] { color: #c9a86c; font-weight: 700; }
-.info-wrap .info-cta .btn { margin: 0; }
-.info-wrap .info-cta .btn-outline { border-color: rgba(255,255,255,.35); color: #ece9e2; }
-.info-wrap .info-cta .btn-outline:hover { border-color: #c9a86c; color: #c9a86c; background: transparent; }
+.info-wrap .vodic-cta p { color: #ece9e2; margin: 0 0 16px; line-height: 1.75; }
+.info-wrap .vodic-cta p:last-child { margin-bottom: 0; display: flex; gap: 12px; flex-wrap: wrap; }
+.info-wrap .vodic-cta a[href^="tel"] { color: #c9a86c; font-weight: 700; }
+.info-wrap .vodic-cta .btn { margin: 0; }
+.info-wrap .vodic-cta .btn-outline { border-color: rgba(255,255,255,.35); color: #ece9e2; }
+.info-wrap .vodic-cta .btn-outline:hover { border-color: #c9a86c; color: #c9a86c; background: transparent; }
 @media (max-width: 560px) {
-  .info-wrap .info-cta { padding: 22px 18px; }
-  .info-wrap .info-cta p:last-child .btn { flex: 1 1 100%; text-align: center; }
+  .info-wrap .vodic-cta { padding: 22px 18px; }
+  .info-wrap .vodic-cta p:last-child .btn { flex: 1 1 100%; text-align: center; }
 }
 
 /* ===== Vodiči na početnoj ===== */
@@ -3233,3 +3233,17 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .footer-pravne a:hover { color: rgba(201,168,108,.9); text-decoration: underline; }
 @media (max-width: 560px) { .footer-pravne { gap: 12px; justify-content: center; } }
+
+/* ===== Dugmad unutar info stranica =====
+   .info-wrap a { color:#c9a86c } je specificnije od .btn-gold pa je zlatnom dugmetu
+   davalo zlatan tekst — dugme je izgledalo prazno. Ovdje vracamo boje dugmadi. */
+/* Bijelo na zlatnom daje kontrast 2,26 — a na ovom dugmetu stoji broj telefona.
+   Tamni tekst na zlatnom daje 8,9 i ostaje u paleti sajta (zlatna + tamna). */
+.info-wrap .btn-gold { color: #1a1a1a; font-weight: 700; }
+.info-wrap .btn-gold:hover { color: #1a1a1a; }
+.info-wrap .btn-outline { color: #1a1a1a; border-color: rgba(26,26,26,.28); }
+.info-wrap .btn-outline:hover { color: #a8863f; border-color: #c9a86c; background: transparent; }
+/* na tamnoj pozadini vodica ostaju svijetla */
+.info-wrap .vodic-cta .btn-gold { color: #1a1a1a; }
+.info-wrap .vodic-cta .btn-outline { color: #ece9e2; border-color: rgba(255,255,255,.35); }
+.info-wrap .vodic-cta .btn-outline:hover { color: #c9a86c; border-color: #c9a86c; }
