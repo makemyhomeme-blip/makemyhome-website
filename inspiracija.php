@@ -96,7 +96,7 @@ arsort($insKat);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
   <meta name="keywords" content="zidni paneli enterijer, ideje za zid, dnevna soba paneli, spavaća soba zid, kupatilo paneli, inspiracija, Podgorica, Crna Gora">
-  <meta property="og:title" content="Inspiracija – Paneli u Pravim Prostorima | Make My Home Decor">
+  <meta property="og:title" content="Inspiracija – Paneli u Prostorima | Make My Home Decor">
   <meta property="og:description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://makemyhome.me/inspiracija.html">
@@ -106,11 +106,11 @@ arsort($insKat);
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Inspiracija – Paneli u Pravim Prostorima | Make My Home Decor">
+  <meta name="twitter:title" content="Inspiracija – Paneli u Prostorima | Make My Home Decor">
   <meta name="twitter:description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
   <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
   <link rel="canonical" href="https://makemyhome.me/inspiracija.html">
-  <title>Inspiracija – Paneli u Pravim Prostorima | Make My Home</title>
+  <title>Inspiracija – Paneli u Prostorima | Make My Home</title>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="apple-touch-icon" sizes="512x512" href="images/favicon-512.png">
@@ -119,7 +119,7 @@ arsort($insKat);
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=33">
+  <link rel="stylesheet" href="css/style-v5.css?v=34">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -329,16 +329,11 @@ arsort($insKat);
   </div>
 </header>
 
-<section class="page-hero">
+<section class="page-hero hero-usko">
   <div class="container">
     <div class="page-hero-content">
       <div class="breadcrumb"><a href="/">Početna</a><i class="fas fa-chevron-right"></i><span>Inspiracija</span></div>
-      <h1 class="section-title">Naši paneli u pravim prostorima</h1>
-      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">
-        <?= count($insSlike) ?> fotografija iz stanova, kuća i poslovnih prostora u Crnoj Gori<?php
-        if ($insNovih): ?>, od toga <strong style="color:#c9a86c;"><?= $insNovih ?> novih</strong><?php endif; ?>.
-        Kliknite na sobu koja vam se svidi i odmah vidite koji je panel na njoj.
-      </p>
+      <h1 class="section-title">Paneli u prostorima</h1>
     </div>
   </div>
 </section>
@@ -346,16 +341,31 @@ arsort($insKat);
 <section class="insp-wrap">
   <div class="container">
 
-    <div class="insp-filter" role="group" aria-label="Filter po vrsti panela">
-      <button type="button" class="insp-chip is-on" data-k="">Sve <span><?= count($insSlike) ?></span></button>
-      <?php if ($insNovih): ?>
-      <button type="button" class="insp-chip" data-novo="1">Novo <span><?= $insNovih ?></span></button>
-      <?php endif; ?>
-      <?php foreach ($insKat as $k => $n): ?>
-      <button type="button" class="insp-chip" data-k="<?= htmlspecialchars($k, ENT_QUOTES) ?>">
-        <?= htmlspecialchars($insNames[$k] ?? $k) ?> <span><?= $n ?></span>
-      </button>
-      <?php endforeach; ?>
+    <div class="insp-filter-bar">
+      <!-- Telefon: padajuci izbornik. Sirok ekran: ista lista kao dugmad. -->
+      <div class="insp-select-wrap">
+        <select id="insp-select" class="insp-select" aria-label="Filter po vrsti panela">
+          <option value="" data-novo="">Sve fotografije (<?= count($insSlike) ?>)</option>
+          <?php if ($insNovih): ?>
+          <option value="" data-novo="1">Novo (<?= $insNovih ?>)</option>
+          <?php endif; ?>
+          <?php foreach ($insKat as $k => $n): ?>
+          <option value="<?= htmlspecialchars($k, ENT_QUOTES) ?>" data-novo=""><?= htmlspecialchars($insNames[$k] ?? $k) ?> (<?= $n ?>)</option>
+          <?php endforeach; ?>
+        </select>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="insp-filter" role="group" aria-label="Filter po vrsti panela">
+        <button type="button" class="insp-chip is-on" data-k="">Sve <span><?= count($insSlike) ?></span></button>
+        <?php if ($insNovih): ?>
+        <button type="button" class="insp-chip" data-novo="1">Novo <span><?= $insNovih ?></span></button>
+        <?php endif; ?>
+        <?php foreach ($insKat as $k => $n): ?>
+        <button type="button" class="insp-chip" data-k="<?= htmlspecialchars($k, ENT_QUOTES) ?>">
+          <?= htmlspecialchars($insNames[$k] ?? $k) ?> <span><?= $n ?></span>
+        </button>
+        <?php endforeach; ?>
+      </div>
     </div>
 
     <div class="insp-grid" id="insp-grid">
@@ -369,7 +379,8 @@ arsort($insKat);
          data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
         <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
              alt="<?= htmlspecialchars($alt, ENT_QUOTES) ?>"
-             loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async">
+             loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async"
+             onerror="this.onerror=null;this.closest(&quot;.insp-kart&quot;).remove();">
         <?php if ($s['t'] > $insPrag): ?><span class="insp-novo">Novo</span><?php endif; ?>
         <span class="insp-info">
           <strong><?= htmlspecialchars($p['name']) ?></strong>
@@ -398,19 +409,38 @@ arsort($insKat);
 (function () {
   var grid = document.getElementById('insp-grid');
   var prazno = document.getElementById('insp-prazno');
-  document.querySelectorAll('.insp-chip').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var k = b.dataset.k, samoNovo = b.dataset.novo === '1';
-      document.querySelectorAll('.insp-chip').forEach(function (o) { o.classList.toggle('is-on', o === b); });
-      var vidljivih = 0;
-      grid.querySelectorAll('.insp-kart').forEach(function (a) {
-        var ok = samoNovo ? a.dataset.novo === '1' : (!k || a.dataset.k === k);
-        a.hidden = !ok;
-        if (ok) vidljivih++;
-      });
-      prazno.hidden = vidljivih > 0;
+  var izbor = document.getElementById('insp-select');
+  var dugmad = [].slice.call(document.querySelectorAll('.insp-chip'));
+
+  function filtriraj(k, samoNovo) {
+    var vidljivih = 0;
+    grid.querySelectorAll('.insp-kart').forEach(function (a) {
+      var ok = samoNovo ? a.dataset.novo === '1' : (!k || a.dataset.k === k);
+      a.hidden = !ok;
+      if (ok) vidljivih++;
     });
+    prazno.hidden = vidljivih > 0;
+    /* Oba filtera se drze istog izbora, pa prelazak telefon/kompjuter ne zbunjuje */
+    dugmad.forEach(function (b) {
+      b.classList.toggle('is-on', (b.dataset.novo === '1') === samoNovo && (samoNovo || (b.dataset.k || '') === (k || '')));
+    });
+    if (izbor) {
+      for (var i = 0; i < izbor.options.length; i++) {
+        var o = izbor.options[i];
+        if ((o.dataset.novo === '1') === samoNovo && (samoNovo || o.value === (k || ''))) { izbor.selectedIndex = i; break; }
+      }
+    }
+  }
+
+  dugmad.forEach(function (b) {
+    b.addEventListener('click', function () { filtriraj(b.dataset.k || '', b.dataset.novo === '1'); });
   });
+  if (izbor) {
+    izbor.addEventListener('change', function () {
+      var o = izbor.options[izbor.selectedIndex];
+      filtriraj(o.value || '', o.dataset.novo === '1');
+    });
+  }
 })();
 </script>
 
