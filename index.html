@@ -551,14 +551,22 @@
     'aluminijum-lajsne': 'Alu Lajsne', 'spc-pod': 'SPC Pod', 'pu-kamen': 'PU Kamen',
     'classic': 'Classic Paneli', 'mdf': 'MDF Paneli', 'flex-stone': 'Flex Stone'
   };
+  /* Na pocetnoj se prikazuju samo bambus paneli i 3D letvice — ostale kategorije
+     (akusticni, classic, PU kamen...) se ovdje ne vrte. */
+  var dozvoljene = {
+    'bambus-paneli': 1, 'bambus-drveni': 1, 'bambus-tekstilni': 1, 'bambus-mermerni': 1,
+    'bambus-metalni': 1, 'bambus-kozni': 1, '3d-letvice': 1
+  };
 
   fetch('data/products.json?v=5').then(function (r) { return r.json(); }).then(function (d) {
     var lista = d && d.products ? d.products : d;
     if (!Array.isArray(lista)) throw 0;
 
-    var sve = [];
+    var sve = [], ukupno = 0;
     lista.forEach(function (p) {
       if (!p.gallery || !p.gallery.length) return;
+      ukupno += p.gallery.length;
+      if (!dozvoljene[p.category]) return;
       p.gallery.forEach(function (src) {
         sve.push({ src: src, id: p.id, ime: p.name || '', kat: imena[p.category] || 'Zidni panel' });
       });
@@ -609,7 +617,8 @@
     plocice.forEach(function (el) { postavi(el, red[kursor++ % red.length], 0); });
 
     var sitno = document.getElementById('ideja-sitno');
-    if (sitno) sitno.textContent = red.length + ' fotografija iz naših realizacija u Crnoj Gori';
+    /* Dugme vodi na sve fotografije, pa se broji cijela galerija, ne samo ono sto se vrti */
+    if (sitno) sitno.textContent = ukupno + ' fotografija iz naših realizacija u Crnoj Gori';
 
     if (red.length <= plocice.length) return;
     var na = 0;
