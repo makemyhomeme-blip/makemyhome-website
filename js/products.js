@@ -9,7 +9,11 @@ let allCategories = [];
 
 // Start fetching data immediately when script loads — don't wait for initProductsPage()
 const _dataPromise = Promise.all([
-  fetch('data/products.json?t=' + Date.now()).then(r => r.json()),
+  // Stabilna adresa (bez Date.now()) da bi se koristio browser cache; svjezina je
+  // pokrivena headerom Cache-Control: max-age=0, must-revalidate iz .htaccess.
+  // <link rel="preload"> je namjerno uklonjen — preload se nije uparivao sa ovim
+  // fetch-om, pa se products.json skidao dva puta (2 x 404 KB po posjeti).
+  fetch('data/products.json?v=5').then(r => r.json()),
   fetch('data/categories.json?v=5').then(r => r.json())
 ]).catch(() => [[], []]);
 

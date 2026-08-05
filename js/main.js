@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function loadProductsOnce() {
       if (_allProducts) return _allProducts;
       try {
-        const r = await fetch('data/products.json?v=' + Date.now());
+        const r = await fetch('data/products.json?v=5');
         _allProducts = await r.json();
       } catch(e) { _allProducts = []; }
       return _allProducts;
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let _prods = null;
     async function loadProds() {
       if (_prods) return _prods;
-      try { const r = await fetch('data/products.json?v=' + Date.now()); _prods = await r.json(); }
+      try { const r = await fetch('data/products.json?v=5'); _prods = await r.json(); }
       catch(e) { _prods = []; }
       return _prods;
     }
