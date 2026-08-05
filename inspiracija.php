@@ -119,7 +119,7 @@ arsort($insKat);
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=37">
+  <link rel="stylesheet" href="css/style-v5.css?v=38">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -377,7 +377,7 @@ arsort($insKat);
       <a class="insp-kart" href="product.html?id=<?= (int)$p['id'] ?>"
          data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"
          data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
-        <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
+        <img <?= $i < 8 ? 'src' : 'data-src' ?>="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
              alt="<?= htmlspecialchars($alt, ENT_QUOTES) ?>"
              loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async"
              onerror="this.onerror=null;this.closest(&quot;.insp-kart&quot;).remove();">
@@ -407,8 +407,48 @@ arsort($insKat);
 
 <script>
 (function () {
+  /* Fotografija ima blizu stotinu; da se na mobilnom internetu ne skida
+     sedam megabajta odjednom, slike poslije prvih dvanaest nose data-src
+     i ucitavaju se tek kad se priblize ekranu. */
+  var lijeni = [].slice.call(document.querySelectorAll('.insp-kart img[data-src]'));
+  function ucitaj(img) {
+    if (!img.dataset.src) return;
+    img.src = img.dataset.src;
+    delete img.dataset.src;
+  }
+  if ('IntersectionObserver' in window) {
+    var osmatrac = new IntersectionObserver(function (redovi) {
+      redovi.forEach(function (r) { if (r.isIntersecting) { ucitaj(r.target); osmatrac.unobserve(r.target); } });
+    }, { rootMargin: '400px 0px' });
+    lijeni.forEach(function (i) { osmatrac.observe(i); });
+  } else {
+    lijeni.forEach(ucitaj);   /* stari pretrazivaci — ucitaj sve odjednom */
+  }
+
   var grid = document.getElementById('insp-grid');
   var prazno = document.getElementById('insp-prazno');
+
+  /* Kartice se rasporedjuju naizmjenicno po kolonama, pa u prvom redu stoje
+     fotografija 1 i fotografija 2 — a ne 1 i 46 kao sa CSS kolonama. */
+  var kartice = [].slice.call(grid.querySelectorAll('.insp-kart'));
+  var kolonaSad = 0;
+  function brojKolona() {
+    var w = window.innerWidth;
+    return w >= 1100 ? 4 : w >= 800 ? 3 : 2;
+  }
+  function rasporedi() {
+    var n = brojKolona();
+    if (n === kolonaSad) return;
+    kolonaSad = n;
+    var kol = [];
+    for (var i = 0; i < n; i++) { var d = document.createElement('div'); d.className = 'insp-kol'; kol.push(d); }
+    kartice.forEach(function (k, i) { kol[i % n].appendChild(k); });
+    grid.textContent = '';
+    kol.forEach(function (d) { grid.appendChild(d); });
+  }
+  rasporedi();
+  var tajmer;
+  window.addEventListener('resize', function () { clearTimeout(tajmer); tajmer = setTimeout(rasporedi, 200); });
   var izbor = document.getElementById('insp-select');
   var dugmad = [].slice.call(document.querySelectorAll('.insp-chip'));
 
@@ -417,7 +457,7 @@ arsort($insKat);
     grid.querySelectorAll('.insp-kart').forEach(function (a) {
       var ok = samoNovo ? a.dataset.novo === '1' : (!k || a.dataset.k === k);
       a.hidden = !ok;
-      if (ok) vidljivih++;
+      if (ok) { vidljivih++; var im = a.querySelector('img[data-src]'); if (im && vidljivih <= 12) ucitaj(im); }
     });
     prazno.hidden = vidljivih > 0;
     /* Oba filtera se drze istog izbora, pa prelazak telefon/kompjuter ne zbunjuje */

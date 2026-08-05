@@ -326,9 +326,12 @@ ul { list-style: none; }
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   cursor: pointer;
-  padding: 8px;
+  /* 44x44 je najmanja povrsina koju prst pouzdano pogadja (Apple HIG / Material) */
+  width: 44px; height: 44px; padding: 0;
   border: none;
   background: none;
 }
@@ -3283,9 +3286,14 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .insp-chip.is-on span { color: rgba(255,255,255,.55); }
 .insp-chip:focus-visible { outline: 2px solid #c9a86c; outline-offset: 2px; }
 
-.insp-grid { columns: 4 250px; column-gap: 14px; }
+/* Kolone se pune redom preko JS-a (insp-kol), a ne CSS multi-columnom.
+   Multi-column je punio prvu kolonu do kraja pa drugu, pa se u prvom redu
+   pojavljivala fotografija broj 1 i fotografija broj 46 — najnovije se nisu
+   vidjele na vrhu, a slike ispod ekrana su se svejedno ucitavale. */
+.insp-grid { display: flex; align-items: flex-start; gap: 14px; }
+.insp-kol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
 .insp-kart {
-  display: block; position: relative; break-inside: avoid; margin: 0 0 14px;
+  display: block; position: relative; margin: 0;
   border-radius: 12px; overflow: hidden; text-decoration: none;
   background: #f2efe9; box-shadow: 0 1px 3px rgba(0,0,0,.07);
 }
@@ -3325,8 +3333,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .insp-select-wrap { display: block; }
 }
 @media (max-width: 640px) {
-  .insp-grid { columns: 2 140px; column-gap: 10px; }
-  .insp-kart { margin-bottom: 10px; border-radius: 10px; }
+  .insp-grid, .insp-kol { gap: 10px; }
+  .insp-kart { border-radius: 10px; }
   .insp-info strong { font-size: 12.5px; }
   .insp-info em { font-size: 11px; }
   .insp-cta { padding: 24px 18px; }
@@ -3425,3 +3433,22 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .info-wrap a:not(.btn):hover { color: #a8863f; }
 .info-wrap .vodic-cta a:not(.btn) { color: #c9a86c; }   /* tamna kutija — zlatna je ovdje citljiva */
+
+/* ===== Skok na dio stranice (npr. faq.html#vodici) =====
+   Zaglavlje je fiksno i visoko ~75px, pa je naslov sekcije zavrsavao ispod
+   njega — posjetilac stigne i ne vidi ono zbog cega je kliknuo. */
+[id] { scroll-margin-top: 92px; }
+
+/* ===== Podnozje na telefonu — vise prostora za prst =====
+   Linkovi su bili visoki 21px i naslagani jedan uz drugi, pa se lako promasi. */
+@media (max-width: 768px) {
+  .footer-links a { min-height: 42px; align-items: center; }
+  .footer-links-grid li { margin-bottom: 0; }
+  .footer-pravne a { display: inline-block; padding: 10px 0; }
+  .breadcrumb a { display: inline-block; padding: 9px 2px; }
+  /* Ostala mjesta gdje je link bio visok 17–19px */
+  .btn-card-detail { min-height: 42px !important; }
+  .product-trust-row .trust-item a { display: inline-flex; align-items: center; min-height: 40px; }
+  .contact-info-text a { display: inline-block; padding: 9px 0; }
+  .cj-tabela a, .info-table a { display: inline-block; padding: 9px 0; }
+}

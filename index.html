@@ -196,7 +196,7 @@
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=37">
+  <link rel="stylesheet" href="css/style-v5.css?v=38">
   <style>
     #showcase{background:var(--light);padding:70px 0 0}
     .showcase-img-wrap{width:100%;line-height:0;margin-top:48px;padding:0 32px;box-sizing:border-box}
@@ -558,7 +558,15 @@
     'bambus-metalni': 1, 'bambus-kozni': 1, '3d-letvice': 1
   };
 
-  fetch('data/products.json?v=5').then(function (r) { return r.json(); }).then(function (d) {
+  /* products.js vec skida istu listu — koristimo njegov rezultat da se
+     products.json (330 kB) ne skida dva puta po posjeti. */
+  function podaci() {
+    if (typeof _dataPromise !== 'undefined')
+      return _dataPromise.then(function (a) { return a[0]; });
+    return fetch('data/products.json?v=5').then(function (r) { return r.json(); });
+  }
+
+  function pokreni(d) {
     var lista = d && d.products ? d.products : d;
     if (!Array.isArray(lista)) throw 0;
 
@@ -631,10 +639,16 @@
       el.classList.add('mijenja');
       setTimeout(function () { postavi(el, s, 0); }, 450);
     }, 3200);
-  }).catch(function () {
+  }
+
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', function () { podaci().then(pokreni).catch(pao); });
+  else podaci().then(pokreni).catch(pao);
+
+  function pao() {
     /* Ako se lista ne ucita, ostaje samo naslov i dugme — bez praznih okvira */
     okvir.style.display = 'none';
-  });
+  }
 })();
 </script>
 
