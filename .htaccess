@@ -53,6 +53,9 @@ RewriteRule ^comments/ - [G,L]
 # fajlovi se brisu sa diska, a ovo pravilo sprjecava da ih iko ikad opet izlozi.
 RewriteRule \.(zip|tar|gz|bz2|rar|7z|sql|bak|old|orig|swp|log|md|ini|env|dist)$ - [F,L]
 RewriteRule ^error_log$ - [F,L]
+# Stari Canva katalog (82 str, 27,7 MB, iz 12/2024) — obrisan, svi proizvodi iz njega
+# vec postoje kao stranice na sajtu. Google ga je imao u indeksu, pa 410 umjesto 404.
+RewriteRule ^images/katalog\.pdf$ - [G,L]
 RewriteRule ^_.*\.php$ - [F,L]
 RewriteRule ^(ads|test|tmp)\.html?$ - [G,L]
 # Stare kopije resursa u rootu (prave kopije su u /css i /js)
