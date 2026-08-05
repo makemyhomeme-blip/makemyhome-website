@@ -11,15 +11,27 @@ $insNames = [
   'spc-pod'=>'SPC Pod','pu-kamen'=>'PU Kamen','classic'=>'Classic Paneli','mdf'=>'MDF Paneli','flex-stone'=>'Flex Stone',
 ];
 
-// Slike grupisane po proizvodu
+// Vrijeme uploada je u imenu fajla (gallery-<id>-<timestamp>-<rand>.jpg) — koristimo ga
+// da najnovije fotografije uvijek budu pri vrhu, bez ijedne rucne izmjene.
+$insVrijeme = function ($put) {
+    return preg_match('/gallery-\d+-(\d{9,11})-/', $put, $m) ? (int) $m[1] : 0;
+};
+
+// Slike grupisane po proizvodu, unutar proizvoda najnovija prva
 $insPo = [];
 foreach ($insP as $p) {
     if (empty($p['gallery'])) continue;
-    $insPo[$p['id']] = ['p' => $p, 'g' => array_values($p['gallery'])];
+    $g = array_values($p['gallery']);
+    usort($g, fn($a, $b) => $insVrijeme($b) <=> $insVrijeme($a));
+    $insPo[$p['id']] = ['p' => $p, 'g' => $g, 't' => $insVrijeme($g[0])];
 }
-// Redoslijed proizvoda tako da se kategorije smjenjuju
+
+// Proizvodi poredani po tome ko je zadnji dobio novu fotografiju,
+// pa se kategorije smjenjuju da se ne naredaju dvije iste zaredom.
+uasort($insPo, fn($a, $b) => $b['t'] <=> $a['t']);
 $poKat = [];
 foreach ($insPo as $id => $v) $poKat[$v['p']['category'] ?? ''][] = $id;
+uasort($poKat, fn($a, $b) => $insPo[$b[0]]['t'] <=> $insPo[$a[0]]['t']);
 $redom = [];
 while ($poKat) {
     foreach (array_keys($poKat) as $k) {
@@ -27,23 +39,24 @@ while ($poKat) {
         if (!$poKat[$k]) unset($poKat[$k]);
     }
 }
-// Naizmjenicno uzimaj po jednu sliku od svakog proizvoda — nikad dvije iste sobe zaredom
+
+// Naizmjenicno po jedna slika od svakog proizvoda — nikad dvije iste sobe zaredom
 $insSlike = [];
 $krug = 0;
 while (true) {
     $dodato = false;
     foreach ($redom as $id) {
         if (isset($insPo[$id]['g'][$krug])) {
-            $insSlike[] = ['src' => $insPo[$id]['g'][$krug], 'p' => $insPo[$id]['p']];
+            $put = $insPo[$id]['g'][$krug];
+            $insSlike[] = ['src' => $put, 'p' => $insPo[$id]['p'], 't' => $insVrijeme($put)];
             $dodato = true;
         }
     }
     if (!$dodato) break;
     $krug++;
 }
-// U posljednjim krugovima ostane samo par proizvoda sa mnogo slika, pa se ista soba
-// zna pojaviti dva puta zaredom. Prolaz koji ih razmakne: trazi zamjenu koja rjesava
-// oba mjesta, i i j, a ne kvari nijedno.
+
+// Prolaz koji razmakne dvije slike istog proizvoda ako su ipak zavrsile jedna do druge
 $n = count($insSlike);
 $idAt = function ($k) use (&$insSlike, $n) {
     return ($k < 0 || $k >= $n) ? null : $insSlike[$k]['p']['id'];
@@ -54,14 +67,20 @@ for ($i = 1; $i < $n; $i++) {
         if ($j === $i) continue;
         $a = $idAt($i); $b = $idAt($j);
         if ($b === $a) continue;
-        // $b dolazi na mjesto $i
         if ($b === $idAt($i - 1) || $b === $idAt($i + 1)) continue;
-        // $a dolazi na mjesto $j
         if ($a === $idAt($j - 1) || $a === $idAt($j + 1)) continue;
         $t = $insSlike[$i]; $insSlike[$i] = $insSlike[$j]; $insSlike[$j] = $t;
         break;
     }
 }
+
+// Oznaku "novo" nosi sve iz posljednje tri sedmice. Racuna se od najnovije fotografije,
+// ne od danasnjeg datuma — da oznaka ne nestane ako se par sedmica nista ne doda.
+$insNajnovija = 0;
+foreach ($insSlike as $s) if ($s['t'] > $insNajnovija) $insNajnovija = $s['t'];
+$insPrag = max($insNajnovija, time()) - 21 * 24 * 3600;
+$insNovih = 0;
+foreach ($insSlike as $s) if ($s['t'] > $insPrag) $insNovih++;
 
 $insKat = [];
 foreach ($insSlike as $s) {
@@ -100,7 +119,7 @@ arsort($insKat);
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=31">
+  <link rel="stylesheet" href="css/style-v5.css?v=32">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -315,7 +334,8 @@ arsort($insKat);
       <div class="breadcrumb"><a href="/">Početna</a><i class="fas fa-chevron-right"></i><span>Inspiracija</span></div>
       <h1 class="section-title">Naši paneli u pravim prostorima</h1>
       <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">
-        <?= count($insSlike) ?> fotografija iz stanova, kuća i poslovnih prostora u Crnoj Gori.
+        <?= count($insSlike) ?> fotografija iz stanova, kuća i poslovnih prostora u Crnoj Gori<?php
+        if ($insNovih): ?>, od toga <strong style="color:#c9a86c;"><?= $insNovih ?> novih</strong><?php endif; ?>.
         Kliknite na sobu koja vam se svidi i odmah vidite koji je panel na njoj.
       </p>
     </div>
@@ -327,6 +347,9 @@ arsort($insKat);
 
     <div class="insp-filter" role="group" aria-label="Filter po vrsti panela">
       <button type="button" class="insp-chip is-on" data-k="">Sve <span><?= count($insSlike) ?></span></button>
+      <?php if ($insNovih): ?>
+      <button type="button" class="insp-chip" data-novo="1">Novo <span><?= $insNovih ?></span></button>
+      <?php endif; ?>
       <?php foreach ($insKat as $k => $n): ?>
       <button type="button" class="insp-chip" data-k="<?= htmlspecialchars($k, ENT_QUOTES) ?>">
         <?= htmlspecialchars($insNames[$k] ?? $k) ?> <span><?= $n ?></span>
@@ -341,10 +364,12 @@ arsort($insKat);
         $alt = $p['name'] . ' u enterijeru – ' . $kat . ' | Make My Home Decor Podgorica';
       ?>
       <a class="insp-kart" href="product.html?id=<?= (int)$p['id'] ?>"
-         data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>">
+         data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"
+         data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
         <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
              alt="<?= htmlspecialchars($alt, ENT_QUOTES) ?>"
              loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async">
+        <?php if ($s['t'] > $insPrag): ?><span class="insp-novo">Novo</span><?php endif; ?>
         <span class="insp-info">
           <strong><?= htmlspecialchars($p['name']) ?></strong>
           <em><?= htmlspecialchars($kat) ?> &rsaquo;</em>
@@ -374,11 +399,11 @@ arsort($insKat);
   var prazno = document.getElementById('insp-prazno');
   document.querySelectorAll('.insp-chip').forEach(function (b) {
     b.addEventListener('click', function () {
-      var k = b.dataset.k;
+      var k = b.dataset.k, samoNovo = b.dataset.novo === '1';
       document.querySelectorAll('.insp-chip').forEach(function (o) { o.classList.toggle('is-on', o === b); });
       var vidljivih = 0;
       grid.querySelectorAll('.insp-kart').forEach(function (a) {
-        var ok = !k || a.dataset.k === k;
+        var ok = samoNovo ? a.dataset.novo === '1' : (!k || a.dataset.k === k);
         a.hidden = !ok;
         if (ok) vidljivih++;
       });

@@ -3304,3 +3304,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .insp-cta-dugmad { flex-direction: column; }
   .insp-cta .btn { width: 100%; justify-content: center; }
 }
+
+/* Oznaka "novo" na svježe dodatoj fotografiji */
+.insp-novo {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  background: #c9a86c; color: #1a1a1a; font-size: 11px; font-weight: 800;
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
