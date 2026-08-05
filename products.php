@@ -530,7 +530,19 @@ echo "\n</script>\n";
         <article class="product-card" data-ssr="1">
           <a href="product.html?id=<?= (int)$p['id'] ?>" class="product-link" style="text-decoration:none;color:inherit;display:block;">
             <div class="product-img">
-              <img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($p['name'] ?? '') ?>" loading="lazy" width="400" height="300" style="width:100%;height:auto;display:block;">
+              <?php
+              // Opisan alt: Google Images je za dekoraciju stvarni izvor posjeta,
+              // a "Mystic Marble" sam po sebi ne govori nista o tome sta je na slici.
+              $altBoja = '';
+              foreach (($p['features'] ?? []) as $af) {
+                  if (str_starts_with($af, 'Boja:')) {
+                      $altBoja = trim(preg_replace('/\s*\([^)]*\)\s*$/u', '', substr($af, 5)));
+                      break;
+                  }
+              }
+              $altTxt = trim(($p['name'] ?? '') . ' – ' . ($catNames[$p['category'] ?? ''] ?? 'zidni panel')
+                        . ($altBoja ? ', ' . $altBoja : '') . ' | Make My Home Decor Podgorica');
+              ?><img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy" width="400" height="300" style="width:100%;height:auto;display:block;">
             </div>
             <div class="product-body" style="padding:16px;">
               <h2 class="product-name" style="font-size:1em;font-weight:700;margin-bottom:8px;color:#1a1a1a;"><?= htmlspecialchars($p['name'] ?? '') ?></h2>
@@ -684,7 +696,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=4"></script>
-<script src="js/products.js?v=40"></script>
+<script src="js/products.js?v=41"></script>
 <script src="js/cart.js?v=2"></script>
 <script>
   initProductsPage();

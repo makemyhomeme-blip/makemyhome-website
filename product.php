@@ -194,6 +194,17 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
     'brand'      => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
     'offers'     => $offers,
   ];
+  // category / color / material — Google ih koristi da poveze proizvod sa upitom
+  // ("bijeli mermerni panel", "bambus zidni panel"). Citaju se iz vec postojecih polja.
+  if ($prodCatName) $schema['category'] = $prodCatName;
+  foreach (($product['features'] ?? []) as $sf) {
+      if (!isset($schema['color']) && str_starts_with($sf, 'Boja:')) {
+          $schema['color'] = trim(preg_replace('/\s*\([^)]*\)\s*$/u', '', mb_substr($sf, 5)));
+      }
+      if (!isset($schema['material']) && str_starts_with($sf, 'Materijal:')) {
+          $schema['material'] = trim(preg_replace('/\s*\([^)]*\)\s*$/u', '', mb_substr($sf, 10)));
+      }
+  }
   // ---- OCJENE U STRUKTURIRANIM PODACIMA — NAMJERNO ISKLJUCENO ----
   // Google (Review snippet – General guidelines): "Ratings must be sourced directly from users".
   // Dok se ne potvrdi da svaka recenzija dolazi od stvarnog kupca, aggregateRating i review
@@ -715,7 +726,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=4"></script>
-<script src="js/products.js?v=40"></script>
+<script src="js/products.js?v=41"></script>
 <script src="js/cart.js?v=2"></script>
 <script>
   renderProductDetail();
