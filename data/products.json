@@ -3227,7 +3227,7 @@
         "price": "19.99",
         "discount": 20,
         "unit": "kom",
-        "description": "Honey Oak je najsvjetlija topla letvica koju držimo — medeno-zlatna, sa žutim podtonom koji prostoriju čini vedrijom nego što jeste. Ako vam je soba na sjevernoj strani i uvijek djeluje sivo, ovo je nijansa koja to ispravlja bez da uključite lampu.\n\nRadi izuzetno dobro u hodnicima i predsobljima, gdje obično nema prozora a zidovi su prazni. Jedan zid u Honey Oaku i prolaz kroz stan više ne izgleda kao prolaz. U dnevnoj sobi ga kombinujte sa svijetlim tekstilom i zelenilom — biljke uz ovu nijansu izgledaju življe.\n\nSa bijelim stolarijom je siguran izbor. Sa tamnim parketom daje kontrast koji ne umara.\n\nDimenzija 280×16 cm, 0,45 m² po letvici. Za standardni zid 3×2,6 m računajte 18 letvica, plus jednu rezervnu za sječenje.",
+        "description": "Honey Oak je najsvjetlija topla letvica koju držimo — medeno-zlatna, sa žutim podtonom koji prostoriju čini vedrijom nego što jeste. Ako vam je soba na sjevernoj strani i uvijek djeluje sivo, ovo je nijansa koja to ispravlja bez da uključite lampu.\r\n\r\nRadi izuzetno dobro u hodnicima i predsobljima, gdje obično nema prozora a zidovi su prazni. Jedan zid u Honey Oaku i prolaz kroz stan više ne izgleda kao prolaz. U dnevnoj sobi ga kombinujte sa svijetlim tekstilom i zelenilom — biljke uz ovu nijansu izgledaju življe.\r\n\r\nSa bijelim stolarijom je siguran izbor. Sa tamnim parketom daje kontrast koji ne umara.\r\n\r\nDimenzija 280×16 cm, 0,45 m² po letvici. Za standardni zid 3×2,6 m računajte 18 letvica, plus jednu rezervnu za sječenje.",
         "features": [
             "Dimenzije: 280×16cm po letvici",
             "Širina: 160mm",
@@ -3239,7 +3239,7 @@
             "Šifra: I3D160MW321"
         ],
         "image": "images\/products\/product-1774011085-475.jpg",
-        "badge": "",
+        "badge": null,
         "inStock": true,
         "featured": false,
         "highlight": "Medeno-zlatna nijansa za svijetle prostore",
@@ -3278,6 +3278,10 @@
                 "rating": 4,
                 "text": "Lijepa medena nijansa hrasta u 3D izvedbi. Montaža je malo zahtjevnija nego flat paneli ali rezultat je spektakularan. Preporučujem LED traku iza za poseban efekat."
             }
+        ],
+        "gallery": [
+            "images\/products\/gallery-63-1785947703-855.jpg",
+            "images\/products\/gallery-63-1785947704-804.jpg"
         ]
     },
     {
@@ -3339,10 +3343,7 @@
                 "text": "Dobra kombinacija nordijske svježine i 3D teksture. Nordic Oak boja nije previše topla niti hladna. Montaža prošla bez problema, zid u trpezariji sada ima karakter."
             }
         ],
-        "gallery": [
-            "images\/products\/gallery-64-1785947139-553.jpg",
-            "images\/products\/gallery-64-1785947140-469.jpg"
-        ]
+        "gallery": []
     },
     {
         "id": 65,
@@ -3703,10 +3704,7 @@
                 "text": "Koristio u apartmanu koji iznajmljujem. Gosti redovno komentarišu kako je lijepo uređeno. Javor daje onaj skandinavski feel koji turisti vole. Sigurno ću naručiti i za drugi apartman."
             }
         ],
-        "gallery": [
-            "images\/products\/gallery-70-1785947159-675.jpg",
-            "images\/products\/gallery-70-1785947159-854.jpg"
-        ]
+        "gallery": []
     },
     {
         "id": 71,
