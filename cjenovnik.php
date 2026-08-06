@@ -390,14 +390,14 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični</a>
-      <a href="products.html?category=mdf" class="nav-link">MDF</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="/kategorija/bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="/kategorija/3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="/kategorija/akusticni-paneli" class="nav-link">Akustični</a>
+      <a href="/kategorija/mdf" class="nav-link">MDF</a>
+      <a href="/kategorija/aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
+      <a href="/kategorija/pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="/kategorija/flex-stone" class="nav-link">Flex Stone</a>
+      <a href="/kategorija/spc-pod" class="nav-link">SPC Pod</a>
       <a href="decor-box.html" class="nav-link">Decor Box</a>
       <a href="faq.html" class="nav-link">Pitanja</a>
       <a href="about.html" class="nav-link">O Nama</a>
@@ -500,7 +500,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
             <span style="display:block;font-size:12px;color:#666e7a;">/ <?= htmlspecialchars($jed) ?></span>
           </td>
           <td data-l="Po m&sup2;"><?= htmlspecialchars($m2Tekst) ?></td>
-          <td class="cj-link"><a href="products.html?category=<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj proizvode &rsaquo;</a></td>
+          <td class="cj-link"><a href="/kategorija/<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj proizvode &rsaquo;</a></td>
         </tr>
 <?php endforeach; ?>
       </tbody>
@@ -612,7 +612,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       '<div class="sub">Zid ' + m2.toFixed(2).replace('.', ',') + ' m² (' + sRezervom.toFixed(2).replace('.', ',') +
       ' m² sa 10% rezerve) &middot; ' + naziv +
       '<br>Bez lajsni, silikona i dostave (okvirno 20 €). ' +
-      '<a href="products.html?category=' + slug + '">Pogledaj ' + naziv.toLowerCase() + ' &rsaquo;</a></div>';
+      '<a href="/kategorija/' + slug + '">Pogledaj ' + naziv.toLowerCase() + ' &rsaquo;</a></div>';
     if (typeof window.mmhTrack === 'function') window.mmhTrack('kalkulator_koristen', { kategorija: slug, kom: kom });
   }
   [w, h, k].forEach(function (el) { el.addEventListener('input', calc); el.addEventListener('change', calc); });
@@ -660,17 +660,17 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       <div>
         <h3 class="footer-title">Kategorije</h3>
         <ul class="footer-links footer-links-grid">
-          <li><a href="products.html?category=bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
-          <li><a href="products.html?category=bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
-          <li><a href="products.html?category=bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
-          <li><a href="products.html?category=bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
-          <li><a href="products.html?category=bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
-          <li><a href="products.html?category=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
-          <li><a href="products.html?category=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
-          <li><a href="products.html?category=aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
-          <li><a href="products.html?category=pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
-          <li><a href="products.html?category=mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
-          <li><a href="products.html?category=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+          <li><a href="/kategorija/bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
+          <li><a href="/kategorija/bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
+          <li><a href="/kategorija/bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
+          <li><a href="/kategorija/bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
+          <li><a href="/kategorija/bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
+          <li><a href="/kategorija/akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="/kategorija/3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="/kategorija/aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
+          <li><a href="/kategorija/pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
+          <li><a href="/kategorija/mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
+          <li><a href="/kategorija/flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
         </ul>
       </div>
       <div>

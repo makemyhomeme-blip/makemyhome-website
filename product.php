@@ -1,10 +1,33 @@
 <?php
-$id = (int)($_GET['id'] ?? 0);
+require_once __DIR__ . '/php/slug.php';
 $productsFile = __DIR__ . '/data/products.json';
 $products = json_decode(@file_get_contents($productsFile), true) ?: [];
-$product = null;
-foreach ($products as $p) {
-    if ((int)$p['id'] === $id) { $product = $p; break; }
+
+// Proizvod se otvara preko adrese /paneli/<ime>. Stari oblik ?id=63 i dalje radi,
+// ali odmah salje 301 na novu adresu da Google prenese sve na jedno mjesto.
+$slugParam = trim((string)($_GET['slug'] ?? ''));
+$id        = (int)($_GET['id'] ?? 0);
+$product   = null;
+
+if ($slugParam !== '') {
+    $product = mmhProizvodPoSlugu($slugParam, $products);
+    if (!$product) {
+        // Adresa ne odgovara nijednom proizvodu — probaj staru logiku po sifri/imenu
+        require_once __DIR__ . '/php/slug-match.php';
+        $cilj = mmhSlugTarget($slugParam, $products);
+        if ($cilj && $cilj !== 'https://makemyhome.me/products.html') {
+            header('Location: ' . $cilj, true, 301);
+            exit;
+        }
+    }
+} elseif ($id > 0) {
+    foreach ($products as $p) {
+        if ((int)$p['id'] === $id) { $product = $p; break; }
+    }
+    if ($product) {
+        header('Location: ' . mmhUrlProizvoda($product), true, 301);
+        exit;
+    }
 }
 
 // Nepostojeci proizvod MORA vratiti 404, ne 200.
@@ -37,7 +60,7 @@ $ogImage = ($product && !empty($product['image']))
     ? 'https://makemyhome.me/' . $product['image']
     : 'https://makemyhome.me/images/products/cq006.jpg';
 
-$ogUrl = 'https://makemyhome.me/product.html' . ($id ? '?id=' . $id : '');
+$ogUrl = $product ? mmhUrlProizvoda($product) : 'https://makemyhome.me/products.html';
 // <title> mora stati u ~60 znakova da ga Google ne siječe u rezultatima.
 // Duga imena skraćujemo: prvo pada dio iza " | ", pa zagrada, pa rez na razmaku.
 $titleName = $product['name'] ?? '';
@@ -82,7 +105,7 @@ $catNames = [
 ];
 $prodCat     = $product['category'] ?? '';
 $prodCatName = $catNames[$prodCat] ?? '';
-$prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . $prodCat : '';
+$prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/products.html';
 ?>
 <!DOCTYPE html>
 <html lang="sr-ME">
@@ -380,14 +403,14 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični</a>
-      <a href="products.html?category=mdf" class="nav-link">MDF</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="/kategorija/bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="/kategorija/3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="/kategorija/akusticni-paneli" class="nav-link">Akustični</a>
+      <a href="/kategorija/mdf" class="nav-link">MDF</a>
+      <a href="/kategorija/aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
+      <a href="/kategorija/pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="/kategorija/flex-stone" class="nav-link">Flex Stone</a>
+      <a href="/kategorija/spc-pod" class="nav-link">SPC Pod</a>
       <a href="decor-box.html" class="nav-link">Decor Box</a>
       <a href="faq.html" class="nav-link">Pitanja</a>
       <a href="about.html" class="nav-link">O Nama</a>
@@ -425,7 +448,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
         <p style="font-weight:700;color:#1a1a1a;margin-bottom:10px;">Popularne kategorije:</p>
         <ul style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;">
           <?php foreach ($catNames as $ck => $cn): ?>
-          <li><a href="products.html?category=<?= htmlspecialchars($ck, ENT_QUOTES) ?>"
+          <li><a href="/kategorija/<?= htmlspecialchars($ck, ENT_QUOTES) ?>"
                  style="display:inline-block;background:#f5f0eb;color:#8a6d2f;padding:6px 13px;border-radius:18px;font-size:13px;text-decoration:none;"><?= htmlspecialchars($cn) ?></a></li>
           <?php endforeach; ?>
         </ul>
@@ -438,7 +461,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
       <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <a href="products.html" style="color:#666e7a;text-decoration:none;">Proizvodi</a>
 <?php if ($prodCatName): ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
-      <a href="products.html?category=<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#c9a86c;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
+      <a href="/kategorija/<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#c9a86c;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
 <?php endif; ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <span style="color:#5a5a5a;"><?= htmlspecialchars($product['name']) ?></span>
     </nav>
@@ -695,18 +718,18 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
       <div>
         <h3 class="footer-title">Kategorije</h3>
         <ul class="footer-links footer-links-grid">
-          <li><a href="products.html?category=bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
-          <li><a href="products.html?category=bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
-          <li><a href="products.html?category=bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
-          <li><a href="products.html?category=bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
-          <li><a href="products.html?category=bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
-          <li><a href="products.html?category=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
-          <li><a href="products.html?category=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
-          <li><a href="products.html?category=aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
-          <li><a href="products.html?category=classic"><i class="fas fa-chevron-right"></i> Classic Paneli</a></li>
-          <li><a href="products.html?category=pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
-          <li><a href="products.html?category=mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
-          <li><a href="products.html?category=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+          <li><a href="/kategorija/bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
+          <li><a href="/kategorija/bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
+          <li><a href="/kategorija/bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
+          <li><a href="/kategorija/bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
+          <li><a href="/kategorija/bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
+          <li><a href="/kategorija/akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="/kategorija/3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="/kategorija/aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
+          <li><a href="/kategorija/classic"><i class="fas fa-chevron-right"></i> Classic Paneli</a></li>
+          <li><a href="/kategorija/pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
+          <li><a href="/kategorija/mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
+          <li><a href="/kategorija/flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
         </ul>
       </div>
       <div>

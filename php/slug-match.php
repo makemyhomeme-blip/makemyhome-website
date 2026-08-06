@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/slug.php';
 /**
  * Pronalazi odrediste za stari WordPress /product/slug/ URL.
  *
@@ -32,10 +33,10 @@ function mmhSlugTarget(string $slug, array $products): string
     // 1 + 2: tacan pogodak
     foreach ($products as $p) {
         if ($norm($p['sku'] ?? '') !== '' && $norm($p['sku']) === $slugNorm) {
-            return $BASE . '/product.html?id=' . (int)$p['id'];
+            return mmhUrlProizvoda($p);
         }
         if ($norm($p['name'] ?? '') === $slugNorm) {
-            return $BASE . '/product.html?id=' . (int)$p['id'];
+            return mmhUrlProizvoda($p);
         }
     }
 
@@ -52,7 +53,7 @@ function mmhSlugTarget(string $slug, array $products): string
     }
     // prag 1.2 — sa 1.0 je 'rouge-stone-white' pogadjao 'White Marble' samo zbog rijeci 'white'
     if ($best && $bestScore >= 1.2) {
-        return $BASE . '/product.html?id=' . (int)$best['id'];
+        return mmhUrlProizvoda($best);
     }
 
     // 4: proizvod vise ne postoji — posalji ga na kategoriju kojoj pripada
@@ -71,7 +72,7 @@ function mmhSlugTarget(string $slug, array $products): string
         'l'   => 'aluminijum-lajsne',
     ];
     foreach ($poPrefiksu as $pref => $kat) {
-        if (str_starts_with($slugNorm, $pref)) return $BASE . '/products.html?category=' . $kat;
+        if (str_starts_with($slugNorm, $pref)) return mmhUrlKategorije($kat);
     }
     $poRijeci = [
         'travertine' => 'flex-stone', 'travertino' => 'flex-stone', 'granite' => 'flex-stone',
@@ -84,7 +85,7 @@ function mmhSlugTarget(string $slug, array $products): string
         'laminat'    => 'spc-pod',    'pod'        => 'spc-pod',
     ];
     foreach ($poRijeci as $rijec => $kat) {
-        if (str_contains($slug, $rijec)) return $BASE . '/products.html?category=' . $kat;
+        if (str_contains($slug, $rijec)) return mmhUrlKategorije($kat);
     }
 
     return $BASE . '/products.html';

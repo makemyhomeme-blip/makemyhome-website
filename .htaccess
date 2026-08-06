@@ -146,6 +146,14 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^([^/.]+)/?$ /$1.html [R=301,L]
 
+# ===== LIJEPE ADRESE =====
+# /paneli/drveni-panel-golden-teak  → product.php?slug=...
+# /kategorija/3d-letvice            → products.php?k=...
+# Interno prepisivanje (bez R=301) — adresa u pretrazivacu ostaje lijepa.
+# Stari oblici ?id= i ?category= i dalje rade i sami salju 301 na novu adresu.
+RewriteRule ^paneli/([a-z0-9][a-z0-9-]*)/?$ product.php?slug=$1 [QSA,L]
+RewriteRule ^kategorija/([a-z0-9][a-z0-9-]*)/?$ products.php?k=$1 [QSA,L]
+
 RewriteRule ^cjenovnik\.html$ cjenovnik.php [QSA,L]
 RewriteRule ^inspiracija\.html$ inspiracija.php [QSA,L]
 RewriteRule ^product\.html$ product.php [QSA,L]

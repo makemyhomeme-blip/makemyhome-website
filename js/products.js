@@ -1,3 +1,42 @@
+/* ===== ADRESE PROIZVODA I KATEGORIJA =====
+   Mora davati ISTI rezultat kao php/slug.php — ako se razidju, linkovi pucaju.
+   Svaka izmjena ovdje ide i tamo. */
+const MMH_TIP = {
+  'bambus-paneli': 'bambus-panel', 'bambus-drveni': 'drveni-panel',
+  'bambus-tekstilni': 'tekstilni-panel', 'bambus-mermerni': 'mermerni-panel',
+  'bambus-metalni': 'metalni-panel', 'bambus-kozni': 'kozni-panel',
+  'classic': 'classic-panel', '3d-letvice': '3d-letvica',
+  'akusticni-paneli': 'akusticni-panel', 'aluminijum-lajsne': 'alu-lajsna',
+  'spc-pod': 'spc-pod', 'pu-kamen': 'pu-kamen', 'mdf': 'mdf-panel',
+  'flex-stone': 'flex-stone'
+};
+function mmhSlugify(s) {
+  s = String(s == null ? '' : s).toLowerCase();
+  const mapa = { 'č':'c','ć':'c','š':'s','ž':'z','đ':'dj','–':'-','—':'-','×':'x' };
+  s = s.replace(/[čćšžđ–—×]/g, function (m) { return mapa[m]; });
+  s = s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+  s = s.replace(/[^a-z0-9]+/g, '-');
+  return s.replace(/-+/g, '-').replace(/^-|-$/g, '');
+}
+function mmhSlugProizvoda(p) {
+  let ime = mmhSlugify(p && p.name);
+  const tip = MMH_TIP[p && p.category] || 'panel';
+  const dijelovi = ime === '' ? [] : ime.split('-');
+  const prva = tip.split('-')[0];
+  if (ime !== '' && dijelovi.indexOf(prva) === -1) ime = tip + '-' + ime;
+  if (ime === '') ime = 'proizvod-' + ((p && p.id) || 0);
+  if (ime.length > 60) {
+    const skraceno = ime.slice(0, 60);
+    const zadnja = skraceno.lastIndexOf('-');
+    ime = (zadnja > 20 ? skraceno.slice(0, zadnja) : skraceno).replace(/-+$/, '');
+  }
+  return 'paneli/' + ime;
+}
+function mmhUrlProizvoda(p) { return '/' + mmhSlugProizvoda(p); }
+function mmhUrlKategorije(k) { return '/kategorija/' + k; }
+window.mmhUrlProizvoda = mmhUrlProizvoda;
+window.mmhUrlKategorije = mmhUrlKategorije;
+
 /* ===================================================
    MAKE MY HOME - Products JavaScript
    =================================================== */
@@ -92,7 +131,7 @@ function renderProductCard(product, lazy = true) {
     : '';
 
   return `
-    <article class="product-card${outOfStock ? ' out-of-stock' : ''}" data-category="${product.category}" data-id="${product.id}" onclick="window.location='product.html?id=${product.id}'" style="cursor:pointer;">
+    <article class="product-card${outOfStock ? ' out-of-stock' : ''}" data-category="${product.category}" data-id="${product.id}" onclick="window.location='${mmhUrlProizvoda(product)}'" style="cursor:pointer;">
       <div class="product-img">
         ${imgContent}
         ${badge}
@@ -115,7 +154,7 @@ function renderProductCard(product, lazy = true) {
               : `${product.price} € <span>/ ${product.unit}</span>`
             }
           </div>
-          <a href="product.html?id=${product.id}" class="btn-card-detail">
+          <a href="${mmhUrlProizvoda(product)}" class="btn-card-detail">
             Detaljnije <i class="fas fa-arrow-right"></i>
           </a>
         </div>
@@ -166,7 +205,7 @@ async function initProductsPage() {
   const footerCats = document.getElementById('footer-cats');
   if (footerCats) {
     footerCats.innerHTML = allCategories.map(c =>
-      `<li><a href="products.html?category=${c.id}"><i class="fas fa-chevron-right"></i> ${c.name}</a></li>`
+      `<li><a href="/kategorija/${c.id}"><i class="fas fa-chevron-right"></i> ${c.name}</a></li>`
     ).join('');
   }
 }
@@ -237,7 +276,7 @@ function showSubcategoryGrid(parentCat) {
     const subProducts = allProducts.filter(p => p.category === sub.id);
     const firstImg = subProducts.find(p => p.image)?.image || '';
     return `
-      <a href="products.html?category=${sub.id}" class="cat-card">
+      <a href="/kategorija/${sub.id}" class="cat-card">
         <div class="cat-card-img">
           ${firstImg
             ? `<img src="${firstImg}" alt="${sub.name}" loading="lazy">`
@@ -277,7 +316,7 @@ function showCategoryGrid() {
   });
 
   grid.innerHTML = cats.map(cat => `
-    <a href="products.html?category=${cat.id}" class="cat-card">
+    <a href="/kategorija/${cat.id}" class="cat-card">
       <div class="cat-card-img">
         ${cat.firstImage
           ? `<img src="${cat.firstImage}" alt="${cat.name}" loading="lazy">`
@@ -326,7 +365,7 @@ function showCategoryProducts(catId) {
   // Back button: go to parent if subcategory, else go to all categories
   const btnBack = document.querySelector('.btn-back');
   if (btnBack && parentCat) {
-    btnBack.href = `products.html?category=${parentCat.id}`;
+    btnBack.href = `/kategorija/${parentCat.id}`;
     btnBack.innerHTML = `<i class="fas fa-arrow-left"></i> ${parentCat.name}`;
   }
 
@@ -368,7 +407,7 @@ async function renderCategories(containerId) {
                 --zoom:${zoom};"></div>`
       : `<span class="category-img-placeholder"><i class="${cat.icon}"></i></span>`;
     return `
-    <a href="products.html?category=${cat.id}" class="category-card">
+    <a href="/kategorija/${cat.id}" class="category-card">
       <div class="category-img" style="overflow:hidden;position:relative;">
         ${imgInner}
       </div>
@@ -1197,7 +1236,7 @@ async function renderProductDetail() {
     }
 
     ${(product.category.startsWith('bambus') || product.category === 'classic') ? `
-    <a href="products.html?category=aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;transition:background .2s;" onmouseover="this.style.background='rgba(201,168,108,0.18)'" onmouseout="this.style.background='rgba(201,168,108,0.1)'">
+    <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;transition:background .2s;" onmouseover="this.style.background='rgba(201,168,108,0.18)'" onmouseout="this.style.background='rgba(201,168,108,0.1)'">
       <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
       <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#c9a86c;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
     </a>
@@ -1361,7 +1400,7 @@ async function renderProductDetail() {
           : 'Kombiniraj 3D letvice sa panelom iste boje za savršen enterijer';
 
       const partnerCards = partners.map(p => `
-        <a href="product.html?id=${p.id}" class="pair-card">
+        <a href="${mmhUrlProizvoda(p)}" class="pair-card">
           <div class="pair-card-img">
             <img src="${p.image}" alt="${p.name}" loading="lazy">
             ${p.badge ? `<span class="pair-badge">${p.badge}</span>` : ''}

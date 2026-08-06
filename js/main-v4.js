@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ? 'bambus-paneli' : cat;
         const label = catLabels[cat] || cat;
         const thumb = p.image ? `<img src="${p.image}" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
-        return `<a href="product.html?id=${p.id}"
+        return `<a href="${(window.mmhUrlProizvoda ? window.mmhUrlProizvoda(p) : "product.html?id=" + p.id)}"
           style="display:flex;align-items:center;gap:12px;padding:11px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background 0.15s;"
           onmouseenter="this.style.background='rgba(201,168,108,0.12)'" onmouseleave="this.style.background=''"
           onclick="document.getElementById('mob-search-input').value='';document.getElementById('mob-search-results').style.display='none';">
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ? 'bambus-paneli' : cat;
         const label = dCatLabels[cat] || cat;
         const thumb = p.image ? `<img src="${p.image}" style="width:36px;height:36px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
-        return `<a href="product.html?id=${p.id}"
+        return `<a href="${(window.mmhUrlProizvoda ? window.mmhUrlProizvoda(p) : "product.html?id=" + p.id)}"
           style="display:flex;align-items:center;gap:10px;padding:10px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .15s;"
           onmouseenter="this.style.background='rgba(201,168,108,0.1)'" onmouseleave="this.style.background=''">
           ${thumb}

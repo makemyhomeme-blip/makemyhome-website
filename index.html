@@ -182,7 +182,7 @@
     "url": [
       "https://makemyhome.me/",
       "https://makemyhome.me/products.html",
-      "https://makemyhome.me/products.html?category=3d-letvice",
+      "https://makemyhome.me/kategorija/3d-letvice",
       "https://makemyhome.me/about.html",
       "https://makemyhome.me/contact.html"
     ]
@@ -395,14 +395,14 @@
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični</a>
-      <a href="products.html?category=mdf" class="nav-link">MDF</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="/kategorija/bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="/kategorija/3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="/kategorija/akusticni-paneli" class="nav-link">Akustični</a>
+      <a href="/kategorija/mdf" class="nav-link">MDF</a>
+      <a href="/kategorija/aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
+      <a href="/kategorija/pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="/kategorija/flex-stone" class="nav-link">Flex Stone</a>
+      <a href="/kategorija/spc-pod" class="nav-link">SPC Pod</a>
       <a href="decor-box.html" class="nav-link">Decor Box</a>
       <a href="faq.html" class="nav-link">Pitanja</a>
       <a href="about.html" class="nav-link">O Nama</a>
@@ -576,7 +576,7 @@
       ukupno += p.gallery.length;
       if (!dozvoljene[p.category]) return;
       p.gallery.forEach(function (src) {
-        sve.push({ src: src, id: p.id, ime: p.name || '', kat: imena[p.category] || 'Zidni panel' });
+        sve.push({ src: src, id: p.id, name: p.name, category: p.category, ime: p.name || '', kat: imena[p.category] || 'Zidni panel' });
       });
     });
     if (sve.length < 2) throw 0;
@@ -616,7 +616,7 @@
         el.textContent = '';
         el.appendChild(img);
         el.appendChild(natpis);
-        el.href = 'product.html?id=' + encodeURIComponent(s.id);
+        el.href = window.mmhUrlProizvoda ? window.mmhUrlProizvoda(s) : ('product.html?id=' + encodeURIComponent(s.id));
         el.setAttribute('aria-label', s.ime + ' – ' + s.kat);
         requestAnimationFrame(function () { el.classList.remove('mijenja'); });
       };
@@ -663,7 +663,7 @@
       </p>
     </div>
     <div class="categories-grid" id="categories-grid">
-      <a href="products.html?category=bambus-paneli" class="category-card">
+      <a href="/kategorija/bambus-paneli" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-bambus-paneli-1774373553.jpeg');background-position:0% 66.57%;background-size:cover;background-repeat:no-repeat;transform:scale(1);transform-origin:0% 66.57%;transition:transform 0.5s ease;--zoom:1;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#7a9e6e"><i class="fas fa-layer-group"></i></div>
@@ -672,7 +672,7 @@
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="products.html?category=3d-letvice" class="category-card">
+      <a href="/kategorija/3d-letvice" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-3d-letvice-1774394494.jpg');background-position:34.8% 64.49%;background-size:cover;background-repeat:no-repeat;transform:scale(1.55);transform-origin:34.8% 64.49%;transition:transform 0.5s ease;--zoom:1.55;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#6b4f2a"><i class="fas fa-grip-lines"></i></div>
@@ -681,7 +681,7 @@
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="products.html?category=akusticni-paneli" class="category-card">
+      <a href="/kategorija/akusticni-paneli" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-akusticni-paneli-1774400659.jpg');background-position:0% 88.73%;background-size:cover;background-repeat:no-repeat;transform:scale(1);transform-origin:0% 88.73%;transition:transform 0.5s ease;--zoom:1;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#2c2c2c"><i class="fas fa-volume-mute"></i></div>
@@ -690,7 +690,7 @@
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="products.html?category=mdf" class="category-card">
+      <a href="/kategorija/mdf" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-mdf-1775496655.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat;transform:scale(1.0);transform-origin:50% 50%;transition:transform 0.5s ease;--zoom:1.0;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#8B6914"><i class="fas fa-layer-group"></i></div>
@@ -699,7 +699,7 @@
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="products.html?category=pu-kamen" class="category-card">
+      <a href="/kategorija/pu-kamen" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-pu-kamen-1774832059.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat;transform:scale(1.1);transform-origin:50% 50%;transition:transform 0.5s ease;--zoom:1.1;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#7d6b55"><i class="fas fa-mountain"></i></div>
@@ -708,7 +708,7 @@
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="products.html?category=flex-stone" class="category-card">
+      <a href="/kategorija/flex-stone" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-flex-stone-1775496929.jpg');background-position:50% 50%;background-size:cover;background-repeat:no-repeat;transform:scale(1.0);transform-origin:50% 50%;transition:transform 0.5s ease;--zoom:1.0;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#6B7280"><i class="fas fa-mountain"></i></div>
@@ -717,7 +717,7 @@
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="products.html?category=aluminijum-lajsne" class="category-card">
+      <a href="/kategorija/aluminijum-lajsne" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-aluminijum-lajsne-1774393266.jpeg');background-position:100% 100%;background-size:cover;background-repeat:no-repeat;transform:scale(1);transform-origin:100% 100%;transition:transform 0.5s ease;--zoom:1;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#888"><i class="fas fa-minus"></i></div>
@@ -726,7 +726,7 @@
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="products.html?category=spc-pod" class="category-card">
+      <a href="/kategorija/spc-pod" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><div class="category-bg-img" style="position:absolute;inset:0;background-image:url('images/categories/cat-spc-pod-1774400873.jpg');background-position:100% 100%;background-size:cover;background-repeat:no-repeat;transform:scale(1.05);transform-origin:100% 100%;transition:transform 0.5s ease;--zoom:1.05;"></div></div>
         <div class="category-body">
           <div class="category-icon" style="background:#5c4a32"><i class="fas fa-border-all"></i></div>
@@ -1127,19 +1127,19 @@
       <div>
         <h3 class="footer-title">Kategorije</h3>
         <ul class="footer-links footer-links-grid">
-          <li><a href="products.html?category=bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
-          <li><a href="products.html?category=bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
-          <li><a href="products.html?category=bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
-          <li><a href="products.html?category=bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
-          <li><a href="products.html?category=classic"><i class="fas fa-chevron-right"></i> Classic Paneli</a></li>
-          <li><a href="products.html?category=bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
-          <li><a href="products.html?category=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
-          <li><a href="products.html?category=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
-          <li><a href="products.html?category=aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
-          <li><a href="products.html?category=spc-pod"><i class="fas fa-chevron-right"></i> SPC Pod</a></li>
-          <li><a href="products.html?category=pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
-          <li><a href="products.html?category=mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
-          <li><a href="products.html?category=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+          <li><a href="/kategorija/bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
+          <li><a href="/kategorija/bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
+          <li><a href="/kategorija/bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
+          <li><a href="/kategorija/bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
+          <li><a href="/kategorija/classic"><i class="fas fa-chevron-right"></i> Classic Paneli</a></li>
+          <li><a href="/kategorija/bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
+          <li><a href="/kategorija/3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="/kategorija/akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="/kategorija/aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
+          <li><a href="/kategorija/spc-pod"><i class="fas fa-chevron-right"></i> SPC Pod</a></li>
+          <li><a href="/kategorija/pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
+          <li><a href="/kategorija/mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
+          <li><a href="/kategorija/flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
         </ul>
       </div>
 

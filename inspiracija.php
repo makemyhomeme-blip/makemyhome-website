@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/php/slug.php';
 // Sve fotografije prostora koje se dodaju kroz admin (polje "gallery"), na jednom mjestu.
 // Nista se ne upisuje rucno — cim se u adminu doda slika nekom proizvodu, pojavi se ovdje.
 $insP = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
@@ -306,14 +307,14 @@ arsort($insKat);
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični</a>
-      <a href="products.html?category=mdf" class="nav-link">MDF</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="/kategorija/bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="/kategorija/3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="/kategorija/akusticni-paneli" class="nav-link">Akustični</a>
+      <a href="/kategorija/mdf" class="nav-link">MDF</a>
+      <a href="/kategorija/aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
+      <a href="/kategorija/pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="/kategorija/flex-stone" class="nav-link">Flex Stone</a>
+      <a href="/kategorija/spc-pod" class="nav-link">SPC Pod</a>
       <a href="decor-box.html" class="nav-link">Decor Box</a>
       <a href="faq.html" class="nav-link">Pitanja</a>
       <a href="about.html" class="nav-link">O Nama</a>
@@ -374,7 +375,7 @@ arsort($insKat);
         $kat = $insNames[$p['category'] ?? ''] ?? 'Zidni panel';
         $alt = $p['name'] . ' u enterijeru – ' . $kat . ' | Make My Home Decor Podgorica';
       ?>
-      <a class="insp-kart" href="product.html?id=<?= (int)$p['id'] ?>"
+      <a class="insp-kart" href="/<?= mmhSlugProizvoda($p) ?>"
          data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"
          data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
         <img <?= $i < 8 ? 'src' : 'data-src' ?>="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
@@ -523,17 +524,17 @@ arsort($insKat);
       <div>
         <h3 class="footer-title">Kategorije</h3>
         <ul class="footer-links footer-links-grid">
-          <li><a href="products.html?category=bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
-          <li><a href="products.html?category=bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
-          <li><a href="products.html?category=bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
-          <li><a href="products.html?category=bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
-          <li><a href="products.html?category=bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
-          <li><a href="products.html?category=akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
-          <li><a href="products.html?category=3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
-          <li><a href="products.html?category=aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
-          <li><a href="products.html?category=pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
-          <li><a href="products.html?category=mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
-          <li><a href="products.html?category=flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+          <li><a href="/kategorija/bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
+          <li><a href="/kategorija/bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
+          <li><a href="/kategorija/bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
+          <li><a href="/kategorija/bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
+          <li><a href="/kategorija/bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
+          <li><a href="/kategorija/akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
+          <li><a href="/kategorija/3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
+          <li><a href="/kategorija/aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
+          <li><a href="/kategorija/pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
+          <li><a href="/kategorija/mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
+          <li><a href="/kategorija/flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
         </ul>
       </div>
       <div>

@@ -7,15 +7,23 @@ if (!empty($_GET['slug'])) {
     exit;
 }
 
-// Normalizuj ?cat= na ?category= (301) — jedna kanonska verzija URL-a,
-// bez "Alternate page with canonical" zapisa u GSC
-if (isset($_GET['cat']) && !isset($_GET['category'])) {
-    $catNorm = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['cat']));
-    header('Location: https://makemyhome.me/products.html' . ($catNorm !== '' ? '?category=' . $catNorm : ''), true, 301);
+require_once __DIR__ . '/php/slug.php';
+
+// Kategorija se otvara preko /kategorija/<kljuc>. Stari oblici ?category= i ?cat=
+// i dalje rade, ali odmah salju 301 na novu adresu.
+$catPretty = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['k'] ?? ''));
+$catStari  = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['category'] ?? $_GET['cat'] ?? ''));
+
+if ($catPretty === '' && $catStari !== '') {
+    header('Location: ' . mmhUrlKategorije($catStari), true, 301);
+    exit;
+}
+if ($catPretty === '' && ($_SERVER['QUERY_STRING'] ?? '') !== '' && isset($_GET['cat'])) {
+    header('Location: https://makemyhome.me/products.html', true, 301);
     exit;
 }
 
-$cat = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['category'] ?? $_GET['cat'] ?? ''));
+$cat = $catPretty;
 
 $catNames = [
   'bambus-tekstilni' => 'Tekstilni Paneli',
@@ -134,7 +142,7 @@ $catSeoText = [
   'flex-stone'       => '<p>Flex Stone je savitljivi kameni furnir koji se primjenjuje na ravne, zakrivljene i neravne površine. Pravi kamen u tankom, fleksibilnom obliku – idealno za stubove, lukove i nestandardne površine.</p><p>Jedinstveno rješenje dostupno u Make My Home Decor showroomu u Podgorici, sa dostavom širom Crne Gore.</p><p>Flex Stone je tanak sloj pravog kamena na savitljivoj podlozi. Za razliku od pločica, može da se savije — ide oko stuba, po zaobljenom zidu, preko ivice i na neravnu podlogu na kojoj kruta obloga ne bi legla.</p><p>Ploča je 120×60 cm i pokriva 0,72 m². Površina je prirodan kamen, pa nema dva ista komada i zid izgleda kao zidan, a ne kao štampan. Lijepi se ljepilom za kamen na ravnu i čvrstu podlogu. Koristi se na akcentnim zidovima, u hodnicima, na fasadnim detaljima, oko kamina i u ugostiteljskim prostorima.</p>',
   'classic'          => '<p>Classic zidni paneli imaju bezvremenski dizajn koji odgovara svakom enterijeru. Bijele i neutralne boje, jednostavna ugradnja i dugotrajan izgled. Ovo je najuniverzalnija kategorija u ponudi – ako ne želite izražen dekor, nego čist i miran zid koji neće izaći iz mode, Classic paneli su pravi izbor.</p><p>Površina je glatka ili blago strukturirana, u bijeloj i neutralnim nijansama koje vizuelno šire prostor. Zbog toga se najčešće koriste u manjim stanovima, hodnicima, kuhinjama i kupatilima, ali i u kancelarijama i čekaonicama gdje se traži čist, uredan izgled. Paneli su vodootporni, ne upijaju vlagu i lako se čiste, pa su praktična zamjena za krečenje zidova koji se često prljaju.</p><p>Classic paneli se odlično kombinuju sa 3D letvicama – ravna bijela podloga na jednom dijelu zida i vertikalne letvice na akcentnom dijelu daju moderan, slojevit izgled. Za završnu obradu ivica i spojeva preporučujemo aluminijum lajsne, koje pokrivaju rezove i daju profesionalan izgled bez gletovanja i farbanja.</p><p>Montaža je jednostavna: panel se lijepi silikonom direktno na ravan zid i siječe skalpelom, bez potkonstrukcije i bez majstora. Dostupno u Make My Home Decor showroomu u Podgorici (Vojvode Maša Đurovića 41, City Kvart), sa dostavom kurirskom službom širom Crne Gore. Za savjet i izračun količine pozovite 069 105 222.</p>',
 ];
-$ogUrl    = 'https://makemyhome.me/products.html' . ($cat ? '?category=' . $cat : '');
+$ogUrl    = $cat ? mmhUrlKategorije($cat) : 'https://makemyhome.me/products.html';
 // Naslov po kategoriji. Ranije je svaka nosila "... – Zidni Paneli", pa je
 // dvadeset stranica trazilo istu rijec od Googla i medjusobno se gusile.
 // Sada svaka kategorija ima svoj izraz, a "zidni paneli" ostaje samo katalogu.
@@ -227,7 +235,7 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
     '@type'       => 'Product',
     'name'        => $p['name'] ?? '',
     'description' => $pDesc,
-    'url'         => 'https://makemyhome.me/product.html?id=' . (int)$p['id'],
+    'url'         => mmhUrlProizvoda($p),
     'image'       => 'https://makemyhome.me/' . ($p['image'] ?? ''),
     'brand'       => ['@type' => 'Brand', 'name' => 'Make My Home Decor'],
     'sku'         => preg_replace('/\s+/', '-', trim($p['sku'] ?? $p['name'] ?? '')),
@@ -503,14 +511,14 @@ echo "\n</script>\n";
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
-      <a href="products.html?category=bambus-paneli" class="nav-link">Bambus Paneli</a>
-      <a href="products.html?category=3d-letvice" class="nav-link">3D Letvice</a>
-      <a href="products.html?category=akusticni-paneli" class="nav-link">Akustični</a>
-      <a href="products.html?category=mdf" class="nav-link">MDF</a>
-      <a href="products.html?category=aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
-      <a href="products.html?category=pu-kamen" class="nav-link">PU Kamen</a>
-      <a href="products.html?category=flex-stone" class="nav-link">Flex Stone</a>
-      <a href="products.html?category=spc-pod" class="nav-link">SPC Pod</a>
+      <a href="/kategorija/bambus-paneli" class="nav-link">Bambus Paneli</a>
+      <a href="/kategorija/3d-letvice" class="nav-link">3D Letvice</a>
+      <a href="/kategorija/akusticni-paneli" class="nav-link">Akustični</a>
+      <a href="/kategorija/mdf" class="nav-link">MDF</a>
+      <a href="/kategorija/aluminijum-lajsne" class="nav-link">Alu Lajsne</a>
+      <a href="/kategorija/pu-kamen" class="nav-link">PU Kamen</a>
+      <a href="/kategorija/flex-stone" class="nav-link">Flex Stone</a>
+      <a href="/kategorija/spc-pod" class="nav-link">SPC Pod</a>
       <a href="decor-box.html" class="nav-link">Decor Box</a>
       <a href="faq.html" class="nav-link">Pitanja</a>
       <a href="about.html" class="nav-link">O Nama</a>
@@ -575,7 +583,7 @@ echo "\n</script>\n";
           $pHl = mb_substr(strip_tags($p['highlight'] ?? $p['description'] ?? ''), 0, 140);
         ?>
         <article class="product-card" data-ssr="1">
-          <a href="product.html?id=<?= (int)$p['id'] ?>" class="product-link" style="text-decoration:none;color:inherit;display:block;">
+          <a href="/<?= mmhSlugProizvoda($p) ?>" class="product-link" style="text-decoration:none;color:inherit;display:block;">
             <div class="product-img">
               <?php
               // Opisan alt: Google Images je za dekoraciju stvarni izvor posjeta,
