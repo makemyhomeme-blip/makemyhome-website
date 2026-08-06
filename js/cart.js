@@ -15,6 +15,11 @@ function saveCart(cart) {
 }
 
 function addToCart(product, qty) {
+  // Rasprodat artikal ne ide u korpu ni ako se funkcija pozove direktno
+  if (product && product.inStock === false) {
+    showCartToast('Trenutno nije na stanju — pozovite 069 105 222');
+    return;
+  }
   qty = parseInt(qty) || 1;
   const effectivePrice = product.discount > 0
     ? +(product.price * (1 - product.discount / 100)).toFixed(2)

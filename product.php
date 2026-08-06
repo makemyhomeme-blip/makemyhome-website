@@ -464,6 +464,10 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
               // taj raskorak. Ovako se mijenja sama kad se promijeni cijena ili popust.
               // Povrsina po komadu: prvo iz zagrade "(3.42 m² po komadu / setu / plocici)",
               // pa iz dimenzija. Prihvata i decimalni zarez ("61,5 × 31 cm") i "Dimenzije seta:".
+              // Ako se proizvod prodaje po m² (SPC pod, dio MDF-a), cijena VEC jeste
+              // cijena po m² — dijeljenje sa povrsinom jedne daske davalo je 79,51 €/m²
+              // umjesto 17,49 €/m². Za takve proizvode se ovaj red preskace.
+              $poM2Sam = (($product['unit'] ?? '') === 'm²');
               $povrsina = null;
               foreach ($product['features'] as $f) {
                   if (preg_match('/\(([\d.,]+)\s*m²\s*po\s+\p{L}+\)/u', $f, $m)) {
@@ -475,7 +479,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
                       $povrsina = ($a / 100) * ($b / 100); break;
                   }
               }
-              if ($povrsina && $povrsina > 0.05 && !empty($product['price'])) {
+              if (!$poM2Sam && $povrsina && $povrsina > 0.05 && !empty($product['price'])) {
                   $puna    = (float) str_replace(',', '.', (string) $product['price']);
                   $placa   = $puna * (1 - ((float) ($product['discount'] ?? 0)) / 100);
                   // Racunaj iz ZAOKRUZENE povrsine koja se i prikazuje, da kupac koji
@@ -726,8 +730,8 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=5"></script>
-<script src="js/products.js?v=42"></script>
-<script src="js/cart.js?v=2"></script>
+<script src="js/products.js?v=44"></script>
+<script src="js/cart.js?v=3"></script>
 <script>
   renderProductDetail();
 </script>

@@ -49,6 +49,24 @@ Program saradnje za arhitekte, dizajnere enterijera, izvođače i građevinske k
 - [Decor Box](https://makemyhome.me/decor-box.html): program saradnje za arhitekte, dizajnere i izvođače.
 - [O nama](https://makemyhome.me/about.html): o firmi, showroom, misija.
 - [Kontakt](https://makemyhome.me/contact.html): adresa, telefon, mapa, kontakt forma.
+- [Inspiracija](https://makemyhome.me/inspiracija.html): fotografije panela u stvarnim prostorima; klik na sobu vodi na panel koji je na tom zidu.
+- [Cjenovnik](https://makemyhome.me/cjenovnik.html): cijene po kategorijama i kalkulator količine.
+- [Montaža panela](https://makemyhome.me/montaza.html): alat, ljepilo, sječenje, uglovi, oko utičnica — korak po korak.
+
+## Vodiči
+
+- [Paneli za kupatilo](https://makemyhome.me/paneli-za-kupatilo.html): koji paneli podnose vlagu i kako se postavljaju u kupatilu.
+- [Zid iza televizora](https://makemyhome.me/tv-zid.html): izbor panela i letvica za TV zid, rasvjeta, kablovi.
+- [Paneli ili lamperija](https://makemyhome.me/paneli-ili-lamperija.html): poređenje po montaži, vlazi, cijeni i održavanju.
+- [Akustični paneli za kancelariju](https://makemyhome.me/akusticni-paneli-kancelarija.html): smanjenje buke i eha u poslovnom prostoru.
+- [SPC ili laminat](https://makemyhome.me/spc-ili-laminat.html): razlike, vodootpornost, gdje se koji isplati.
+- [Dostava u Crnoj Gori](https://makemyhome.me/dostava-crna-gora.html): rokovi, cijena, gradovi, plaćanje pouzećem.
+
+## Pravne stranice
+
+- [Uslovi kupovine](https://makemyhome.me/uslovi.html)
+- [Reklamacije i povrat](https://makemyhome.me/reklamacije.html)
+- [Politika privatnosti](https://makemyhome.me/privatnost.html)
 
 ## Kategorije proizvoda
 

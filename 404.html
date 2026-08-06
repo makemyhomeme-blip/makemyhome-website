@@ -30,7 +30,15 @@
     .icon { font-size: 64px; color: #c9a86c; margin-bottom: 24px; position: relative; z-index: 1; }
     .content { position: relative; }
     h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
-    p { font-size: 16px; color: #aaa; margin-bottom: 36px; max-width: 400px; line-height: 1.6; }
+    p { font-size: 16px; color: #c4c4c4; margin-bottom: 36px; max-width: 400px; line-height: 1.6; }
+    .preporuke { margin-top: 34px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.12);
+      display: flex; flex-wrap: wrap; gap: 8px 10px; justify-content: center; align-items: center; max-width: 560px; }
+    .preporuke-nas { width: 100%; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      color: #8f8f8f; margin-bottom: 6px; }
+    .preporuke a { color: #e6e2da; text-decoration: none; font-size: 14px; font-weight: 600;
+      border: 1px solid rgba(201,168,108,.4); border-radius: 999px; padding: 9px 15px; min-height: 40px;
+      display: inline-flex; align-items: center; transition: background .2s, color .2s; }
+    .preporuke a:hover { background: rgba(201,168,108,.15); color: #c9a86c; }
     .buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
     .btn {
       padding: 14px 28px;
@@ -104,9 +112,9 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
 </head>
 <body>
-  <div class="logo">
+  <a href="/" class="logo" style="text-decoration:none;">
     <div class="logo-text">Make My Home Decor</div>
-  </div>
+  </a>
 
   <div class="content">
     <div class="error-code">404</div>
@@ -117,6 +125,20 @@
     <div class="buttons">
       <a href="/" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Početna</a>
       <a href="/products.html" class="btn btn-secondary"><i class="fas fa-th-large"></i> Proizvodi</a>
+      <a href="tel:+38269105222" class="btn btn-secondary"><i class="fas fa-phone"></i> 069 105 222</a>
+    </div>
+    <!-- Na ovu stranicu se stize sa starih adresa iz Googla, pa je ovdje
+         kratak spisak kategorija umjesto slijepe ulice sa dva dugmeta. -->
+    <div class="preporuke">
+      <span class="preporuke-nas">Možda tražite:</span>
+      <a href="/products.html?category=bambus-paneli">Bambus paneli</a>
+      <a href="/products.html?category=3d-letvice">3D letvice</a>
+      <a href="/products.html?category=akusticni-paneli">Akustični paneli</a>
+      <a href="/products.html?category=spc-pod">SPC pod</a>
+      <a href="/inspiracija.html">Inspiracija</a>
+      <a href="/cjenovnik.html">Cijene</a>
+      <a href="/montaza.html">Montaža</a>
+      <a href="/contact.html">Kontakt</a>
     </div>
   </div>
 <script src="js/analytics-events.js?v=3" defer></script>

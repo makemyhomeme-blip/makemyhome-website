@@ -94,10 +94,10 @@ arsort($insKat);
 <head><meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
+  <meta name="description" content="Zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i kancelarije. Kliknite na sobu i vidite koji je panel na njoj.">
   <meta name="keywords" content="zidni paneli enterijer, ideje za zid, dnevna soba paneli, spavaća soba zid, kupatilo paneli, inspiracija, Podgorica, Crna Gora">
   <meta property="og:title" content="Inspiracija – Paneli u Prostorima | Make My Home Decor">
-  <meta property="og:description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
+  <meta property="og:description" content="Zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i kancelarije. Kliknite na sobu i vidite koji je panel na njoj.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://makemyhome.me/inspiracija.html">
   <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
@@ -107,7 +107,7 @@ arsort($insKat);
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Inspiracija – Paneli u Prostorima | Make My Home Decor">
-  <meta name="twitter:description" content="Naši zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i poslovni prostori. Kliknite na sliku koja vam se svidi i vidite koji je panel na njoj.">
+  <meta name="twitter:description" content="Zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i kancelarije. Kliknite na sobu i vidite koji je panel na njoj.">
   <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
   <link rel="canonical" href="https://makemyhome.me/inspiracija.html">
   <title>Inspiracija – Paneli u Prostorima | Make My Home</title>
@@ -561,7 +561,7 @@ arsort($insKat);
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 <script src="js/main-v4.js?v=5"></script>
-<script src="js/cart.js?v=2"></script>
+<script src="js/cart.js?v=3"></script>
 <script src="js/analytics-events.js?v=3" defer></script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Početna", "item": "https://makemyhome.me/"}, {"@type": "ListItem", "position": 2, "name": "Inspiracija", "item": "https://makemyhome.me/inspiracija.html"}]}

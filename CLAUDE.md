@@ -34,10 +34,10 @@ curl -sk --cacert /root/.ccr/ca-bundle.crt -u "mmhdecor:fhgkwqjd0F6K" -X POST \
 
 ### Admin sync via curl
 ```bash
-# 1. Login
+# 1. Login (SIFRA_SA_SERVERA se cita iz /home/mmhdecor/.mmh-admin-pass preko cPanel API-ja)
 curl -sk --cacert /root/.ccr/ca-bundle.crt -c /tmp/mkh_cookies.txt \
   -X POST "https://makemyhome.me/admin/index.php" \
-  -d "username=admin&password=makemyhome2026" -L -o /dev/null
+  -d "username=admin&password=SIFRA_SA_SERVERA" -L -o /dev/null
 
 # 2. Run sync
 curl -sk --cacert /root/.ccr/ca-bundle.crt -b /tmp/mkh_cookies.txt \

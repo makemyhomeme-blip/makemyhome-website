@@ -487,28 +487,43 @@ async function renderProductDetail() {
     }
   }
 
-  // Čitaj širinu letvice iz featuresa (Širina: Xmm), fallback 160mm
+  // Sirina letvice iz featuresa (Širina: Xmm). Ako je nema, vraca null —
+  // ranije se vracalo 16cm, pa je kalkulator za profile bez upisane sirine
+  // (3D02, 3D05, 3D09X, 3D07X) racunao sa izmisljenom mjerom.
   function getLetvicaWidthCm() {
     for (const f of (product.features || [])) {
       const m = f.match(/Širina:\s*(\d+)\s*mm/i);
       if (m) return parseInt(m[1]) / 10;
     }
-    return 16; // default 160mm
+    return null;
   }
-  // Compute m² per unit from features string
+  // Koliko m² pokriva jedan komad. Cita se iz featuresa isto kao u product.php:
+  // prvo "(3,42 m²", pa "275×60cm". Bez podatka vraca null — bez izmisljanja.
   function getCoveragePerUnit() {
     if (product.unit === 'm²') return 1;
-    if (product.category === '3d-letvice') return 2.80 * (getLetvicaWidthCm() / 100);
-    for (const f of (product.features || [])) {
-      const m1 = f.match(/\((\d+[.,]\d+)\s*m²/);
-      if (m1) return parseFloat(m1[1].replace(',', '.'));
+    if (product.category === '3d-letvice') {
+      const w = getLetvicaWidthCm();
+      return w ? 2.80 * (w / 100) : null;
     }
-    return 3.416;
+    for (const f of (product.features || [])) {
+      const m1 = f.match(/\((\d+\s*[.,]\s*\d+)\s*m²/);
+      if (m1) {
+        const v = parseFloat(m1[1].replace(/\s+/g, '').replace(',', '.'));
+        if (v > 0.05) return v;
+      }
+      const m2 = f.match(/(\d{2,3})\s*[×x]\s*(\d{2,3})\s*cm/i);
+      if (m2) {
+        const v = (parseInt(m2[1]) / 100) * (parseInt(m2[2]) / 100);
+        if (v > 0.05) return v;
+      }
+    }
+    return null;
   }
   // Dimensions info for letvice (shown in calculator)
-  const letvicaDims = product.category === '3d-letvice'
-    ? { w: getLetvicaWidthCm(), h: 280 }  // cm
-    : null;
+  const nemaNaStanju = product.inStock === false;
+  /* Bez upisane sirine nema ni prikaza dimenzija ni racunanja komada */
+  const _letvW = product.category === '3d-letvice' ? getLetvicaWidthCm() : null;
+  const letvicaDims = _letvW ? { w: _letvW, h: 280 } : null;  // cm
   const coveragePerUnit = getCoveragePerUnit();
 
   // PU Kamen panel dimensions from features
@@ -1101,6 +1116,9 @@ async function renderProductDetail() {
               // Cijena po m² — racuna se iz ZIVE cijene, isto kao u product.php.
               // Bez ovoga bi je vidio samo Google (PHP je ispisuje), a kupac ne bi,
               // jer JS ovdje prepisuje cijeli blok karakteristika.
+              // Proizvod koji se prodaje po m² vec ima cijenu po m² — dijeljenje sa
+              // povrsinom jedne daske davalo je 79,51 €/m² umjesto 17,49 €/m².
+              if ((product.unit || '') === 'm²') return '';
               let pov = null;
               for (const f of product.features || []) {
                 let m = f.match(/\(([\d.,]+)\s*m²\s*po\s+\S+\)/);
@@ -1213,7 +1231,7 @@ async function renderProductDetail() {
         <span class="pq-step-val" id="pq-qty-val">1</span>
         <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
       </div>
-      ${product.category !== 'spc-pod' ? `<div class="pq-m2-badge" id="pq-m2-badge">
+      ${product.category !== 'spc-pod' && coveragePerUnit ? `<div class="pq-m2-badge" id="pq-m2-badge">
         1 ${product.unit === 'm²' ? 'm²' : 'kom'} = ${coveragePerUnit.toFixed(2).replace('.', ',')} m²
       </div>` : ''}
     </div>
@@ -1275,12 +1293,25 @@ async function renderProductDetail() {
 
     <div class="product-short-desc">${(product.description || '').split('Karakteristike:')[0].trim()}</div>
 
+    <!-- Stanje zaliha. PHP ga ispisuje, ali ovaj blok prepisuje cijeli okvir,
+         pa se bez ovoga kupcu nikad nije vidjelo. -->
+    ${nemaNaStanju
+      ? `<p style="color:#e74c3c;font-weight:700;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle-exclamation"></i> Trenutno nije na stanju</p>`
+      : `<p style="color:#27ae60;font-weight:600;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-check"></i> Na stanju</p>`}
+
     <!-- CTA dugmad -->
     <div style="display:flex;flex-direction:column;gap:10px;margin:22px 0 28px;">
+      ${nemaNaStanju ? `
+      <div style="background:#fdf3f2;border:1px solid rgba(231,76,60,.3);border-radius:14px;padding:16px 18px;color:#8a3a30;font-size:14.5px;line-height:1.65;">
+        Ovaj model je trenutno rasprodat. Javite nam se — reći ćemo vam kada stiže ili predložiti najbliži model koji imamo.
+      </div>
+      <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
+        <i class="fas fa-phone" style="font-size:17px;"></i><span>069 105 222</span>
+      </a>` : `
       <button onclick="addProductToCartById(${product.id}, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;transition:background .2s,transform .15s,box-shadow .2s;" onmouseover="this.style.background='#dfc080';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(201,168,108,0.3)'" onmouseout="this.style.background='#c9a86c';this.style.transform='';this.style.boxShadow=''">
         <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
         <span>Dodaj u Korpu</span>
-      </button>
+      </button>`}
       <a href="${waLink}" target="_blank" rel="noopener" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1.5px solid rgba(37,211,102,0.4);border-radius:14px;background:rgba(37,211,102,0.08);color:#25d366;font-size:14px;font-weight:600;text-decoration:none;font-family:inherit;box-sizing:border-box;transition:background .2s;" onmouseover="this.style.background='rgba(37,211,102,0.16)'" onmouseout="this.style.background='rgba(37,211,102,0.08)'">
         <i class="fab fa-whatsapp" style="font-size:17px;"></i> Pitaj nas na WhatsApp-u
       </a>
@@ -1375,6 +1406,7 @@ async function renderProductDetail() {
     if (!el) return;
     let val = Math.max(1, parseInt(el.textContent) + delta);
     el.textContent = val;
+    if (!badge || !coveragePerUnit) return;
     const total = (val * coveragePerUnit).toFixed(2).replace('.', ',');
     badge.textContent = `${val} ${product.unit === 'm²' ? 'm²' : 'kom'} = ${total} m²`;
   };
@@ -1411,6 +1443,13 @@ async function renderProductDetail() {
     }
 
     const unitPrice = parseFloat(product.price) * (1 - (product.discount || 0) / 100);
+    if (!coveragePerUnit) {
+      /* Za ovaj profil u podacima nema dimenzija — bolje bez broja nego sa pogresnim */
+      res.innerHTML = `Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(1).replace('.', ',')} m²</strong><br>` +
+        `<span style="color:#9b7d56;">Za ovaj profil nemamo upisane dimenzije. Pošaljite nam mjere i ` +
+        `izračunamo tačan broj komada isti dan — <a href="tel:+38269105222" style="color:#c9a86c;font-weight:700;">069 105 222</a>.</span>`;
+      return;
+    }
     const count = Math.ceil(area / coveragePerUnit);
     const totalPrice = (count * unitPrice).toFixed(2).replace('.', ',');
 
