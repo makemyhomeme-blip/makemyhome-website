@@ -69,6 +69,10 @@ Ako se fajl deployuje preko cPanela prije push-a, prvi sljedeci sync ga vrati na
   Ako se sadrzaj mijenja: **prvo povuci sa servera**, izmijeni tu verziju, pa vrati.
   Isto vazi za `images/products/*`.
 - **NEVER touch** main/first product images without explicit permission
+- **Jedinica mjere:** jedino **SPC pod** se prodaje po m² (`"unit": "m²"`). Sve ostalo —
+  bambus paneli, 3D letvice, akusticni, MDF, PU kamen, Flex Stone, alu lajsne — ide
+  **po komadu** (`"unit": "kom"`). Kod koji racuna cijenu po m² se oslanja na ovo polje:
+  za robu po m² cijena JESTE cijena po m² i ne smije se dijeliti povrsinom komada.
 - **Always test** `.htaccess` changes: `Options` directive is NOT allowed on this hosting (causes 500 for all pages). Use `<IfModule>` blocks only.
 - Respond in **Latin script** (latinica), never Cyrillic
 - CSS file is versioned: `style-v5.css` — when incrementing version, update all HTML references too
