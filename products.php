@@ -223,7 +223,14 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       'shippingDetails'        => $_shippingDetails,
     ],
   ];
-  if ($pRevCnt > 0) {
+  // ---- OCJENE U STRUKTURIRANIM PODACIMA — NAMJERNO ISKLJUCENO ----
+  // Isto pravilo kao u product.php: dok se ne potvrdi da svaka recenzija dolazi
+  // od stvarnog kupca, ocjene se ne salju Google-u (Review snippet guidelines:
+  // "Ratings must be sourced directly from users"). Stranica proizvoda ih vec
+  // nije slala, a ove stranice jesu — pa je rizik ipak postojao, samo sa druge
+  // strane. Recenzije i dalje stoje vidljivo na stranici, to je dozvoljeno.
+  // Kada budu iz forme koju popunjavaju kupci, vraca se uklanjanjem "false &&".
+  if (false && $pRevCnt > 0) {
     $pItem['aggregateRating'] = [
       '@type'       => 'AggregateRating',
       'ratingValue' => (string)round(array_sum(array_column($pRevs, 'rating')) / $pRevCnt, 1),
