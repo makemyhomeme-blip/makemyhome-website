@@ -11,12 +11,34 @@ require_once __DIR__ . '/php/slug.php';
 
 // Kategorija se otvara preko /kategorija/<kljuc>. Stari oblici ?category= i ?cat=
 // i dalje rade, ali odmah salju 301 na novu adresu.
-$catPretty = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['k'] ?? ''));
+$kSirov    = trim((string)($_GET['k'] ?? ''));
+$catPretty = preg_replace('/[^a-z0-9\-]/', '', strtolower($kSirov));
+// Velika slova u adresi -> 301 na malu verziju, da ne postoje dvije adrese
+if ($kSirov !== '' && $kSirov !== $catPretty) {
+    header('Location: https://makemyhome.me/kategorija/' . rawurlencode($catPretty), true, 301);
+    exit;
+}
 $catStari  = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['category'] ?? $_GET['cat'] ?? ''));
 
+// Spisak postojecih kategorija — koristi se prije preusmjeravanja da se ne
+// napravi 301 koji vodi na 404 (Google to prijavljuje kao "redirect error").
+$catPostoje = ['bambus-paneli','bambus-drveni','bambus-tekstilni','bambus-mermerni',
+               'bambus-metalni','bambus-kozni','classic','3d-letvice','akusticni-paneli',
+               'aluminijum-lajsne','spc-pod','pu-kamen','mdf','flex-stone'];
+
 if ($catPretty === '' && $catStari !== '') {
-    header('Location: ' . mmhUrlKategorije($catStari), true, 301);
+    if (in_array($catStari, $catPostoje, true)) {
+        header('Location: ' . mmhUrlKategorije($catStari), true, 301);
+    } else {
+        header('Location: https://makemyhome.me/products.html', true, 301);
+    }
     exit;
+}
+// Nepoznata kategorija u novoj adresi — 404 odmah, bez preusmjeravanja
+if ($catPretty !== '' && !in_array($catPretty, $catPostoje, true)) {
+    http_response_code(404);
+    header('X-Robots-Tag: noindex', true);
+    $catPretty = '';
 }
 if ($catPretty === '' && ($_SERVER['QUERY_STRING'] ?? '') !== '' && isset($_GET['cat'])) {
     header('Location: https://makemyhome.me/products.html', true, 301);

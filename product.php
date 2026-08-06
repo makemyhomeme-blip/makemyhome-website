@@ -10,6 +10,13 @@ $id        = (int)($_GET['id'] ?? 0);
 $product   = null;
 
 if ($slugParam !== '') {
+    // Adresa sa velikim slovima vodi na istu stranicu, ali se 301-om vraca na mala
+    // da ne postoje dvije adrese za isti proizvod.
+    $slugMala = strtolower($slugParam);
+    if ($slugMala !== $slugParam) {
+        header('Location: https://makemyhome.me/paneli/' . rawurlencode($slugMala), true, 301);
+        exit;
+    }
     $product = mmhProizvodPoSlugu($slugParam, $products);
     if (!$product) {
         // Adresa ne odgovara nijednom proizvodu — probaj staru logiku po sifri/imenu
