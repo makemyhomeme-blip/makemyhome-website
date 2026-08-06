@@ -132,6 +132,9 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
        nivo dublje. Bez ovoga bi se svaka relativna putanja (css, slike, linkovi,
        i one koje pravi JavaScript) trazila unutar tog foldera i vracala 404. -->
   <base href="https://makemyhome.me/">
+  <script>/* Nova adresa /paneli/<ime> nema ?id=, pa JS ovdje dobija koji je proizvod otvoren.
+     Mora biti prije svake skripte koja ga cita. */
+  window.__mmhProduct = <?= $product ? json_encode(['id' => (int)$product['id']]) : 'null' ?>;</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="<?= $ogDesc ?>">
   <meta property="og:title" content="<?= $ogTitle ?>">
@@ -779,7 +782,7 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=6"></script>
-<script src="js/products.js?v=46"></script>
+<script src="js/products.js?v=47"></script>
 <script src="js/cart.js?v=3"></script>
 <script>
   renderProductDetail();

@@ -183,7 +183,9 @@ async function renderFeatured(containerId, limit = 6) {
 // ===== PRODUCTS PAGE – category-first navigation =====
 async function initProductsPage() {
   const params = new URLSearchParams(window.location.search);
-  const cat = params.get('cat') || params.get('category');
+  // Nova adresa je /kategorija/<kljuc> i nema ?category= — upisuje ga products.php.
+  const cat = (typeof window.__mmhCategory === 'string' && window.__mmhCategory) ||
+              params.get('cat') || params.get('category');
 
   // Title/subtitle/grid already handled by inline script in HTML — don't clear
 
@@ -428,12 +430,14 @@ async function renderCategories(containerId) {
 // ===== PRODUCT DETAIL PAGE =====
 async function renderProductDetail() {
   const params = new URLSearchParams(window.location.search);
-  const id = parseInt(params.get('id'));
-  if (!id) { window.location.href = 'products.html'; return; }
+  // Nova adresa je /paneli/<ime> i nema ?id= — koji je proizvod otvoren upisuje
+  // product.php u window.__mmhProduct. ?id= ostaje kao rezerva za stare linkove.
+  const id = (window.__mmhProduct && window.__mmhProduct.id) || parseInt(params.get('id'));
+  if (!id) { window.location.href = '/products.html'; return; }
 
   await loadData();
   const product = allProducts.find(p => p.id === id);
-  if (!product) { window.location.href = 'products.html'; return; }
+  if (!product) { window.location.href = '/products.html'; return; }
 
   const categoryName = allCategories.find(c => c.id === product.category)?.name || product.category;
 
