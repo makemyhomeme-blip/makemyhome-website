@@ -117,6 +117,11 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
     'url'          => $ogUrl,
     'price'        => (string)$salePrice,
     'priceCurrency'=> 'EUR',
+    // Google preporucuje oba polja uz ponudu; bez njih u Search Console stoji
+    // upozorenje. Datum je kraj sljedeceg mjeseca i racuna se pri svakom
+    // ucitavanju, pa nikad ne zastari.
+    'itemCondition'   => 'https://schema.org/NewCondition',
+    'priceValidUntil' => date('Y-m-t', strtotime('first day of next month')),
     'availability' => $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     'seller'       => ['@type' => 'Organization', 'name' => 'Make My Home Decor', 'url' => 'https://makemyhome.me'],
     'hasMerchantReturnPolicy' => [
@@ -730,7 +735,7 @@ $prodCatUrl  = $prodCatName ? 'https://makemyhome.me/products.html?category=' . 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=5"></script>
-<script src="js/products.js?v=44"></script>
+<script src="js/products.js?v=45"></script>
 <script src="js/cart.js?v=3"></script>
 <script>
   renderProductDetail();

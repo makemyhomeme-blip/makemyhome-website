@@ -216,6 +216,8 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       '@type'                  => 'Offer',
       'price'                  => (string)$pFinal,
       'priceCurrency'          => 'EUR',
+      'itemCondition'          => 'https://schema.org/NewCondition',
+      'priceValidUntil'        => date('Y-m-t', strtotime('first day of next month')),
       'availability'           => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       'hasMerchantReturnPolicy'=> $_returnPolicy,
       'shippingDetails'        => $_shippingDetails,
@@ -724,7 +726,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=5"></script>
-<script src="js/products.js?v=44"></script>
+<script src="js/products.js?v=45"></script>
 <script src="js/cart.js?v=3"></script>
 <script>
   initProductsPage();

@@ -24,6 +24,33 @@ $cjArea = [
   'bambus-kozni'=>3.42,'classic'=>3.42,'3d-letvice'=>0.45,'akusticni-paneli'=>0.36,
   'pu-kamen'=>1.74,'flex-stone'=>0.72,'spc-pod'=>1.0,
 ];
+// Povrsina po komadu se cita iz istih polja kao na stranici proizvoda, umjesto
+// da stoji upisana u tabeli. Rucno upisane vrijednosti su bile zastarjele:
+// akusticni paneli su vodjeni kao 60x60cm (0,36 m²) iako ih vecina ima
+// 275x60cm (1,65 m²), pa je cjenovnik pokazivao 133 €/m² umjesto 46 €/m².
+$cjPovrsina = function (array $x): ?float {
+    if (($x['unit'] ?? '') === 'm²') return 1.0;
+    foreach (($x['features'] ?? []) as $f) {
+        if (preg_match('/\(\s*([\d]+[.,]\s*[\d]+)\s*m²/u', $f, $m)) {
+            $v = (float) str_replace([' ', ','], ['', '.'], $m[1]);
+            if ($v > 0.05) return $v;
+        }
+        if (preg_match('/(?:Dimenzije|Dimenzije seta)[^:]*:\s*([\d]+(?:[.,][\d]+)?)\s*[×x]\s*([\d]+(?:[.,][\d]+)?)\s*cm/u', $f, $m)) {
+            $v = ((float) str_replace(',', '.', $m[1]) / 100) * ((float) str_replace(',', '.', $m[2]) / 100);
+            if ($v > 0.05) return $v;
+        }
+    }
+    return null;
+};
+$cjDimTekst = function (array $x): ?string {
+    foreach (($x['features'] ?? []) as $f) {
+        if (preg_match('/(?:Dimenzije|Dimenzije seta)[^:]*:\s*([\d]+(?:[.,][\d]+)?)\s*[×x]\s*([\d]+(?:[.,][\d]+)?)\s*cm/u', $f, $m))
+            return $m[1] . '×' . $m[2] . ' cm';
+        if (preg_match('/Dužina:\s*([\d]+(?:[.,][\d]+)?)\s*(m|cm)\b/u', $f, $m))
+            return 'dužina ' . $m[1] . ' ' . $m[2];
+    }
+    return null;
+};
 $cjRows = [];
 foreach ($cjP as $x) {
     $c = $x['category'] ?? '';
@@ -31,7 +58,12 @@ foreach ($cjP as $x) {
     $pr = (float)($x['price'] ?? 0);
     $dc = (int)($x['discount'] ?? 0);
     $sp = $dc > 0 ? round($pr * (1 - $dc / 100), 2) : $pr;
-    $cjRows[$c][] = ['puna'=>$pr, 'akcija'=>$sp, 'popust'=>$dc, 'jed'=>$x['unit'] ?? 'kom'];
+    $pov = $cjPovrsina($x);
+    $cjRows[$c][] = [
+        'puna'=>$pr, 'akcija'=>$sp, 'popust'=>$dc, 'jed'=>$x['unit'] ?? 'kom',
+        'pov'=>$pov, 'dim'=>$cjDimTekst($x),
+        'm2'=>($pov && $pov > 0.05 && ($x['unit'] ?? '') !== 'm²') ? $sp / round($pov, 2) : (($x['unit'] ?? '') === 'm²' ? $sp : null),
+    ];
 }
 $cjOrder = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-metalni','bambus-kozni','classic','3d-letvice','akusticni-paneli','mdf','pu-kamen','flex-stone','spc-pod','aluminijum-lajsne'];
 $fmt = fn($v) => number_format($v, 2, ',', '.');
@@ -424,25 +456,50 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   $hi = max(array_column($cjRows[$c], 'akcija'));
   $loPuna = min(array_column($cjRows[$c], 'puna'));
   $maxPop = max(array_column($cjRows[$c], 'popust'));
+  $minPop = min(array_column($cjRows[$c], 'popust'));
+  // Ranije je stajao samo najveci popust, pa je za 12 od 13 mermernih pisalo
+  // -30% iako imaju -20%. Kad se popusti razlikuju, pise se raspon.
+  $popTekst = $minPop === $maxPop ? '−' . $maxPop . '%' : '−' . $minPop . '% do −' . $maxPop . '%';
   $jed = $cjRows[$c][0]['jed'];
-  $povrsina = $cjArea[$c] ?? null;
-  $poM2 = $povrsina ? $lo / $povrsina : null;
+  // Dimenzija: ako svi modeli u kategoriji imaju istu, pise se tacno;
+  // ako se razlikuju, pise "razne dimenzije" i daje se raspon cijene po m².
+  $dims = array_values(array_unique(array_filter(array_column($cjRows[$c], 'dim'))));
+  $povs = array_values(array_filter(array_column($cjRows[$c], 'pov')));
+  $m2s  = array_values(array_filter(array_column($cjRows[$c], 'm2')));
+  if (count($dims) === 1 && count($povs) === count($cjRows[$c])) {
+      $dimTekst = $dims[0] . ' · ' . $fmt(round($povs[0], 2)) . ' m²';
+  } elseif ($jed === 'm²') {
+      $dimTekst = 'prodaje se po m²';
+  } elseif (count($dims) === 1) {
+      $dimTekst = $dims[0];
+  } elseif (count($dims) > 1) {
+      $dimTekst = 'razne dimenzije';
+  } else {
+      $dimTekst = '—';
+  }
+  $m2Tekst = '—';
+  if ($m2s) {
+      $m2lo = min($m2s); $m2hi = max($m2s);
+      $m2Tekst = abs($m2hi - $m2lo) < 0.01
+          ? '~' . $fmt($m2lo) . ' €'
+          : $fmt($m2lo) . ' – ' . $fmt($m2hi) . ' €';
+  }
 ?>
         <tr>
           <td class="cj-naziv"><strong><?= htmlspecialchars($cjNames[$c]) ?></strong><br>
               <span style="font-size:12.5px;color:#666e7a;"><?= count($cjRows[$c]) ?> dezena</span></td>
-          <td data-l="Dimenzija"><?= htmlspecialchars($cjDim[$c] ?? '—') ?></td>
+          <td data-l="Dimenzija"><?= htmlspecialchars($dimTekst) ?></td>
           <td data-l="Cijena">
             <?php if ($maxPop > 0): ?>
               <strong style="color:#c9a86c;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
               <span style="display:block;font-size:12px;color:#767676;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
-              <span style="display:inline-block;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;">−<?= $maxPop ?>%</span>
+              <span style="display:inline-block;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;white-space:nowrap;"><?= $popTekst ?></span>
             <?php else: ?>
               <strong style="font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
             <?php endif; ?>
             <span style="display:block;font-size:12px;color:#666e7a;">/ <?= htmlspecialchars($jed) ?></span>
           </td>
-          <td data-l="Po m&sup2;"><?= $poM2 ? '~' . $fmt($poM2) . ' €' : '—' ?></td>
+          <td data-l="Po m&sup2;"><?= htmlspecialchars($m2Tekst) ?></td>
           <td class="cj-link"><a href="products.html?category=<?= htmlspecialchars($c, ENT_QUOTES) ?>">Pogledaj proizvode &rsaquo;</a></td>
         </tr>
 <?php endforeach; ?>
