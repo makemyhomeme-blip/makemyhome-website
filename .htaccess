@@ -153,13 +153,13 @@ RewriteRule ^([^/.]+)/?$ /$1.html [R=301,L]
 # Stari oblici ?id= i ?category= i dalje rade i sami salju 301 na novu adresu.
 
 # Kosa crta na kraju pravi drugu adresu za istu stranicu — 301 na verziju bez nje.
-RewriteRule ^(paneli|kategorija)/([^/]+)/$ /$1/$2 [R=301,L]
+RewriteRule ^(paneli|kategorija)/([^/]+)/$ /$1/$2 [NC,R=301,L]
 # Prazno /kategorija i /kategorija/ vodi na katalog
-RewriteRule ^kategorija/?$ /products.html [R=301,L]
+RewriteRule ^kategorija/?$ /products.html [NC,R=301,L]
 
 # Velika slova se prihvataju (link prekopiran iz poruke), a PHP ih vrati na mala 301-om.
-RewriteRule ^paneli/([A-Za-z0-9][A-Za-z0-9-]*)$ product.php?slug=$1 [QSA,L]
-RewriteRule ^kategorija/([A-Za-z0-9][A-Za-z0-9-]*)$ products.php?k=$1 [QSA,L]
+RewriteRule ^paneli/([A-Za-z0-9][A-Za-z0-9-]*)$ product.php?slug=$1 [NC,QSA,L]
+RewriteRule ^kategorija/([A-Za-z0-9][A-Za-z0-9-]*)$ products.php?k=$1 [NC,QSA,L]
 
 RewriteRule ^cjenovnik\.html$ cjenovnik.php [QSA,L]
 RewriteRule ^inspiracija\.html$ inspiracija.php [QSA,L]

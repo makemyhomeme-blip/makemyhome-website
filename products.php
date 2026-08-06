@@ -13,10 +13,15 @@ require_once __DIR__ . '/php/slug.php';
 // i dalje rade, ali odmah salju 301 na novu adresu.
 $kSirov    = trim((string)($_GET['k'] ?? ''));
 $catPretty = preg_replace('/[^a-z0-9\-]/', '', strtolower($kSirov));
-// Velika slova u adresi -> 301 na malu verziju, da ne postoje dvije adrese
-if ($kSirov !== '' && $kSirov !== $catPretty) {
-    header('Location: https://makemyhome.me/kategorija/' . rawurlencode($catPretty), true, 301);
-    exit;
+// Sve varijante iste adrese (velika slova, /KATEGORIJA/, kosa crta) vracaju se
+// 301-om na jednu kanonsku verziju.
+if ($kSirov !== '') {
+    $putanja  = strtok((string)($_SERVER['REQUEST_URI'] ?? ''), '?');
+    $kanonska = '/kategorija/' . $catPretty;
+    if ($catPretty !== '' && $putanja !== '' && $putanja !== $kanonska && strpos($putanja, '.php') === false) {
+        header('Location: https://makemyhome.me' . $kanonska, true, 301);
+        exit;
+    }
 }
 $catStari  = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['category'] ?? $_GET['cat'] ?? ''));
 

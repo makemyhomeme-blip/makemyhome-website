@@ -13,11 +13,21 @@ if ($slugParam !== '') {
     // Adresa sa velikim slovima vodi na istu stranicu, ali se 301-om vraca na mala
     // da ne postoje dvije adrese za isti proizvod.
     $slugMala = strtolower($slugParam);
-    if ($slugMala !== $slugParam) {
-        header('Location: https://makemyhome.me/paneli/' . rawurlencode($slugMala), true, 301);
-        exit;
+    $product  = mmhProizvodPoSlugu($slugMala, $products);
+    // Jedna provjera pokriva sve varijante iste adrese: velika slova u bilo kom
+    // dijelu putanje, kosa crta na kraju, /PANELI/. Ako se stvarna putanja
+    // razlikuje od kanonske — 301 na kanonsku.
+    if ($product) {
+        $putanja  = strtok((string)($_SERVER['REQUEST_URI'] ?? ''), '?');
+        $kanonska = '/' . mmhSlugProizvoda($product);
+        if ($putanja !== '' && $putanja !== $kanonska && strpos($putanja, '.php') === false) {
+            $upit = ($_SERVER['QUERY_STRING'] ?? '');
+            $upit = preg_replace('/(^|&)slug=[^&]*/', '', $upit);
+            $upit = trim($upit, '&');
+            header('Location: https://makemyhome.me' . $kanonska . ($upit !== '' ? '?' . $upit : ''), true, 301);
+            exit;
+        }
     }
-    $product = mmhProizvodPoSlugu($slugParam, $products);
     if (!$product) {
         // Adresa ne odgovara nijednom proizvodu — probaj staru logiku po sifri/imenu
         require_once __DIR__ . '/php/slug-match.php';
