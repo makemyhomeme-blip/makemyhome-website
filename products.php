@@ -119,7 +119,7 @@ $catVodic = [
 ];
 
 $catSeoText = [
-  'bambus-paneli'    => '<p>Bambus zidni paneli su jedno od najtraženijih rješenja za dekoraciju zidova u Crnoj Gori. Spajaju prirodnu drvenu teksturu sa modernim dizajnom i daju toplinu svakom prostoru – dnevnoj sobi, spavaćoj sobi, hodniku ili poslovnom prostoru. Standardne dimenzije su 280x122cm, što omogućava brzo prekrivanje velikih površina uz minimalan broj spojeva. Kao moderna zamjena za klasičnu lamperiju, ovi vodootporni paneli su pogodni i za kupatilo i kuhinju, a posebno su popularni za TV zid – akcentni zid iza televizora ili iza kreveta.</p><p>U ponudi Make My Home Decor showrooma u Podgorici imate bambus panele u više varijanti – drveni, tekstilni, mermerni, metalni i kožni. Svi paneli su otporni na vlagu, jednostavni za montažu (montaža panela lijepljenjem – bez majstora) i lako se održavaju. Dostavljamo širom Crne Gore – Podgorica, Nikšić, Bar, Budva, Herceg Novi i ostali gradovi.</p>',
+  'bambus-paneli'    => '<p>Bambus zidni paneli su jedno od najtraženijih rješenja za dekoraciju zidova u Crnoj Gori. Spajaju prirodnu drvenu teksturu sa modernim dizajnom i daju toplinu svakom prostoru – dnevnoj sobi, spavaćoj sobi, hodniku ili poslovnom prostoru. Standardne dimenzije su 280x122cm, što omogućava brzo prekrivanje velikih površina uz minimalan broj spojeva. Kao moderna zamjena za klasičnu lamperiju, ovi vodootporni paneli su pogodni i za kupatilo i kuhinju, a posebno su popularni za TV zid – akcentni zid iza televizora ili iza kreveta.</p><p>U ponudi Make My Home Decor showrooma u Podgorici imate bambus panele u više varijanti – drveni, tekstilni, mermerni, metalni i kožni. Svi paneli su otporni na vlagu, jednostavni za montažu (montaža panela lijepljenjem – bez majstora) i lako se održavaju. Dostavljamo širom Crne Gore – Podgorica, Nikšić, Bar, Budva, Herceg Novi i ostali gradovi.</p><p>Ako tražite dekorativni panel za dnevnu sobu, panele za spavaću sobu ili zidne obloge za hodnik, bambus je najuniverzalniji izbor: jedan panel pokriva 3,42 m², pa se veliki zid prekrije sa svega nekoliko komada i bez vidljivih spojeva. Za akcentni zid iza TV-a ili iza kreveta najčešće se biraju tamniji dezeni, a za manje prostorije svijetli, jer vizuelno šire prostor. Uzorke možete vidjeti i opipati u showroomu prije nego se odlučite.</p>',
   'bambus-drveni'    => '<p>Drveni bambus paneli unose toplu, prirodnu drvenu teksturu u svaki enterijer – moderna zamjena za klasičnu drvenu lamperiju. Idealni su za moderne i klasične prostore – dnevne sobe, spavaće sobe, TV zidove i poslovne prostore. Dimenzije 280x122cm, visoka trajnost i jednostavna ugradnja na svaku ravnu površinu.</p><p>Drvo izgleda bez održavanja pravog drveta – paneli su vodootporni i ne deformišu se, pa su pogodni i za kupatilo. Dostupni u Make My Home Decor showroomu u Podgorici, sa dostavom širom Crne Gore.</p>',
   'bambus-tekstilni' => '<p>Tekstilni bambus paneli imaju mekanu tkaninu na bambusovoj podlozi, što daje sofisticiran i elegantan izgled zidu. Savršeni za spavaće sobe i dnevne boravke gdje želite topao, prijatan ambijent. Dimenzije 280x122cm.</p><p>Premium tekstilna površina je otporna i lako se održava. Pogledajte uzorke u našem showroomu u Podgorici – dostava dostupna širom Crne Gore.</p>',
   'bambus-mermerni'  => '<p>Mermerni bambus paneli su savršena imitacija mermera – luksuzni izgled prirodnog kamena bez velike cijene i težine. Ovi vodootporni paneli za kupatilo, hodnik i akcentne zidove u dnevnom boravku prekrivaju velike površine brzo i čisto. Dimenzije 280x122cm, otporni na vlagu.</p><p>Mermerni uzorak izgleda izuzetno realistično, a montaža je jednostavna. Dostupno u Make My Home Decor Podgorica, sa dostavom širom Crne Gore.</p>',
@@ -135,8 +135,27 @@ $catSeoText = [
   'classic'          => '<p>Classic zidni paneli imaju bezvremenski dizajn koji odgovara svakom enterijeru. Bijele i neutralne boje, jednostavna ugradnja i dugotrajan izgled. Ovo je najuniverzalnija kategorija u ponudi – ako ne želite izražen dekor, nego čist i miran zid koji neće izaći iz mode, Classic paneli su pravi izbor.</p><p>Površina je glatka ili blago strukturirana, u bijeloj i neutralnim nijansama koje vizuelno šire prostor. Zbog toga se najčešće koriste u manjim stanovima, hodnicima, kuhinjama i kupatilima, ali i u kancelarijama i čekaonicama gdje se traži čist, uredan izgled. Paneli su vodootporni, ne upijaju vlagu i lako se čiste, pa su praktična zamjena za krečenje zidova koji se često prljaju.</p><p>Classic paneli se odlično kombinuju sa 3D letvicama – ravna bijela podloga na jednom dijelu zida i vertikalne letvice na akcentnom dijelu daju moderan, slojevit izgled. Za završnu obradu ivica i spojeva preporučujemo aluminijum lajsne, koje pokrivaju rezove i daju profesionalan izgled bez gletovanja i farbanja.</p><p>Montaža je jednostavna: panel se lijepi silikonom direktno na ravan zid i siječe skalpelom, bez potkonstrukcije i bez majstora. Dostupno u Make My Home Decor showroomu u Podgorici (Vojvode Maša Đurovića 41, City Kvart), sa dostavom kurirskom službom širom Crne Gore. Za savjet i izračun količine pozovite 069 105 222.</p>',
 ];
 $ogUrl    = 'https://makemyhome.me/products.html' . ($cat ? '?category=' . $cat : '');
+// Naslov po kategoriji. Ranije je svaka nosila "... – Zidni Paneli", pa je
+// dvadeset stranica trazilo istu rijec od Googla i medjusobno se gusile.
+// Sada svaka kategorija ima svoj izraz, a "zidni paneli" ostaje samo katalogu.
+$catTitles = [
+  'bambus-paneli'    => 'Bambus Paneli za Zid – Cijene i Modeli',
+  'bambus-drveni'    => 'Drveni Paneli za Zid – Bambus Obloge',
+  'bambus-tekstilni' => 'Tekstilni Paneli za Zid – Modeli i Cijene',
+  'bambus-mermerni'  => 'Mermerni Paneli – Imitacija Mermera za Zid',
+  'bambus-metalni'   => 'Metalni Paneli za Zid – Moderan Enterijer',
+  'bambus-kozni'     => 'Kožni Paneli za Zid – Luksuzne Obloge',
+  'classic'          => 'Classic Paneli – Jednobojne Obloge za Zid',
+  '3d-letvice'       => '3D Letvice za Zid – Cijene i Dezeni',
+  'akusticni-paneli' => 'Akustični Paneli – Zvučna Izolacija Zida',
+  'aluminijum-lajsne'=> 'Aluminijum Lajsne za Panele – Profili',
+  'spc-pod'          => 'SPC Vodootporni Pod – Cijena po m²',
+  'pu-kamen'         => 'PU Dekorativni Kamen za Zid – Imitacija',
+  'mdf'              => 'MDF Kanelirani Paneli – Rebrasti Zid',
+  'flex-stone'       => 'Flex Stone – Savitljivi Kameni Furnir',
+];
 $pageTitle = $cat
-  ? $catName . ' – Zidni Paneli | Make My Home Decor'
+  ? (($catTitles[$cat] ?? $catName) . ' | Make My Home Decor')
   : 'Zidni Paneli i Bambus Obloge | Make My Home Decor';
 ?>
 <!DOCTYPE html>
