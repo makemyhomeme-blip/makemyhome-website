@@ -197,6 +197,10 @@ $pageTitle = $cat
 <html lang="sr-ME">
 <head><meta charset="utf-8">
   
+    <!-- Stranica se servira sa /paneli/... odnosno /kategorija/..., dakle jedan
+       nivo dublje. Bez ovoga bi se svaka relativna putanja (css, slike, linkovi,
+       i one koje pravi JavaScript) trazila unutar tog foldera i vracala 404. -->
+  <base href="https://makemyhome.me/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="<?= htmlspecialchars($ogDesc) ?>">
   <meta property="og:title" content="<?= htmlspecialchars($ogTitle) ?>">

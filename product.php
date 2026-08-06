@@ -128,6 +128,10 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
 <html lang="sr-ME">
 <head><meta charset="utf-8">
 
+    <!-- Stranica se servira sa /paneli/... odnosno /kategorija/..., dakle jedan
+       nivo dublje. Bez ovoga bi se svaka relativna putanja (css, slike, linkovi,
+       i one koje pravi JavaScript) trazila unutar tog foldera i vracala 404. -->
+  <base href="https://makemyhome.me/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="<?= $ogDesc ?>">
   <meta property="og:title" content="<?= $ogTitle ?>">
@@ -596,7 +600,7 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
              daje kupcu razloge da kupi bas ovdje (ocjena, dostava, showroom, kontakt) -->
         <aside class="p-side">
           <?php if ($avgRating !== null): ?>
-          <a href="#product-reviews" class="p-side-rating">
+          <a href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>#product-reviews" class="p-side-rating">
             <span class="p-side-rating-num"><?= htmlspecialchars(number_format((float)$avgRating, 1)) ?></span>
             <span>
               <span class="p-side-rating-stars"><?= $stars((int)round((float)$avgRating)) ?></span>
