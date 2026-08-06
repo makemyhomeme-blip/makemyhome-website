@@ -64,6 +64,19 @@ curl -sk --cacert /root/.ccr/ca-bundle.crt -b /tmp/mkh_cookies.txt \
   nasljedjuju i na makemyhome.me. Svaka izmjena tamo se mora odmah testirati na
   pravom sajtu (svih 149 URL-ova iz sitemapa).
 
+## Adrese (URL struktura)
+
+- Proizvod: `/paneli/<tip>-<ime>`  npr. `/paneli/3d-letvica-honey-oak`
+- Kategorija: `/kategorija/<kljuc>`  npr. `/kategorija/3d-letvice`
+- Adresu pravi **`php/slug.php`** (PHP) i **ista funkcija na vrhu `js/products.js`** (JS).
+  **Ako se mijenja jedna, mora i druga** — inace linkovi na sajtu vode na 404.
+  Provjera: izracunaj slug za svih 117 proizvoda u oba jezika i uporedi.
+- Stari oblici `?id=` i `?category=` rade i salju 301 na novu adresu (product.php / products.php).
+- Stare WordPress adrese idu **pravo** na novu adresu, jednim skokom (`php/slug-match.php`).
+- Pravila su u `.htaccess`, blok `# ===== LIJEPE ADRESE =====`.
+- `php/slug.php` **mora biti u `admin/sync.php` listi** — bez njega product.php i
+  products.php pucaju sa fatalnom greskom.
+
 ## Deploy Workflow
 
 **REDOSLIJED JE OBAVEZAN — sync povlaci sa GitHuba i prepisuje server.
