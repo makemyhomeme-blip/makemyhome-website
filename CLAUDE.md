@@ -50,6 +50,20 @@ curl -sk --cacert /root/.ccr/ca-bundle.crt -b /tmp/mkh_cookies.txt \
 - **Repo:** `makemyhomeme-blip/makemyhome-website`
 - **Always push to this branch, never to main/master**
 
+## Struktura hostinga — VAZNO
+
+- `mmhdecor.mycpanel.rs` je **glavni domen naloga**, docroot `/home/mmhdecor/public_html`
+- `makemyhome.me` je **addon domen**, docroot `/home/mmhdecor/public_html/makemyhome.me`
+- U korijenu naloga stoji zastarjela kopija sajta iz maja 2026 (index.html, about.html,
+  contact.html, sitemap.xml sa 5 URL-ova...). Ta kopija je bila javno dostupna na
+  `mmhdecor.mycpanel.rs` i `cp71.cpanelhosting.rs/~mmhdecor` — drugi sajt sa istim
+  sadrzajem, sto Google tretira kao duplikat.
+- Rijeseno: `/home/mmhdecor/public_html/.htaccess` sada 301-uje sve sto ne dolazi
+  na `makemyhome.me` na pravi domen. **Taj blok se ne smije brisati.**
+- Taj `.htaccess` je u RODITELJSKOM direktorijumu addon domena, pa se njegova pravila
+  nasljedjuju i na makemyhome.me. Svaka izmjena tamo se mora odmah testirati na
+  pravom sajtu (svih 149 URL-ova iz sitemapa).
+
 ## Deploy Workflow
 
 **REDOSLIJED JE OBAVEZAN — sync povlaci sa GitHuba i prepisuje server.
