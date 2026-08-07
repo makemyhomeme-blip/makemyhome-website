@@ -68,19 +68,24 @@ Program saradnje za arhitekte, dizajnere enterijera, izvođače i građevinske k
 - [Reklamacije i povrat](https://makemyhome.me/reklamacije.html)
 - [Politika privatnosti](https://makemyhome.me/privatnost.html)
 
+## Adrese
+
+- Stranica proizvoda: `https://makemyhome.me/paneli/<tip>-<ime>` — npr. `/paneli/3d-letvica-honey-oak`, `/paneli/drveni-panel-golden-teak`
+- Stranica kategorije: `https://makemyhome.me/kategorija/<kljuc>` — npr. `/kategorija/3d-letvice`
+
 ## Kategorije proizvoda
 
-- [Bambus paneli](https://makemyhome.me/products.html?category=bambus-paneli)
-- [Drveni paneli](https://makemyhome.me/products.html?category=bambus-drveni)
-- [Tekstilni paneli](https://makemyhome.me/products.html?category=bambus-tekstilni)
-- [Mermerni paneli](https://makemyhome.me/products.html?category=bambus-mermerni)
-- [Metalni paneli](https://makemyhome.me/products.html?category=bambus-metalni)
-- [Kožni paneli](https://makemyhome.me/products.html?category=bambus-kozni)
-- [Classic paneli](https://makemyhome.me/products.html?category=classic)
-- [3D letvice](https://makemyhome.me/products.html?category=3d-letvice)
-- [Akustični paneli](https://makemyhome.me/products.html?category=akusticni-paneli)
-- [MDF paneli](https://makemyhome.me/products.html?category=mdf)
-- [PU kamen](https://makemyhome.me/products.html?category=pu-kamen)
-- [Flex Stone](https://makemyhome.me/products.html?category=flex-stone)
-- [Aluminijum lajsne](https://makemyhome.me/products.html?category=aluminijum-lajsne)
-- [SPC pod](https://makemyhome.me/products.html?category=spc-pod)
+- [Bambus paneli](https://makemyhome.me/kategorija/bambus-paneli)
+- [Drveni paneli](https://makemyhome.me/kategorija/bambus-drveni)
+- [Tekstilni paneli](https://makemyhome.me/kategorija/bambus-tekstilni)
+- [Mermerni paneli](https://makemyhome.me/kategorija/bambus-mermerni)
+- [Metalni paneli](https://makemyhome.me/kategorija/bambus-metalni)
+- [Kožni paneli](https://makemyhome.me/kategorija/bambus-kozni)
+- [Classic paneli](https://makemyhome.me/kategorija/classic)
+- [3D letvice](https://makemyhome.me/kategorija/3d-letvice)
+- [Akustični paneli](https://makemyhome.me/kategorija/akusticni-paneli)
+- [MDF paneli](https://makemyhome.me/kategorija/mdf)
+- [PU kamen](https://makemyhome.me/kategorija/pu-kamen)
+- [Flex Stone](https://makemyhome.me/kategorija/flex-stone)
+- [Aluminijum lajsne](https://makemyhome.me/kategorija/aluminijum-lajsne)
+- [SPC pod](https://makemyhome.me/kategorija/spc-pod)

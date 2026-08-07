@@ -117,4 +117,4 @@ Ako se fajl deployuje preko cPanela prije push-a, prvi sljedeci sync ga vrati na
 - Sitemap: `sitemap.xml` (129 URLs, update `lastmod` when content changes)
 - Canonical: `https://makemyhome.me/` (non-www, HTTPS)
 - Google Search Console connected
-- Old WordPress URLs `/product/slug/` → 301 via `404.php` → `product.html?id=X`
+- Old WordPress URLs `/product/slug/` → 301 via `404.php` + `php/slug-match.php` → `/paneli/<ime>`
