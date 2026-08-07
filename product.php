@@ -167,6 +167,9 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
     // Google preporucuje oba polja uz ponudu; bez njih u Search Console stoji
     // upozorenje. Datum je kraj sljedeceg mjeseca i racuna se pri svakom
     // ucitavanju, pa nikad ne zastari.
+    // Google (Merchant listings) trazi i pocetak vazenja cijene uz priceValidUntil.
+    // Popust ide po mjesecima, pa je pocetak prvi dan tekuceg mjeseca.
+    'validFrom'      => date('Y-m-01'),
     'itemCondition'   => 'https://schema.org/NewCondition',
     'priceValidUntil' => date('Y-m-t', strtotime('first day of next month')),
     'availability' => $inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',

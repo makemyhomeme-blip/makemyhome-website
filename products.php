@@ -277,6 +277,9 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       '@type'                  => 'Offer',
       'price'                  => (string)$pFinal,
       'priceCurrency'          => 'EUR',
+      // Google (Merchant listings) trazi i pocetak vazenja cijene uz priceValidUntil.
+      // Popust ide po mjesecima, pa je pocetak prvi dan tekuceg mjeseca.
+      'validFrom'      => date('Y-m-01'),
       'itemCondition'          => 'https://schema.org/NewCondition',
       'priceValidUntil'        => date('Y-m-t', strtotime('first day of next month')),
       'availability'           => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
