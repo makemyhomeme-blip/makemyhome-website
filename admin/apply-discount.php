@@ -6,7 +6,7 @@
  * Web: /admin/apply-discount.php?key=mkhdisc2025 (probni mod, ništa se ne mijenja)
  *      dodaj &apply=1 da stvarno primijeniš izmjene (čuva se backup products.json)
  */
-session_start();
+require_once __DIR__ . '/sesija.php';
 if (empty($_SESSION['admin_logged'])) {
     http_response_code(403);
     die('Pristup odbijen – mora si prijavljen kao admin.');

@@ -5,7 +5,7 @@
 ob_start(); // buffer any PHP warnings so they don't corrupt JSON responses
 
 
-session_start();
+require_once __DIR__ . '/sesija.php';
 if (empty($_SESSION['admin_logged'])) {
     ob_end_clean();
     header('Location: index.php');

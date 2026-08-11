@@ -2,7 +2,7 @@
 /**
  * Make My Home – Admin Dashboard
  */
-session_start();
+require_once __DIR__ . '/sesija.php';
 if (empty($_SESSION['admin_logged'])) {
     header('Location: index.php');
     exit;

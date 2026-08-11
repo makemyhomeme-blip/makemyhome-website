@@ -3,7 +3,7 @@
  * Make My Home – Server Status Monitor
  * /admin/server-status.php?key=mkhstatus2025
  */
-session_start();
+require_once __DIR__ . '/sesija.php';
 if (empty($_SESSION['admin_logged'])) {
     http_response_code(403);
     die('Pristup odbijen.');

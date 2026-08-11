@@ -3,7 +3,7 @@
  * Make My Home – Admin Login
  * VAŽNO: Promijenite lozinku ispod!
  */
-session_start();
+require_once __DIR__ . '/sesija.php';
 
 define('ADMIN_USER', 'admin');
 
@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $real = mmhAdminPass();
 
     if ($real !== '' && $user === ADMIN_USER && hash_equals($real, $pass)) {
+        // Nov broj sesije poslije prijave — da podmetnut broj ne vrijedi
+        mmhSesijaObnovi();
         $_SESSION['admin_logged'] = true;
         $_SESSION['admin_time']   = time();
         header('Location: dashboard.php');

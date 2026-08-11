@@ -10,7 +10,7 @@ if (function_exists('opcache_reset')) opcache_reset();
 $isCli = (php_sapi_name() === 'cli');
 
 if (!$isCli) {
-    session_start();
+    require_once __DIR__ . '/sesija.php';
     if (empty($_SESSION['admin_logged'])) {
         http_response_code(403);
         die('Pristup odbijen – mora si prijavljen kao admin.');
