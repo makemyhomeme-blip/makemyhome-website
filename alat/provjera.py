@@ -20,15 +20,21 @@ rezultati = []
 
 
 def dohvati(u, prati=False, timeout='20'):
+    # Kod 000 znaci da veza uopste nije uspostavljena — to je najcesce trenutni
+    # prekid u mrezi, a ne greska na sajtu. Zato se pokusava jos dva puta;
+    # bez toga je provjera znala da prijavi ispravnu adresu kao pokvarenu.
     cmd = CURL + ['--max-time', timeout, '-w', '\n@@%{http_code}|%{num_redirects}|%{url_effective}']
     if prati:
         cmd += ['-L', '--max-redirs', '5']
-    r = subprocess.run(cmd + [u], capture_output=True, text=True, errors='replace').stdout
-    i = r.rfind('\n@@')
-    if i < 0:
-        return '', '000', '0', ''
-    kod, sk, kraj = r[i + 3:].split('|', 2)
-    return r[:i], kod, sk, kraj.strip()
+    for pokusaj in range(3):
+        r = subprocess.run(cmd + [u], capture_output=True, text=True, errors='replace').stdout
+        i = r.rfind('\n@@')
+        if i < 0:
+            continue
+        kod, sk, kraj = r[i + 3:].split('|', 2)
+        if kod != '000':
+            return r[:i], kod, sk, kraj.strip()
+    return '', '000', '0', ''
 
 
 def zabiljezi(sifra, opis, greske, provjereno):

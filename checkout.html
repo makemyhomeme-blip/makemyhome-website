@@ -58,6 +58,7 @@
     .pay-radio-dot{width:8px;height:8px;border-radius:50%;background:#c9a86c;display:none}
     .pay-opt.sel .pay-radio-dot{display:block}
     .pay-icon{width:36px;height:36px;border-radius:8px;background:rgba(201,168,108,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;color:#c9a86c;flex-shrink:0}
+    .pay-text{display:block}
     .pay-text strong{display:block;font-size:14px;color:#1a1a1a;font-weight:600}
     .pay-text span{font-size:12px;color:#666e7a;line-height:1.4}
 
@@ -244,22 +245,22 @@
               <div class="co-section">
                 <div class="co-section-title"><i class="fas fa-user"></i> Kontakt podaci</div>
                 <div class="co-row">
-                  <div class="co-field"><label>Ime *</label><input type="text" name="Ime" required placeholder="Vaše ime" autocomplete="given-name"></div>
-                  <div class="co-field"><label>Prezime *</label><input type="text" name="Prezime" required placeholder="Vaše prezime" autocomplete="family-name"></div>
+                  <div class="co-field"><label for="polje-ime">Ime *</label><input id="polje-ime" type="text" name="Ime" required placeholder="Vaše ime" autocomplete="given-name"></div>
+                  <div class="co-field"><label for="polje-prezime">Prezime *</label><input id="polje-prezime" type="text" name="Prezime" required placeholder="Vaše prezime" autocomplete="family-name"></div>
                 </div>
                 <div class="co-row">
-                  <div class="co-field"><label>Telefon *</label><input type="tel" name="Telefon" required placeholder="+382 69 ..." autocomplete="tel"></div>
-                  <div class="co-field"><label>Email</label><input type="email" name="Email" placeholder="vasa@email.com" autocomplete="email"></div>
+                  <div class="co-field"><label for="polje-telefon">Telefon *</label><input id="polje-telefon" type="tel" name="Telefon" required placeholder="+382 69 ..." autocomplete="tel"></div>
+                  <div class="co-field"><label for="polje-email">Email</label><input id="polje-email" type="email" name="Email" placeholder="vasa@email.com" autocomplete="email"></div>
                 </div>
               </div>
 
               <!-- Adresa dostave -->
               <div class="co-section">
                 <div class="co-section-title"><i class="fas fa-location-dot"></i> Adresa dostave</div>
-                <div class="co-field"><label>Ulica i broj *</label><input type="text" name="Adresa" required placeholder="npr. Bulevar Džordža Vašingtona 12" autocomplete="street-address"></div>
+                <div class="co-field"><label for="polje-adresa">Ulica i broj *</label><input id="polje-adresa" type="text" name="Adresa" required placeholder="npr. Bulevar Džordža Vašingtona 12" autocomplete="address-line1"></div>
                 <div class="co-row">
-                  <div class="co-field"><label>Grad *</label><input type="text" name="Grad" required placeholder="Podgorica" autocomplete="address-level2"></div>
-                  <div class="co-field"><label>Poštanski broj</label><input type="text" name="Postanski_broj" placeholder="81000" autocomplete="postal-code"></div>
+                  <div class="co-field"><label for="polje-grad">Grad *</label><input id="polje-grad" type="text" name="Grad" required placeholder="Podgorica" autocomplete="address-level2"></div>
+                  <div class="co-field"><label for="polje-postanski-broj">Poštanski broj</label><input id="polje-postanski-broj" type="text" name="Postanski_broj" placeholder="81000" autocomplete="postal-code"></div>
                 </div>
               </div>
 
@@ -269,30 +270,30 @@
                 <div class="pay-opts">
                   <label class="pay-opt" id="pay-1" onclick="selectPay(this,'Plaćanje karticom')">
                     <input type="radio" name="_pay" value="kartica">
-                    <div class="pay-radio"><div class="pay-radio-dot"></div></div>
-                    <div class="pay-icon"><i class="fas fa-credit-card"></i></div>
-                    <div class="pay-text">
+                    <span class="pay-radio"><span class="pay-radio-dot"></span></span>
+                    <span class="pay-icon"><i class="fas fa-credit-card"></i></span>
+                    <span class="pay-text">
                       <strong>Plaćanje karticom</strong>
                       <span>Visa, Mastercard · link za plaćanje šaljemo na Vaš email</span>
-                    </div>
+                    </span>
                   </label>
                   <label class="pay-opt" id="pay-2" onclick="selectPay(this,'Plaćanje pouzećem')">
                     <input type="radio" name="_pay" value="pouzecem">
-                    <div class="pay-radio"><div class="pay-radio-dot"></div></div>
-                    <div class="pay-icon"><i class="fas fa-money-bill-wave"></i></div>
-                    <div class="pay-text">
+                    <span class="pay-radio"><span class="pay-radio-dot"></span></span>
+                    <span class="pay-icon"><i class="fas fa-money-bill-wave"></i></span>
+                    <span class="pay-text">
                       <strong>Plaćanje pouzećem</strong>
                       <span>Gotovina ili kartica pri preuzimanju</span>
-                    </div>
+                    </span>
                   </label>
                   <label class="pay-opt" id="pay-3" onclick="selectPay(this,'Upit / Rezervacija')">
                     <input type="radio" name="_pay" value="upit">
-                    <div class="pay-radio"><div class="pay-radio-dot"></div></div>
-                    <div class="pay-icon"><i class="fas fa-comments"></i></div>
-                    <div class="pay-text">
+                    <span class="pay-radio"><span class="pay-radio-dot"></span></span>
+                    <span class="pay-icon"><i class="fas fa-comments"></i></span>
+                    <span class="pay-text">
                       <strong>Upit / Rezervacija</strong>
                       <span>Kontaktiraćemo Vas u roku od nekoliko sati</span>
-                    </div>
+                    </span>
                   </label>
                 </div>
               </div>
@@ -301,7 +302,7 @@
               <div class="co-section">
                 <div class="co-section-title"><i class="fas fa-note-sticky"></i> Napomena (opciono)</div>
                 <div class="co-field" style="margin-bottom:0;">
-                  <textarea name="Napomena" placeholder="Posebni zahtjevi, pitanja o dostavi, termin…"></textarea>
+                  <textarea id="polje-napomena" name="Napomena" placeholder="Posebni zahtjevi, pitanja o dostavi, termin…"></textarea>
                 </div>
               </div>
 

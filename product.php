@@ -646,7 +646,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
                 $fullDesc = $end > 1200 ? mb_substr($cut, 0, $end + 1) : $cut;
             }
             if ($fullDesc): ?>
-            <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars($fullDesc)) ?></div>
+            <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars($fullDesc), false) ?></div>
             <?php endif; ?>
             <?php if ($inStock): ?>
             <p style="color:#27ae60;font-weight:600;margin-top:14px;">&#10003; Na stanju</p>

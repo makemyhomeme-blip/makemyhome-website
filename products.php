@@ -626,7 +626,7 @@ echo "\n</script>\n";
     <!-- Back bar (vidljiv samo kad je kategorija otvorena) -->
     <div class="back-bar" id="back-bar" style="display:none;">
       <a href="products.html" class="btn-back"><i class="fas fa-arrow-left"></i> Sve Kategorije</a>
-      <h2 id="cat-title"></h2>
+      <?php if ($cat): ?><h2 id="cat-title"><?= htmlspecialchars($catName) ?></h2><?php endif; ?>
       <span class="count-badge" id="cat-count"></span>
     </div>
 

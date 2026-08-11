@@ -369,18 +369,44 @@ arsort($insKat);
       </div>
     </div>
 
+    <?php
+    /* Bez width i height slika prije ucitavanja zauzima nula piksela. Zbog toga
+       je cijela mreza bila visoka nula, pa je pretrazivac zakljucio da su sve
+       fotografije na ekranu i skinuo svih 8 MB odjednom — a sadrzaj je skakao
+       dok su slike stizale. Prava velicina se cita sa diska i pamti u kesu,
+       pa se cita samo kad se doda nova fotografija. */
+    $insKesPut  = __DIR__ . '/data/dimenzije-slika.json';
+    $insDim     = json_decode(@file_get_contents($insKesPut), true) ?: [];
+    $insDimNovo = false;
+    $insVelicina = function (string $rel) use (&$insDim, &$insDimNovo): ?array {
+        $put = __DIR__ . '/' . ltrim($rel, '/');
+        $vr  = @filemtime($put);
+        if ($vr === false) return null;
+        $kljuc = $rel . '|' . $vr;
+        if (!isset($insDim[$kljuc])) {
+            $s = @getimagesize($put);
+            if (!$s || empty($s[0]) || empty($s[1])) return null;
+            $insDim[$kljuc] = [$s[0], $s[1]];
+            $insDimNovo = true;
+        }
+        return $insDim[$kljuc];
+    };
+    ?>
     <div class="insp-grid" id="insp-grid">
       <?php foreach ($insSlike as $i => $s):
         $p = $s['p'];
         $kat = $insNames[$p['category'] ?? ''] ?? 'Zidni panel';
         $alt = $p['name'] . ' u enterijeru – ' . $kat . ' | Make My Home Decor Podgorica';
+        $vel = $insVelicina($s['src']);
       ?>
       <a class="insp-kart" href="/<?= mmhSlugProizvoda($p) ?>"
          data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"
          data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
-        <img <?= $i < 8 ? 'src' : 'data-src' ?>="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
+        <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
              alt="<?= htmlspecialchars($alt, ENT_QUOTES) ?>"
+             <?php if ($vel): ?>width="<?= $vel[0] ?>" height="<?= $vel[1] ?>" <?php endif; ?>
              loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async"
+             fetchpriority="<?= $i < 6 ? 'high' : 'low' ?>"
              onerror="this.onerror=null;this.closest(&quot;.insp-kart&quot;).remove();">
         <?php if ($s['t'] > $insPrag): ?><span class="insp-novo">Novo</span><?php endif; ?>
         <span class="insp-info">
@@ -390,6 +416,15 @@ arsort($insKat);
       </a>
       <?php endforeach; ?>
     </div>
+    <?php
+    /* Kes se upisuje samo kad je stvarno nesto novo procitano. Ako upis ne
+       uspije (prava na disku), stranica i dalje radi — samo ce sljedeci put
+       opet citati dimenzije. */
+    if ($insDimNovo) {
+        if (count($insDim) > 600) $insDim = array_slice($insDim, -600, null, true);
+        @file_put_contents($insKesPut, json_encode($insDim), LOCK_EX);
+    }
+    ?>
 
     <p class="insp-prazno" id="insp-prazno" hidden>Nema fotografija u ovoj kategoriji.</p>
 
@@ -408,23 +443,14 @@ arsort($insKat);
 
 <script>
 (function () {
-  /* Fotografija ima blizu stotinu; da se na mobilnom internetu ne skida
-     sedam megabajta odjednom, slike poslije prvih dvanaest nose data-src
-     i ucitavaju se tek kad se priblize ekranu. */
-  var lijeni = [].slice.call(document.querySelectorAll('.insp-kart img[data-src]'));
-  function ucitaj(img) {
-    if (!img.dataset.src) return;
-    img.src = img.dataset.src;
-    delete img.dataset.src;
-  }
-  if ('IntersectionObserver' in window) {
-    var osmatrac = new IntersectionObserver(function (redovi) {
-      redovi.forEach(function (r) { if (r.isIntersecting) { ucitaj(r.target); osmatrac.unobserve(r.target); } });
-    }, { rootMargin: '400px 0px' });
-    lijeni.forEach(function (i) { osmatrac.observe(i); });
-  } else {
-    lijeni.forEach(ucitaj);   /* stari pretrazivaci — ucitaj sve odjednom */
-  }
+  /* Fotografija ima blizu stotinu. Ranije su one poslije osme nosile data-src
+     umjesto src, pa ih je ucitavao JavaScript. To je stedjelo saobracaj, ali
+     je imalo dvije mane: takva slika je neispravan HTML (W3C je prijavio 95
+     gresaka), a Google Images nije mogao da vidi nijednu od tih fotografija —
+     jer u izvoru stranice nije pisalo gdje je slika.
+     Sada svaka slika ima pravi src i loading="lazy", sto pretrazivac radi sam:
+     ucitava se tek kad se priblizi ekranu, isto kao ranije, ali je adresa
+     slike vidljiva i u izvoru stranice. */
 
   var grid = document.getElementById('insp-grid');
   var prazno = document.getElementById('insp-prazno');
@@ -458,7 +484,7 @@ arsort($insKat);
     grid.querySelectorAll('.insp-kart').forEach(function (a) {
       var ok = samoNovo ? a.dataset.novo === '1' : (!k || a.dataset.k === k);
       a.hidden = !ok;
-      if (ok) { vidljivih++; var im = a.querySelector('img[data-src]'); if (im && vidljivih <= 12) ucitaj(im); }
+      if (ok) vidljivih++;
     });
     prazno.hidden = vidljivih > 0;
     /* Oba filtera se drze istog izbora, pa prelazak telefon/kompjuter ne zbunjuje */
