@@ -26,7 +26,7 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/hvala.html'       => $base . '/hvala.html',
     $root . '/faq.html'         => $base . '/faq.html',
     $root . '/montaza.html'     => $base . '/montaza.html',
-    $root . '/decor-box.html'   => $base . '/decor-box.html',
+    $root . '/decor-box.php'    => $base . '/decor-box.php',
     $root . '/privatnost.html'  => $base . '/privatnost.html',
     $root . '/uslovi.html'      => $base . '/uslovi.html',
     $root . '/reklamacije.html' => $base . '/reklamacije.html',
