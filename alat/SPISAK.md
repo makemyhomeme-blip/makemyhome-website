@@ -65,6 +65,39 @@ a linkovi koje pravi JavaScript se **ne** broje — Google ih u prvom prolazu ne
 - **I3** Svaki od 6 vodica je linkovan sa bar 10 stranica
   (podnozje svih stranica + blok "Procitajte prije kupovine" na kategorijama)
 
+## J · Vanjski alati koji sami kazu sta ne valja
+Nase provjere (A–I) gledaju ono sto smo mi odlucili da gledamo. Ova tri alata
+gledaju sve ostalo — pisu ih Google i W3C i ne znaju nista o nasem sajtu.
+Vrijedi ih pustiti poslije svake vece izmjene.
+
+**1. W3C provjeravac HTML-a** — ispravnost koda stranice
+```
+https://validator.w3.org/nu/?doc=https%3A%2F%2Fmakemyhome.me%2F&out=json
+```
+Zamijeni adresu na kraju. Trazi `"type":"error"`. Cilj: nula.
+Prvi put pusten 11.08.2026 — nasao 109 gresaka na 13 stranica, sve popravljene.
+
+**2. Google Lighthouse** — pristupacnost, SEO, dobra praksa
+```
+npm i lighthouse
+CHROME_PATH=<putanja do chrome> node node_modules/lighthouse/cli/index.js \
+  <adresa> --only-categories=accessibility,best-practices,seo \
+  --chrome-flags="--headless=new --no-sandbox"
+```
+Cilj: pristupacnost i SEO 100. Korpa i naplata imaju SEO 69 namjerno — one su
+noindex, Google ih ne treba.
+Prvi put pusten 11.08.2026 — pristupacnost je bila 91, sada je 100.
+
+**3. W3C provjeravac CSS-a**
+```
+https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fmakemyhome.me%2Fcss%2Fstyle-v5.css&output=json&profile=css3
+```
+Prijavljuje `pointer-events` kao gresku — nije greska, alat ne poznaje to
+svojstvo. Sve ostalo mora biti cisto.
+
+**4. Google Search Console** (ovo moze samo vlasnik, kroz nalog)
+  Pages · Sitemaps · Core Web Vitals · Manual actions
+
 ## Sta se NE provjerava automatski
 - Izgled na telefonu (radi se kroz Playwright, posebno)
 - Pretraga, korpa, naplata (isto Playwright)
