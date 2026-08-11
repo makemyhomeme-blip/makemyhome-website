@@ -424,6 +424,32 @@ def grupa_G():
             g.append('%s → %s (sajtu treba, ne smije biti zatvoren)' % (f, kod))
     zabiljezi('G6', 'Podaci kupaca zatvoreni, podaci sajta otvoreni', g, 10)
 
+    # Sudar admina i sinhronizacije.
+    # Admin je CSS za velicinu slika na Decor Box stranici upisivao pravo u
+    # decor-box.html — a taj fajl je bio u sync listi. Vlasnik bi namjestio
+    # visinu, sve bi radilo, i onda bi prvi sljedeci sync vratio staro, bez
+    # ijedne poruke. Ovo pravilo trazi svaki fajl u koji admin pise i provjerava
+    # da nijedan nije u spisku koji sync prepisuje.
+    g = []
+    lista = ''
+    for put in ('admin/sync-lista.php', 'admin/sync.php'):
+        pp = os.path.join(KORIJEN, put)
+        if os.path.exists(pp):
+            lista += open(pp, encoding='utf-8').read()
+    usync = set(re.findall(r"\$base \. '/([^']+)'", lista))
+    pise = set()
+    for f in os.listdir(os.path.join(KORIJEN, 'admin')):
+        if not f.endswith('.php') or f in ('sync.php', 'sync-lista.php'):
+            continue
+        t = open(os.path.join(KORIJEN, 'admin', f), encoding='utf-8').read()
+        # putanje oblika __DIR__ . '/../nesto'
+        for m in re.findall(r"__DIR__ \. '/\.\./([^']+)'", t):
+            pise.add(m.strip('/'))
+    for m in sorted(pise):
+        if m in usync:
+            g.append('admin pise u %s, a sync ga prepisuje — izmjena bi se gubila' % m)
+    zabiljezi('G7', 'Nijedan fajl koji admin mijenja nije u sync listi', g, len(pise))
+
     g = []
     hh, _, _, _ = dohvati(BAZA + '/robots.txt', timeout='10')
     if 'Sitemap: https://makemyhome.me/sitemap.xml' not in hh:

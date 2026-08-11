@@ -48,6 +48,13 @@ Svako pravilo ili prodje ili ispise tacno gdje je pao.
 - **G3** `robots.txt` navodi sitemap, blokira `/admin/`, ne blokira `/paneli/` ni `/kategorija/`
 - **G4** Lokalni fajlovi identicni onima na serveru
 - **G5** Svi vazni fajlovi su u `admin/sync.php` listi (bez `php/slug.php` sajt puca)
+- **G7** Nijedan fajl koji **admin mijenja** ne smije biti u sync listi.
+  Admin je CSS za velicinu slika na Decor Box stranici upisivao pravo u
+  `decor-box.html`, a taj fajl je bio u sync listi — vlasnik bi namjestio visinu,
+  sve bi radilo, i onda bi prvi sljedeci sync vratio staro, bez ijedne poruke.
+  Rjesenje je uvijek isto: **izbor ide u `data/*.json`, stranica ga cita.**
+  Pravilo prolazi kroz sve admin fajlove, vadi svaku putanju u koju pisu, i
+  poredi je sa spiskom koji sync prepisuje.
 - **G6** `data/inquiries.json` (ime, email, telefon i poruka svakog kupca iz kontakt
   forme) mora biti **zatvoren** — `/data/` je javan direktorijum jer se odatle cita
   `products.json`. Isto vazi za `.tmp` varijantu, `data/*.bak.<datum>.json` i debug
