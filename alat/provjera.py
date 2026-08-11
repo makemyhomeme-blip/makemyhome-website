@@ -457,15 +457,60 @@ def grupa_H():
 
 
 # ============================================================
+# I — UNUTRASNJE POVEZIVANJE
+# Stranica do koje vodi jedan jedini link Google sporo obilazi i slabo
+# rangira. Ovo mjeri koliko linkova sa samog sajta vodi do svake stranice.
+# ============================================================
+VODICI = ['paneli-za-kupatilo.html', 'tv-zid.html', 'spc-ili-laminat.html',
+          'paneli-ili-lamperija.html', 'akusticni-paneli-kancelarija.html',
+          'dostava-crna-gora.html']
+
+
+def grupa_I():
+    print('\n=== I · UNUTRASNJE POVEZIVANJE ===')
+    sve = {u.rstrip('/') for u in STRANICE}
+    dolazni = collections.Counter()
+    for u, (h, kod, _, _) in STRANICE.items():
+        if kod != '200':
+            continue
+        b = re.search(r'<base href="([^"]*)"', h)
+        baza = b.group(1) if b else u
+        bez = re.sub(r'<script[^>]*>.*?</script>', '', h, flags=re.S)
+        mete = set()
+        for m in re.findall(r'<a\s[^>]*href="([^"#][^"]*)"', bez):
+            if m.startswith(('mailto:', 'tel:', 'javascript:', 'data:', 'viber:')):
+                continue
+            a = urljoin(baza, m).split('#')[0].split('?')[0].rstrip('/')
+            if a in sve and a != u.rstrip('/'):
+                mete.add(a)
+        for a in mete:
+            dolazni[a] += 1
+
+    g = [u for u in STRANICE if dolazni[u.rstrip('/')] == 0]
+    zabiljezi('I1', 'Nijedna stranica nije siroce (bar jedan link vodi do nje)',
+              g, len(STRANICE))
+
+    proizvodi = [u for u in STRANICE if '/paneli/' in u]
+    g = ['%s → samo %d' % (u, dolazni[u.rstrip('/')])
+         for u in proizvodi if dolazni[u.rstrip('/')] < 3]
+    zabiljezi('I2', 'Svaki proizvod ima bar 3 dolazna linka', g, len(proizvodi))
+
+    g = ['/%s → samo %d' % (v, dolazni[(BAZA + '/' + v).rstrip('/')])
+         for v in VODICI if dolazni[(BAZA + '/' + v).rstrip('/')] < 10]
+    zabiljezi('I3', 'Svaki vodic je linkovan sa bar 10 stranica', g, len(VODICI))
+
+
+# ============================================================
 GRUPE = {'A': grupa_A, 'B': grupa_B, 'C': grupa_C, 'D': grupa_D,
-         'E': grupa_E, 'F': grupa_F, 'G': grupa_G, 'H': grupa_H}
+         'E': grupa_E, 'F': grupa_F, 'G': grupa_G, 'H': grupa_H,
+         'I': grupa_I}
 
 if __name__ == '__main__':
     arg = (sys.argv[1] if len(sys.argv) > 1 else 'brzo').upper()
     if arg == 'SVE':
-        red = 'ABCDEFGH'
+        red = 'ABCDEFGHI'
     elif arg == 'BRZO':
-        red = 'ACDFG'
+        red = 'ACDFGI'
     else:
         red = arg
     for k in red:

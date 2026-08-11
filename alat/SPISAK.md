@@ -54,6 +54,17 @@ Izvor: `alat/gsc-adrese.txt` — izvezeno iz Search Console-a (Pages + Coverage)
 - **H1** Svaka od tih adresa vraca 200 ili 410, nikad lanac preusmjerenja
 - **H2** Ugasen proizvod ide na **svoju kategoriju**, ne na spisak svih kategorija
 
+## I · Unutrasnje povezivanje
+Stranica do koje sa sajta vodi jedan jedini link Google sporo obilazi i slabo rangira.
+Zato se broji koliko linkova sa samog sajta vodi do svake stranice (racuna se `<base href>`,
+a linkovi koje pravi JavaScript se **ne** broje — Google ih u prvom prolazu ne vidi).
+- **I1** Nijedna stranica nije siroce — bar jedan link vodi do nje
+- **I2** Svaki proizvod ima bar 3 dolazna linka
+  (kutiju "Slicni proizvodi" ispisuje `product.php` na serveru; vrti se u krug kroz
+  kategoriju, pa nijedan proizvod ne ostaje bez veza sa susjedima)
+- **I3** Svaki od 6 vodica je linkovan sa bar 10 stranica
+  (podnozje svih stranica + blok "Procitajte prije kupovine" na kategorijama)
+
 ## Sta se NE provjerava automatski
 - Izgled na telefonu (radi se kroz Playwright, posebno)
 - Pretraga, korpa, naplata (isto Playwright)
