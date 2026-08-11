@@ -23,9 +23,24 @@ if (!$isCli) {
 $branch = 'claude/build-product-website-6CvHG';
 $repo   = 'makemyhomeme-blip/makemyhome-website';
 $base   = "https://raw.githubusercontent.com/{$repo}/{$branch}";
-// zig za probijanje CDN kesa — jedinstven po pokretanju sinhronizacije
-define('SYNC_ZIG', (string)time());
 $root   = dirname(__DIR__);
+
+// --- Preuzimanje po SHA-u commita ---------------------------------------
+// raw.githubusercontent.com se posluzuje preko CDN-a koji kesira po cvorovima.
+// Adresa sa imenom grane je uvijek ista, pa je cvor koji opsluzuje ovaj server
+// umio da vrati PRETHODNU verziju fajla — sync bi ispisao OK, a na disk upisao
+// staro. Tako je product.php dva puta ostao star iako je push prosao.
+// Adresa sa SHA-om commita je jedinstvena za svaku izmjenu, pa CDN nema sta da
+// vrati iz kesa. Ako API ne odgovori, vracamo se na ime grane (staro ponasanje).
+$sha = null;
+$apiOdgovor = fetchUrl("https://api.github.com/repos/{$repo}/commits/"
+                       . rawurlencode($branch) . '?per_page=1');
+if ($apiOdgovor !== false) {
+    $j = json_decode($apiOdgovor, true);
+    if (!empty($j['sha']) && preg_match('/^[0-9a-f]{40}$/', $j['sha'])) $sha = $j['sha'];
+}
+if ($sha) $base = "https://raw.githubusercontent.com/{$repo}/{$sha}";
+$sync_izvor = $sha ? ('commit ' . substr($sha, 0, 7)) : ('grana ' . $branch . ' (API nedostupan)');
 
 $files = [
     // HTML stranice
@@ -92,13 +107,6 @@ $files = [
 
 /** Fetch a URL using best available method */
 function fetchUrl(string $url): string|false {
-    // raw.githubusercontent.com kesira po CDN cvorovima. Bez ovoga se desavalo
-    // da sync javi "OK", a da povuce staru verziju fajla — jer je cvor koji
-    // opsluzuje ovaj server jos imao stari sadrzaj. Jedinstven parametar u
-    // adresi tjera CDN da ode po svjez fajl. GitHub sam parametar ignorise.
-    if (strpos($url, 'raw.githubusercontent.com') !== false) {
-        $url .= (strpos($url, '?') === false ? '?' : '&') . 'svjeze=' . SYNC_ZIG;
-    }
     $zaglavlja = ['Cache-Control: no-cache', 'Pragma: no-cache'];
 
     // Method 1: PHP curl extension
@@ -120,7 +128,7 @@ function fetchUrl(string $url): string|false {
     // Method 2: exec curl binary (-f = fail on HTTP >= 400, ne snimaj error stranice)
     if (function_exists('exec')) {
         $out = []; $ret = 0;
-        exec("curl -fsSL --max-time 30 -H 'Cache-Control: no-cache' " . escapeshellarg($url) . " 2>/dev/null", $out, $ret);
+        exec("curl -fsSL --max-time 30 -A 'MakeMyHome-Sync/1.0' -H 'Cache-Control: no-cache' " . escapeshellarg($url) . " 2>/dev/null", $out, $ret);
         if ($ret === 0 && !empty($out)) {
             $data = implode("\n", $out);
             if (strlen($data) > 5 && trim($data) !== '404: Not Found') return $data;
@@ -128,7 +136,7 @@ function fetchUrl(string $url): string|false {
     }
     // Method 3: file_get_contents (needs allow_url_fopen=On)
     if (ini_get('allow_url_fopen')) {
-        $ctx  = stream_context_create(['http' => ['timeout' => 30, 'header' => "Cache-Control: no-cache\r\n"]]);
+        $ctx  = stream_context_create(['http' => ['timeout' => 30, 'header' => "Cache-Control: no-cache\r\nUser-Agent: MakeMyHome-Sync/1.0\r\n"]]);
         $data = @file_get_contents($url, false, $ctx);
         if ($data !== false && strlen($data) > 5) return $data;
     }
@@ -136,10 +144,12 @@ function fetchUrl(string $url): string|false {
 }
 
 if ($isCli) {
-    echo "=== Make My Home – Sync fajlova (CLI) ===\n\n";
+    echo "=== Make My Home – Sync fajlova (CLI) ===\n";
+    echo "Izvor: {$sync_izvor}\n\n";
 } else {
     echo '<pre style="font-family:monospace;font-size:14px;padding:20px;background:#111;color:#eee;min-height:100vh;">';
-    echo "=== Make My Home &ndash; Sync fajlova ===\n\n";
+    echo "=== Make My Home &ndash; Sync fajlova ===\n";
+    echo "Izvor: " . htmlspecialchars($sync_izvor) . "\n\n";
 }
 
 $allOk = true;
