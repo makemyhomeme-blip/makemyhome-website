@@ -59,6 +59,13 @@ return function (string $base, string $root, string $adminDir): array {
         $root . '/fa/webfonts/fa-solid-900.woff2'  => $base . '/fa/webfonts/fa-solid-900.woff2',
         $root . '/fa/webfonts/fa-brands-400.woff2' => $base . '/fa/webfonts/fa-brands-400.woff2',
         $root . '/fa/css/all.min.css'              => $base . '/fa/css/all.min.css',
+        // Tekstualni fontovi: "latin-ext" fajlovi su nosili ogroman opseg znakova
+        // (fonetski, dodatni latinicni...) a sajtu trebaju samo ć č đ š ž.
+        // Sazeti su na cio blok Latin Extended-A i B, da rade i buduca imena.
+        $root . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2' => $base . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2',
+        $root . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2'    => $base . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2',
+        $root . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2'    => $base . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2',
+        $root . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2'      => $base . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2',
         $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
     $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
     // SEO
