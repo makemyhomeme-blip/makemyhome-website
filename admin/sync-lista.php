@@ -54,7 +54,12 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
     $root . '/css/fonts.css'    => $base . '/css/fonts.css',
     // Images / favicon
-    $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
+    // Ikone: fontovi su sazeti sa 267 kB na 14 kB (samo 134 ikone koje sajt
+        // stvarno koristi). Sync ih prenosi bajt po bajt, kao i favicon.
+        $root . '/fa/webfonts/fa-solid-900.woff2'  => $base . '/fa/webfonts/fa-solid-900.woff2',
+        $root . '/fa/webfonts/fa-brands-400.woff2' => $base . '/fa/webfonts/fa-brands-400.woff2',
+        $root . '/fa/css/all.min.css'              => $base . '/fa/css/all.min.css',
+        $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
     $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
     // SEO
     $root . '/404.php'          => $base . '/404.php',
