@@ -23,6 +23,8 @@ if (!$isCli) {
 $branch = 'claude/build-product-website-6CvHG';
 $repo   = 'makemyhomeme-blip/makemyhome-website';
 $base   = "https://raw.githubusercontent.com/{$repo}/{$branch}";
+// zig za probijanje CDN kesa — jedinstven po pokretanju sinhronizacije
+define('SYNC_ZIG', (string)time());
 $root   = dirname(__DIR__);
 
 $files = [
@@ -90,6 +92,15 @@ $files = [
 
 /** Fetch a URL using best available method */
 function fetchUrl(string $url): string|false {
+    // raw.githubusercontent.com kesira po CDN cvorovima. Bez ovoga se desavalo
+    // da sync javi "OK", a da povuce staru verziju fajla — jer je cvor koji
+    // opsluzuje ovaj server jos imao stari sadrzaj. Jedinstven parametar u
+    // adresi tjera CDN da ode po svjez fajl. GitHub sam parametar ignorise.
+    if (strpos($url, 'raw.githubusercontent.com') !== false) {
+        $url .= (strpos($url, '?') === false ? '?' : '&') . 'svjeze=' . SYNC_ZIG;
+    }
+    $zaglavlja = ['Cache-Control: no-cache', 'Pragma: no-cache'];
+
     // Method 1: PHP curl extension
     if (function_exists('curl_init')) {
         $ch = curl_init($url);
@@ -98,6 +109,7 @@ function fetchUrl(string $url): string|false {
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT        => 30,
             CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_HTTPHEADER     => $zaglavlja,
             CURLOPT_USERAGENT      => 'MakeMyHome-Sync/1.0',
         ]);
         $data = curl_exec($ch);
@@ -108,7 +120,7 @@ function fetchUrl(string $url): string|false {
     // Method 2: exec curl binary (-f = fail on HTTP >= 400, ne snimaj error stranice)
     if (function_exists('exec')) {
         $out = []; $ret = 0;
-        exec("curl -fsSL --max-time 30 " . escapeshellarg($url) . " 2>/dev/null", $out, $ret);
+        exec("curl -fsSL --max-time 30 -H 'Cache-Control: no-cache' " . escapeshellarg($url) . " 2>/dev/null", $out, $ret);
         if ($ret === 0 && !empty($out)) {
             $data = implode("\n", $out);
             if (strlen($data) > 5 && trim($data) !== '404: Not Found') return $data;
@@ -116,7 +128,7 @@ function fetchUrl(string $url): string|false {
     }
     // Method 3: file_get_contents (needs allow_url_fopen=On)
     if (ini_get('allow_url_fopen')) {
-        $ctx  = stream_context_create(['http' => ['timeout' => 30]]);
+        $ctx  = stream_context_create(['http' => ['timeout' => 30, 'header' => "Cache-Control: no-cache\r\n"]]);
         $data = @file_get_contents($url, false, $ctx);
         if ($data !== false && strlen($data) > 5) return $data;
     }
