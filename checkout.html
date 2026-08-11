@@ -24,7 +24,7 @@
     /* Steps bar */
     .co-steps{display:flex;align-items:center;gap:0;margin-bottom:36px}
     .co-step{display:flex;align-items:center;gap:8px;font-size:13px;color:#666e7a}
-    .co-step.done{color:#c9a86c}
+    .co-step.done{color:#795f32}
     .co-step.active{color:#1a1a1a;font-weight:600}
     .co-step-num{width:26px;height:26px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
     .co-step.done .co-step-num{background:#c9a86c;border-color:#c9a86c;color:#0a0a0a}
@@ -38,7 +38,7 @@
     .co-form-card{background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
     .co-section{padding:22px 24px;border-bottom:1px solid rgba(0,0,0,0.06)}
     .co-section:last-child{border-bottom:none}
-    .co-section-title{font-size:13px;font-weight:700;color:#c9a86c;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .co-section-title{font-size:13px;font-weight:700;color:#795f32;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
     .co-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .co-field{margin-bottom:12px}
     .co-field label{display:block;font-size:12px;color:#666e7a;margin-bottom:5px;font-weight:500}
@@ -300,7 +300,7 @@
 
               <!-- Napomena -->
               <div class="co-section">
-                <div class="co-section-title"><i class="fas fa-note-sticky"></i> Napomena (opciono)</div>
+                <label class="co-section-title" for="polje-napomena"><i class="fas fa-note-sticky"></i> Napomena (opciono)</label>
                 <div class="co-field" style="margin-bottom:0;">
                   <textarea id="polje-napomena" name="Napomena" placeholder="Posebni zahtjevi, pitanja o dostavi, termin…"></textarea>
                 </div>
