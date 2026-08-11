@@ -114,7 +114,22 @@ if ($cat !== '' && !isset($catNames[$cat])) {
 }
 $catName  = isset($catNames[$cat]) ? $catNames[$cat] : 'Katalog Proizvoda';
 $imgPath  = isset($catImages[$cat]) ? $catImages[$cat] : 'images/products/cq006.jpg';
-$ogImage  = 'https://makemyhome.me/' . $imgPath;
+// Ista prica kao na stranici proizvoda: uspravna fotografija se na Facebooku
+// i WhatsAppu prikaze kao sicusna slicica. Uzima se prva dovoljno siroka
+// slika iz same kategorije, a ako je nema — fotografija showrooma.
+// products.json se u ovom fajlu ucitava tek nize (za mrezu proizvoda), a
+// ovdje treba ranije — za izbor slike. Ucitava se jednom i koristi na oba
+// mjesta, da se fajl od 380 kB ne cita dvaput po zahtjevu.
+$_allProds = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+if (isset($_allProds['products'])) $_allProds = $_allProds['products'];
+$ogKandidati = [$imgPath];
+foreach ($_allProds as $pp) {
+    if ($cat !== '' && ($pp['category'] ?? '') !== $cat) continue;
+    if (!empty($pp['image'])) $ogKandidati[] = $pp['image'];
+    foreach (($pp['gallery'] ?? []) as $g) $ogKandidati[] = $g;
+}
+$ogIzbor  = mmhSlikaZaDijeljenje($ogKandidati);
+$ogImage  = 'https://makemyhome.me/' . ltrim($ogIzbor['put'], '/');
 $ogTitle  = $catName . ' | Make My Home Decor';
 $catDescs = [
   'bambus-tekstilni' => 'Tekstilni zidni paneli 280x122cm – premium tkanina na bambusovoj podlozi. Topao i elegantan dekor za dnevne sobe i spavaće sobe.',
@@ -240,6 +255,8 @@ $pageTitle = $cat
   <meta property="og:type" content="website">
   <meta property="og:url" content="<?= htmlspecialchars($ogUrl) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
+  <meta property="og:image:width" content="<?= (int)$ogIzbor['w'] ?>">
+  <meta property="og:image:height" content="<?= (int)$ogIzbor['h'] ?>">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
@@ -259,7 +276,7 @@ $pageTitle = $cat
   }
   </script>
 <?php
-$_allProds   = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+// $_allProds je vec ucitan gore, kod izbora slike za dijeljenje
 $_bambusCats = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-kozni','bambus-metalni'];
 if (!$cat) {
   $_listProds = $_allProds;

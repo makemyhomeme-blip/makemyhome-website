@@ -74,9 +74,17 @@ if (mb_strlen($rawDesc) > 155) {
 }
 $ogDesc = htmlspecialchars($rawDesc, ENT_QUOTES);
 
-$ogImage = ($product && !empty($product['image']))
-    ? 'https://makemyhome.me/' . $product['image']
-    : 'https://makemyhome.me/images/products/cq006.jpg';
+// Facebook, WhatsApp i Viber prikazu veliku karticu tek od 600x315. Vecina
+// fotografija panela je uspravna (507x900), pa se link dijelio kao sicusna
+// slicica. Zato se bira prva dovoljno siroka slika ISTOG proizvoda —
+// najprije glavna, pa galerija; tek ako nista ne odgovara ide showroom.
+$ogKandidati = [];
+if ($product) {
+    if (!empty($product['image'])) $ogKandidati[] = $product['image'];
+    foreach (($product['gallery'] ?? []) as $g) $ogKandidati[] = $g;
+}
+$ogIzbor = mmhSlikaZaDijeljenje($ogKandidati);
+$ogImage = 'https://makemyhome.me/' . ltrim($ogIzbor['put'], '/');
 
 $ogUrl = $product ? mmhUrlProizvoda($product) : 'https://makemyhome.me/products.html';
 // <title> mora stati u ~60 znakova da ga Google ne siječe u rezultatima.
@@ -201,6 +209,8 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <meta property="og:type" content="product">
   <meta property="og:url" content="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>">
+  <meta property="og:image:width" content="<?= (int)$ogIzbor['w'] ?>">
+  <meta property="og:image:height" content="<?= (int)$ogIzbor['h'] ?>">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">

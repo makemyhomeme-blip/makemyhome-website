@@ -57,3 +57,30 @@ function mmhDimAtributi(string $rel): string
     $d = mmhDimenzije($rel);
     return $d ? sprintf(' width="%d" height="%d"', $d[0], $d[1]) : '';
 }
+
+/**
+ * Izaberi sliku za dijeljenje na drustvenim mrezama.
+ *
+ * Facebook, WhatsApp i Viber prikazu veliku karticu samo ako je slika bar
+ * 600x315. Ispod toga daju sitnu slicicu ili nista. Vecina fotografija
+ * proizvoda je uspravna (npr. 507x900), pa je 32 stranice dijeljeno kao
+ * sicusna slicica.
+ *
+ * Ovdje se ne dira nijedna slika — samo se od ponudjenih bira prva koja je
+ * dovoljno siroka. Prvo se gleda glavna slika, pa galerija istog proizvoda,
+ * a tek ako nista ne odgovara uzima se zajednicka fotografija showrooma.
+ *
+ * @param array $kandidati relativne putanje, po redu prvenstva
+ */
+function mmhSlikaZaDijeljenje(array $kandidati, string $rezerva = 'images/showcase-room.jpg'): array
+{
+    foreach ($kandidati as $rel) {
+        if (!$rel) continue;
+        $d = mmhDimenzije($rel);
+        if ($d && $d[0] >= 600 && $d[1] >= 315) {
+            return ['put' => $rel, 'w' => $d[0], 'h' => $d[1]];
+        }
+    }
+    $d = mmhDimenzije($rezerva);
+    return ['put' => $rezerva, 'w' => $d[0] ?? 1714, 'h' => $d[1] ?? 800];
+}
