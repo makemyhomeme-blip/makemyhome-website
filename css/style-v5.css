@@ -1203,7 +1203,7 @@ ul { list-style: none; }
 @media (max-width: 1149px) {
   .footer-vodici { gap: 4px 20px; }
   .footer-vodici-nas { width: 100%; margin-bottom: 4px; }
-  .footer-vodici a { display: inline-block; padding: 9px 0; }
+  .footer-vodici a { display: inline-block; padding: 11px 0; }
 }
 
 /* ===== PRODUCTS PAGE ===== */
