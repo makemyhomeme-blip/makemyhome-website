@@ -157,5 +157,14 @@
 <script src="js/main-v4.js?v=6"></script>
 <script src="js/cart.js?v=3"></script>
 <script src="js/analytics-events.js?v=3" defer></script>
+<script>
+  /* Ova stranica se otvara tek kad je narudzba stvarno primljena
+     (formsubmit.co ovdje preusmjerava preko polja _next), pa je ovo
+     jedino mjesto gdje je sigurno prazniti korpu. */
+  try {
+    localStorage.removeItem('mmh_cart');
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+  } catch (e) {}
+</script>
 </body>
 </html>

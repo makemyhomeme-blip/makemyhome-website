@@ -465,7 +465,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById('co-submit-btn');
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Šaljemo narudžbu…';
-    localStorage.removeItem('mmh_cart');
+    /* Korpa se NE prazni ovdje. Ranije jeste — odmah po kliku, prije nego
+       sto se zna da je narudzba stvarno primljena. Ako bi slanje puklo,
+       kupac bi ostao i bez narudzbe i bez korpe, i morao bi sve iznova.
+       Sada je prazni stranica hvala.html, koja se otvara tek kad narudzba
+       prodje. Ako nesto pukne, korpa ostane i kupac moze da pokusa opet. */
   });
 });
 </script>
