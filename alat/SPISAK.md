@@ -41,7 +41,9 @@ Svako pravilo ili prodje ili ispise tacno gdje je pao.
 - **F4** Nijedan proizvod ne dijeli adresu sa drugim
 
 ## G · Server i bezbjednost
-- **G1** gzip, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy
+- **G1** gzip, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy **i Cache-Control** —
+  mjereno na svakom tipu stranice (staticka `.html`, PHP proizvod, PHP kategorija), jer
+  `FilesMatch` u `.htaccess` gleda ime fajla na disku a ne adresu
 - **G2** `.htaccess`, `error_log`, arhive, `.git`, listanje foldera — sve zabranjeno
 - **G3** `robots.txt` navodi sitemap, blokira `/admin/`, ne blokira `/paneli/` ni `/kategorija/`
 - **G4** Lokalni fajlovi identicni onima na serveru

@@ -178,7 +178,11 @@ RewriteRule ^products\.html$ products.php [QSA,L]
   # HTML i JSON - uvijek se provjeri kod servera, ali dozvoli 304 (brži povratni posjet).
   # no-store je namjerno uklonjen: zabranjivao je i uslovni zahtjev, pa se svaka stranica
   # skidala iznova pri svakom povratku na sajt.
-  <FilesMatch "\.(html|htm|json)$">
+  # .php je ovdje jer FilesMatch gleda IME FAJLA NA DISKU, ne adresu. Stranice
+  # /paneli/..., /kategorija/..., cjenovnik i inspiracija servira PHP, pa su bez
+  # ovoga ostajale bez Cache-Control zaglavlja — pretrazivac ih je kesirao po
+  # sopstvenoj procjeni i mogao prikazati staru cijenu ili stanje zaliha.
+  <FilesMatch "\.(html|htm|json|php)$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
     Header unset Pragma
     Header unset Expires

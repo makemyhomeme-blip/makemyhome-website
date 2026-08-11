@@ -372,14 +372,20 @@ let d=''; process.stdin.on('data',c=>d+=c).on('end',()=>{
 # ============================================================
 def grupa_G():
     print('\n=== G · SERVER I BEZBJEDNOST ===')
-    r = subprocess.run(CURL + ['-H', 'Accept-Encoding: gzip', '-D', '-', '-o', '/dev/null', BAZA + '/'],
-                       capture_output=True, text=True).stdout.lower()
+    # Mjeri se na SVAKOM tipu stranice: statickoj, PHP proizvodu i PHP kategoriji.
+    # Ranije se mjerilo samo na pocetnoj, pa se nije vidjelo da PHP stranice
+    # nemaju Cache-Control (FilesMatch gleda ime fajla, ne adresu).
     g = []
-    for z in ['content-encoding: gzip', 'strict-transport-security', 'x-content-type-options',
-              'x-frame-options', 'referrer-policy']:
-        if z not in r:
-            g.append('nedostaje zaglavlje: %s' % z)
-    zabiljezi('G1', 'Kompresija i bezbjednosna zaglavlja postoje', g, 5)
+    for put in ['/', '/faq.html', '/paneli/3d-letvica-honey-oak', '/kategorija/3d-letvice',
+                '/cjenovnik.html', '/products.html']:
+        r = subprocess.run(CURL + ['--max-time', '20', '-H', 'Accept-Encoding: gzip, br',
+                                   '-D', '-', '-o', '/dev/null', BAZA + put],
+                           capture_output=True, text=True).stdout.lower()
+        for z in ['content-encoding: gzip', 'strict-transport-security', 'x-content-type-options',
+                  'x-frame-options', 'referrer-policy', 'cache-control']:
+            if z not in r:
+                g.append('%s → nedostaje %s' % (put, z))
+    zabiljezi('G1', 'Kompresija, zastita i Cache-Control na SVAKOM tipu stranice', g, 36)
 
     g = []
     for f in ['.htaccess', 'error_log', 'backup.zip', 'db.sql', 'wp-config.php.bak', '_test.php']:
