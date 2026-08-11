@@ -156,8 +156,16 @@ if ($product) {
             }
         }
     };
-    // prvo iz iste kategorije, pa dopuna iz srodnih da svaki proizvod ima 6 veza
-    $uzmi([$prodCat], 6);
+    // Iz iste kategorije uzimamo 6 KOJI SLIJEDE poslije ovog proizvoda, u krug.
+    // Da nije tako, u velikoj kategoriji bi svih 30 proizvoda linkovalo istih
+    // prvih 6, a ostali bi ostali bez ijedne veze sa susjedima.
+    $uKat = array_values(array_filter($products, fn($p) => ($p['category'] ?? '') === $prodCat));
+    $n = count($uKat);
+    if ($n > 1) {
+        $poz = 0;
+        foreach ($uKat as $i => $p) { if ((int)($p['id'] ?? 0) === $mojId) { $poz = $i; break; } }
+        for ($i = 1; $i < $n && count($srodni) < 6; $i++) $srodni[] = $uKat[($poz + $i) % $n];
+    }
     if (count($srodni) < 6) $uzmi($srodneKat[$prodCat] ?? ['bambus-drveni', '3d-letvice'], 6);
 }
 
