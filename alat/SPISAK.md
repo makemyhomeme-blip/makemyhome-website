@@ -70,6 +70,16 @@ a linkovi koje pravi JavaScript se **ne** broje — Google ih u prvom prolazu ne
 - **I3** Svaki od 6 vodica je linkovan sa bar 10 stranica
   (podnozje svih stranica + blok "Procitajte prije kupovine" na kategorijama)
 
+## R · Recenzije
+Recenzije se traze po ID-u proizvoda u `data/reviews.json`. ID se ranije citao samo
+iz `?id=` u adresi — a nove adrese `/paneli/...` ga nemaju, pa je ostajao nula.
+Pod kljucem `"0"` nema nicega, kod je padao na rezervnu granu i uzimao STARO polje
+`reviews` iz `products.json`. Rezultat: svih 117 proizvoda je mjesecima prikazivalo
+3 stare recenzije umjesto 5 novijih, a ocjena i zvjezdice su se racunale po starima.
+Nista na stranici to nije odavalo.
+- **R1** Svaka recenzija koja postoji u podacima se vidi na stranici proizvoda
+- **R2** Ukupan broj prikazanih recenzija = broj u podacima (585)
+
 ## J · Vanjski alati koji sami kazu sta ne valja
 Nase provjere (A–I) gledaju ono sto smo mi odlucili da gledamo. Ova tri alata
 gledaju sve ostalo — pisu ih Google i W3C i ne znaju nista o nasem sajtu.

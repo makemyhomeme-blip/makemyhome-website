@@ -498,6 +498,46 @@ def grupa_H():
     zabiljezi('H2', 'Ugasen proizvod ide na svoju kategoriju, ne na opsti katalog', opsti, len(adrese))
 
 
+def grupa_R():
+    print('\n=== R · RECENZIJE ===')
+    # Recenzije se traze po ID-u proizvoda u data/reviews.json. Kad su adrese
+    # promijenjene u /paneli/..., iz zahtjeva je nestao ?id=, pa je ID ostajao
+    # nula i svaka stranica je pokazivala STARE tri recenzije iz products.json
+    # umjesto pet novijih. Nista drugo na stranici nije odavalo gresku.
+    import urllib.request as _u
+    rev, _, _, _ = dohvati(BAZA + '/data/reviews.json')
+    try:
+        REV = json.loads(rev)
+    except Exception:
+        zabiljezi('R1', 'Svaka recenzija iz podataka se vidi na stranici', ['ne mogu procitati reviews.json'], 1)
+        return
+    php = subprocess.run(['php', '-r',
+        'require "%s/php/slug.php"; $d=json_decode(file_get_contents("php://stdin"),true); '
+        '$o=[]; foreach($d as $p) $o[$p["id"]]=mmhSlugProizvoda($p); echo json_encode($o);' % KORIJEN],
+        input=json.dumps(PROIZVODI), capture_output=True, text=True)
+    slug = json.loads(php.stdout)
+    g = []
+    uk_ocek = uk_prik = 0
+    for pid, blok in REV.items():
+        if pid not in slug:
+            continue
+        ocek = [i.get('name') for i in (blok.get('items') or [])]
+        h, kod, _, _ = dohvati('%s/%s' % (BAZA, slug[pid]), timeout='15')
+        if kod != '200':
+            g.append('%s → %s' % (slug[pid], kod))
+            continue
+        imena = [re.sub(r'<.*', '', x).strip() for x in re.findall(r'class="rv-card-name">([^<]*)', h)]
+        uk_ocek += len(ocek); uk_prik += len(imena)
+        fale = [n for n in ocek if n not in imena]
+        if fale:
+            g.append('%s → fali %d recenzija (%s)' % (slug[pid], len(fale), ', '.join(fale[:2])))
+    zabiljezi('R1', 'Svaka recenzija iz podataka se vidi na stranici', g, len(REV))
+    g = []
+    if uk_prik != uk_ocek:
+        g.append('prikazano %d od %d recenzija' % (uk_prik, uk_ocek))
+    zabiljezi('R2', 'Ukupan broj prikazanih recenzija = broj u podacima', g, 1)
+
+
 # ============================================================
 # I — UNUTRASNJE POVEZIVANJE
 # Stranica do koje vodi jedan jedini link Google sporo obilazi i slabo
@@ -545,14 +585,14 @@ def grupa_I():
 # ============================================================
 GRUPE = {'A': grupa_A, 'B': grupa_B, 'C': grupa_C, 'D': grupa_D,
          'E': grupa_E, 'F': grupa_F, 'G': grupa_G, 'H': grupa_H,
-         'I': grupa_I}
+         'I': grupa_I, 'R': grupa_R}
 
 if __name__ == '__main__':
     arg = (sys.argv[1] if len(sys.argv) > 1 else 'brzo').upper()
     if arg == 'SVE':
-        red = 'ABCDEFGHI'
+        red = 'ABCDEFGHIR'
     elif arg == 'BRZO':
-        red = 'ACDFGI'
+        red = 'ACDFGIR'
     else:
         red = arg
     for k in red:
