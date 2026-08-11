@@ -407,6 +407,23 @@ def grupa_G():
         g.append('.git je javno dostupan!')
     zabiljezi('G2', 'Osjetljivi fajlovi i listanje foldera zabranjeni', g, 12)
 
+    # data/inquiries.json cuva ime, email, telefon i poruku svakog kupca, a
+    # /data/ je javan direktorijum. Bio je otvoren svakome ko zna adresu.
+    # Ovo pravilo pazi da se to ne vrati, i da se ne zatvore fajlovi koji
+    # sajtu trebaju.
+    g = []
+    for f in ['data/inquiries.json', 'data/inquiries.json.tmp',
+              'data/products.bak.20260807-174841.json', 'data/actions_debug.log',
+              'data/upload_debug.log', 'admin/listall.php', 'admin/listgallery.php']:
+        _, kod, _, _ = dohvati('%s/%s' % (BAZA, f), timeout='10')
+        if kod not in ('403', '404', '410'):
+            g.append('%s → %s (podaci kupaca / mrtvi fajl, mora biti zatvoren)' % (f, kod))
+    for f in ['data/products.json', 'data/categories.json', 'data/reviews.json']:
+        _, kod, _, _ = dohvati('%s/%s' % (BAZA, f), timeout='10')
+        if kod != '200':
+            g.append('%s → %s (sajtu treba, ne smije biti zatvoren)' % (f, kod))
+    zabiljezi('G6', 'Podaci kupaca zatvoreni, podaci sajta otvoreni', g, 10)
+
     g = []
     hh, _, _, _ = dohvati(BAZA + '/robots.txt', timeout='10')
     if 'Sitemap: https://makemyhome.me/sitemap.xml' not in hh:

@@ -48,6 +48,11 @@ Svako pravilo ili prodje ili ispise tacno gdje je pao.
 - **G3** `robots.txt` navodi sitemap, blokira `/admin/`, ne blokira `/paneli/` ni `/kategorija/`
 - **G4** Lokalni fajlovi identicni onima na serveru
 - **G5** Svi vazni fajlovi su u `admin/sync.php` listi (bez `php/slug.php` sajt puca)
+- **G6** `data/inquiries.json` (ime, email, telefon i poruka svakog kupca iz kontakt
+  forme) mora biti **zatvoren** — `/data/` je javan direktorijum jer se odatle cita
+  `products.json`. Isto vazi za `.tmp` varijantu, `data/*.bak.<datum>.json` i debug
+  logove. Istovremeno `products.json`, `categories.json` i `reviews.json` moraju
+  ostati **otvoreni** — bez njih sajt ne radi.
 
 ## H · Adrese koje Google stvarno ima
 Izvor: `alat/gsc-adrese.txt` — izvezeno iz Search Console-a (Pages + Coverage).

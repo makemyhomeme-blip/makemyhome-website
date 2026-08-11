@@ -186,6 +186,19 @@ RewriteRule ^products\.html$ products.php [QSA,L]
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
+  # Content-Security-Policy — jedino sigurnosno zaglavlje koje je nedostajalo.
+  # NAMJERNO nema script-src ni style-src: sajt ima puno ugradjenih <script> i
+  # style="..." atributa, pa bi ih takvo pravilo poblokiralo i sajt bi stao.
+  # Ovdje stoje samo pravila koja ne mogu nista da pokvare, a stvarno stite:
+  #   base-uri     — napadac ne moze da ubaci <base> i preusmjeri sve putanje;
+  #                  nas <base href> pokazuje na makemyhome.me pa je izricito dozvoljen
+  #   form-action  — forma ne moze da se preusmjeri na tudji server (kontakt forma
+  #                  salje na formsubmit.co, pa je i on dozvoljen)
+  #   object-src   — nema <object>/<embed>, pa se zabranjuje u potpunosti
+  #   frame-ancestors — isto sto i X-Frame-Options, ali ga citaju i noviji citaci
+  # Provjereno kroz pretrazivac na svim tipovima stranica: nijedno krsenje.
+  Header always set Content-Security-Policy "base-uri 'self' https://makemyhome.me; form-action 'self' https://formsubmit.co; object-src 'none'; frame-ancestors 'self'"
+
   # HTML i JSON - uvijek se provjeri kod servera, ali dozvoli 304 (brži povratni posjet).
   # no-store je namjerno uklonjen: zabranjivao je i uslovni zahtjev, pa se svaka stranica
   # skidala iznova pri svakom povratku na sajt.
