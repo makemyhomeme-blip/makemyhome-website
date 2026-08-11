@@ -84,6 +84,7 @@ RewriteRule ^product-category/lajsne(/.*)?$ /kategorija/aluminijum-lajsne [R=301
 RewriteRule ^product-category/mdf(/.*)?$ /kategorija/mdf [R=301,L]
 RewriteRule ^product-category/bambus(-paneli)?(/.*)?$ /kategorija/bambus-paneli [R=301,L]
 RewriteRule ^product-category/decor-paneli(/.*)?$ /kategorija/bambus-paneli [R=301,L]
+RewriteRule ^product-category/uv-paneli(/.*)?$ /kategorija/bambus-mermerni [R=301,L]
 RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 
 # Ostali stari WordPress query parametri koji renderuju homepage kao duplikat
@@ -99,7 +100,7 @@ RewriteRule .* /products.html? [R=301,L]
 
 # Stare WordPress kategorije → products (? na kraju čisti stare ?add-to-cart= parametre)
 RewriteRule ^proizvodi/?$ /products.html? [R=301,L]
-RewriteRule ^decor-paneli/?$ /products.html? [R=301,L]
+RewriteRule ^decor-paneli/?$ /kategorija/bambus-paneli [R=301,L]
 RewriteRule ^paneli/?$ /products.html? [R=301,L]
 RewriteRule ^shop/?$ /products.html? [R=301,L]
 RewriteRule ^prodavnica/?$ /products.html? [R=301,L]
@@ -118,7 +119,7 @@ RewriteRule ^mdf(-paneli)?/?$ /kategorija/mdf [R=301,L]
 RewriteRule ^classic(-paneli)?/?$ /kategorija/classic [R=301,L]
 RewriteRule ^category/.*$ /products.html? [R=301,L]
 RewriteRule ^tag/.*$ /products.html? [R=301,L]
-RewriteRule ^uv-paneli/?$ /products.html? [R=301,L]
+RewriteRule ^uv-paneli/?$ /kategorija/bambus-mermerni [R=301,L]
 RewriteRule ^flex-stone/?$ /kategorija/flex-stone [R=301,L]
 
 # Stare WordPress info stranice → nove stranice

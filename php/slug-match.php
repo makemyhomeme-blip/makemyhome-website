@@ -57,28 +57,42 @@ function mmhSlugTarget(string $slug, array $products): string
     }
 
     // 4: proizvod vise ne postoji — posalji ga na kategoriju kojoj pripada
+    // Prefiksi su preuzeti iz stvarnih sifara u ponudi. Ranije su BW, SW, MW, CQ i PW
+    // svi vodili na opsti "bambus-paneli", a CS, JS, UV, TR, TS, TW i YL nisu ni
+    // postojali — takvi ugaseni proizvodi zavrsavali su na spisku svih kategorija.
+    // Redoslijed je od duzeg ka kracem, da 'pu' ne pokupi 'pw' i slicno.
     $poPrefiksu = [
         'aku' => 'akusticni-paneli',
         'i3d' => '3d-letvice',
         'spc' => 'spc-pod',
-        'pu'  => 'pu-kamen',
         'mdf' => 'mdf',
-        'bw'  => 'bambus-paneli',
-        'sw'  => 'bambus-paneli',
-        'mw'  => 'bambus-paneli',
-        'cq'  => 'bambus-paneli',
-        'pw'  => 'bambus-paneli',
-        'pq'  => 'bambus-paneli',
-        'l'   => 'aluminijum-lajsne',
+        'pu'  => 'pu-kamen',
+        'bw'  => 'bambus-tekstilni',
+        'sw'  => 'bambus-mermerni',
+        'yl'  => 'bambus-mermerni',
+        'tr'  => 'bambus-mermerni',
+        'uv'  => 'bambus-mermerni',   // stara WP kategorija "uv-paneli" = mermerni UV print
+        'mw'  => 'bambus-drveni',
+        'cq'  => 'bambus-drveni',
+        'pw'  => 'bambus-kozni',
+        'cs'  => 'classic',
+        'js'  => 'bambus-metalni',
+        'ts'  => 'bambus-metalni',
+        'tw'  => 'mdf',
+        'ps'  => 'pu-kamen',        // stari PS-F30 i slicno iz WP kategorije "pu-stone"
     ];
     foreach ($poPrefiksu as $pref => $kat) {
         if (str_starts_with($slugNorm, $pref)) return mmhUrlKategorije($kat);
     }
+    // Lajsne se zovu L1..L8 — samo slovo L pa cifra, da 'linear-travertine'
+    // ne bi zavrsio kao lajsna.
+    if (preg_match('/^l\d/', $slugNorm)) return mmhUrlKategorije('aluminijum-lajsne');
     $poRijeci = [
         'travertine' => 'flex-stone', 'travertino' => 'flex-stone', 'granite' => 'flex-stone',
         'romantine'  => 'flex-stone', 'weaving'    => 'flex-stone', 'dolomitic' => 'flex-stone',
         'rouge'      => 'flex-stone', 'luna'       => 'flex-stone',
         'muretto'    => 'pu-kamen',   'mushroom'   => 'pu-kamen',   'brick'   => 'pu-kamen',
+        'rock'       => 'pu-kamen',   'obloga'     => 'pu-kamen',   'cut-stone' => 'pu-kamen',
         'letvica'    => '3d-letvice', 'letvice'    => '3d-letvice',
         'lajsna'     => 'aluminijum-lajsne', 'lajsne' => 'aluminijum-lajsne',
         'akusticni'  => 'akusticni-paneli', 'aku'   => 'akusticni-paneli',
