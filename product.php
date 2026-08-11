@@ -123,6 +123,56 @@ $catNames = [
 $prodCat     = $product['category'] ?? '';
 $prodCatName = $catNames[$prodCat] ?? '';
 $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/products.html';
+
+// --- Srodni proizvodi: racunaju se na serveru da bi linkovi bili vidljivi bez JavaScripta ---
+$srodneKat = [
+    'bambus-drveni' => ['bambus-tekstilni', 'bambus-mermerni', 'classic'],
+    'bambus-tekstilni' => ['bambus-drveni', 'bambus-mermerni', 'classic'],
+    'bambus-mermerni' => ['bambus-drveni', 'bambus-metalni', 'classic'],
+    'bambus-metalni' => ['bambus-mermerni', 'bambus-kozni', 'classic'],
+    'bambus-kozni' => ['bambus-tekstilni', 'bambus-metalni', 'classic'],
+    'bambus-paneli' => ['bambus-drveni', 'bambus-tekstilni', 'classic'],
+    'classic' => ['bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni'],
+    '3d-letvice' => ['akusticni-paneli', 'aluminijum-lajsne', 'mdf'],
+    'akusticni-paneli' => ['3d-letvice', 'mdf', 'aluminijum-lajsne'],
+    'aluminijum-lajsne' => ['3d-letvice', 'bambus-drveni', 'akusticni-paneli'],
+    'mdf' => ['3d-letvice', 'akusticni-paneli', 'classic'],
+    'spc-pod' => ['bambus-drveni', 'flex-stone', 'pu-kamen'],
+    'pu-kamen' => ['flex-stone', 'bambus-mermerni', 'spc-pod'],
+    'flex-stone' => ['pu-kamen', 'bambus-mermerni', 'spc-pod'],
+];
+$srodni = [];
+if ($product) {
+    $mojId = (int)($product['id'] ?? 0);
+    $uzmi = function (array $kategorije, int $koliko) use ($products, $mojId, &$srodni) {
+        $vec = array_map(fn($p) => (int)$p['id'], $srodni);
+        foreach ($kategorije as $k) {
+            foreach ($products as $p) {
+                if (count($srodni) >= $koliko) return;
+                if (($p['category'] ?? '') !== $k) continue;
+                $pid = (int)($p['id'] ?? 0);
+                if ($pid === $mojId || in_array($pid, $vec, true)) continue;
+                $srodni[] = $p; $vec[] = $pid;
+            }
+        }
+    };
+    // prvo iz iste kategorije, pa dopuna iz srodnih da svaki proizvod ima 6 veza
+    $uzmi([$prodCat], 6);
+    if (count($srodni) < 6) $uzmi($srodneKat[$prodCat] ?? ['bambus-drveni', '3d-letvice'], 6);
+}
+
+// Vodič koji tematski odgovara ovoj kategoriji
+$vodicZaKat = [
+    'spc-pod' => ['spc-ili-laminat.html', 'SPC pod ili laminat — šta je bolje za stan'],
+    'akusticni-paneli' => ['akusticni-paneli-kancelarija.html', 'Akustični paneli u kancelariji — koliko stvarno smanjuju buku'],
+    '3d-letvice' => ['tv-zid.html', 'TV zid od letvica — kako se planira i koliko košta'],
+    'mdf' => ['tv-zid.html', 'TV zid od panela — kako se planira i koliko košta'],
+    'pu-kamen' => ['paneli-za-kupatilo.html', 'Paneli za kupatilo — šta podnosi vlagu'],
+    'flex-stone' => ['paneli-za-kupatilo.html', 'Paneli za kupatilo — šta podnosi vlagu'],
+    'bambus-drveni' => ['paneli-ili-lamperija.html', 'Zidni paneli ili lamperija — poređenje'],
+    'classic' => ['paneli-ili-lamperija.html', 'Zidni paneli ili lamperija — poređenje'],
+];
+$vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju — korak po korak'];
 ?>
 <!DOCTYPE html>
 <html lang="sr-ME">
@@ -317,7 +367,7 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=38">
+  <link rel="stylesheet" href="css/style-v5.css?v=39">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -694,14 +744,56 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
     </div>
     <?php endif; ?>
 
-    <!-- Slični proizvodi -->
+    <!-- Slični proizvodi — renderuje server, da linkovi rade i bez JavaScripta -->
+    <?php if ($product && $srodni): ?>
     <div style="margin-top:80px;">
       <div class="gold-line"></div>
       <h2 class="section-title" style="margin-bottom:40px;">Slični Proizvodi</h2>
       <div class="products-grid" id="related-products">
-        <!-- Učitava se dinamički -->
+        <?php foreach ($srodni as $sp):
+          $spUrl   = mmhUrlProizvoda($sp);
+          $spKat   = $catNames[$sp['category'] ?? ''] ?? ($sp['category'] ?? '');
+          $spCijena = (float)($sp['price'] ?? 0);
+          $spPopust = (int)($sp['discount'] ?? 0);
+          $spNema   = ($sp['inStock'] ?? true) === false;
+          $spJedin  = $sp['unit'] ?? 'kom';
+        ?>
+        <article class="product-card<?= $spNema ? ' out-of-stock' : '' ?>" data-category="<?= htmlspecialchars($sp['category'] ?? '') ?>" data-id="<?= (int)($sp['id'] ?? 0) ?>">
+          <a href="<?= htmlspecialchars($spUrl) ?>" class="product-img" style="display:block;">
+            <img src="<?= htmlspecialchars($sp['image'] ?? '') ?>" loading="lazy"
+                 alt="<?= htmlspecialchars(($sp['name'] ?? '') . ' – ' . $spKat . ' | Make My Home Decor Podgorica') ?>">
+            <?php if ($spPopust > 0 && !$spNema): ?>
+            <div style="position:absolute;top:10px;right:10px;background:#e74c3c;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;box-shadow:0 3px 10px rgba(231,76,60,0.45);">&minus;<?= $spPopust ?>%</div>
+            <?php endif; ?>
+            <?php if ($spNema): ?><div class="oos-tag">Rasprodato</div><?php endif; ?>
+          </a>
+          <div class="product-body">
+            <div class="product-category"><?= htmlspecialchars($spKat) ?></div>
+            <h3 class="product-name"><a href="<?= htmlspecialchars($spUrl) ?>" style="color:inherit;"><?= htmlspecialchars($sp['name'] ?? '') ?></a></h3>
+            <?php if (!empty($sp['sku'])): ?><div class="product-sku">Šifra: <strong><?= htmlspecialchars($sp['sku']) ?></strong></div><?php endif; ?>
+            <p class="product-desc"><?= htmlspecialchars(mb_substr((string)($sp['description'] ?? ''), 0, 150)) ?>…</p>
+            <div class="product-footer">
+              <div class="product-price">
+                <?php if ($spPopust > 0): ?>
+                  <span style="text-decoration:line-through;color:#767676;font-size:13px;display:block;"><?= $spCijena ?> €</span>
+                  <span style="color:#e74c3c;font-weight:700;"><?= number_format($spCijena * (1 - $spPopust / 100), 2, ',', '') ?> €</span>
+                  <span style="color:#666e7a;font-size:12px;"> / <?= htmlspecialchars($spJedin) ?></span>
+                <?php else: ?>
+                  <?= $spCijena ?> € <span>/ <?= htmlspecialchars($spJedin) ?></span>
+                <?php endif; ?>
+              </div>
+              <a href="<?= htmlspecialchars($spUrl) ?>" class="btn-card-detail">Detaljnije <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+        <?php endforeach; ?>
+      </div>
+      <div style="text-align:center;margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="<?= htmlspecialchars($prodCatUrl) ?>" class="btn btn-outline">Sve iz kategorije <?= htmlspecialchars($prodCatName) ?></a>
+        <a href="<?= htmlspecialchars($vodic[0]) ?>" class="btn btn-outline"><?= htmlspecialchars($vodic[1]) ?></a>
       </div>
     </div>
+    <?php endif; ?>
   </div>
 </section>
 
@@ -769,6 +861,15 @@ $prodCatUrl  = $prodCat ? mmhUrlKategorije($prodCat) : 'https://makemyhome.me/pr
         </ul>
       </div>
     </div>
+    <nav class="footer-vodici" aria-label="Vodiči i savjeti">
+      <span class="footer-vodici-nas">Vodiči i savjeti</span>
+      <a href="paneli-za-kupatilo.html">Paneli za kupatilo</a>
+      <a href="tv-zid.html">TV zid od panela</a>
+      <a href="spc-ili-laminat.html">SPC pod ili laminat</a>
+      <a href="paneli-ili-lamperija.html">Paneli ili lamperija</a>
+      <a href="akusticni-paneli-kancelarija.html">Akustični paneli u kancelariji</a>
+      <a href="dostava-crna-gora.html">Dostava i montaža u Crnoj Gori</a>
+    </nav>
     <div class="footer-bottom">
       <p>&copy; 2026 Make My Home Decor. Sva prava zadržana.</p>
       <p class="footer-pravne"><a href="uslovi.html">Uslovi kupovine</a><a href="reklamacije.html">Reklamacije i povrat</a><a href="privatnost.html">Politika privatnosti</a></p>

@@ -189,6 +189,34 @@ $catTitles = [
   'mdf'              => 'MDF Kanelirani Paneli – Rebrasti Zid',
   'flex-stone'       => 'Flex Stone – Savitljivi Kameni Furnir',
 ];
+
+// Vodici koji tematski pripadaju kategoriji (unutrasnje povezivanje)
+$sviVodici = [
+  'paneli-za-kupatilo.html'            => 'Paneli za kupatilo — šta stvarno podnosi vlagu',
+  'tv-zid.html'                        => 'TV zid od panela — kako se planira i koliko košta',
+  'spc-ili-laminat.html'               => 'SPC pod ili laminat — šta je bolje za stan',
+  'paneli-ili-lamperija.html'          => 'Zidni paneli ili lamperija — poređenje',
+  'akusticni-paneli-kancelarija.html'  => 'Akustični paneli u kancelariji — koliko smanjuju buku',
+  'dostava-crna-gora.html'             => 'Dostava i montaža u Crnoj Gori',
+];
+$vodiciZaKat = [
+  'bambus-paneli'    => ['paneli-ili-lamperija.html', 'tv-zid.html', 'paneli-za-kupatilo.html'],
+  'bambus-drveni'    => ['paneli-ili-lamperija.html', 'tv-zid.html', 'dostava-crna-gora.html'],
+  'bambus-tekstilni' => ['akusticni-paneli-kancelarija.html', 'tv-zid.html', 'paneli-ili-lamperija.html'],
+  'bambus-mermerni'  => ['paneli-za-kupatilo.html', 'tv-zid.html', 'paneli-ili-lamperija.html'],
+  'bambus-metalni'   => ['tv-zid.html', 'paneli-ili-lamperija.html', 'dostava-crna-gora.html'],
+  'bambus-kozni'     => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'paneli-ili-lamperija.html'],
+  'classic'          => ['paneli-ili-lamperija.html', 'paneli-za-kupatilo.html', 'dostava-crna-gora.html'],
+  '3d-letvice'       => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'paneli-ili-lamperija.html'],
+  'akusticni-paneli' => ['akusticni-paneli-kancelarija.html', 'tv-zid.html', 'dostava-crna-gora.html'],
+  'aluminijum-lajsne'=> ['tv-zid.html', 'paneli-ili-lamperija.html', 'dostava-crna-gora.html'],
+  'spc-pod'          => ['spc-ili-laminat.html', 'paneli-za-kupatilo.html', 'dostava-crna-gora.html'],
+  'pu-kamen'         => ['paneli-za-kupatilo.html', 'tv-zid.html', 'dostava-crna-gora.html'],
+  'mdf'              => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'paneli-ili-lamperija.html'],
+  'flex-stone'       => ['paneli-za-kupatilo.html', 'tv-zid.html', 'dostava-crna-gora.html'],
+];
+$vodiciOvdje = $cat ? ($vodiciZaKat[$cat] ?? []) : array_keys($sviVodici);
+
 $pageTitle = $cat
   ? (($catTitles[$cat] ?? $catName) . ' | Make My Home Decor')
   : 'Zidni Paneli i Bambus Obloge | Make My Home Decor';
@@ -324,7 +352,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=38">
+  <link rel="stylesheet" href="css/style-v5.css?v=39">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -677,6 +705,20 @@ echo "\n</script>\n";
         <p>Niste sigurni šta odgovara vašem prostoru? Pogledajte <a href="faq.html" style="color:#c9a86c;font-weight:600;">česta pitanja</a> ili nas pozovite na <a href="tel:+38269105222" style="color:#c9a86c;font-weight:600;">069 105 222</a> – savjetujemo bez obaveze. Arhitektama, dizajnerima i izvođačima nudimo posebne uslove kroz program <a href="decor-box.html" style="color:#c9a86c;font-weight:600;">Decor Box</a>.</p>
       </section>
       <?php endif; ?>
+      <?php if ($vodiciOvdje): ?>
+      <section class="cat-vodici" style="max-width:860px;margin:34px auto 0;padding:26px 24px 32px;">
+        <h2 style="font-size:1.15em;color:#1a1a1a;margin-bottom:16px;">Pročitajte prije kupovine</h2>
+        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:10px;">
+          <?php foreach ($vodiciOvdje as $vf): if (!isset($sviVodici[$vf])) continue; ?>
+          <li style="line-height:1.6;">
+            <a href="<?= htmlspecialchars($vf) ?>" style="color:#8a6d3b;font-weight:600;display:inline-block;padding:4px 0;">
+              <i class="fas fa-arrow-right" style="font-size:12px;color:#c9a86c;margin-right:8px;"></i><?= htmlspecialchars($sviVodici[$vf]) ?>
+            </a>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+      </section>
+      <?php endif; ?>
       <script>(function(){
         var p=new URLSearchParams(location.search),cat=p.get('cat')||p.get('category');
         if(!cat)return;
@@ -780,6 +822,15 @@ echo "\n</script>\n";
         </ul>
       </div>
     </div>
+    <nav class="footer-vodici" aria-label="Vodiči i savjeti">
+      <span class="footer-vodici-nas">Vodiči i savjeti</span>
+      <a href="paneli-za-kupatilo.html">Paneli za kupatilo</a>
+      <a href="tv-zid.html">TV zid od panela</a>
+      <a href="spc-ili-laminat.html">SPC pod ili laminat</a>
+      <a href="paneli-ili-lamperija.html">Paneli ili lamperija</a>
+      <a href="akusticni-paneli-kancelarija.html">Akustični paneli u kancelariji</a>
+      <a href="dostava-crna-gora.html">Dostava i montaža u Crnoj Gori</a>
+    </nav>
     <div class="footer-bottom">
       <p>&copy; 2026 Make My Home Decor. Sva prava zadržana.</p>
       <p class="footer-pravne"><a href="uslovi.html">Uslovi kupovine</a><a href="reklamacije.html">Reklamacije i povrat</a><a href="privatnost.html">Politika privatnosti</a></p>

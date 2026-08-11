@@ -1558,12 +1558,15 @@ async function renderProductDetail() {
   // Immediately compute initial calculator result
   calcPanels();
 
-  // Related products
-  const related = allProducts.filter(p => p.category === product.category && p.id !== id).slice(0, 4);
+  // Srodni proizvodi — product.php ih vec ispise na serveru.
+  // JS popunjava samo ako je kutija prazna (product.html bez PHP-a).
   const relContainer = document.getElementById('related-products');
-  if (relContainer && related.length > 0) {
-    relContainer.innerHTML = related.map(p => renderProductCard(p)).join('');
-    initAnimations();
+  if (relContainer && relContainer.querySelectorAll('.product-card').length === 0) {
+    const related = allProducts.filter(p => p.category === product.category && p.id !== id).slice(0, 4);
+    if (related.length > 0) {
+      relContainer.innerHTML = related.map(p => renderProductCard(p)).join('');
+      initAnimations();
+    }
   }
 }
 
