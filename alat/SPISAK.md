@@ -103,6 +103,29 @@ svojstvo. Sve ostalo mora biti cisto.
 **4. Google Search Console** (ovo moze samo vlasnik, kroz nalog)
   Pages · Sitemaps · Core Web Vitals · Manual actions
 
+## K · Fontovi — sazeti, ne originalni
+
+**Ne zamjenjuj fajlove u `fa/webfonts/` i `fonts/` originalima sa interneta.**
+Oni na serveru su namjerno sazeti na znakove koje sajt koristi:
+
+| fajl | original | sada | sadrzi |
+|---|---|---|---|
+| `fa-solid-900.woff2` | 153 kB | 12 kB | 123 ikone |
+| `fa-brands-400.woff2` | 114 kB | 2 kB | 6 ikona |
+| Inter `...25L7SUc` (latin-ext) | 83 kB | 37 kB | U+0100-024F |
+| Playfair `...LYgFE_` (latin-ext) | 21 kB | 15 kB | U+0100-024F |
+
+Prva posjeta je time pala sa 455 kB fontova na 150 kB.
+Imena fajlova, kodovi znakova i CSS su nepromijenjeni, pa stara kesirana
+verzija i dalje radi.
+
+**Ako se doda NOVA ikona** koja se do sada nije koristila, nece se prikazati —
+font je nema. Tada treba ponovo sazeti:
+```
+python3 alat/fontovi.py      # popise ikone iz svih fajlova i sazme fontove
+```
+Isto vazi ako se u tekst uvede slovo van opsega U+0000-024F.
+
 ## Sta se NE provjerava automatski
 - Izgled na telefonu (radi se kroz Playwright, posebno)
 - Pretraga, korpa, naplata (isto Playwright)
