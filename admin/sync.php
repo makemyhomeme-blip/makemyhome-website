@@ -42,69 +42,23 @@ if ($apiOdgovor !== false) {
 if ($sha) $base = "https://raw.githubusercontent.com/{$repo}/{$sha}";
 $sync_izvor = $sha ? ('commit ' . substr($sha, 0, 7)) : ('grana ' . $branch . ' (API nedostupan)');
 
-$files = [
-    // HTML stranice
-    $root . '/404.html'         => $base . '/404.html',
-    $root . '/index.html'       => $base . '/index.html',
-    $root . '/product.html'     => $base . '/product.html',
-    $root . '/products.html'    => $base . '/products.html',
-    $root . '/about.html'       => $base . '/about.html',
-    $root . '/contact.html'     => $base . '/contact.html',
-    $root . '/korpa.html'       => $base . '/korpa.html',
-    $root . '/checkout.html'    => $base . '/checkout.html',
-    $root . '/hvala.html'       => $base . '/hvala.html',
-    $root . '/faq.html'         => $base . '/faq.html',
-    $root . '/montaza.html'     => $base . '/montaza.html',
-    $root . '/decor-box.html'   => $base . '/decor-box.html',
-    $root . '/privatnost.html'  => $base . '/privatnost.html',
-    $root . '/uslovi.html'      => $base . '/uslovi.html',
-    $root . '/reklamacije.html' => $base . '/reklamacije.html',
-    $root . '/paneli-za-kupatilo.html' => $base . '/paneli-za-kupatilo.html',
-    $root . '/tv-zid.html' => $base . '/tv-zid.html',
-    $root . '/paneli-ili-lamperija.html' => $base . '/paneli-ili-lamperija.html',
-    $root . '/akusticni-paneli-kancelarija.html' => $base . '/akusticni-paneli-kancelarija.html',
-    $root . '/spc-ili-laminat.html' => $base . '/spc-ili-laminat.html',
-    $root . '/dostava-crna-gora.html' => $base . '/dostava-crna-gora.html',
-    // PHP
-    $root . '/product.php'      => $base . '/product.php',
-    $root . '/products.php'     => $base . '/products.php',
-    $root . '/cjenovnik.php'    => $base . '/cjenovnik.php',
-    $root . '/inspiracija.php'  => $base . '/inspiracija.php',
-    $root . '/php/slug.php'       => $base . '/php/slug.php',
-    $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
-    $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
-    $root . '/php/contact.php'    => $base . '/php/contact.php',
-    // JS
-    $root . '/js/cart.js'       => $base . '/js/cart.js',
-    $root . '/js/products.js'   => $base . '/js/products.js',
-    $root . '/js/main-v4.js'    => $base . '/js/main-v4.js',
-    $root . '/js/analytics-events.js' => $base . '/js/analytics-events.js',
-    // CSS
-    $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
-    $root . '/css/fonts.css'    => $base . '/css/fonts.css',
-    // Images / favicon
-    $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
-    $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
-    // SEO
-    $root . '/404.php'          => $base . '/404.php',
-    $root . '/robots.txt'       => $base . '/robots.txt',
-    $root . '/llms.txt'         => $base . '/llms.txt',
-    $root . '/sitemap.xml'      => $base . '/sitemap.xml',
-    // Server config
-    $root . '/.htaccess'           => $base . '/.htaccess',
-    // Admin
-    __DIR__ . '/dashboard.php'  => $base . '/admin/dashboard.php',
-    __DIR__ . '/actions.php'    => $base . '/admin/actions.php',
-    __DIR__ . '/sync.php'       => $base . '/admin/sync.php',
-    __DIR__ . '/index.php'      => $base . '/admin/index.php',
-    __DIR__ . '/logout.php'     => $base . '/admin/logout.php',
-    __DIR__ . '/oporavak.php'   => $base . '/admin/oporavak.php',
-    __DIR__ . '/sifre.php'      => $base . '/admin/sifre.php',
-    __DIR__ . '/optimize-gallery-images.php' => $base . '/admin/optimize-gallery-images.php',
-    __DIR__ . '/optimize-main-images.php'    => $base . '/admin/optimize-main-images.php',
-    __DIR__ . '/apply-discount.php'          => $base . '/admin/apply-discount.php',
-    __DIR__ . '/server-status.php'           => $base . '/admin/server-status.php',
-];
+// --- Spisak fajlova ------------------------------------------------------
+// Spisak stoji u admin/sync-lista.php i skida se PRVI, prije svega ostalog.
+// Ranije je stajao ovdje, u sync.php, pa je prvi sync poslije dodavanja novog
+// fajla radio po starom spisku: povukao bi product.php koji trazi novi fajl,
+// a sam novi fajl ne bi. Sajt bi vratio 500 dok se sync ne pokrene drugi put.
+$listaPut = __DIR__ . '/sync-lista.php';
+$svjezaLista = fetchUrl($base . '/admin/sync-lista.php');
+if ($svjezaLista !== false && strpos($svjezaLista, 'return function') !== false) {
+    file_put_contents($listaPut, $svjezaLista);
+    if (function_exists('opcache_invalidate')) opcache_invalidate($listaPut, true);
+}
+if (!is_file($listaPut)) {
+    die('Nema admin/sync-lista.php, a ni sa GitHuba se ne moze skinuti. Sync prekinut.');
+}
+$dajListu = require $listaPut;
+$files = $dajListu($base, $root, __DIR__);
+
 
 /** Fetch a URL using best available method */
 function fetchUrl(string $url): string|false {

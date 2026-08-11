@@ -448,12 +448,31 @@ def grupa_G():
             g.append('%s se razlikuje od servera' % f)
     zabiljezi('G4', 'Lokalni fajlovi identicni serveru', g, 9)
 
+    # Spisak je od 11.08.2026 u admin/sync-lista.php, ne vise u sync.php.
+    # Fajl koji nije u spisku nikad ne stigne na server — a ako ga product.php
+    # trazi preko require, cijeli sajt vrati 500.
     g = []
-    for f in ['php/slug.php', 'php/slug-match.php', 'product.php', 'products.php',
-              'cjenovnik.php', 'inspiracija.php', '.htaccess']:
-        if "'/%s'" % f not in open(os.path.join(KORIJEN, 'admin/sync.php'), encoding='utf-8').read():
+    lista = ''
+    for put in ('admin/sync-lista.php', 'admin/sync.php'):
+        p = os.path.join(KORIJEN, put)
+        if os.path.exists(p):
+            lista += open(p, encoding='utf-8').read()
+    vazni = ['php/slug.php', 'php/dimenzije.php', 'php/slug-match.php', 'php/contact.php',
+             'product.php', 'products.php', 'cjenovnik.php', 'inspiracija.php', '.htaccess',
+             'sitemap.xml', 'robots.txt', 'css/style-v5.css', 'js/products.js',
+             'admin/sync.php', 'admin/sync-lista.php']
+    for f in vazni:
+        if "'/%s'" % f not in lista and "'%s'" % f not in lista:
             g.append('%s NIJE u sync listi' % f)
-    zabiljezi('G5', 'Svi vazni fajlovi su u listi sinhronizacije', g, 7)
+    # Svaki fajl koji neki PHP trazi preko require MORA biti u spisku
+    for izvor in ('product.php', 'products.php', 'inspiracija.php', 'cjenovnik.php'):
+        p = os.path.join(KORIJEN, izvor)
+        if not os.path.exists(p):
+            continue
+        for m in re.findall(r"require(?:_once)?\s+__DIR__\s*\.\s*'/([^']+)'", open(p, encoding='utf-8').read()):
+            if "'/%s'" % m not in lista:
+                g.append('%s trazi %s, a njega nema u sync listi (sajt bi vratio 500)' % (izvor, m))
+    zabiljezi('G5', 'Svi vazni fajlovi su u listi sinhronizacije', g, len(vazni))
 
 
 # ============================================================
