@@ -53,6 +53,17 @@ RewriteRule ^comments/ - [G,L]
 # fajlovi se brisu sa diska, a ovo pravilo sprjecava da ih iko ikad opet izlozi.
 RewriteRule \.(zip|tar|gz|bz2|rar|7z|sql|bak|old|orig|swp|log|md|ini|env|dist)$ - [F,L]
 RewriteRule ^error_log$ - [F,L]
+# data/inquiries.json cuva ime, email, telefon i poruku svakog kupca koji
+# posalje upit preko kontakt forme, a /data/ je javan direktorijum (odatle se
+# cita products.json). Fajl je bio otvoren za svakoga ko zna adresu. Bio je
+# prazan pa nista nije iscurilo, ali prvi sljedeci upit bi bio javan.
+# Blokiraju se i .tmp i .bak varijante, jer upis ide preko privremenog fajla.
+RewriteRule ^data/inquiries\.json - [F,L]
+RewriteRule ^data/inquiries\.json\.(tmp|bak)$ - [F,L]
+# Backupi podataka koje pravi admin (data/*.bak.<datum>.json) — ime ne zavrsava
+# na .bak pa ih gornje pravilo ne hvata. Nisu tajna, ali su duplikat sadrzaja
+# koji Google ne treba da cita.
+RewriteRule ^data/.*\.bak\.[0-9-]+\.json$ - [F,L]
 # Stari Canva katalog (82 str, 27,7 MB, iz 12/2024) — obrisan, svi proizvodi iz njega
 # vec postoje kao stranice na sajtu. Google ga je imao u indeksu, pa 410 umjesto 404.
 RewriteRule ^images/katalog\.pdf$ - [G,L]
