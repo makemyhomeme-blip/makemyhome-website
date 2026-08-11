@@ -375,7 +375,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=40">
+  <link rel="stylesheet" href="css/style-v5.css?v=42">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -503,7 +503,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
     </nav>
     <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
-      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
+      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#c0392b;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
     <button id="hamburger" class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -623,7 +623,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
               <?php if ($discount > 0): ?>
               <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($salePrice, 2, ',', '.') ?> €</span>
               <span style="text-decoration:line-through;color:#767676;font-size:1.1em;margin-left:10px;"><?= number_format($price, 2, ',', '.') ?> €</span>
-              <span style="background:#e74c3c;color:#fff;font-size:.75em;font-weight:700;padding:3px 8px;border-radius:20px;margin-left:8px;">-<?= $discount ?>%</span>
+              <span style="background:#c0392b;color:#fff;font-size:.75em;font-weight:700;padding:3px 8px;border-radius:20px;margin-left:8px;">-<?= $discount ?>%</span>
               <?php else: ?>
               <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($price, 2, ',', '.') ?> €</span>
               <?php endif; ?>
@@ -651,7 +651,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <?php if ($inStock): ?>
             <p style="color:#27ae60;font-weight:600;margin-top:14px;">&#10003; Na stanju</p>
             <?php else: ?>
-            <p style="color:#e74c3c;font-weight:600;margin-top:14px;">Privremeno nedostupno</p>
+            <p style="color:#c0392b;font-weight:600;margin-top:14px;">Privremeno nedostupno</p>
             <?php endif; ?>
           </div>
           <?php else: ?>
@@ -771,7 +771,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <img src="<?= htmlspecialchars($sp['image'] ?? '') ?>" loading="lazy"
                  alt="<?= htmlspecialchars(($sp['name'] ?? '') . ' – ' . $spKat . ' | Make My Home Decor Podgorica') ?>">
             <?php if ($spPopust > 0 && !$spNema): ?>
-            <div style="position:absolute;top:10px;right:10px;background:#e74c3c;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;box-shadow:0 3px 10px rgba(231,76,60,0.45);">&minus;<?= $spPopust ?>%</div>
+            <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;box-shadow:0 3px 10px rgba(192,57,43,0.45);">&minus;<?= $spPopust ?>%</div>
             <?php endif; ?>
             <?php if ($spNema): ?><div class="oos-tag">Rasprodato</div><?php endif; ?>
           </a>
@@ -784,7 +784,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
               <div class="product-price">
                 <?php if ($spPopust > 0): ?>
                   <span style="text-decoration:line-through;color:#767676;font-size:13px;display:block;"><?= $spCijena ?> €</span>
-                  <span style="color:#e74c3c;font-weight:700;"><?= number_format($spCijena * (1 - $spPopust / 100), 2, ',', '') ?> €</span>
+                  <span style="color:#c0392b;font-weight:700;"><?= number_format($spCijena * (1 - $spPopust / 100), 2, ',', '') ?> €</span>
                   <span style="color:#666e7a;font-size:12px;"> / <?= htmlspecialchars($spJedin) ?></span>
                 <?php else: ?>
                   <?= $spCijena ?> € <span>/ <?= htmlspecialchars($spJedin) ?></span>

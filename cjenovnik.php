@@ -98,7 +98,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=40">
+  <link rel="stylesheet" href="css/style-v5.css?v=42">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -405,7 +405,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
     </nav>
     <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
-      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
+      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#c0392b;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
     <button id="hamburger" class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -493,7 +493,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
             <?php if ($maxPop > 0): ?>
               <strong style="color:#c9a86c;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
               <span style="display:block;font-size:12px;color:#767676;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
-              <span style="display:inline-block;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;white-space:nowrap;"><?= $popTekst ?></span>
+              <span style="display:inline-block;background:#c0392b;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;white-space:nowrap;"><?= $popTekst ?></span>
             <?php else: ?>
               <strong style="font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
             <?php endif; ?>

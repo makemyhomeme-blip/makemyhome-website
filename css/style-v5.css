@@ -17,7 +17,7 @@
   --gray-light: #ccc;
   --light: #f5f0eb;
   --white: #ffffff;
-  --danger: #e74c3c;
+  --danger: #c0392b;
   --success: #27ae60;
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
@@ -553,7 +553,7 @@ ul { list-style: none; }
 .category-link {
   font-size: 13px;
   font-weight: 600;
-  color: var(--primary);
+  color: #795f32;          /* zlatna je na bijeloj kartici davala 2,26:1 */
   display: flex;
   align-items: center;
   gap: 6px;
@@ -670,11 +670,11 @@ ul { list-style: none; }
   z-index: 1;
 }
 
-.product-badge.new { background: #27ae60; color: var(--white); }
-.product-badge.sale { background: var(--danger); color: var(--white); }
-.product-badge.limited { background: #8e44ad; color: var(--white); }
-.product-badge.recommended { background: #2980b9; color: var(--white); }
-.product-badge.preorder { background: #e67e22; color: var(--white); }
+.product-badge.new { background: #1c7a41; color: var(--white); }
+.product-badge.sale { background: #c0392b; color: var(--white); }
+.product-badge.limited { background: #7d3c98; color: var(--white); }
+.product-badge.recommended { background: #1f6391; color: var(--white); }
+.product-badge.preorder { background: #a85a0f; color: var(--white); }
 
 .product-body { padding: 20px; }
 
@@ -682,7 +682,7 @@ ul { list-style: none; }
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--primary);
+  color: #795f32;          /* isto — sitna zlatna slova na bijelom */
   font-weight: 600;
   margin-bottom: 6px;
 }
@@ -701,7 +701,7 @@ ul { list-style: none; }
   margin-bottom: 6px;
   letter-spacing: 0.03em;
 }
-.product-sku strong { color: #777; font-weight: 600; }
+.product-sku strong { color: #666; font-weight: 600; }
 
 .product-desc {
   font-size: 14px;
@@ -1171,10 +1171,10 @@ ul { list-style: none; }
 
 .footer-bottom p {
   font-size: 13px;
-  color: rgba(255,255,255,0.35);
+  color: #9a9a9a;          /* bilo je 3,22:1 prema tamnom podnozju */
 }
 
-.footer-bottom a { color: var(--primary); }
+.footer-bottom a { color: var(--primary); text-decoration: underline; }
 
 /* ===== VODICI U PODNOZJU ===== */
 .footer-vodici {
@@ -1609,9 +1609,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 
 .form-msg.error {
-  background: rgba(231,76,60,0.1);
+  background: rgba(192,57,43,0.1);
   color: var(--danger);
-  border: 1px solid rgba(231,76,60,0.3);
+  border: 1px solid rgba(192,57,43,0.3);
   display: block;
 }
 
@@ -1816,10 +1816,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 
 .insta-handle {
-  color: var(--primary);
+  color: #795f32;          /* zlatna je na svijetloj podlozi davala 1,99:1 */
   font-weight: 600;
+  text-decoration: underline;
 }
-.insta-handle:hover { color: var(--primary-dark); }
+.insta-handle:hover { color: #5f4726; }
 
 .insta-cta-box {
   display: flex;
@@ -1866,7 +1867,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .btn-gold {
   flex-shrink: 0;
   background: var(--primary);
-  color: var(--white);
+  color: #1a1a1a;
   padding: 14px 28px;
   border-radius: 4px;
   font-weight: 600;
@@ -1878,7 +1879,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .btn-gold:hover {
   background: var(--primary-dark);
-  color: var(--white);
+  color: #1a1a1a;
 }
 
 @media (max-width: 768px) {
@@ -2850,7 +2851,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   transition: color .2s, background .2s;
   margin-left: 4px;
 }
-.cart-item-remove:hover { color: #e74c3c; background: rgba(231,76,60,0.1); }
+.cart-item-remove:hover { color: #c0392b; background: rgba(192,57,43,0.1); }
 
 .cart-summary {
   background: rgba(255,255,255,0.03);
@@ -2911,7 +2912,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   font-family: inherit;
   transition: color .2s, border-color .2s;
 }
-.btn-clear-cart:hover { color: #e74c3c; border-color: rgba(231,76,60,0.4); }
+.btn-clear-cart:hover { color: #c0392b; border-color: rgba(192,57,43,0.4); }
 
 /* ===== CHECKOUT PAGE ===== */
 .checkout-page { min-height: 70vh; padding: 120px 0 80px; }
@@ -3267,7 +3268,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 /* ===== Pravne stranice u dnu futera — dostupne, ali ne u glavnoj navigaciji ===== */
 .footer-pravne { display: flex; gap: 18px; flex-wrap: wrap; }
 .footer-pravne a {
-  font-size: 12.5px; color: rgba(255,255,255,.42); text-decoration: none;
+  font-size: 12.5px; color: #9a9a9a; text-decoration: underline;
 }
 .footer-pravne a:hover { color: rgba(201,168,108,.9); text-decoration: underline; }
 @media (max-width: 560px) { .footer-pravne { gap: 12px; justify-content: center; } }

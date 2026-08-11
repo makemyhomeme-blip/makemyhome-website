@@ -127,7 +127,7 @@ function renderProductCard(product, lazy = true) {
   const outOfStock = product.inStock === false;
 
   const discountRibbon = (product.discount > 0 && !isPreorder && !outOfStock)
-    ? `<div style="position:absolute;top:10px;right:10px;background:#e74c3c;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;box-shadow:0 3px 10px rgba(231,76,60,0.45);letter-spacing:0.3px;">−${product.discount}%</div>`
+    ? `<div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;box-shadow:0 3px 10px rgba(192,57,43,0.45);letter-spacing:0.3px;">−${product.discount}%</div>`
     : '';
 
   return `
@@ -148,8 +148,8 @@ function renderProductCard(product, lazy = true) {
           <div class="product-price">
             ${product.discount > 0
               ? `<span style="text-decoration:line-through;color:#767676;font-size:13px;display:block;">${product.price} €</span>
-                 <span style="color:#e74c3c;font-weight:700;">${(product.price*(1-product.discount/100)).toFixed(2)} €</span>
-                 <span style="background:#e74c3c;color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:4px;">-${product.discount}%</span>
+                 <span style="color:#c0392b;font-weight:700;">${(product.price*(1-product.discount/100)).toFixed(2)} €</span>
+                 <span style="background:#c0392b;color:#fff;border-radius:12px;padding:2px 8px;font-size:11px;font-weight:700;margin-left:4px;">-${product.discount}%</span>
                  <span style="color:#666e7a;font-size:12px;"> / ${product.unit}</span>`
               : `${product.price} € <span>/ ${product.unit}</span>`
             }
@@ -1233,7 +1233,7 @@ async function renderProductDetail() {
       ? `<div class="product-price-lg">
            <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;">${product.price} €</span>
            <span style="margin-left:8px;">${(product.price*(1-product.discount/100)).toFixed(2)} €</span>
-           <span style="background:#e74c3c;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle;">-${product.discount}% POPUST</span>
+           <span style="background:#c0392b;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle;">-${product.discount}% POPUST</span>
            <span style="color:#666e7a;font-size:14px;"> / ${product.unit}</span>
          </div>`
       : `<div class="product-price-lg">${product.price} € <span>/ ${product.unit}</span></div>`
@@ -1339,13 +1339,13 @@ async function renderProductDetail() {
     <!-- Stanje zaliha. PHP ga ispisuje, ali ovaj blok prepisuje cijeli okvir,
          pa se bez ovoga kupcu nikad nije vidjelo. -->
     ${nemaNaStanju
-      ? `<p style="color:#e74c3c;font-weight:700;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle-exclamation"></i> Trenutno nije na stanju</p>`
+      ? `<p style="color:#c0392b;font-weight:700;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle-exclamation"></i> Trenutno nije na stanju</p>`
       : `<p style="color:#27ae60;font-weight:600;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-check"></i> Na stanju</p>`}
 
     <!-- CTA dugmad -->
     <div style="display:flex;flex-direction:column;gap:10px;margin:22px 0 28px;">
       ${nemaNaStanju ? `
-      <div style="background:#fdf3f2;border:1px solid rgba(231,76,60,.3);border-radius:14px;padding:16px 18px;color:#8a3a30;font-size:14.5px;line-height:1.65;">
+      <div style="background:#fdf3f2;border:1px solid rgba(192,57,43,.3);border-radius:14px;padding:16px 18px;color:#8a3a30;font-size:14.5px;line-height:1.65;">
         Ovaj model je trenutno rasprodat. Javite nam se — reći ćemo vam kada stiže ili predložiti najbliži model koji imamo.
       </div>
       <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">

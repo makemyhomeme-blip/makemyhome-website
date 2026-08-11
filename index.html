@@ -196,7 +196,7 @@
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=40">
+  <link rel="stylesheet" href="css/style-v5.css?v=42">
   <style>
   #decor-box-promo .db-promo-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;}
   #decor-box-promo .db-check-list{list-style:none;padding:0;margin:0 0 28px;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;}
@@ -426,7 +426,7 @@
     </nav>
     <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
-      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
+      <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#c0392b;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
     <button id="hamburger" class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -492,7 +492,7 @@
 </section>
 
 <!-- ===== AKCIJA BANER ===== -->
-<section id="akcija-banner" style="background:linear-gradient(135deg,#e74c3c 0%,#c0392b 100%);padding:16px 0;box-shadow:0 4px 18px rgba(192,57,43,0.35);">
+<section id="akcija-banner" style="background:linear-gradient(135deg,#c0392b 0%,#c0392b 100%);padding:16px 0;box-shadow:0 4px 18px rgba(192,57,43,0.35);">
   <div class="container" style="display:flex;align-items:center;justify-content:center;gap:14px 26px;flex-wrap:wrap;text-align:center;">
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;">
       <span style="background:#fff;color:#c0392b;font-weight:800;letter-spacing:1.5px;font-size:12px;padding:6px 14px;border-radius:20px;flex-shrink:0;"><i class="fas fa-fire" style="margin-right:5px;"></i>AKCIJA</span>
@@ -633,7 +633,10 @@
         el.appendChild(img);
         el.appendChild(natpis);
         el.href = window.mmhUrlProizvoda ? window.mmhUrlProizvoda(s) : ('product.html?id=' + encodeURIComponent(s.id));
-        el.setAttribute('aria-label', s.ime + ' – ' + s.kat);
+        /* Dok je plocica prazna, aria-label je jedino ime koje citac ekrana ima.
+           Cim dobije pravi tekst, label se sklanja — inace se vidljivi tekst i
+           izgovoreno ime razlikuju, pa upravljanje glasom ne pogadja plocicu. */
+        el.removeAttribute('aria-label');
         requestAnimationFrame(function () { el.classList.remove('mijenja'); });
       };
       img.src = s.src;
@@ -770,7 +773,7 @@
         <span>
           <span style="display:block;font-size:17px;font-weight:800;color:#1a1a1a;margin-bottom:6px;">Cijene i kalkulator</span>
           <span style="display:block;font-size:14px;color:#5a6672;line-height:1.6;">Cjenovnik svih kategorija i kalkulator koji vam kaže koliko komada treba za vaš zid.</span>
-          <span style="display:inline-block;margin-top:10px;font-size:13.5px;font-weight:700;color:#c9a86c;">Pogledaj cijene &rsaquo;</span>
+          <span style="display:inline-block;margin-top:10px;font-size:13.5px;font-weight:700;color:#795f32;">Pogledaj cijene &rsaquo;</span>
         </span>
       </a>
       <a href="montaza.html" style="display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid rgba(201,168,108,0.3);border-radius:16px;padding:26px 24px;text-decoration:none;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 14px 34px rgba(201,168,108,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
@@ -778,7 +781,7 @@
         <span>
           <span style="display:block;font-size:17px;font-weight:800;color:#1a1a1a;margin-bottom:6px;">Montaža korak po korak</span>
           <span style="display:block;font-size:14px;color:#5a6672;line-height:1.6;">Alat, ljepilo, sječenje i uglovi — kako da postavite panele sami, bez majstora.</span>
-          <span style="display:inline-block;margin-top:10px;font-size:13.5px;font-weight:700;color:#c9a86c;">Pročitaj uputstvo &rsaquo;</span>
+          <span style="display:inline-block;margin-top:10px;font-size:13.5px;font-weight:700;color:#795f32;">Pročitaj uputstvo &rsaquo;</span>
         </span>
       </a>
       <a href="faq.html#vodici" style="display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid rgba(201,168,108,0.3);border-radius:16px;padding:26px 24px;text-decoration:none;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 14px 34px rgba(201,168,108,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
@@ -786,7 +789,7 @@
         <span>
           <span style="display:block;font-size:17px;font-weight:800;color:#1a1a1a;margin-bottom:6px;">Vodiči i česta pitanja</span>
           <span style="display:block;font-size:14px;color:#5a6672;line-height:1.6;">Paneli za kupatilo, zid iza TV-a, SPC ili laminat, akustika — i odgovori na sve što kupci pitaju.</span>
-          <span style="display:inline-block;margin-top:10px;font-size:13.5px;font-weight:700;color:#c9a86c;">Otvori vodiče &rsaquo;</span>
+          <span style="display:inline-block;margin-top:10px;font-size:13.5px;font-weight:700;color:#795f32;">Otvori vodiče &rsaquo;</span>
         </span>
       </a>
     </div>
