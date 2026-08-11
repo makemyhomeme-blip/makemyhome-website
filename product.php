@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/php/slug.php';
+require_once __DIR__ . '/php/dimenzije.php';
 $productsFile = __DIR__ . '/data/products.json';
 $products = json_decode(@file_get_contents($productsFile), true) ?: [];
 
@@ -768,7 +769,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
         ?>
         <article class="product-card<?= $spNema ? ' out-of-stock' : '' ?>" data-category="<?= htmlspecialchars($sp['category'] ?? '') ?>" data-id="<?= (int)($sp['id'] ?? 0) ?>">
           <a href="<?= htmlspecialchars($spUrl) ?>" class="product-img" style="display:block;">
-            <img src="<?= htmlspecialchars($sp['image'] ?? '') ?>" loading="lazy"
+            <img src="<?= htmlspecialchars($sp['image'] ?? '') ?>" loading="lazy"<?= mmhDimAtributi($sp['image'] ?? '') ?>
                  alt="<?= htmlspecialchars(($sp['name'] ?? '') . ' – ' . $spKat . ' | Make My Home Decor Podgorica') ?>">
             <?php if ($spPopust > 0 && !$spNema): ?>
             <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;box-shadow:0 3px 10px rgba(192,57,43,0.45);">&minus;<?= $spPopust ?>%</div>

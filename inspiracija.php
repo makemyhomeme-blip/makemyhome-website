@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/php/slug.php';
+require_once __DIR__ . '/php/dimenzije.php';
 // Sve fotografije prostora koje se dodaju kroz admin (polje "gallery"), na jednom mjestu.
 // Nista se ne upisuje rucno — cim se u adminu doda slika nekom proizvodu, pojavi se ovdje.
 $insP = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
@@ -369,42 +370,18 @@ arsort($insKat);
       </div>
     </div>
 
-    <?php
-    /* Bez width i height slika prije ucitavanja zauzima nula piksela. Zbog toga
-       je cijela mreza bila visoka nula, pa je pretrazivac zakljucio da su sve
-       fotografije na ekranu i skinuo svih 8 MB odjednom — a sadrzaj je skakao
-       dok su slike stizale. Prava velicina se cita sa diska i pamti u kesu,
-       pa se cita samo kad se doda nova fotografija. */
-    $insKesPut  = __DIR__ . '/data/dimenzije-slika.json';
-    $insDim     = json_decode(@file_get_contents($insKesPut), true) ?: [];
-    $insDimNovo = false;
-    $insVelicina = function (string $rel) use (&$insDim, &$insDimNovo): ?array {
-        $put = __DIR__ . '/' . ltrim($rel, '/');
-        $vr  = @filemtime($put);
-        if ($vr === false) return null;
-        $kljuc = $rel . '|' . $vr;
-        if (!isset($insDim[$kljuc])) {
-            $s = @getimagesize($put);
-            if (!$s || empty($s[0]) || empty($s[1])) return null;
-            $insDim[$kljuc] = [$s[0], $s[1]];
-            $insDimNovo = true;
-        }
-        return $insDim[$kljuc];
-    };
-    ?>
     <div class="insp-grid" id="insp-grid">
       <?php foreach ($insSlike as $i => $s):
         $p = $s['p'];
         $kat = $insNames[$p['category'] ?? ''] ?? 'Zidni panel';
         $alt = $p['name'] . ' u enterijeru – ' . $kat . ' | Make My Home Decor Podgorica';
-        $vel = $insVelicina($s['src']);
       ?>
       <a class="insp-kart" href="/<?= mmhSlugProizvoda($p) ?>"
          data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"
          data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
         <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
              alt="<?= htmlspecialchars($alt, ENT_QUOTES) ?>"
-             <?php if ($vel): ?>width="<?= $vel[0] ?>" height="<?= $vel[1] ?>" <?php endif; ?>
+             <?= ltrim(mmhDimAtributi($s['src'])) ?>
              loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async"
              fetchpriority="<?= $i < 6 ? 'high' : 'low' ?>"
              onerror="this.onerror=null;this.closest(&quot;.insp-kart&quot;).remove();">
@@ -416,15 +393,6 @@ arsort($insKat);
       </a>
       <?php endforeach; ?>
     </div>
-    <?php
-    /* Kes se upisuje samo kad je stvarno nesto novo procitano. Ako upis ne
-       uspije (prava na disku), stranica i dalje radi — samo ce sljedeci put
-       opet citati dimenzije. */
-    if ($insDimNovo) {
-        if (count($insDim) > 600) $insDim = array_slice($insDim, -600, null, true);
-        @file_put_contents($insKesPut, json_encode($insDim), LOCK_EX);
-    }
-    ?>
 
     <p class="insp-prazno" id="insp-prazno" hidden>Nema fotografija u ovoj kategoriji.</p>
 

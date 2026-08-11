@@ -71,6 +71,7 @@ $files = [
     $root . '/cjenovnik.php'    => $base . '/cjenovnik.php',
     $root . '/inspiracija.php'  => $base . '/inspiracija.php',
     $root . '/php/slug.php'       => $base . '/php/slug.php',
+    $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
     $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
     $root . '/php/contact.php'    => $base . '/php/contact.php',
     // JS

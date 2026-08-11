@@ -8,6 +8,7 @@ if (!empty($_GET['slug'])) {
 }
 
 require_once __DIR__ . '/php/slug.php';
+require_once __DIR__ . '/php/dimenzije.php';
 
 // Kategorija se otvara preko /kategorija/<kljuc>. Stari oblici ?category= i ?cat=
 // i dalje rade, ali odmah salju 301 na novu adresu.
@@ -662,7 +663,7 @@ echo "\n</script>\n";
               }
               $altTxt = trim(($p['name'] ?? '') . ' – ' . ($catNames[$p['category'] ?? ''] ?? 'zidni panel')
                         . ($altBoja ? ', ' . $altBoja : '') . ' | Make My Home Decor Podgorica');
-              ?><img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy" width="400" height="300" style="width:100%;height:auto;display:block;">
+              ?><img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?> style="width:100%;height:auto;display:block;">
             </div>
             <div class="product-body" style="padding:16px;">
               <h2 class="product-name" style="font-size:1em;font-weight:700;margin-bottom:8px;color:#1a1a1a;"><?= htmlspecialchars($p['name'] ?? '') ?></h2>
