@@ -56,6 +56,14 @@ if (!$product) {
     header('X-Robots-Tag: noindex', true);
 }
 
+// Kad se stranica otvori preko nove adrese (/paneli/...), u zahtjevu nema ?id=,
+// pa je $id ostajao nula. Recenzije se traze po ID-u u data/reviews.json, a pod
+// kljucem "0" nema nicega — zato je svaka stranica proizvoda pokazivala STARE
+// tri recenzije ugradjene u products.json umjesto pet novijih iz reviews.json,
+// i racunala ocjenu po njima. Otkad su adrese promijenjene, to je vazilo za
+// svih 117 proizvoda. Ovdje se $id uzima iz pronadjenog proizvoda.
+if ($product) $id = (int)($product['id'] ?? 0);
+
 $ogTitle = $product
     ? htmlspecialchars($product['name'], ENT_QUOTES) . ' | Make My Home Decor'
     : 'Proizvod | Make My Home Decor';
