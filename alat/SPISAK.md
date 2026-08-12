@@ -54,6 +54,13 @@ Svako pravilo ili prodje ili ispise tacno gdje je pao.
   punio ih je JavaScript, a Googlebot ih u prvom prolazu nije vidio.
   Napomena: `index.html` i `sitemap.xml` se **ne porede po bajtovima** sa serverom
   (pravilo G4), jer pocetnu sastavlja `pocetna.php`, a sitemap `sitemap.php`.
+- **G9** Nista sto Google treba da procita ne smije da ceka JavaScript.
+  Googlebot u prvom prolazu ne izvrsava JavaScript. Ovako su otkrivene cetiri
+  stvari koje nijedna druga provjera nije vidjela: prazna galerija na svih 117
+  stranica proizvoda, prazan spisak kategorija u podnozju na 15 stranica, prazan
+  blok izdvojenih proizvoda na pocetnoj i prazna mreza kategorija na katalogu.
+  Dozvoljeno je da budu prazni samo blokovi koji se pune tek kad korisnik nesto
+  uradi (rezultati pretrage, poruka forme, brojac u korpi).
 - **G7** Nijedan fajl koji **admin mijenja** ne smije biti u sync listi.
   Admin je CSS za velicinu slika na Decor Box stranici upisivao pravo u
   `decor-box.html`, a taj fajl je bio u sync listi — vlasnik bi namjestio visinu,
@@ -148,6 +155,25 @@ font je nema. Tada treba ponovo sazeti:
 python3 alat/fontovi.py      # popise ikone iz svih fajlova i sazme fontove
 ```
 Isto vazi ako se u tekst uvede slovo van opsega U+0000-024F.
+
+## L · Zastita od toga da popravka pokvari nesto drugo
+
+`alat/snimak.py` snimi stanje **svih 149 stranica** — naslov, opis, canonical,
+broj rijeci, broj naslova, broj slika, broj kartica, broj linkova, tipove
+strukturiranih podataka, prazne blokove. Prije i poslije izmjene:
+
+```
+python3 alat/snimak.py snimi prije
+   ... izmjena i deploy ...
+python3 alat/snimak.py snimi poslije
+python3 alat/snimak.py uporedi prije poslije
+```
+
+Ispise **tacno sta se promijenilo i na kojim stranicama**. Ako se promijenilo
+samo ono sto si htio — u redu. Ako se promijenilo jos nesto — vidi se odmah,
+prije nego sto Google vidi.
+
+Postoji snimak `osnova` — stanje na dan 12.08.2026, kad je sve bilo cisto.
 
 ## Sta se NE provjerava automatski
 - Izgled na telefonu (radi se kroz Playwright, posebno)

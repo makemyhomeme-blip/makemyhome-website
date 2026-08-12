@@ -510,6 +510,31 @@ def grupa_G():
             g.append('sitemap ima samo %d adresa (ocekivano preko 140)' % br_adresa)
     zabiljezi('G8', 'Server sastavlja pocetnu, katalog i sitemap kako treba', g, 3)
 
+    # Sve sto Googlebot NE vidi u sirovom HTML-u.
+    # Ovako su otkriveni: prazna galerija na svih 117 stranica proizvoda,
+    # prazan spisak kategorija u podnozju na 15 stranica, prazan blok
+    # izdvojenih proizvoda na pocetnoj i prazna mreza kategorija na katalogu.
+    # Nista od toga nije bilo vidljivo ni u jednoj drugoj provjeri.
+    DOZVOLJENO = {'products-container', 'cout', 'form-message', 'mob-search-results',
+                  'desk-search-results', 'back-bar', 'insp-prazno', 'toast', 'img-lightbox',
+                  'gallery-specs'}
+    g = []
+    for u, (h, kod, _, _) in STRANICE.items():
+        if kod != '200':
+            continue
+        vidljivo = re.sub(r'<script[^>]*>.*?</script>', '', h, flags=re.S)
+        if 'loading-placeholder' in vidljivo:
+            g.append('%s → ostao prazan blok koji ceka JavaScript' % u)
+            continue
+        for m in re.finditer(r'<(div|section|ul|tbody)\b[^>]*id="([a-z0-9-]+)"[^>]*>(.*?)</\1>', vidljivo, re.S):
+            if m.group(2) in DOZVOLJENO:
+                continue
+            unut = re.sub(r'\s+', ' ', re.sub(r'<!--.*?-->', '', m.group(3), flags=re.S)).strip()
+            if len(unut) < 40:
+                g.append('%s → prazan <%s id="%s">' % (u, m.group(1), m.group(2)))
+                break
+    zabiljezi('G9', 'Nista sto Google treba ne ceka JavaScript', g, len(STRANICE))
+
     # Spisak je od 11.08.2026 u admin/sync-lista.php, ne vise u sync.php.
     # Fajl koji nije u spisku nikad ne stigne na server — a ako ga product.php
     # trazi preko require, cijeli sajt vrati 500.
