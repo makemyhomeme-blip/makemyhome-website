@@ -311,6 +311,9 @@ function showCategoryGrid() {
   document.getElementById('back-bar').style.display = 'none';
 
   const grid = document.getElementById('category-grid');
+  // Katalog sada ispisuje server (products.php) da bi Google vidio kategorije
+  // i bez JavaScripta. Ako su kartice vec tu, ne diramo ih.
+  if (grid.querySelectorAll('.cat-card').length > 0) { initAnimations(); return; }
   const catMap = buildCatMap();
   const cats = Object.values(catMap).sort((a, b) => {
     const ai = CATEGORY_ORDER.indexOf(a.id);

@@ -650,12 +650,50 @@ echo "\n</script>\n";
 
     <!-- Sadržaj (kategorije ili proizvodi) -->
     <div id="main-content">
-      <div class="cat-grid" id="category-grid">
-        <!-- Loading placeholders -->
-        <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
-        <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
-        <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
-        <div class="loading-placeholder" style="height:300px;border-radius:16px;"></div>
+      <div class="cat-grid" id="category-grid"<?= $cat ? ' style="display:none;"' : '' ?>>
+        <?php
+        /* Mreza kategorija se ranije punila tek JavaScriptom, pa je Googlebot na
+           katalogu vidio prazninu — ni jedno ime kategorije, ni jedan opis, ni
+           broj proizvoda. Sada je ispise server; JavaScript je vise ne dira. */
+        $catKfg = json_decode(@file_get_contents(__DIR__ . '/data/categories.json'), true) ?: [];
+        $brojUKat = [];
+        foreach ($_allProds as $pp) {
+            $k = $pp['category'] ?? '';
+            if ($k !== '') $brojUKat[$k] = ($brojUKat[$k] ?? 0) + 1;
+        }
+        foreach ($catKfg as $ck):
+            $kid = $ck['id'] ?? '';
+            if ($kid === '') continue;
+            // Broj proizvoda: sama kategorija plus sve njene podkategorije
+            $br = $brojUKat[$kid] ?? 0;
+            foreach (($ck['subcategories'] ?? []) as $sub) $br += $brojUKat[$sub['id'] ?? ''] ?? 0;
+            $prvaSlika = $ck['image'] ?? '';
+            if ($prvaSlika === '') {
+                foreach ($_allProds as $pp) {
+                    if (($pp['category'] ?? '') === $kid && !empty($pp['image'])) { $prvaSlika = $pp['image']; break; }
+                }
+            }
+        ?>
+        <a href="/kategorija/<?= htmlspecialchars($kid) ?>" class="cat-card">
+          <div class="cat-card-img">
+            <?php if ($prvaSlika): ?>
+            <img src="<?= htmlspecialchars($prvaSlika) ?>" alt="<?= htmlspecialchars(($ck['name'] ?? '') . ' – zidni paneli, Make My Home Decor Podgorica') ?>" loading="lazy"<?= mmhDimAtributi($prvaSlika) ?>>
+            <?php else: ?>
+            <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
+            <?php endif; ?>
+          </div>
+          <div class="cat-card-body">
+            <div class="cat-card-icon" style="background:<?= htmlspecialchars($ck['color'] ?? '#7a9e6e') ?>">
+              <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
+            </div>
+            <div class="cat-card-info">
+              <h3><?= htmlspecialchars($ck['name'] ?? '') ?></h3>
+              <p><?= htmlspecialchars($ck['description'] ?? '') ?></p>
+              <span class="cat-card-count"><?= $br ?> proizvoda</span>
+            </div>
+          </div>
+        </a>
+        <?php endforeach; ?>
       </div>
       <div class="products-grid" id="products-container" style="display:<?= $cat ? 'grid' : 'none' ?>;padding-top:20px;">
         <?php if ($cat): ?>
