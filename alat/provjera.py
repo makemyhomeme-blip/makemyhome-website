@@ -197,7 +197,9 @@ def grupa_C():
         else:
             dd = d.group(1).strip()
             opisi[dd].append(u)
-            if not (70 <= len(dd) <= 165):
+            # 140-160 je opseg koji Google prikaze cijel. Ispod 140 cesto odbaci
+            # nas tekst i sam sastavi opis iz stranice, iznad 160 odsijece kraj.
+            if not (140 <= len(dd) <= 160):
                 g3.append('%s → opis %d znakova' % (u, len(dd)))
         v = tekst_bez_skripti(h)
         for obr, ime in [(r'[А-Яа-яЁё]', 'cirilica'), (r'Ã[\x80-\xbf]|â€', 'mojibake'),
@@ -216,7 +218,7 @@ def grupa_C():
             g3.append('isti opis na %d stranica' % len(l))
     zabiljezi('C1', 'Tacno jedan H1 po stranici', g1, len(SITEMAP))
     zabiljezi('C2', 'Title jedinstven i do 65 znakova', g2, len(SITEMAP))
-    zabiljezi('C3', 'Opis jedinstven, 70-165 znakova', g3, len(SITEMAP))
+    zabiljezi('C3', 'Opis jedinstven, 140-160 znakova', g3, len(SITEMAP))
     zabiljezi('C4', 'Nema cirilice, mojibakea, undefined, NaN', g4, len(SITEMAP))
     zabiljezi('C5', 'Svaka slika ima alt', g5, len(SITEMAP))
 
