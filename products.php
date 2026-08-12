@@ -286,24 +286,6 @@ if (!$cat) {
 } else {
   $_listProds = array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat));
 }
-$_returnPolicy = [
-  '@type'                => 'MerchantReturnPolicy',
-  'applicableCountry'    => 'ME',
-  'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
-  'merchantReturnDays'   => 7,
-  'returnMethod'         => 'https://schema.org/ReturnByMail',
-  'returnFees'           => 'https://schema.org/FreeReturn',
-];
-$_shippingDetails = [
-  '@type'               => 'OfferShippingDetails',
-  'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '20', 'currency' => 'EUR'],
-  'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'ME'],
-  'deliveryTime'        => [
-    '@type'        => 'ShippingDeliveryTime',
-    'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 0, 'maxValue' => 2, 'unitCode' => 'DAY'],
-    'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 4, 'unitCode' => 'DAY'],
-  ],
-];
 $_items = [];
 foreach (array_slice($_listProds, 0, 20) as $i => $p) {
   $pOrig    = (float)($p['price'] ?? 0);
@@ -330,8 +312,11 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       'itemCondition'          => 'https://schema.org/NewCondition',
       'priceValidUntil'        => date('Y-m-t', strtotime('first day of next month')),
       'availability'           => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      'hasMerchantReturnPolicy'=> $_returnPolicy,
-      'shippingDetails'        => $_shippingDetails,
+      // Politika povrata i uslovi dostave se OVDJE ne salju.
+      // Bili su ubaceni u svaku od 20 stavki, potpuno isti tekst 20 puta —
+      // 800 B po proizvodu, 16 kB praznog ponavljanja na svakoj kategoriji.
+      // Google te podatke cita sa stranice samog proizvoda, gdje i stoje
+      // (product.php ih i dalje salje). Ovo je spisak, ne prodajna stranica.
     ],
   ];
   // ---- OCJENE U STRUKTURIRANIM PODACIMA — NAMJERNO ISKLJUCENO ----
@@ -360,7 +345,10 @@ echo json_encode([
   'url'            => $ogUrl,
   'numberOfItems'  => count($_listProds),
   'itemListElement'=> $_items,
-], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  // Bez JSON_PRETTY_PRINT: uvlake za 20 stavki su same po sebi nosile oko
+  // trecinu velicine bloka. Google cita jednako, a izvorni kod stranice
+  // postaje pregledan kad se otvori u alatu za provjeru.
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 echo "\n</script>\n";
 ?>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
