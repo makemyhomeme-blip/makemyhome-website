@@ -95,5 +95,26 @@ if ($izdvojeni) {
     }
 }
 
+// ---- Brojke u hero bloku ------------------------------------------------
+// Pisalo je "8+ kategorija" i "90+ modela" jos otkad je toliko i bilo. U
+// medjuvremenu je asortiman narastao na 13 kategorija i 117 modela, pa je
+// pocetna umanjivala sopstvenu ponudu. Ovdje se brojke racunaju iz istih
+// podataka iz kojih se pravi i katalog, pa vise ne mogu zastarjeti kad
+// vlasnik doda proizvod. Broj kupaca se ne dira — to nije podatak iz baze.
+if ($P) {
+    $brKat = count(array_unique(array_filter(array_column($P, 'category'))));
+    $brMod = count($P);
+    $html = str_replace(
+        '<div class="number">8+</div>' . "\n" . '          <div class="label">Kategorija proizvoda</div>',
+        '<div class="number">' . $brKat . '</div>' . "\n" . '          <div class="label">Kategorija proizvoda</div>',
+        $html
+    );
+    $html = str_replace(
+        '<div class="number">90+</div>' . "\n" . '          <div class="label">Modela i dezena</div>',
+        '<div class="number">' . $brMod . '</div>' . "\n" . '          <div class="label">Modela i dezena</div>',
+        $html
+    );
+}
+
 header('Content-Type: text/html; charset=utf-8');
 echo $html;

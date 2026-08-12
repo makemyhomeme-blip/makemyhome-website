@@ -360,6 +360,10 @@ ul { list-style: none; }
   position: relative;
   overflow: hidden;
   padding-top: 75px;
+  /* "Skrolujte" stoji apsolutno na 40px od dna i na nizim ekranima je ulazio
+     u red sa brojkama (4000+ Zadovoljnih kupaca). Mobilni je to imao rijeseno,
+     desktop nije. Ovo mu ostavlja mjesto. */
+  padding-bottom: 110px;
 }
 
 /* Pozadina hero bloka je najveca stvar koja se iscrta na prvom ekranu, pa po
