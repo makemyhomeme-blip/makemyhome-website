@@ -38,7 +38,14 @@ if (($_GET['key'] ?? '') !== 'mkhwebp2025') {
 
 $root  = dirname(__DIR__);
 $probni = ($_GET['apply'] ?? '') !== '1';
-$KVALITET = 82;
+// Iznova pravi i one .webp koji vec postoje — treba kad se promijeni kvalitet.
+$ponovo = ($_GET['ponovo'] ?? '') === '1';
+
+// Kvalitet 75, ne 82. Provjereno na fotografijama enterijera: prosjecna razlika
+// izmedju 82 i 75 je 1,66 od 255 po kanalu — oko je ne vidi ni na uporednom
+// prikazu — a fajl je manji za oko 30%. PageSpeed je bas to trazio pod
+// "Increasing the image compression factor could improve this image's download size".
+$KVALITET = 75;
 
 // Folderi cije se slike konvertuju. Sve ostalo (favicon, logo, ikone) se ne
 // dira — te su ionako sitne, a logo je PNG sa prozirnoscu.
@@ -77,7 +84,7 @@ foreach ($FOLDERI as $rel) {
         $velOrig = filesize($put);
 
         // Vec postoji i noviji je od originala — nema sta da se radi
-        if (is_file($webp) && filemtime($webp) >= filemtime($put)) {
+        if (!$ponovo && is_file($webp) && filemtime($webp) >= filemtime($put)) {
             $preskoceno++;
             continue;
         }
@@ -155,5 +162,7 @@ if ($ukPrije > 0) {
 if ($probni) {
     echo "\nOvo je bila samo procjena. Za stvarno pravljenje fajlova:\n";
     echo "   /admin/webp.php?key=mkhwebp2025&apply=1\n";
+    echo "Za ponovno pravljenje SVIH (npr. poslije promjene kvaliteta):\n";
+    echo "   /admin/webp.php?key=mkhwebp2025&apply=1&ponovo=1\n";
 }
 echo "</pre>";
