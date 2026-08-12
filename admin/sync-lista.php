@@ -53,7 +53,8 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/js/analytics-events.js' => $base . '/js/analytics-events.js',
     // CSS
     $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
-    $root . '/css/fonts.css'    => $base . '/css/fonts.css',
+    // css/fonts.css je spojen u style-v5.css — jedan blokirajuci zahtjev manje.
+    // Fajl ostaje na serveru kao zaostatak, ali ga nijedna stranica ne trazi.
     // Images / favicon
     // Ikone: fontovi su sazeti sa 267 kB na 14 kB (samo 134 ikone koje sajt
         // stvarno koristi). Isto vazi i za CSS — all.min.css opisuje 1870 ikona

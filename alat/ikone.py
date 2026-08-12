@@ -87,6 +87,13 @@ def napravi():
     for p in izbaci:
         novi = novi.replace(p, '', 1)
 
+    # Font Awesome isporucuje font-display:block — ikona je NEVIDLJIVA do 3
+    # sekunde dok se font ne preuzme. PageSpeed to naplacuje (70 ms), a nema
+    # razloga: font je sazet na 12 kB i najavljen preko <link rel=preload>, pa
+    # stigne brzo. Uz swap se u tom kratkom trenutku ne vidi nista umjesto
+    # ikone, a sirinu drzi pravilo i[class*="fa-"]{width:1em} u <head>.
+    novi = novi.replace('font-display:block', 'font-display:swap')
+
     # Koje od koriscenih ikona uopste ne postoje u Font Awesome-u
     ima = set()
     for p in pravila:
