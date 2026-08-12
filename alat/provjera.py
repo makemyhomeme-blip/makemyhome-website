@@ -503,8 +503,11 @@ def grupa_G():
         br_slika = h.count('<image:image>')
         if br_slika < 300:
             g.append('sitemap ima samo %d slika (ocekivano preko 300)' % br_slika)
-        if h.count('<loc>') - br_slika < 140:
-            g.append('sitemap ima premalo adresa')
+        # <loc> su adrese stranica; slike koriste <image:loc>, pa se ne mijesaju.
+        # Prva verzija ovog pravila ih je oduzimala i uvijek javljala gresku.
+        br_adresa = h.count('<loc>')
+        if br_adresa < 140:
+            g.append('sitemap ima samo %d adresa (ocekivano preko 140)' % br_adresa)
     zabiljezi('G8', 'Server sastavlja pocetnu, katalog i sitemap kako treba', g, 3)
 
     # Spisak je od 11.08.2026 u admin/sync-lista.php, ne vise u sync.php.
