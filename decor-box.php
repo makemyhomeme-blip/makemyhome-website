@@ -403,7 +403,7 @@
 <!-- MATERIAL SWATCHES -->
 <div class="db-swatches">
   <img src="images/products/cq006.jpg" alt="Drveni dezen" loading="lazy" onerror="this.style.display='none'">
-  <img src="images/products/product-1780505348-753.jpg" alt="Mermerni dezen" loading="lazy" onerror="this.style.display='none'">
+  <img src="images/products/product-1780505348-753.jpg" alt="Mystic Marble – mermerni zidni panel, Make My Home Decor Podgorica" loading="lazy" onerror="this.style.display='none'">
   <img src="images/products/product-1774009566-250.jpg" alt="Metalni dezen" loading="lazy" onerror="this.style.display='none'">
   <img src="images/products/product-1785262175-466.jpg" alt="3D letvica dezen" loading="lazy" onerror="this.style.display='none'">
   <img src="images/products/product-1774006203-686.jpg" alt="Tekstilni dezen" loading="lazy" onerror="this.style.display='none'">

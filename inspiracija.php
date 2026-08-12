@@ -370,11 +370,16 @@ arsort($insKat);
       </div>
     </div>
 
+    <?php $insBroj = []; ?>
     <div class="insp-grid" id="insp-grid">
       <?php foreach ($insSlike as $i => $s):
         $p = $s['p'];
         $kat = $insNames[$p['category'] ?? ''] ?? 'Zidni panel';
-        $alt = $p['name'] . ' u enterijeru – ' . $kat . ' | Make My Home Decor Podgorica';
+        // Redni broj razlikuje fotografije istog proizvoda. Bez njega je
+        // sest razlicitih slika imalo isti alt tekst, pa ih Google slike
+        // nisu mogle razdvojiti.
+        $redni = ($insBroj[$p['id']] = ($insBroj[$p['id']] ?? 0) + 1);
+        $alt = $p['name'] . ' u enterijeru ' . $redni . ' – ' . $kat . ' | Make My Home Decor Podgorica';
       ?>
       <a class="insp-kart" href="/<?= mmhSlugProizvoda($p) ?>"
          data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"

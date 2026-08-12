@@ -87,9 +87,9 @@ foreach ($statika as [$f, $fr, $pr]) {
     $sl = '';
     if ($f === 'inspiracija.html') {
         foreach ($P as $p) {
-            foreach (($p['gallery'] ?? []) as $g) {
+            foreach (($p['gallery'] ?? []) as $gi => $g) {
                 $kat = $katImena[$p['category'] ?? ''] ?? 'Zidni panel';
-                $sl .= mmhSlikaXML($g, $p['name'] . ' u enterijeru – ' . $kat);
+                $sl .= mmhSlikaXML($g, $p['name'] . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
             }
         }
     }
@@ -116,8 +116,8 @@ foreach ($P as $p) {
     $kat = $katImena[$p['category'] ?? ''] ?? 'Zidni panel';
     $sl  = '';
     if (!empty($p['image'])) $sl .= mmhSlikaXML($p['image'], $ime . ' – ' . $kat);
-    foreach (($p['gallery'] ?? []) as $g) {
-        $sl .= mmhSlikaXML($g, $ime . ' u enterijeru – ' . $kat);
+    foreach (($p['gallery'] ?? []) as $gi => $g) {
+        $sl .= mmhSlikaXML($g, $ime . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
     }
     $dodaj($BAZA . '/' . mmhSlugProizvoda($p), 'weekly', '0.8', $sl);
 }
