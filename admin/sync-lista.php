@@ -56,10 +56,13 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/css/fonts.css'    => $base . '/css/fonts.css',
     // Images / favicon
     // Ikone: fontovi su sazeti sa 267 kB na 14 kB (samo 134 ikone koje sajt
-        // stvarno koristi). Sync ih prenosi bajt po bajt, kao i favicon.
+        // stvarno koristi). Isto vazi i za CSS — all.min.css opisuje 1870 ikona
+        // i tezak je 100 kB, a mmh-ikone.css samo onih 134, 22 kB. Pravi ga
+        // alat/ikone.py iz koda, pa ne moze zastarjeti. Sync ih prenosi bajt
+        // po bajt, kao i favicon.
         $root . '/fa/webfonts/fa-solid-900.woff2'  => $base . '/fa/webfonts/fa-solid-900.woff2',
         $root . '/fa/webfonts/fa-brands-400.woff2' => $base . '/fa/webfonts/fa-brands-400.woff2',
-        $root . '/fa/css/all.min.css'              => $base . '/fa/css/all.min.css',
+        $root . '/fa/css/mmh-ikone.css'              => $base . '/fa/css/mmh-ikone.css',
         // Tekstualni fontovi: "latin-ext" fajlovi su nosili ogroman opseg znakova
         // (fonetski, dodatni latinicni...) a sajtu trebaju samo ć č đ š ž.
         // Sazeti su na cio blok Latin Extended-A i B, da rade i buduca imena.

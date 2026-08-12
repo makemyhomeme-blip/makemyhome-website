@@ -222,6 +222,38 @@ def grupa_C():
     zabiljezi('C4', 'Nema cirilice, mojibakea, undefined, NaN', g4, len(SITEMAP))
     zabiljezi('C5', 'Svaka slika ima alt', g5, len(SITEMAP))
 
+    # fa/css/mmh-ikone.css nosi samo ikone koje sajt koristi (100 kB -> 22 kB).
+    # Kad neko doda novu ikonu na stranicu a zaboravi da pokrene alat/ikone.py,
+    # ikona se prikaze kao prazan kvadratic. To se lako previdi jer sve ostalo
+    # radi. Zato se ovdje uporedjuje sta stranice traze sa onim sto CSS ima.
+    g = []
+    ikone = set()
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import ikone as _ik
+        ikone = _ik.koriscene_ikone()
+        # Ikone kategorija bira vlasnik kroz admin i cuvaju se u
+        # data/categories.json, koji se NE deployuje sa lokalnog. Zato se
+        # spisak dopunjuje onim sto na serveru stvarno stoji — inace bi izbor
+        # nove ikone u adminu dao prazan kvadratic, a provjera bi rekla da je
+        # sve u redu jer lokalni fajl o toj ikoni ne zna nista.
+        kat, kodK, _, _ = dohvati('%s/data/categories.json' % BAZA)
+        if kodK == '200':
+            ikone |= {m for m in re.findall(r'"icon"\s*:\s*"[^"]*\bfa-([a-z0-9-]+)', kat)}
+        css, kod, _, _ = dohvati('%s/fa/css/mmh-ikone.css' % BAZA)
+        if kod != '200':
+            g.append('mmh-ikone.css nije dostupan na sajtu (kod %s)' % kod)
+        else:
+            ima = set()
+            for p in re.findall(r'\.fa-[a-z0-9-]+(?:[:,][^{]*)?\{content:"\\[0-9a-f]+"[^}]*\}', css):
+                ima |= set(re.findall(r'\.fa-([a-z0-9-]+)(?=:|,|\{)', p))
+            for f in sorted(ikone - ima):
+                g.append('fa-%s se koristi na sajtu ali je nema u CSS-u — prikazace se prazan kvadratic '
+                         '(pokreni: python3 alat/ikone.py)' % f)
+    except Exception as e:
+        g.append('provjera ikona nije mogla da se izvrsi: %s' % e)
+    zabiljezi('C6', 'Svaka ikona koju stranice traze postoji u CSS-u', g, len(ikone))
+
 
 # ============================================================
 # D — STRUKTURIRANI PODACI

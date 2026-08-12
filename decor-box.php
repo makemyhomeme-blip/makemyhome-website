@@ -66,7 +66,7 @@
   <link rel="apple-touch-icon" sizes="512x512" href="images/favicon-512.png">
   <meta name="theme-color" content="#1a1a1a">
   <link rel="preload" href="fa/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="fa/css/all.min.css?v=1">
+  <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
   <link rel="stylesheet" href="css/style-v5.css?v=49">
