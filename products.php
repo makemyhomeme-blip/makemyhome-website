@@ -149,7 +149,7 @@ $catDescs = [
 ];
 $ogDesc   = $cat
   ? ($catDescs[$cat] ?? "Pregledajte {$catName} – Make My Home Decor Podgorica, Crna Gora. Zidni paneli i dekorativne obloge.")
-  : 'Kompletan katalog zidnih panela, 3D letvica, akustičnih panela, SPC podova i PU kamena. Make My Home Decor Podgorica.';
+  : 'Kompletan katalog: 117 modela zidnih panela, 3D letvica, akustičnih panela, SPC podova, PU kamena i Flex Stone obloga sa cijenama. Podgorica, Crna Gora.';
 
 // SEO uvodni tekst po kategoriji – prikazuje se na stranici (vidi ga kupac i Google)
 // Vodic koji odgovara kategoriji — da posjetilac dodje do njega odakle i gleda proizvode
