@@ -191,6 +191,30 @@ RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
 </IfModule>
 
+# ===== WEBP UMJESTO JPG, KAD PREGLEDAC TO UMIJE =====
+# U images/products stoji 263 fotografije, ukupno 34 MB. Kategorija sa 28
+# letvica povuce preko 6 MB dok se skroluje — a najvise posjeta dolazi sa
+# telefona. WebP je na istom kvalitetu upola manji.
+#
+# Kako radi: kad stigne zahtjev za foto.jpg, a pregledac je u zaglavlju Accept
+# rekao da razumije image/webp, I na disku pored stoji foto.webp — servira se
+# webp. Adresa u HTML-u ostaje foto.jpg, nista se u stranicama ne mijenja.
+# Ko ne razumije webp (stari pregledaci, alati, botovi) dobija original.
+#
+# Zasto ovako a ne <picture> u HTML-u: ovako radi i za pozadine iz CSS-a i za
+# slike koje vlasnik tek ubaci kroz admin, bez ijedne izmjene u stranicama.
+#
+# Ako .webp fajlova nema, pravilo ne uradi nista — uslov -f jednostavno ne prodje.
+# Fajlove pravi /admin/webp.php, a admin/actions.php ih odrzava: pri zamjeni
+# slike stari webp se brise zajedno sa originalom, pa se nikad ne servira stara.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{REQUEST_FILENAME} (.+)\.(jpe?g|png)$ [NC]
+  RewriteCond %1.webp -f
+  RewriteRule (.+)\.(jpe?g|png)$ $1.webp [NC,T=image/webp,L]
+</IfModule>
+
 <IfModule mod_headers.c>
   # Security headers — zaštita od clickjacking, MIME sniffing, forsiranje HTTPS
   Header always set X-Content-Type-Options "nosniff"
@@ -228,8 +252,12 @@ RewriteRule ^products\.html$ products.php [QSA,L]
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   # Slike - cache 30 dana
+  # Vary: Accept jer ista adresa (foto.jpg) vraca WebP ili JPG zavisno od toga
+  # sta pregledac trazi — bez ovoga bi posrednicki kes mogao dati webp nekome
+  # ko ga ne cita.
   <FilesMatch "\.(jpg|jpeg|png|gif|ico|webp|svg)$">
     Header set Cache-Control "public, max-age=2592000"
+    Header append Vary Accept
   </FilesMatch>
   # Fontovi - cache 1 godina (imena su hesirana, nikad se ne mijenjaju)
   <FilesMatch "\.(woff2|woff|ttf|eot)$">

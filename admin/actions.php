@@ -142,6 +142,20 @@ function syncWebp($destPath, $gdImage = null, $quality = 82) {
     return $made;
 }
 
+/**
+ * Obrise sliku ZAJEDNO sa njenim .webp blizancem.
+ *
+ * .htaccess servira foto.webp svakom pregledacu koji kaze da razumije WebP.
+ * Ako se obrise samo foto.jpg, webp ostane i sajt nastavi da prikazuje staru
+ * fotografiju — vlasnik bi promijenio sliku i vidio da se nista nije desilo.
+ * Zato brisanje uvijek ide u paru.
+ */
+function mmhObrisiSliku(string $apsolutniPut): void {
+    @unlink($apsolutniPut);
+    $webp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $apsolutniPut);
+    if ($webp !== $apsolutniPut) @unlink($webp);
+}
+
 function handleImageUpload($fieldName) {
     // Korisnik nije izabrao novu sliku — zadrži postojeću (nije greška)
     if (empty($_FILES[$fieldName]) || ($_FILES[$fieldName]['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
@@ -169,10 +183,12 @@ function handleImageUpload($fieldName) {
     if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
     $destPath  = $uploadDir . $filename;
     if (optimizeImage($file['tmp_name'], $destPath, 1200, 900, 82)) {
+        syncWebp($destPath);
         return 'images/products/' . $filename;
     }
     // Fallback: sačuvaj original ako GD nije dostupan
     if (move_uploaded_file($file['tmp_name'], $destPath)) {
+        syncWebp($destPath);
         return 'images/products/' . $filename;
     }
     redirect('', 'Slika se nije mogla obraditi na serveru. Pokušaj sa JPG slikom manje rezolucije.');
@@ -280,7 +296,7 @@ switch ($action) {
                     // Obriši staru sliku ako postoji i nije ista
                     $oldImg = $p['image'] ?? '';
                     if ($oldImg && str_starts_with($oldImg, 'images/products/')) {
-                        @unlink(__DIR__ . '/../' . $oldImg);
+                        mmhObrisiSliku(__DIR__ . '/../' . $oldImg);
                     }
                     $p['image'] = $image;
                 }
@@ -483,13 +499,14 @@ switch ($action) {
                 exit;
             }
         }
+        syncWebp($destPath);
         $imgPath = 'images/categories/' . $filename;
         foreach ($cats as &$c) {
             if ($c['id'] === $catId) {
                 // Obriši staru sliku kategorije ako postoji
                 $oldImg = $c['image'] ?? '';
                 if ($oldImg && str_starts_with($oldImg, 'images/categories/')) {
-                    @unlink(__DIR__ . '/../' . $oldImg);
+                    mmhObrisiSliku(__DIR__ . '/../' . $oldImg);
                 }
                 $c['image'] = $imgPath;
                 $c['imagePosition'] = ['posX' => 50.0, 'posY' => 50.0, 'zoom' => 1.0];
@@ -706,7 +723,7 @@ switch ($action) {
         }
         $fname   = ($type === 'mobile') ? 'slide-' . $slot . '-mobile.jpg' : 'slide-' . $slot . '.jpg';
         $imgPath = __DIR__ . '/../images/hero-slides/' . $fname;
-        if (file_exists($imgPath)) @unlink($imgPath);
+        if (file_exists($imgPath)) mmhObrisiSliku($imgPath);
         $jsonFile = __DIR__ . '/../data/hero-slides.json';
         $slides   = file_exists($jsonFile) ? (json_decode(file_get_contents($jsonFile), true) ?: []) : [];
         while (count($slides) < 3) $slides[] = [];
@@ -757,6 +774,7 @@ switch ($action) {
                 echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']); exit;
             }
         }
+        syncWebp($destPath);
         foreach ($products as &$p) {
             if ($p['id'] === $id) {
                 if (!isset($p['gallery']) || !is_array($p['gallery'])) $p['gallery'] = [];
@@ -766,7 +784,7 @@ switch ($action) {
         }
         unset($p);
         if (!saveProducts($products, $productsFile)) {
-            @unlink($destPath);
+            mmhObrisiSliku($destPath);
             echo json_encode(['ok' => false, 'error' => 'Slika snimljena ali baza nije upisana.']); exit;
         }
         echo json_encode(['ok' => true, 'path' => $imgPath]); exit;
@@ -789,7 +807,7 @@ switch ($action) {
         unset($p);
         // Obriši fajl s diska ako je u images/products/
         if (str_starts_with($img, 'images/products/')) {
-            @unlink(__DIR__ . '/../' . $img);
+            mmhObrisiSliku(__DIR__ . '/../' . $img);
         }
         if (!saveProducts($products, $productsFile)) {
             echo json_encode(['ok' => false, 'error' => 'Greška pri snimanju.']); exit;

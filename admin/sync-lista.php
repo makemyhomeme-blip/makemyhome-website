@@ -89,6 +89,7 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/optimize-gallery-images.php' => $base . '/admin/optimize-gallery-images.php',
     $adminDir . '/optimize-main-images.php'    => $base . '/admin/optimize-main-images.php',
     $adminDir . '/apply-discount.php'          => $base . '/admin/apply-discount.php',
+    $adminDir . '/webp.php'                    => $base . '/admin/webp.php',
     $adminDir . '/server-status.php'           => $base . '/admin/server-status.php',
 ];
 };
