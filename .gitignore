@@ -11,3 +11,10 @@ images/products/
 # System files
 .DS_Store
 Thumbs.db
+
+# Kes dimenzija slika — pravi ga server pri prvom otvaranju stranice,
+# razlikuje se lokalno i na serveru, i ne deployuje se.
+data/dimenzije-slika.json
+
+# Snimci stanja sajta (alat/snimak.py) — radna evidencija, ne ide na server.
+alat/snimci/
