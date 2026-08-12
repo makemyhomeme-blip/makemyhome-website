@@ -862,8 +862,13 @@
     <div class="about-grid">
       <div class="about-img-wrapper animate-on-scroll">
         <div class="about-img-main">
-          <img src="images/about-showroom.jpg" alt="Make My Home Decor Showroom"
-            onerror="this.onerror=null;this.parentElement.innerHTML='<i class=&quot;fas fa-store&quot; style=&quot;font-size:120px;color:rgba(255,255,255,0.2)&quot;></i>'">
+          <!-- WebP verzija vec postoji na serveru i ostale stranice je koriste;
+               pocetna je jedina jos skidala JPEG (180 kB umjesto 108 kB). -->
+          <picture>
+            <source srcset="images/about-showroom.webp" type="image/webp">
+            <img src="images/about-showroom.jpg" alt="Make My Home Decor Showroom" loading="lazy" width="696" height="900"
+              onerror="this.onerror=null;this.parentElement.parentElement.innerHTML='<i class=&quot;fas fa-store&quot; style=&quot;font-size:120px;color:rgba(255,255,255,0.2)&quot;></i>'">
+          </picture>
         </div>
         <div class="about-img-badge">
           <div class="years">5+</div>
