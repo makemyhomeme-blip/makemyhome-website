@@ -209,7 +209,7 @@ async function initProductsPage() {
 
   // Fill footer categories
   const footerCats = document.getElementById('footer-cats');
-  if (footerCats) {
+  if (footerCats && footerCats.children.length === 0) {
     footerCats.innerHTML = allCategories.map(c =>
       `<li><a href="/kategorija/${c.id}"><i class="fas fa-chevron-right"></i> ${c.name}</a></li>`
     ).join('');
@@ -456,6 +456,11 @@ async function renderProductDetail() {
   // Gallery
   const galleryMain = document.getElementById('gallery-main');
   const galleryThumbs = document.getElementById('gallery-thumbs');
+  // product.php ove dvije kutije vec popuni na serveru (da ih Google vidi).
+  // JavaScript ih gradi iznova zbog uvecavanja i listanja, pa ih prvo isprazni
+  // — bez ovoga bi se slicice pojavile dvaput.
+  if (galleryThumbs) galleryThumbs.innerHTML = '';
+  if (galleryMain) galleryMain.innerHTML = '';
 
   // Build image list — expose globally so lightbox can navigate
   const _galleryImages = [{ src: product.image, label: `${product.name} – ${categoryName} | Make My Home Decor` }];

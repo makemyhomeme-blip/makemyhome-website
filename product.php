@@ -574,10 +574,28 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 
       <div class="product-gallery">
         <div class="gallery-main" id="gallery-main">
+          <?php
+          /* Glavna slika i sličice su ranije bile prazne dok ih JavaScript ne
+             popuni — Googlebot na svih 117 stranica proizvoda nije vidio
+             nijednu fotografiju u HTML-u. Sada ih ispisuje server; JavaScript
+             ih poslije zamijeni istima, uz uvećavanje i listanje. */
+          $galSlike = [];
+          if ($product) {
+              if (!empty($product['image'])) $galSlike[] = [$product['image'], $product['name'] . ' – ' . $prodCatName . ' | Make My Home Decor Podgorica'];
+              foreach (($product['gallery'] ?? []) as $gi => $gsrc) {
+                  $galSlike[] = [$gsrc, $product['name'] . ' u enterijeru ' . ($gi + 1) . ' – ' . $prodCatName . ' | Make My Home Decor'];
+              }
+          }
+          if ($galSlike): ?>
+          <img id="gallery-main-img" src="<?= htmlspecialchars($galSlike[0][0]) ?>" alt="<?= htmlspecialchars($galSlike[0][1]) ?>"<?= mmhDimAtributi($galSlike[0][0]) ?> style="width:100%;height:auto;display:block;border-radius:16px;">
+          <?php else: ?>
           <div class="loading-placeholder" style="width:100%;height:100%;border-radius:16px;"></div>
+          <?php endif; ?>
         </div>
         <div class="gallery-thumbs" id="gallery-thumbs">
-          <!-- Thumbnails -->
+          <?php foreach ($galSlike as $gi => $g): ?>
+          <img class="gallery-thumb<?= $gi === 0 ? ' active' : '' ?>" src="<?= htmlspecialchars($g[0]) ?>" alt="<?= htmlspecialchars($g[1]) ?>" loading="lazy"<?= mmhDimAtributi($g[0]) ?> onclick="window._goToGallery && window._goToGallery(<?= $gi ?>)">
+          <?php endforeach; ?>
         </div>
         <p class="gallery-open-hint"><i class="fas fa-search-plus"></i> Tapni na sliku za prikaz u punoj rezoluciji</p>
         <div id="gallery-specs" class="gallery-specs-desktop"><?php
