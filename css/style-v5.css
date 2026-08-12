@@ -844,6 +844,21 @@ ul { list-style: none; }
   margin-top: 4px;
 }
 
+/* Badge namjerno visi 24px van slike — na desktopu ima mjesta, na telefonu
+   slika ide skoro do ivice ekrana pa je desni ugao sa slovom "A" iz rijeci
+   ISKUSTVA bio odsjecen. Kako body ima overflow:hidden, to se nije vidjelo
+   kao bocno skrolovanje — sadrzaj je prosto nedostajao. Na uskim ekranima
+   badge se poravnava sa slikom umjesto da visi van nje. */
+@media (max-width: 768px) {
+  .about-img-badge {
+    right: 0;
+    bottom: -18px;
+    padding: 18px 20px;
+    min-width: 0;
+  }
+  .about-img-badge .years { font-size: 38px; }
+}
+
 .about-content { color: var(--white); }
 .about-content .section-title { color: var(--white); }
 .about-content .section-subtitle { color: rgba(255,255,255,0.65); }
