@@ -180,6 +180,9 @@ RewriteRule ^kategorija/([A-Za-z0-9][A-Za-z0-9-]*)$ products.php?k=$1 [NC,QSA,L]
 RewriteRule ^cjenovnik\.html$ cjenovnik.php [QSA,L]
 RewriteRule ^inspiracija\.html$ inspiracija.php [QSA,L]
 RewriteRule ^decor-box\.html$ decor-box.php [QSA,L]
+# Sitemap se pravi iz podataka (sa slikama), pa je uvijek tacan i kad se doda
+# nov proizvod ili nova fotografija. Adresa ostaje /sitemap.xml.
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
 </IfModule>

@@ -72,7 +72,7 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/404.php'          => $base . '/404.php',
     $root . '/robots.txt'       => $base . '/robots.txt',
     $root . '/llms.txt'         => $base . '/llms.txt',
-    $root . '/sitemap.xml'      => $base . '/sitemap.xml',
+    $root . '/sitemap.php'      => $base . '/sitemap.php',
     // Server config
     $root . '/.htaccess'           => $base . '/.htaccess',
     // Admin
