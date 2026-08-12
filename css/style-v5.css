@@ -1379,7 +1379,16 @@ ul { list-style: none; }
   color: #9a9a9a;          /* bilo je 3,22:1 prema tamnom podnozju */
 }
 
-.footer-bottom a { color: var(--primary); text-decoration: underline; }
+/* Link u podnozju je bio visok 16px — premalo da se pouzdano pogodi prstom.
+   WCAG 2.2 trazi najmanje 24px, a izuzima linkove usred recenice; ovaj to
+   nije, stoji sam u redu. Uspravni razmak i inline-block mu dizu visinu
+   dodira na 24px, a da se izgled reda ne mijenja. */
+.footer-bottom a {
+  color: var(--primary);
+  text-decoration: underline;
+  display: inline-block;
+  padding: 4px 2px;
+}
 
 /* ===== VODICI U PODNOZJU ===== */
 .footer-vodici {
