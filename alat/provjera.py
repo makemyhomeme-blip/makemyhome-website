@@ -207,7 +207,12 @@ def grupa_C():
                          (r'\$\{', 'nerazrijesen JS sablon'), (r'<\?php', 'neizvrsen PHP')]:
             if re.search(obr, v):
                 g4.append('%s → %s' % (u, ime))
-        bezalt = [m for m in re.findall(r'<img\b[^>]*>', h) if 'alt=' not in m]
+        # Traziti <img u sirovom HTML-u znaci naci ga i u komentaru unutar
+        # <style> ili <script>. Tako je jedan CSS komentar oborio ovu provjeru
+        # iako na stranici nije bilo nijedne slike bez alt. Blokovi sa kodom
+        # se izbacuju prije trazenja.
+        bezKoda = re.sub(r'<(style|script)\b[^>]*>.*?</\1>', '', h, flags=re.S | re.I)
+        bezalt = [m for m in re.findall(r'<img\b[^>]*>', bezKoda) if 'alt=' not in m]
         if bezalt:
             g5.append('%s → %d slika bez alt' % (u, len(bezalt)))
     for t, l in naslovi.items():
