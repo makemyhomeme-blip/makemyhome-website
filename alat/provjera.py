@@ -461,9 +461,13 @@ def grupa_G():
             g.append('robots.txt blokira %s !' % zab)
     zabiljezi('G3', 'robots.txt ispravan', g, 4)
 
+    # Fajlovi koji se serviraju onakvi kakvi jesu moraju biti identicni.
+    # index.html i sitemap.xml se OVDJE ne porede: pocetnu servira pocetna.php
+    # (ubaci kartice proizvoda u index.html), a sitemap pravi sitemap.php.
+    # Njih provjerava pravilo G8, po sadrzaju a ne po bajtovima.
     g = []
     for f in ['css/style-v5.css', 'js/products.js', 'js/main-v4.js', 'js/cart.js',
-              'llms.txt', 'robots.txt', 'sitemap.xml', '404.html', 'index.html']:
+              'llms.txt', 'robots.txt', '404.html']:
         put = os.path.join(KORIJEN, f)
         if not os.path.exists(put):
             g.append('%s ne postoji lokalno' % f)
@@ -472,7 +476,36 @@ def grupa_G():
         r = subprocess.run(CURL + ['--max-time', '25', '-L', '%s/%s' % (BAZA, f)], capture_output=True).stdout
         if hashlib.md5(r).hexdigest() != lok:
             g.append('%s se razlikuje od servera' % f)
-    zabiljezi('G4', 'Lokalni fajlovi identicni serveru', g, 9)
+    zabiljezi('G4', 'Lokalni fajlovi identicni serveru', g, 7)
+
+    # Stranice koje server sastavlja: mora da se vidi ono sto Google treba da
+    # procita, i to BEZ JavaScripta. Ranije su ovi blokovi bili prazni.
+    g = []
+    h, kod, _, _ = dohvati(BAZA + '/', timeout='20')
+    if kod != '200':
+        g.append('pocetna → %s' % kod)
+    else:
+        if h.count('product-card') < 3:
+            g.append('pocetna: manje od 3 kartice proizvoda u HTML-u (puni ih JavaScript?)')
+        if 'loading-placeholder' in h:
+            g.append('pocetna: ostao prazan blok koji ceka JavaScript')
+    h, kod, _, _ = dohvati(BAZA + '/products.html', timeout='20')
+    if kod != '200':
+        g.append('katalog → %s' % kod)
+    elif h.count('cat-card"') < 6:
+        g.append('katalog: manje od 6 kartica kategorija u HTML-u')
+    h, kod, _, _ = dohvati(BAZA + '/sitemap.xml', timeout='25')
+    if kod != '200':
+        g.append('sitemap → %s' % kod)
+    else:
+        if '<urlset' not in h:
+            g.append('sitemap nije urlset')
+        br_slika = h.count('<image:image>')
+        if br_slika < 300:
+            g.append('sitemap ima samo %d slika (ocekivano preko 300)' % br_slika)
+        if h.count('<loc>') - br_slika < 140:
+            g.append('sitemap ima premalo adresa')
+    zabiljezi('G8', 'Server sastavlja pocetnu, katalog i sitemap kako treba', g, 3)
 
     # Spisak je od 11.08.2026 u admin/sync-lista.php, ne vise u sync.php.
     # Fajl koji nije u spisku nikad ne stigne na server — a ako ga product.php
@@ -485,7 +518,7 @@ def grupa_G():
             lista += open(p, encoding='utf-8').read()
     vazni = ['php/slug.php', 'php/dimenzije.php', 'php/slug-match.php', 'php/contact.php',
              'product.php', 'products.php', 'cjenovnik.php', 'inspiracija.php', '.htaccess',
-             'sitemap.xml', 'robots.txt', 'css/style-v5.css', 'js/products.js',
+             'sitemap.php', 'pocetna.php', 'robots.txt', 'css/style-v5.css', 'js/products.js',
              'admin/sync.php', 'admin/sync-lista.php']
     for f in vazni:
         if "'/%s'" % f not in lista and "'%s'" % f not in lista:

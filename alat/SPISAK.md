@@ -48,6 +48,12 @@ Svako pravilo ili prodje ili ispise tacno gdje je pao.
 - **G3** `robots.txt` navodi sitemap, blokira `/admin/`, ne blokira `/paneli/` ni `/kategorija/`
 - **G4** Lokalni fajlovi identicni onima na serveru
 - **G5** Svi vazni fajlovi su u `admin/sync.php` listi (bez `php/slug.php` sajt puca)
+- **G8** Stranice koje server SASTAVLJA moraju sadrzati ono sto Google treba, i to
+  bez JavaScripta: pocetna bar 3 kartice proizvoda, katalog bar 6 kartica kategorija,
+  sitemap preko 300 slika i preko 140 adresa. Ranije su ti blokovi bili prazni —
+  punio ih je JavaScript, a Googlebot ih u prvom prolazu nije vidio.
+  Napomena: `index.html` i `sitemap.xml` se **ne porede po bajtovima** sa serverom
+  (pravilo G4), jer pocetnu sastavlja `pocetna.php`, a sitemap `sitemap.php`.
 - **G7** Nijedan fajl koji **admin mijenja** ne smije biti u sync listi.
   Admin je CSS za velicinu slika na Decor Box stranici upisivao pravo u
   `decor-box.html`, a taj fajl je bio u sync listi — vlasnik bi namjestio visinu,
