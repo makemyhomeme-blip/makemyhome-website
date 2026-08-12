@@ -563,6 +563,45 @@ def grupa_G():
                 g.append('%s trazi %s, a njega nema u sync listi (sajt bi vratio 500)' % (izvor, m))
     zabiljezi('G5', 'Svi vazni fajlovi su u listi sinhronizacije', g, len(vazni))
 
+    # WebP se servira na istoj adresi kao JPG, preko Accept zaglavlja. Tri
+    # stvari mogu tiho da se pokvare i niko ne bi primijetio:
+    #   1. pravilo u .htaccess nestane pri nekoj izmjeni — sajt radi, samo je
+    #      opet dvostruko tezi;
+    #   2. webp ostane stariji od originala — vlasnik promijeni fotografiju,
+    #      a posjetioci mjesecima gledaju staru;
+    #   3. pregledac bez WebP-a dobije webp i vidi pokvarenu sliku.
+    # Zato se sve troje mjeri na stvarnim slikama sa sajta.
+    g = []
+    slike = []
+    h, kod, _, _ = dohvati('%s/kategorija/3d-letvice' % BAZA)
+    if kod == '200':
+        slike = [s for s in re.findall(r'<img[^>]+src="([^"]+)"', h) if '/products/' in s][:8]
+    for rel in slike:
+        u = BAZA + '/' + rel.lstrip('/')
+        zag = subprocess.run(
+            CURL + ['-sI', '--max-time', '25', '-H', 'Accept: image/webp,image/*,*/*', u],
+            capture_output=True, text=True, errors='replace').stdout.lower()
+        zagJpg = subprocess.run(
+            CURL + ['-sI', '--max-time', '25', '-H', 'Accept: image/jpeg,image/*,*/*', u],
+            capture_output=True, text=True, errors='replace').stdout.lower()
+        ime = rel.split('/')[-1]
+        if 'image/webp' not in zag:
+            g.append('%s ne vraca webp pregledacu koji ga trazi' % ime)
+        if 'image/webp' in zagJpg:
+            g.append('%s vraca webp i pregledacu koji ga NE trazi' % ime)
+        if 'vary: accept' not in zag:
+            g.append('%s nema Vary: Accept — posrednicki kes moze pomijesati verzije' % ime)
+        try:
+            duz = int(re.search(r'content-length:\s*(\d+)', zag).group(1))
+            duzJ = int(re.search(r'content-length:\s*(\d+)', zagJpg).group(1))
+            if duz >= duzJ:
+                g.append('%s: webp (%d B) nije manji od originala (%d B)' % (ime, duz, duzJ))
+        except (AttributeError, ValueError):
+            pass
+    if not slike:
+        g.append('nijedna slika proizvoda nije nadjena na kategoriji — provjera nije mogla da se izvrsi')
+    zabiljezi('G10', 'Slike se serviraju kao WebP samo onome ko ga cita', g, len(slike))
+
 
 # ============================================================
 # H — ADRESE KOJE GOOGLE STVARNO IMA
