@@ -500,22 +500,68 @@ def grupa_G():
             g.append('robots.txt blokira %s !' % zab)
     zabiljezi('G3', 'robots.txt ispravan', g, 4)
 
-    # Fajlovi koji se serviraju onakvi kakvi jesu moraju biti identicni.
-    # index.html i sitemap.xml se OVDJE ne porede: pocetnu servira pocetna.php
-    # (ubaci kartice proizvoda u index.html), a sitemap pravi sitemap.php.
-    # Njih provjerava pravilo G8, po sadrzaju a ne po bajtovima.
+    # ---- Git, cPanel i zivi sajt moraju nositi ISTE fajlove ----------------
+    #
+    # Ranije je ovdje provjeravano samo sedam fajlova, pa se ostalo moglo
+    # razici a da niko ne primijeti: u gitu jedno, na serveru drugo, a na
+    # sajtu se vidi trece. Sada se provjerava SVAKI fajl iz sync liste.
+    #
+    # Dva nacina, jer se ne servira sve isto:
+    #   * fajl koji se salje takav kakav jeste (css, js, txt, woff2, slike i
+    #     one .html stranice koje .htaccess ne prepisuje na PHP) — skida se
+    #     preko HTTPS-a i uporedjuje bajt po bajt;
+    #   * fajl koji se ne moze skinuti u izvornom obliku (svi .php, .htaccess,
+    #     i .html koje .htaccess prepisuje na PHP) — poredi se VELICINA preko
+    #     cPanel API-ja. Sadrzaj se preko tog API-ja ne moze porediti jer ga
+    #     on normalizuje (npr. spoji <head> i <meta charset>), pa je znao da
+    #     prijavi razliku koje nema. Velicina dolazi sa diska i ne laze.
     g = []
-    for f in ['css/style-v5.css', 'js/products.js', 'js/main-v4.js', 'js/cart.js',
-              'llms.txt', 'robots.txt', '404.html']:
-        put = os.path.join(KORIJEN, f)
+    lista_php = os.path.join(KORIJEN, 'admin', 'sync-lista.php')
+    parovi = []
+    if os.path.exists(lista_php):
+        izl = subprocess.run(['php', '-r',
+            '$f = require "%s"; foreach ($f("", "", "admin") as $lok => $_) echo $lok . "\\n";' % lista_php],
+            capture_output=True, text=True).stdout
+        parovi = [x.strip().lstrip('/') for x in izl.splitlines() if x.strip()]
+
+    # .html adrese koje .htaccess prepisuje na PHP — njih se ne moze skinuti sirove
+    PREKO_PHP = {'index.html', 'products.html', 'product.html', 'cjenovnik.html',
+                 'inspiracija.html', 'decor-box.html'}
+    PREKO_HTTP = ('.css', '.js', '.txt', '.woff2', '.ico', '.png', '.jpg', '.webp')
+
+    srv_vel = {}
+    for folder in ('', 'css', 'js', 'fa/css', 'fa/webfonts', 'fonts', 'images', 'php', 'admin'):
+        dir_srv = '/home/mmhdecor/public_html/makemyhome.me' + ('/' + folder if folder else '')
+        r = subprocess.run(CURL + ['--max-time', '30', '-u', 'mmhdecor:fhgkwqjd0F6K',
+            'https://cpanel.mmhdecor.mycpanel.rs/execute/Fileman/list_files?dir=%s&include_mime=0'
+            '&show_hidden=1' % dir_srv.replace('/', '%2F')], capture_output=True, text=True).stdout
+        try:
+            for x in (json.loads(r).get('data') or []):
+                kljuc = (folder + '/' if folder else '') + x.get('file', '')
+                srv_vel[kljuc] = int(x.get('size') or 0)
+        except Exception:
+            pass
+
+    provjereno = 0
+    for rel in parovi:
+        put = os.path.join(KORIJEN, rel)
         if not os.path.exists(put):
-            g.append('%s ne postoji lokalno' % f)
+            g.append('%s je u sync listi a nema ga lokalno' % rel)
             continue
-        lok = hashlib.md5(open(put, 'rb').read()).hexdigest()
-        r = subprocess.run(CURL + ['--max-time', '25', '-L', '%s/%s' % (BAZA, f)], capture_output=True).stdout
-        if hashlib.md5(r).hexdigest() != lok:
-            g.append('%s se razlikuje od servera' % f)
-    zabiljezi('G4', 'Lokalni fajlovi identicni serveru', g, 7)
+        provjereno += 1
+        sirovo = rel.endswith(PREKO_HTTP) or (rel.endswith('.html') and rel not in PREKO_PHP)
+        if sirovo:
+            lok = hashlib.md5(open(put, 'rb').read()).hexdigest()
+            r = subprocess.run(CURL + ['--max-time', '25', '-L', '-H', 'Accept-Encoding: identity',
+                                       '%s/%s' % (BAZA, rel)], capture_output=True).stdout
+            if hashlib.md5(r).hexdigest() != lok:
+                g.append('%s: sadrzaj na sajtu nije isti kao u gitu' % rel)
+        else:
+            if rel not in srv_vel:
+                g.append('%s: nema ga na serveru' % rel)
+            elif srv_vel[rel] != os.path.getsize(put):
+                g.append('%s: na serveru %d B, u gitu %d B' % (rel, srv_vel[rel], os.path.getsize(put)))
+    zabiljezi('G4', 'Git, cPanel i sajt nose iste fajlove', g, provjereno)
 
     # Stranice koje server sastavlja: mora da se vidi ono sto Google treba da
     # procita, i to BEZ JavaScripta. Ranije su ovi blokovi bili prazni.
@@ -638,6 +684,46 @@ def grupa_G():
     if not slike:
         g.append('nijedna slika proizvoda nije nadjena na kategoriji — provjera nije mogla da se izvrsi')
     zabiljezi('G10', 'Slike se serviraju kao WebP samo onome ko ga cita', g, len(slike))
+
+    # ---- JavaScript ne smije da prepisuje ono sto je server ispisao --------
+    #
+    # Ovo je bio izvor najskupljih gresaka na sajtu. Funkcije koje crtaju
+    # kartice zvale su se pri ucitavanju i BEZUSLOVNO brisale serverski
+    # sadrzaj pa ga crtale iznova. Posljedice koje su stvarno izmjerene:
+    #   * renderCategories je slike kategorija vracao na CSS pozadine, a one
+    #     ne poznaju loading="lazy" — svih 640 kB se skidalo odmah;
+    #   * galerija proizvoda se crtala drugi put, pa se prva slika ucitavala
+    #     dvaput;
+    #   * svaki takav ispis nosi rizik da se razidje od onoga sto je server
+    #     poslao Googleu.
+    #
+    # Zato svaka takva funkcija mora imati "ogradu" — provjeru da je server
+    # vec odradio posao. Ako neko ogradu ukloni, ovo pravilo pada.
+    g = []
+    put_js = os.path.join(KORIJEN, 'js', 'products.js')
+    if not os.path.exists(put_js):
+        g.append('js/products.js ne postoji')
+    else:
+        kod_js = open(put_js, encoding='utf-8').read()
+        ograde = [
+            ('renderFeatured',       "querySelectorAll('.product-card')"),
+            ('renderCategories',     "container.querySelector('.category-card')"),
+            ('showCategoryGrid',     "grid.querySelector('.cat-card')"),
+            ('showCategoryProducts', "container.querySelector('.product-card')"),
+            ('renderProductDetail',  'vecIspisana'),
+        ]
+        for ime, ograda in ograde:
+            m = re.search(r'function %s\s*\(' % re.escape(ime), kod_js)
+            if not m:
+                g.append('funkcija %s vise ne postoji — provjeri da li je ograda prenesena' % ime)
+                continue
+            # tijelo do sljedece deklaracije funkcije na pocetku reda
+            k = re.search(r'\n(?:async )?function ', kod_js[m.end():])
+            tijelo = kod_js[m.end(): m.end() + (k.start() if k else 4000)]
+            if ograda not in tijelo:
+                g.append('%s vise ne provjerava da li je server vec ispisao sadrzaj '
+                         '(nedostaje: %s)' % (ime, ograda))
+    zabiljezi('G11', 'JavaScript ne prepisuje ono sto je server ispisao', g, 5)
 
 
 # ============================================================
