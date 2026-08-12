@@ -116,6 +116,60 @@ if ($P) {
     );
 }
 
+// ---- Mreza kategorija ----------------------------------------------------
+// Dvije stvari su bile pogresne u zatecenom HTML-u:
+//
+// 1) Slike su bile CSS pozadine (background-image u style atributu). CSS
+//    pozadina ne poznaje loading="lazy", pa je pregledac SVIH OSAM skidao
+//    odmah — 640 kB. Na sporom 4G to je preko tri sekunde propusnog opsega
+//    otetog hero slici, koja se bas tada mjeri kao LCP. Kartice kategorija
+//    su daleko ispod prvog ekrana i niko ih tada ne gleda.
+//    Sada su to prave <img loading="lazy">, pa se skidaju kad se dodje do
+//    njih. Kadriranje je isto: background-position -> object-position,
+//    background-size:cover -> object-fit:cover, uvecanje ostaje na transform.
+//
+// 2) Imena fajlova su bila zakucana u index.html. Vlasnik mijenja sliku
+//    kategorije kroz admin, a HTML bi i dalje pokazivao staru — dok je ne
+//    prepise JavaScript. Sada se cita iz data/categories.json, iz istog
+//    fajla iz kojeg se pravi i ostatak sajta.
+$KAT = json_decode(@file_get_contents(__DIR__ . '/data/categories.json'), true) ?: [];
+if (isset($KAT['categories'])) $KAT = $KAT['categories'];
+
+if ($KAT) {
+    ob_start();
+    foreach ($KAT as $k) {
+        $kljuc = $k['id'] ?? '';
+        if ($kljuc === '') continue;
+        $poz  = $k['imagePosition'] ?? [];
+        $pX   = (float)($poz['posX'] ?? 50);
+        $pY   = (float)($poz['posY'] ?? 50);
+        $zum  = (float)($poz['zoom'] ?? 1);
+        $slika = $k['image'] ?? '';
+        ?>
+      <a href="/kategorija/<?= htmlspecialchars($kljuc) ?>" class="category-card">
+        <div class="category-img" style="overflow:hidden;position:relative;"><?php if ($slika): ?><img class="category-bg-img" src="<?= htmlspecialchars($slika) ?>" alt="<?= htmlspecialchars(($k['name'] ?? '') . ' – Make My Home Decor Podgorica') ?>" loading="lazy" decoding="async"<?= mmhDimAtributi($slika) ?> style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:<?= $pX ?>% <?= $pY ?>%;transform:scale(<?= $zum ?>);transform-origin:<?= $pX ?>% <?= $pY ?>%;--zoom:<?= $zum ?>;"><?php endif; ?></div>
+        <div class="category-body">
+          <div class="category-icon" style="background:<?= htmlspecialchars($k['color'] ?? '#7a9e6e') ?>"><i class="<?= htmlspecialchars($k['icon'] ?? 'fas fa-layer-group') ?>"></i></div>
+          <h3><?= htmlspecialchars($k['name'] ?? '') ?></h3>
+          <p><?= htmlspecialchars($k['description'] ?? '') ?></p>
+          <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+<?php
+    }
+    $mreza = ob_get_clean();
+
+    // Zamijeni SAMO sadrzaj mreze, po jasnim granicama, da se ne dira nista drugo
+    $poc = '<div class="categories-grid" id="categories-grid">';
+    $i = strpos($html, $poc);
+    if ($i !== false) {
+        $j = strpos($html, "\n    </div>", $i);
+        if ($j !== false) {
+            $html = substr($html, 0, $i + strlen($poc)) . "\n" . $mreza . substr($html, $j);
+        }
+    }
+}
+
 // ---- Prva slika hero slidera --------------------------------------------
 // Ovo je bila najskuplja greska na pocetnoj. Slajdovi su se pravili tek iz
 // JavaScripta, i to ovim redom: HTML -> tri skripte -> fetch hero-slides.json

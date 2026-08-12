@@ -396,6 +396,14 @@ async function renderCategories(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
+  /* Ako je server vec ispisao kartice (pocetna.php ih pravi iz categories.json),
+     ovdje se ne dira nista. Ranije je ova funkcija bezuslovno prepisivala mrezu
+     i vracala slike na CSS pozadine — a CSS pozadina ne poznaje loading="lazy",
+     pa se svih 640 kB slika kategorija skidalo odmah, dok se jos ucitava hero.
+     Isto je i Googleu pokazivalo praznu mrezu do trenutka dok se JavaScript ne
+     izvrsi. Server to radi bolje i ranije; ovo ostaje samo kao rezerva. */
+  if (container.querySelector('.category-card')) return;
+
   await loadData();
 
   container.innerHTML = allCategories.map(cat => {
