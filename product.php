@@ -111,9 +111,43 @@ if (mb_strlen($titleName . $suffix) > 60) {
     if ($sp !== false && $sp > 10) $cut = mb_substr($cut, 0, $sp);
     $titleName = rtrim($cut, " -–—,.");
 }
-$pageTitle = $product
-    ? htmlspecialchars($titleName, ENT_QUOTES) . $suffix
-    : 'Proizvod | Make My Home Decor';
+// Ime proizvoda samo za sebe ne kaze STA je ni GDJE smo: 74 od 117 naslova
+// bilo je krace od 45 znakova, npr. "Golden Teak | Make My Home Decor". Ko
+// trazi "3d letvica cijena" ili "bambus panel podgorica" tu nema sta da nadje.
+// Zato se ispred imena dodaje vrsta proizvoda, a iza cijena — ako sve stane
+// u 60 znakova, koliko Google prikaze prije nego sto presijece.
+$vrstaZaNaslov = [
+    'bambus-paneli' => 'Bambus Panel', 'bambus-drveni' => 'Drveni Panel',
+    'bambus-tekstilni' => 'Tekstilni Panel', 'bambus-mermerni' => 'Mermerni Panel',
+    'bambus-metalni' => 'Metalni Panel', 'bambus-kozni' => 'Kožni Panel',
+    'classic' => 'Zidni Panel', '3d-letvice' => '3D Letvica',
+    'akusticni-paneli' => 'Akustični Panel', 'aluminijum-lajsne' => 'Alu Lajsna',
+    'spc-pod' => 'SPC Pod', 'pu-kamen' => 'PU Kamen',
+    'mdf' => 'MDF Panel', 'flex-stone' => 'Flex Stone',
+];
+if ($product) {
+    // $prodCat se definise tek nize u fajlu — ovdje se uzima direktno
+    $vrsta = $vrstaZaNaslov[$product['category'] ?? ''] ?? '';
+    // Vrsta se preskace samo ako je CIJELA vec u imenu ("3D Letvica – Havana Oak").
+    // Ranije se gledala samo prva rijec, pa je "MDF001" bio prepoznat kao da
+    // vec sadrzi "MDF Panel" i ostajao bez ijedne rijeci koja kaze sta je.
+    $imaVec = $vrsta !== '' && mb_stripos($titleName, $vrsta) !== false;
+    $osnova = ($vrsta !== '' && !$imaVec) ? $vrsta . ' ' . $titleName : $titleName;
+
+    $cij = (float)($product['price'] ?? 0);
+    $pop = (int)($product['discount'] ?? 0);
+    $kon = $pop > 0 ? round($cij * (1 - $pop / 100), 2) : $cij;
+    $cijenaTekst = ($kon > 0 && ($product['inStock'] ?? true))
+        ? ' – ' . number_format($kon, 2, ',', '') . ' €' : '';
+
+    $sa  = $osnova . $cijenaTekst . $suffix;
+    $bez = $osnova . $suffix;
+    $pageTitle = htmlspecialchars(
+        mb_strlen($sa) <= 62 ? $sa : (mb_strlen($bez) <= 62 ? $bez : $titleName . $suffix),
+        ENT_QUOTES);
+} else {
+    $pageTitle = 'Proizvod | Make My Home Decor';
+}
 
 // Keyword za H1 – mapa kategorija (dodaje se uz ime proizvoda za bolji SEO)
 $catKeywords = [
