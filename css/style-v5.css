@@ -362,12 +362,45 @@ ul { list-style: none; }
   padding-top: 75px;
 }
 
+/* Pozadina hero bloka je najveca stvar koja se iscrta na prvom ekranu, pa po
+   njoj Google mjeri LCP. Do sada je i telefon dobijao desktop JPG od 86 kB,
+   iako u images/ vec stoje i WebP verzija (45 kB) i uspravniji mobilni kadar.
+   Zato: JPG ostaje kao osnova za starije pregledace, a image-set() nudi WebP
+   onima koji ga znaju; ispod 768px ide mobilna slika (40 kB). */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background:
+  background-image:
     linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 50%, rgba(26,26,26,0.85) 100%),
-    url('../images/hero-desktop.jpg') center/cover no-repeat;
+    url('../images/hero-desktop.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@supports (background-image: image-set(url('../images/hero-desktop.webp') type('image/webp'))) {
+  .hero-bg {
+    background-image:
+      linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 50%, rgba(26,26,26,0.85) 100%),
+      image-set(url('../images/hero-desktop.webp') type('image/webp'),
+                url('../images/hero-desktop.jpg') type('image/jpeg'));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    background-image:
+      linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 50%, rgba(26,26,26,0.85) 100%),
+      url('../images/hero-mobile.jpg');
+  }
+  @supports (background-image: image-set(url('../images/hero-mobile.webp') type('image/webp'))) {
+    .hero-bg {
+      background-image:
+        linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.7) 50%, rgba(26,26,26,0.85) 100%),
+        image-set(url('../images/hero-mobile.webp') type('image/webp'),
+                  url('../images/hero-mobile.jpg') type('image/jpeg'));
+    }
+  }
 }
 
 .hero-bg::before {
