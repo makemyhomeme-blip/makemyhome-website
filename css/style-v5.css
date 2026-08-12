@@ -330,8 +330,10 @@ ul { list-style: none; }
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  /* 44x44 je najmanja povrsina koju prst pouzdano pogadja (Apple HIG / Material) */
-  width: 44px; height: 44px; padding: 0;
+  /* 44x44 je najmanja povrsina koju prst pouzdano pogadja (Apple HIG / Material).
+     flex-shrink: 0 je obavezan — na ekranu od 320px zaglavlju ponestane mjesta
+     pa je flex sabijao dugme na 37px sirine. */
+  width: 44px; height: 44px; padding: 0; flex-shrink: 0;
   border: none;
   background: none;
 }
