@@ -18,3 +18,9 @@ data/dimenzije-slika.json
 
 # Snimci stanja sajta (alat/snimak.py) — radna evidencija, ne ide na server.
 alat/snimci/
+
+# Python kes — nastaje otkad alat/provjera.py uvozi alat/ikone.py radi
+# provjere ikona (pravilo C6). Pravi ga sam Python, vezan je za verziju
+# interpretera i nema ga sta biti u repou.
+__pycache__/
+*.pyc
