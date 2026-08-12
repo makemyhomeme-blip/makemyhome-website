@@ -183,6 +183,10 @@ RewriteRule ^decor-box\.html$ decor-box.php [QSA,L]
 # Sitemap se pravi iz podataka (sa slikama), pa je uvijek tacan i kad se doda
 # nov proizvod ili nova fotografija. Adresa ostaje /sitemap.xml.
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
+# Pocetnu servira pocetna.php: ona procita index.html i ubaci kartice proizvoda
+# koje su ranije bile prazne dok se ne pokrene JavaScript — Googlebot ih u
+# prvom prolazu nije vidio. Adresa ostaje "/", index.html ostaje kao rezerva.
+RewriteRule ^$ pocetna.php [L]
 RewriteRule ^product\.html$ product.php [QSA,L]
 RewriteRule ^products\.html$ products.php [QSA,L]
 </IfModule>

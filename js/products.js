@@ -168,6 +168,10 @@ async function renderFeatured(containerId, limit = 6) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
+  // Pocetnu servira pocetna.php, koja kartice vec ispise na serveru — da ih
+  // Google vidi i bez JavaScripta. Ako su vec tu, ne diramo ih.
+  if (container.querySelectorAll('.product-card').length > 0) { initAnimations(); return; }
+
   await loadData();
   const featured = allProducts.filter(p => p.featured).slice(0, limit);
 

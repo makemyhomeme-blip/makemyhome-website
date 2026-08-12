@@ -17,6 +17,7 @@ return function (string $base, string $root, string $adminDir): array {
     // HTML stranice
     $root . '/404.html'         => $base . '/404.html',
     $root . '/index.html'       => $base . '/index.html',
+        $root . '/pocetna.php'      => $base . '/pocetna.php',
     $root . '/product.html'     => $base . '/product.html',
     $root . '/products.html'    => $base . '/products.html',
     $root . '/about.html'       => $base . '/about.html',
