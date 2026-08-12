@@ -100,6 +100,7 @@
     .db-factory-img img{width:100%;display:block;}
 
 <?php
+require_once __DIR__ . '/php/dimenzije.php';
     /* Velicinu ovih slika vlasnik podesava u adminu (Decor Box → Velicina slika).
        Ranije je admin upisivao CSS pravo u decor-box.html — a svaki sync taj
        fajl povuce sa GitHuba i prepise, pa je podesavanje nestajalo. Zato je
@@ -327,7 +328,7 @@
         <picture>
           <source srcset="images/decor-box-banner.webp" type="image/webp">
           <img src="images/decor-box-banner.jpg" alt="Decor Box – Make My Home Decor showroom"
-            onerror="this.onerror=null;this.src='images/showcase-room.jpg'">
+            onerror="this.onerror=null;this.src='images/showcase-room.jpg'"<?= mmhDimAtributi('images/decor-box-banner.jpg') ?>>
         </picture>
       </div>
     </div>
@@ -393,7 +394,7 @@
         <picture>
           <source srcset="images/decor-box-fabrika.webp" type="image/webp">
           <img src="images/decor-box-fabrika.jpg" alt="Make My Home Decor fabrika u Beogradu"
-            onerror="this.onerror=null;this.parentElement.parentElement.innerHTML='<div style=&quot;height:100%;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(201,168,108,0.55);gap:14px;&quot;><i class=&quot;fas fa-industry&quot; style=&quot;font-size:72px;&quot;></i><span style=&quot;font-size:13px;letter-spacing:1px;&quot;>Fotografija fabrike</span></div>'">
+            onerror="this.onerror=null;this.parentElement.parentElement.innerHTML='<div style=&quot;height:100%;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(201,168,108,0.55);gap:14px;&quot;<?= mmhDimAtributi('images/decor-box-fabrika.jpg') ?>><i class=&quot;fas fa-industry&quot; style=&quot;font-size:72px;&quot;></i><span style=&quot;font-size:13px;letter-spacing:1px;&quot;>Fotografija fabrike</span></div>'">
         </picture>
       </div>
     </div>
@@ -402,11 +403,11 @@
 
 <!-- MATERIAL SWATCHES -->
 <div class="db-swatches">
-  <img src="images/products/cq006.jpg" alt="Drveni dezen" loading="lazy" onerror="this.style.display='none'">
-  <img src="images/products/product-1780505348-753.jpg" alt="Mystic Marble – mermerni zidni panel, Make My Home Decor Podgorica" loading="lazy" onerror="this.style.display='none'">
-  <img src="images/products/product-1774009566-250.jpg" alt="Metalni dezen" loading="lazy" onerror="this.style.display='none'">
-  <img src="images/products/product-1785262175-466.jpg" alt="3D letvica dezen" loading="lazy" onerror="this.style.display='none'">
-  <img src="images/products/product-1774006203-686.jpg" alt="Tekstilni dezen" loading="lazy" onerror="this.style.display='none'">
+  <img src="images/products/cq006.jpg" alt="Drveni dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/cq006.jpg') ?>>
+  <img src="images/products/product-1780505348-753.jpg" alt="Mystic Marble – mermerni zidni panel, Make My Home Decor Podgorica" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1780505348-753.jpg') ?>>
+  <img src="images/products/product-1774009566-250.jpg" alt="Metalni dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1774009566-250.jpg') ?>>
+  <img src="images/products/product-1785262175-466.jpg" alt="3D letvica dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1785262175-466.jpg') ?>>
+  <img src="images/products/product-1774006203-686.jpg" alt="Tekstilni dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1774006203-686.jpg') ?>>
 </div>
 
 <!-- CTA -->
