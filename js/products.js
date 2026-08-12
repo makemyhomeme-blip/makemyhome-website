@@ -293,7 +293,7 @@ function showSubcategoryGrid(parentCat) {
             <i class="${sub.icon || parentCat.icon}"></i>
           </div>
           <div class="cat-card-info">
-            <h3>${sub.name}</h3>
+            <h2>${sub.name}</h2>
             <p>${sub.description || ''}</p>
             <span class="cat-card-count">${subProducts.length} proizvoda</span>
           </div>
@@ -336,7 +336,7 @@ function showCategoryGrid() {
           <i class="${cat.icon}"></i>
         </div>
         <div class="cat-card-info">
-          <h3>${cat.name}</h3>
+          <h2>${cat.name}</h2>
           <p>${cat.description}</p>
           <span class="cat-card-count">${cat.count} proizvoda</span>
         </div>
@@ -424,7 +424,7 @@ async function renderCategories(containerId) {
         <div class="category-icon" style="background:${cat.color}">
           <i class="${cat.icon}"></i>
         </div>
-        <h3>${cat.name}</h3>
+        <h2>${cat.name}</h2>
         <p>${cat.description}</p>
         <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>
       </div>

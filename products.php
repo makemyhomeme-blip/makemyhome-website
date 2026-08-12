@@ -422,7 +422,7 @@ echo "\n</script>\n";
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-size: 18px; flex-shrink: 0; margin-top: 2px;
     }
-    .cat-card-info h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #1a1a1a; }
+    .cat-card-info h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #1a1a1a; }
     .cat-card-info p  { font-size: 13px; color: #666e7a; margin-bottom: 8px; line-height: 1.5; }
     .cat-card-count {
       display: inline-block;
@@ -687,7 +687,7 @@ echo "\n</script>\n";
               <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
             </div>
             <div class="cat-card-info">
-              <h3><?= htmlspecialchars($ck['name'] ?? '') ?></h3>
+              <h2><?= htmlspecialchars($ck['name'] ?? '') ?></h2>
               <p><?= htmlspecialchars($ck['description'] ?? '') ?></p>
               <span class="cat-card-count"><?= $br ?> proizvoda</span>
             </div>
