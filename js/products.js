@@ -342,6 +342,13 @@ function showCategoryGrid() {
     return ai - bi;
   });
 
+  /* Server je ovu mrezu vec ispisao (products.php). Ova funkcija se zove samo
+     jednom, pri ucitavanju — nema sortiranja koje bi je ponovo pozvalo — pa bi
+     ponovno ispisivanje bilo cist gubitak: isti sadrzaj se izbrise i nacrta
+     iznova, uz treptaj i rizik da se ispis iz JavaScripta razidje od onog sa
+     servera. Tako je vec bilo sa slikama kategorija na pocetnoj. */
+  if (grid.querySelector('.cat-card')) { initAnimations(); return; }
+
   grid.innerHTML = cats.map(cat => `
     <a href="/kategorija/${cat.id}" class="cat-card">
       <div class="cat-card-img">
@@ -404,6 +411,11 @@ function showCategoryProducts(catId) {
     container.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gray);padding:60px 0;">Nema proizvoda u ovoj kategoriji.</p>';
     return;
   }
+
+  /* Isto kao gore: products.php je kartice vec ispisao, a ova funkcija se zove
+     samo pri ucitavanju. Naslov, brojac i dugme "nazad" iznad se svejedno
+     postave, mijenja se samo to da se mreza ne crta po drugi put. */
+  if (container.querySelector('.product-card')) { initAnimations(); return; }
 
   container.innerHTML = filtered.map(p => renderProductCard(p)).join('');
   initAnimations();
@@ -519,8 +531,14 @@ async function renderProductDetail() {
     });
   }
 
+  /* product.php je glavnu sliku i slicice vec ispisao — Googlebot ih tako vidi
+     i bez JavaScripta. Ako su tu, ne diramo ih: samo se zakace dogadjaji za
+     klik i listanje. Ranije se cijela galerija crtala iznova, pa se prva slika
+     ucitavala DVA puta (jednom sa servera, jednom iz JavaScripta). */
+  const vecIspisana = galleryMain && galleryMain.querySelector('#gallery-main-img');
+
   if (galleryMain) {
-    const dotWrap = multi ? `
+    const dotWrap = (multi && !vecIspisana) ? `
       <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
         display:flex;gap:7px;z-index:10;pointer-events:none;">
         ${_galleryImages.map((_, i) => `<span class="gallery-dot" style="
@@ -529,7 +547,7 @@ async function renderProductDetail() {
           transform:${i === 0 ? 'scale(1.25)' : 'scale(1)'};"
         ></span>`).join('')}
       </div>` : '';
-    galleryMain.innerHTML = `
+    const _noviHtml = `
       <div style="position:relative;width:100%;height:100%;">
         <img id="gallery-main-img" src="${_galleryImages[0].src}" alt="${_galleryImages[0].label}"
           onclick="openImageLightbox(this.src, '${product.name}')"
@@ -537,6 +555,9 @@ async function renderProductDetail() {
           onerror="this.style.display='none'">
         ${dotWrap}
       </div>`;
+    /* Ispis se preskace ako je server vec nacrtao sliku; dogadjaji za listanje
+       se kace u svakom slucaju, da swipe i strelice rade i tada. */
+    if (!vecIspisana) galleryMain.innerHTML = _noviHtml;
 
     // Swipe support (mobile)
     let _tx = 0;
@@ -556,7 +577,10 @@ async function renderProductDetail() {
   }
 
   if (galleryThumbs) {
-    if (multi) {
+    if (multi && galleryThumbs.querySelector('.gallery-thumb')) {
+      /* slicice je vec ispisao product.php */
+      galleryThumbs.style.display = 'flex';
+    } else if (multi) {
       galleryThumbs.innerHTML = _galleryImages.map((img, i) => `
         <div class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="_goToGallery(${i})">
           <img src="${img.src}" alt="${img.label}"
