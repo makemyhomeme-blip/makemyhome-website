@@ -918,7 +918,7 @@ ul { list-style: none; }
 
 .quote-icon {
   font-size: 48px;
-  color: var(--primary);
+  color: #a8863f;   /* zlatna je na krem podlozi davala 1,99:1 */
   line-height: 1;
   margin-bottom: 20px;
   font-family: Georgia, serif;
@@ -1531,7 +1531,7 @@ ul { list-style: none; }
 
 .contact-info-text h4 { font-weight: 600; color: var(--dark); margin-bottom: 6px; }
 .contact-info-text p { font-size: 14px; color: var(--gray); line-height: 1.6; }
-.contact-info-text a { color: var(--primary); }
+.contact-info-text a { color: #795f32; }
 .contact-info-text a:hover { color: var(--primary-dark); }
 
 /* ===== FORM ===== */
@@ -2927,7 +2927,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .checkout-form-wrap h2 i { color: #c9a86c; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-group { margin-bottom: 16px; }
-.form-group label { display: block; font-size: 13px; color: #aaa; margin-bottom: 6px; font-weight: 500; }
+.form-group label { display: block; font-size: 13px; color: #666; margin-bottom: 6px; font-weight: 500; }
 .form-group input, .form-group textarea, .form-group select {
   width: 100%;
   box-sizing: border-box;
@@ -3311,7 +3311,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   background: #fff; border: 1px solid rgba(0,0,0,.14); border-radius: 999px;
   padding: 8px 15px; cursor: pointer; transition: all .18s; white-space: nowrap;
 }
-.insp-chip span { color: #a8a49b; font-weight: 500; margin-left: 3px; font-size: 12.5px; }
+.insp-chip span { color: #6b675f; font-weight: 500; margin-left: 3px; font-size: 12.5px; }
 .insp-chip:hover { border-color: #c9a86c; color: #1a1a1a; }
 .insp-chip.is-on { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
 .insp-chip.is-on span { color: rgba(255,255,255,.55); }

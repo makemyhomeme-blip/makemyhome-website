@@ -98,7 +98,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <link rel="stylesheet" href="fa/css/all.min.css?v=1">
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/style-v5.css?v=42">
+  <link rel="stylesheet" href="css/style-v5.css?v=44">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -110,7 +110,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
     .faq-group-title i{color:var(--primary);font-size:18px;}
     .faq-item{background:#fff;border:1px solid rgba(0,0,0,0.07);border-radius:14px;padding:22px 24px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
     .faq-item h3{font-size:17px;color:var(--dark);margin:0 0 10px;line-height:1.4;display:flex;gap:10px;align-items:flex-start;}
-    .faq-item h3 span.q{color:var(--primary);font-weight:800;flex-shrink:0;}
+    .faq-item h3 span.q{color:#795f32;font-weight:800;flex-shrink:0;}
     .faq-item p{font-size:15px;color:var(--dark-2);line-height:1.8;margin:0;}
     .faq-item p + p{margin-top:10px;}
     .faq-intro{max-width:760px;margin:0 auto 44px;text-align:center;font-size:16px;color:var(--gray);line-height:1.8;}
@@ -372,7 +372,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
     <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
       <div style="position:relative;">
         <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
-        <input id="desk-search-input" type="text" placeholder="Traži proizvod…" autocomplete="off"
+        <input id="desk-search-input" type="text" aria-label="Pretraga proizvoda" placeholder="Traži proizvod…" autocomplete="off"
           style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
           onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
           onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
@@ -383,7 +383,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
       <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
         <div style="position:relative;">
           <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
-          <input id="mob-search-input" type="text" placeholder="Traži po imenu ili šifri…" autocomplete="off"
+          <input id="mob-search-input" type="text" aria-label="Pretraga proizvoda po imenu ili šifri" placeholder="Traži po imenu ili šifri…" autocomplete="off"
             style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
         </div>
         <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
@@ -491,7 +491,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
           <td data-l="Dimenzija"><?= htmlspecialchars($dimTekst) ?></td>
           <td data-l="Cijena">
             <?php if ($maxPop > 0): ?>
-              <strong style="color:#c9a86c;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
+              <strong style="color:#795f32;font-size:15px;"><?= $fmt($lo) ?><?= $hi > $lo ? ' – ' . $fmt($hi) : '' ?> €</strong>
               <span style="display:block;font-size:12px;color:#767676;text-decoration:line-through;">od <?= $fmt($loPuna) ?> €</span>
               <span style="display:inline-block;background:#c0392b;color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:12px;margin-top:3px;white-space:nowrap;"><?= $popTekst ?></span>
             <?php else: ?>
