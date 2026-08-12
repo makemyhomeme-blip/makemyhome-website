@@ -116,5 +116,56 @@ if ($P) {
     );
 }
 
+// ---- Prva slika hero slidera --------------------------------------------
+// Ovo je bila najskuplja greska na pocetnoj. Slajdovi su se pravili tek iz
+// JavaScripta, i to ovim redom: HTML -> tri skripte -> fetch hero-slides.json
+// -> tek onda <img>. Slika koja pokriva cijeli prvi ekran kretala je posljednja
+// u nizu, pa je PageSpeed mjerio LCP 6,8 s. Uz to je i JSON i svaka slika isla
+// sa "?v=" + trenutno vrijeme, pa se NIJEDNA nikad nije kesirala — svaka
+// posjeta je iznova skidala sve tri (preko 200 kB), a WebP i kes od 30 dana
+// nisu vrijedili nista.
+//
+// Sada prvi slajd stoji u samom HTML-u. Pregledac ga vidi cim procita <head>
+// i krece da ga skida odmah, prije ijedne skripte. <picture> bira uspravni
+// kadar za telefon i polozeni za racunar, jer to nisu iste slike nego dva
+// razlicita kadra. Ostala dva slajda i dalje pravi JavaScript — njih niko ne
+// vidi u prvom trenutku.
+$slajdovi = json_decode(@file_get_contents(__DIR__ . '/data/hero-slides.json'), true) ?: [];
+$slajdovi = array_values(array_filter($slajdovi, fn($s) => is_string($s) ? $s !== '' : !empty($s['d'])));
+
+if ($slajdovi) {
+    $prvi = $slajdovi[0];
+    $desk = is_string($prvi) ? $prvi : $prvi['d'];
+    $mob  = is_string($prvi) ? $prvi : ($prvi['m'] ?? $prvi['d']);
+
+    $slika = '<picture>'
+           . '<source media="(max-width: 768px)" srcset="' . htmlspecialchars($mob) . '">'
+           . '<img src="' . htmlspecialchars($desk) . '" alt="Enterijer sa zidnim panelima Make My Home Decor"'
+           . ' data-slajd="0" fetchpriority="high" decoding="async"' . mmhDimAtributi($desk) . '>'
+           . '</picture>';
+
+    // Slider se od pocetka vidi; ranije je stajao sakriven dok ga JavaScript ne otkrije
+    $html = str_replace(
+        '<div id="hs-bg" style="position:absolute;inset:0;overflow:hidden;display:none;">' . "\n" . '    <div id="hs-track"></div>',
+        '<div id="hs-bg" style="position:absolute;inset:0;overflow:hidden;">' . "\n" . '    <div id="hs-track">' . $slika . '</div>',
+        $html
+    );
+
+    // Fotografija iz CSS-a (.hero-bg) stoji ISPOD slidera i kad ima slajdova se
+    // uopste ne vidi — a pregledac ju je svejedno skidao, 40 kB uzalud pri
+    // svakoj posjeti. Gasi se samo slika; tamna podloga i gradient ostaju,
+    // preko slajda ionako ide #hs-overlay.
+    $html = str_replace('</head>',
+        '  <style>#hero .hero-bg{background-image:none}</style>' . "\n" . '</head>', $html);
+
+    // Najava se prebacuje na sliku koja se STVARNO prikaze.
+    $html = preg_replace(
+        '#<link rel="preload" as="image" href="images/hero-mobile\.webp"[^>]*>\s*<link rel="preload" as="image" href="images/hero-desktop\.webp"[^>]*>#',
+        '<link rel="preload" as="image" href="' . htmlspecialchars($mob) . '" media="(max-width: 768px)" fetchpriority="high">' . "\n"
+        . '  <link rel="preload" as="image" href="' . htmlspecialchars($desk) . '" media="(min-width: 769px)" fetchpriority="high">',
+        $html, 1
+    );
+}
+
 header('Content-Type: text/html; charset=utf-8');
 echo $html;

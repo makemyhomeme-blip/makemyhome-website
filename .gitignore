@@ -3,6 +3,10 @@ data/products.json
 data/categories.json
 data/inquiries.json
 data/*.backup-*.json
+# Slajdovi na pocetnoj: vlasnik ih mijenja kroz admin (admin/actions.php ih
+# upisuje). Nisu u sync listi pa se ne mogu prepisati, ali stoje i ovdje da
+# se ta greska ne moze napraviti kasnije.
+data/hero-slides.json
 
 # Uploads managed on server
 images/categories/

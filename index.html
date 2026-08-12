@@ -252,15 +252,27 @@
     #hs-dots{z-index:3!important}
     #hs-track{display:flex;width:100%;height:100%;transition:transform .65s cubic-bezier(.4,0,.2,1);will-change:transform}
     #hs-track img{min-width:100%;width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0}
-    .hs-dot{width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.5);cursor:pointer;padding:0;transition:all .3s;background:transparent;pointer-events:all}
-    .hs-dot.active{background:#c9a86c;border-color:#c9a86c;transform:scale(1.3)}
+    /* Prvi slajd ispisuje server unutar <picture> (uspravni kadar za telefon,
+       polozeni za racunar). <picture> je inline element pa bi u flex traci
+       propao — ovdje dobija istu sirinu i visinu kao <img> kod ostalih slajdova. */
+    #hs-track picture{min-width:100%;width:100%;height:100%;display:block;flex-shrink:0}
+    /* Tackica se VIDI kao 8px, ali se DODIRUJE kao 24px: prozirni okvir oko nje
+       daje povrsinu koju prst moze da pogodi, sto PageSpeed trazi pod
+       pristupacnoscu ("Touch targets do not have sufficient size").
+       Sam kruzic crta ::before, pa izgled ostaje isti kao do sada. */
+    .hs-dot{width:24px;height:24px;border:0;border-radius:50%;cursor:pointer;padding:0;background:transparent;pointer-events:all;display:inline-flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+    .hs-dot::before{content:"";width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.5);background:transparent;transition:all .3s}
+    .hs-dot.active::before{background:#c9a86c;border-color:#c9a86c;transform:scale(1.3)}
     /* ===== MOBILE NAV FIX ===== */
     @media(max-width:768px){
       .nav-menu{max-height:calc(100svh - 75px);overflow-y:auto}
     }
     /* ===== MOBILE HERO OPTIMIZACIJA ===== */
     @media(max-width:768px){
-      #hero{min-height:100svh;padding-top:70px;padding-bottom:80px;align-items:flex-end;display:flex}
+      /* padding-bottom 80 -> 116px: ispod brojki mora stati red tackica (24px)
+         i ispod njih "Skrolujte". Na 80px su se tackice preklapale sa
+         redom "4000+ Zadovoljnih kupaca". */
+      #hero{min-height:100svh;padding-top:70px;padding-bottom:116px;align-items:flex-end;display:flex}
       /* Jači gradient pri dnu da tekst bude čitljiv */
       #hs-overlay{background:linear-gradient(to top,rgba(5,5,5,.92) 0%,rgba(5,5,5,.55) 45%,rgba(5,5,5,.1) 100%)!important}
       .hero-badge{font-size:10px;padding:5px 11px;margin-bottom:12px}
@@ -273,7 +285,9 @@
       .stat-item .number{font-size:22px}
       .stat-item .label{font-size:10px}
       #hs-track img{object-position:center center}
-      #hs-dots{bottom:52px!important}
+      /* Tackice su sad 24px visoke (povrsina za prst), pa su na starih 52px
+         ulazile u red sa "Skrolujte". Podignute su iznad njega. */
+      #hs-dots{bottom:80px!important}
       /* 2-kolonski grid za "Zašto mi" kartice */
       .why-grid{grid-template-columns:repeat(2,1fr)!important;gap:14px!important;margin-top:32px!important}
       .why-card{padding:22px 14px!important}
@@ -504,7 +518,7 @@
     <i class="fas fa-chevron-down"></i>
   </div>
   <!-- Dots za slider -->
-  <div id="hs-dots" style="position:absolute;bottom:68px;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:4;pointer-events:none;"></div>
+  <div id="hs-dots" style="position:absolute;bottom:92px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:4;pointer-events:none;"></div>
 </section>
 
 <!-- ===== AKCIJA BANER ===== -->
@@ -1243,7 +1257,9 @@
 </script>
 <script>
 (function(){
-  fetch('data/hero-slides.json?v=' + Date.now())
+  fetch('data/hero-slides.json')  /* bez ?v=Date.now(): tjeralo je novo
+     preuzimanje pri svakoj posjeti. Svjezinu vec cuva Cache-Control
+     max-age=0, must-revalidate iz .htaccess. */
     .then(function(r){ return r.json(); })
     .then(function(slidesData){
       var isMobile = window.innerWidth <= 768;
@@ -1255,14 +1271,30 @@
       var hero  = document.getElementById('hero');
       var track = document.getElementById('hs-track');
       var dotsEl  = document.getElementById('hs-dots');
-      var v = Date.now();
-      slides.forEach(function(s, i){
+      /* Slike slajdova 2 i 3 se ne prave odmah. One su u prvom ekranu pa im
+         loading="lazy" ne pomaze, a zajedno su preko 160 kB koje su se otimale
+         za propusni opseg bas dok se ucitava ono sto se VIDI. Prvi slajd se
+         mijenja tek poslije 5 sekundi, pa se ostali prave kad se stranica
+         smiri. Tackice se prave odmah, one nista ne kostaju. */
+      function dodajSliku(s, i) {
+        if (track.querySelector('img[data-slajd="' + i + '"]')) return;
         var src = (typeof s === 'string') ? s : ((isMobile && s.m) ? s.m : s.d);
         var img = document.createElement('img');
-        img.src = src + '?v=' + v;
+        img.src = src;   /* bez ?v=: ovako slika ostaje u kesu 30 dana */
         img.alt = 'Enterijer ' + (i+1);
-        img.loading = i === 0 ? 'eager' : 'lazy';
-        track.appendChild(img);
+        img.setAttribute('data-slajd', i);
+        /* redoslijed u traci mora pratiti redoslijed slajdova */
+        var poslije = track.querySelector('[data-slajd="' + (i+1) + '"]');
+        if (poslije) track.insertBefore(img, poslije); else track.appendChild(img);
+      }
+      function ostatak() {
+        slides.forEach(function(s, i){ if (i > 0) dodajSliku(s, i); });
+      }
+      if (document.readyState === 'complete') setTimeout(ostatak, 400);
+      else window.addEventListener('load', function(){ setTimeout(ostatak, 400); });
+
+      slides.forEach(function(s, i){
+        if (i === 0) dodajSliku(s, 0);   /* rezerva ako server nije ispisao prvi */
         var dot = document.createElement('button');
         dot.className = 'hs-dot' + (i===0?' active':'');
         dot.setAttribute('aria-label','Slajd '+(i+1));
@@ -1272,7 +1304,7 @@
       // Kad postoje slike: overlay postaje samo tamni gradient (bez hero-bg.jpg)
       // Prikaži slider (pokrij fallback pozadinu)
       var hsBg = document.getElementById('hs-bg');
-      if (hsBg) hsBg.style.display = '';
+      if (hsBg) hsBg.style.display = '';   /* zadrzano za slucaj da server nije ispisao slajd */
       var current = 0, timer;
       function goTo(n){
         current = ((n % slides.length) + slides.length) % slides.length;
