@@ -73,11 +73,15 @@ $rawDesc = $product && !empty($product['description'])
     : 'Detalji proizvoda – Make My Home Decor Podgorica. Zidni paneli i 3D letvice.';
 // Pun opis za Product schema (Google dozvoljava do 5000 znakova) — meta description se skraćuje, schema NE
 $schemaDesc = $rawDesc;
-// Skrati na ~155 znakova ali na granici riječi (ne siječi usred riječi)
-if (mb_strlen($rawDesc) > 155) {
-    $cut = mb_substr($rawDesc, 0, 155);
+// Skrati na granici rijeci tako da opis ostane u opsegu koji Google prikazuje
+// cijeli: 140-160 znakova. Ranije se sjeklo na 155 pa se trazio razmak unazad,
+// a kad je zadnja rijec bila duga opis je padao na 139 i bio prekratak.
+// Zato je gornja granica 158, a razmak se prihvata samo ako je iza 142. znaka;
+// ako takvog nema (rijec duza od 16 znakova preko granice), sijece se tvrdo.
+if (mb_strlen($rawDesc) > 158) {
+    $cut = mb_substr($rawDesc, 0, 158);
     $lastSpace = mb_strrpos($cut, ' ');
-    if ($lastSpace !== false) $cut = mb_substr($cut, 0, $lastSpace);
+    if ($lastSpace !== false && $lastSpace >= 142) $cut = mb_substr($cut, 0, $lastSpace);
     $rawDesc = rtrim($cut, " ,.;:-") . '…';
 }
 $ogDesc = htmlspecialchars($rawDesc, ENT_QUOTES);
