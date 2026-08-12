@@ -610,8 +610,8 @@
   /* products.js vec skida istu listu — koristimo njegov rezultat da se
      products.json (330 kB) ne skida dva puta po posjeti. */
   function podaci() {
-    if (typeof _dataPromise !== 'undefined')
-      return _dataPromise.then(function (a) { return a[0]; });
+    if (typeof window.mmhPodaci === 'function')
+      return window.mmhPodaci().then(function (a) { return a[0]; });
     return fetch('data/products.json?v=5').then(function (r) { return r.json(); });
   }
 
@@ -693,9 +693,12 @@
     }, 3200);
   }
 
-  if (document.readyState === 'loading')
-    document.addEventListener('DOMContentLoaded', function () { podaci().then(pokreni).catch(pao); });
-  else podaci().then(pokreni).catch(pao);
+  /* Traka sa sobama je ispod prvog ekrana, a za nju treba products.json (73 kB).
+     Ranije je krenuo na DOMContentLoaded i otimao propusni opseg hero slici
+     bas dok se ona mjeri kao LCP. Ceka da se stranica ucita. */
+  function pokreniTraku() { podaci().then(pokreni).catch(pao); }
+  if (document.readyState === 'complete') setTimeout(pokreniTraku, 200);
+  else window.addEventListener('load', function () { setTimeout(pokreniTraku, 200); });
 
   function pao() {
     /* Ako se lista ne ucita, ostaje samo naslov i dugme — bez praznih okvira */
@@ -1248,7 +1251,7 @@
 </button>
 
 <script src="js/main-v4.js?v=6"></script>
-<script src="js/products.js?v=48"></script>
+<script src="js/products.js?v=49"></script>
 <script src="js/cart.js?v=3"></script>
 <script>
   // Učitaj kategorije i featured proizvode

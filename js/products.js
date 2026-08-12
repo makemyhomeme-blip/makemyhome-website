@@ -46,15 +46,33 @@ let currentFilter = 'all';
 let allProducts = [];
 let allCategories = [];
 
-// Start fetching data immediately when script loads — don't wait for initProductsPage()
-const _dataPromise = Promise.all([
-  // Stabilna adresa (bez Date.now()) da bi se koristio browser cache; svjezina je
-  // pokrivena headerom Cache-Control: max-age=0, must-revalidate iz .htaccess.
-  // <link rel="preload"> je namjerno uklonjen — preload se nije uparivao sa ovim
-  // fetch-om, pa se products.json skidao dva puta (2 x 404 KB po posjeti).
-  fetch('data/products.json?v=5').then(r => r.json()),
-  fetch('data/categories.json?v=5').then(r => r.json())
-]).catch(() => [[], []]);
+/**
+ * products.json je 73 kB (sazeto) i skidao se ODMAH na svakoj stranici koja
+ * ucita ovu skriptu — i tamo gdje ne treba. Na pocetnoj su proizvodi i
+ * kategorije vec ispisani na serveru, pa se taj fajl tu koristi samo za
+ * pretragu i traku sa sobama. A dok se skida, otima propusni opseg hero
+ * slici, po kojoj se mjeri LCP.
+ *
+ * Sada se skida na prvi zahtjev. Na katalogu i kategorijama initProductsPage()
+ * ga trazi odmah, pa se tamo nista ne mijenja. Ako niko ne zatrazi, krene sam
+ * kad se stranica smiri, da pretraga bude spremna prije nego korisnik klikne.
+ *
+ * Adresa je stabilna (bez Date.now()) da bi radio kes pregledaca; svjezinu
+ * pokriva Cache-Control: max-age=0, must-revalidate iz .htaccess.
+ */
+let _dataPromise = null;
+function mmhPodaci() {
+  if (!_dataPromise) {
+    _dataPromise = Promise.all([
+      fetch('data/products.json?v=5').then(r => r.json()),
+      fetch('data/categories.json?v=5').then(r => r.json())
+    ]).catch(() => [[], []]);
+  }
+  return _dataPromise;
+}
+window.mmhPodaci = mmhPodaci;
+if (document.readyState === 'complete') setTimeout(mmhPodaci, 300);
+else window.addEventListener('load', function () { setTimeout(mmhPodaci, 300); });
 
 // Željeni redoslijed kategorija na stranici "Svi proizvodi"
 const CATEGORY_ORDER = [
@@ -77,7 +95,7 @@ const CATEGORY_ORDER = [
 async function loadData() {
   if (allProducts.length > 0) return;
   try {
-    const [products, categories] = await _dataPromise;
+    const [products, categories] = await mmhPodaci();
     allProducts = products;
     allCategories = categories;
   } catch (e) {
