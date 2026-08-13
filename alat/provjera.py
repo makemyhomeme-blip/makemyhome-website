@@ -259,6 +259,48 @@ def grupa_C():
         g.append('provjera ikona nije mogla da se izvrsi: %s' % e)
     zabiljezi('C6', 'Svaka ikona koju stranice traze postoji u CSS-u', g, len(ikone))
 
+    # ---- Ime, adresa i telefon moraju biti ISTI svuda ----------------------
+    #
+    # Google uporedjuje ove tri stvari sa sajta sa onim sto stoji na profilu
+    # firme. Kad se ne poklapaju, slabije povezuje profil i sajt — a bas ta
+    # veza izbacuje firmu u mapu i u lokalne rezultate. Ovo se stvarno desilo:
+    # sajt je pisao broj 41, a profil 43, i to je stajalo nezapazeno jer se
+    # adresa pojavljuje na 48 mjesta u 23 fajla i niko ih ne poredi rucno.
+    ADRESA  = 'Vojvode Maša Đurovića 43'
+    TELEFON = '069 105 222'
+    g = []
+    brojevi, bezAdrese = collections.Counter(), []
+    for u, (h, kod, _, _) in STRANICE.items():
+        if kod != '200':
+            continue
+        for m in re.findall(r'Vojvode Maša Đurovića\s*([0-9][0-9-]*)', h):
+            brojevi[m] += 1
+        if 'Vojvode Maša Đurovića' in h and ADRESA not in h:
+            bezAdrese.append(u)
+    for b in sorted(brojevi):
+        if b != '43':
+            g.append('negdje pise kucni broj %s umjesto 43 (%d puta)' % (b, brojevi[b]))
+    for u in bezAdrese[:5]:
+        g.append('%s → adresa nije u tacnom obliku' % u)
+
+    # Telefon i adresa u strukturiranim podacima — to Google zaista cita
+    for u in (BAZA + '/', BAZA + '/contact.html', BAZA + '/about.html'):
+        h = STRANICE.get(u, ('', '', '', ''))[0]
+        if not h:
+            continue
+        for blok in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
+            if '"streetAddress"' not in blok:
+                continue
+            sa = re.search(r'"streetAddress"\s*:\s*"([^"]*)"', blok)
+            if sa and ADRESA not in sa.group(1):
+                g.append('%s → streetAddress u strukturiranim podacima: %s' % (u, sa.group(1)))
+            tel = re.search(r'"telephone"\s*:\s*"([^"]*)"', blok)
+            # Poredi se zadnjih 8 cifara: isti broj se pise i kao +382 69 105 222
+            # i kao 069 105 222, pa vodeca nula odnosno pozivni ne smiju da smetaju.
+            if tel and re.sub(r'\D', '', tel.group(1))[-8:] != re.sub(r'\D', '', TELEFON)[-8:]:
+                g.append('%s → telefon u strukturiranim podacima: %s' % (u, tel.group(1)))
+    zabiljezi('C7', 'Adresa i telefon isti na cijelom sajtu', g, len(STRANICE))
+
 
 # ============================================================
 # D — STRUKTURIRANI PODACI
