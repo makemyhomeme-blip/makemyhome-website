@@ -112,7 +112,7 @@ arsort($insKat);
   <meta name="twitter:description" content="Zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i kancelarije. Kliknite na sobu i vidite koji je panel na njoj.">
   <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
   <link rel="canonical" href="https://makemyhome.me/inspiracija.html">
-  <title>Inspiracija – Paneli u Prostorima | Make My Home</title>
+  <title>Inspiracija – Paneli u Prostorima | Make My Home Decor</title>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="apple-touch-icon" sizes="512x512" href="images/favicon-512.png">
