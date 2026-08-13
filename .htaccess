@@ -24,10 +24,17 @@ RewriteRule ^ https://makemyhome.me%{REQUEST_URI} [R=301,L]
 RewriteCond %{REQUEST_URI} ^(/[^?]*\.html)[.,;:!)\]]+$
 RewriteRule ^ %1 [R=301,L]
 
-# Stari WordPress feed URL-ovi → 301 na odgovarajuću stranicu (čisti GSC 404 izvještaj)
-# (product/slug/feed obrađuje 404.php koji zna da nađe pravi proizvod)
-RewriteRule ^feed/?$ /? [R=301,L]
-RewriteRule ^comments/feed/?$ /? [R=301,L]
+# Stari WordPress feed URL-ovi → 410 Gone.
+#
+# Ranije su preusmjeravani na pocetnu. To je bila greska: preusmjerenje znaci
+# "sadrzaj je premjesten ovdje", a RSS feed nema svoju zamjenu na novom sajtu.
+# Google takvo preusmjerenje na nepovezanu stranicu tretira kao meku 404 i
+# drzi adresu u redu za obilazak unedogled. 410 znaci "trajno obrisano" —
+# izbaci je iz indeksa i vise ne dolazi po nju.
+# (product/slug/feed je izuzet: njega obradjuje 404.php koji nadje pravi
+#  proizvod, jer TU zamjena postoji.)
+RewriteRule ^feed/?$ - [G,L]
+RewriteRule ^comments/feed/?$ - [G,L]
 
 # Stari WordPress sistemski fajlovi → 410 Gone (najjači signal Googleu: trajno obrisano, izbaci iz indeksa)
 # Ostaci starog WordPress sajta — vracaju 410 Gone da ih Google brzo izbaci iz indeksa.
@@ -44,7 +51,7 @@ RewriteRule ^wp-content/ - [G,L]
 RewriteRule ^wp-admin/ - [G,L]
 RewriteRule ^wp-json - [G,L]
 RewriteRule ^xmlrpc\.php$ - [G,L]
-RewriteRule ^(?!product/)(.*/)?feed/?$ /? [R=301,L]
+RewriteRule ^(?!product/)(.*/)?feed/?$ - [G,L]
 RewriteRule ^comments/ - [G,L]
 # /hello-world/ je podrazumijevani prvi clanak koji WordPress sam napravi.
 # Google ga jos drzi u svom grafu — u URL Inspection-u za pocetnu stoji kao
@@ -137,6 +144,9 @@ RewriteRule ^spc-pod/?$ /kategorija/spc-pod [R=301,L]
 RewriteRule ^spc/?$ /kategorija/spc-pod [R=301,L]
 RewriteRule ^mdf(-paneli)?/?$ /kategorija/mdf [R=301,L]
 RewriteRule ^classic(-paneli)?/?$ /kategorija/classic [R=301,L]
+# "uncategorized" je WordPress-ova fiktivna kategorija u koju padne sve sto
+# nije svrstano — nema zamjenu kod nas, pa 410 umjesto preusmjerenja.
+RewriteRule ^category/uncategorized/?$ - [G,L]
 RewriteRule ^category/.*$ /products.html? [R=301,L]
 RewriteRule ^tag/.*$ /products.html? [R=301,L]
 RewriteRule ^uv-paneli/?$ /kategorija/bambus-mermerni [R=301,L]
