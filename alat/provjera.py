@@ -790,6 +790,28 @@ def grupa_H():
     zabiljezi('H1', 'Sve adrese koje Google ima → 200 ili 410, bez lanca', g, len(adrese))
     zabiljezi('H2', 'Ugasen proizvod ide na svoju kategoriju, ne na opsti katalog', opsti, len(adrese))
 
+    # ---- Adresa bez zamjene mora reci "obrisano", ne preusmjeravati --------
+    #
+    # Preusmjerenje Googleu znaci "sadrzaj je premjesten ovdje". RSS feed i
+    # WordPress-ova fiktivna kategorija "uncategorized" nemaju zamjenu na novom
+    # sajtu — slati ih na pocetnu ili katalog je neistina, a Google to tretira
+    # kao meku 404 i drzi adresu u redu za obilazak unedogled. Bas to nas je
+    # mjesecima drzalo zakacene za stari WordPress sajt.
+    # 410 znaci "trajno obrisano": Google je izbaci i vise ne dolazi po nju.
+    bez_zamjene = ['/feed/', '/comments/feed/', '/product-category/aku-paneli/feed/',
+                   '/category/uncategorized/', '/hello-world/']
+    g = []
+    for p in bez_zamjene:
+        _, kod, _, _ = dohvati(BAZA + p, timeout='12')
+        if kod != '410':
+            g.append('%s → %s (mora 410, nema zamjenu na novom sajtu)' % (p, kod))
+    # a ono STO ima zamjenu mora i dalje voditi na nju
+    _, kod, sk, kraj = dohvati(BAZA + '/product/mocha-oak/feed/', prati=True, timeout='12')
+    if kod != '200' or 'mocha-oak' not in kraj:
+        g.append('/product/mocha-oak/feed/ → %s %s (mora voditi na taj proizvod)' % (kod, kraj))
+    zabiljezi('H3', 'Stara adresa bez zamjene vraca 410, sa zamjenom vodi na nju',
+              g, len(bez_zamjene) + 1)
+
 
 def grupa_R():
     print('\n=== R · RECENZIJE ===')
