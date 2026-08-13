@@ -46,6 +46,11 @@ RewriteRule ^wp-json - [G,L]
 RewriteRule ^xmlrpc\.php$ - [G,L]
 RewriteRule ^(?!product/)(.*/)?feed/?$ /? [R=301,L]
 RewriteRule ^comments/ - [G,L]
+# /hello-world/ je podrazumijevani prvi clanak koji WordPress sam napravi.
+# Google ga jos drzi u svom grafu — u URL Inspection-u za pocetnu stoji kao
+# "Referring page". Vracao je 404; 410 mu jasnije kaze da je trajno obrisan,
+# pa ga brze izbacuje i prestaje da ga koristi kao putokaz do pocetne.
+RewriteRule ^hello-world/?$ - [G,L]
 
 # ── Arhive, backupi i dev fajlovi — 403 Forbidden ──────────────────────────────
 # nas-sajt-backup-*.zip je sadrzao admin/index.php sa lozinkom u citljivom obliku
