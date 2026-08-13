@@ -36,9 +36,33 @@ $katImena = [
     'mdf' => 'MDF Paneli', 'flex-stone' => 'Flex Stone',
 ];
 
-// Datum posljednje izmjene podataka — ne izmisljamo, uzimamo sa diska
-$datPod = @filemtime(__DIR__ . '/data/products.json');
-$danas  = date('Y-m-d', $datPod ?: time());
+// Datum izmjene po adresi — ne izmisljamo, uzimamo sa diska.
+//
+// Ranije je SVIH 149 adresa dobijalo isti datum, i to onaj kad je zadnji put
+// mijenjan products.json. To je Googleu davalo pogresan signal u oba smjera:
+// stranica o firmi bi "se mijenjala" svaki put kad se doda proizvod, a
+// izmjena izgleda ili teksta na vodicu se ne bi vidjela uopste. Google po
+// lastmod-u odlucuje koliko brzo ce ponovo doci, pa je vrijedjelo srediti.
+//
+// Sada svaka adresa nosi datum onoga sto JOJ stvarno odredjuje sadrzaj:
+// za stranicu proizvoda to su podaci + product.php + stilovi, za staticnu
+// stranicu njen HTML, i tako redom. Uzima se najnoviji od tih datuma.
+function mmhVrijeme(array $fajlovi): int
+{
+    $naj = 0;
+    foreach ($fajlovi as $f) {
+        $t = @filemtime(__DIR__ . '/' . ltrim($f, '/'));
+        if ($t && $t > $naj) $naj = $t;
+    }
+    return $naj ?: time();
+}
+
+// U racun ulazi samo ono sto mijenja SADRZAJ — tekst, cijene, slike. Stilovi
+// i skripte se namjerno NE broje: Google trazi da lastmod znaci stvarnu
+// promjenu sadrzaja, a da se racuna i CSS, sitna izmjena izgleda bi javila da
+// se promijenilo svih 149 stranica i signal bi izgubio vrijednost.
+$mmhOkvir  = [];
+$mmhPodaci = ['data/products.json', 'data/categories.json'];
 
 function mmhX(string $s): string
 {
@@ -56,10 +80,10 @@ function mmhSlikaXML(string $rel, string $naslov): string
 }
 
 $izlaz = [];
-$dodaj = function (string $loc, string $freq, string $prio, string $slike = '') use (&$izlaz, $danas) {
+$dodaj = function (string $loc, string $freq, string $prio, string $slike = '', int $kada = 0) use (&$izlaz) {
     $izlaz[] = "  <url>\n"
              . '    <loc>' . mmhX($loc) . "</loc>\n"
-             . '    <lastmod>' . $danas . "</lastmod>\n"
+             . '    <lastmod>' . date('Y-m-d', $kada ?: time()) . "</lastmod>\n"
              . '    <changefreq>' . $freq . "</changefreq>\n"
              . '    <priority>' . $prio . "</priority>\n"
              . $slike
@@ -68,7 +92,8 @@ $dodaj = function (string $loc, string $freq, string $prio, string $slike = '') 
 
 // ---- Pocetna i staticne stranice ----------------------------------------
 $dodaj($BAZA . '/', 'daily', '1.0',
-       mmhSlikaXML('images/showcase-room.jpg', 'Make My Home Decor – zidni paneli, Podgorica'));
+       mmhSlikaXML('images/showcase-room.jpg', 'Make My Home Decor – zidni paneli, Podgorica'),
+       mmhVrijeme(array_merge($mmhPodaci, ['index.html', 'pocetna.php'])));
 
 $statika = [
     ['products.html', 'weekly', '0.9'], ['cjenovnik.html', 'weekly', '0.9'],
@@ -93,7 +118,13 @@ foreach ($statika as [$f, $fr, $pr]) {
             }
         }
     }
-    $dodaj($BAZA . '/' . $f, $fr, $pr, $sl);
+    // Cetiri stranice sastavlja PHP; njima se gleda i taj fajl, ne samo .html
+    $izvori = array_merge($mmhOkvir, [$f]);
+    if ($f === 'inspiracija.html')  $izvori = array_merge($mmhPodaci, ['inspiracija.php']);
+    if ($f === 'cjenovnik.html')    $izvori = array_merge($mmhPodaci, ['cjenovnik.php']);
+    if ($f === 'products.html')     $izvori = array_merge($mmhPodaci, ['products.php']);
+    if ($f === 'decor-box.html')    $izvori = array_merge($mmhOkvir, ['decor-box.php', 'data/decor-box-style.json']);
+    $dodaj($BAZA . '/' . $f, $fr, $pr, $sl, mmhVrijeme($izvori));
 }
 
 // ---- Kategorije ----------------------------------------------------------
@@ -107,7 +138,8 @@ foreach ($katImena as $k => $ime) {
     foreach (($poKat[$k] ?? []) as $p) {
         if (!empty($p['image'])) $sl .= mmhSlikaXML($p['image'], $p['name'] . ' – ' . $ime);
     }
-    $dodaj($BAZA . '/kategorija/' . $k, 'weekly', '0.9', $sl);
+    $dodaj($BAZA . '/kategorija/' . $k, 'weekly', '0.9', $sl,
+           mmhVrijeme(array_merge($mmhPodaci, ['products.php'])));
 }
 
 // ---- Proizvodi -----------------------------------------------------------
@@ -119,7 +151,8 @@ foreach ($P as $p) {
     foreach (($p['gallery'] ?? []) as $gi => $g) {
         $sl .= mmhSlikaXML($g, $ime . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
     }
-    $dodaj($BAZA . '/' . mmhSlugProizvoda($p), 'weekly', '0.8', $sl);
+    $dodaj($BAZA . '/' . mmhSlugProizvoda($p), 'weekly', '0.8', $sl,
+           mmhVrijeme(array_merge($mmhPodaci, ['product.php'])));
 }
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
