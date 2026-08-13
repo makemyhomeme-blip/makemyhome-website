@@ -698,44 +698,49 @@ echo "\n</script>\n";
           $pF = $pD > 0 ? round($pO * (1 - $pD / 100), 2) : $pO;
           $pHl = mb_substr(strip_tags($p['highlight'] ?? $p['description'] ?? ''), 0, 140);
         ?>
-        <article class="product-card" data-ssr="1">
-          <a href="/<?= mmhSlugProizvoda($p) ?>" class="product-link" style="text-decoration:none;color:inherit;display:block;">
-            <div class="product-img">
-              <?php
-              // Opisan alt: Google Images je za dekoraciju stvarni izvor posjeta,
-              // a "Mystic Marble" sam po sebi ne govori nista o tome sta je na slici.
-              $altBoja = '';
-              foreach (($p['features'] ?? []) as $af) {
-                  if (str_starts_with($af, 'Boja:')) {
-                      $altBoja = trim(preg_replace('/\s*\([^)]*\)\s*$/u', '', substr($af, 5)));
-                      break;
-                  }
+        <?php
+          $pUrl  = '/' . mmhSlugProizvoda($p);
+          $pKat  = $catNames[$p['category'] ?? ''] ?? '';
+          $pJed  = $p['unit'] ?? 'kom';
+          $pNema = ($p['inStock'] ?? true) === false;
+          // Opisan alt: Google Images je za dekoraciju stvarni izvor posjeta,
+          // a "Mystic Marble" sam po sebi ne govori nista o tome sta je na slici.
+          $altBoja = '';
+          foreach (($p['features'] ?? []) as $af) {
+              if (str_starts_with($af, 'Boja:')) {
+                  $altBoja = trim(preg_replace('/\s*\([^)]*\)\s*$/u', '', substr($af, 5)));
+                  break;
               }
-              $altTxt = trim(($p['name'] ?? '') . ' – ' . ($catNames[$p['category'] ?? ''] ?? 'zidni panel')
-                        . ($altBoja ? ', ' . $altBoja : '') . ' | Make My Home Decor Podgorica');
-              ?><img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?> style="width:100%;height:auto;display:block;">
-              <?php if ($pD > 0): ?>
-              <!-- Oznaka popusta preko slike. Pocetna ju je imala, kategorije nisu —
-                   pa je ista roba na dva mjesta izgledala razlicito i na kategoriji
-                   se nije vidjelo da je na akciji. Sada je isto na oba mjesta. -->
-              <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $pD ?>%</div>
-              <?php endif; ?>
-            </div>
-            <div class="product-body" style="padding:16px;">
-              <h2 class="product-name" style="font-size:1em;font-weight:700;margin-bottom:8px;color:#1a1a1a;"><?= htmlspecialchars($p['name'] ?? '') ?></h2>
-              <p class="product-price" style="margin-bottom:6px;">
-                <?php if ($pD > 0): ?>
-                <!-- Snizena cijena je crvena, kao i na pocetnoj — tako se vidi da je
-                     akcija. Kontrast crvene na bijeloj je 5,44 (WCAG trazi 4,5). -->
-                <span style="font-weight:700;color:#c0392b;"><?= number_format($pF, 2, ',', '.') ?> €</span>
-                <span style="text-decoration:line-through;color:#767676;font-size:.85em;margin-left:6px;"><?= number_format($pO, 2, ',', '.') ?> €</span>
-                <?php else: ?>
-                <span style="font-weight:700;color:#795f32;"><?= number_format($pF, 2, ',', '.') ?> €</span>
-                <?php endif; ?>
-              </p>
-              <?php if ($pHl): ?><p style="font-size:.82em;color:#666;line-height:1.5;"><?= htmlspecialchars($pHl) ?></p><?php endif; ?>
-            </div>
+          }
+          $altTxt = trim(($p['name'] ?? '') . ' – ' . ($pKat ?: 'zidni panel')
+                    . ($altBoja ? ', ' . $altBoja : '') . ' | Make My Home Decor Podgorica');
+        ?>
+        <article class="product-card<?= $pNema ? ' out-of-stock' : '' ?>" data-ssr="1">
+          <a href="<?= htmlspecialchars($pUrl) ?>" class="product-img" style="display:block;">
+            <img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?>>
+            <?php if ($pD > 0 && !$pNema): ?>
+            <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $pD ?>%</div>
+            <?php endif; ?>
+            <?php if ($pNema): ?><div class="oos-tag">Rasprodato</div><?php endif; ?>
           </a>
+          <div class="product-body">
+            <?php if ($pKat): ?><div class="product-category"><?= htmlspecialchars($pKat) ?></div><?php endif; ?>
+            <h2 class="product-name"><a href="<?= htmlspecialchars($pUrl) ?>" style="color:inherit;"><?= htmlspecialchars($p['name'] ?? '') ?></a></h2>
+            <?php if (!empty($p['sku'])): ?><div class="product-sku">Šifra: <strong><?= htmlspecialchars($p['sku']) ?></strong></div><?php endif; ?>
+            <?php if ($pHl): ?><p class="product-desc"><?= htmlspecialchars($pHl) ?></p><?php endif; ?>
+            <div class="product-footer">
+              <div class="product-price">
+                <?php if ($pD > 0): ?>
+                  <span style="text-decoration:line-through;color:#767676;font-size:13px;display:block;"><?= number_format($pO, 2, ',', '.') ?> €</span>
+                  <span style="color:#c0392b;font-weight:700;"><?= number_format($pF, 2, ',', '.') ?> €</span>
+                  <span style="color:#666e7a;font-size:12px;"> / <?= htmlspecialchars($pJed) ?></span>
+                <?php else: ?>
+                  <?= number_format($pF, 2, ',', '.') ?> € <span>/ <?= htmlspecialchars($pJed) ?></span>
+                <?php endif; ?>
+              </div>
+              <a href="<?= htmlspecialchars($pUrl) ?>" class="btn-card-detail">Detaljnije <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
         </article>
         <?php endforeach; ?>
         <?php endif; ?>
