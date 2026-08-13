@@ -76,6 +76,9 @@ RewriteRule ^data/inquiries\.json\.(tmp|bak)$ - [F,L]
 # na .bak pa ih gornje pravilo ne hvata. Nisu tajna, ali su duplikat sadrzaja
 # koji Google ne treba da cita.
 RewriteRule ^data/.*\.bak\.[0-9-]+\.json$ - [F,L]
+# Kes sitemapa koji pravi sitemap.php. Isti sadrzaj kao /sitemap.xml — da ga
+# Google ne nadje kao drugu adresu istog spiska, zatvoren je za web.
+RewriteRule ^data/sitemap-kes\.xml(\.tmp)?$ - [F,L]
 # Stari Canva katalog (82 str, 27,7 MB, iz 12/2024) — obrisan, svi proizvodi iz njega
 # vec postoje kao stranice na sajtu. Google ga je imao u indeksu, pa 410 umjesto 404.
 RewriteRule ^images/katalog\.pdf$ - [G,L]

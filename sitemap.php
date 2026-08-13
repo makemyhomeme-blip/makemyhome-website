@@ -17,10 +17,36 @@
  * nista nije promijenilo.
  */
 require_once __DIR__ . '/php/slug.php';
-require_once __DIR__ . '/php/dimenzije.php';
+// php/dimenzije.php se OVDJE ne koristi — bio je ucitavan bez potrebe i uz
+// njega i kes dimenzija slika od 10 kB, pri svakom zahtjevu za sitemapom.
+
+// ---- Kes ----------------------------------------------------------------
+// Google je u Search Console-u za dvije adrese javio "Sitemap: Temporary
+// processing error". Sitemap se do sada pravio IZNOVA pri svakom zahtjevu:
+// citanje products.json od 383 kB, obrada 117 proizvoda i ispis 447 slika,
+// 0,6 do 1,5 sekunde. Za Googlebot je to nepotreban rizik — ako mu odgovor
+// zakasni, prijavi gresku i ne procita spisak.
+//
+// Sada se gotov XML cuva u fajlu i sluzi se odatle. Ponovo se pravi samo kad
+// se promijeni nesto od cega zavisi: podaci o proizvodima, kategorije ili sam
+// ovaj fajl. Sadrzaj je isti do znaka, samo stize odmah.
+$kesFajl = __DIR__ . '/data/sitemap-kes.xml';
+$izvori  = [__DIR__ . '/data/products.json', __DIR__ . '/data/categories.json',
+            __FILE__, __DIR__ . '/php/slug.php'];
+$najnoviji = 0;
+foreach ($izvori as $f) {
+    $t = @filemtime($f);
+    if ($t && $t > $najnoviji) $najnoviji = $t;
+}
 
 header('Content-Type: application/xml; charset=utf-8');
 header('Cache-Control: public, max-age=0, must-revalidate');
+if ($najnoviji) header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $najnoviji) . ' GMT');
+
+if (is_file($kesFajl) && filemtime($kesFajl) >= $najnoviji && filesize($kesFajl) > 1000) {
+    readfile($kesFajl);
+    exit;
+}
 
 $BAZA = 'https://makemyhome.me';
 $P = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
@@ -155,8 +181,16 @@ foreach ($P as $p) {
            mmhVrijeme(array_merge($mmhPodaci, ['product.php'])));
 }
 
-echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
-echo '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
-echo implode('', $izlaz);
-echo "</urlset>\n";
+$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
+     . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n"
+     . '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n"
+     . implode('', $izlaz)
+     . "</urlset>\n";
+
+// Prvo u privremeni fajl pa preimenovanje — da Googlebot nikad ne uhvati
+// polovicno upisan sitemap ako naidje bas u trenutku pravljenja.
+$priv = $kesFajl . '.tmp';
+if (@file_put_contents($priv, $xml, LOCK_EX) !== false) {
+    @rename($priv, $kesFajl);
+}
+echo $xml;

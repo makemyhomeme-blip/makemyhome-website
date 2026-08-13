@@ -7,6 +7,9 @@ data/*.backup-*.json
 # upisuje). Nisu u sync listi pa se ne mogu prepisati, ali stoje i ovdje da
 # se ta greska ne moze napraviti kasnije.
 data/hero-slides.json
+# Kes sitemapa — pravi ga server, ne drzi se u gitu
+data/sitemap-kes.xml
+data/sitemap-kes.xml.tmp
 
 # Uploads managed on server
 images/categories/
