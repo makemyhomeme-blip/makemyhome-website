@@ -145,9 +145,22 @@ if ($KAT) {
         $pY   = (float)($poz['posY'] ?? 50);
         $zum  = (float)($poz['zoom'] ?? 1);
         $slika = $k['image'] ?? '';
+        // Uz original se nudi i uza verzija (admin/webp.php je pravi na 560px).
+        // Kartica je na telefonu siroka oko 173 CSS piksela, pa je original od
+        // 1400px bio cetiri puta veci nego sto treba. Atribut sizes govori
+        // pregledacu koliko je slika ZAISTA velika na ekranu, da moze da izabere.
+        $uza = preg_replace('/\.(jpe?g|png)$/i', '-560.$1', $slika);
+        $srcset = '';
+        if ($uza !== $slika && is_file(__DIR__ . '/' . $uza)) {
+            $d = mmhDimenzije($slika);
+            $sirOrig = $d ? (int)$d[0] : 0;
+            $srcset = ' srcset="' . htmlspecialchars($uza) . ' 560w'
+                    . ($sirOrig > 560 ? ', ' . htmlspecialchars($slika) . ' ' . $sirOrig . 'w' : '')
+                    . '" sizes="(max-width: 768px) 46vw, 300px"';
+        }
         ?>
       <a href="/kategorija/<?= htmlspecialchars($kljuc) ?>" class="category-card">
-        <div class="category-img" style="overflow:hidden;position:relative;"><?php if ($slika): ?><img class="category-bg-img" src="<?= htmlspecialchars($slika) ?>" alt="<?= htmlspecialchars(($k['name'] ?? '') . ' – Make My Home Decor Podgorica') ?>" loading="lazy" decoding="async"<?= mmhDimAtributi($slika) ?> style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:<?= $pX ?>% <?= $pY ?>%;transform:scale(<?= $zum ?>);transform-origin:<?= $pX ?>% <?= $pY ?>%;--zoom:<?= $zum ?>;"><?php endif; ?></div>
+        <div class="category-img" style="overflow:hidden;position:relative;"><?php if ($slika): ?><img class="category-bg-img" src="<?= htmlspecialchars($slika) ?>"<?= $srcset ?> alt="<?= htmlspecialchars(($k['name'] ?? '') . ' – Make My Home Decor Podgorica') ?>" loading="lazy" decoding="async"<?= mmhDimAtributi($slika) ?> style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:<?= $pX ?>% <?= $pY ?>%;transform:scale(<?= $zum ?>);transform-origin:<?= $pX ?>% <?= $pY ?>%;--zoom:<?= $zum ?>;"><?php endif; ?></div>
         <div class="category-body">
           <div class="category-icon" style="background:<?= htmlspecialchars($k['color'] ?? '#7a9e6e') ?>"><i class="<?= htmlspecialchars($k['icon'] ?? 'fas fa-layer-group') ?>"></i></div>
           <h3><?= htmlspecialchars($k['name'] ?? '') ?></h3>

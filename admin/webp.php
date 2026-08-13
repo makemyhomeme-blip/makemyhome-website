@@ -51,6 +51,16 @@ $KVALITET = 75;
 // dira — te su ionako sitne, a logo je PNG sa prozirnoscu.
 $FOLDERI = ['images/products', 'images/categories', 'images/rooms', 'images/hero-slides'];
 
+// Uze verzije za slike koje se prikazuju sitno.
+//
+// Kartice kategorija su na telefonu siroke 173 CSS piksela, a fotografije su
+// do 1400x933 — PageSpeed je to prijavio kao 640 kB viska. Ovdje se PORED
+// originala pravi verzija sirine 560 px (dovoljna i za ekran sa tri piksela
+// po tacki), pa stranica preko srcset nudi obje: pregledac uzme uzu, a
+// original ostaje za velike ekrane. Original se NE mijenja.
+$UZE = ['images/categories' => 560];
+$UZE_SUFIKS = '/-\d{2,4}\.(jpe?g|png)$/i';   // vec napravljena uza verzija — ne diraj je
+
 echo '<pre style="font-family:monospace;font-size:13px;padding:20px;background:#111;color:#eee;min-height:100vh;">';
 echo "=== WebP verzije slika ===\n\n";
 
@@ -69,6 +79,34 @@ $napravljeno = 0;
 $preskoceno = 0;
 $gore = 0;      // webp ispao veci od originala — takav se brise, nema smisla
 $greske = [];
+
+// ---- prvo uze verzije, pa tek onda webp (da i one dobiju svoj .webp) ----
+$uzih = 0;
+foreach ($UZE as $relU => $maxW) {
+    $dirU = $root . '/' . $relU;
+    if (!is_dir($dirU)) continue;
+    foreach (glob($dirU . '/*.{jpg,jpeg,JPG,JPEG,png,PNG}', GLOB_BRACE) ?: [] as $put) {
+        if (preg_match($UZE_SUFIKS, $put)) continue;          // ovo je vec uza verzija
+        $info = @getimagesize($put);
+        if (!$info || $info[0] <= $maxW) continue;            // vec je dovoljno uska
+        $cilj = preg_replace('/\.(jpe?g|png)$/i', '-' . $maxW . '.$1', $put);
+        if (!$ponovo && is_file($cilj) && filemtime($cilj) >= filemtime($put)) continue;
+        if ($probni) { $uzih++; continue; }
+
+        $src = $info[2] === IMAGETYPE_PNG ? @imagecreatefrompng($put) : @imagecreatefromjpeg($put);
+        if (!$src) { $greske[] = basename($put) . ' (uza verzija: GD je ne moze otvoriti)'; continue; }
+        $novaH = (int) round($info[1] * $maxW / $info[0]);
+        $dst = imagecreatetruecolor($maxW, $novaH);
+        if ($info[2] === IMAGETYPE_PNG) { imagealphablending($dst, false); imagesavealpha($dst, true); }
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $maxW, $novaH, $info[0], $info[1]);
+        imagedestroy($src);
+        $ok = $info[2] === IMAGETYPE_PNG ? @imagepng($dst, $cilj) : @imagejpeg($dst, $cilj, 86);
+        imagedestroy($dst);
+        if ($ok) { @touch($cilj, filemtime($put) + 1); $uzih++; }
+        else { $greske[] = basename($put) . ' (uza verzija: snimanje nije uspjelo)'; }
+    }
+}
+if ($uzih) echo "--- uzih verzija (560px) napravljeno: $uzih\n";
 
 foreach ($FOLDERI as $rel) {
     $dir = $root . '/' . $rel;
