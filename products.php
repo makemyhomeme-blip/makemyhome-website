@@ -865,19 +865,19 @@ echo "\n</script>\n";
              svih 14 stranica kategorija nije vidio nijedan link kategorije u
              podnozju — 12 unutrasnjih veza po stranici je nedostajalo. -->
         <ul class="footer-links footer-links-grid" id="footer-cats">
-          <li><a href="/kategorija/bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni Paneli</a></li>
-          <li><a href="/kategorija/bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni Paneli</a></li>
-          <li><a href="/kategorija/bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni Paneli</a></li>
-          <li><a href="/kategorija/bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni Paneli</a></li>
-          <li><a href="/kategorija/classic"><i class="fas fa-chevron-right"></i> Classic Paneli</a></li>
-          <li><a href="/kategorija/bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni Paneli</a></li>
-          <li><a href="/kategorija/3d-letvice"><i class="fas fa-chevron-right"></i> 3D Letvice</a></li>
-          <li><a href="/kategorija/akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični Paneli</a></li>
-          <li><a href="/kategorija/aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Alu Lajsne</a></li>
-          <li><a href="/kategorija/spc-pod"><i class="fas fa-chevron-right"></i> SPC Pod</a></li>
-          <li><a href="/kategorija/pu-kamen"><i class="fas fa-chevron-right"></i> PU Kamen</a></li>
-          <li><a href="/kategorija/mdf"><i class="fas fa-chevron-right"></i> MDF Paneli</a></li>
-          <li><a href="/kategorija/flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone</a></li>
+          <li><a href="/kategorija/bambus-drveni"><i class="fas fa-chevron-right"></i> Drveni zidni paneli</a></li>
+          <li><a href="/kategorija/bambus-tekstilni"><i class="fas fa-chevron-right"></i> Tekstilni zidni paneli</a></li>
+          <li><a href="/kategorija/bambus-mermerni"><i class="fas fa-chevron-right"></i> Mermerni zidni paneli</a></li>
+          <li><a href="/kategorija/bambus-metalni"><i class="fas fa-chevron-right"></i> Metalni zidni paneli</a></li>
+          <li><a href="/kategorija/classic"><i class="fas fa-chevron-right"></i> Classic zidni paneli</a></li>
+          <li><a href="/kategorija/bambus-kozni"><i class="fas fa-chevron-right"></i> Kožni zidni paneli</a></li>
+          <li><a href="/kategorija/3d-letvice"><i class="fas fa-chevron-right"></i> 3D letvice za zid</a></li>
+          <li><a href="/kategorija/akusticni-paneli"><i class="fas fa-chevron-right"></i> Akustični zidni paneli</a></li>
+          <li><a href="/kategorija/aluminijum-lajsne"><i class="fas fa-chevron-right"></i> Aluminijum lajsne za panele</a></li>
+          <li><a href="/kategorija/spc-pod"><i class="fas fa-chevron-right"></i> SPC vodootporni pod</a></li>
+          <li><a href="/kategorija/pu-kamen"><i class="fas fa-chevron-right"></i> PU dekorativni kamen</a></li>
+          <li><a href="/kategorija/mdf"><i class="fas fa-chevron-right"></i> MDF kanelirani paneli</a></li>
+          <li><a href="/kategorija/flex-stone"><i class="fas fa-chevron-right"></i> Flex Stone kameni furnir</a></li>
         </ul>
       </div>
       <div>
