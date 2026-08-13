@@ -47,7 +47,7 @@
       "email": "makemyhome.me@gmail.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Vojvode Maša Đurovića 41, City Kvart",
+        "streetAddress": "Vojvode Maša Đurovića 43, City Kvart",
         "addressLocality": "Podgorica",
         "postalCode": "81000",
         "addressCountry": "ME"
@@ -488,7 +488,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       <div>
         <h3 class="footer-title">Kontakt</h3>
         <ul class="footer-contact-list">
-          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 41, City Kvart, Podgorica</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 43, City Kvart, Podgorica</span></li>
           <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
           <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
           <li><i class="fas fa-clock"></i><span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span></li>

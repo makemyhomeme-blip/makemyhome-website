@@ -586,7 +586,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
       </p>
       <p style="color:#5a6672;line-height:1.75;margin-bottom:26px;">
         Ako tražite određeni dezen, pozovite nas na <a href="tel:+38269105222" style="color:#c9a86c;font-weight:600;">069 105 222</a>
-        ili svratite u showroom u Podgorici — Vojvode Maša Đurovića 41, City Kvart.
+        ili svratite u showroom u Podgorici — Vojvode Maša Đurovića 43, City Kvart.
       </p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <a href="products.html" class="btn btn-gold">Pogledaj sve proizvode</a>
@@ -764,7 +764,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <div class="p-side-box">
             <p class="p-side-box-t"><i class="fas fa-store"></i> Pogledajte uživo prije kupovine</p>
             <p class="p-side-box-p">
-              Uzorak možete opipati u našem showroomu u Podgorici — <strong>Vojvode Maša Đurovića 41, City Kvart</strong>.
+              Uzorak možete opipati u našem showroomu u Podgorici — <strong>Vojvode Maša Đurovića 43, City Kvart</strong>.
               Donesite mjere zida i na licu mjesta vam izračunamo koliko komada treba i koliko će koštati.
             </p>
             <p class="p-side-box-h"><i class="fas fa-clock"></i> Pon–Pet 09:00–20:00 &nbsp;·&nbsp; Sub 10:00–17:00</p>
@@ -945,7 +945,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
         <ul class="footer-contact-list">
           <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
           <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
-          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 41, City Kvart, Podgorica 81000</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 43, City Kvart, Podgorica 81000</span></li>
           <li><i class="fas fa-clock"></i><span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span></li>
         </ul>
       </div>
