@@ -714,12 +714,20 @@ echo "\n</script>\n";
               $altTxt = trim(($p['name'] ?? '') . ' – ' . ($catNames[$p['category'] ?? ''] ?? 'zidni panel')
                         . ($altBoja ? ', ' . $altBoja : '') . ' | Make My Home Decor Podgorica');
               ?><img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?> style="width:100%;height:auto;display:block;">
+              <?php if ($pD > 0): ?>
+              <!-- Oznaka popusta preko slike. Pocetna ju je imala, kategorije nisu —
+                   pa je ista roba na dva mjesta izgledala razlicito i na kategoriji
+                   se nije vidjelo da je na akciji. Sada je isto na oba mjesta. -->
+              <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $pD ?>%</div>
+              <?php endif; ?>
             </div>
             <div class="product-body" style="padding:16px;">
               <h2 class="product-name" style="font-size:1em;font-weight:700;margin-bottom:8px;color:#1a1a1a;"><?= htmlspecialchars($p['name'] ?? '') ?></h2>
               <p class="product-price" style="margin-bottom:6px;">
                 <?php if ($pD > 0): ?>
-                <span style="font-weight:700;color:#795f32;"><?= number_format($pF, 2, ',', '.') ?> €</span>
+                <!-- Snizena cijena je crvena, kao i na pocetnoj — tako se vidi da je
+                     akcija. Kontrast crvene na bijeloj je 5,44 (WCAG trazi 4,5). -->
+                <span style="font-weight:700;color:#c0392b;"><?= number_format($pF, 2, ',', '.') ?> €</span>
                 <span style="text-decoration:line-through;color:#767676;font-size:.85em;margin-left:6px;"><?= number_format($pO, 2, ',', '.') ?> €</span>
                 <?php else: ?>
                 <span style="font-weight:700;color:#795f32;"><?= number_format($pF, 2, ',', '.') ?> €</span>
