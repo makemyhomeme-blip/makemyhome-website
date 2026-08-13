@@ -2,6 +2,21 @@
    MAKE MY HOME - Glavne stilove
    =================================================== */
 
+/* Tekst samo za citace ekrana — vidi ga softver za slijepe, ne i oko.
+   Koristi se npr. za zaglavlje kolone u tabeli gdje u dizajnu nema mjesta za
+   jos jednu rijec, a celije bez zaglavlja su greska u pristupacnosti.
+   Stoji OVDJE a ne u CSS-u ikona, jer se taj ucitava naknadno pa bi tekst
+   na trenutak bio vidljiv. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ===== FONTOVI =====
    Ranije su stajali u zasebnom css/fonts.css. Mjereno u pregledacu sa mobilnim
    usporenjem: tri CSS fajla su se utrkivala u kriticnom putu i tekst se nije
@@ -160,6 +175,13 @@
 :root {
   --primary: #c9a86c;
   --primary-dark: #a8863f;
+  /* Zlatna za TEKST na svijetloj pozadini. --primary na bijeloj daje kontrast
+     2,26 a --primary-dark 3,42 — oba ispod 4,5 koliko trazi WCAG za obican
+     tekst, i Lighthouse ih prijavljuje. Ova daje 6,01 na bijeloj i 5,31 na
+     #f5f0eb, a oku je i dalje ista zlatna. NA TAMNOJ pozadini i dalje ide
+     --primary; ovo je samo za svijetlo. */
+  --zlatna-tekst: #795f32;
+  --uspjeh-tekst: #1e8449;   /* #27ae60 daje 2,87 na bijeloj, ovo 4,72 */
   --primary-light: #e8d5a3;
   --dark: #1a1a1a;
   --dark-2: #2c2c2c;
@@ -2119,7 +2141,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .pair-card-price {
   font-size: 14px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--zlatna-tekst);
   margin-bottom: 6px;
 }
 .pair-card-unit {
@@ -2130,7 +2152,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .pair-card-cta {
   font-size: 12px;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--zlatna-tekst);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -2175,7 +2197,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .pq-tab:last-child { border-right: none; }
 .pq-tab.active {
   background: #fff;
-  color: var(--primary-dark);
+  color: var(--zlatna-tekst);
 }
 .pq-tab.active i { color: var(--primary); }
 .pq-tab i { font-size: 15px; color: #bbb; transition: color 0.2s; }

@@ -365,7 +365,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=52">
+  <link rel="stylesheet" href="css/style-v5.css?v=53">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -421,7 +421,7 @@ echo "\n</script>\n";
     .cat-card-info p  { font-size: 13px; color: #666e7a; margin-bottom: 8px; line-height: 1.5; }
     .cat-card-count {
       display: inline-block;
-      background: #f5f0eb; color: #c9a86c;
+      background: #f5f0eb; color: #795f32;
       padding: 3px 12px; border-radius: 20px;
       font-size: 12px; font-weight: 700;
     }
@@ -439,7 +439,7 @@ echo "\n</script>\n";
     .btn-back:hover { background: #333; }
     .back-bar h2 { font-size: 22px; font-weight: 800; color: #1a1a1a; }
     .back-bar .count-badge {
-      background: #f5f0eb; color: #c9a86c;
+      background: #f5f0eb; color: #795f32;
       padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
     }
     /* TELEFON: bez praznog prostora ispod hero-a i bez stiskanja u jedan red */
@@ -719,10 +719,10 @@ echo "\n</script>\n";
               <h2 class="product-name" style="font-size:1em;font-weight:700;margin-bottom:8px;color:#1a1a1a;"><?= htmlspecialchars($p['name'] ?? '') ?></h2>
               <p class="product-price" style="margin-bottom:6px;">
                 <?php if ($pD > 0): ?>
-                <span style="font-weight:700;color:#c9a86c;"><?= number_format($pF, 2, ',', '.') ?> €</span>
+                <span style="font-weight:700;color:#795f32;"><?= number_format($pF, 2, ',', '.') ?> €</span>
                 <span style="text-decoration:line-through;color:#767676;font-size:.85em;margin-left:6px;"><?= number_format($pO, 2, ',', '.') ?> €</span>
                 <?php else: ?>
-                <span style="font-weight:700;color:#c9a86c;"><?= number_format($pF, 2, ',', '.') ?> €</span>
+                <span style="font-weight:700;color:#795f32;"><?= number_format($pF, 2, ',', '.') ?> €</span>
                 <?php endif; ?>
               </p>
               <?php if ($pHl): ?><p style="font-size:.82em;color:#666;line-height:1.5;"><?= htmlspecialchars($pHl) ?></p><?php endif; ?>
@@ -753,7 +753,7 @@ echo "\n</script>\n";
         <p>Make My Home Decor je specijalizovana prodavnica dekorativnih zidnih obloga u <strong>Podgorici</strong>. U našem showroomu u City Kvartu na jednom mjestu možete vidjeti i opipati kompletnu ponudu – <strong>bambus zidne panele</strong> (drvene, tekstilne, mermerne, metalne i kožne), <strong>3D dekorativne letvice</strong>, <strong>akustične panele</strong>, <strong>MDF kanelirane panele</strong>, <strong>PU dekorativni kamen</strong>, <strong>Flex Stone</strong> savitljivi kameni furnir, <strong>aluminijum lajsne</strong> i <strong>SPC vodootporne podove</strong>.</p>
         <p>Bambus paneli dimenzija 280x122cm prekrivaju 3,42 m² po komadu, pa se veliki zid obnovi brzo i sa malo spojeva. Vodootporni su, otporni na buđ i vlagu, vatrootporni klase B1 i imaju UV zaštitu. Kao moderna zamjena za klasičnu <strong>lamperiju</strong>, montiraju se lijepljenjem – bez bušenja, letvica i majstora, a mogu se postaviti i preko starog maltera, gipsa ili pločica. Popularni su za <strong>TV zid</strong>, akcentni zid iza kreveta, kupatilo, kuhinju, hodnike, kao i za kafiće, restorane, hotele i poslovne prostore.</p>
         <p>Sve cijene su jasno navedene uz svaki proizvod, a na stranici proizvoda imate <strong>kalkulator</strong> koji na osnovu dimenzija zida izračuna potreban broj komada. Dostava kurirskom službom širom <strong>Crne Gore</strong> – Podgorica, Nikšić, Bar, Budva, Herceg Novi, Kotor, Tivat, Bijelo Polje, Berane i ostali gradovi, uz mogućnost plaćanja pouzećem ili ličnog preuzimanja u showroomu.</p>
-        <p>Niste sigurni šta odgovara vašem prostoru? Pogledajte <a href="faq.html" style="color:#c9a86c;font-weight:600;">česta pitanja</a> ili nas pozovite na <a href="tel:+38269105222" style="color:#c9a86c;font-weight:600;">069 105 222</a> – savjetujemo bez obaveze. Arhitektama, dizajnerima i izvođačima nudimo posebne uslove kroz program <a href="decor-box.html" style="color:#c9a86c;font-weight:600;">Decor Box</a>.</p>
+        <p>Niste sigurni šta odgovara vašem prostoru? Pogledajte <a href="faq.html" style="color:#795f32;font-weight:600;">česta pitanja</a> ili nas pozovite na <a href="tel:+38269105222" style="color:#795f32;font-weight:600;">069 105 222</a> – savjetujemo bez obaveze. Arhitektama, dizajnerima i izvođačima nudimo posebne uslove kroz program <a href="decor-box.html" style="color:#795f32;font-weight:600;">Decor Box</a>.</p>
       </section>
       <?php endif; ?>
       <?php if ($vodiciOvdje): ?>
@@ -916,7 +916,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=6"></script>
-<script src="js/products.js?v=50"></script>
+<script src="js/products.js?v=51"></script>
 <script src="js/cart.js?v=3"></script>
 <script>
   initProductsPage();

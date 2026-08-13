@@ -438,7 +438,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=52">
+  <link rel="stylesheet" href="css/style-v5.css?v=53">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -609,7 +609,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
       <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <a href="products.html" style="color:#666e7a;text-decoration:none;">Proizvodi</a>
 <?php if ($prodCatName): ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
-      <a href="/kategorija/<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#c9a86c;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
+      <a href="/kategorija/<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#795f32;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
 <?php endif; ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <span style="color:#5a5a5a;"><?= htmlspecialchars($product['name']) ?></span>
     </nav>
@@ -730,7 +730,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars($fullDesc), false) ?></div>
             <?php endif; ?>
             <?php if ($inStock): ?>
-            <p style="color:#27ae60;font-weight:600;margin-top:14px;">&#10003; Na stanju</p>
+            <p style="color:#1e8449;font-weight:600;margin-top:14px;">&#10003; Na stanju</p>
             <?php else: ?>
             <p style="color:#c0392b;font-weight:600;margin-top:14px;">Privremeno nedostupno</p>
             <?php endif; ?>
@@ -975,7 +975,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=6"></script>
-<script src="js/products.js?v=50"></script>
+<script src="js/products.js?v=51"></script>
 <script src="js/cart.js?v=3"></script>
 <script>
   renderProductDetail();

@@ -1186,10 +1186,13 @@ async function renderProductDetail() {
           <ul class="spec-feature-list">
             ${(() => {
               const protMap = [
-                { k: 'Vodootporan',            icon: 'fa-droplet',           color: '#1a7abf' },
-                { k: 'Otporan na buđ',         icon: 'fa-shield-halved',     color: '#2e9e6b' },
-                { k: 'Vatrootporan',           icon: 'fa-fire-flame-curved', color: '#d4620a' },
-                { k: 'Otporan na prljavštinu', icon: 'fa-hand-sparkles',     color: '#7b5ea7' },
+                // Boje su potamnjene: na svojoj svijetloj podlozi stare su davale
+                // kontrast 3,1-4,7 sto je ispod 4,5 koliko trazi WCAG za obican
+                // tekst. Nove daju 5,4-7,2, a ostaju iste boje po karakteru.
+                { k: 'Vodootporan',            icon: 'fa-droplet',           color: '#155f95' },
+                { k: 'Otporan na buđ',         icon: 'fa-shield-halved',     color: '#116343' },
+                { k: 'Vatrootporan',           icon: 'fa-fire-flame-curved', color: '#a34a06' },
+                { k: 'Otporan na prljavštinu', icon: 'fa-hand-sparkles',     color: '#5c4680' },
               ];
               // Group: lines starting with lowercase are continuations of the line above
               const groups = [];
@@ -1209,7 +1212,7 @@ async function renderProductDetail() {
                 if (prot) {
                   return `<li style="background:${prot.color}14;border:1px solid ${prot.color}33;border-radius:8px;padding:8px 12px;margin-bottom:4px;">
                     <i class="fas ${prot.icon}" style="color:${prot.color};"></i>
-                    <strong style="color:${prot.color}dd;">${main}</strong>
+                    <strong style="color:${prot.color};">${main}</strong>
                   </li>`;
                 }
                 // Join all continuations inline — no chips, no separate lines
@@ -1285,7 +1288,7 @@ async function renderProductDetail() {
   info.innerHTML = `
     <div class="product-category">${categoryName}</div>
     <h1 class="product-name">${product.name}</h1>
-    ${product.sku ? `<div style="display:inline-flex;align-items:center;gap:6px;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#c9a86c;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;">${product.sku}</span></div>` : ''}
+    ${product.sku ? `<div style="display:inline-flex;align-items:center;gap:6px;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;">${product.sku}</span></div>` : ''}
     <div class="product-rating">
       <span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
       <span class="rating-count">(4.8) · Odlično</span>
@@ -1304,7 +1307,7 @@ async function renderProductDetail() {
     ${(product.category.startsWith('bambus') || product.category === 'classic') ? `
     <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;transition:background .2s;" onmouseover="this.style.background='rgba(201,168,108,0.18)'" onmouseout="this.style.background='rgba(201,168,108,0.1)'">
       <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
-      <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#c9a86c;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
+      <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#795f32;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
     </a>
     ` : ''}
 
@@ -1402,7 +1405,7 @@ async function renderProductDetail() {
          pa se bez ovoga kupcu nikad nije vidjelo. -->
     ${nemaNaStanju
       ? `<p style="color:#c0392b;font-weight:700;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle-exclamation"></i> Trenutno nije na stanju</p>`
-      : `<p style="color:#27ae60;font-weight:600;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-check"></i> Na stanju</p>`}
+      : `<p style="color:#1e8449;font-weight:600;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-check"></i> Na stanju</p>`}
 
     <!-- CTA dugmad -->
     <div style="display:flex;flex-direction:column;gap:10px;margin:22px 0 28px;">
@@ -1417,7 +1420,7 @@ async function renderProductDetail() {
         <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
         <span>Dodaj u Korpu</span>
       </button>`}
-      <a href="${waLink}" target="_blank" rel="noopener" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1.5px solid rgba(37,211,102,0.4);border-radius:14px;background:rgba(37,211,102,0.08);color:#25d366;font-size:14px;font-weight:600;text-decoration:none;font-family:inherit;box-sizing:border-box;transition:background .2s;" onmouseover="this.style.background='rgba(37,211,102,0.16)'" onmouseout="this.style.background='rgba(37,211,102,0.08)'">
+      <a href="${waLink}" target="_blank" rel="noopener" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1.5px solid rgba(37,211,102,0.4);border-radius:14px;background:rgba(37,211,102,0.08);color:#0f7a36;font-size:14px;font-weight:600;text-decoration:none;font-family:inherit;box-sizing:border-box;transition:background .2s;" onmouseover="this.style.background='rgba(37,211,102,0.16)'" onmouseout="this.style.background='rgba(37,211,102,0.08)'">
         <i class="fab fa-whatsapp" style="font-size:17px;"></i> Pitaj nas na WhatsApp-u
       </a>
     </div>
@@ -1552,7 +1555,7 @@ async function renderProductDetail() {
       /* Za ovaj profil u podacima nema dimenzija — bolje bez broja nego sa pogresnim */
       res.innerHTML = `Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(1).replace('.', ',')} m²</strong><br>` +
         `<span style="color:#9b7d56;">Za ovaj profil nemamo upisane dimenzije. Pošaljite nam mjere i ` +
-        `izračunamo tačan broj komada isti dan — <a href="tel:+38269105222" style="color:#c9a86c;font-weight:700;">069 105 222</a>.</span>`;
+        `izračunamo tačan broj komada isti dan — <a href="tel:+38269105222" style="color:#795f32;font-weight:700;">069 105 222</a>.</span>`;
       return;
     }
     const count = Math.ceil(area / coveragePerUnit);

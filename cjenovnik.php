@@ -104,7 +104,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=52">
+  <link rel="stylesheet" href="css/style-v5.css?v=53">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -452,7 +452,11 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
           <th>Dimenzija</th>
           <th>Cijena</th>
           <th>Po m²</th>
-          <th></th>
+          <!-- Zaglavlje zadnje kolone bilo je prazno, pa celije u njoj nisu
+               imale svoje zaglavlje. Citac ekrana tada ne zna sta je ta kolona,
+               a Lighthouse to prijavljuje (td-has-header). Naslov postoji ali
+               se ne vidi — u zaglavlju tabele nema mjesta za jos jednu rijec. -->
+          <th><span class="sr-only">Veza ka kategoriji</span></th>
         </tr>
       </thead>
       <tbody>
