@@ -338,7 +338,12 @@ function renderKorpa() {
   const cart = getCart();
   document.getElementById('korpa-empty').style.display = cart.length === 0 ? 'block' : 'none';
   document.getElementById('korpa-content').style.display = cart.length === 0 ? 'none' : 'block';
-  if (cart.length === 0) return;
+  if (cart.length === 0) {
+    // Blok sa stavkama je sakriven, ali je stari sadrzaj ostajao u njemu.
+    // Nije se vidio, ali je bez potrebe stajao u stranici — brisemo ga.
+    document.getElementById('korpa-items').innerHTML = '';
+    return;
+  }
 
   const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
   const count = cart.reduce((s,i) => s + i.qty, 0);
