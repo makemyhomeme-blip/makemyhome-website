@@ -79,6 +79,10 @@ RewriteRule ^data/.*\.bak\.[0-9-]+\.json$ - [F,L]
 # Kes sitemapa koji pravi sitemap.php. Isti sadrzaj kao /sitemap.xml — da ga
 # Google ne nadje kao drugu adresu istog spiska, zatvoren je za web.
 RewriteRule ^data/sitemap-kes\.xml(\.tmp)?$ - [F,L]
+# /design/ su makete izgleda sajta (screenshotovi dizajna). Nijedna stranica
+# ih ne linkuje i nisu u sitemapu, ali su bile javno dostupne — da ih Google
+# ne pokupi u pretragu slika kao "slike sajta" umjesto fotografija panela.
+RewriteRule ^design/ - [F,L]
 # Stari Canva katalog (82 str, 27,7 MB, iz 12/2024) — obrisan, svi proizvodi iz njega
 # vec postoje kao stranice na sajtu. Google ga je imao u indeksu, pa 410 umjesto 404.
 RewriteRule ^images/katalog\.pdf$ - [G,L]
