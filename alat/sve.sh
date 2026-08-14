@@ -157,11 +157,21 @@ else
   ocisti; sleep 1
   LH="${LH:-/home/user/lighthouse/node_modules/.bin/lighthouse}" \
     bash alat/lighthouse.sh > "$ISPIS/lighthouse.txt" 2>&1
-  if [ $? -eq 0 ] && ! grep -qiE '^\s*PAD|nedovoljan kontrast|GRESKA' "$ISPIS/lighthouse.txt"; then
-    zapisi LIGHTHOUSE OK "$(grep -ciE '^\s*(OK|100)' "$ISPIS/lighthouse.txt" || echo '?') provjera prolazi"
+  LHKOD=$?
+  # Sudi se po izlaznom kodu i po tome da je izvjestaj stvarno ispisan.
+  #
+  # Prva verzija je trazila rijec "GRESKA" bez obzira na velika slova — a bas
+  # ta rijec stoji i u uspjesnoj poruci "nijedna stvarna greska na 14 tipova
+  # stranica". Lighthouse je prolazio, a alat je javljao pad. Tacno ona vrsta
+  # laznog alarma zbog koje se pravim nalazima prestane vjerovati.
+  if [ $LHKOD -eq 0 ] && grep -q 'nijedna stvarna greska' "$ISPIS/lighthouse.txt"; then
+    zapisi LIGHTHOUSE OK "14 tipova stranica, nijedna stvarna greska"
+  elif [ $LHKOD -ne 0 ] && ! grep -q 'ZAVRSNO\|STVARNE GRESKE' "$ISPIS/lighthouse.txt"; then
+    zapisi LIGHTHOUSE PAD "alat se nije izvrsio do kraja — provjera NIJE uradjena"
+    tail -12 "$ISPIS/lighthouse.txt"
   else
     zapisi LIGHTHOUSE PAD "nalazi ispod"
-    tail -20 "$ISPIS/lighthouse.txt"
+    sed -n '/STVARNE GRESKE/,$p' "$ISPIS/lighthouse.txt" | head -14
   fi
   ocisti
 fi
