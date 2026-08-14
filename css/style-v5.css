@@ -2336,6 +2336,13 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   font-size: 14px;
   line-height: 1.6;
   text-align: center;
+  /* Visina se rezervise unaprijed. Kutiju ispisuje server prazan, a broj u njoj
+     racuna JavaScript cim stignu podaci. Bez ove visine kutija bi narasla iz
+     nule i pomjerila sve ispod sebe — sadrzaj bi skocio pred kupcem. */
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .pq-calc-result strong { color: var(--primary); font-size: 17px; }
 

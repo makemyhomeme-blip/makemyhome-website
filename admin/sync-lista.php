@@ -43,6 +43,8 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/cjenovnik.php'    => $base . '/cjenovnik.php',
     $root . '/inspiracija.php'  => $base . '/inspiracija.php',
     $root . '/php/slug.php'       => $base . '/php/slug.php',
+    // Bez ovoga product.php puca sa fatalnom greskom — trazi ga na vrhu.
+    $root . '/php/kalkulator.php' => $base . '/php/kalkulator.php',
     $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
     $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
     $root . '/php/contact.php'    => $base . '/php/contact.php',

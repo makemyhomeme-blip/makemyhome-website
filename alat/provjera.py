@@ -900,6 +900,13 @@ def grupa_G():
             ('showCategoryGrid',     "grid.querySelector('.cat-card')"),
             ('showCategoryProducts', "container.querySelector('.product-card')"),
             ('renderProductDetail',  'vecIspisana'),
+            # Desnu kolonu proizvoda (sifra, cijena, KALKULATOR, dugmad) i
+            # harmoniku ispod slike ispisuje product.php. Ranije ih je JS u
+            # cjelini prepisivao, tek posto skine data/products.json — pa je
+            # kupac pri osvjezavanju vidio prvo jedan raspored pa drugi, a
+            # kalkulator se pojavljivao zadnji. Na svakoj stranici proizvoda.
+            ('renderProductDetail',  "info.dataset.ssr"),
+            ('renderProductDetail',  "gallerySpecs.dataset.ssr"),
         ]
         for ime, ograda in ograde:
             m = re.search(r'function %s\s*\(' % re.escape(ime), kod_js)
@@ -912,7 +919,7 @@ def grupa_G():
             if ograda not in tijelo:
                 g.append('%s vise ne provjerava da li je server vec ispisao sadrzaj '
                          '(nedostaje: %s)' % (ime, ograda))
-    zabiljezi('G11', 'JavaScript ne prepisuje ono sto je server ispisao', g, 5)
+    zabiljezi('G11', 'JavaScript ne prepisuje ono sto je server ispisao', g, len(ograde))
 
 
 # ============================================================

@@ -1285,154 +1285,27 @@ async function renderProductDetail() {
       <div class="trust-item"><i class="fas fa-money-bill-wave"></i><span>Plaćanje pouzećem</span></div>
     </div>`;
 
-  info.innerHTML = `
-    <div class="product-category">${categoryName}</div>
-    <h1 class="product-name">${product.name}</h1>
-    ${product.sku ? `<div style="display:inline-flex;align-items:center;gap:6px;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;">${product.sku}</span></div>` : ''}
-    <div class="product-rating">
-      <span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-      <span class="rating-count">(4.8) · Odlično</span>
-    </div>
+  // Desnu kolonu ispisuje SERVER (product.php), ne vise ovaj fajl.
+  //
+  // Ranije je ovdje stajao predlozak koji je u cjelini prepisivao ono sto je
+  // server vec ispisao — i to tek posto se skine data/products.json. Kupac je
+  // pri osvjezavanju vidio prvo jedan raspored pa drugi, a kalkulator se
+  // pojavljivao zadnji. Predlozak je obrisan, a ne samo zaobidjen, da ne
+  // ostanu dvije kopije istog HTML-a koje se vremenom raziđu.
+  //
+  // Ako oznake nema (stara verzija stranice iz kesa), nista se ne dira —
+  // bolje je da fali dugme nego da se stranica prepise pred kupcem.
+  if (info.dataset.ssr !== '1') {
+    console.warn('product-info-content bez data-ssr — server nije ispisao kolonu');
+  }
 
-    ${product.discount > 0
-      ? `<div class="product-price-lg">
-           <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;">${product.price} €</span>
-           <span style="margin-left:8px;">${(product.price*(1-product.discount/100)).toFixed(2)} €</span>
-           <span style="background:#c0392b;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle;">-${product.discount}% POPUST</span>
-           <span style="color:#666e7a;font-size:14px;"> / ${product.unit}</span>
-         </div>`
-      : `<div class="product-price-lg">${product.price} € <span>/ ${product.unit}</span></div>`
-    }
-
-    ${(product.category.startsWith('bambus') || product.category === 'classic') ? `
-    <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;transition:background .2s;" onmouseover="this.style.background='rgba(201,168,108,0.18)'" onmouseout="this.style.background='rgba(201,168,108,0.1)'">
-      <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
-      <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#795f32;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
-    </a>
-    ` : ''}
-
-    ${product.category === 'aluminijum-lajsne' ? `
-    <!-- Količina za lajsne (bez kalkulatora) -->
-    <div class="pq-panel" id="pq-qty" style="display:block;">
-      <div class="pq-stepper">
-        <button type="button" class="pq-step-btn" onclick="stepPqQty(-1)">−</button>
-        <span class="pq-step-val" id="pq-qty-val">1</span>
-        <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
-      </div>
-    </div>
-    <div id="pq-calc" style="display:none;"><div class="pq-calc-result" id="calc-result"></div></div>
-    ` : `
-    <!-- Tab switcher -->
-    <div class="pq-tabs">
-      <button class="pq-tab active" onclick="switchPqTab('calc', this)">
-        <i class="fas fa-calculator"></i> Kalkulator m²
-      </button>
-      <button class="pq-tab" onclick="switchPqTab('qty', this)">
-        <i class="fas fa-list-ol"></i> Unesi Količinu
-      </button>
-    </div>
-
-    <!-- Tab: Količina -->
-    <div class="pq-panel" id="pq-qty" style="display:none;">
-      <div class="pq-stepper">
-        <button type="button" class="pq-step-btn" onclick="stepPqQty(-1)">−</button>
-        <span class="pq-step-val" id="pq-qty-val">1</span>
-        <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
-      </div>
-      ${product.category !== 'spc-pod' && coveragePerUnit ? `<div class="pq-m2-badge" id="pq-m2-badge">
-        1 ${product.unit === 'm²' ? 'm²' : 'kom'} = ${coveragePerUnit.toFixed(2).replace('.', ',')} m²
-      </div>` : ''}
-    </div>
-
-    <!-- Tab: Kalkulator -->
-    <div class="pq-panel" id="pq-calc">
-      ${letvicaDims ? `
-      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
-        <i class="fas fa-ruler-horizontal"></i>
-        <span>Svaka letvica: <strong>280cm visina × ${letvicaDims.w}cm širina</strong> → 1 letvica = ${coveragePerUnit.toFixed(2).replace('.', ',')} m²</span>
-      </div>` : ''}
-      ${puDims ? `
-      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
-        <i class="fas fa-ruler-combined"></i>
-        <span>Svaki panel: <strong>${puDims.w} × ${puDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
-      </div>` : ''}
-      ${mdfDims ? `
-      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
-        <i class="fas fa-ruler-combined"></i>
-        <span>Svaki panel: <strong>${mdfDims.w} × ${mdfDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
-      </div>` : ''}
-      ${flexDims ? `
-      <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
-        <i class="fas fa-ruler-combined"></i>
-        <span>Svaki panel: <strong>${flexDims.w} × ${flexDims.h} cm</strong> &nbsp;·&nbsp; 1 kom = ${coveragePerUnit.toFixed(2).replace('.', ',')} m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
-      </div>` : ''}
-      ${spcDims ? `
-      <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
-        <i class="fas fa-ruler-combined"></i>
-        <span>Svaka daska: <strong>${spcDims.w} × ${spcDims.h} cm</strong> &nbsp;·&nbsp; Kalkulator uključuje <strong>+10% otpad</strong> za rezove</span>
-      </div>` : (product.category === 'spc-pod' ? `
-      <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
-        <i class="fas fa-info-circle"></i>
-        <span>Kalkulator uključuje <strong>+10% otpad</strong> za rezove</span>
-      </div>` : '')}
-      <div class="pq-calc-inner">
-        <div class="pq-calc-field">
-          <label for="wall-w">${product.category === 'spc-pod' ? 'Dužina prostorije' : 'Širina zida'}</label>
-          <div class="pq-calc-stepper">
-            <button type="button" onclick="stepCalc('wall-w',-0.5)">−</button>
-            <input type="number" id="wall-w" aria-label="${product.category === 'spc-pod' ? 'Dužina prostorije u metrima' : 'Širina zida u metrima'}" value="${product.category === 'spc-pod' ? '3' : '1'}" min="0.5" max="50" step="0.5" oninput="calcPanels()">
-            <span class="pq-calc-unit">m</span>
-            <button type="button" onclick="stepCalc('wall-w',0.5)">+</button>
-          </div>
-        </div>
-        <div class="pq-calc-field">
-          <label for="wall-h">${product.category === 'spc-pod' ? 'Širina prostorije' : 'Visina zida'}</label>
-          <div class="pq-calc-stepper">
-            <button type="button" onclick="stepCalc('wall-h',-0.1)">−</button>
-            <input type="number" id="wall-h" aria-label="${product.category === 'spc-pod' ? 'Širina prostorije u metrima' : 'Visina zida u metrima'}" value="${product.category === 'spc-pod' ? '3.5' : '2.8'}" min="0.5" max="50" step="0.1" oninput="calcPanels()">
-            <span class="pq-calc-unit">m</span>
-            <button type="button" onclick="stepCalc('wall-h',0.1)">+</button>
-          </div>
-        </div>
-      </div>
-      <div class="pq-calc-result" id="calc-result"></div>
-    </div>
-    `}
-
-    <div class="product-short-desc">${(product.description || '').split('Karakteristike:')[0].trim()}</div>
-
-    <!-- Stanje zaliha. PHP ga ispisuje, ali ovaj blok prepisuje cijeli okvir,
-         pa se bez ovoga kupcu nikad nije vidjelo. -->
-    ${nemaNaStanju
-      ? `<p style="color:#c0392b;font-weight:700;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle-exclamation"></i> Trenutno nije na stanju</p>`
-      : `<p style="color:#1e8449;font-weight:600;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-check"></i> Na stanju</p>`}
-
-    <!-- CTA dugmad -->
-    <div style="display:flex;flex-direction:column;gap:10px;margin:22px 0 28px;">
-      ${nemaNaStanju ? `
-      <div style="background:#fdf3f2;border:1px solid rgba(192,57,43,.3);border-radius:14px;padding:16px 18px;color:#8a3a30;font-size:14.5px;line-height:1.65;">
-        Ovaj model je trenutno rasprodat. Javite nam se — reći ćemo vam kada stiže ili predložiti najbliži model koji imamo.
-      </div>
-      <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
-        <i class="fas fa-phone" style="font-size:17px;"></i><span>069 105 222</span>
-      </a>` : `
-      <button onclick="addProductToCartById(${product.id}, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;transition:background .2s,transform .15s,box-shadow .2s;" onmouseover="this.style.background='#dfc080';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(201,168,108,0.3)'" onmouseout="this.style.background='#c9a86c';this.style.transform='';this.style.boxShadow=''">
-        <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
-        <span>Dodaj u Korpu</span>
-      </button>`}
-      <a href="${waLink}" target="_blank" rel="noopener" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1.5px solid rgba(37,211,102,0.4);border-radius:14px;background:rgba(37,211,102,0.08);color:#0f7a36;font-size:14px;font-weight:600;text-decoration:none;font-family:inherit;box-sizing:border-box;transition:background .2s;" onmouseover="this.style.background='rgba(37,211,102,0.16)'" onmouseout="this.style.background='rgba(37,211,102,0.08)'">
-        <i class="fab fa-whatsapp" style="font-size:17px;"></i> Pitaj nas na WhatsApp-u
-      </a>
-    </div>
-
-    <!-- Accordion sekcije + trust row (na desktopu se prikazuju ispod glavne slike) -->
-    <div class="accordion-mobile-only">${accordionHtml}</div>
-
-  `;
-
-  // Na desktopu se Karakteristike, Idealno za & Stil i O Proizvodu prikazuju ispod glavne slike
+  // Harmoniku ispod glavne slike ispisuje SERVER (mmhHarmonikaHTML u
+  // php/kalkulator.php). Ranije je JavaScript prepisivao ono sto je server vec
+  // ispisao, pa se pri svakom osvjezavanju vidjela promjena. Ako oznake nema,
+  // znaci da je stranica stara verzija iz kesa — tada se ispise kao i prije,
+  // da harmonika ne bi nedostajala.
   const gallerySpecs = document.getElementById('gallery-specs');
-  if (gallerySpecs) gallerySpecs.innerHTML = accordionHtml;
+  if (gallerySpecs && gallerySpecs.dataset.ssr !== '1') gallerySpecs.innerHTML = accordionHtml;
 
   // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
   const matchingPairs = {

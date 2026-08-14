@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/php/slug.php';
 require_once __DIR__ . '/php/dimenzije.php';
+require_once __DIR__ . '/php/kalkulator.php';
 $productsFile = __DIR__ . '/data/products.json';
 $products = json_decode(@file_get_contents($productsFile), true) ?: [];
 
@@ -644,99 +645,186 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <?php endforeach; ?>
         </div>
         <p class="gallery-open-hint"><i class="fas fa-search-plus"></i> Tapni na sliku za prikaz u punoj rezoluciji</p>
-        <div id="gallery-specs" class="gallery-specs-desktop"><?php
-          // SSR specifikacije — Google ih vidi odmah (JS ih zamijeni istim sadržajem za korisnika)
-          if ($product && !empty($product['features'])):
-        ?><div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:20px 22px;margin-top:18px;">
-            <h2 style="font-size:1.05em;color:#1a1a1a;margin:0 0 14px;">Karakteristike – <?= htmlspecialchars($product['name']) ?></h2>
-            <ul style="list-style:none;padding:0;margin:0;font-size:.92em;color:#555;line-height:1.75;">
-              <?php foreach ($product['features'] as $f): ?>
-              <li style="padding-left:18px;position:relative;margin-bottom:6px;"><span style="position:absolute;left:0;color:#c9a86c;">&#10003;</span><?= htmlspecialchars($f) ?></li>
-              <?php endforeach; ?>
-              <?php
-              // Cijena po m² se racuna iz ZIVE cijene i povrsine iz "Dimenzije:".
-              // Ranije je stajala upisana u features kao fiksan broj racunat na punu cijenu:
-              // stranica je prikazivala 15,99 € a lista "44,62 €/m²" — 25 proizvoda je imalo
-              // taj raskorak. Ovako se mijenja sama kad se promijeni cijena ili popust.
-              // Povrsina po komadu: prvo iz zagrade "(3.42 m² po komadu / setu / plocici)",
-              // pa iz dimenzija. Prihvata i decimalni zarez ("61,5 × 31 cm") i "Dimenzije seta:".
-              // Ako se proizvod prodaje po m² (SPC pod, dio MDF-a), cijena VEC jeste
-              // cijena po m² — dijeljenje sa povrsinom jedne daske davalo je 79,51 €/m²
-              // umjesto 17,49 €/m². Za takve proizvode se ovaj red preskace.
-              $poM2Sam = (($product['unit'] ?? '') === 'm²');
-              $povrsina = null;
-              foreach ($product['features'] as $f) {
-                  if (preg_match('/\(([\d.,]+)\s*m²\s*po\s+\p{L}+\)/u', $f, $m)) {
-                      $povrsina = (float) str_replace(',', '.', $m[1]); break;
-                  }
-                  if (preg_match('/Dimenzije[^:]*:\s*([\d]+(?:[.,][\d]+)?)\s*[×x]\s*([\d]+(?:[.,][\d]+)?)\s*cm/u', $f, $m)) {
-                      $a = (float) str_replace(',', '.', $m[1]);
-                      $b = (float) str_replace(',', '.', $m[2]);
-                      $povrsina = ($a / 100) * ($b / 100); break;
-                  }
-              }
-              if (!$poM2Sam && $povrsina && $povrsina > 0.05 && !empty($product['price'])) {
-                  $puna    = (float) str_replace(',', '.', (string) $product['price']);
-                  $placa   = $puna * (1 - ((float) ($product['discount'] ?? 0)) / 100);
-                  // Racunaj iz ZAOKRUZENE povrsine koja se i prikazuje, da kupac koji
-                  // provjeri racun dobije isti broj (0,448 m² se prikazuje kao 0,45).
-                  $povrsina = round($povrsina, 2);
-                  $poM2    = $placa / $povrsina;
-              ?>
-              <li style="padding-left:18px;position:relative;margin-bottom:6px;"><span style="position:absolute;left:0;color:#c9a86c;">&#10003;</span>Cijena po m&sup2;: <?= number_format($poM2, 2, ',', '.') ?> &euro;/m&sup2; (1 komad pokriva <?= number_format($povrsina, 2, ',', '.') ?> m&sup2;)</li>
-              <?php } ?>
-            </ul>
-            <?php if (!empty($product['idealFor'])): ?>
-            <p style="font-size:.92em;color:#555;margin:14px 0 0;line-height:1.7;"><strong>Idealno za:</strong> <?= htmlspecialchars(implode(', ', $product['idealFor'])) ?>.</p>
-            <?php endif; ?>
-            <p style="font-size:.9em;color:#666;margin:12px 0 0;line-height:1.7;">
-              <?= htmlspecialchars($product['name']) ?><?= $h1Keyword ? ' je ' . htmlspecialchars(mb_strtolower($h1Keyword)) : '' ?> iz ponude Make My Home Decor showrooma u Podgorici.
-              Dostupno odmah, sa dostavom širom Crne Gore – Podgorica, Nikšić, Bar, Budva, Herceg Novi, Kotor i ostali gradovi.
-              Za savjet pri izboru pozovite 069 105 222 ili posjetite naš showroom u City Kvartu.
-            </p>
-          </div><?php endif; ?></div>
+        <div id="gallery-specs" class="gallery-specs-desktop"<?= $product ? ' data-ssr="1"' : '' ?>><?php
+          /* Harmoniku ispisuje server. Ranije je ovdje stajao obican spisak,
+             a JavaScript bi ga zamijenio harmonikom — pa se pri svakom
+             osvjezavanju vidjela promjena. Sada postoji samo jedan ispis. */
+          if ($product) echo mmhHarmonikaHTML($product);
+        ?></div>
       </div>
 
       <div class="product-info">
-        <div id="product-info-content">
+        <?php
+        /* ===== DESNA KOLONA — ISPISUJE SERVER, JAVASCRIPT JE VISE NE CRTA =====
+         *
+         * Ranije je server ispisivao jednu, jednostavniju verziju (naslov,
+         * cijena, opis, stanje), a JavaScript bi je — tek posto skine
+         * data/products.json — u cjelini zamijenio drugom: sa sifrom, ocjenom,
+         * drugacije slozenom cijenom i kalkulatorom. Kupac je pri osvjezavanju
+         * vidio prvo jedan raspored pa drugi, a kalkulator se pojavljivao
+         * zadnji. To se dogadjalo na SVAKOJ stranici proizvoda.
+         *
+         * Sada server odmah ispisuje konacan izgled. Predlozak u
+         * js/products.js je obrisan da ne ostanu dvije kopije istog HTML-a
+         * koje se vremenom raziđu — JavaScript samo ozivi dugmad.
+         * Oznaka data-ssr="1" mu kaze da ovdje nema sta da crta.
+         */
+        $pKat      = $prodCatName ?: ($product['category'] ?? '');
+        $pokriva   = $product ? mmhPokrivenostPoKomadu($product) : null;
+        $dimKom    = $product ? mmhDimenzijeKomada($product) : null;
+        $letvW     = ($product && ($product['category'] ?? '') === '3d-letvice') ? mmhSirinaLetviceCm($product) : null;
+        $jeLajsna  = ($product['category'] ?? '') === 'aluminijum-lajsne';
+        $jeSpc     = ($product['category'] ?? '') === 'spc-pod';
+        $jedinica  = $product['unit'] ?? 'kom';
+        $waTekst   = !empty($product['sku']) ? 'šifra: ' . $product['sku'] : ($product['name'] ?? '');
+        $waLink    = 'https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20' . rawurlencode($waTekst);
+        ?>
+        <div id="product-info-content"<?= $product ? ' data-ssr="1"' : '' ?>>
           <?php if ($product): ?>
-          <div id="ssr-pinfo">
-            <h1 class="product-title" style="font-size:1.6em;font-weight:800;color:#1a1a1a;margin-bottom:12px;"><?= htmlspecialchars($product['name'] ?? '') ?><?= $h1Keyword ? ' <span style="font-weight:600;color:#888;">– ' . htmlspecialchars($h1Keyword) . '</span>' : '' ?></h1>
-            <div style="margin-bottom:16px;">
-              <?php if ($discount > 0): ?>
-              <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($salePrice, 2, ',', '.') ?> €</span>
-              <span style="text-decoration:line-through;color:#767676;font-size:1.1em;margin-left:10px;"><?= number_format($price, 2, ',', '.') ?> €</span>
-              <span style="background:#c0392b;color:#fff;font-size:.75em;font-weight:700;padding:3px 8px;border-radius:20px;margin-left:8px;">-<?= $discount ?>%</span>
-              <?php else: ?>
-              <span style="font-size:1.9em;font-weight:700;color:#c9a86c;"><?= number_format($price, 2, ',', '.') ?> €</span>
-              <?php endif; ?>
+          <div class="product-category"><?= htmlspecialchars($pKat) ?></div>
+          <h1 class="product-name"><?= htmlspecialchars($product['name'] ?? '') ?></h1>
+          <?php if (!empty($product['sku'])): ?>
+          <div style="display:inline-flex;align-items:center;gap:6px;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
+          <?php endif; ?>
+          <div class="product-rating">
+            <span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+            <span class="rating-count">(4.8) · Odlično</span>
+          </div>
+
+          <?php if ($discount > 0): ?>
+          <div class="product-price-lg">
+            <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;"><?= mmhBroj($price) ?> €</span>
+            <span style="margin-left:8px;"><?= mmhBroj($salePrice) ?> €</span>
+            <span style="background:#c0392b;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle;">-<?= $discount ?>% POPUST</span>
+            <span style="color:#666e7a;font-size:14px;"> / <?= htmlspecialchars($jedinica) ?></span>
+          </div>
+          <?php else: ?>
+          <div class="product-price-lg"><?= mmhBroj($price) ?> € <span>/ <?= htmlspecialchars($jedinica) ?></span></div>
+          <?php endif; ?>
+
+          <?php if (str_starts_with($product['category'] ?? '', 'bambus') || ($product['category'] ?? '') === 'classic'): ?>
+          <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;">
+            <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
+            <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#795f32;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
+          </a>
+          <?php endif; ?>
+
+          <?php if ($jeLajsna): ?>
+          <!-- Lajsne se prodaju na komad — bez kalkulatora m² -->
+          <div class="pq-panel" id="pq-qty" style="display:block;">
+            <div class="pq-stepper">
+              <button type="button" class="pq-step-btn" onclick="stepPqQty(-1)">−</button>
+              <span class="pq-step-val" id="pq-qty-val">1</span>
+              <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
             </div>
-            <?php if (!empty($product['highlight'])): ?>
-            <p style="font-size:1em;color:#444;line-height:1.65;margin-bottom:14px;"><?= htmlspecialchars(strip_tags($product['highlight'])) ?></p>
-            <?php endif; ?>
-            <?php
-            // "Karakteristike:" je nekada stajalo i u opisu i u listi ispod — ista lista dva puta
-            // na istoj stranici. Sada je iz opisa uklonjeno; ovaj rez ostaje za slucaj da se
-            // preko admina opet unese takav tekst.
-            $fullDesc = strip_tags($product['description'] ?? '');
-            $cutAt = mb_strpos($fullDesc, 'Karakteristike:');
-            if ($cutAt !== false) $fullDesc = trim(mb_substr($fullDesc, 0, $cutAt));
-            // Rez na 2000 znakova (bio 600) — novi opisi su 700-800 znakova i sjekli su se
-            // usred recenice. Sjece se na granici recenice, nikad usred rijeci.
-            if (mb_strlen($fullDesc) > 2000) {
-                $cut = mb_substr($fullDesc, 0, 2000);
-                $end = max(mb_strrpos($cut, '. '), mb_strrpos($cut, "\n"));
-                $fullDesc = $end > 1200 ? mb_substr($cut, 0, $end + 1) : $cut;
-            }
-            if ($fullDesc): ?>
-            <div style="font-size:.93em;color:#555;line-height:1.7;"><?= nl2br(htmlspecialchars($fullDesc), false) ?></div>
-            <?php endif; ?>
-            <?php if ($inStock): ?>
-            <p style="color:#1e8449;font-weight:600;margin-top:14px;">&#10003; Na stanju</p>
-            <?php else: ?>
-            <p style="color:#c0392b;font-weight:600;margin-top:14px;">Privremeno nedostupno</p>
+          </div>
+          <div id="pq-calc" style="display:none;"><div class="pq-calc-result" id="calc-result"></div></div>
+          <?php else: ?>
+          <div class="pq-tabs">
+            <button class="pq-tab active" onclick="switchPqTab('calc', this)">
+              <i class="fas fa-calculator"></i> Kalkulator m²
+            </button>
+            <button class="pq-tab" onclick="switchPqTab('qty', this)">
+              <i class="fas fa-list-ol"></i> Unesi Količinu
+            </button>
+          </div>
+
+          <div class="pq-panel" id="pq-qty" style="display:none;">
+            <div class="pq-stepper">
+              <button type="button" class="pq-step-btn" onclick="stepPqQty(-1)">−</button>
+              <span class="pq-step-val" id="pq-qty-val">1</span>
+              <button type="button" class="pq-step-btn" onclick="stepPqQty(1)">+</button>
+            </div>
+            <?php if (!$jeSpc && $pokriva): ?>
+            <div class="pq-m2-badge" id="pq-m2-badge">
+              1 <?= $jedinica === 'm²' ? 'm²' : 'kom' ?> = <?= mmhBroj($pokriva) ?> m²
+            </div>
             <?php endif; ?>
           </div>
+
+          <div class="pq-panel" id="pq-calc">
+            <?php if ($letvW && $pokriva): ?>
+            <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+              <i class="fas fa-ruler-horizontal"></i>
+              <span>Svaka letvica: <strong>280cm visina × <?= rtrim(rtrim(number_format($letvW, 1, ',', ''), '0'), ',') ?>cm širina</strong> → 1 letvica = <?= mmhBroj($pokriva) ?> m²</span>
+            </div>
+            <?php elseif ($dimKom && !$jeSpc && $pokriva): ?>
+            <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+              <i class="fas fa-ruler-combined"></i>
+              <span>Svaki panel: <strong><?= $dimKom['w'] ?> × <?= $dimKom['h'] ?> cm</strong> &nbsp;·&nbsp; 1 kom = <?= mmhBroj($pokriva) ?> m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
+            </div>
+            <?php elseif ($jeSpc): ?>
+            <div style="background:rgba(92,74,50,0.12);border:1px solid rgba(92,74,50,0.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#9b7d56;display:flex;align-items:center;gap:8px;">
+              <i class="fas fa-ruler-combined"></i>
+              <?php if ($dimKom): ?>
+              <span>Svaka daska: <strong><?= rtrim(rtrim(number_format($dimKom['w'], 1, ',', ''), '0'), ',') ?> × <?= rtrim(rtrim(number_format($dimKom['h'], 1, ',', ''), '0'), ',') ?> cm</strong> &nbsp;·&nbsp; Kalkulator uključuje <strong>+10% otpad</strong> za rezove</span>
+              <?php else: ?>
+              <span>Kalkulator uključuje <strong>+10% otpad</strong> za rezove</span>
+              <?php endif; ?>
+            </div>
+            <?php endif; ?>
+            <div class="pq-calc-inner">
+              <div class="pq-calc-field">
+                <label for="wall-w"><?= $jeSpc ? 'Dužina prostorije' : 'Širina zida' ?></label>
+                <div class="pq-calc-stepper">
+                  <button type="button" onclick="stepCalc('wall-w',-0.5)">−</button>
+                  <input type="number" id="wall-w" aria-label="<?= $jeSpc ? 'Dužina prostorije u metrima' : 'Širina zida u metrima' ?>" value="<?= $jeSpc ? '3' : '1' ?>" min="0.5" max="50" step="0.5" oninput="calcPanels()">
+                  <span class="pq-calc-unit">m</span>
+                  <button type="button" onclick="stepCalc('wall-w',0.5)">+</button>
+                </div>
+              </div>
+              <div class="pq-calc-field">
+                <label for="wall-h"><?= $jeSpc ? 'Širina prostorije' : 'Visina zida' ?></label>
+                <div class="pq-calc-stepper">
+                  <button type="button" onclick="stepCalc('wall-h',-0.1)">−</button>
+                  <input type="number" id="wall-h" aria-label="<?= $jeSpc ? 'Širina prostorije u metrima' : 'Visina zida u metrima' ?>" value="<?= $jeSpc ? '3.5' : '2.8' ?>" min="0.5" max="50" step="0.1" oninput="calcPanels()">
+                  <span class="pq-calc-unit">m</span>
+                  <button type="button" onclick="stepCalc('wall-h',0.1)">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="pq-calc-result" id="calc-result"></div>
+          </div>
+          <?php endif; ?>
+
+          <?php
+          // "Karakteristike:" je nekada stajalo i u opisu i u listi ispod — ista lista dva puta
+          // na istoj stranici. Sada je iz opisa uklonjeno; ovaj rez ostaje za slucaj da se
+          // preko admina opet unese takav tekst.
+          $fullDesc = strip_tags($product['description'] ?? '');
+          $cutAt = mb_strpos($fullDesc, 'Karakteristike:');
+          if ($cutAt !== false) $fullDesc = trim(mb_substr($fullDesc, 0, $cutAt));
+          if ($fullDesc): ?>
+          <div class="product-short-desc"><?= nl2br(htmlspecialchars($fullDesc), false) ?></div>
+          <?php endif; ?>
+
+          <?php if ($inStock): ?>
+          <p style="color:#1e8449;font-weight:600;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-check"></i> Na stanju</p>
+          <?php else: ?>
+          <p style="color:#c0392b;font-weight:700;margin:14px 0 0;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle-exclamation"></i> Trenutno nije na stanju</p>
+          <?php endif; ?>
+
+          <div style="display:flex;flex-direction:column;gap:10px;margin:22px 0 28px;">
+            <?php if (!$inStock): ?>
+            <div style="background:#fdf3f2;border:1px solid rgba(192,57,43,.3);border-radius:14px;padding:16px 18px;color:#8a3a30;font-size:14.5px;line-height:1.65;">
+              Ovaj model je trenutno rasprodat. Javite nam se — reći ćemo vam kada stiže ili predložiti najbliži model koji imamo.
+            </div>
+            <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
+              <i class="fas fa-phone" style="font-size:17px;"></i><span>069 105 222</span>
+            </a>
+            <?php else: ?>
+            <button onclick="addProductToCartById(<?= (int)($product['id'] ?? 0) ?>, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;">
+              <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
+              <span>Dodaj u Korpu</span>
+            </button>
+            <?php endif; ?>
+            <a href="<?= htmlspecialchars($waLink, ENT_QUOTES) ?>" target="_blank" rel="noopener" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1.5px solid rgba(37,211,102,0.4);border-radius:14px;background:rgba(37,211,102,0.08);color:#0f7a36;font-size:14px;font-weight:600;text-decoration:none;font-family:inherit;box-sizing:border-box;">
+              <i class="fab fa-whatsapp" style="font-size:17px;"></i> Pitaj nas na WhatsApp-u
+            </a>
+          </div>
+
+          <!-- Na telefonu harmonika stoji ovdje; na racunaru ispod glavne slike -->
+          <div class="accordion-mobile-only"><?= mmhHarmonikaHTML($product) ?></div>
           <?php else: ?>
           <div class="loading-placeholder" style="height:400px;"></div>
           <?php endif; ?>
