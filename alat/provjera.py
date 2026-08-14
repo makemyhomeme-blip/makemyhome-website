@@ -10,7 +10,7 @@ Pokretanje:  python3 alat/provjera.py [grupa]
 Svaka stavka je jedno pravilo. Ako pravilo padne, ispise se sta tacno i gdje.
 Fajl se NE deployuje na server (nije u admin/sync.php listi).
 """
-import json, re, subprocess, sys, os, collections, hashlib
+import json, re, subprocess, sys, os, collections, hashlib, time
 from urllib.parse import urljoin, urlparse
 
 BAZA = 'https://makemyhome.me'
@@ -19,22 +19,37 @@ CURL = ['curl', '-sk', '--cacert', '/root/.ccr/ca-bundle.crt']
 rezultati = []
 
 
+# Odgovori koji NE znace gresku na sajtu nego trenutni ispad.
+#
+# 000 = veza nije ni uspostavljena. 429/500/502/503/504 = server je za taj
+# jedan zahtjev odustao. Provjera povuce preko 400 adresa u nizu i deelnog
+# shared hostinga to zna nakratko da obori — pa bi ispravna stranica bila
+# prijavljena kao pokvarena. Desilo se: E2 je jednom javio gresku, a na
+# ponovnom pokretanju 397 adresa 0 gresaka.
+#
+# Pravilo: kvar je kvar samo ako se ponovi. Pokusava se tri puta, sa pauzom
+# koja raste, da server stigne da se oporavi. Prava greska (404 na obrisanu
+# stranicu, 500 zbog greske u kodu) preziva sva tri pokusaja i bice prijavljena.
+PROLAZNO = {'000', '429', '500', '502', '503', '504'}
+
+
 def dohvati(u, prati=False, timeout='20'):
-    # Kod 000 znaci da veza uopste nije uspostavljena — to je najcesce trenutni
-    # prekid u mrezi, a ne greska na sajtu. Zato se pokusava jos dva puta;
-    # bez toga je provjera znala da prijavi ispravnu adresu kao pokvarenu.
     cmd = CURL + ['--max-time', timeout, '-w', '\n@@%{http_code}|%{num_redirects}|%{url_effective}']
     if prati:
         cmd += ['-L', '--max-redirs', '5']
+    zadnji = ('', '000', '0', '')
     for pokusaj in range(3):
         r = subprocess.run(cmd + [u], capture_output=True, text=True, errors='replace').stdout
         i = r.rfind('\n@@')
         if i < 0:
+            time.sleep(1.5 * (pokusaj + 1))
             continue
         kod, sk, kraj = r[i + 3:].split('|', 2)
-        if kod != '000':
-            return r[:i], kod, sk, kraj.strip()
-    return '', '000', '0', ''
+        zadnji = (r[:i], kod, sk, kraj.strip())
+        if kod not in PROLAZNO:
+            return zadnji
+        time.sleep(1.5 * (pokusaj + 1))
+    return zadnji
 
 
 def zabiljezi(sifra, opis, greske, provjereno):
