@@ -3,10 +3,10 @@
 <head><meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Decor Box – program saradnje za arhitekte, dizajnere enterijera i izvođače. Partnerski uslovi, uzorci i katalozi. Make My Home Decor, Podgorica.">
-  <meta name="keywords" content="decor box, saradnja arhitekte, dizajneri enterijera, veleprodaja zidni paneli, partner program, dekorativne obloge, sopstvena proizvodnja, Podgorica, Crna Gora">
-  <meta property="og:title" content="Decor Box | Make My Home Decor – Program Saradnje za Profesionalce">
-  <meta property="og:description" content="Zajedno stvaramo bolje enterijere. Postanite Decor Box partner – posebni uslovi, uzorci, katalozi i stručna podrška za vaše projekte.">
+  <meta name="description" content="Decor Box – saradnja sa arhitektama i projektantima: dokumentacija za projekat, uzorci u biro, detalji ugradnje i izbor obloga po namjeni prostora.">
+  <meta name="keywords" content="decor box, zidne obloge za arhitekte, projektanti, specifikacija materijala, uzorci za projektni biro, detalji ugradnje panela, akustična obrada kancelarije, obloge za hotel, veleprodaja zidni paneli, Podgorica, Crna Gora">
+  <meta property="og:title" content="Decor Box – za arhitekte i projektante | Make My Home Decor">
+  <meta property="og:description" content="Za arhitekte, projektante i izvođače: dokumentacija za konkretan proizvod, uzorci u vaš biro, detalji ugradnje i provjera dostupnosti prije ponude.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://makemyhome.me/decor-box.html">
   <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
@@ -15,11 +15,11 @@
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Decor Box | Make My Home Decor – Program Saradnje za Profesionalce">
-  <meta name="twitter:description" content="Zajedno stvaramo bolje enterijere. Postanite Decor Box partner – posebni uslovi, uzorci, katalozi i stručna podrška za vaše projekte.">
+  <meta name="twitter:title" content="Decor Box – za arhitekte i projektante | Make My Home Decor">
+  <meta name="twitter:description" content="Za arhitekte, projektante i izvođače: dokumentacija za konkretan proizvod, uzorci u vaš biro, detalji ugradnje i provjera dostupnosti prije ponude.">
   <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
   <link rel="canonical" href="https://makemyhome.me/decor-box.html">
-  <title>Decor Box – Program Saradnje | Make My Home Decor</title>
+  <title>Decor Box za arhitekte i projektante | Make My Home Decor</title>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,10 +34,10 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Decor Box – program saradnje za profesionalce",
-    "serviceType": "B2B partnerski program za zidne panele i dekorativne obloge",
+    "name": "Decor Box – podrška projektnim biroima i arhitektama",
+    "serviceType": "Podrška arhitektama i projektantima pri izboru i specifikaciji zidnih obloga",
     "url": "https://makemyhome.me/decor-box.html",
-    "description": "Decor Box je partnerski program Make My Home Decor za arhitekte, projektante, izvođače radova, dizajnere enterijera i prodavnice u Crnoj Gori – partnerske cijene, uzorci, direktan uvoz iz fabrike i podrška u projektima.",
+    "description": "Decor Box je program Make My Home Decor za arhitekte, projektante, izvođače i dizajnere enterijera u Crnoj Gori: dokumentacija za konkretan proizvod, tekst za specifikaciju i predmjer, uzorci dostavljeni u biro, detalji ugradnje, provjera dostupnosti i rokova prije ulaska u ponudu, i partnerski uslovi saradnje.",
     "provider": {
       "@type": ["HomeGoodsStore", "LocalBusiness", "Organization"],
       "@id": "https://makemyhome.me/#organization",
@@ -56,7 +56,8 @@
     "areaServed": { "@type": "Country", "name": "Crna Gora" },
     "audience": {
       "@type": "BusinessAudience",
-      "name": "Arhitekte, projektanti, izvođači radova, dizajneri enterijera i prodavnice"
+      "name": "Arhitekte, projektanti, izvođači radova, dizajneri enterijera i prodavnice",
+      "audienceType": ["Arhitekta", "Projektant", "Dizajner enterijera", "Izvođač radova"]
     },
     "inLanguage": "sr-ME"
   }
@@ -134,6 +135,30 @@ require_once __DIR__ . '/php/dimenzije.php';
     .db-badge i{font-size:26px;color:var(--primary);margin-bottom:10px;display:block;}
     .db-badge span{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.4;display:block;}
 
+    /* Namjena prostora — tabela koja arhitekti odgovara na prvo pitanje */
+    .db-namjena{padding:80px 0;}
+    .db-namjena-wrap{margin-top:40px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px;border:1px solid rgba(0,0,0,0.08);}
+    .db-namjena-tabela{width:100%;border-collapse:collapse;background:#fff;min-width:640px;}
+    .db-namjena-tabela th,.db-namjena-tabela td{padding:16px 18px;text-align:left;vertical-align:top;font-size:14.5px;line-height:1.6;border-bottom:1px solid rgba(0,0,0,0.06);}
+    .db-namjena-tabela thead th{background:var(--dark);color:#fff;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;}
+    .db-namjena-tabela tbody th{font-weight:700;color:var(--dark);width:31%;}
+    .db-namjena-tabela tbody th i{color:var(--primary);margin-right:9px;width:1.1em;text-align:center;}
+    .db-namjena-tabela td{color:var(--gray);}
+    .db-namjena-tabela tbody tr:last-child th,.db-namjena-tabela tbody tr:last-child td{border-bottom:none;}
+    .db-namjena-tabela tbody tr:nth-child(even) th,.db-namjena-tabela tbody tr:nth-child(even) td{background:rgba(201,168,108,0.05);}
+    .db-namjena-tabela a{color:#795f32;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(121,95,50,0.35);}
+    .db-namjena-tabela a:hover{color:var(--dark);border-bottom-color:var(--dark);}
+    .db-namjena-nota{margin-top:22px;font-size:14px;color:var(--gray);line-height:1.85;max-width:860px;}
+    .db-namjena-nota a{color:#795f32;font-weight:600;}
+
+    /* Tok saradnje */
+    .db-tok{padding:80px 0;background:var(--light);}
+    .db-tok-grid{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
+    .db-tok-korak{position:relative;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:30px 24px 26px;box-shadow:0 2px 14px rgba(0,0,0,0.05);}
+    .db-tok-broj{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--dark);color:var(--primary);font-family:var(--font-heading);font-size:19px;font-weight:700;margin-bottom:16px;}
+    .db-tok-korak h3{font-size:17px;color:var(--dark);margin:0 0 8px;}
+    .db-tok-korak p{font-size:14px;color:var(--gray);line-height:1.7;margin:0;}
+
     /* Swatch strip */
     .db-swatches{display:flex;gap:0;}
     .db-swatches img{flex:1;height:120px;object-fit:cover;display:block;min-width:0;}
@@ -141,7 +166,8 @@ require_once __DIR__ . '/php/dimenzije.php';
     /* CTA */
     .db-cta{padding:72px 0;background:linear-gradient(135deg,#c9a86c 0%,#b8965a 100%);text-align:center;}
     .db-cta .db-cta-script{font-family:var(--font-heading);font-style:italic;font-size:22px;color:rgba(0,0,0,0.55);margin-bottom:4px;}
-    .db-cta h2{color:#1a1a1a;font-size:34px;margin-bottom:26px;line-height:1.2;}
+    .db-cta h2{color:#1a1a1a;font-size:34px;margin-bottom:14px;line-height:1.2;}
+    .db-cta-nota{font-size:15px;color:rgba(0,0,0,0.7);line-height:1.7;max-width:620px;margin:0 auto 26px;}
     .db-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
     .db-cta .btn-dark{background:#1a1a1a;color:#fff;border:none;}
     .db-cta .btn-dark:hover{background:#000;}
@@ -161,6 +187,20 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-intro .btn{margin-left:auto;margin-right:auto;}
       .db-ben-card{flex-direction:column;align-items:center;text-align:center;}
       .db-ben-card .db-ben-icon{margin:0 auto;}
+      /* Tabela namjena se na telefonu ne skroluje bocno nego se slaze u kartice:
+         svaki red postaje jedna kartica, a zaglavlje kolona se sakrije jer se
+         znacenje vidi iz same kartice. */
+      .db-namjena-wrap{overflow-x:visible;border:none;border-radius:0;}
+      .db-namjena-tabela{min-width:0;background:transparent;}
+      .db-namjena-tabela thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+      .db-namjena-tabela tbody tr{display:block;background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:14px;padding:18px 18px 14px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+      .db-namjena-tabela tbody th,.db-namjena-tabela tbody td{display:block;width:auto;padding:0;border-bottom:none;background:transparent!important;}
+      .db-namjena-tabela tbody th{font-size:15.5px;margin-bottom:7px;}
+      .db-namjena-tabela tbody td{font-size:14px;margin-bottom:9px;}
+      .db-namjena-tabela tbody td:last-child{margin-bottom:0;font-size:14.5px;}
+      .db-namjena-nota{text-align:left;}
+      .db-tok-korak{text-align:center;}
+      .db-tok-broj{margin-left:auto;margin-right:auto;}
     }
   </style>
   <style id="nav-fix">
@@ -301,7 +341,7 @@ require_once __DIR__ . '/php/dimenzije.php';
         <span>Decor Box</span>
       </div>
       <h1 class="section-title">Decor Box</h1>
-      <p class="section-subtitle">Zajedno stvaramo bolje enterijere</p>
+      <p class="section-subtitle">Zidne obloge za arhitekte i projektante — od izbora materijala do detalja ugradnje</p>
     </div>
   </div>
 </section>
@@ -311,23 +351,25 @@ require_once __DIR__ . '/php/dimenzije.php';
   <div class="container">
     <div class="db-intro-grid">
       <div class="animate-on-scroll">
-        <span class="db-eyebrow">Program saradnje za profesionalce</span>
+        <span class="db-eyebrow">Za arhitekte, projektante i izvođače</span>
         <div class="gold-line"></div>
         <p class="db-lead">
-          Nudimo saradnju <strong>arhitektama, dizajnerima enterijera, izvođačima i građevinskim kompanijama</strong> sa
-          zajedničkim ciljem – da klijentima ponudimo savremena, kvalitetna i estetski atraktivna rješenja za uređenje prostora.
+          Kad obloga uđe u projekat, potrebno je više od fotografije. Treba znati
+          <strong>šta materijal jeste, kako se spaja, u kojoj količini postoji i kad stiže</strong> —
+          prije nego što stavka uđe u predmjer i prije nego što klijent vidi ponudu.
         </p>
         <p class="db-lead-sub">
-          Decor Box je program saradnje Make My Home Decor-a namijenjen profesionalcima koji u svojim projektima koriste
-          dekorativne zidne obloge. Na jednom mjestu pružamo veliki izbor zidnih panela i dekorativnih letvica, uz stručnu
-          podršku pri izboru odgovarajućeg materijala i dezena za konkretan projekat.
+          Decor Box je taj dio posla. Za svaki proizvod iz naše ponude dobijate dokumentaciju,
+          spreman opis za specifikaciju, uzorak u ruke i odgovor na pitanje dostupnosti — od jedne osobe,
+          bez prepisivanja sa fabrikom.
         </p>
         <p class="db-lead-sub">
-          Naša ponuda obuhvata veliki broj dezena inspirisanih drvetom, kamenom, mermerom, tekstilom, metalom i savremenim
-          zidnim tehnikama, što omogućava primjenu u stambenim, hotelskim, ugostiteljskim, poslovnim i drugim enterijerima.
+          Ponuda pokriva drvo, kamen, mermer, tekstil, metal i akustične obrade, u <strong>13 kategorija i
+          117 modela</strong>, sa primjenom u stambenim, hotelskim, ugostiteljskim i poslovnim enterijerima.
+          Ispod je izbor po namjeni prostora — od kancelarije do kupatila.
         </p>
-        <a href="https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20Decor%20Box%20program%20saradnje%20za%20profesionalce." target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="margin-top:8px;">
-          <i class="fab fa-whatsapp"></i> Postanite Partner
+        <a href="https://wa.me/38269105222?text=Zdravo%2C%20javljam%20se%20iz%20projektnog%20biroa.%20Radim%20projekat%20i%20trebaju%20mi%20podaci%20o%20oblogama%20%E2%80%93%20namjena%20prostora%2C%20povr%C5%A1ina%20i%20faza%20projekta%20su%3A" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="margin-top:8px;">
+          <i class="fab fa-whatsapp"></i> Pošaljite projekat
         </a>
       </div>
       <div class="db-intro-img animate-on-scroll">
@@ -346,35 +388,126 @@ require_once __DIR__ . '/php/dimenzije.php';
   <div class="container">
     <div class="text-center">
       <div class="gold-line"></div>
-      <h2 class="section-title">Kao Decor Box partner dobijate</h2>
-      <p class="section-subtitle">Sve što vam treba za uspješnu realizaciju projekta – na jednom mjestu</p>
+      <h2 class="section-title">Šta dobijate za projekat</h2>
+      <p class="section-subtitle">Ono što je potrebno da obloga uđe u crtež, u predmjer i u ponudu</p>
     </div>
     <div class="db-ben-grid">
       <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-handshake"></i></div>
-        <div><h3>Posebne uslove</h3><p>Partnerski uslovi saradnje prilagođeni obimu i dinamici vaših projekata.</p></div>
+        <div class="db-ben-icon"><i class="fas fa-file-pdf"></i></div>
+        <div><h3>Dokumentacija za proizvod</h3><p>Za svaki artikal iz ponude šaljemo podatke koje traži projekat: sastav, dimenzije, težinu, način ugradnje i dostupnu fabričku dokumentaciju. Recite koji proizvod i za koju namjenu — dobijate ono što stvarno postoji, bez uopštenih obećanja.</p></div>
+      </div>
+      <div class="db-ben-card animate-on-scroll">
+        <div class="db-ben-icon"><i class="fas fa-clipboard-list"></i></div>
+        <div><h3>Tekst za specifikaciju</h3><p>Spreman opis stavke za predmjer i tehnički opis — naziv, šifra, dimenzija, jedinica mjere i količina po m². Kopira se u projekat bez prepravljanja.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
         <div class="db-ben-icon"><i class="fas fa-swatchbook"></i></div>
-        <div><h3>Uzorke i kataloge</h3><p>Fizički uzorci i katalozi za profesionalnu prezentaciju rješenja vašim klijentima.</p></div>
+        <div><h3>Uzorci u vaš biro</h3><p>Fizički uzorci dezena koje razmatrate, dostavljeni na adresu biroa. Boja i tekstura se na ekranu ne vide tačno, a klijent odluku donosi u ruci.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-ruler-combined"></i></div>
-        <div><h3>Podršku pri izboru</h3><p>Stručnu pomoć pri izboru materijala i dezena za svaki konkretan enterijer.</p></div>
+        <div class="db-ben-icon"><i class="fas fa-drafting-compass"></i></div>
+        <div><h3>Detalji ugradnje</h3><p>Kako se rješava unutrašnji i spoljašnji ugao, prelaz na plafon, spoj sa podom i završetak uz otvor — uz odgovarajuće aluminijum lajsne. Detalj se dogovara prije, ne na gradilištu.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-file-invoice"></i></div>
-        <div><h3>Ponude prilagođene</h3><p>Individualne ponude izrađene prema zahtjevima i budžetu konkretnog projekta.</p></div>
+        <div class="db-ben-icon"><i class="fas fa-boxes-stacked"></i></div>
+        <div><h3>Dostupnost i rok, prije ponude</h3><p>Provjera stvarne količine na stanju i roka nabavke za veće serije — prije nego što artikal uđe u projekat. Nema neprijatnog otkrića poslije potpisa.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-lightbulb"></i></div>
-        <div><h3>Podršku od ideje do realizacije</h3><p>Pratimo vas kroz cijeli proces – od prve ideje do završene ugradnje.</p></div>
-      </div>
-      <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-file-contract"></i></div>
-        <div><h3>Podršku za tendere</h3><p>Tehnički listovi, sertifikati i specifikacije za javne nabavke i velike projekte.</p></div>
+        <div class="db-ben-icon"><i class="fas fa-handshake"></i></div>
+        <div><h3>Jedna osoba za projekat</h3><p>Isti sagovornik od prvog pitanja do isporuke, sa partnerskim uslovima prema obimu. Ne prepričavate projekat iznova svakome ko se javi.</p></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- NAMJENA PROSTORA -->
+<section class="db-namjena">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Izbor obloge po namjeni prostora</h2>
+      <p class="section-subtitle">Prostor postavlja zahtjev, materijal na njega odgovara — polazna tabela za projekat</p>
+    </div>
+    <div class="db-namjena-wrap">
+      <table class="db-namjena-tabela">
+        <caption class="sr-only">Preporučene zidne obloge prema namjeni prostora i zahtjevu koji prostor postavlja</caption>
+        <thead>
+          <tr><th scope="col">Prostor</th><th scope="col">Šta prostor traži</th><th scope="col">Obloga</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><i class="fas fa-briefcase"></i> Kancelarija, open space, sala za sastanke</th>
+            <td>Smanjenje odjeka i razgovora koji se prenosi kroz prostoriju</td>
+            <td><a href="/kategorija/akusticni-paneli">Akustični paneli</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fas fa-hotel"></i> Hotelska soba, apartman</th>
+            <td>Toplina, otpornost na habanje, brza ugradnja između dvije sezone</td>
+            <td><a href="/kategorija/bambus-drveni">Drveni</a> i <a href="/kategorija/bambus-tekstilni">tekstilni paneli</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fas fa-utensils"></i> Lobi, recepcija, restoran</th>
+            <td>Reprezentativan utisak na prvi pogled, izdržljivost u prometu</td>
+            <td><a href="/kategorija/bambus-mermerni">Mermerni</a>, <a href="/kategorija/bambus-metalni">metalni</a>, <a href="/kategorija/flex-stone">Flex Stone</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fas fa-droplet"></i> Kupatilo, wellness, spa</th>
+            <td>Otpornost na vlagu i lako održavanje</td>
+            <td><a href="/kategorija/pu-kamen">PU kamen</a> i <a href="/kategorija/spc-pod">SPC pod</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fas fa-layer-group"></i> Hodnik, stepenište, ulaz</th>
+            <td>Površina koja podnosi dodir i udarce, jednostavna zamjena dijela</td>
+            <td><a href="/kategorija/mdf">MDF kanelirani paneli</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fas fa-cube"></i> Dnevna soba, TV zid, spavaća</th>
+            <td>Ritam i dubina na zidu bez sužavanja prostorije</td>
+            <td><a href="/kategorija/3d-letvice">3D letvice</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="db-namjena-nota">
+      Tabela je polazna tačka, ne propis. Za konkretan prostor — površinu, visinu, vlažnost i namjenu —
+      predlog sužavamo na dva do tri dezena i šaljemo uzorke.
+      Detalji ugradnje i prelaza opisani su u <a href="montaza.html">vodiču za montažu</a>,
+      a rješenja po prostorijama u tekstovima o <a href="akusticni-paneli-kancelarija.html">akustici u kancelariji</a>,
+      <a href="paneli-za-kupatilo.html">panelima u kupatilu</a> i <a href="tv-zid.html">TV zidu</a>.
+    </p>
+  </div>
+</section>
+
+<!-- KAKO TECE SARADNJA -->
+<section class="db-tok">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Kako teče saradnja</h2>
+      <p class="section-subtitle">Četiri koraka, bez čekanja na odgovor iz fabrike</p>
+    </div>
+    <ol class="db-tok-grid">
+      <li class="db-tok-korak animate-on-scroll">
+        <span class="db-tok-broj">1</span>
+        <h3>Javite se sa projektom</h3>
+        <p>Dovoljni su namjena prostora, približna površina i faza u kojoj je projekat. Osnova, foto ili skica pomažu, ali nisu uslov.</p>
+      </li>
+      <li class="db-tok-korak animate-on-scroll">
+        <span class="db-tok-broj">2</span>
+        <h3>Predlog i uzorci</h3>
+        <p>Sužavamo izbor na dva do tri dezena koja odgovaraju namjeni, i šaljemo uzorke u biro da ih vidite i pokažete klijentu.</p>
+      </li>
+      <li class="db-tok-korak animate-on-scroll">
+        <span class="db-tok-broj">3</span>
+        <h3>Količine, rok i ponuda</h3>
+        <p>Računamo potrebnu količinu sa otpadom, provjeravamo stanje i rok, i šaljemo ponudu sa tekstom spremnim za predmjer.</p>
+      </li>
+      <li class="db-tok-korak animate-on-scroll">
+        <span class="db-tok-broj">4</span>
+        <h3>Isporuka i ugradnja</h3>
+        <p>Isporuka na gradilište i dogovor detalja sa izvođačem. Ostajemo dostupni dok se posao ne završi.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -421,12 +554,13 @@ require_once __DIR__ . '/php/dimenzije.php';
   <div class="container">
     <div class="db-cta-script">Vi stvarate prostor.</div>
     <h2>MI VAM DAJEMO MATERIJAL ZA IDEJU.</h2>
+    <p class="db-cta-nota">Recite namjenu prostora, približnu površinu i fazu projekta — dobijate predlog, uzorke i cijenu.</p>
     <div class="db-cta-btns">
-      <a href="https://wa.me/38269105222?text=Zdravo%2C%20%C5%BEelim%20da%20postanem%20Decor%20Box%20partner." target="_blank" rel="noopener" class="btn btn-dark btn-lg">
-        <i class="fab fa-whatsapp"></i> Postanite Decor Box Partner
+      <a href="https://wa.me/38269105222?text=Zdravo%2C%20javljam%20se%20iz%20projektnog%20biroa.%20Namjena%20prostora%3A%20%20%7C%20Povr%C5%A1ina%3A%20%20%7C%20Faza%20projekta%3A" target="_blank" rel="noopener" class="btn btn-dark btn-lg">
+        <i class="fab fa-whatsapp"></i> Pošaljite projekat
       </a>
-      <a href="contact.html" class="btn btn-ghost btn-lg">
-        <i class="fas fa-envelope"></i> Kontaktirajte Nas
+      <a href="mailto:makemyhome.me@gmail.com?subject=Decor%20Box%20%E2%80%93%20zahtjev%20projektnog%20biroa&amp;body=Namjena%20prostora%3A%0APribli%C5%BEna%20povr%C5%A1ina%20(m2)%3A%0AFaza%20projekta%3A%0ARok%3A%0AProizvodi%20koji%20me%20zanimaju%3A%0A%0ATra%C5%BEim%3A%20dokumentaciju%20%2F%20uzorke%20%2F%20tekst%20za%20specifikaciju%20%2F%20ponudu" class="btn btn-ghost btn-lg">
+        <i class="fas fa-file-pdf"></i> Zatražite dokumentaciju
       </a>
     </div>
   </div>
