@@ -172,6 +172,7 @@ iz njega vraća 200 — pa su dvije greške u njemu prošle neprimijećeno.
 | Nijedna stranica ne fali u sitemapu — a ako fali, nosi `noindex` | S3 |
 | **Keš zavisi od svega iz čega se računaju datumi** | S4 |
 | Svaka slika iz sitemapa postoji | S5 |
+| Kategorija koja na stranici ima proizvode ima i slike u sitemapu | S6 |
 
 Dvije greške koje su ovo iznudile:
 
@@ -188,8 +189,21 @@ S4 je statička provjera samog `sitemap.php`: upoređuje spisak fajlova od kojih
 keš zavisi sa spiskom iz kog se datumi računaju. Provjereno na oba stanja koda —
 0 nalaza na ispravnom, 25 na onom prije popravke.
 
+Treća greška, iste vrste: **`/kategorija/bambus-paneli` prikazuje 39 proizvoda
+sa 39 fotografija, a u sitemapu je stajala bez ijedne slike.** To je nadređena
+kategorija — nijedan proizvod je ne nosi u polju `category`, nego se na njoj
+prikazuju svi bambus podtipovi. `products.php` to zna, `sitemap.php` nije znao.
+Google slike otkriva prvenstveno preko sitemapa, pa je najveća kategorija na
+sajtu bila nevidljiva za pretragu slika. S6 upoređuje baš to: koliko proizvoda
+stranica pokazuje i koliko slika sitemap za nju daje.
+
 **Pravilo za ubuduće:** kad se u `sitemap.php` doda nov izvor datuma, mora ući i
-u `$izvori`. S4 ne pušta da se to zaboravi.
+u `$izvori`. Kad se doda nadređena kategorija, mora se dodati i u grupisanje
+slika. S4 i S6 ne puštaju da se to zaboravi.
+
+**Ne zaboraviti `llms.txt`.** Kad se promijeni sadržaj stranice koju taj fajl
+opisuje, mijenja se i on — inače AI asistenti opisuju ponudu koje više nema.
+To se već desilo sa Decor Boxom.
 
 ## 8. Nijedna stranica nije siroče · I
 
