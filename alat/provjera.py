@@ -558,6 +558,37 @@ def grupa_G():
     #     on normalizuje (npr. spoji <head> i <meta charset>), pa je znao da
     #     prijavi razliku koje nema. Velicina dolazi sa diska i ne laze.
     g = []
+
+    # Prvo: da li je LOKALNI git uopste na onome sto je pushovano?
+    #
+    # Bez ovoga pravilo zna da slaze. Radni direktorijum se zna vratiti unazad
+    # (kontejner se resetuje), pa lokalno stoji stara verzija dok su server i
+    # GitHub na novoj. G4 tada prijavi trideset razlika i za svaku kaze "na
+    # serveru toliko, u gitu toliko" — a nijedna nije prava: server je u redu,
+    # lokalna kopija je zastarjela. Zato se prvo provjeri to, i ako lokalno
+    # kaska, kaze se TO umjesto trideset lazi. Lijek je `git reset --hard`,
+    # ne ponovni sync.
+    def _git(*a):
+        return subprocess.run(['git', '-C', KORIJEN, *a],
+                              capture_output=True, text=True, timeout=60).stdout.strip()
+    try:
+        grana = _git('rev-parse', '--abbrev-ref', 'HEAD')
+        subprocess.run(['git', '-C', KORIJEN, 'fetch', '--quiet', 'origin', grana],
+                       capture_output=True, timeout=120)
+        lok_h, dalj_h = _git('rev-parse', 'HEAD'), _git('rev-parse', 'origin/' + grana)
+        if lok_h and dalj_h and lok_h != dalj_h:
+            iza = _git('rev-list', '--count', 'HEAD..origin/' + grana)
+            ispred = _git('rev-list', '--count', 'origin/%s..HEAD' % grana)
+            g.append('LOKALNI GIT NIJE NA POSLJEDNJEM STANJU: %s iza, %s ispred origin/%s'
+                     ' — sve razlike ispod su zato lazne; uradi `git reset --hard origin/%s`'
+                     % (iza or '?', ispred or '?', grana, grana))
+        prljavo = [x for x in _git('status', '--porcelain').splitlines() if x.strip()]
+        if prljavo:
+            g.append('lokalno ima %d neupisanih izmjena (nisu ni commitovane ni pushovane): %s'
+                     % (len(prljavo), ', '.join(x.split(maxsplit=1)[-1] for x in prljavo[:4])))
+    except Exception as e:
+        g.append('ne mogu provjeriti stanje gita: %s' % e)
+
     lista_php = os.path.join(KORIJEN, 'admin', 'sync-lista.php')
     parovi = []
     if os.path.exists(lista_php):
