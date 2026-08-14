@@ -470,6 +470,60 @@ def grupa_D():
     zabiljezi('D4', 'Nigdje se ne salju ocjene Google-u', g4, len(SITEMAP))
     zabiljezi('D5', 'Breadcrumb pozicije idu 1,2,3…', g5, len(SITEMAP))
 
+    # ---- Firma mora biti JEDNA, ne dvije ----------------------------------
+    #
+    # Grupa D je do sada provjeravala samo proizvode. Podatke o firmi nije
+    # gledao niko — a bas njih Google cita kad neko ukuca ime firme i kad
+    # odlucuje da li sajt i profil na Mapama pripadaju istom subjektu.
+    #
+    # Naslo se ovako: pocetna je opisivala firmu kao HomeGoodsStore /
+    # LocalBusiness / Organization sa @id "…/#organization", a contact.html
+    # kao LocalBusiness BEZ ijednog @id-a i bez addressRegion. Dva cvora bez
+    # zajednickog @id-a Google moze citati kao dvije razlicite firme, pa se
+    # snaga jedne dijeli na dvije — a firma se pet mjeseci nije nalazila ni
+    # po svom punom imenu.
+    g = []
+    cvorovi = []
+    for u, (h, kod, _, _) in STRANICE.items():
+        if kod != '200':
+            continue
+        for blok in re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S):
+            try:
+                d = json.loads(blok)
+            except Exception:
+                continue                      # D1 to vec prijavljuje
+            for n in (d if isinstance(d, list) else [d]):
+                if not isinstance(n, dict):
+                    continue
+                t = n.get('@type')
+                tt = t if isinstance(t, list) else [t]
+                if not any(x in ('Organization', 'LocalBusiness', 'HomeGoodsStore', 'Store') for x in tt):
+                    continue
+                cvorovi.append((u, n))
+                if not n.get('@id'):
+                    g.append('%s → podaci o firmi bez @id — Google to moze citati '
+                             'kao drugu firmu' % u)
+    # Sve sto ima @id mora imati ISTE podatke: ime, telefon, adresu
+    poId = collections.defaultdict(list)
+    for u, n in cvorovi:
+        if n.get('@id'):
+            poId[n['@id']].append((u, n))
+    if len(poId) > 1:
+        g.append('firma je opisana pod %d razlicitih @id: %s'
+                 % (len(poId), ', '.join(sorted(poId))))
+    for oid, spisak in poId.items():
+        osnovni = None
+        for u, n in spisak:
+            kljuc = (n.get('name'),
+                     re.sub(r'\D', '', str(n.get('telephone') or ''))[-8:],
+                     (n.get('address') or {}).get('streetAddress'))
+            if osnovni is None:
+                osnovni = (u, kljuc)
+            elif kljuc != osnovni[1]:
+                g.append('%s opisuje firmu drugacije nego %s: %s vs %s'
+                         % (u, osnovni[0], kljuc, osnovni[1]))
+    zabiljezi('D6', 'Firma je svuda opisana kao JEDNA te ista', g, len(cvorovi))
+
 
 # ============================================================
 # E — RESURSI I LINKOVI  (sporo)
