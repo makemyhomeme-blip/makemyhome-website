@@ -82,7 +82,7 @@ def main():
             return 0
 
         # Nista se ne prijavljuje dok se ne potvrdi drugim prolazom.
-        print('\n--- palo %d, provjeravam da nije bio ispad mreze: %s'
+        print('\n--- palo %d, provjeravam da li se ponavlja: %s'
               % (len(pali), ', '.join(sorted(pali))))
         grupe = ''.join(sorted({GRUPA_OD(s) for s in pali}))
         ispis2, pali2 = pusti(grupe)
@@ -90,12 +90,17 @@ def main():
         stvarne = {s: o for s, o in pali2.items() if s in pali}
         nestale = sorted(set(pali) - set(pali2))
         if nestale:
-            print('--- bio ispad, ne greska (prezivjelo nije): %s' % ', '.join(nestale))
+            # Ne tvrdi se STA je bilo — samo da se nije ponovilo. Uzrok moze
+            # biti ispad mreze, ali i stanje koje se u medjuvremenu promijenilo
+            # (npr. fajl commitovan izmedju dva prolaza). Tvrditi "bio je ispad"
+            # znacilo bi reci nesto sto se ne zna.
+            print('--- nije se ponovilo u drugom prolazu, ne racuna se kao greska: %s'
+                  % ', '.join(nestale))
 
         if not stvarne:
             print('\n' + '=' * 66)
-            print('SAJT JE PO ETALONU — sve sto je palo bio je trenutni ispad,')
-            print('nijedna greska nije prezivjela ponovni prolaz.')
+            print('SAJT JE PO ETALONU — nijedno palo pravilo nije se ponovilo')
+            print('u drugom prolazu.')
             print('=' * 66)
             return 0
 
