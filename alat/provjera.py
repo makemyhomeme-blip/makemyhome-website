@@ -791,7 +791,11 @@ def grupa_G():
     # Nista od toga nije bilo vidljivo ni u jednoj drugoj provjeri.
     DOZVOLJENO = {'products-container', 'cout', 'form-message', 'mob-search-results',
                   'desk-search-results', 'back-bar', 'insp-prazno', 'toast', 'img-lightbox',
-                  'gallery-specs'}
+                  'gallery-specs',
+                  # Kutija za rezultat kalkulatora: server je ispisuje praznu i
+                  # rezervise joj visinu, a broj u nju upise JavaScript kad se
+                  # promijene mjere. Nije sadrzaj koji Google treba.
+                  'calc-result'}
     g = []
     for u, (h, kod, _, _) in STRANICE.items():
         if kod != '200':
@@ -803,8 +807,21 @@ def grupa_G():
         for m in re.finditer(r'<(div|section|ul|tbody)\b[^>]*id="([a-z0-9-]+)"[^>]*>(.*?)</\1>', vidljivo, re.S):
             if m.group(2) in DOZVOLJENO:
                 continue
-            unut = re.sub(r'\s+', ' ', re.sub(r'<!--.*?-->', '', m.group(3), flags=re.S)).strip()
-            if len(unut) < 40:
+            # Prazno znaci PRAZNO, ne "krace od 40 znakova".
+            #
+            # Ranije je ovdje stajao prag duzine, kao gruba zamjena za pravu
+            # provjeru. Cim je server poceo da ispisuje kratke ali stvarne
+            # blokove — recimo "1 kom = 3,42 m²" u oznaci pokrivenosti — pravilo
+            # ih je prijavilo kao prazne na 109 stranica. Nijedan nije bio
+            # prazan. Prag je bio pretpostavka, a pretpostavka u pravilu daje
+            # lazne nalaze i tjera da se pravima prestane vjerovati.
+            unut = re.sub(r'<!--.*?-->', '', m.group(3), flags=re.S)
+            # Prazno = nema ni teksta ni ijednog elementa. Blok sa poljem za
+            # pretragu nema teksta, ali nije prazan — prva verzija ove izmjene
+            # je bas njega prijavila na svakoj stranici.
+            imaElement = re.search(r'<[a-z]', unut, re.I) is not None
+            tekst = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', unut)).strip()
+            if not tekst and not imaElement:
                 g.append('%s → prazan <%s id="%s">' % (u, m.group(1), m.group(2)))
                 break
     zabiljezi('G9', 'Nista sto Google treba ne ceka JavaScript', g, len(STRANICE))
