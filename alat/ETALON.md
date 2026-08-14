@@ -159,6 +159,38 @@ sync vrati na staro.
 | Podaci kupaca zatvoreni, podaci sajta otvoreni | G6 |
 | Slike se serviraju kao WebP samo pregledaču koji ga čita | G10 |
 
+## 7a. Sitemap je tačan · S
+
+Sitemap je jedini dokument koji Googleu kaže **šta sajt ima** i **kad se šta
+promijenilo**. Do sada se provjeravao samo posredno — kroz A1, da svaka adresa
+iz njega vraća 200 — pa su dvije greške u njemu prošle neprimijećeno.
+
+| Mora biti | Pravilo |
+|---|---|
+| Servira se kao `application/xml`, gzip, bez skoka; `robots.txt` ga navodi | S1 |
+| Validan XML, bez duplikata, apsolutne adrese, validni changefreq/priority, `lastmod` u obliku Y-m-d i ne u budućnosti, svaka slika ima naslov | S2 |
+| Nijedna stranica ne fali u sitemapu — a ako fali, nosi `noindex` | S3 |
+| **Keš zavisi od svega iz čega se računaju datumi** | S4 |
+| Svaka slika iz sitemapa postoji | S5 |
+
+Dvije greške koje su ovo iznudile:
+
+1. **`sync.php` je prepisivao svaki fajl pri svakom pokretanju**, i kad se
+   sadržaj nije promijenio ni za bajt. Vrijeme izmjene na disku je zato mjerilo
+   *kad je zadnji put pokrenut deploy*, a ne kad se stranica promijenila — pa
+   je svih 149 adresa javljalo isti datum. Kad sve stranice svaki put kažu da
+   su nove, Google prestane da vjeruje tom podatku i ignoriše ga.
+2. **Keš sitemapa nije zavisio od stranica** iz kojih se ti datumi računaju.
+   Izmjena teksta na `about.html` promijenila bi `lastmod`, ali bi keš i dalje
+   služio stari — i Google ne bi ni saznao da se nešto promijenilo.
+
+S4 je statička provjera samog `sitemap.php`: upoređuje spisak fajlova od kojih
+keš zavisi sa spiskom iz kog se datumi računaju. Provjereno na oba stanja koda —
+0 nalaza na ispravnom, 25 na onom prije popravke.
+
+**Pravilo za ubuduće:** kad se u `sitemap.php` doda nov izvor datuma, mora ući i
+u `$izvori`. S4 ne pušta da se to zaboravi.
+
 ## 8. Nijedna stranica nije siroče · I
 
 | Mora biti | Pravilo |

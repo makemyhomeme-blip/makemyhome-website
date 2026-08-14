@@ -10,7 +10,8 @@ Pokretanje:  python3 alat/provjera.py [grupa]
 Svaka stavka je jedno pravilo. Ako pravilo padne, ispise se sta tacno i gdje.
 Fajl se NE deployuje na server (nije u admin/sync.php listi).
 """
-import json, re, subprocess, sys, os, collections, hashlib, time
+import json, re, subprocess, sys, os, collections, hashlib, time, datetime
+import xml.etree.ElementTree as ET
 from urllib.parse import urljoin, urlparse
 from html.parser import HTMLParser
 
@@ -18,6 +19,9 @@ BAZA = 'https://makemyhome.me'
 KORIJEN = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CURL = ['curl', '-sk', '--cacert', '/root/.ccr/ca-bundle.crt']
 rezultati = []
+
+# Spora pravila (ona koja povlace stotine adresa) rade se samo uz 'sve'.
+SPORO = len(sys.argv) > 1 and sys.argv[1].upper() in ('SVE', 'S', 'E')
 
 
 # Odgovori koji NE znace gresku na sajtu nego trenutni ispad.
@@ -1041,16 +1045,201 @@ def grupa_I():
 
 
 # ============================================================
+# S — SITEMAP
+#
+# Sitemap je jedini dokument koji Google cita da bi znao STA sajt uopste ima
+# i KAD se sta promijenilo. Do sada se provjeravao samo posredno — kroz A1
+# (svaka adresa iz njega vraca 200) — pa su dvije greske u njemu prosle
+# neprimijeceno:
+#
+#   * sync.php je prepisivao svaki fajl pri svakom pokretanju, pa je vrijeme
+#     izmjene mjerilo deploy a ne izmjenu sadrzaja, i svih 149 adresa je
+#     javljalo isti datum. Kad sve stranice svaki put kazu da su nove, Google
+#     prestane da vjeruje tom podatku;
+#   * kes sitemapa nije zavisio od stranica iz kojih se ti datumi racunaju,
+#     pa izmjena teksta na stranici ne bi ni stigla do Googlea.
+# ============================================================
+def grupa_S():
+    print('\n=== S · SITEMAP ===')
+
+    sm, kod, sk, _ = dohvati(BAZA + '/sitemap.xml', timeout='30')
+    g = []
+    if kod != '200':
+        g.append('sitemap.xml → %s' % kod)
+    if sk != '0':
+        g.append('sitemap.xml ide kroz %s preusmjerenja' % sk)
+    # GET a ne HEAD: Apache na HEAD zahtjev ne primjenjuje mod_deflate, pa bi
+    # provjera javila da kompresije nema iako radi. Prva verzija ovog pravila
+    # je bas tako lagala.
+    zag = subprocess.run(CURL + ['--max-time', '30', '-D', '-', '-o', '/dev/null',
+                                 '-H', 'Accept-Encoding: gzip',
+                                 BAZA + '/sitemap.xml'], capture_output=True, text=True).stdout.lower()
+    if 'content-type: application/xml' not in zag:
+        g.append('sitemap se ne servira kao application/xml')
+    if 'content-encoding: gzip' not in zag:
+        g.append('sitemap se ne salje sazet (gzip) — 123 kB umjesto 9 kB')
+    rob, _, _, _ = dohvati(BAZA + '/robots.txt', timeout='10')
+    if 'Sitemap: %s/sitemap.xml' % BAZA not in rob:
+        g.append('robots.txt ne navodi sitemap')
+    zabiljezi('S1', 'Sitemap se servira ispravno i sazeto', g, 5)
+
+    # ---- Struktura ----------------------------------------------------------
+    g = []
+    korijen = None
+    try:
+        korijen = ET.fromstring(sm)
+    except Exception as e:
+        g.append('sitemap nije validan XML: %s' % e)
+    NSM = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9',
+           'i': 'http://www.google.com/schemas/sitemap-image/1.1'}
+    adrese, slikeSM = [], []
+    if korijen is not None:
+        if not korijen.tag.endswith('}urlset'):
+            g.append('korijenski element nije <urlset>')
+        stavke = korijen.findall('s:url', NSM)
+        adrese = [x.find('s:loc', NSM).text for x in stavke if x.find('s:loc', NSM) is not None]
+        slikeSM = [x.text for x in korijen.findall('.//i:loc', NSM)]
+        for a, n in collections.Counter(adrese).items():
+            if n > 1:
+                g.append('adresa se ponavlja %d puta: %s' % (n, a))
+        for a in adrese:
+            if not a.startswith(BAZA + '/'):
+                g.append('adresa nije apsolutna na nas domen: %s' % a)
+        for s in set(slikeSM):
+            if not s.startswith(BAZA + '/'):
+                g.append('slika nije apsolutna na nas domen: %s' % s)
+        VALID = {'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'}
+        for e in korijen.findall('.//s:changefreq', NSM):
+            if e.text not in VALID:
+                g.append('nevalidan changefreq: %s' % e.text)
+        for e in korijen.findall('.//s:priority', NSM):
+            try:
+                if not 0.0 <= float(e.text) <= 1.0:
+                    raise ValueError
+            except (TypeError, ValueError):
+                g.append('nevalidan priority: %s' % e.text)
+        danas = datetime.date.today()
+        for x in stavke:
+            d = x.find('s:lastmod', NSM)
+            loc = x.find('s:loc', NSM)
+            if d is None or not d.text:
+                g.append('%s → nema lastmod' % (loc.text if loc is not None else '?'))
+                continue
+            try:
+                if datetime.date.fromisoformat(d.text[:10]) > danas:
+                    g.append('%s → lastmod u buducnosti: %s' % (loc.text, d.text))
+            except ValueError:
+                g.append('%s → lastmod nije Y-m-d: %s' % (loc.text, d.text))
+        # Sitemap smije nositi najvise 50 000 adresa i 50 MB nesazeto
+        if len(adrese) > 50000:
+            g.append('vise od 50 000 adresa (%d) — mora se podijeliti' % len(adrese))
+        if len(sm) > 50 * 1024 * 1024:
+            g.append('veci od 50 MB nesazeto')
+        # Naslovi slika
+        for x in korijen.findall('.//i:image', NSM):
+            t = x.find('i:title', NSM)
+            if t is None or not (t.text or '').strip():
+                lo = x.find('i:loc', NSM)
+                g.append('slika bez naslova: %s' % (lo.text if lo is not None else '?'))
+    zabiljezi('S2', 'Sitemap je strukturno ispravan', g, len(adrese))
+
+    # ---- Nijedna stranica ne smije faliti -----------------------------------
+    #
+    # Stranica koje nema u sitemapu Google mozda nikad i ne otkrije. Ako je
+    # namjerno izostavljena (korpa, naplata, hvala), mora nositi noindex —
+    # inace se ne zna da li je izostavljena namjerno ili greskom.
+    g = []
+    usm = set(adrese)
+    html = sorted(f for f in os.listdir(KORIJEN) if f.endswith('.html'))
+    for f in html:
+        if f == 'index.html' or '%s/%s' % (BAZA, f) in usm:
+            continue
+        h, kodF, _, _ = dohvati('%s/%s' % (BAZA, f), timeout='12')
+        if kodF == '404':
+            continue                      # ne postoji kao adresa — u redu
+        if 'noindex' not in h.lower():
+            g.append('%s → nije u sitemapu, a nema noindex (%s)' % (f, kodF))
+    zabiljezi('S3', 'Nijedna stranica ne fali u sitemapu bez razloga', g, len(html))
+
+    # ---- Kes mora zavisiti od svega iz cega se racunaju datumi --------------
+    #
+    # Ovo je staticka provjera samog sitemap.php, ne sajta. Datum svake adrese
+    # racuna se iz odredjenih fajlova; ako kes ne zavisi bas od tih fajlova,
+    # izmjena stranice se nikad ne pojavi u sitemapu. Bas se to i desilo.
+    g = []
+    koristi = set()
+    try:
+        izv = open(os.path.join(KORIJEN, 'sitemap.php'), encoding='utf-8').read()
+        # Vodeca kosa crta se skida: __DIR__ . '/data/products.json' i
+        # 'data/products.json' su isti fajl, a bez normalizacije bi se
+        # poredili kao dva razlicita i pravilo bi javljalo greske kojih nema.
+        imena = lambda t: {x.lstrip('/') for x in
+                           re.findall(r"'([^']+\.(?:php|json|html))'", t)}
+
+        # $mmhStatika — spisak statickih stranica; ulazi u kes preko array_column
+        st = re.search(r'\$mmhStatika\s*=\s*\[(.*?)\n\];', izv, re.S)
+        statika = imena(st.group(1)) if st else set()
+
+        # $mmhPodaci i $mmhOkvir — promjenljive koje se prosljedjuju mmhVrijeme()
+        def var(ime):
+            m = re.search(r'\$%s\s*=\s*\[(.*?)\];' % ime, izv, re.S)
+            return imena(m.group(1)) if m else set()
+        podaci, okvir = var('mmhPodaci'), var('mmhOkvir')
+
+        # Od cega kes zavisi — dodjela $izvori koja stoji prije $najnoviji.
+        # Hvata se bilo koji oblik (obican niz ili array_merge), jer je stari
+        # kod bio obican niz; regex vezan samo za array_merge bi na njemu
+        # prijavio da nista nije pokriveno, sto je tacno po ishodu ali
+        # pogresno po obrazlozenju.
+        prije = izv.split('$najnoviji = 0;')[0]
+        d = re.findall(r'\$izvori\s*=\s*(.*?);', prije, re.S)
+        kes = imena(d[-1]) if d else set()
+        if d and 'array_column($mmhStatika' in d[-1]:
+            kes |= statika
+
+        # Iz cega se datumi stvarno racunaju
+        for m in re.finditer(r'mmhVrijeme\((.*?)\)\)?[,;]', izv, re.S):
+            t = m.group(1)
+            koristi |= imena(t)
+            if '$mmhPodaci' in t:
+                koristi |= podaci
+            if '$mmhOkvir' in t:
+                koristi |= okvir
+            if re.search(r'\[\s*\$f\b', t) or ', [$f]' in t:
+                koristi |= statika          # petlja po $mmhStatika
+        # $izvori se u petlji po statici gradi posebno
+        for m in re.finditer(r'\$izvori\s*=\s*array_merge\(\$mmh(Okvir|Podaci),\s*\[(.*?)\]\)', izv):
+            koristi |= (okvir if m.group(1) == 'Okvir' else podaci) | imena('[' + m.group(2) + ']')
+        koristi |= statika                  # svaka staticka stranica nosi svoj datum
+
+        for f in sorted(koristi - kes):
+            g.append('datum se racuna iz %s, a kes od njega ne zavisi — izmjena te '
+                     'stranice ne bi stigla do Googlea' % f)
+    except Exception as e:
+        g.append('provjera kesa nije mogla da se izvrsi: %s' % e)
+    zabiljezi('S4', 'Kes sitemapa zavisi od svega iz cega se racunaju datumi', g, len(koristi))
+
+    # ---- Slike (sporo) ------------------------------------------------------
+    if SPORO:
+        g = []
+        for s in sorted(set(slikeSM)):
+            _, kodS, _, _ = dohvati(s, timeout='15')
+            if kodS != '200':
+                g.append('%s → %s' % (s.replace(BAZA + '/', ''), kodS))
+        zabiljezi('S5', 'Svaka slika iz sitemapa postoji', g, len(set(slikeSM)))
+
+
+# ============================================================
 GRUPE = {'A': grupa_A, 'B': grupa_B, 'C': grupa_C, 'D': grupa_D,
          'E': grupa_E, 'F': grupa_F, 'G': grupa_G, 'H': grupa_H,
-         'I': grupa_I, 'R': grupa_R}
+         'I': grupa_I, 'R': grupa_R, 'S': grupa_S}
 
 if __name__ == '__main__':
     arg = (sys.argv[1] if len(sys.argv) > 1 else 'brzo').upper()
     if arg == 'SVE':
-        red = 'ABCDEFGHIR'
+        red = 'ABCDEFGHIRS'
     elif arg == 'BRZO':
-        red = 'ACDFGIR'
+        red = 'ACDFGIRS'
     else:
         red = arg
     for k in red:
