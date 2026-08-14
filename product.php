@@ -686,10 +686,35 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <?php if (!empty($product['sku'])): ?>
           <div style="display:inline-flex;align-items:center;gap:6px;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
           <?php endif; ?>
+          <?php
+          /* Ocjena uz naslov cita STVARNI prosjek tog proizvoda.
+             Ranije je ovdje stajalo tvrdo upisano "(4.8) · Odlično" za svaki
+             proizvod, dok blok nize prikazuje pravi prosjek — pa je Nordic Oak
+             na istoj stranici imao 4,8 uz naslov i 4,6 ispod. Pogadjalo je 43
+             proizvoda: deset ih ima prosjek 4,6, trideset tri 5,0.
+             Bez recenzija se ne prikazuje nista, umjesto izmisljene ocjene. */
+          if ($avgRating !== null && $revCount > 0):
+            $oc = (float) $avgRating;
+            // Zaokruzivanje na najblizu polovinu: 4,8 se prikazuje kao pet
+            // punih zvjezdica, 4,6 kao cetiri i po. Racunanje "cijeli dio pa
+            // ostatak" davalo je 4,8 → cetiri pune i jedna prazna, sto izgleda
+            // kao 4,0 iako pise 4.8.
+            $pol  = (int) round($oc * 2);      // broj polovina, 0..10
+            $pun  = intdiv($pol, 2);
+            $pola = ($pol % 2) === 1;
+            $rijec = $oc >= 4.75 ? 'Odlično' : ($oc >= 4.0 ? 'Vrlo dobro' : 'Dobro');
+          ?>
           <div class="product-rating">
-            <span class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-            <span class="rating-count">(4.8) · Odlično</span>
+            <span class="rating-stars"><?php
+              for ($i = 1; $i <= 5; $i++) {
+                  if ($i <= $pun)                   echo '<i class="fas fa-star"></i>';
+                  elseif ($i === $pun + 1 && $pola) echo '<i class="fas fa-star-half-alt"></i>';
+                  else                              echo '<i class="far fa-star"></i>';
+              }
+            ?></span>
+            <span class="rating-count">(<?= htmlspecialchars(number_format($oc, 1, '.', '')) ?>) · <?= $rijec ?></span>
           </div>
+          <?php endif; ?>
 
           <?php if ($discount > 0): ?>
           <div class="product-price-lg">
