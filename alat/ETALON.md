@@ -69,6 +69,16 @@ izbaci brže. Redirekcija na početnu je najgora — Google je čita kao lažni 
 | Svaka slika ima `alt` | C5 |
 | Svaka ikona koju stranica traži postoji u CSS-u | C6 |
 | Adresa i telefon isti na cijelom sajtu i u strukturiranim podacima | C7 |
+| Nijedan komad koda nije iscurio u vidljivi tekst | C8 |
+| Svaka ikona ima i **stvarni znak u fontu**, ne samo pravilo u CSS-u | C9 |
+
+C8 i C9 postoje zato što su dvije greške prošle kroz sve ostale provjere i
+vidjele se **samo okom, na slici stranice**: golo `">` ispod fotografije
+fabrike, i četiri ikone koje se iscrtavaju kao prazan prostor. Obje stranice
+su vraćale 200, HTML se učitavao, sve ostalo je bilo tačno.
+
+Pouka: provjera koja gleda samo kod ne vidi ono što posjetilac vidi. Kad se
+mijenja izgled, stranica se i **slika i pogleda** — `alat/snimak.py`.
 
 Ovo je bio korijen pet mjeseci nevidljivosti: sadržaj je crtao JavaScript, a
 Google je indeksirao 144 prazne stranice. Zato G9 i G11 nisu preporuka.
