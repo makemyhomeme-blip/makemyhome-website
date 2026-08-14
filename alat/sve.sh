@@ -43,8 +43,13 @@ zapisi() {           # zapisi <ime> <status> <detalj>
 }
 
 ocisti() {
-  pkill -f 'posrednik.mjs' 2>/dev/null
-  pkill -f 'php -S 127.0.0.1:8899' 2>/dev/null
+  # Uglaste zagrade oko prvog slova: bez njih "pkill -f" pogodi i sopstvenu
+  # komandnu liniju, jer i ona sadrzi taj isti tekst — pa alat ubije sam sebe.
+  # Bas se to i desilo: cijeli prolaz je prekinut na pocetku, bez ijedne
+  # poruke o razlogu.
+  pkill -f '[p]osrednik.mjs' 2>/dev/null
+  pkill -f '[p]hp -S 127.0.0.1:8899' 2>/dev/null
+  return 0
 }
 trap ocisti EXIT
 
