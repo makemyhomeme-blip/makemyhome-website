@@ -1027,8 +1027,11 @@ def grupa_G():
         obican = subprocess.run(CURL + ['--max-time', '25', u], capture_output=True).stdout
         for ime, ua in (('Googlebot', GBOT), ('Googlebot za telefon', GBOT_MOB)):
             bot = subprocess.run(CURL + ['--max-time', '25', '-A', ua, u], capture_output=True).stdout
-            if len(bot) < 200:
-                g.append('%s → %s ne dobija stranicu (%d B)' % (u, ime, len(bot)))
+            # Bez praga po velicini: robots.txt je 179 bajtova i prvi prag od
+            # 200 ga je proglasio nedostupnim iako je stizao ispravno. Poredjenje
+            # sa obicnim odgovorom je dovoljno i ne zavisi od velicine fajla.
+            if not bot:
+                g.append('%s → %s ne dobija nista' % (u, ime))
             elif bot != obican:
                 g.append('%s → %s dobija drugaciji sadrzaj (%d B umjesto %d B)'
                          % (u, ime, len(bot), len(obican)))
