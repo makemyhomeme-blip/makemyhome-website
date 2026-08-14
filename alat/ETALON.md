@@ -77,8 +77,31 @@ vidjele se **samo okom, na slici stranice**: golo `">` ispod fotografije
 fabrike, i četiri ikone koje se iscrtavaju kao prazan prostor. Obje stranice
 su vraćale 200, HTML se učitavao, sve ostalo je bilo tačno.
 
-Pouka: provjera koja gleda samo kod ne vidi ono što posjetilac vidi. Kad se
-mijenja izgled, stranica se i **slika i pogleda** — `alat/snimak.py`.
+Pouka: provjera koja gleda samo kod ne vidi ono što posjetilac vidi.
+
+## 3a. Stranica izgleda kako treba · alat/oko.mjs
+
+Ovo se ne provjerava curl-om nego pravim pregledačem, na 10 tipova stranica ×
+računar i telefon:
+
+| Mora biti | |
+|---|---|
+| Nijedna JavaScript greška na stranici | |
+| Nijedan resurs sa našeg domena ne vraća 404 | |
+| Nijedna stranica ne izlazi van ekrana (bočni skrol) | |
+| Nijedan komad koda u vidljivom tekstu | |
+| Nijedna ikona bez stvarnog znaka u fontu | |
+
+    php -S 127.0.0.1:8899 -t . &
+    node alat/posrednik.mjs &
+    node alat/oko.mjs
+
+Posrednik je obavezan: stranice nose `<base href="https://makemyhome.me/">`, pa
+bi pregledač bez njega učitao stranicu **bez stilova** i prijavio gomilu
+izmišljenih grešaka. Posrednik i slike koje postoje samo na serveru
+(`images/products/*`, `images/categories/*`) dovlači sa sajta — bez toga bi
+alat prijavio 27 nepostojećih 404. Spoljni servisi (Analytics, Google Maps) se
+ne broje: kroz ovo okruženje ionako ne prolaze.
 
 Ovo je bio korijen pet mjeseci nevidljivosti: sadržaj je crtao JavaScript, a
 Google je indeksirao 144 prazne stranice. Zato G9 i G11 nisu preporuka.
