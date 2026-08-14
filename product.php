@@ -574,6 +574,8 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   </div>
 </header>
 
+<main id="sadrzaj">
+
 <section class="product-detail-section" style="padding-top:140px;">
   <div class="container">
 <?php if (!$product): ?>
@@ -885,6 +887,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
     <?php endif; ?>
   </div>
 </section>
+</main>
 
 <footer id="footer">
   <div class="container">

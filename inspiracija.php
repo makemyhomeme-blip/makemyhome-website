@@ -337,6 +337,8 @@ arsort($insKat);
   </div>
 </header>
 
+<main id="sadrzaj">
+
 <section class="page-hero hero-usko">
   <div class="container">
     <div class="page-hero-content">
@@ -489,6 +491,7 @@ arsort($insKat);
   }
 })();
 </script>
+</main>
 
 <footer id="footer">
   <div class="container">

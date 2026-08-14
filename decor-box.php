@@ -332,6 +332,8 @@ require_once __DIR__ . '/php/dimenzije.php';
   </div>
 </header>
 
+<main id="sadrzaj">
+
 <section class="page-hero">
   <div class="container">
     <div class="page-hero-content">
@@ -570,6 +572,7 @@ require_once __DIR__ . '/php/dimenzije.php';
     </div>
   </div>
 </section>
+</main>
 
 <footer id="footer">
   <div class="container">

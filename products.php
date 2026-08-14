@@ -612,6 +612,8 @@ echo "\n</script>\n";
   </div>
 </header>
 
+<main id="sadrzaj">
+
 <!-- ===== PAGE HERO ===== -->
 <section class="page-hero">
   <div class="container">
@@ -828,6 +830,8 @@ echo "\n</script>\n";
 </section>
 
 <!-- ===== FOOTER ===== -->
+</main>
+
 <footer id="footer">
   <div class="container">
     <div class="footer-grid">

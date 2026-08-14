@@ -419,6 +419,8 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   </div>
 </header>
 
+<main id="sadrzaj">
+
 <section class="page-hero">
   <div class="container">
     <div class="page-hero-content">
@@ -629,6 +631,7 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   calc();
 })();
 </script>
+</main>
 
 <footer id="footer">
   <div class="container">
