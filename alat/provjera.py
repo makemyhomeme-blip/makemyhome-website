@@ -467,6 +467,20 @@ def grupa_D():
     zabiljezi('D1', 'Svi JSON-LD blokovi se parsiraju', g1, len(SITEMAP))
     zabiljezi('D2', 'Product ima name/image/description/offers/sku/brand', g2, len(SITEMAP))
     zabiljezi('D3', 'Ponuda ima cijenu, valutu, stanje, validFrom, priceValidUntil', g3, ponuda)
+    # D4 nije opreznost nego pravilo koje se NE SMIJE ukloniti.
+    #
+    # Search Console javlja "Missing field aggregateRating (optional)" na
+    # stranicama proizvoda. To NIJE greska — GSC uz to pise "valid items
+    # detected, eligible for rich results", a polje je oznaceno kao neobavezno.
+    # Zvuci kao da fali nesto sto treba dodati, i lako se doda.
+    #
+    # Ne smije se dodati: vlasnik je potvrdio da recenzije na sajtu nisu prave.
+    # Slanje izmisljenih ocjena Googleu je krsenje pravila o strukturiranim
+    # podacima i povlaci rucnu sankciju, koja obara cijeli sajt u rezultatima —
+    # dakle tacno suprotno od onoga zbog cega se ovo i radi.
+    #
+    # Ako recenzije jednom postanu prave (kupci ih sami ostave), tek tada se
+    # smiju slati, i tek tada se ovo pravilo mijenja.
     zabiljezi('D4', 'Nigdje se ne salju ocjene Google-u', g4, len(SITEMAP))
     zabiljezi('D5', 'Breadcrumb pozicije idu 1,2,3…', g5, len(SITEMAP))
 

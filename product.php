@@ -859,15 +859,10 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
         <!-- Bocni blok: popunjava prazninu pored duge liste karakteristika i
              daje kupcu razloge da kupi bas ovdje (ocjena, dostava, showroom, kontakt) -->
         <aside class="p-side">
-          <?php if ($avgRating !== null): ?>
-          <a href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>#product-reviews" class="p-side-rating">
-            <span class="p-side-rating-num"><?= htmlspecialchars(number_format((float)$avgRating, 1)) ?></span>
-            <span>
-              <span class="p-side-rating-stars"><?= $stars((int)round((float)$avgRating)) ?></span>
-              <span class="p-side-rating-txt"><?= $revCount ?> <?= $revCount === 1 ? 'recenzija kupca' : ($revCount < 5 ? 'recenzije kupaca' : 'recenzija kupaca') ?> &rsaquo;</span>
-            </span>
-          </a>
-          <?php endif; ?>
+          <?php /* Mala kutija sa ocjenom je uklonjena — isti broj je stajao na
+                   tri mjesta na istoj stranici: uz naslov, ovdje, i u odjeljku
+                   "Sta kazu kupci" ispod. Ostala su dva: kratka ocjena uz naslov
+                   i odjeljak sa samim recenzijama. */ ?>
 
           <ul class="p-side-list">
             <li><i class="fas fa-truck"></i><span><strong>Dostava za 1–4 dana</strong> kurirskom službom na adresu, širom Crne Gore</span></li>
