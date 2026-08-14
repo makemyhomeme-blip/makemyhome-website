@@ -59,11 +59,35 @@ def mapa_ikona():
     return m
 
 
+def ikone_sa_servera():
+    """Ikone koje vlasnik bira u adminu — one stoje samo na serveru.
+
+    data/categories.json se NE deployuje sa lokalnog (vlasnik ga mijenja kroz
+    admin), pa lokalni fajlovi o tim ikonama ne znaju nista. Zbog toga su
+    fa-cube i fa-table-columns ispali iz fonta pri sazimanju i dvije ikone
+    kategorija su se na sajtu iscrtavale prazno — mjesecima, a da niko ne
+    primijeti. Zato se spisak dopunjuje onim sto na serveru stvarno stoji.
+    """
+    try:
+        r = subprocess.run(['curl', '-sk', '--cacert', '/root/.ccr/ca-bundle.crt',
+                            '--max-time', '25',
+                            'https://makemyhome.me/data/categories.json'],
+                           capture_output=True, text=True, timeout=40).stdout
+        if len(r) < 50:
+            print('   PAZI: categories.json sa servera nije procitan — ikone iz admina nisu uzete')
+            return set()
+        return set(re.findall(r'"icon"\s*:\s*"[^"]*\b(fa-[a-z0-9-]+)', r))
+    except Exception as e:
+        print('   PAZI: categories.json sa servera nije procitan (%s)' % e)
+        return set()
+
+
 def koriscene(mapa):
     pom = set()
     for f in sve_datoteke():
         s = open(f, encoding='utf-8', errors='replace').read()
         pom |= set(re.findall(r'\b(fa-[a-z0-9-]+)', s))
+    pom |= ikone_sa_servera()
     koris = {i for i in pom if i in mapa}
     nepoznate = {i for i in pom if i not in mapa and i not in SLUZBENE}
     return koris, nepoznate
@@ -74,9 +98,26 @@ def sazmi(rel, unicodes, opis):
     if not os.path.exists(put):
         print('   nema fajla: ' + rel)
         return
+
+    # Sazima se UVIJEK iz punog originala u fa/webfonts-izvor/, nikad preko
+    # vec sazetog fajla.
+    #
+    # Ranije je alat citao isti fajl koji i prepisuje. Prvo pokretanje je
+    # izbacilo sve glifove osim tada koriscenih — i ti glifovi su nestali
+    # zauvijek. Kad je kasnije na Decor Box dodato sest novih ikona, cetiri
+    # se nisu iscrtale: CSS ih je imao, font vise nije, a ponovno pokretanje
+    # alata ih nije moglo vratiti jer ih ni u izvoru nema. Originali su
+    # vraceni iz git istorije (commit 117a8d4) i stoje u fa/webfonts-izvor/.
+    # Taj folder se NE deployuje — sluzi samo kao izvor pri sazimanju.
+    izvor = os.path.join(KORIJEN, 'fa/webfonts-izvor', os.path.basename(rel))
+    if not os.path.exists(izvor):
+        print('   PAZI: nema originala %s — preskacem %s da ne izgubim jos glifova'
+              % (os.path.relpath(izvor, KORIJEN), rel))
+        return
+
     prije = os.path.getsize(put)
     izlaz = put + '.novi'
-    r = subprocess.run(['python3', '-m', 'fontTools.subset', put,
+    r = subprocess.run(['python3', '-m', 'fontTools.subset', izvor,
                         '--unicodes=' + unicodes, '--flavor=woff2',
                         '--layout-features=*', '--no-hinting',
                         '--output-file=' + izlaz],

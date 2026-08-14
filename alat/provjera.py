@@ -275,6 +275,49 @@ def grupa_C():
         g.append('provjera ikona nije mogla da se izvrsi: %s' % e)
     zabiljezi('C6', 'Svaka ikona koju stranice traze postoji u CSS-u', g, len(ikone))
 
+    # ---- Ikona mora imati i GLIF u fontu, ne samo pravilo u CSS-u ----------
+    #
+    # C6 gleda samo CSS i zato je propustio pravu gresku. Fontovi su sazeti na
+    # ikone koje su se koristile u tom trenutku (fa-solid-900.woff2: 156 kB ->
+    # 12 kB). Kad je na Decor Box dodato sest ikona, CSS je regenerisan i C6 je
+    # rekao da je sve u redu — ali font te glifove nije imao i cetiri ikone su
+    # se iscrtale kao prazan prostor. Vidjelo se samo okom, na slici stranice.
+    #
+    # Ovdje se cita pravi font sa sajta i provjerava da za svaku koriscenu
+    # ikonu postoji znak u njemu. Lijek je `python3 alat/fontovi.py upisi`.
+    g = []
+    provjereno_gl = 0
+    try:
+        from fontTools.ttLib import TTFont
+        import io
+        # ime ikone -> kod znaka, iz punog Font Awesome CSS-a
+        puni = open(os.path.join(KORIJEN, 'fa/css/all.min.css'), encoding='utf-8').read()
+        kodovi = {}
+        for sel, kod in re.findall(r'([^{}]+)\{content:"\\([0-9a-f]+)"\}', puni):
+            for ime in re.findall(r'\.fa-([a-z0-9-]+):+before', sel):
+                kodovi[ime] = int(kod, 16)
+
+        znakovi = set()
+        for rel in ('fa/webfonts/fa-solid-900.woff2', 'fa/webfonts/fa-brands-400.woff2'):
+            r = subprocess.run(CURL + ['--max-time', '25', '%s/%s' % (BAZA, rel)],
+                               capture_output=True).stdout
+            if len(r) < 500:
+                g.append('%s se ne moze skinuti sa sajta (%d B)' % (rel, len(r)))
+                continue
+            znakovi |= set(TTFont(io.BytesIO(r)).getBestCmap())
+
+        if znakovi:
+            for ime in sorted(ikone):
+                if ime not in kodovi:
+                    continue
+                provjereno_gl += 1
+                if kodovi[ime] not in znakovi:
+                    g.append('fa-%s ima pravilo u CSS-u ali font nema taj znak — iscrtace se prazno '
+                             '(pokreni: python3 alat/fontovi.py upisi)' % ime)
+    except Exception as e:
+        g.append('provjera glifova nije mogla da se izvrsi: %s' % e)
+    zabiljezi('C9', 'Svaka ikona ima i stvarni znak u fontu', g, provjereno_gl)
+
     # ---- Ime, adresa i telefon moraju biti ISTI svuda ----------------------
     #
     # Google uporedjuje ove tri stvari sa sajta sa onim sto stoji na profilu
