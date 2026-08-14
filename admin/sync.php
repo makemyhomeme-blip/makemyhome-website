@@ -120,6 +120,22 @@ foreach ($files as $dest => $url) {
         $msg = "GREŠKA – nije moguće preuzeti fajl.";
         echo $isCli ? "$msg\n" : "<span style='color:#e74c3c;'>$msg</span>\n";
         $allOk = false;
+    } elseif (is_file($dest) && file_get_contents($dest) === $content) {
+        // Sadrzaj je isti — fajl se NE dira.
+        //
+        // Ranije se svaki fajl upisivao pri svakom pokretanju, pa je vrijeme
+        // izmjene na disku mjerilo kad je zadnji put pokrenut sync, a ne kad
+        // se sadrzaj stvarno promijenio. sitemap.php iz tog vremena racuna
+        // <lastmod> za svaku adresu — i zato je svih 149 stranica javljalo
+        // isti datum, onaj posljednjeg deploya. Google po lastmod-u odlucuje
+        // koliko brzo ce ponovo doci; kad mu sve stranice svaki put kazu da
+        // su se promijenile, prestane da vjeruje tom podatku.
+        //
+        // Ovako vrijeme na disku znaci ono sto treba da znaci: kad se sadrzaj
+        // te stranice zaista promijenio. Uz to je sync i brzi, jer se pise
+        // samo ono sto je novo.
+        $msg = "nepromijenjeno (" . round(strlen($content) / 1024, 1) . " KB)";
+        echo $isCli ? "$msg\n" : "<span style='color:#7f8c8d;'>$msg</span>\n";
     } else {
         @mkdir(dirname($dest), 0755, true);
         $bytes = file_put_contents($dest, $content);

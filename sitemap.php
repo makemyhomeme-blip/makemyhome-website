@@ -31,11 +31,38 @@ require_once __DIR__ . '/php/slug.php';
 // se promijeni nesto od cega zavisi: podaci o proizvodima, kategorije ili sam
 // ovaj fajl. Sadrzaj je isti do znaka, samo stize odmah.
 $kesFajl = __DIR__ . '/data/sitemap-kes.xml';
-$izvori  = [__DIR__ . '/data/products.json', __DIR__ . '/data/categories.json',
-            __FILE__, __DIR__ . '/php/slug.php'];
+
+// Spisak SVEGA od cega zavisi bilo koji datum u sitemapu.
+//
+// Ranije su ovdje bila samo cetiri fajla: dva sa podacima, slug.php i ovaj
+// fajl. To je bilo premalo. Datum izmjene svake stranice racuna se i iz njenog
+// HTML-a odnosno PHP-a (about.html, decor-box.php, product.php…), pa bi
+// izmjena teksta na stranici promijenila njen lastmod — a kes se ne bi
+// osvjezio i sitemap bi i dalje javljao stari datum. Google po lastmod-u
+// odlucuje kad ce ponovo doci; stari datum znaci da ne dolazi.
+//
+// Zato spisak mora biti isti onaj iz kog se datumi i racunaju. Drzi se na
+// jednom mjestu da se ne mogu razici.
+$mmhStatika = [
+    ['products.html', 'weekly', '0.9'], ['cjenovnik.html', 'weekly', '0.9'],
+    ['inspiracija.html', 'weekly', '0.9'], ['montaza.html', 'weekly', '0.7'],
+    ['faq.html', 'weekly', '0.7'], ['about.html', 'weekly', '0.7'],
+    ['contact.html', 'weekly', '0.7'], ['decor-box.html', 'weekly', '0.7'],
+    ['paneli-za-kupatilo.html', 'weekly', '0.7'], ['tv-zid.html', 'weekly', '0.7'],
+    ['paneli-ili-lamperija.html', 'weekly', '0.7'], ['spc-ili-laminat.html', 'weekly', '0.7'],
+    ['akusticni-paneli-kancelarija.html', 'weekly', '0.7'], ['dostava-crna-gora.html', 'weekly', '0.7'],
+    ['uslovi.html', 'weekly', '0.7'], ['reklamacije.html', 'weekly', '0.7'],
+    ['privatnost.html', 'weekly', '0.7'],
+];
+$izvori = array_merge(
+    ['data/products.json', 'data/categories.json', 'php/slug.php', 'sitemap.php',
+     'index.html', 'pocetna.php', 'product.php', 'products.php',
+     'inspiracija.php', 'cjenovnik.php', 'decor-box.php', 'data/decor-box-style.json'],
+    array_column($mmhStatika, 0)
+);
 $najnoviji = 0;
 foreach ($izvori as $f) {
-    $t = @filemtime($f);
+    $t = @filemtime(__DIR__ . '/' . $f);
     if ($t && $t > $najnoviji) $najnoviji = $t;
 }
 
@@ -121,18 +148,7 @@ $dodaj($BAZA . '/', 'daily', '1.0',
        mmhSlikaXML('images/showcase-room.jpg', 'Make My Home Decor – zidni paneli, Podgorica'),
        mmhVrijeme(array_merge($mmhPodaci, ['index.html', 'pocetna.php'])));
 
-$statika = [
-    ['products.html', 'weekly', '0.9'], ['cjenovnik.html', 'weekly', '0.9'],
-    ['inspiracija.html', 'weekly', '0.9'], ['montaza.html', 'weekly', '0.7'],
-    ['faq.html', 'weekly', '0.7'], ['about.html', 'weekly', '0.7'],
-    ['contact.html', 'weekly', '0.7'], ['decor-box.html', 'weekly', '0.7'],
-    ['paneli-za-kupatilo.html', 'weekly', '0.7'], ['tv-zid.html', 'weekly', '0.7'],
-    ['paneli-ili-lamperija.html', 'weekly', '0.7'], ['spc-ili-laminat.html', 'weekly', '0.7'],
-    ['akusticni-paneli-kancelarija.html', 'weekly', '0.7'], ['dostava-crna-gora.html', 'weekly', '0.7'],
-    ['uslovi.html', 'weekly', '0.7'], ['reklamacije.html', 'weekly', '0.7'],
-    ['privatnost.html', 'weekly', '0.7'],
-];
-foreach ($statika as [$f, $fr, $pr]) {
+foreach ($mmhStatika as [$f, $fr, $pr]) {
     // Inspiracija dobija SVE fotografije prostora — to je stranica zbog koje
     // uopste i pravimo sitemap sa slikama.
     $sl = '';
