@@ -1,0 +1,194 @@
+#!/usr/bin/env bash
+# =============================================================================
+# SVE — jedna komanda koja provjeri sve i da JEDAN odgovor:
+#       smije li se sajt slati Googleu na indeksiranje ili ne.
+#
+# Zasto postoji
+# -------------
+# Do sada je postojalo vise alata, svaki sa svojim izlazom. Kad bi jedan
+# rekao "0 gresaka", to je znacilo "0 od onoga sto TAJ alat provjerava" — a
+# ne "0 gresaka na sajtu". Ta razlika je bila presudna, a nije se vidjela iz
+# izvjestaja. Zato je izgledalo da se greske pojavljuju iz cista mira, iako
+# su cijelo vrijeme bile tu, samo ih niko nije trazio.
+#
+# Ovdje se pokrece SVE sto postoji, redom, i na kraju stoji jedan zakljucak.
+# Ako pise da nije spremno, ne salje se na indeksiranje.
+#
+# Sta se pokrece
+# --------------
+#   1. GIT      lokalno, GitHub i server nose isto; nista necommitovano
+#   2. PRAVILA  54 pravila iz alat/ETALON.md (alat/dok-ne-bude.py)
+#   3. OKO      pravi pregledac, 10 stranica x racunar i telefon
+#   4. KORPA    22 provjere korpe i narudzbe u pravom pregledacu
+#   5. IKONE    svaka ikona ima pravilo u CSS-u I znak u fontu
+#   6. LIGHTHOUSE  Googleov alat na 14 tipova stranica
+#
+# Pokretanje
+# ----------
+#     bash alat/sve.sh          # sve (oko 40 min)
+#     bash alat/sve.sh brzo     # bez sporih pravila (oko 10 min)
+# =============================================================================
+set -uo pipefail
+cd "$(dirname "$0")/.." || exit 1
+
+BRZO="${1:-}"
+ISPIS=$(mktemp -d)
+PALO=0
+declare -a REZ
+
+zapisi() {           # zapisi <ime> <status> <detalj>
+  REZ+=("$1|$2|$3")
+  if [ "$2" != "OK" ]; then PALO=$((PALO+1)); fi
+  printf '\n>>> %-10s %s  %s\n' "$1" "$2" "$3"
+}
+
+ocisti() {
+  pkill -f 'posrednik.mjs' 2>/dev/null
+  pkill -f 'php -S 127.0.0.1:8899' 2>/dev/null
+}
+trap ocisti EXIT
+
+echo "==============================================================="
+echo " PROVJERA SVEGA — Make My Home Decor"
+echo " $(date '+%Y-%m-%d %H:%M')"
+echo "==============================================================="
+
+# ---------------------------------------------------------------- 1. GIT ----
+echo; echo "--- 1/6  GIT · lokalno, GitHub i server ---"
+GRANA=$(git rev-parse --abbrev-ref HEAD)
+git fetch --quiet origin "$GRANA" 2>/dev/null
+NEUPISANO=$(git status --porcelain | grep -c . || true)
+IZA=$(git rev-list --count "HEAD..origin/$GRANA" 2>/dev/null || echo '?')
+ISPRED=$(git rev-list --count "origin/$GRANA..HEAD" 2>/dev/null || echo '?')
+if [ "$NEUPISANO" != "0" ]; then
+  zapisi GIT PAD "$NEUPISANO izmjena nije commitovano — commituj i pushuj prije indeksiranja"
+elif [ "$IZA" != "0" ] || [ "$ISPRED" != "0" ]; then
+  zapisi GIT PAD "lokalno $IZA iza / $ISPRED ispred GitHuba — nije isto stanje"
+else
+  zapisi GIT OK "lokalno = GitHub ($GRANA), nista necommitovano"
+fi
+echo "    (poredjenje sa serverom radi pravilo G4 u sljedecem koraku)"
+
+# ------------------------------------------------------------ 2. PRAVILA ----
+echo; echo "--- 2/6  PRAVILA · 54 pravila iz ETALON.md ---"
+if [ "$BRZO" = "brzo" ]; then
+  python3 alat/dok-ne-bude.py > "$ISPIS/pravila.txt" 2>&1
+else
+  python3 alat/dok-ne-bude.py sve > "$ISPIS/pravila.txt" 2>&1
+fi
+KOD=$?
+BROJ=$(grep -oE 'ZAVRSNO: [0-9]+ pravila' "$ISPIS/pravila.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+if [ $KOD -eq 0 ]; then
+  zapisi PRAVILA OK "$BROJ pravila, nijedno nije palo"
+else
+  zapisi PRAVILA PAD "$(grep -c '^PAD' "$ISPIS/pravila.txt" || echo '?') pravila palo — detalji ispod"
+  grep -A3 'PRAVE GRESKE' "$ISPIS/pravila.txt" | head -30
+fi
+
+# --------------------------------------------------------------- 3. OKO ----
+echo; echo "--- 3/6  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
+ocisti; sleep 1
+php -S 127.0.0.1:8899 -t . > "$ISPIS/php.log" 2>&1 &
+node alat/posrednik.mjs > "$ISPIS/posrednik.log" 2>&1 &
+for _ in $(seq 40); do
+  curl -s -o /dev/null http://127.0.0.1:8898/products.php && break
+  sleep 1
+done
+if curl -s -o /dev/null http://127.0.0.1:8898/products.php; then
+  node alat/oko.mjs > "$ISPIS/oko.txt" 2>&1
+  if [ $? -eq 0 ]; then
+    zapisi OKO OK "$(grep -c '^  OK' "$ISPIS/oko.txt") provjera, sve stranice izgledaju kako treba"
+  else
+    zapisi OKO PAD "$(grep -c '^  PAD' "$ISPIS/oko.txt") nalaza"
+    grep '^  PAD' "$ISPIS/oko.txt" | head -12
+  fi
+else
+  zapisi OKO PAD "lokalni server se nije podigao — provjera izgleda NIJE uradjena"
+fi
+
+# ------------------------------------------------------------- 4. KORPA ----
+echo; echo "--- 4/6  KORPA · narudzba od pocetka do kraja ---"
+if curl -s -o /dev/null http://127.0.0.1:8899/korpa.html; then
+  node alat/korpa.mjs > "$ISPIS/korpa.txt" 2>&1
+  if [ $? -eq 0 ]; then
+    zapisi KORPA OK "$(grep -ciE '^\s*(OK|✓)' "$ISPIS/korpa.txt" || echo '?') provjera prolazi"
+  else
+    zapisi KORPA PAD "korpa ne radi kako treba"
+    tail -15 "$ISPIS/korpa.txt"
+  fi
+else
+  zapisi KORPA PAD "lokalni server nedostupan — korpa NIJE provjerena"
+fi
+ocisti
+
+# ------------------------------------------------------------- 5. IKONE ----
+echo; echo "--- 5/6  IKONE · pravilo u CSS-u i znak u fontu ---"
+python3 alat/ikone.py provjeri > "$ISPIS/ikone.txt" 2>&1
+python3 alat/fontovi.py >> "$ISPIS/ikone.txt" 2>&1
+if grep -qiE 'PAZI|nema u CSS|GRESKA' "$ISPIS/ikone.txt"; then
+  zapisi IKONE PAD "nesto fali — pokreni: python3 alat/ikone.py && python3 alat/fontovi.py upisi"
+  grep -iE 'PAZI|nema u CSS|GRESKA' "$ISPIS/ikone.txt" | head -8
+else
+  zapisi IKONE OK "$(grep -oE 'koristi:?\s+[0-9]+' "$ISPIS/ikone.txt" | tail -1 | grep -oE '[0-9]+') ikona, sve imaju i pravilo i znak"
+fi
+
+# -------------------------------------------------------- 6. LIGHTHOUSE ----
+#
+# Googleov alat, isti onaj iza PageSpeed-a. Gleda drugim ocima od nasih
+# pravila: kontrast boja, velicinu dugmadi, oznake formi, zaglavlja tabela.
+# Kad je prvi put pusten, nasao je cetiri stranice sa nedovoljnim kontrastom
+# koje nase provjere nisu mogle naci jer kontrast nikad nisu mjerile.
+#
+# Ako nije instaliran, TO SE KAZE i broji se kao pad. Tiho preskakanje bi
+# znacilo da izvjestaj tvrdi vise nego sto je provjereno — a bas to je i
+# bio problem: "sve prolazi" je znacilo "sve od onoga sto sam pogledao".
+echo; echo "--- 6/6  LIGHTHOUSE · Googleov alat na 14 tipova stranica ---"
+if [ "$BRZO" = "brzo" ]; then
+  zapisi LIGHTHOUSE PRESK "preskoceno jer je pokrenuto 'brzo' — pokreni bez 'brzo' prije indeksiranja"
+elif ! ls /home/user/lighthouse/node_modules/.bin/lighthouse >/dev/null 2>&1 \
+     && ! command -v lighthouse >/dev/null 2>&1; then
+  zapisi LIGHTHOUSE PAD "nije instaliran (nestane pri resetu okruzenja) — instaliraj: cd /home/user/lighthouse && npm i lighthouse"
+else
+  ocisti; sleep 1
+  LH="${LH:-/home/user/lighthouse/node_modules/.bin/lighthouse}" \
+    bash alat/lighthouse.sh > "$ISPIS/lighthouse.txt" 2>&1
+  if [ $? -eq 0 ] && ! grep -qiE '^\s*PAD|nedovoljan kontrast|GRESKA' "$ISPIS/lighthouse.txt"; then
+    zapisi LIGHTHOUSE OK "$(grep -ciE '^\s*(OK|100)' "$ISPIS/lighthouse.txt" || echo '?') provjera prolazi"
+  else
+    zapisi LIGHTHOUSE PAD "nalazi ispod"
+    tail -20 "$ISPIS/lighthouse.txt"
+  fi
+  ocisti
+fi
+
+# ------------------------------------------------------------- ZAKLJUCAK ----
+echo
+echo "==============================================================="
+printf ' %-10s %s\n' "KORAK" "REZULTAT"
+echo "---------------------------------------------------------------"
+for r in "${REZ[@]}"; do
+  IFS='|' read -r ime st det <<< "$r"
+  printf ' %-10s %-4s %s\n' "$ime" "$st" "$det"
+done
+echo "==============================================================="
+if [ $PALO -eq 0 ]; then
+  echo
+  echo "  SPREMNO ZA INDEKSIRANJE."
+  echo
+  echo "  Sve sto se provjerava — prolazi. U Search Console-u:"
+  echo "    1. Sitemaps  → posalji https://makemyhome.me/sitemap.xml"
+  echo "    2. URL Inspection → pocetna + 2-3 kategorije → Request Indexing"
+  echo
+  echo "  Ovo NE znaci da je sajt bez ijedne greske. Znaci da nema"
+  echo "  nijedne od onih koje se provjeravaju. Sta se NE provjerava"
+  echo "  pise u alat/ETALON.md, odjeljak 'Sta se ne provjerava'."
+  echo "==============================================================="
+  exit 0
+else
+  echo
+  echo "  NIJE SPREMNO — palo $PALO od 6 koraka."
+  echo "  Ne salji na indeksiranje dok ovo ne bude cisto."
+  echo "  Puni izlaz: $ISPIS"
+  echo "==============================================================="
+  exit 1
+fi
