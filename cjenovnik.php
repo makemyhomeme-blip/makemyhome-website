@@ -79,15 +79,15 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <meta property="og:description" content="Cijene zidnih panela, 3D letvica, PU kamena i SPC poda u Crnoj Gori — 117 modela na jednom mjestu i kalkulator koliko komada vam treba za vaš zid.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://makemyhome.me/cjenovnik.html">
-  <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
-  <meta property="og:image:width" content="1714">
-  <meta property="og:image:height" content="800">
+  <meta property="og:image" content="https://makemyhome.me/images/og-dijeljenje.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor">
   <meta name="twitter:description" content="Cijene zidnih panela, 3D letvica, PU kamena i SPC poda u Crnoj Gori — 117 modela na jednom mjestu i kalkulator koliko komada vam treba za vaš zid.">
-  <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
+  <meta name="twitter:image" content="https://makemyhome.me/images/og-dijeljenje.jpg">
   <link rel="canonical" href="https://makemyhome.me/cjenovnik.html">
   <title>Cijene Zidnih Panela u Crnoj Gori | Make My Home Decor</title>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">

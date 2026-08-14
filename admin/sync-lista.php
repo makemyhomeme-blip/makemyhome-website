@@ -75,6 +75,10 @@ return function (string $base, string $root, string $adminDir): array {
         $root . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2'      => $base . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2',
         $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
     $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
+    // Slika koja se pokaze kad se link sajta podijeli na Instagramu, Facebooku
+    // ili WhatsAppu. Ranije je tamo isla fotografija sobe sa pocetne, pa se
+    // umjesto firme vidjela soba.
+    $root . '/images/og-dijeljenje.jpg' => $base . '/images/og-dijeljenje.jpg',
     // SEO
     $root . '/404.php'          => $base . '/404.php',
     $root . '/robots.txt'       => $base . '/robots.txt',

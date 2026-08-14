@@ -1425,6 +1425,62 @@ def grupa_S():
                          % (loc.text, naStr, uSM))
     zabiljezi('S6', 'Kategorija sa proizvodima ima i slike u sitemapu', g, parovi)
 
+    # ---- Svaki proizvod i kategorija MORAJU biti u sitemapu ---------------
+    #
+    # Do sada se provjeravalo samo ono sto u sitemapu JESTE — da svaka adresa
+    # vraca 200. Ono cega u njemu NEMA nije provjeravao niko. Proizvod koji
+    # ispadne iz sitemapa Google mozda nikad ne otkrije, a nista to ne bi
+    # javilo: sve ostale provjere bi i dalje prolazile.
+    #
+    # Provjerava se u oba smjera: da nijedan proizvod iz podataka ne fali, i
+    # da u sitemapu nema adrese proizvoda kojeg vise nema u podacima.
+    g = []
+    php = subprocess.run(['php', '-r',
+        'require "%s/php/slug.php"; $d=json_decode(file_get_contents("php://stdin"),true); '
+        '$P=$d["products"]??$d; $o=[]; foreach($P as $p) $o[$p["id"]]=mmhSlugProizvoda($p); '
+        'echo json_encode($o);' % KORIJEN],
+        input=json.dumps({'products': PROIZVODI}), capture_output=True, text=True)
+    try:
+        slugovi = json.loads(php.stdout)
+    except Exception as e:
+        slugovi = {}
+        g.append('ne mogu izracunati adrese proizvoda: %s' % e)
+    uSitemapu = set(adrese)
+    for pid, sl in slugovi.items():
+        if BAZA + '/' + sl not in uSitemapu:
+            g.append('proizvod %s (%s) nije u sitemapu — Google ga mozda nikad ne otkrije' % (pid, sl))
+    nasi = {BAZA + '/' + sl for sl in slugovi.values()}
+    for u in sorted(uSitemapu):
+        if '/paneli/' in u and u not in nasi:
+            g.append('%s je u sitemapu, a tog proizvoda nema u podacima' % u)
+    KATEGORIJE = ['bambus-paneli', 'bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni',
+                  'bambus-metalni', 'bambus-kozni', '3d-letvice', 'akusticni-paneli',
+                  'aluminijum-lajsne', 'spc-pod', 'pu-kamen', 'classic', 'mdf', 'flex-stone']
+    for k in KATEGORIJE:
+        if BAZA + '/kategorija/' + k not in uSitemapu:
+            g.append('kategorija %s nije u sitemapu' % k)
+    # Uz to: svaki proizvod mora u sitemapu imati SVE svoje slike — glavnu i
+    # sve iz galerije. Google slike otkriva prvenstveno preko sitemapa; ako
+    # fotografija enterijera nije u njemu, za pretragu slika ne postoji.
+    # S6 ovo provjerava za kategorije, ali stranice proizvoda nije gledao niko.
+    if korijen is not None:
+        slikaPo = {}
+        for x in korijen.findall('s:url', NSM):
+            lo = x.find('s:loc', NSM)
+            if lo is not None and '/paneli/' in lo.text:
+                slikaPo[lo.text] = len(x.findall('.//i:loc', NSM))
+        for p in PROIZVODI:
+            sl = slugovi.get(str(p.get('id')))
+            if not sl:
+                continue
+            treba = (1 if p.get('image') else 0) + len(p.get('gallery') or [])
+            ima = slikaPo.get(BAZA + '/' + sl, -1)
+            if ima != treba:
+                g.append('%s → u podacima %d slika, u sitemapu %d'
+                         % (p.get('name', '?'), treba, ima))
+    zabiljezi('S7', 'Svaki proizvod i kategorija su u sitemapu, sa svim slikama',
+              g, len(slugovi) + len(KATEGORIJE))
+
     # ---- Slike (sporo) ------------------------------------------------------
     if SPORO:
         g = []

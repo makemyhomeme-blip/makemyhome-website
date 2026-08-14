@@ -9,15 +9,15 @@
   <meta property="og:description" content="Za arhitekte, projektante i izvođače: dokumentacija za konkretan proizvod, uzorci u vaš biro, detalji ugradnje i provjera dostupnosti prije ponude.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://makemyhome.me/decor-box.html">
-  <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
-  <meta property="og:image:width" content="1714">
-  <meta property="og:image:height" content="800">
+  <meta property="og:image" content="https://makemyhome.me/images/og-dijeljenje.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Decor Box – za arhitekte i projektante | Make My Home Decor">
   <meta name="twitter:description" content="Za arhitekte, projektante i izvođače: dokumentacija za konkretan proizvod, uzorci u vaš biro, detalji ugradnje i provjera dostupnosti prije ponude.">
-  <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
+  <meta name="twitter:image" content="https://makemyhome.me/images/og-dijeljenje.jpg">
   <link rel="canonical" href="https://makemyhome.me/decor-box.html">
   <title>Decor Box za arhitekte i projektante | Make My Home Decor</title>
   <script type="application/ld+json">

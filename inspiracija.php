@@ -102,15 +102,15 @@ arsort($insKat);
   <meta property="og:description" content="Zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i kancelarije. Kliknite na sobu i vidite koji je panel na njoj.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://makemyhome.me/inspiracija.html">
-  <meta property="og:image" content="https://makemyhome.me/images/showcase-room.jpg">
-  <meta property="og:image:width" content="1714">
-  <meta property="og:image:height" content="800">
+  <meta property="og:image" content="https://makemyhome.me/images/og-dijeljenje.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Inspiracija – Paneli u Prostorima | Make My Home Decor">
   <meta name="twitter:description" content="Zidni paneli i 3D letvice u pravim prostorima — dnevne sobe, spavaće, kupatila i kancelarije. Kliknite na sobu i vidite koji je panel na njoj.">
-  <meta name="twitter:image" content="https://makemyhome.me/images/showcase-room.jpg">
+  <meta name="twitter:image" content="https://makemyhome.me/images/og-dijeljenje.jpg">
   <link rel="canonical" href="https://makemyhome.me/inspiracija.html">
   <title>Inspiracija – Paneli u Prostorima | Make My Home Decor</title>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
