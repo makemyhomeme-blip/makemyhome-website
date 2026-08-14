@@ -532,8 +532,13 @@ require_once __DIR__ . '/php/dimenzije.php';
       <div class="db-factory-img animate-on-scroll">
         <picture>
           <source srcset="images/decor-box-fabrika.webp" type="image/webp">
-          <img src="images/decor-box-fabrika.jpg" alt="Make My Home Decor fabrika u Beogradu"
-            onerror="this.onerror=null;this.parentElement.parentElement.innerHTML='<div style=&quot;height:100%;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(201,168,108,0.55);gap:14px;&quot;<?= mmhDimAtributi('images/decor-box-fabrika.jpg') ?>><i class=&quot;fas fa-industry&quot; style=&quot;font-size:72px;&quot;></i><span style=&quot;font-size:13px;letter-spacing:1px;&quot;>Fotografija fabrike</span></div>'">
+          <?php /* Sirina i visina idu na sam <img>, NE u onerror. Ranije su bile
+                   ubacene usred <div style="..."> unutar onerror teksta; kako
+                   mmhDimAtributi ispisuje prave navodnike, oni su prekidali
+                   onerror="..." prije kraja, pa je ostatak curio na stranicu
+                   kao goli tekst ("> ispod fabrike). */ ?>
+          <img src="images/decor-box-fabrika.jpg" alt="Make My Home Decor fabrika u Beogradu"<?= mmhDimAtributi('images/decor-box-fabrika.jpg') ?>
+            onerror="this.onerror=null;this.parentElement.parentElement.innerHTML='<div style=&quot;height:100%;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(201,168,108,0.55);gap:14px;&quot;><i class=&quot;fas fa-industry&quot; style=&quot;font-size:72px;&quot;></i><span style=&quot;font-size:13px;letter-spacing:1px;&quot;>Fotografija fabrike</span></div>'">
         </picture>
       </div>
     </div>

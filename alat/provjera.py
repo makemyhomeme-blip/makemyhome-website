@@ -12,6 +12,7 @@ Fajl se NE deployuje na server (nije u admin/sync.php listi).
 """
 import json, re, subprocess, sys, os, collections, hashlib, time
 from urllib.parse import urljoin, urlparse
+from html.parser import HTMLParser
 
 BAZA = 'https://makemyhome.me'
 KORIJEN = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -315,6 +316,59 @@ def grupa_C():
             if tel and re.sub(r'\D', '', tel.group(1))[-8:] != re.sub(r'\D', '', TELEFON)[-8:]:
                 g.append('%s → telefon u strukturiranim podacima: %s' % (u, tel.group(1)))
     zabiljezi('C7', 'Adresa i telefon isti na cijelom sajtu', g, len(STRANICE))
+
+    # ---- Kod ne smije iscuriti u vidljivi tekst ---------------------------
+    #
+    # Na Decor Boxu je ispod fotografije fabrike stajalo golo `">`. Uzrok:
+    # mmhDimAtributi() je bio ubacen USRED onerror="..." teksta, a ispisuje
+    # prave navodnike — pa je zatvorio atribut prije kraja i ostatak markupa
+    # je zavrsio na stranici kao tekst koji posjetilac vidi.
+    #
+    # Nijedno dotadasnje pravilo to nije moglo uhvatiti: stranica je vracala
+    # 200, HTML se ucitavao, slika se prikazivala, alt je bio tu. Greska se
+    # vidjela samo okom. Zato se sada gleda ono sto posjetilac stvarno cita:
+    # ako se u tekstu nadje komad koda, nesto je puklo u sastavljanju.
+    # Ovdje se NE smije koristiti tekst_bez_skripti(): ono cisti tagove regexom
+    # <[^>]+>, koji stane na prvom `>` — a `>` sasvim legitimno stoji unutar
+    # navodnika u onerror="…&quot;></i>…". Regex tu presijece tag na pola i
+    # ostatak proglasi tekstom, pa je pravilo u prvom pokusaju prijavilo 22
+    # ispravne stranice. Zato ovdje ide pravi parser, koji navodnike postuje.
+    class _Tekst(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.dijelovi, self.preskoci = [], 0
+
+        def handle_starttag(self, tag, attrs):
+            if tag in ('script', 'style'):
+                self.preskoci += 1
+
+        def handle_endtag(self, tag):
+            if tag in ('script', 'style') and self.preskoci:
+                self.preskoci -= 1
+
+        def handle_data(self, d):
+            if not self.preskoci:
+                self.dijelovi.append(d)
+
+    OSTACI = ['">', "'>", '/>', '<div', '<img', '<span', '<i ', '<?php', '<?=',
+              'onerror=', 'srcset=', 'loading="lazy"']
+    g = []
+    for u, (h, kod, _, _) in STRANICE.items():
+        if kod != '200':
+            continue
+        p = _Tekst()
+        try:
+            p.feed(h)
+        except Exception as e:
+            g.append('%s → HTML se ne moze isparsirati: %s' % (u, e))
+            continue
+        vidljivo = ' '.join(''.join(p.dijelovi).split())
+        nadjeno = sorted({o for o in OSTACI if o in vidljivo})
+        if nadjeno:
+            i = vidljivo.find(nadjeno[0])
+            g.append('%s → u vidljivom tekstu stoji %s  …%s…'
+                     % (u, ', '.join(nadjeno), vidljivo[max(0, i - 45):i + 30]))
+    zabiljezi('C8', 'Nijedan komad koda nije iscurio u vidljivi tekst', g, len(STRANICE))
 
 
 # ============================================================
