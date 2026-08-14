@@ -992,6 +992,34 @@ def grupa_G():
                          '(nedostaje: %s)' % (ime, ograda))
     zabiljezi('G11', 'JavaScript ne prepisuje ono sto je server ispisao', g, len(ograde))
 
+    # ---- Googlebot mora dobiti ISTO sto i posjetilac ----------------------
+    #
+    # Dijeljeni hosting i zastitni dodaci znaju tiho blokirati ili usporavati
+    # botove — po imenu pregledaca. Kad se to desi, sve ostale provjere i dalje
+    # prolaze jer mi dolazimo kao obican posjetilac, a Google ne vidi nista.
+    # Kvar koji bi objasnio mjesece nevidljivosti, a nijedno pravilo ga nije
+    # moglo primijetiti.
+    #
+    # Poredi se i velicina odgovora, ne samo kod: podmetanje drugog sadrzaja
+    # botu vratilo bi 200 kao i nama.
+    GBOT = ('Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
+    GBOT_MOB = ('Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 '
+                '(KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36 '
+                '(compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
+    g = []
+    meta = [BAZA + '/', BAZA + '/sitemap.xml', BAZA + '/robots.txt',
+            BAZA + '/kategorija/3d-letvice', BAZA + '/paneli/drveni-panel-golden-teak']
+    for u in meta:
+        obican = subprocess.run(CURL + ['--max-time', '25', u], capture_output=True).stdout
+        for ime, ua in (('Googlebot', GBOT), ('Googlebot za telefon', GBOT_MOB)):
+            bot = subprocess.run(CURL + ['--max-time', '25', '-A', ua, u], capture_output=True).stdout
+            if len(bot) < 200:
+                g.append('%s → %s ne dobija stranicu (%d B)' % (u, ime, len(bot)))
+            elif bot != obican:
+                g.append('%s → %s dobija drugaciji sadrzaj (%d B umjesto %d B)'
+                         % (u, ime, len(bot), len(obican)))
+    zabiljezi('G12', 'Googlebot dobija isto sto i posjetilac', g, len(meta) * 2)
+
 
 # ============================================================
 # H — ADRESE KOJE GOOGLE STVARNO IMA
