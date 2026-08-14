@@ -1219,6 +1219,40 @@ def grupa_S():
         g.append('provjera kesa nije mogla da se izvrsi: %s' % e)
     zabiljezi('S4', 'Kes sitemapa zavisi od svega iz cega se racunaju datumi', g, len(koristi))
 
+    # ---- Kategorija koja na stranici ima proizvode mora imati i slike -------
+    #
+    # /kategorija/bambus-paneli prikazuje 39 proizvoda sa 39 fotografija, a u
+    # sitemapu je stajala bez ijedne slike. Uzrok: bambus-paneli je nadredjena
+    # kategorija — nijedan proizvod je ne nosi u polju "category", nego se na
+    # njoj prikazuju svi bambus podtipovi. products.php to zna, sitemap.php
+    # nije znao. Google slike otkriva prvenstveno preko sitemapa, pa je cijela
+    # ta kategorija bila nevidljiva za pretragu slika.
+    #
+    # Nijedno pravilo to nije moglo vidjeti: adresa vraca 200, stranica je
+    # puna, slike postoje. Greska je bila u tome sto sitemap i stranica ne
+    # racunaju isto.
+    g = []
+    parovi = 0
+    if korijen is not None:
+        for x in korijen.findall('s:url', NSM):
+            loc = x.find('s:loc', NSM)
+            if loc is None or '/kategorija/' not in loc.text:
+                continue
+            parovi += 1
+            uSM = len(x.findall('.//i:loc', NSM))
+            h, kodK, _, _ = dohvati(loc.text, timeout='20')
+            if kodK != '200':
+                g.append('%s → %s' % (loc.text, kodK))
+                continue
+            naStr = h.count('class="product-card')
+            if naStr and not uSM:
+                g.append('%s → stranica pokazuje %d proizvoda, a sitemap nema nijednu sliku'
+                         % (loc.text, naStr))
+            elif naStr and uSM < naStr:
+                g.append('%s → %d proizvoda na stranici, samo %d slika u sitemapu'
+                         % (loc.text, naStr, uSM))
+    zabiljezi('S6', 'Kategorija sa proizvodima ima i slike u sitemapu', g, parovi)
+
     # ---- Slike (sporo) ------------------------------------------------------
     if SPORO:
         g = []

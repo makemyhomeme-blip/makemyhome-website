@@ -175,6 +175,21 @@ foreach ($P as $p) {
     $k = $p['category'] ?? '';
     if ($k !== '') $poKat[$k][] = $p;
 }
+
+// bambus-paneli je NADREDJENA kategorija — nijedan proizvod je ne nosi u polju
+// "category", nego se na njoj prikazuju svi bambus podtipovi. products.php to
+// radi preko $_bambusCats; ovdje mora vrijediti isto pravilo.
+//
+// Bez ovoga je stranica sa 39 proizvoda i 39 fotografija u sitemapu stajala
+// bez ijedne slike, dok su sve ostale kategorije svoje imale. Google slike
+// otkriva prvenstveno preko sitemapa, pa je cijela ta kategorija bila
+// nevidljiva za pretragu slika.
+$mmhBambus = ['bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni',
+              'bambus-kozni', 'bambus-metalni'];
+$poKat['bambus-paneli'] = [];
+foreach ($mmhBambus as $k) {
+    foreach (($poKat[$k] ?? []) as $p) $poKat['bambus-paneli'][] = $p;
+}
 foreach ($katImena as $k => $ime) {
     $sl = '';
     foreach (($poKat[$k] ?? []) as $p) {

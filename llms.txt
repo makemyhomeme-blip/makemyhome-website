@@ -37,16 +37,25 @@
 - Održavanje: čišćenje vlažnom krpom; bez lakiranja i brušenja.
 - Primjena: dnevne sobe, spavaće sobe, TV zid, akcentni zid iza kreveta, kupatila, hodnici, kafići, restorani, hoteli, apartmani, recepcije, kancelarije.
 
-## Decor Box — program saradnje za profesionalce
+## Decor Box — za arhitekte i projektante
 
-Program saradnje za arhitekte, dizajnere enterijera, izvođače i građevinske kompanije. Partneri dobijaju: posebne uslove saradnje, fizičke uzorke i kataloge za prezentaciju klijentima, stručnu podršku pri izboru materijala i dezena, ponude prilagođene konkretnom projektu, podršku od ideje do realizacije, i tehničku dokumentaciju za tendere i javne nabavke. Detalji: https://makemyhome.me/decor-box.html
+Saradnja sa arhitektama, projektantima, izvođačima i dizajnerima enterijera. Za projekat se dobija: dokumentacija za konkretan proizvod (sastav, dimenzije, težina, način ugradnje, dostupna fabrička dokumentacija), spreman tekst za specifikaciju i predmjer sa šifrom i količinom po m², fizički uzorci dostavljeni u biro, detalji ugradnje (unutrašnji i spoljašnji ugao, prelaz na plafon, spoj sa podom, završetak uz otvor, odgovarajuće aluminijum lajsne), provjera stvarne količine na stanju i roka nabavke prije ulaska u ponudu, i jedan sagovornik kroz cijeli projekat uz partnerske uslove prema obimu. Detalji: https://makemyhome.me/decor-box.html
+
+Izbor obloge po namjeni prostora:
+
+- Kancelarija, open space, sala za sastanke — smanjenje odjeka → akustični paneli
+- Hotelska soba, apartman — toplina i otpornost na habanje → drveni i tekstilni paneli
+- Lobi, recepcija, restoran — reprezentativnost i izdržljivost u prometu → mermerni, metalni, Flex Stone
+- Kupatilo, wellness, spa — otpornost na vlagu → PU kamen i SPC pod
+- Hodnik, stepenište, ulaz — otpornost na dodir i udarce → MDF kanelirani paneli
+- Dnevna soba, TV zid, spavaća — ritam i dubina na zidu → 3D letvice
 
 ## Stranice
 
 - [Početna](https://makemyhome.me/): pregled ponude, kategorije, istaknuti proizvodi.
 - [Svi proizvodi](https://makemyhome.me/products.html): kompletan katalog po kategorijama sa cijenama.
 - [Česta pitanja](https://makemyhome.me/faq.html): cijene, montaža, izbor materijala, dostava — detaljni odgovori.
-- [Decor Box](https://makemyhome.me/decor-box.html): program saradnje za arhitekte, dizajnere i izvođače.
+- [Decor Box](https://makemyhome.me/decor-box.html): za arhitekte i projektante — dokumentacija, tekst za specifikaciju, uzorci u biro, detalji ugradnje, izbor obloge po namjeni prostora.
 - [O nama](https://makemyhome.me/about.html): o firmi, showroom, misija.
 - [Kontakt](https://makemyhome.me/contact.html): adresa, telefon, mapa, kontakt forma.
 - [Inspiracija](https://makemyhome.me/inspiracija.html): fotografije panela u stvarnim prostorima; klik na sobu vodi na panel koji je na tom zidu.
