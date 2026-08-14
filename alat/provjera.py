@@ -1089,6 +1089,45 @@ def grupa_G():
                          'server vec ispisao sadrzaj' % (fajl, i + 1, meta_ime))
     zabiljezi('G13', 'Server crta, JavaScript samo reaguje', g, ukupno)
 
+    # ---- Zavisnost se mora deployovati PRIJE stranice koja je trazi --------
+    #
+    # Sync upisuje fajlove redom iz spiska. Ako stranica dodje prije fajla koji
+    # trazi preko require_once, postoji prozor u kom stranica stoji na serveru
+    # a fajl jos nije — i server tada vraca 500. Prozor traje dok se ostatak
+    # spiska ne preuzme, jer svaki fajl ide posebnim zahtjevom sa GitHuba.
+    #
+    # Nije teorija. U dnevniku servera stoji: 4. avgusta fatalna greska zbog
+    # inc/slug-match.php, 11. avgusta zbog php/dimenzije.php, 14. avgusta zbog
+    # php/kalkulator.php. Svaki put kad je dodat nov zavisni fajl. Google sajtu
+    # koji vraca 500 smanjuje citanje i povjerenje, a to se ne vidi ni na jednoj
+    # stranici — vidi se samo u dnevniku, koji niko nije gledao sest mjeseci.
+    g = []
+    parova = 0
+    try:
+        izl = subprocess.run(['php', '-r',
+            '$f = require "%s"; foreach ($f("", "", "admin") as $lok => $_) echo $lok . "\n";'
+            % os.path.join(KORIJEN, 'admin', 'sync-lista.php')],
+            capture_output=True, text=True).stdout
+        redom = [x.strip().lstrip('/') for x in izl.splitlines() if x.strip()]
+        mjesto = {f: i for i, f in enumerate(redom)}
+        for f in redom:
+            if not f.endswith('.php'):
+                continue
+            put = os.path.join(KORIJEN, f)
+            if not os.path.exists(put):
+                continue
+            for zav in re.findall(r"require(?:_once)?\s+__DIR__\s*\.\s*'/([^']+)'",
+                                  open(put, encoding='utf-8').read()):
+                if zav not in mjesto:
+                    continue                      # G5 prijavljuje ono cega nema u spisku
+                parova += 1
+                if mjesto[zav] > mjesto[f]:
+                    g.append('%s se deployuje prije %s koji trazi — prozor u kom '
+                             'server vraca 500' % (f, zav))
+    except Exception as e:
+        g.append('provjera redosljeda nije mogla da se izvrsi: %s' % e)
+    zabiljezi('G14', 'Zavisnost se deployuje prije stranice koja je trazi', g, parova)
+
 
 # ============================================================
 # H — ADRESE KOJE GOOGLE STVARNO IMA

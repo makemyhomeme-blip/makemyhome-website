@@ -14,6 +14,25 @@
  */
 return function (string $base, string $root, string $adminDir): array {
     return [
+    // ---- ZAVISNOSTI IDU PRVE ----
+    //
+    // Ovi fajlovi se traze na vrhu stranica (require_once). Ranije su stajali
+    // na 27-31. mjestu u spisku, a pocetna.php na 3. i product.php na 23. —
+    // dakle stranica se upisivala PRIJE fajla bez kojeg ne radi. Kad god se
+    // doda nov zavisni fajl, postojao je prozor u kom stranica stoji na
+    // serveru a fajl jos nije, i tada server vraca 500.
+    //
+    // U dnevniku servera to se vidi kao fatalna greska 4. avgusta
+    // (inc/slug-match.php), 11. avgusta (php/dimenzije.php) i 14. avgusta
+    // (php/kalkulator.php). Google sajtu koji vraca 500 smanjuje citanje.
+    //
+    // Zato zavisnosti idu prve. Novi fajl u php/ se OBAVEZNO dodaje ovdje,
+    // ne nize. Pravilo G14 to provjerava.
+    $root . '/php/slug.php'       => $base . '/php/slug.php',
+    $root . '/php/kalkulator.php' => $base . '/php/kalkulator.php',
+    $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
+    $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
+    $root . '/php/contact.php'    => $base . '/php/contact.php',
     // HTML stranice
     $root . '/404.html'         => $base . '/404.html',
     $root . '/index.html'       => $base . '/index.html',
@@ -42,12 +61,7 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/products.php'     => $base . '/products.php',
     $root . '/cjenovnik.php'    => $base . '/cjenovnik.php',
     $root . '/inspiracija.php'  => $base . '/inspiracija.php',
-    $root . '/php/slug.php'       => $base . '/php/slug.php',
     // Bez ovoga product.php puca sa fatalnom greskom — trazi ga na vrhu.
-    $root . '/php/kalkulator.php' => $base . '/php/kalkulator.php',
-    $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
-    $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
-    $root . '/php/contact.php'    => $base . '/php/contact.php',
     // JS
     $root . '/js/cart.js'       => $base . '/js/cart.js',
     $root . '/js/products.js'   => $base . '/js/products.js',
