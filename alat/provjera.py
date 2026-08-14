@@ -1020,6 +1020,58 @@ def grupa_G():
                          % (u, ime, len(bot), len(obican)))
     zabiljezi('G12', 'Googlebot dobija isto sto i posjetilac', g, len(meta) * 2)
 
+    # ---- Server crta, JavaScript samo reaguje -----------------------------
+    #
+    # Ovo je pravilo o tome KAKO je sajt slozen, a ne o jednoj gresci.
+    #
+    # Ista greska se vracala vise puta: server ispise sadrzaj, pa ga JavaScript
+    # — posto skine podatke — prepise svojom verzijom. Posjetilac vidi prvo
+    # jedan pa drugi raspored, sadrzaj skace, a Google ponekad procita ono sto
+    # ce za sekundu nestati. Desilo se na pocetnoj, na katalogu, na
+    # kategorijama, na galeriji, pa na desnoj koloni proizvoda i harmonici.
+    #
+    # G11 provjerava sedam poimenicno nabrojanih mjesta. To ne pomaze kad neko
+    # doda osmo. Ovo pravilo zato gleda SVAKO mjesto gdje JavaScript upisuje
+    # sadrzaj i trazi da svako od njih bude ili na spisku onoga sto JavaScript
+    # smije da posjeduje, ili zasticeno ogradom.
+    #
+    # Sta JavaScript SMIJE da crta sam: ono cega u HTML-u nema i ne treba da
+    # ga bude — rezultat pretrage, poruka forme, uvecana slika, obavjestenje,
+    # izracunata vrijednost. Sve ostalo pise server.
+    NJEGOVO = {
+        'res', 'resBox', 'resultsBox',      # rezultati pretrage i kalkulatora
+        'msgDiv', 't', 'lb', 'btn', 'btnBack',   # poruka, obavjestenje, uvecana slika, dugmad
+    }
+    OGRADE = ('dataset.ssr', 'vecIspisana', '_srvGlavna', '_srvSlicice',
+              'querySelector', 'querySelectorAll', 'length === 0')
+    g = []
+    ukupno = 0
+    for fajl in ('js/products.js', 'js/main-v4.js', 'js/cart.js'):
+        put = os.path.join(KORIJEN, fajl)
+        if not os.path.exists(put):
+            continue
+        redovi = open(put, encoding='utf-8').read().splitlines()
+        for i, red in enumerate(redovi):
+            # Preskacu se redovi gdje "innerHTML" stoji UNUTAR teksta, a ne u
+            # kodu — npr. u onerror="…this.parentElement.innerHTML='…'". To se
+            # izvrsi tek kad slika ne uspije da se ucita i ne prepisuje nista
+            # sto je server nacrtao. Prva verzija pravila je bas to prijavila.
+            if 'onerror=' in red or 'onerror="' in red:
+                continue
+            m = re.search(r'(\b[A-Za-z_$][\w$]*)\.innerHTML\s*=[^=]', red)
+            if not m:
+                continue
+            meta_ime = m.group(1)
+            ukupno += 1
+            if meta_ime in NJEGOVO:
+                continue
+            # ograda smije stajati u istom redu ili u petnaest redova iznad
+            okolina = '\n'.join(redovi[max(0, i - 15): i + 1])
+            if not any(o in okolina for o in OGRADE):
+                g.append('%s red %d: %s.innerHTML se upisuje bez provjere da li je '
+                         'server vec ispisao sadrzaj' % (fajl, i + 1, meta_ime))
+    zabiljezi('G13', 'Server crta, JavaScript samo reaguje', g, ukupno)
+
 
 # ============================================================
 # H — ADRESE KOJE GOOGLE STVARNO IMA

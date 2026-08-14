@@ -494,11 +494,20 @@ async function renderProductDetail() {
   // Gallery
   const galleryMain = document.getElementById('gallery-main');
   const galleryThumbs = document.getElementById('gallery-thumbs');
-  // product.php ove dvije kutije vec popuni na serveru (da ih Google vidi).
-  // JavaScript ih gradi iznova zbog uvecavanja i listanja, pa ih prvo isprazni
-  // — bez ovoga bi se slicice pojavile dvaput.
-  if (galleryThumbs) galleryThumbs.innerHTML = '';
-  if (galleryMain) galleryMain.innerHTML = '';
+  // product.php ove dvije kutije vec popuni na serveru, da ih Google vidi.
+  //
+  // Sta se ovdje desavalo: kutije su se praznile ODMAH, a tek nize se
+  // provjeravalo "je li server vec ispisao" — nad vec ispraznjenom kutijom.
+  // Provjera je zato uvijek bila netacna i galerija se pri svakom otvaranju
+  // brisala pa iscrtavala iznova. Kupac je vidio kako slika i slicice nestanu
+  // pa se vrate. Ograda je postojala u kodu, ali nije radila nista.
+  //
+  // Sada se stanje sa servera zapamti PRIJE bilo kakvog diranja, i prazni se
+  // samo ono cega na serveru nije bilo.
+  const _srvGlavna  = !!(galleryMain && galleryMain.querySelector('#gallery-main-img'));
+  const _srvSlicice = !!(galleryThumbs && galleryThumbs.querySelector('.gallery-thumb'));
+  if (galleryThumbs && !_srvSlicice) galleryThumbs.innerHTML = '';
+  if (galleryMain && !_srvGlavna) galleryMain.innerHTML = '';
 
   // Build image list — expose globally so lightbox can navigate
   const _galleryImages = [{ src: product.image, label: `${product.name} – ${categoryName} | Make My Home Decor` }];
@@ -535,7 +544,7 @@ async function renderProductDetail() {
      i bez JavaScripta. Ako su tu, ne diramo ih: samo se zakace dogadjaji za
      klik i listanje. Ranije se cijela galerija crtala iznova, pa se prva slika
      ucitavala DVA puta (jednom sa servera, jednom iz JavaScripta). */
-  const vecIspisana = galleryMain && galleryMain.querySelector('#gallery-main-img');
+  const vecIspisana = _srvGlavna;   // zapamceno prije praznjenja, vidi gore
 
   if (galleryMain) {
     const dotWrap = (multi && !vecIspisana) ? `
@@ -577,8 +586,8 @@ async function renderProductDetail() {
   }
 
   if (galleryThumbs) {
-    if (multi && galleryThumbs.querySelector('.gallery-thumb')) {
-      /* slicice je vec ispisao product.php */
+    if (multi && _srvSlicice) {
+      /* slicice je vec ispisao product.php — ne diraju se */
       galleryThumbs.style.display = 'flex';
     } else if (multi) {
       galleryThumbs.innerHTML = _galleryImages.map((img, i) => `
