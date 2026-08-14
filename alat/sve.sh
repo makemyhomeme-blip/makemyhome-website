@@ -27,6 +27,10 @@
 # ----------
 #     bash alat/sve.sh          # sve (oko 40 min)
 #     bash alat/sve.sh brzo     # bez sporih pravila (oko 10 min)
+#
+# PAZI pri rucnom ciscenju prije pokretanja: "pkill -f" poredi CIJELU komandnu
+# liniju, pa obrazac koji se poklapa sa imenom ovog fajla ubije i sam poziv.
+# Desilo se dvaput. Alat sam cisti za sobom — ne treba ga pokretati uz pkill.
 # =============================================================================
 set -uo pipefail
 cd "$(dirname "$0")/.." || exit 1
