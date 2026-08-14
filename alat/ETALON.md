@@ -172,6 +172,38 @@ je u sitemapu.
 
 ---
 
+## Alati — koji šta radi
+
+| Alat | Radi | Kad se pokreće |
+|---|---|---|
+| `dok-ne-bude.py` | pušta sve provjere dok ne bude čisto | prije svakog „gotovo je" |
+| `provjera.py` | 48 pravila iz ovog dokumenta | zove ga runner |
+| `oko.mjs` | pregled pravim pregledačem, 10 stranica × 2 uređaja | kad se mijenja izgled |
+| `posrednik.mjs` | neutrališe `<base href>`, dovlači slike sa servera | uz `oko.mjs` i Lighthouse |
+| `snimak.py` | snimi svih 149 stranica prije i poslije izmjene, pokaže razliku | prije rizične izmjene |
+| `korpa.mjs` | 22 provjere korpe i narudžbe u pravom pregledaču | kad se dira korpa |
+| `lighthouse.sh` | Googleov alat na 14 tipova stranica | kad se dira brzina ili pristupačnost |
+| `ikone.py` | pravi skraćeni `mmh-ikone.css` | **kad se doda nova ikona** |
+| `fontovi.py` | sažima fontove iz `fa/webfonts-izvor/` | **kad se doda nova ikona** |
+| `webp.php` | pravi `.webp` parnjake i uže varijante slika | kad se dodaju slike |
+
+Nova ikona traži **oba**: `ikone.py` (pravilo u CSS-u) i `fontovi.py upisi`
+(znak u fontu). Ako se pokrene samo prvi, ikona se iscrta kao prazan prostor —
+to se već desilo i zato postoji pravilo C9.
+
+## Šta se ne provjerava automatski
+
+Da se ne bi mislilo da je pokriveno više nego što jeste:
+
+* da li je tekst **tačan po sadržaju** — cijena, dimenzija, tvrdnja o proizvodu.
+  To može samo čovjek koji zna robu;
+* da li stranica **lijepo izgleda**. `oko.mjs` hvata pokvareno (kod u tekstu,
+  prazna ikona, bočni skrol), ne ružno;
+* da li Google **stvarno prikazuje** sajt za neki upit — to se vidi samo u
+  Search Console-u, poslije indeksiranja.
+
+---
+
 ## Šta se NE dira
 
 * `data/products.json` i `images/products/*` se **nikad** ne deployuju sa lokalnog
