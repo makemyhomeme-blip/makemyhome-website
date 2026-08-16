@@ -1,6 +1,6 @@
 # JS provjera — makemyhome.me
 
-Napravljeno: 2026-08-16 16:25 UTC
+Napravljeno: 2026-08-16 18:23 UTC
 
 Pravi Chromium, Googlebot user-agent, mobilni ekran 412×915.
 
@@ -33,7 +33,7 @@ sessionStorage  (prazno)
 ```
                  sirovi HTML   poslije JS
 znak €           10            8
-duzina teksta    8128          7597
+duzina teksta    8128          7576
 ```
 [i] Cijene postoje u sirovom HTML-u — server ih ispisuje.
 
@@ -92,8 +92,8 @@ sessionStorage  (prazno)
 
 ```
                  sirovi HTML   poslije JS
-znak €           81            0
-duzina teksta    8585          3249
+znak €           81            78
+duzina teksta    8585          7828
 ```
 [i] Cijene postoje u sirovom HTML-u — server ih ispisuje.
 
@@ -473,9 +473,9 @@ duzina teksta    1597          1153
 
 | stranica | € sirovo | € poslije JS | tekst sirovo | tekst JS | h1 | JSON-LD | JS greske | neuspjeli | 4xx |
 |---|---|---|---|---|---|---|---|---|---|
-| / | 10 | 8 | 8128 | 7597 | 1 | 4 | 0 | 0 | 0 |
+| / | 10 | 8 | 8128 | 7576 | 1 | 4 | 0 | 0 | 0 |
 | /products.html | 0 | 0 | 3999 | 2189 | 1 | 0 | 0 | 0 | 0 |
-| /kategorija/bambus-paneli | 81 | 0 | 8585 | 3249 | 1 | 2 | 0 | 0 | 0 |
+| /kategorija/bambus-paneli | 81 | 78 | 8585 | 7828 | 1 | 2 | 0 | 0 | 0 |
 | /kategorija/3d-letvice | 59 | 56 | 7568 | 6544 | 1 | 2 | 0 | 0 | 0 |
 | /kategorija/akusticni-paneli | 24 | 21 | 5744 | 4825 | 1 | 2 | 0 | 0 | 0 |
 | /kategorija/mdf | 17 | 14 | 4801 | 3926 | 1 | 2 | 0 | 0 | 0 |

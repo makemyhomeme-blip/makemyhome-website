@@ -271,7 +271,15 @@ function buildCatMap() {
 
 function showSubcategoryGrid(parentCat) {
   document.getElementById('category-grid').style.display = 'grid';
-  document.getElementById('products-container').style.display = 'none';
+  /* products.php je za roditeljsku kategoriju (bambus-paneli) vec ispisao
+     kartice svih proizvoda iz podkategorija — 39 komada, 81 cijena, 2252 rijeci.
+     Ovdje su se ranije bezuslovno krile, pa je Google u sirovom HTML-u vidio
+     katalog, a poslije iscrtavanja raskrsnicu sa 5 plocica i 62% manje teksta;
+     posjetilac je vidio bljesak kartica koje nestanu.
+     Sada ostaju: plocice podkategorija stoje iznad njih kao izbor, ne kao
+     zamjena. Ista zastita vec postoji za lisnate kategorije nize u fajlu. */
+  const pc = document.getElementById('products-container');
+  if (pc && !pc.querySelector('.product-card')) pc.style.display = 'none';
 
   // Back bar
   const backBar = document.getElementById('back-bar');
