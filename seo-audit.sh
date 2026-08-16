@@ -12,11 +12,14 @@
 set -uo pipefail
 cd "$(dirname "$0")" || exit 1
 
-BAZA="https://makemyhome.me"
+# Adresa sajta i putanje se mogu preusmjeriti kroz okruzenje — tako
+# alat/r2-meta-test.sh pusti ovaj isti skript preko laznog sajta u koji su
+# namjerno ubacene greske, da se vidi hvata li ih uopste.
+BAZA="${MMH_BAZA:-https://makemyhome.me}"
 GBOT="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 CURL=(curl -sk --cacert /root/.ccr/ca-bundle.crt --max-time 30)
-KES=".seo-audit-kes"
-IZV="SEO-AUDIT-RAPORT.md"
+KES="${MMH_KES:-.seo-audit-kes}"
+IZV="${MMH_IZVJESTAJ:-SEO-AUDIT-RAPORT.md}"
 
 mkdir -p "$KES"; : > "$IZV"
 r()  { printf '%s\n' "$*" >> "$IZV"; }

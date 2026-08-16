@@ -16,14 +16,15 @@
  *     php -S 127.0.0.1:8899 alat/ruter.php
  */
 $put = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-// Pravi fajl koji postoji — posluzi ga takav kakav jeste (slike, css, js).
 $fajl = __DIR__ . '/..' . $put;
-if ($put !== '/' && is_file($fajl) && !preg_match('~\.(php)$~', $put)) {
-    return false;
-}
 
-// Iste zamjene kao u .htaccess, blok "LIJEPE ADRESE"
+/* PRESLIKAVANJA IDU PRVA — .htaccess na serveru prepisuje ove adrese na PHP
+   iako istoimeni .html fajl postoji na disku. Prva verzija ovog rutera je
+   prvo gledala postoji li fajl, pa je za /products.html posluzila zastarjeli
+   staticni fajl (0 kartica kategorija, 2 h2) umjesto products.php (8 kartica,
+   11 h2). Mjerenje je zbog toga za tu stranicu pokazalo da "JavaScript dodaje
+   66% teksta" — a razlika je bila u tome sto lokalna kopija nije servirala
+   istu stranicu kao sajt. */
 if ($put === '/' || $put === '/index.html') {
     require __DIR__ . '/../pocetna.php';
     return true;
@@ -50,6 +51,11 @@ foreach ([
         require __DIR__ . '/../' . $skripta;
         return true;
     }
+}
+
+// Pravi fajl koji postoji — posluzi ga takav kakav jeste (slike, css, js).
+if ($put !== '/' && is_file($fajl) && !preg_match('~\.(php)$~', $put)) {
+    return false;
 }
 
 // Sve ostalo: obican fajl ili 404

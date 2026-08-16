@@ -32,3 +32,5 @@ alat/snimci/
 __pycache__/
 *.pyc
 .seo-audit-kes/
+alat/snimci/
+R2-*.json
