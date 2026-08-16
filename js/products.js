@@ -270,40 +270,51 @@ function buildCatMap() {
 }
 
 function showSubcategoryGrid(parentCat) {
-  document.getElementById('category-grid').style.display = 'grid';
-  /* products.php je za roditeljsku kategoriju (bambus-paneli) vec ispisao
-     kartice svih proizvoda iz podkategorija — 39 komada, 81 cijena, 2252 rijeci.
-     Ovdje su se ranije bezuslovno krile, pa je Google u sirovom HTML-u vidio
-     katalog, a poslije iscrtavanja raskrsnicu sa 5 plocica i 62% manje teksta;
-     posjetilac je vidio bljesak kartica koje nestanu.
-     Sada ostaju: plocice podkategorija stoje iznad njih kao izbor, ne kao
-     zamjena. Ista zastita vec postoji za lisnate kategorije nize u fajlu. */
+  /* Server (products.php) za roditeljsku kategoriju ispisuje i plocice
+     podkategorija i kartice proizvoda, obje odmah vidljive i tim redom.
+     Ovdje se zato vise nista ne ispisuje i nista ne gasi — samo se popune
+     natpisi. Pravilo je: JavaScript smije filtrirati ono sto je server dao,
+     ali ne smije ni ispisivati ni gasiti mreze.
+
+     Kratka istorija, da se ne vrati:
+       · prvo su se kartice proizvoda bezuslovno gasile — Google je u sirovom
+         HTML-u vidio katalog, a poslije iscrtavanja raskrsnicu sa 62% manje
+         teksta, a posjetilac bljesak kartica koje nestanu;
+       · zatim su ostale, ali su se plocice i dalje ubacivale iznad njih —
+         sve ispod se pomjeralo nadolje, CLS 0,517 (prag je 0,1). */
+  const grid = document.getElementById('category-grid');
   const pc = document.getElementById('products-container');
+  if (grid && !grid.querySelector('.cat-card')) grid.style.display = 'grid';
   if (pc && !pc.querySelector('.product-card')) pc.style.display = 'none';
 
   // Back bar
   const backBar = document.getElementById('back-bar');
-  if (backBar) backBar.style.display = 'flex';
+  if (backBar && backBar.style.display === 'none') backBar.style.display = 'flex';
+  /* Sve sto nosi data-seo ispisao je server i ne dira se. Bez toga je Google u
+     sirovom HTML-u citao "Proizvodi" u mrvicama i dugme "Sve Kategorije" prema
+     katalogu, a posjetilac je poslije JavaScripta vidio ime kategorije i dugme
+     prema roditelju — dva razlicita sadrzaja na istoj adresi. */
   const catTitle = document.getElementById('cat-title');
-  if (catTitle) catTitle.textContent = parentCat.name;
+  if (catTitle && !catTitle.dataset.seo) catTitle.textContent = parentCat.name;
   const catCount = document.getElementById('cat-count');
-  if (catCount) catCount.textContent = `${parentCat.subcategories.length} podkategorija`;
+  if (catCount && !catCount.textContent.trim()) catCount.textContent = `${parentCat.subcategories.length} podkategorija`;
 
   // Breadcrumb
   const breadLabel = document.getElementById('breadcrumb-label');
-  if (breadLabel) breadLabel.textContent = parentCat.name;
+  if (breadLabel && !breadLabel.dataset.seo) breadLabel.textContent = parentCat.name;
   const pageTitle = document.getElementById('page-title');
   if (pageTitle && !pageTitle.dataset.seo) pageTitle.textContent = parentCat.name;
   const _catSubs = {'bambus-paneli':'Odaberite tip panela','bambus-drveni':'Topla drvena tekstura bambusa – prirodan izgled koji unosi toplinu u svaki prostor','bambus-tekstilni':'Mekana tekstilna površina na bambus osnovi za sofisticiran i elegantan zid','bambus-mermerni':'Mermerni uzorak na bambus panelu – luksuz bez težine i cijene pravog mermera','bambus-metalni':'Metalni sjaj na bambus osnovi za moderan industrijski ili luksuzni enterijer','bambus-kozni':'Kožna površinska obrada za ekskluzivan i taktilno bogat zid','classic':'Klasični paneli s vremenski provjerenim uzorcima prilagođenim svakom stilu','3d-letvice':'Vertikalni rebrasti paneli koji igrom svjetla i sjene transformišu svaki ravni zid','akusticni-paneli':'Poboljšavaju akustiku i smanjuju buku, a pritom izgledaju kao pravi dekorativni element','aluminijum-lajsne':'Profili za završne detalje, ivice i prelaze – savršena finalna tačka svakog enterijera','spc-pod':'Vodootporni laminatni pod koji izdrži kupatilo, kuhinju i svakodnevnu upotrebu','pu-kamen':'Laki poliuretanski paneli koji izgledaju kao pravi kamen, a teže mnogo manje','mdf':'Kaneliran medijapan koji zidovima daje arhitektonski karakter i trodimenzionalnu dubinu','flex-stone':'Savitljivi kameni furnir koji se primjenjuje na ravne, zakrivljene i neravne površine'};
   const pageSub = document.getElementById('page-subtitle');
-  if (pageSub) pageSub.textContent = _catSubs[parentCat.id] || 'Pogledajte našu kolekciju';
+  // Podnaslov ispisuje server i nosi data-seo — tada se ne dira.
+  if (pageSub && !pageSub.dataset.seo) pageSub.textContent = _catSubs[parentCat.id] || 'Pogledajte našu kolekciju';
 
-  // Back button goes to all categories
+  // Dugme "nazad" ispisuje server (data-seo) — ne dira se.
   const btnBack = document.querySelector('.btn-back');
-  if (btnBack) { btnBack.href = 'products.html'; btnBack.innerHTML = '<i class="fas fa-arrow-left"></i> Sve Kategorije'; }
+  if (btnBack && !btnBack.dataset.seo) { btnBack.href = 'products.html'; btnBack.innerHTML = '<i class="fas fa-arrow-left"></i> Sve Kategorije'; }
 
-  // Count products per subcategory
-  const grid = document.getElementById('category-grid');
+  // Plocice je ispisao server. Ako su tu, ne diraju se.
+  if (grid && grid.querySelector('.cat-card')) { initAnimations(); return; }
   grid.innerHTML = parentCat.subcategories.map(sub => {
     const subProducts = allProducts.filter(p => p.category === sub.id);
     const firstImg = subProducts.find(p => p.image)?.image || '';
@@ -389,24 +400,26 @@ function showCategoryProducts(catId) {
 
   // Update breadcrumb & title (subtitle already set by inline script — don't change height)
   const breadLabel = document.getElementById('breadcrumb-label');
-  if (breadLabel) breadLabel.textContent = cat.name;
+  if (breadLabel && !breadLabel.dataset.seo) breadLabel.textContent = cat.name;
   const pageTitle = document.getElementById('page-title');
   if (pageTitle && !pageTitle.dataset.seo) pageTitle.textContent = cat.name;
 
   // Find parent category if this is a subcategory
   const parentCat = allCategories.find(c => c.subcategories?.some(s => s.id === catId));
 
-  // Show back bar
+  /* Traku iznad server na kategoriji vec ispisuje vidljivom. Paljenje po drugi
+     put je pomjeralo sve ispod nje — odatle je dolazio CLS oko 0,05 na svih 13
+     lisnatih kategorija. Dira se samo ako je zaista ugasena. */
   const backBar = document.getElementById('back-bar');
-  if (backBar) backBar.style.display = 'flex';
+  if (backBar && backBar.style.display === 'none') backBar.style.display = 'flex';
   const catTitle = document.getElementById('cat-title');
-  if (catTitle) catTitle.textContent = cat.name;
+  if (catTitle && !catTitle.dataset.seo) catTitle.textContent = cat.name;
   const catCount = document.getElementById('cat-count');
-  if (catCount) catCount.textContent = `${cat.count} proizvoda`;
+  if (catCount && !catCount.textContent.trim()) catCount.textContent = `${cat.count} proizvoda`;
 
   // Back button: go to parent if subcategory, else go to all categories
   const btnBack = document.querySelector('.btn-back');
-  if (btnBack && parentCat) {
+  if (btnBack && !btnBack.dataset.seo && parentCat) {
     btnBack.href = `/kategorija/${parentCat.id}`;
     btnBack.innerHTML = `<i class="fas fa-arrow-left"></i> ${parentCat.name}`;
   }

@@ -24,7 +24,7 @@ Thumbs.db
 data/dimenzije-slika.json
 
 # Snimci stanja sajta (alat/snimak.py) — radna evidencija, ne ide na server.
-alat/snimci/
+alat/snimci/*.png
 
 # Python kes — nastaje otkad alat/provjera.py uvozi alat/ikone.py radi
 # provjere ikona (pravilo C6). Pravi ga sam Python, vezan je za verziju
@@ -32,5 +32,4 @@ alat/snimci/
 __pycache__/
 *.pyc
 .seo-audit-kes/
-alat/snimci/
 R2-*.json

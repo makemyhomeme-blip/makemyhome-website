@@ -64,6 +64,9 @@ function uIzvoru(html) {
 const MJERI = () => ({
   eura: ((document.body.innerText || '').match(/€/g) || []).length,
   kartice: document.querySelectorAll('.product-card').length,
+  plocice: document.querySelectorAll('.cat-card').length,
+  ld: document.querySelectorAll('script[type="application/ld+json"]').length,
+  h1: document.querySelectorAll('h1').length,
   h2: document.querySelectorAll('h2').length,
   h3: document.querySelectorAll('h3').length,
   tekst: (document.body.innerText || '').replace(/\s+/g, ' ').trim().length,
@@ -151,6 +154,12 @@ const pw = require('/opt/node22/lib/node_modules/playwright/index.js');
     if (red.sa.eura < red.bez.eura) {
       oznake.push(`[!!] JS ukloni ${red.bez.eura - red.sa.eura} cijena`);
     }
+    if (red.sa.plocice < red.bez.plocice) {
+      oznake.push(`[!!] JS ukloni ${red.bez.plocice - red.sa.plocice} plocica kategorija`);
+    }
+    if (red.sa.ld < red.bez.ld) oznake.push(`[!!] JS ukloni ${red.bez.ld - red.sa.ld} JSON-LD blokova`);
+    if (red.sa.ld > red.bez.ld) oznake.push(`[!] JS doda ${red.sa.ld - red.bez.ld} JSON-LD blokova — Google ih u prvom prolazu ne vidi`);
+    if (red.sa.h1 !== 1 || red.bez.h1 !== 1) oznake.push(`[!!] h1: ${red.bez.h1} bez JS-a, ${red.sa.h1} sa JS-om (mora biti tacno 1)`);
     if (red.sa.h2 < red.bez.h2) oznake.push(`[!!] JS ukloni ${red.bez.h2 - red.sa.h2} h2`);
     if (red.sa.h3 < red.bez.h3) oznake.push(`[!!] JS ukloni ${red.bez.h3 - red.sa.h3} h3`);
     if (red.bez.tekst > 0 && red.sa.tekst < red.bez.tekst * (1 - PRAG_TEKST)) {
@@ -224,14 +233,15 @@ function napraviIzvjestaj(redovi) {
   r('');
   r('`kart` = kartice proizvoda · `bez` = bez JavaScripta · `sa` = poslije JavaScripta');
   r('');
-  r('| adresa | € bez | € sa | kart bez | kart sa | h2 bez | h2 sa | tekst bez | tekst sa | status |');
-  r('|---|---|---|---|---|---|---|---|---|---|');
+  r('| adresa | € bez | € sa | kart bez | kart sa | ploc bez | ploc sa | LD bez | LD sa | h1 | h2 bez | h2 sa | tekst bez | tekst sa | status |');
+  r('|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|');
   for (const x of redovi) {
-    if (x.greska) { r(`| \`${x.put}\` | — | — | — | — | — | — | — | — | pukla |`); continue; }
+    if (x.greska) { r(`| \`${x.put}\` | — | — | — | — | — | — | — | — | — | — | — | — | — | pukla |`); continue; }
     const st = (x.oznake || []).length
       ? (x.oznake.some(o => o.startsWith('[!!]')) ? '**[!!]**' : '[!]')
       : '[i]';
     r(`| \`${x.put}\` | ${x.bez.eura} | ${x.sa.eura} | ${x.bez.kartice} | ${x.sa.kartice} `
+      + `| ${x.bez.plocice} | ${x.sa.plocice} | ${x.bez.ld} | ${x.sa.ld} | ${x.sa.h1} `
       + `| ${x.bez.h2} | ${x.sa.h2} | ${x.bez.tekst} | ${x.sa.tekst} | ${st} |`);
   }
 

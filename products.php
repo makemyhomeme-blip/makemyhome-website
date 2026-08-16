@@ -659,15 +659,41 @@ echo "\n</script>\n";
       <div class="breadcrumb" id="breadcrumb">
         <a href="/">Početna</a>
         <i class="fas fa-chevron-right"></i>
-        <span id="breadcrumb-label">Proizvodi</span>
+        <span id="breadcrumb-label"<?= $cat ? ' data-seo="1"' : '' ?>><?= $cat && isset($catNames[$cat]) ? htmlspecialchars($catNames[$cat]) : 'Proizvodi' ?></span>
       </div>
       <h1 class="section-title" id="page-title"<?= $cat && isset($catNames[$cat]) ? ' data-seo="1"' : '' ?>><?= $cat && isset($catNames[$cat])
         ? htmlspecialchars($catH1[$cat] ?? ($catNames[$cat] . ' – Zidni Paneli Podgorica'), ENT_QUOTES)
         : 'Zidni Paneli, Bambus Obloge i 3D Letvice u Podgorici' ?></h1>
-      <p class="section-subtitle" id="page-subtitle" style="margin-left:auto;margin-right:auto;text-align:center;">
-        Kompletna kolekcija obloga za zid u Podgorici — bambus paneli, 3D letvice, akustični paneli, MDF, PU kamen, Flex Stone i SPC podovi
+      <?php
+      /* Podnaslov po kategoriji. Do sada ga je server ispisivao samo u opstem
+         obliku ("Kompletna kolekcija obloga...") na svih 14 kategorija, pa je
+         Google na svakoj citao isti tekst; posjetilac je vidio pravi tekst jer
+         ga JavaScript zamijeni. Sada ga ispise server, a JavaScript ga ne dira
+         (data-seo="1"), pa je isti i za Google i za coveka. */
+      $catPodnaslov = [
+        'bambus-paneli'     => 'Odaberite tip panela',
+        'bambus-drveni'     => 'Topla drvena tekstura bambusa – prirodan izgled koji unosi toplinu u svaki prostor',
+        'bambus-tekstilni'  => 'Mekana tekstilna površina na bambus osnovi za sofisticiran i elegantan zid',
+        'bambus-mermerni'   => 'Mermerni uzorak na bambus panelu – luksuz bez težine i cijene pravog mermera',
+        'bambus-metalni'    => 'Metalni sjaj na bambus osnovi za moderan industrijski ili luksuzni enterijer',
+        'bambus-kozni'      => 'Kožna površinska obrada za ekskluzivan i taktilno bogat zid',
+        'classic'           => 'Klasični paneli s vremenski provjerenim uzorcima prilagođenim svakom stilu',
+        '3d-letvice'        => 'Vertikalni rebrasti paneli koji igrom svjetla i sjene transformišu svaki ravni zid',
+        'akusticni-paneli'  => 'Poboljšavaju akustiku i smanjuju buku, a pritom izgledaju kao pravi dekorativni element',
+        'aluminijum-lajsne' => 'Profili za završne detalje, ivice i prelaze – savršena finalna tačka svakog enterijera',
+        'spc-pod'           => 'Vodootporni laminatni pod koji izdrži kupatilo, kuhinju i svakodnevnu upotrebu',
+        'pu-kamen'          => 'Laki poliuretanski paneli koji izgledaju kao pravi kamen, a teže mnogo manje',
+        'mdf'               => 'Kaneliran medijapan koji zidovima daje arhitektonski karakter i trodimenzionalnu dubinu',
+        'flex-stone'        => 'Savitljivi kameni furnir koji se primjenjuje na ravne, zakrivljene i neravne površine',
+      ];
+      $mmhPodnaslov = ($cat && isset($catPodnaslov[$cat])) ? $catPodnaslov[$cat] : '';
+      ?>
+      <p class="section-subtitle" id="page-subtitle"<?= $mmhPodnaslov ? ' data-seo="1"' : '' ?> style="margin-left:auto;margin-right:auto;text-align:center;">
+        <?= $mmhPodnaslov
+          ? htmlspecialchars($mmhPodnaslov, ENT_QUOTES)
+          : 'Kompletna kolekcija obloga za zid u Podgorici — bambus paneli, 3D letvice, akustični paneli, MDF, PU kamen, Flex Stone i SPC podovi' ?>
       </p>
-      <script>(function(){var p=new URLSearchParams(location.search),cat=(typeof window.__mmhCategory==='string'&&window.__mmhCategory)||p.get('cat')||p.get('category');if(!cat)return;var names={'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni Paneli','bambus-tekstilni':'Tekstilni Paneli','bambus-mermerni':'Mermerni Paneli','bambus-metalni':'Metalni Paneli','bambus-kozni':'Kožni Paneli','3d-letvice':'3D Letvice','akusticni-paneli':'Akustični Paneli','aluminijum-lajsne':'Aluminijum Lajsne','spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic Paneli','mdf':'MDF Paneli','flex-stone':'Flex Stone'};var subs={'bambus-paneli':'Odaberite tip panela','bambus-drveni':'Topla drvena tekstura bambusa – prirodan izgled koji unosi toplinu u svaki prostor','bambus-tekstilni':'Mekana tekstilna površina na bambus osnovi za sofisticiran i elegantan zid','bambus-mermerni':'Mermerni uzorak na bambus panelu – luksuz bez težine i cijene pravog mermera','bambus-metalni':'Metalni sjaj na bambus osnovi za moderan industrijski ili luksuzni enterijer','bambus-kozni':'Kožna površinska obrada za ekskluzivan i taktilno bogat zid','classic':'Klasični paneli s vremenski provjerenim uzorcima prilagođenim svakom stilu','3d-letvice':'Vertikalni rebrasti paneli koji igrom svjetla i sjene transformišu svaki ravni zid','akusticni-paneli':'Poboljšavaju akustiku i smanjuju buku, a pritom izgledaju kao pravi dekorativni element','aluminijum-lajsne':'Profili za završne detalje, ivice i prelaze – savršena finalna tačka svakog enterijera','spc-pod':'Vodootporni laminatni pod koji izdrži kupatilo, kuhinju i svakodnevnu upotrebu','pu-kamen':'Laki poliuretanski paneli koji izgledaju kao pravi kamen, a teže mnogo manje','mdf':'Kaneliran medijapan koji zidovima daje arhitektonski karakter i trodimenzionalnu dubinu','flex-stone':'Savitljivi kameni furnir koji se primjenjuje na ravne, zakrivljene i neravne površine'};var n=names[cat]||cat;var pt=document.getElementById('page-title');if(pt&&!pt.dataset.seo)pt.textContent=n;var b=document.getElementById('breadcrumb-label');if(b)b.textContent=n;var s=document.getElementById('page-subtitle');if(s)s.textContent=subs[cat]||'Pogledajte našu kolekciju';})();</script>
+      <script>(function(){var p=new URLSearchParams(location.search),cat=(typeof window.__mmhCategory==='string'&&window.__mmhCategory)||p.get('cat')||p.get('category');if(!cat)return;var names={'bambus-paneli':'Bambus Paneli','bambus-drveni':'Drveni Paneli','bambus-tekstilni':'Tekstilni Paneli','bambus-mermerni':'Mermerni Paneli','bambus-metalni':'Metalni Paneli','bambus-kozni':'Kožni Paneli','3d-letvice':'3D Letvice','akusticni-paneli':'Akustični Paneli','aluminijum-lajsne':'Aluminijum Lajsne','spc-pod':'SPC Pod','pu-kamen':'PU Kamen','classic':'Classic Paneli','mdf':'MDF Paneli','flex-stone':'Flex Stone'};var subs={'bambus-paneli':'Odaberite tip panela','bambus-drveni':'Topla drvena tekstura bambusa – prirodan izgled koji unosi toplinu u svaki prostor','bambus-tekstilni':'Mekana tekstilna površina na bambus osnovi za sofisticiran i elegantan zid','bambus-mermerni':'Mermerni uzorak na bambus panelu – luksuz bez težine i cijene pravog mermera','bambus-metalni':'Metalni sjaj na bambus osnovi za moderan industrijski ili luksuzni enterijer','bambus-kozni':'Kožna površinska obrada za ekskluzivan i taktilno bogat zid','classic':'Klasični paneli s vremenski provjerenim uzorcima prilagođenim svakom stilu','3d-letvice':'Vertikalni rebrasti paneli koji igrom svjetla i sjene transformišu svaki ravni zid','akusticni-paneli':'Poboljšavaju akustiku i smanjuju buku, a pritom izgledaju kao pravi dekorativni element','aluminijum-lajsne':'Profili za završne detalje, ivice i prelaze – savršena finalna tačka svakog enterijera','spc-pod':'Vodootporni laminatni pod koji izdrži kupatilo, kuhinju i svakodnevnu upotrebu','pu-kamen':'Laki poliuretanski paneli koji izgledaju kao pravi kamen, a teže mnogo manje','mdf':'Kaneliran medijapan koji zidovima daje arhitektonski karakter i trodimenzionalnu dubinu','flex-stone':'Savitljivi kameni furnir koji se primjenjuje na ravne, zakrivljene i neravne površine'};var n=names[cat]||cat;var pt=document.getElementById('page-title');if(pt&&!pt.dataset.seo)pt.textContent=n;var b=document.getElementById('breadcrumb-label');if(b&&!b.dataset.seo)b.textContent=n;var s=document.getElementById('page-subtitle');if(s&&!s.dataset.seo)s.textContent=subs[cat]||'Pogledajte našu kolekciju';})();</script>
     </div>
   </div>
 </section>
@@ -676,27 +702,80 @@ echo "\n</script>\n";
 <section class="products-section">
   <div class="container">
 
+    <?php
+    /* Mreza kategorija se ranije punila tek JavaScriptom, pa je Googlebot na
+       katalogu vidio prazninu — ni jedno ime kategorije, ni jedan opis, ni
+       broj proizvoda. Sada je ispise server; JavaScript je vise ne dira.
+
+       Sta ide u mrezu, po stranici:
+         · katalog (nema $cat)      — sve glavne kategorije
+         · roditeljska kategorija   — njene podkategorije, ODMAH VIDLJIVE
+         · lisnata kategorija       — nista; mreza ostaje prazna i ugasena
+
+       Ranije je i lisnata i roditeljska stranica dobijala svih 8 glavnih
+       kategorija sa display:none. Na roditeljskoj ih je JavaScript zamjenjivao
+       plocicama podkategorija i tek onda palio mrezu — iznad 39 vec iscrtanih
+       proizvoda. Sve ispod se pomjeralo nadolje: CLS 0,517, pet puta iznad
+       Googleovog praga. Uz to je Google u prvom prolazu citao 8 naslova tudjih
+       kategorija, a 6 podkategorija bambusa nije vidio nikad jer su postojale
+       samo poslije JavaScripta. */
+    $catKfg = json_decode(@file_get_contents(__DIR__ . '/data/categories.json'), true) ?: [];
+    $brojUKat = [];
+    foreach ($_allProds as $pp) {
+        $k = $pp['category'] ?? '';
+        if ($k !== '') $brojUKat[$k] = ($brojUKat[$k] ?? 0) + 1;
+    }
+    $mmhKartice = [];
+    if (!$cat) {
+        $mmhKartice = $catKfg;
+    } else {
+        foreach ($catKfg as $ck) {
+            if (($ck['id'] ?? '') === $cat && !empty($ck['subcategories'])) {
+                $mmhKartice = $ck['subcategories'];
+                break;
+            }
+        }
+    }
+    // Natpis u traci iznad: koliko podkategorija, odnosno koliko proizvoda.
+    $mmhBrojka = '';
+    if ($cat) {
+        $mmhBrojka = $mmhKartice
+            ? count($mmhKartice) . ' podkategorija'
+            : count($_listProds) . ' proizvoda';
+    }
+    ?>
+
     <!-- Back bar (vidljiv samo kad je kategorija otvorena) -->
-    <div class="back-bar" id="back-bar" style="display:none;">
-      <a href="products.html" class="btn-back"><i class="fas fa-arrow-left"></i> Sve Kategorije</a>
-      <?php if ($cat): ?><h2 id="cat-title"><?= htmlspecialchars($catName) ?></h2><?php endif; ?>
-      <span class="count-badge" id="cat-count"></span>
+    <div class="back-bar" id="back-bar"<?= $cat ? '' : ' style="display:none;"' ?>>
+      <?php
+      /* Dugme "nazad": na podkategoriji vodi na roditeljsku kategoriju, inace na
+         katalog. Do sada je server uvijek ispisivao "Sve Kategorije" i adresu
+         products.html, pa je JavaScript to mijenjao — Google je citao jedan
+         link, posjetilac vidio drugi. */
+      $mmhNazadAdr = '/products.html';
+      $mmhNazadTxt = 'Sve Kategorije';
+      if ($cat) {
+          foreach ($catKfg as $ck) {
+              foreach (($ck['subcategories'] ?? []) as $sub) {
+                  if (($sub['id'] ?? '') === $cat) {
+                      $mmhNazadAdr = '/kategorija/' . ($ck['id'] ?? '');
+                      $mmhNazadTxt = $ck['name'] ?? 'Nazad';
+                      break 2;
+                  }
+              }
+          }
+      }
+      ?>
+      <a href="<?= htmlspecialchars($mmhNazadAdr) ?>" class="btn-back"<?= $cat ? ' data-seo="1"' : '' ?>><i class="fas fa-arrow-left"></i> <?= htmlspecialchars($mmhNazadTxt) ?></a>
+      <?php if ($cat): ?><h2 id="cat-title" data-seo="1"><?= htmlspecialchars($catName) ?></h2><?php endif; ?>
+      <span class="count-badge" id="cat-count"><?= htmlspecialchars($mmhBrojka) ?></span>
     </div>
 
     <!-- Sadržaj (kategorije ili proizvodi) -->
     <div id="main-content">
-      <div class="cat-grid" id="category-grid"<?= $cat ? ' style="display:none;"' : '' ?>>
+      <div class="cat-grid" id="category-grid"<?= $mmhKartice ? '' : ' style="display:none;"' ?>>
         <?php
-        /* Mreza kategorija se ranije punila tek JavaScriptom, pa je Googlebot na
-           katalogu vidio prazninu — ni jedno ime kategorije, ni jedan opis, ni
-           broj proizvoda. Sada je ispise server; JavaScript je vise ne dira. */
-        $catKfg = json_decode(@file_get_contents(__DIR__ . '/data/categories.json'), true) ?: [];
-        $brojUKat = [];
-        foreach ($_allProds as $pp) {
-            $k = $pp['category'] ?? '';
-            if ($k !== '') $brojUKat[$k] = ($brojUKat[$k] ?? 0) + 1;
-        }
-        foreach ($catKfg as $ck):
+        foreach ($mmhKartice as $ck):
             $kid = $ck['id'] ?? '';
             if ($kid === '') continue;
             // Broj proizvoda: sama kategorija plus sve njene podkategorije
