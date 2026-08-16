@@ -1,5 +1,12 @@
 # NALAZI — 16. avgust 2026.
 
+> **STANJE: oba nalaza popravljena i pustena na sajt.**
+> Korak 1 — commit `8daecc5`, `js/products.js`, deployovan (sync OK, 123,9 KB).
+> Korak 2 — commit `283dd2a`, `seo-audit.sh` (alat, ne ide na sajt).
+> Poslije popravke: `seo-audit.sh` prijavljuje **0 `[!]` i 0 `[!!]`**,
+> `alat/provjera.py` **50 pravila, 0 palo**, svih 149 URL-ova vraca 200.
+> Detalji ispod ostaju kao zapis šta je bilo i zašto.
+
 Izvori: `SEO-AUDIT-RAPORT.md` (149 URL-ova, čist bash/curl, sa servera)
 i `JS-RAPORT.md` (15 stranica, Chromium sa Googlebot UA, 412×915).
 
@@ -47,7 +54,7 @@ avgusta.**
 ## 2. OZBILJNO [!] — sve što šteti rangiranju
 
 **O1 — na `/kategorija/bambus-paneli` JavaScript sakrije sadržaj koji je server
-ispisao**
+ispisao** — POPRAVLJENO (commit `8daecc5`, deployovano)
 
 | fajl | linija | šta radi |
 |---|---|---|
@@ -86,7 +93,8 @@ sekciji 3.
 
 ## 3. SITNICE
 
-**S1 — `seo-audit.sh` nikad nije stvarno uporedio meta opise**
+**S1 — `seo-audit.sh` nikad nije stvarno uporedio meta opise** — POPRAVLJENO
+(commit `283dd2a`)
 `seo-audit.sh:182` → `echo "$u|${t:-NEMA}|${d:-NEMA}"`
 Razdvajač je `|`, a **title sadrži `|`** („Proizvodi | Make My Home Decor").
 Zato u `awk -F'|'` polje `$3` nije opis nego rep naslova — „ Make My Home Decor"
@@ -122,7 +130,36 @@ potreban — stranica je `noindex`.
 
 ## 4. PLAN POPRAVKI
 
-### U kodu
+### U kodu — URAĐENO
+
+**Korak 1 — O1, `/kategorija/bambus-paneli` — URAĐENO**
+
+Izmijenjen `js/products.js:273–281`: `#products-container` se gasi **samo ako je
+prazan**. Pločice podkategorija sada stoje iznad proizvoda, kao izbor, ne kao
+zamjena.
+
+Mjereno ponovo sa `js-check.js`, red `/kategorija/bambus-paneli`:
+
+```
+              prije popravke      poslije popravke
+znak €        81 → 0              81 → 78
+tekst         8585 → 3249         8585 → 7828
+```
+
+Ostatak razlike (81 → 78) je asimetrija mjerenja iz S2 — isti odnos ima i
+`/kategorija/3d-letvice` (59 → 56), koja nikad nije imala ovaj kvar.
+
+Deployovano: sync `js/products.js` OK (123,9 KB), stranica vraća 200.
+Poslije toga: `alat/provjera.py` — 50 pravila, 0 palo.
+
+**Korak 2 — S1, `seo-audit.sh` — URAĐENO**
+
+Razdvajač u `$KES/meta.txt` je sada tabulator, `awk -F'\t'` na linijama 189–198.
+Dodato je i ispisivanje samih dupliranih opisa, da se ubuduće vidi kojih.
+Ponovo pokrenuto: **0 dupliranih opisa, 0 dupliranih naslova**, cio izvještaj
+bez ijednog `[!]` i `[!!]`.
+
+<details><summary>Prvobitni plan (prije izvođenja)</summary>
 
 **Korak 1 — O1, `/kategorija/bambus-paneli` (~30 min + provjera)**
 
@@ -150,6 +187,8 @@ opise. Commit: samo `seo-audit.sh`.
 Redoslijed je bitan: prvo Korak 1 (jedini stvarni nalaz), pa Korak 2 (alat).
 Ukupno ~40 minuta rada, dva commita.
 
+</details>
+
 ### Ne rješava se u kodu
 
 Tehnička provjera je iscrpljena. Ništa na sajtu ne stoji između Googlea i
@@ -171,5 +210,5 @@ WordPress adrese koje vraćaju 410 — nijedna nije naša stranica.
 
 ---
 
-**Kod nije diran.** Čeka se odobrenje plana; onda se popravlja stavka po
-stavci, commit po stavci.
+**Obje stavke su popravljene, svaka svojim commitom, i provjerene ponovnim
+mjerenjem.** Na sajtu je od tehničkih nalaza ostalo — ništa.
