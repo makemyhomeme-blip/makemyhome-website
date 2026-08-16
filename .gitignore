@@ -31,3 +31,4 @@ alat/snimci/
 # interpretera i nema ga sta biti u repou.
 __pycache__/
 *.pyc
+.seo-audit-kes/
