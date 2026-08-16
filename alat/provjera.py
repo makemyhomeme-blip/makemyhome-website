@@ -1144,6 +1144,33 @@ def grupa_G():
         g.append('provjera redosljeda nije mogla da se izvrsi: %s' % e)
     zabiljezi('G14', 'Zavisnost se deployuje prije stranice koja je trazi', g, parova)
 
+    # ---- Zabrana indeksiranja se moze poslati i ZAGLAVLJEM ----------------
+    #
+    # X-Robots-Tag: noindex u odgovoru servera radi isto sto i meta oznaka u
+    # HTML-u, ali se u izvornom kodu stranice NE VIDI. Jedan red u .htaccess
+    # ili u podesavanju hostinga moze tiho iskljuciti cio sajt iz Googla, a
+    # svaka druga provjera bi i dalje prolazila: stranica vraca 200, sadrzaj
+    # je tu, canonical je tacan.
+    #
+    # Provjerava se kao Googlebot, jer se takvo pravilo ponekad postavlja bas
+    # po imenu pregledaca.
+    g = []
+    GBOT_UA = ('Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
+    mete = [BAZA + '/', BAZA + '/products.html', BAZA + '/sitemap.xml',
+            BAZA + '/kategorija/bambus-paneli', BAZA + '/paneli/drveni-panel-golden-teak']
+    for u in mete:
+        for ime, ua in (('posjetilac', None), ('Googlebot', GBOT_UA)):
+            cmd = CURL + ['--max-time', '25', '-o', '/dev/null', '-D', '-']
+            if ua:
+                cmd += ['-A', ua]
+            zag = subprocess.run(cmd + [u], capture_output=True, text=True).stdout.lower()
+            for red in zag.splitlines():
+                if red.startswith('x-robots-tag') and ('noindex' in red or 'none' in red):
+                    g.append('%s → %s dobija zabranu u zaglavlju: %s'
+                             % (u, ime, red.strip()[:70]))
+    zabiljezi('G15', 'Nijedna stranica ne salje zabranu indeksiranja zaglavljem',
+              g, len(mete) * 2)
+
 
 # ============================================================
 # H — ADRESE KOJE GOOGLE STVARNO IMA
