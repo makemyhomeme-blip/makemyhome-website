@@ -28,7 +28,14 @@ try {
   puppeteer = null;
 }
 
-const BAZA = 'https://makemyhome.me';
+const ZIVI = 'https://makemyhome.me';
+const LOKALNO = 'http://127.0.0.1:8898';   // php -S 8899 + alat/posrednik.mjs
+// Pregledac iz ovog okruzenja ne moze do zivog sajta — proxy propusta curl ali
+// ne i Chromium (ERR_CONNECTION_RESET). Zato se DOM mjeri na lokalnoj kopiji
+// ISTOG koda, a sirovi HTML se i dalje povlaci sa ZIVOG sajta preko curl-a.
+// To je posteno razdvojeno i tako je i oznaceno u izvjestaju.
+let BAZA = ZIVI;
+let naLokalnom = false;
 const GBOT = 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 '
            + '(KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36 '
            + '(compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
@@ -56,7 +63,7 @@ function sirovi(put) {
   try {
     return execFileSync('curl', [
       '-sk', '--cacert', '/root/.ccr/ca-bundle.crt', '--max-time', '30',
-      '-A', GBOT, BAZA + put,
+      '-A', GBOT, ZIVI + put,          // sirovi HTML UVIJEK sa zivog sajta
     ], { maxBuffer: 40 * 1024 * 1024 }).toString('utf8');
   } catch (e) { return ''; }
 }
@@ -94,6 +101,26 @@ function tekstIzHtml(s) {
   let browser;
   if (chromium) browser = await chromium.launch(opcijePokretanja);
   else browser = await playwrightChromium.launch();
+
+  // Moze li pregledac uopste do zivog sajta iz ovog okruzenja?
+  {
+    const p0 = chromium ? await browser.newPage() : await (await browser.newContext()).newPage();
+    try {
+      await p0.goto(ZIVI + '/', { waitUntil: 'domcontentloaded', timeout: 20000 });
+    } catch (e) {
+      naLokalnom = true;
+      BAZA = LOKALNO;
+      dodaj('');
+      dodaj('> **Napomena o mjerenju.** Pregledac iz ovog okruzenja ne moze do zivog');
+      dodaj('> sajta — proxy propusta `curl` ali ne i Chromium. Zato je **iscrtani DOM**');
+      dodaj('> mjeren na lokalnoj kopiji istog koda (`php -S` + `alat/posrednik.mjs`),');
+      dodaj('> a **sirovi HTML** je i dalje povucen sa **zivog sajta**. Kod je isti —');
+      dodaj('> pravilo G4 provjerava da git, cPanel i sajt nose iste fajlove. Razlika');
+      dodaj('> je samo u podacima: `data/products.json` je na serveru noviji jer ga');
+      dodaj('> vlasnik mijenja kroz admin.');
+    }
+    await p0.close();
+  }
 
   for (const put of STRANICE) {
     const url = BAZA + put;
