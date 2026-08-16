@@ -22,6 +22,7 @@
 #   4. KORPA    22 provjere korpe i narudzbe u pravom pregledacu
 #   5. IKONE    svaka ikona ima pravilo u CSS-u I znak u fontu
 #   6. LIGHTHOUSE  Googleov alat na 14 tipova stranica
+#   7. PROMJENE   sta se promijenilo od zadnje ciste provjere
 #
 # Pokretanje
 # ----------
@@ -63,7 +64,7 @@ echo " $(date '+%Y-%m-%d %H:%M')"
 echo "==============================================================="
 
 # ---------------------------------------------------------------- 1. GIT ----
-echo; echo "--- 1/6  GIT · lokalno, GitHub i server ---"
+echo; echo "--- 1/7  GIT · lokalno, GitHub i server ---"
 GRANA=$(git rev-parse --abbrev-ref HEAD)
 git fetch --quiet origin "$GRANA" 2>/dev/null
 NEUPISANO=$(git status --porcelain | grep -c . || true)
@@ -79,7 +80,7 @@ fi
 echo "    (poredjenje sa serverom radi pravilo G4 u sljedecem koraku)"
 
 # ------------------------------------------------------------ 2. PRAVILA ----
-echo; echo "--- 2/6  PRAVILA · 54 pravila iz ETALON.md ---"
+echo; echo "--- 2/7  PRAVILA · 54 pravila iz ETALON.md ---"
 if [ "$BRZO" = "brzo" ]; then
   python3 alat/dok-ne-bude.py > "$ISPIS/pravila.txt" 2>&1
 else
@@ -95,7 +96,7 @@ else
 fi
 
 # --------------------------------------------------------------- 3. OKO ----
-echo; echo "--- 3/6  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
+echo; echo "--- 3/7  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
 ocisti; sleep 1
 php -S 127.0.0.1:8899 -t . > "$ISPIS/php.log" 2>&1 &
 node alat/posrednik.mjs > "$ISPIS/posrednik.log" 2>&1 &
@@ -116,7 +117,7 @@ else
 fi
 
 # ------------------------------------------------------------- 4. KORPA ----
-echo; echo "--- 4/6  KORPA · narudzba od pocetka do kraja ---"
+echo; echo "--- 4/7  KORPA · narudzba od pocetka do kraja ---"
 if curl -s -o /dev/null http://127.0.0.1:8899/korpa.html; then
   node alat/korpa.mjs > "$ISPIS/korpa.txt" 2>&1
   if [ $? -eq 0 ]; then
@@ -131,7 +132,7 @@ fi
 ocisti
 
 # ------------------------------------------------------------- 5. IKONE ----
-echo; echo "--- 5/6  IKONE · pravilo u CSS-u i znak u fontu ---"
+echo; echo "--- 5/7  IKONE · pravilo u CSS-u i znak u fontu ---"
 python3 alat/ikone.py provjeri > "$ISPIS/ikone.txt" 2>&1
 python3 alat/fontovi.py >> "$ISPIS/ikone.txt" 2>&1
 if grep -qiE 'PAZI|nema u CSS|GRESKA' "$ISPIS/ikone.txt"; then
@@ -151,7 +152,7 @@ fi
 # Ako nije instaliran, TO SE KAZE i broji se kao pad. Tiho preskakanje bi
 # znacilo da izvjestaj tvrdi vise nego sto je provjereno — a bas to je i
 # bio problem: "sve prolazi" je znacilo "sve od onoga sto sam pogledao".
-echo; echo "--- 6/6  LIGHTHOUSE · Googleov alat na 14 tipova stranica ---"
+echo; echo "--- 6/7  LIGHTHOUSE · Googleov alat na 14 tipova stranica ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi LIGHTHOUSE PRESK "preskoceno jer je pokrenuto 'brzo' — pokreni bez 'brzo' prije indeksiranja"
 elif ! ls /home/user/lighthouse/node_modules/.bin/lighthouse >/dev/null 2>&1 \
@@ -180,6 +181,37 @@ else
   ocisti
 fi
 
+# ------------------------------------------------------ 7. STA SE PROMIJENILO ----
+#
+# Ovo je odgovor na najcescu prituzbu: popravi se jedno, pokvari drugo, i to
+# se primijeti tek sljedeci put. Pravila hvataju samo ono sto neko unaprijed
+# zna da treba provjeriti. Ona NE mogu primijetiti da je sa 117 stranica nestao
+# naslov, jer nijedno pravilo ne kaze koliko naslova stranica treba da ima.
+#
+# Zato se poslije svake ciste provjere snimi stanje svih 149 stranica. Pri
+# sljedecem pokretanju se novo stanje uporedi sa tim snimkom i ispise se STA
+# se promijenilo. Ako se promijenilo samo ono sto si mijenjao — u redu. Ako je
+# usput nestalo nesto drugo — vidi se odmah, a ne za nedjelju dana.
+#
+# Tako je i nadjeno da je "Karakteristike – <ime>" nestalo sa 117 stranica.
+echo; echo "--- 7/7  PROMJENE · sta se promijenilo od zadnje ciste provjere ---"
+SNIMCI="$(dirname "$0")/snimci"
+if [ -f "$SNIMCI/zadnji-ok.json.gz" ]; then
+  python3 alat/snimak.py snimi sada > /dev/null 2>&1
+  python3 alat/snimak.py uporedi zadnji-ok sada > "$ISPIS/promjene.txt" 2>&1
+  if grep -q "NEMA RAZLIKE\|Nema razlike" "$ISPIS/promjene.txt"; then
+    zapisi PROMJENE OK "nista se nije promijenilo od zadnje ciste provjere"
+  else
+    # Promjena NIJE greska — samo se mora vidjeti i potvrditi.
+    BROJ=$(grep -cE "^[a-z_]+ +[0-9]+ stranica" "$ISPIS/promjene.txt" || echo 0)
+    zapisi PROMJENE OK "$BROJ vrsta izmjena — spisak ispod, provjeri da je samo ono sto si mijenjao"
+    sed -n "/STA SE PROMIJENILO/,\$p" "$ISPIS/promjene.txt" | head -40
+  fi
+else
+  echo "    (nema ranijeg snimka — pravim prvi, poredjenje krece od sljedeceg puta)"
+  zapisi PROMJENE OK "prvi snimak, poredjenje krece od sljedeceg puta"
+fi
+
 # ------------------------------------------------------------- ZAKLJUCAK ----
 echo
 echo "==============================================================="
@@ -191,6 +223,8 @@ for r in "${REZ[@]}"; do
 done
 echo "==============================================================="
 if [ $PALO -eq 0 ]; then
+  # Cisto stanje postaje osnova za sljedecu uporedbu.
+  python3 alat/snimak.py snimi zadnji-ok > /dev/null 2>&1
   echo
   echo "  SPREMNO ZA INDEKSIRANJE."
   echo
@@ -205,7 +239,7 @@ if [ $PALO -eq 0 ]; then
   exit 0
 else
   echo
-  echo "  NIJE SPREMNO — palo $PALO od 6 koraka."
+  echo "  NIJE SPREMNO — palo $PALO od 7 koraka."
   echo "  Ne salji na indeksiranje dok ovo ne bude cisto."
   echo "  Puni izlaz: $ISPIS"
   echo "==============================================================="
