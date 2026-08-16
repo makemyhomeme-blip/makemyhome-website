@@ -2940,3 +2940,13 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .contact-info-text a { display: inline-block; padding: 9px 0; }
   .cj-tabela a, .info-table a { display: inline-block; padding: 9px 0; }
 }
+
+/* Naslov iznad harmonike sa karakteristikama. Postojao je i ranije, u bloku
+   koji je zamijenjen harmonikom, pa je nestao sa 117 stranica dok to nije
+   pokazala uporedba snimaka. */
+.specs-h2 {
+  font-size: 1.05em;
+  color: var(--dark);
+  margin: 18px 0 12px;
+  font-weight: 700;
+}

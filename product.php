@@ -649,7 +649,16 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           /* Harmoniku ispisuje server. Ranije je ovdje stajao obican spisak,
              a JavaScript bi ga zamijenio harmonikom — pa se pri svakom
              osvjezavanju vidjela promjena. Sada postoji samo jedan ispis. */
-          if ($product) echo mmhHarmonikaHTML($product);
+          /* Naslov "Karakteristike – <ime>" je stajao ovdje prije nego sto je
+             blok zamijenjen harmonikom. Harmonika koristi dugme umjesto
+             naslova, pa je H2 nestao sa svih 117 stranica proizvoda — a u
+             njemu stoji i ime proizvoda i rijec koju ljudi kucaju. Nasla ga
+             je tek uporedba snimka prije i poslije (alat/snimak.py). */
+          if ($product) {
+              echo '<h2 class="specs-h2">Karakteristike – '
+                 . htmlspecialchars($product['name'] ?? '') . '</h2>';
+              echo mmhHarmonikaHTML($product);
+          }
         ?></div>
       </div>
 

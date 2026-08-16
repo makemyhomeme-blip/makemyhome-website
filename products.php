@@ -286,6 +286,33 @@ if (!$cat) {
 } else {
   $_listProds = array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat));
 }
+// Politika povrata i uslovi dostave — isti za sve proizvode, pa se sastave
+// jednom i upisu u svaku ponudu.
+//
+// Prvo su bili uklonjeni da se schema smanji sa 53 kB na 11,5 kB, uz pogresno
+// obrazlozenje da ih Google cita sa stranice proizvoda. Search Console ih je
+// trazio bas ovdje. Zatim su vraceni preko @graph i @id, sto je manje, ali
+// Googleov primjer za ova polja pokazuje da se upisuju direktno — a sajt koji
+// sest mjeseci nije izlazio nije mjesto za neprovjerena rjesenja. Zato ovako:
+// 5 kB vise po stranici, ali bez ijedne nepoznanice.
+$mmhPovrat = [
+  '@type'                => 'MerchantReturnPolicy',
+  'applicableCountry'    => 'ME',
+  'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+  'merchantReturnDays'   => 7,
+  'returnMethod'         => 'https://schema.org/ReturnByMail',
+  'returnFees'           => 'https://schema.org/FreeReturn',
+];
+$mmhDostava = [
+  '@type'               => 'OfferShippingDetails',
+  'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '20', 'currency' => 'EUR'],
+  'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'ME'],
+  'deliveryTime'        => [
+    '@type'        => 'ShippingDeliveryTime',
+    'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 0, 'maxValue' => 2, 'unitCode' => 'DAY'],
+    'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 4, 'unitCode' => 'DAY'],
+  ],
+];
 $_items = [];
 foreach (array_slice($_listProds, 0, 20) as $i => $p) {
   $pOrig    = (float)($p['price'] ?? 0);
@@ -322,8 +349,8 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       //
       // Sada su definisani jednom, u @graph nize, a ovdje stoji poziv na njih.
       // Blok je 7,2 kB umjesto 12,6 kB koliko bi bio sa prepisivanjem.
-      'hasMerchantReturnPolicy' => ['@id' => 'https://makemyhome.me/#povrat'],
-      'shippingDetails'         => ['@id' => 'https://makemyhome.me/#dostava'],
+      'hasMerchantReturnPolicy' => $mmhPovrat,
+      'shippingDetails'         => $mmhDostava,
       // Bili su ubaceni u svaku od 20 stavki, potpuno isti tekst 20 puta —
       // 800 B po proizvodu, 16 kB praznog ponavljanja na svakoj kategoriji.
       // Google te podatke cita sa stranice samog proizvoda, gdje i stoje
@@ -350,30 +377,7 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
 }
 echo '<script type="application/ld+json">' . "\n";
 echo json_encode([
-  '@context' => 'https://schema.org',
-  '@graph'   => [
-    // Definisani jednom, pozvani iz svake ponude preko @id.
-    [
-      '@type'                => 'MerchantReturnPolicy',
-      '@id'                  => 'https://makemyhome.me/#povrat',
-      'applicableCountry'    => 'ME',
-      'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
-      'merchantReturnDays'   => 7,
-      'returnMethod'         => 'https://schema.org/ReturnByMail',
-      'returnFees'           => 'https://schema.org/FreeReturn',
-    ],
-    [
-      '@type'               => 'OfferShippingDetails',
-      '@id'                 => 'https://makemyhome.me/#dostava',
-      'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '20', 'currency' => 'EUR'],
-      'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'ME'],
-      'deliveryTime'        => [
-        '@type'        => 'ShippingDeliveryTime',
-        'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 0, 'maxValue' => 2, 'unitCode' => 'DAY'],
-        'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 4, 'unitCode' => 'DAY'],
-      ],
-    ],
-    [
+  '@context'       => 'https://schema.org',
   '@type'          => 'ItemList',
   'name'           => $catName,
   'url'            => $ogUrl,
@@ -382,8 +386,6 @@ echo json_encode([
   // Bez JSON_PRETTY_PRINT: uvlake za 20 stavki su same po sebi nosile oko
   // trecinu velicine bloka. Google cita jednako, a izvorni kod stranice
   // postaje pregledan kad se otvori u alatu za provjeru.
-    ],
-  ],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 echo "\n</script>\n";
 ?>
