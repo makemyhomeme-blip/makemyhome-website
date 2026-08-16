@@ -142,8 +142,9 @@ h2 "6. Canonical"
 : > "$KES/canon.txt"
 while IFS='|' read -r u kod _; do
   [ "$kod" != "200" ] && continue
-  c=$(grep -oiE '<link[^>]*rel=["'"'"']canonical["'"'"'][^>]*>' "$KES/$(ime "$u").html" 2>/dev/null | head -1 \
-      | grep -oiE 'href=["'"'"'][^"'"'"']*' | sed 's/^href=.//')
+  c=$(tr '\n' ' ' < "$KES/$(ime "$u").html" 2>/dev/null \
+      | grep -oiE '<link[^>]*rel="canonical"[^>]*>' | head -1 \
+      | grep -oiE 'href="[^"]*' | sed 's/^href="//')
   echo "$u|${c:-NEMA}" >> "$KES/canon.txt"
 done < "$KES/statusi.txt"
 BEZ=$(awk -F'|' '$2=="NEMA"' "$KES/canon.txt" | grep -c . || true)
@@ -170,9 +171,14 @@ h2 "7. Title i meta opis"
 while IFS='|' read -r u kod _; do
   [ "$kod" != "200" ] && continue
   f="$KES/$(ime "$u").html"
-  t=$(tr '\n' ' ' < "$f" | grep -oiE '<title>[^<]*</title>' | head -1 | sed 's/<[^>]*>//g; s/^ *//; s/ *$//')
-  d=$(grep -oiE '<meta[^>]*name=["'"'"']description["'"'"'][^>]*>' "$f" | head -1 \
-      | grep -oiE 'content=["'"'"'][^"'"'"']*' | sed 's/^content=.//')
+  # Fajl se prvo spljosti u jedan red. Meta opis se u 62 od 149 stranica
+  # prelama preko dva reda, pa ga grep koji radi red po red ne moze uhvatiti —
+  # prva verzija ovog skripta je zbog toga za 148 stranica vratila pogresnu
+  # vrijednost i prijavila "148 dupliranih opisa" kojih nema.
+  jedan=$(tr '\n' ' ' < "$f")
+  t=$(printf '%s' "$jedan" | grep -oiE '<title>[^<]*</title>' | head -1 | sed 's/<[^>]*>//g; s/^ *//; s/ *$//')
+  d=$(printf '%s' "$jedan" | grep -oiE '<meta[^>]*name="description"[^>]*>' | head -1 \
+      | grep -oiE 'content="[^"]*' | sed 's/^content="//' | tr -s ' ')
   echo "$u|${t:-NEMA}|${d:-NEMA}" >> "$KES/meta.txt"
 done < "$KES/statusi.txt"
 BT=$(awk -F'|' '$2=="NEMA"' "$KES/meta.txt" | grep -c . || true)
