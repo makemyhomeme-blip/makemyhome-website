@@ -1,6 +1,6 @@
 # SEO audit — makemyhome.me
 
-Napravljeno: 2026-08-16 18:28 UTC · Googlebot user-agent
+Napravljeno: 2026-08-16 21:32 UTC · Googlebot user-agent
 
 **[!!]** blokator · **[!]** ozbiljno · **[i]** informacija
 
@@ -88,20 +88,20 @@ znaci da ih crta JavaScript i Google ih u prvom prolazu ne vidi.
 
 ```
 kategorija                                rijeci   €    h2    h3
-/kategorija/bambus-paneli                   2252    81    51     3
-/kategorija/bambus-drveni                   1624    21    21     3
-/kategorija/bambus-tekstilni                1701    23    21     3
-/kategorija/bambus-mermerni                 1739    29    25     3
-/kategorija/bambus-metalni                  1504    11    16     3
-/kategorija/bambus-kozni                    1514    12    16     3
-/kategorija/3d-letvice                      2213    59    40     3
-/kategorija/akusticni-paneli                1827    24    21     3
-/kategorija/aluminijum-lajsne               1731    13    20     3
-/kategorija/spc-pod                         1702    15    17     3
-/kategorija/pu-kamen                        1862    21    21     3
-/kategorija/classic                         1519    11    16     3
-/kategorija/mdf                             1646    17    17     3
-/kategorija/flex-stone                      1897    25    22     3
+/kategorija/bambus-paneli                   2214    81    49     3
+/kategorija/bambus-drveni                   1539    21    13     3
+/kategorija/bambus-tekstilni                1615    23    13     3
+/kategorija/bambus-mermerni                 1654    29    17     3
+/kategorija/bambus-metalni                  1418    11     8     3
+/kategorija/bambus-kozni                    1426    12     8     3
+/kategorija/3d-letvice                      2128    59    32     3
+/kategorija/akusticni-paneli                1742    24    13     3
+/kategorija/aluminijum-lajsne               1646    13    12     3
+/kategorija/spc-pod                         1615    15     9     3
+/kategorija/pu-kamen                        1777    21    13     3
+/kategorija/classic                         1431    11     8     3
+/kategorija/mdf                             1559    17     9     3
+/kategorija/flex-stone                      1812    25    14     3
 ```
 [i] Sve kategorije imaju cijene u sirovom HTML-u — server ih ispisuje.
 [i] Svaka stranica proizvoda ima cijenu u sirovom HTML-u.
@@ -211,9 +211,9 @@ f4c642a Sitemap nije imao nijednu sliku — Google nije mogao ni da ih otkrije
 
 ```
 stranica                                           TTFB   ukupno
-/                                              0.655820s 0.805832s
-/kategorija/bambus-paneli                      0.753611s 1.005375s
-/paneli/drveni-panel-golden-teak               0.676137s 0.821536s
+/                                              0.778146s 0.920974s
+/kategorija/bambus-paneli                      0.769011s 1.021382s
+/paneli/drveni-panel-golden-teak               0.634598s 0.796155s
 ```
 [i] Mjereno kroz posrednik ovog okruzenja — pravi server je brzi za oko 0,5 s.
 

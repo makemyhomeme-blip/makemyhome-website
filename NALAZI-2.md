@@ -1,5 +1,12 @@
 # NALAZI-2 — druga runda, 16. avgust 2026.
 
+> **STANJE: O1 i O2 popravljeni i pušteni na sajt** (commit `d807a3a`).
+> CLS na `/kategorija/bambus-paneli` 0,517 → **0,001**; ostalih 13 kategorija
+> 0,05 → 0,001–0,025. Sirovi HTML i iscrtani DOM su na svih 149 adresa isti po
+> proizvodima, cijenama, pločicama, naslovima i JSON-LD blokovima.
+> Poslije deploya: `provjera.py` 50/50, `seo-audit.sh` 0 oznaka, `r2-jsonld`
+> 0 grešaka. Detalji ispod ostaju kao zapis šta je bilo i zašto.
+
 Prva runda je gledala **statični HTML** i prošla čisto, a kvar je bio u
 **ponašanju** — JavaScript je gasio 39 proizvoda na `/kategorija/bambus-paneli`.
 Ova runda zato mjeri šta ostane **poslije** izvršavanja JavaScripta.
@@ -48,7 +55,7 @@ jedino `bambus-paneli` (`js/products.js:220–222`).
 
 ## 2. OZBILJNO [!]
 
-### O1 — `/kategorija/bambus-paneli` skače raspored: CLS **0,517**
+### O1 — `/kategorija/bambus-paneli` skače raspored: CLS **0,517** — POPRAVLJENO
 
 Googleov prag je 0,1. Ova stranica je **pet puta iznad njega**, jedina na sajtu.
 
@@ -89,7 +96,7 @@ ništa se ne pomjera. Mjesto: `products.php:688` (grana kada je `$cat` roditelj)
 plus zaštita u `js/products.js:306–307` — ne prepisuj mrežu ako su pločice već
 tu, isto kao što `showCategoryProducts()` već radi za proizvode.
 
-### O2 — Google na toj stranici u prvom prolazu vidi pogrešnih 8 naslova
+### O2 — Google na toj stranici u prvom prolazu vidi pogrešnih 8 naslova — POPRAVLJENO
 
 Na istoj stranici, `h2` prije i poslije JavaScripta:
 
@@ -109,7 +116,7 @@ nikad, jer postoje samo poslije JavaScripta. Isti uzrok kao O1, isti popravak.
 
 ## 3. SITNICE
 
-**S1 — skrivena mreža kategorija na svih 14 kategorija**
+**S1 — skrivena mreža kategorija na svih 14 kategorija** — POPRAVLJENO (mreža se na lisnatim kategorijama više ne ispisuje)
 `products.php:688`. Svaka kategorija nosi 8 kartica glavnih kategorija sa
 `display:none`. Google ih čita u HTML-u, posjetilac ih ne vidi nikad. Nije kazna
 i nije cloaking — svi dobijaju isti HTML — ali je 8 nepotrebnih naslova i 8
