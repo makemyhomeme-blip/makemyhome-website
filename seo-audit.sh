@@ -179,17 +179,22 @@ while IFS='|' read -r u kod _; do
   t=$(printf '%s' "$jedan" | grep -oiE '<title>[^<]*</title>' | head -1 | sed 's/<[^>]*>//g; s/^ *//; s/ *$//')
   d=$(printf '%s' "$jedan" | grep -oiE '<meta[^>]*name="description"[^>]*>' | head -1 \
       | grep -oiE 'content="[^"]*' | sed 's/^content="//' | tr -s ' ')
-  echo "$u|${t:-NEMA}|${d:-NEMA}" >> "$KES/meta.txt"
+  # Razdvajac je TABULATOR, ne "|". Naslovi na ovom sajtu izgledaju ovako:
+  # "Proizvodi | Make My Home Decor" — sa "|" kao razdvajacem awk je za polje
+  # opisa uzimao rep naslova (" Make My Home Decor"), isti za 148 stranica, pa
+  # je skript prijavio duplirani opis kojeg nema, a opisi nikad nisu ni bili
+  # uporedjeni. Tabulator se u naslovima i opisima ne pojavljuje.
+  printf '%s\t%s\t%s\n' "$u" "${t:-NEMA}" "${d:-NEMA}" >> "$KES/meta.txt"
 done < "$KES/statusi.txt"
-BT=$(awk -F'|' '$2=="NEMA"' "$KES/meta.txt" | grep -c . || true)
-BD=$(awk -F'|' '$3=="NEMA"' "$KES/meta.txt" | grep -c . || true)
+BT=$(awk -F'\t' '$2=="NEMA"' "$KES/meta.txt" | grep -c . || true)
+BD=$(awk -F'\t' '$3=="NEMA"' "$KES/meta.txt" | grep -c . || true)
 [ "$BT" -gt 0 ] && r "[!!] $BT stranica bez title." || r "[i] Svaka stranica ima title."
 [ "$BD" -gt 0 ] && r "[!] $BD stranica bez meta opisa." || r "[i] Svaka stranica ima meta opis."
-DT=$(awk -F'|' '$2!="NEMA"{print $2}' "$KES/meta.txt" | sort | uniq -d | grep -c . || true)
-DD=$(awk -F'|' '$3!="NEMA"{print $3}' "$KES/meta.txt" | sort | uniq -d | grep -c . || true)
-[ "$DT" -gt 0 ] && { r "[!] $DT dupliranih title-ova:"; r '```'; awk -F'|' '$2!="NEMA"{print $2}' "$KES/meta.txt" | sort | uniq -d | head -10 >> "$IZV"; r '```'; } || r "[i] Nijedan title se ne ponavlja."
-[ "$DD" -gt 0 ] && r "[!] $DD dupliranih meta opisa." || r "[i] Nijedan opis se ne ponavlja."
-DUG=$(awk -F'|' '$2!="NEMA" && length($2)>60' "$KES/meta.txt" | grep -c . || true)
+DT=$(awk -F'\t' '$2!="NEMA"{print $2}' "$KES/meta.txt" | sort | uniq -d | grep -c . || true)
+DD=$(awk -F'\t' '$3!="NEMA"{print $3}' "$KES/meta.txt" | sort | uniq -d | grep -c . || true)
+[ "$DT" -gt 0 ] && { r "[!] $DT dupliranih title-ova:"; r '```'; awk -F'\t' '$2!="NEMA"{print $2}' "$KES/meta.txt" | sort | uniq -d | head -10 >> "$IZV"; r '```'; } || r "[i] Nijedan title se ne ponavlja."
+[ "$DD" -gt 0 ] && { r "[!] $DD dupliranih meta opisa:"; r '```'; awk -F'\t' '$3!="NEMA"{print $3}' "$KES/meta.txt" | sort | uniq -d | cut -c1-100 | head -10 >> "$IZV"; r '```'; } || r "[i] Nijedan opis se ne ponavlja."
+DUG=$(awk -F'\t' '$2!="NEMA" && length($2)>60' "$KES/meta.txt" | grep -c . || true)
 [ "$DUG" -gt 0 ] && r "[i] $DUG title-ova duze od 60 znakova (Google ih skracuje)."
 
 # ------------------------------------------------- 8. SADRZAJ BEZ JS --------

@@ -1,6 +1,6 @@
 # SEO audit — makemyhome.me
 
-Napravljeno: 2026-08-16 15:55 UTC · Googlebot user-agent
+Napravljeno: 2026-08-16 18:28 UTC · Googlebot user-agent
 
 **[!!]** blokator · **[!]** ozbiljno · **[i]** informacija
 
@@ -65,7 +65,8 @@ Skinuto: **149** stranica.
 [i] Svaka stranica ima title.
 [i] Svaka stranica ima meta opis.
 [i] Nijedan title se ne ponavlja.
-[!] 1 dupliranih meta opisa.
+[i] Nijedan opis se ne ponavlja.
+[i] 48 title-ova duze od 60 znakova (Google ih skracuje).
 
 ## 8. Sadrzaj u sirovom HTML-u (bez JavaScripta)
 
@@ -162,7 +163,7 @@ Interni linkovi koji vracaju gresku (uzorak 60):
 ./hvala.html:18:  <meta name="robots" content="noindex, follow">
 ./404.html:5:  <meta name="robots" content="noindex, follow">
 ./product.php:57:    header('X-Robots-Tag: noindex', true);
-./js-check.js:207:    if (/noindex/i.test(d.robots)) dodaj(`[!!] meta robots sadrzi noindex: \`${d.robots}\``);
+./js-check.js:234:    if (/noindex/i.test(d.robots)) dodaj(`[!!] meta robots sadrzi noindex: \`${d.robots}\``);
 ./checkout.html:6:  <meta name="robots" content="noindex, follow">
 ./products.php:46:    header('X-Robots-Tag: noindex', true);
 ./products.php:112:    header('X-Robots-Tag: noindex', true);
@@ -210,9 +211,9 @@ f4c642a Sitemap nije imao nijednu sliku — Google nije mogao ni da ih otkrije
 
 ```
 stranica                                           TTFB   ukupno
-/                                              0.781034s 0.978820s
-/kategorija/bambus-paneli                      0.655437s 0.907265s
-/paneli/drveni-panel-golden-teak               0.660345s 0.819240s
+/                                              0.655820s 0.805832s
+/kategorija/bambus-paneli                      0.753611s 1.005375s
+/paneli/drveni-panel-golden-teak               0.676137s 0.821536s
 ```
 [i] Mjereno kroz posrednik ovog okruzenja — pravi server je brzi za oko 0,5 s.
 
