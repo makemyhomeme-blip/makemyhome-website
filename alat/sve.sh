@@ -156,8 +156,13 @@ echo; echo "--- 6/7  LIGHTHOUSE · Googleov alat na 14 tipova stranica ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi LIGHTHOUSE PRESK "preskoceno jer je pokrenuto 'brzo' — pokreni bez 'brzo' prije indeksiranja"
 elif ! ls /home/user/lighthouse/node_modules/.bin/lighthouse >/dev/null 2>&1 \
-     && ! command -v lighthouse >/dev/null 2>&1; then
-  zapisi LIGHTHOUSE PAD "nije instaliran (nestane pri resetu okruzenja) — instaliraj: cd /home/user/lighthouse && npm i lighthouse"
+     && ! command -v lighthouse >/dev/null 2>&1 \
+     && { echo "    Lighthouse nije nadjen — instaliram (nestane pri resetu okruzenja)…"
+          mkdir -p /home/user/lighthouse \
+            && (cd /home/user/lighthouse && npm init -y >/dev/null 2>&1 \
+                && npm i lighthouse --no-audit --no-fund >/dev/null 2>&1)
+          ! ls /home/user/lighthouse/node_modules/.bin/lighthouse >/dev/null 2>&1; }; then
+  zapisi LIGHTHOUSE PAD "nije instaliran i instalacija nije uspjela — provjeri mrezu, pa: cd /home/user/lighthouse && npm i lighthouse"
 else
   ocisti; sleep 1
   LH="${LH:-/home/user/lighthouse/node_modules/.bin/lighthouse}" \
