@@ -1300,6 +1300,52 @@ def grupa_I():
          for v in VODICI if dolazni[(BAZA + '/' + v).rstrip('/')] < 10]
     zabiljezi('I3', 'Svaki vodic je linkovan sa bar 10 stranica', g, len(VODICI))
 
+    # ---- Do svake stranice se mora doci sa pocetne, pracenjem linkova ------
+    #
+    # I1 provjerava da do stranice vodi bar jedan link. To nije isto: stranica
+    # moze imati link sa druge stranice do koje se takodje ne moze doci. Ovdje
+    # se pusta pauk koji krece sa pocetne i prati linkove do tri klika dubine,
+    # i gleda dosegne li svih 149 adresa iz sitemapa.
+    #
+    # Zasto je vazno: u Search Console-u je na svakoj stranici pisalo
+    # "No referring sitemaps detected" — Google nijednu adresu nije pripisivao
+    # sitemapu. Da sajt zavisi od sitemapa, to bi bio ozbiljan problem. Ovako
+    # nije: i da ga Google potpuno ignorise, do svake stranice dodje linkovima.
+    from urllib.parse import urljoin as _spoji
+    g = []
+    cilj = {a for a in SITEMAP if '/images/' not in a}
+    posjeceno, red, nadjeno = set(), [(BAZA + '/', 0)], set()
+    while red and len(posjeceno) < 80:
+        u, dub = red.pop(0)
+        if u in posjeceno or dub > 3:
+            continue
+        posjeceno.add(u)
+        h = STRANICE.get(u, (None,))[0]
+        if h is None:
+            h, kodP, _, _ = dohvati(u, timeout='20')
+            if kodP != '200':
+                continue
+        if not h or len(h) < 500:
+            continue
+        b = re.search(r'<base href="([^"]*)"', h)
+        baza = b.group(1) if b else u
+        bez = re.sub(r'<script[^>]*>.*?</script>', '', h, flags=re.S)
+        for m in re.findall(r'href="([^"#][^"]*)"', bez):
+            if m.startswith(('mailto:', 'tel:', 'javascript:', 'viber:', 'data:')):
+                continue
+            if m.startswith('http') and not m.startswith(BAZA):
+                continue
+            a = _spoji(baza, m).split('#')[0].split('?')[0]
+            if not a.startswith(BAZA):
+                continue
+            if a in cilj:
+                nadjeno.add(a)
+            if a not in posjeceno:
+                red.append((a, dub + 1))
+    for u in sorted(cilj - nadjeno):
+        g.append('%s → do nje se ne moze doci sa pocetne u tri klika' % u)
+    zabiljezi('I4', 'Do svake stranice se dolazi sa pocetne, bez sitemapa', g, len(cilj))
+
 
 # ============================================================
 # S — SITEMAP
