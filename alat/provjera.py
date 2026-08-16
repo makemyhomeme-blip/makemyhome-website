@@ -67,6 +67,26 @@ def zabiljezi(sifra, opis, greske, provjereno):
         print('        · …i jos %d' % (len(greske) - 6))
 
 
+def mmhCvorovi(d):
+    """Svi JSON-LD cvorovi, ukljucujuci one unutar @graph.
+
+    Bez ovoga se @graph preskace u tisini. Kad je schema na kategorijama
+    prebacena u @graph — da se politika povrata i uslovi dostave definisu
+    jednom pa pozivaju oznakom — pravila D2, D3 i D4 bi prestala da vide
+    proizvode na tih 14 stranica, i javljala bi da je sve u redu jer nemaju
+    sta da provjere. Provjera koja nema sta da gleda uvijek prolazi.
+    """
+    for o in (d if isinstance(d, list) else [d]):
+        if not isinstance(o, dict):
+            continue
+        if '@graph' in o:
+            for g in (o['@graph'] if isinstance(o['@graph'], list) else [o['@graph']]):
+                if isinstance(g, dict):
+                    yield g
+        else:
+            yield o
+
+
 def tekst_bez_skripti(h):
     v = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', h, flags=re.S)
     v = re.sub(r'<[^>]+>', ' ', v)
@@ -435,9 +455,7 @@ def grupa_D():
             except Exception as e:
                 g1.append('%s → %s' % (u, str(e)[:40]))
         for d in blokovi:
-            for o in (d if isinstance(d, list) else [d]):
-                if not isinstance(o, dict):
-                    continue
+            for o in mmhCvorovi(d):
                 t = o.get('@type')
                 if t == 'BreadcrumbList':
                     poz = [e.get('position') for e in o.get('itemListElement', [])]
@@ -506,9 +524,7 @@ def grupa_D():
                 d = json.loads(blok)
             except Exception:
                 continue                      # D1 to vec prijavljuje
-            for n in (d if isinstance(d, list) else [d]):
-                if not isinstance(n, dict):
-                    continue
+            for n in mmhCvorovi(d):
                 t = n.get('@type')
                 tt = t if isinstance(t, list) else [t]
                 if not any(x in ('Organization', 'LocalBusiness', 'HomeGoodsStore', 'Store') for x in tt):

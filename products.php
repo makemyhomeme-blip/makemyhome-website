@@ -312,7 +312,18 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       'itemCondition'          => 'https://schema.org/NewCondition',
       'priceValidUntil'        => date('Y-m-t', strtotime('first day of next month')),
       'availability'           => ($p['inStock'] ?? true) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      // Politika povrata i uslovi dostave se OVDJE ne salju.
+      // Politika povrata i uslovi dostave — pozivaju se OZNAKOM, ne prepisuju.
+      //
+      // Ranije su bili ispisani u cjelini uz svaki proizvod: 800 B istog teksta
+      // dvadeset puta po kategoriji. Zato su uklonjeni, uz obrazlozenje da ih
+      // Google cita sa stranice proizvoda. To obrazlozenje je bilo netacno:
+      // Search Console ih trazi bas ovdje ("Missing field hasMerchantReturnPolicy"
+      // i "shippingDetails", 19 stavki na pu-kamen i flex-stone).
+      //
+      // Sada su definisani jednom, u @graph nize, a ovdje stoji poziv na njih.
+      // Blok je 7,2 kB umjesto 12,6 kB koliko bi bio sa prepisivanjem.
+      'hasMerchantReturnPolicy' => ['@id' => 'https://makemyhome.me/#povrat'],
+      'shippingDetails'         => ['@id' => 'https://makemyhome.me/#dostava'],
       // Bili su ubaceni u svaku od 20 stavki, potpuno isti tekst 20 puta —
       // 800 B po proizvodu, 16 kB praznog ponavljanja na svakoj kategoriji.
       // Google te podatke cita sa stranice samog proizvoda, gdje i stoje
@@ -339,7 +350,30 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
 }
 echo '<script type="application/ld+json">' . "\n";
 echo json_encode([
-  '@context'       => 'https://schema.org',
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    // Definisani jednom, pozvani iz svake ponude preko @id.
+    [
+      '@type'                => 'MerchantReturnPolicy',
+      '@id'                  => 'https://makemyhome.me/#povrat',
+      'applicableCountry'    => 'ME',
+      'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      'merchantReturnDays'   => 7,
+      'returnMethod'         => 'https://schema.org/ReturnByMail',
+      'returnFees'           => 'https://schema.org/FreeReturn',
+    ],
+    [
+      '@type'               => 'OfferShippingDetails',
+      '@id'                 => 'https://makemyhome.me/#dostava',
+      'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => '20', 'currency' => 'EUR'],
+      'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'ME'],
+      'deliveryTime'        => [
+        '@type'        => 'ShippingDeliveryTime',
+        'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 0, 'maxValue' => 2, 'unitCode' => 'DAY'],
+        'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 4, 'unitCode' => 'DAY'],
+      ],
+    ],
+    [
   '@type'          => 'ItemList',
   'name'           => $catName,
   'url'            => $ogUrl,
@@ -348,6 +382,8 @@ echo json_encode([
   // Bez JSON_PRETTY_PRINT: uvlake za 20 stavki su same po sebi nosile oko
   // trecinu velicine bloka. Google cita jednako, a izvorni kod stranice
   // postaje pregledan kad se otvori u alatu za provjeru.
+    ],
+  ],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 echo "\n</script>\n";
 ?>
