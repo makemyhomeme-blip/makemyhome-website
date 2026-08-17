@@ -313,6 +313,12 @@ $mmhDostava = [
     'transitTime'  => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 4, 'unitCode' => 'DAY'],
   ],
 ];
+/* Spisak u strukturiranim podacima ide do 20 stavki. Granica postoji zbog
+   velicine bloka (20 stavki je 7,2 kB; svih 39 na bambusu bilo bi oko 14 kB), a
+   svaki proizvod ionako nosi punu schemu na svojoj stranici.
+   VAZNO: numberOfItems nize MORA biti broj stvarno ispisanih stavki, ne ukupan
+   broj proizvoda u kategoriji. Ranije je javljao 39 pa nabrojao 20 — Googleu je
+   to netacan podatak, a netacan podatak u schemi rusi vjeru i u ostale. */
 $_items = [];
 foreach (array_slice($_listProds, 0, 20) as $i => $p) {
   $pOrig    = (float)($p['price'] ?? 0);
@@ -331,8 +337,13 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
     'sku'         => preg_replace('/\s+/', '-', trim($p['sku'] ?? $p['name'] ?? '')),
     'offers'      => [
       '@type'                  => 'Offer',
+      // url i seller: Google ih za Merchant listings preporucuje uz svaku ponudu.
+      // Stranica proizvoda ih je imala, spisak na kategoriji nije — pa je isti
+      // proizvod na dva mjesta imao razlicito opisanu ponudu.
+      'url'                    => mmhUrlProizvoda($p),
       'price'                  => (string)$pFinal,
       'priceCurrency'          => 'EUR',
+      'seller'                 => ['@type' => 'Organization', 'name' => 'Make My Home Decor', 'url' => 'https://makemyhome.me'],
       // Google (Merchant listings) trazi i pocetak vazenja cijene uz priceValidUntil.
       // Popust ide po mjesecima, pa je pocetak prvi dan tekuceg mjeseca.
       'validFrom'      => date('Y-m-01'),
@@ -347,14 +358,14 @@ foreach (array_slice($_listProds, 0, 20) as $i => $p) {
       // Search Console ih trazi bas ovdje ("Missing field hasMerchantReturnPolicy"
       // i "shippingDetails", 19 stavki na pu-kamen i flex-stone).
       //
-      // Sada su definisani jednom, u @graph nize, a ovdje stoji poziv na njih.
-      // Blok je 7,2 kB umjesto 12,6 kB koliko bi bio sa prepisivanjem.
+      // Sastavljeni su jednom iznad petlje ($mmhPovrat, $mmhDostava) i upisuju se
+      // u svaku ponudu u cjelini. Kraca varijanta preko @graph i @id je bila
+      // probana i namjerno vracena: Googleov primjer za ova polja pokazuje da se
+      // upisuju direktno, a ovo nije mjesto za neprovjereno rjesenje.
+      // Cijena toga je velicina: spisak na bambusu je 27 kB. Google to cita bez
+      // problema, ali ako se ikad bude smanjivalo, smanjuje se OVO, ne broj polja.
       'hasMerchantReturnPolicy' => $mmhPovrat,
       'shippingDetails'         => $mmhDostava,
-      // Bili su ubaceni u svaku od 20 stavki, potpuno isti tekst 20 puta —
-      // 800 B po proizvodu, 16 kB praznog ponavljanja na svakoj kategoriji.
-      // Google te podatke cita sa stranice samog proizvoda, gdje i stoje
-      // (product.php ih i dalje salje). Ovo je spisak, ne prodajna stranica.
     ],
   ];
   // ---- OCJENE U STRUKTURIRANIM PODACIMA — NAMJERNO ISKLJUCENO ----
@@ -381,7 +392,7 @@ echo json_encode([
   '@type'          => 'ItemList',
   'name'           => $catName,
   'url'            => $ogUrl,
-  'numberOfItems'  => count($_listProds),
+  'numberOfItems'  => count($_items),
   'itemListElement'=> $_items,
   // Bez JSON_PRETTY_PRINT: uvlake za 20 stavki su same po sebi nosile oko
   // trecinu velicine bloka. Google cita jednako, a izvorni kod stranice
