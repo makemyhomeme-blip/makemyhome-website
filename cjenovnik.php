@@ -94,17 +94,17 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="apple-touch-icon" sizes="512x512" href="images/favicon-512.png">
   <meta name="theme-color" content="#1a1a1a">
-  <link rel="preload" href="fa/webfonts/fa-solid-900.woff2?v=2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fa/webfonts/fa-solid-900.woff2?v=aebfb638" as="font" type="font/woff2" crossorigin>
   <!-- Ikone se ucitavaju bez blokiranja: media="print" znaci da pregledac fajl
        preuzme ali ga ne ceka da bi iscrtao stranicu, a onload ga odmah vrati u
        upotrebu. Ikone su ukras — LCP element je tekst i ne smije da ceka na njih.
        Pravilo ispod cuva sirinu 1em za svaku ikonu dok CSS ne stigne, da se
        dugmad ne pomjere kad se ikone pojave (CLS ostaje 0). -->
   <style>i[class*="fa-"]{display:inline-block;width:1em;height:1em}</style>
-  <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2"></noscript>
+  <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=54">
+  <link rel="stylesheet" href="css/style-v5.css?v=86d9ada3">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -719,8 +719,8 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 </div>
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
-<script src="js/main-v4.js?v=6"></script>
-<script src="js/cart.js?v=3"></script>
-<script src="js/analytics-events.js?v=3" defer></script>
+<script src="js/main-v4.js?v=d86f5c22"></script>
+<script src="js/cart.js?v=2906a9ed"></script>
+<script src="js/analytics-events.js?v=6b69b9c0" defer></script>
 </body>
 </html>

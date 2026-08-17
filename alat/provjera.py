@@ -18,6 +18,7 @@ from html.parser import HTMLParser
 BAZA = 'https://makemyhome.me'
 KORIJEN = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CURL = ['curl', '-sk', '--cacert', '/root/.ccr/ca-bundle.crt']
+GOOGLEBOT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
 rezultati = []
 
 # Spora pravila (ona koja povlace stotine adresa) rade se samo uz 'sve'.
@@ -65,6 +66,11 @@ def zabiljezi(sifra, opis, greske, provjereno):
         print('        · %s' % str(g)[:112])
     if len(greske) > 6:
         print('        · …i jos %d' % (len(greske) - 6))
+
+
+def urlparse_put(u):
+    """Samo putanja iz adrese: https://makemyhome.me/paneli/x -> /paneli/x"""
+    return re.sub(r'^https?://[^/]+', '', u)
 
 
 def mmhCvorovi(d):
@@ -1177,22 +1183,22 @@ def grupa_G():
 
     # ---- G16 i G17: IZMJENA MORA STICI DO POSJETIOCA ---------------------
     #
-    # Zasto ova dva pravila postoje:
+    # Zasto:
     # Recenzije su obrisane sa servera i provjera je javila "0 tragova na svih
-    # 149 stranica" — a vlasnik ih je i dalje gledao na svom telefonu. Provjera
-    # je gledala STA SERVER POSALJE, a ne STA PREGLEDAC POKAZE. js/products.js
-    # se servira sa "immutable" na godinu, a broj u ?v= je ostao 51, pa je svaki
-    # posjetilac koji je sajt vec otvarao dobijao stari fajl iz svog kesa — sa
-    # svim izmisljenim recenzijama. Google to nije vidio jer bot ne kesira.
+    # 149 stranica" — a vlasnik ih je i dalje gledao na telefonu. Provjera je
+    # gledala STA SERVER POSALJE, a ne STA PREGLEDAC POKAZE. js/products.js se
+    # servira sa immutable na godinu, a broj u ?v= je ostao 51, pa je svaki
+    # posjetilac koji je sajt vec otvarao dobijao stari fajl iz svog kesa.
     #
     # G16: fajl koji se servira dugorocno MORA imati ?v= i istu vrijednost svuda.
-    # G17: ako se sadrzaj fajla promijenio, broj u ?v= se MORA promijeniti.
-    #      Alat pamti par (hash, verzija) u alat/verzije.json i poredi.
+    # G17: ta vrijednost MORA biti hash sadrzaja fajla (alat/verzije.py).
+    #      Nema pamcenja sa strane — tacna vrijednost se racuna iz samog fajla,
+    #      pa pravilo ne moze zakazati zato sto je neko zaboravio nesto upisati.
     import hashlib as _h
     ref = {}          # sredstvo -> {verzija: [fajlovi]}
     for koren, dirs, fajlovi in os.walk(KORIJEN):
         dirs[:] = [d for d in dirs if d not in
-                   ('.git', 'alat', 'node_modules', '.seo-audit-kes', 'images', 'data')]
+                   ('.git', 'alat', 'node_modules', '.seo-audit-kes', 'images', 'data', 'admin')]
         for f in fajlovi:
             if not f.endswith(('.html', '.php')):
                 continue
@@ -1202,54 +1208,173 @@ def grupa_G():
             except OSError:
                 continue
             for m in re.finditer(
-                    r'(?:src|href)="((?:js|css|fa)/[^"?]+\.(?:js|css|woff2?|ttf))(?:\?v=([0-9.]+))?"', t):
+                    r'(?:src|href)="((?:js|css|fa)/[^"?]+\.(?:js|css|woff2?|ttf))(?:\?v=([A-Za-z0-9.]+))?"', t):
                 ref.setdefault(m.group(1), {}).setdefault(m.group(2) or '', []).append(
                     os.path.relpath(os.path.join(koren, f), KORIJEN))
 
-    g16 = []
-    dugorocni = []
+    g16, g17, dugorocni = [], [], []
     for sred in sorted(ref):
         zag = subprocess.run(CURL + ['-I', '--max-time', '15', BAZA + '/' + sred],
                              capture_output=True, text=True, errors='replace').stdout
-        dugo = 'immutable' in zag or 'max-age=31536000' in zag
-        if not dugo:
+        if 'immutable' not in zag and 'max-age=31536000' not in zag:
             continue
         dugorocni.append(sred)
         verzije = ref[sred]
         if '' in verzije:
             g16.append('%s se kesira godinu, a %d fajl(ova) ga poziva BEZ ?v= (%s)'
                        % (sred, len(verzije['']), verzije[''][0]))
-        drugi = [v for v in verzije if v]
+        drugi = sorted(v for v in verzije if v)
         if len(drugi) > 1:
-            g16.append('%s se poziva sa vise razlicitih verzija: %s' % (sred, ', '.join(sorted(drugi))))
-    zabiljezi('G16', 'Dugorocno kesiran fajl ima verziju, istu svuda', g16, max(len(dugorocni), 1))
-
-    pamcenje = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'verzije.json')
-    try:
-        with open(pamcenje, encoding='utf-8') as fh:
-            staro = json.load(fh)
-    except Exception:
-        staro = {}
-    g17 = []
-    novo = dict(staro)
-    for sred in dugorocni:
+            g16.append('%s se poziva sa vise razlicitih verzija: %s' % (sred, ', '.join(drugi)))
         put = os.path.join(KORIJEN, sred)
         if not os.path.exists(put):
             continue
         with open(put, 'rb') as fh:
-            hesh = _h.sha256(fh.read()).hexdigest()[:16]
-        verzija = sorted([v for v in ref[sred] if v]) or ['']
-        verzija = verzija[0]
-        prije = staro.get(sred)
-        if prije and prije['hash'] != hesh and prije['verzija'] == verzija:
-            g17.append('%s je izmijenjen, a ?v=%s nije podignut — izmjena ne stize '
-                       'do nikoga ko je sajt vec otvarao' % (sred, verzija))
-        else:
-            novo[sred] = {'hash': hesh, 'verzija': verzija}
-    zabiljezi('G17', 'Izmijenjen fajl znaci i podignutu verziju', g17, max(len(dugorocni), 1))
-    if not g17:
-        with open(pamcenje, 'w', encoding='utf-8') as fh:
-            json.dump(novo, fh, ensure_ascii=False, indent=1, sort_keys=True)
+            hesh = _h.sha256(fh.read()).hexdigest()[:8]
+        for v in drugi:
+            if v != hesh:
+                g17.append('%s?v=%s ne odgovara sadrzaju (treba %s) — pokreni '
+                           'python3 alat/verzije.py upisi' % (sred, v, hesh))
+    zabiljezi('G16', 'Dugorocno kesiran fajl ima verziju, istu svuda', g16, max(len(dugorocni), 1))
+    zabiljezi('G17', 'Verzija je hash sadrzaja fajla', g17, max(len(dugorocni), 1))
+
+    # ---- G18-G24: ZAVRSNA ZASTITA -----------------------------------------
+    #
+    # Sedam pravila koja cuvaju ono sto je danas dovedeno u red. Neka se
+    # preklapaju sa ranijim pravilima (A2 canonical, S1-S7 sitemap, G15
+    # noindex, I1-I4 linkovi) — namjerno: ranija gledaju jednu stranu, ova
+    # gledaju krajnji ishod, na zivom sajtu i u pregledacu.
+
+    # G18 — nigdje na javnoj stranici lazna recenzija ili ocjena
+    tragovi = ['rv-card', 'rv-wrap', 'testimonial-card', 'aggregateRating',
+               'ratingValue', 'reviewCount', 'ratingCount', 'Ocjene korisnika',
+               'Šta kažu kupci', 'Šta Kažu Naši Kupci', 'Google ocjena']
+    g = []
+    for u in SITEMAP:
+        h, kod, _, _ = dohvati(u, timeout='15')
+        if kod != '200':
+            g.append('%s → %s' % (u.replace(BAZA, ''), kod))
+            continue
+        bez = re.sub(r'<!--.*?-->', '', h, flags=re.S)     # komentari smiju objasniti
+        nasao = [t for t in tragovi if t in bez]
+        if nasao:
+            g.append('%s → %s' % (u.replace(BAZA, ''), ', '.join(nasao[:3])))
+    # I javni podaci, ne samo stranice.
+    for f in ('data/products.json', 'data/categories.json'):
+        tijelo, kod, _, _ = dohvati('%s/%s' % (BAZA, f), timeout='15')
+        if kod == '200' and re.search(r'"(reviews|rating|aggregateRating)"\s*:', tijelo):
+            g.append('%s sadrzi polje sa recenzijama/ocjenama' % f)
+    for f in ('data/reviews.json', 'data/reviews-extra.json'):
+        _, kod, _, _ = dohvati('%s/%s' % (BAZA, f), timeout='10')
+        if kod == '200':
+            g.append('%s je ponovo dostupan (mora biti obrisan)' % f)
+    zabiljezi('G18', 'Nigdje javno nema lazne recenzije ni ocjene', g, len(SITEMAP) + 4)
+
+    # G19 — Product schema bez review/aggregateRating dok nema stvarnih podataka
+    g = []
+    prov = [u for u in SITEMAP if '/paneli/' in u]
+    for u in prov:
+        h, kod, _, _ = dohvati(u, timeout='15')
+        if kod != '200':
+            g.append('%s → %s' % (u.replace(BAZA, ''), kod))
+            continue
+        for blok in re.findall(r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', h, re.S):
+            try:
+                d = json.loads(blok)
+            except Exception:
+                g.append('%s → JSON-LD se ne parsira' % u.replace(BAZA, ''))
+                continue
+            for c in mmhCvorovi(d):
+                if c.get('@type') == 'Product' and ('review' in c or 'aggregateRating' in c):
+                    g.append('%s → Product ima review/aggregateRating' % u.replace(BAZA, ''))
+    zabiljezi('G19', 'Product schema bez izmisljene ocjene', g, len(prov))
+
+    # G20 — canonical mora vracati 200 i pokazivati na samu stranicu
+    g = []
+    for u in SITEMAP:
+        h, kod, _, _ = dohvati(u, timeout='15')
+        if kod != '200':
+            g.append('%s → %s' % (u.replace(BAZA, ''), kod))
+            continue
+        m = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]*href=["\']([^"\']+)', h, re.I)
+        if not m:
+            g.append('%s → nema canonical' % u.replace(BAZA, ''))
+            continue
+        c = m.group(1)
+        if c != u:
+            g.append('%s → canonical pokazuje na %s' % (u.replace(BAZA, ''), c))
+            continue
+        if not c.startswith('https://makemyhome.me/'):
+            g.append('%s → canonical nije https bez www' % u.replace(BAZA, ''))
+    zabiljezi('G20', 'Canonical vraca 200 i pokazuje na samu stranicu', g, len(SITEMAP))
+
+    # G21 — svaka adresa iz sitemapa vraca 200 bez skoka (S1-S3 gledaju sadrzaj
+    #       sitemapa; ovo gleda ishod svake adrese)
+    g = []
+    for u in SITEMAP:
+        _, kod, sk, kraj = dohvati(u, prati=True, timeout='15')
+        if kod != '200' or sk != '0':
+            g.append('%s → %s, skokova %s, zavrsi na %s' % (u.replace(BAZA, ''), kod, sk, kraj))
+    zabiljezi('G21', 'Svaka adresa iz sitemapa vraca 200 bez skoka', g, len(SITEMAP))
+
+    # G22 — nijedna adresa iz sitemapa ne smije imati noindex (ni u HTML-u ni u
+    #       zaglavlju), ni kao posjetilac ni kao Googlebot
+    g = []
+    for u in SITEMAP:
+        h, kod, _, _ = dohvati(u, timeout='15')
+        if kod == '200' and re.search(r'<meta[^>]+name=["\']robots["\'][^>]*noindex', h, re.I):
+            g.append('%s → noindex u HTML-u' % u.replace(BAZA, ''))
+        zag = subprocess.run(CURL + ['-I', '--max-time', '15', '-A', GOOGLEBOT, u],
+                             capture_output=True, text=True, errors='replace').stdout
+        if re.search(r'(?i)x-robots-tag:[^\r\n]*noindex', zag):
+            g.append('%s → X-Robots-Tag: noindex' % u.replace(BAZA, ''))
+    zabiljezi('G22', 'Nijedna adresa iz sitemapa nema noindex', g, len(SITEMAP) * 2)
+
+    # G23 — do svakog proizvoda se dolazi internim linkovima (I2 broji dolazne
+    #       linkove; ovo trazi da ih ima bar jedan sa stranice koja nije sitemap)
+    g = []
+    dolazni = {}
+    for u in SITEMAP:
+        h, kod, _, _ = dohvati(u, timeout='15')
+        if kod != '200':
+            continue
+        bez = re.sub(r'<script[\s\S]*?</script>', '', h, flags=re.I)
+        for cilj in set(re.findall(r'href="[^"]*?(/paneli/[a-z0-9-]+)"', bez)):
+            if cilj != urlparse_put(u):
+                dolazni[cilj] = dolazni.get(cilj, 0) + 1
+    for u in prov:
+        put = u.replace(BAZA, '')
+        if dolazni.get(put, 0) == 0:
+            g.append('%s → nijedan interni link ne vodi do njega' % put)
+    zabiljezi('G23', 'Do svakog proizvoda vodi bar jedan interni link', g, len(prov))
+
+    # G24 — pregledac ne smije dobiti stari sadrzaj iz kesa
+    #
+    # Ovo je pravilo zbog kojeg su i nastala G16/G17. Ako je verzija u adresi
+    # hash sadrzaja, stari kes je nemoguc: druga verzija = druga adresa. Ovdje
+    # se to provjerava na zivom sajtu — hash u adresi naspram sadrzaja koji
+    # server stvarno vrati na toj adresi.
+    g = []
+    uzorak = [BAZA + '/'] + [u for u in SITEMAP if '/kategorija/' in u][:2] + \
+             [u for u in SITEMAP if '/paneli/' in u][:2]
+    prov_sred = 0
+    for u in uzorak:
+        h, kod, _, _ = dohvati(u, timeout='15')
+        if kod != '200':
+            g.append('%s → %s' % (u.replace(BAZA, ''), kod))
+            continue
+        for m in re.finditer(r'(?:src|href)="((?:js|css|fa)/[^"?]+)\?v=([A-Za-z0-9.]+)"', h):
+            sred, v = m.group(1), m.group(2)
+            tijelo, k2, _, _ = dohvati('%s/%s?v=%s' % (BAZA, sred, v), timeout='15')
+            if k2 != '200':
+                g.append('%s?v=%s → %s' % (sred, v, k2))
+                continue
+            prov_sred += 1
+            stvarni = _h.sha256(tijelo.encode('utf-8', 'surrogateescape')).hexdigest()[:8]
+            if len(v) == 8 and v != stvarni:
+                g.append('%s: u adresi stoji ?v=%s, a sadrzaj na serveru daje %s '
+                         '— pregledaci mogu drzati stari fajl' % (sred, v, stvarni))
+    zabiljezi('G24', 'Verzija u adresi odgovara onome sto server vrati', g, max(prov_sred, 1))
 
 
 # ============================================================

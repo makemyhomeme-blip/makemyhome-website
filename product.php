@@ -329,8 +329,10 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
      bio u tome sto je prikazivanje izmisljenih recenzija kao pravih nelojalna
      trgovacka praksa, i sto kupac koji to prepozna izgubi povjerenje u sve
      ostalo na stranici, uklucujuci cijene i mjere.
-     data/reviews.json i polje "reviews" u products.json ostaju na serveru, ali
-     ih nista ne cita. Kad recenzije budu dolazile od stvarnih kupaca kroz formu,
+     Podaci su takodje uklonjeni: data/reviews.json i data/reviews-extra.json su
+     obrisani sa servera i iz repoa, a polje "reviews" je izbaceno iz
+     data/products.json. Sigurnosna kopija stanja prije brisanja je u istoriji,
+     commit 1571fb6. Kad recenzije budu dolazile od stvarnih kupaca kroz formu,
      ovdje se vraca citanje, prikaz i tek tada aggregateRating u schemi. */
   $monthMap   = ['Januar'=>'01','Februar'=>'02','Mart'=>'03','April'=>'04','Maj'=>'05','Juni'=>'06',
                  'Juli'=>'07','Avgust'=>'08','Septembar'=>'09','Oktobar'=>'10','Novembar'=>'11','Decembar'=>'12'];
@@ -382,17 +384,17 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="icon" type="image/png" href="images/favicon-512.png">
   <link rel="apple-touch-icon" sizes="512x512" href="images/favicon-512.png">
   <meta name="theme-color" content="#1a1a1a">
-  <link rel="preload" href="fa/webfonts/fa-solid-900.woff2?v=2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fa/webfonts/fa-solid-900.woff2?v=aebfb638" as="font" type="font/woff2" crossorigin>
   <!-- Ikone se ucitavaju bez blokiranja: media="print" znaci da pregledac fajl
        preuzme ali ga ne ceka da bi iscrtao stranicu, a onload ga odmah vrati u
        upotrebu. Ikone su ukras — LCP element je tekst i ne smije da ceka na njih.
        Pravilo ispod cuva sirinu 1em za svaku ikonu dok CSS ne stigne, da se
        dugmad ne pomjere kad se ikone pojave (CLS ostaje 0). -->
   <style>i[class*="fa-"]{display:inline-block;width:1em;height:1em}</style>
-  <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=2"></noscript>
+  <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=54">
+  <link rel="stylesheet" href="css/style-v5.css?v=86d9ada3">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -1051,12 +1053,12 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js?v=6"></script>
-<script src="js/products.js?v=52"></script>
-<script src="js/cart.js?v=3"></script>
+<script src="js/main-v4.js?v=d86f5c22"></script>
+<script src="js/products.js?v=a373a25d"></script>
+<script src="js/cart.js?v=2906a9ed"></script>
 <script>
   renderProductDetail();
 </script>
-<script src="js/analytics-events.js?v=3" defer></script>
+<script src="js/analytics-events.js?v=6b69b9c0" defer></script>
 </body>
 </html>

@@ -35,3 +35,5 @@ __pycache__/
 R2-*.json
 alat/snimci/sada.json.gz
 alat/snimci/oko/
+data/reviews.json
+data/reviews-extra.json
