@@ -23,11 +23,15 @@
 #    5. PREGLEDAC  149 stranica: sto server posalje naspram sto pregledac pokaze
 #    6. SCHEMA     strukturirani podaci, sirovo naspram iscrtanog + obavezna polja
 #    7. BLJESAK    skok rasporeda i sadrzaj koji se pojavi pa nestane
-#    8. ADRESE     duplikati, varijante adresa, ostaci starog sajta
-#    9. OSTALO     lang, kosa crta, schema po tipu, robots.txt
-#   10. SEO        149 adresa sa Googlebot user-agentom
-#   11. IKONE      svaka ikona ima pravilo u CSS-u I znak u fontu
-#   12. PROMJENE   sta se promijenilo od zadnje ciste provjere
+#    8. SRV-PREGL  polje po polju: title, canonical, robots, h1, cijena, schema,
+#                  tragovi recenzija — i kao mobilni i kao racunar
+#    9. RESURSI    svaki zahtjev pregledaca: 4xx/5xx, velicine, LCP, CLS, kes
+#   10. VERZIJE    ?v= mora biti hash sadrzaja fajla (alat/verzije.py)
+#   11. ADRESE     duplikati, varijante adresa, ostaci starog sajta
+#   12. OSTALO     lang, kosa crta, schema po tipu, robots.txt
+#   13. SEO        149 adresa sa Googlebot user-agentom
+#   14. IKONE      svaka ikona ima pravilo u CSS-u I znak u fontu
+#   15. PROMJENE   sta se promijenilo od zadnje ciste provjere
 #   + LIGHTHOUSE   Googleov alat na 14 tipova stranica (dodatno)
 #
 # Koraci 5, 6 i 7 su tu zato sto svi ostali gledaju samo jednu stranu — sta
@@ -84,7 +88,7 @@ echo " $(date '+%Y-%m-%d %H:%M')"
 echo "==============================================================="
 
 # ---------------------------------------------------------------- 1. GIT ----
-echo; echo "--- 1/12  GIT · lokalno, GitHub i server ---"
+echo; echo "--- 1/15  GIT · lokalno, GitHub i server ---"
 GRANA=$(git rev-parse --abbrev-ref HEAD)
 git fetch --quiet origin "$GRANA" 2>/dev/null
 NEUPISANO=$(git status --porcelain | grep -c . || true)
@@ -100,7 +104,7 @@ fi
 echo "    (poredjenje sa serverom radi pravilo G4 u sljedecem koraku)"
 
 # ------------------------------------------------------------ 2. PRAVILA ----
-echo; echo "--- 2/12  PRAVILA · 54 pravila iz ETALON.md ---"
+echo; echo "--- 2/15  PRAVILA · 54 pravila iz ETALON.md ---"
 if [ "$BRZO" = "brzo" ]; then
   python3 alat/dok-ne-bude.py > "$ISPIS/pravila.txt" 2>&1
 else
@@ -118,7 +122,7 @@ else
 fi
 
 # --------------------------------------------------------------- 3. OKO ----
-echo; echo "--- 3/12  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
+echo; echo "--- 3/15  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
 ocisti; sleep 1
 # Sa ruterom: bez njega lokalna kopija ne zna za lijepe adrese
 # (/kategorija/x, /paneli/x) pa svaka pada na 404 stranicu, a alat to
@@ -144,7 +148,7 @@ else
 fi
 
 # ------------------------------------------------------------- 4. KORPA ----
-echo; echo "--- 4/12  KORPA · narudzba od pocetka do kraja ---"
+echo; echo "--- 4/15  KORPA · narudzba od pocetka do kraja ---"
 if curl -s -o /dev/null http://127.0.0.1:8899/korpa.html; then
   node alat/korpa.mjs > "$ISPIS/korpa.txt" 2>&1
   if [ $? -eq 0 ]; then
@@ -176,7 +180,7 @@ fi
 # vidljivog teksta. Ako se brojevi razlikuju, Google i covjek ne vide isto.
 #
 # Verziju kesiranih fajlova cuvaju pravila G16 i G17 u koraku 2.
-echo; echo "--- 5/12  PREGLEDAC · server naspram onoga sto pregledac pokaze ---"
+echo; echo "--- 5/15  PREGLEDAC · server naspram onoga sto pregledac pokaze ---"
 curl -s "https://makemyhome.me/sitemap.xml" 2>/dev/null | grep -o '<loc>[^<]*' | sed 's/<loc>//' > "$ISPIS/adrese.txt"
 UKUPNO=$(grep -c . "$ISPIS/adrese.txt" || echo 0)
 if [ "$BRZO" = "brzo" ]; then
@@ -211,7 +215,7 @@ fi
 # Uz to se provjeravaju obavezna polja: Product (name, apsolutna slika, cijena,
 # valuta, dostupnost), LocalBusiness (adresa, telefon, radno vrijeme) i
 # BreadcrumbList (redoslijed 1..N).
-echo; echo "--- 6/12  SCHEMA · strukturirani podaci, sirovo naspram iscrtanog ---"
+echo; echo "--- 6/15  SCHEMA · strukturirani podaci, sirovo naspram iscrtanog ---"
 if [ "$BROJ_META" -gt 0 ] && curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/schema" node alat/r2-jsonld.mjs "$META" > "$ISPIS/schema.txt" 2>&1
   KOD_S=$?
@@ -233,7 +237,7 @@ fi
 # Sadrzaj koji se pojavi pa nestane, i raspored koji skoci pod prstom.
 # Snima se na 200, 600, 1500 i 3000 ms od pocetka ucitavanja, na telefonu.
 # Googleov prag za skok rasporeda (CLS) je 0,1.
-echo; echo "--- 7/12  BLJESAK · skok rasporeda i sadrzaj koji nestane ---"
+echo; echo "--- 7/15  BLJESAK · skok rasporeda i sadrzaj koji nestane ---"
 if curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/bljesak" MMH_SNIMCI="$ISPIS/snimci" node alat/r2-bljesak.mjs > "$ISPIS/bljesak.txt" 2>&1
   KOD_B=$?
@@ -249,10 +253,73 @@ if curl -s -o /dev/null http://127.0.0.1:8898/; then
 else
   zapisi BLJESAK PAD "lokalni server nedostupan — NIJE provjereno"
 fi
+# Server ostaje upaljen — trebaju ga i koraci 8 i 9 (server-pregledac, resursi).
+
+# --------------------------------------- 8. SERVER-PREGLEDAC --------------
+#
+# Dva odvojena mjerenja iste stranice, polje po polju: title, meta description,
+# canonical, meta robots, h1, ime i cijena proizvoda, Product schema, broj slika
+# i internih linkova, tragovi recenzija. Mjeri se i kao mobilni i kao racunar.
+# Uzorak: pocetna + 5 kategorija + 10 proizvoda.
+echo; echo "--- 8/15  SERVER-PREGLEDAC · polje po polju, mobilni i racunar ---"
+{ echo "https://makemyhome.me/"; grep '/kategorija/' "$ISPIS/adrese.txt" | head -5;
+  grep '/paneli/' "$ISPIS/adrese.txt" | head -10; } > "$ISPIS/uzorak16.txt"
+if curl -s -o /dev/null http://127.0.0.1:8898/; then
+  MMH_IZLAZ="$ISPIS/sp" node alat/r2-server-pregledac.mjs "$ISPIS/uzorak16.txt" > "$ISPIS/sp.txt" 2>&1
+  KOD_SP=$?
+  PUK_SP=$(grep -oE 'pukle [0-9]+' "$ISPIS/sp.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  RAZ_SP=$(grep -oE 'razlike [0-9]+' "$ISPIS/sp.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  if [ "$PUK_SP" = "0" ] && [ "$RAZ_SP" = "0" ] && [ $KOD_SP -eq 0 ]; then
+    zapisi SRV-PREGL OK "16 stranica x 2 uredjaja: server i pregledac se poklapaju u svemu"
+  else
+    zapisi SRV-PREGL PAD "razlika na $RAZ_SP stranica, nije izmjereno $PUK_SP"
+    sed -n '/## \[!!\] Razlike/,/## Tabela/p' "$ISPIS/sp.md" 2>/dev/null | head -20
+  fi
+else
+  zapisi SRV-PREGL PAD "lokalni server nedostupan — NIJE provjereno"
+fi
+
+# ------------------------------------------- 9. RESURSI I BRZINA ----------
+#
+# Svaki zahtjev koji pregledac napravi: status, vrsta, velicina, zaglavlje kesa.
+# Kriticno je 4xx/5xx, mijesani sadrzaj, greska u konzoli i sredstvo koje se
+# kesira godinu bez verzije u adresi. Velika slika, LCP i CLS su savjet — ne
+# obaraju provjeru, jer su fotografije vlasnikove i ne diraju se bez dogovora.
+echo; echo "--- 9/15  RESURSI · zahtjevi, 4xx/5xx, velicine, LCP, CLS ---"
+if curl -s -o /dev/null http://127.0.0.1:8898/; then
+  MMH_IZLAZ="$ISPIS/res" node alat/r2-resursi.mjs "$ISPIS/uzorak16.txt" > "$ISPIS/res.txt" 2>&1
+  KOD_RS=$?
+  NEIZ=$(grep -oE 'nije izmjereno [0-9]+' "$ISPIS/res.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  KRIT=$(grep -oE 'kriticno [0-9]+' "$ISPIS/res.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  KONZ=$(grep -oE 'konzola [0-9]+' "$ISPIS/res.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  SAVJ=$(grep -oE 'savjeti [0-9]+' "$ISPIS/res.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  if [ "$NEIZ" = "0" ] && [ "$KRIT" = "0" ] && [ "$KONZ" = "0" ] && [ $KOD_RS -eq 0 ]; then
+    zapisi RESURSI OK "16 stranica: 0 kriticnih, 0 gresaka u konzoli, $SAVJ sa savjetom"
+  else
+    zapisi RESURSI PAD "kriticno $KRIT, konzola $KONZ, nije izmjereno $NEIZ"
+    sed -n '/## \[!!\]/,/## \[!\]/p' "$ISPIS/res.md" 2>/dev/null | head -20
+  fi
+else
+  zapisi RESURSI PAD "lokalni server nedostupan — NIJE provjereno"
+fi
+
+# ------------------------------------------------ 10. VERZIJE -------------
+#
+# Verzija u adresi (?v=) mora biti hash sadrzaja fajla. Ako nije, izmjena ne
+# stize do pregledaca koji fajl vec ima. Pravila G16, G17 i G24 to provjeravaju
+# i na zivom sajtu; ovdje se gleda lokalno stanje, prije deploya.
+echo; echo "--- 10/15  VERZIJE · hash sadrzaja u adresi svakog kesiranog fajla ---"
+python3 alat/verzije.py > "$ISPIS/verzije.txt" 2>&1
+if grep -q "Sve adrese nose tacan hash" "$ISPIS/verzije.txt"; then
+  zapisi VERZIJE OK "svaka adresa nosi hash sadrzaja"
+else
+  zapisi VERZIJE PAD "adrese ne odgovaraju sadrzaju — pokreni: python3 alat/verzije.py upisi"
+  head -12 "$ISPIS/verzije.txt"
+fi
 ocisti
 
-# ---------------------------------------------------- 8. ADRESE -----------
-echo; echo "--- 8/12  ADRESE · duplikati, varijante, ostaci starog sajta ---"
+# --------------------------------------------------- 11. ADRESE -----------
+echo; echo "--- 11/15  ADRESE · duplikati, varijante, ostaci starog sajta ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi ADRESE PRESK "preskoceno jer je pokrenuto 'brzo'"
 else
@@ -265,8 +332,8 @@ else
   fi
 fi
 
-# ---------------------------------------------------- 9. OSTALO -----------
-echo; echo "--- 9/12  OSTALO · lang, kosa crta, schema po tipu, robots.txt ---"
+# --------------------------------------------------- 12. OSTALO -----------
+echo; echo "--- 12/15  OSTALO · lang, kosa crta, schema po tipu, robots.txt ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi OSTALO PRESK "preskoceno jer je pokrenuto 'brzo'"
 else
@@ -279,8 +346,8 @@ else
   fi
 fi
 
-# ------------------------------------------------------- 10. SEO ----------
-echo; echo "--- 10/12  SEO · 149 adresa sa Googlebot user-agentom ---"
+# ------------------------------------------------------- 13. SEO ----------
+echo; echo "--- 13/15  SEO · 149 adresa sa Googlebot user-agentom ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi SEO PRESK "preskoceno jer je pokrenuto 'brzo'"
 else
@@ -295,7 +362,7 @@ else
 fi
 
 # ------------------------------------------------------------ 11. IKONE ----
-echo; echo "--- 11/12  IKONE · pravilo u CSS-u i znak u fontu ---"
+echo; echo "--- 14/15  IKONE · pravilo u CSS-u i znak u fontu ---"
 python3 alat/ikone.py provjeri > "$ISPIS/ikone.txt" 2>&1
 python3 alat/fontovi.py >> "$ISPIS/ikone.txt" 2>&1
 if grep -qiE 'PAZI|nema u CSS|GRESKA' "$ISPIS/ikone.txt"; then
@@ -362,7 +429,7 @@ fi
 # usput nestalo nesto drugo — vidi se odmah, a ne za nedjelju dana.
 #
 # Tako je i nadjeno da je "Karakteristike – <ime>" nestalo sa 117 stranica.
-echo; echo "--- 12/12  PROMJENE · sta se promijenilo od zadnje ciste provjere ---"
+echo; echo "--- 15/15  PROMJENE · sta se promijenilo od zadnje ciste provjere ---"
 SNIMCI="$(dirname "$0")/snimci"
 if [ -f "$SNIMCI/zadnji-ok.json.gz" ]; then
   python3 alat/snimak.py snimi sada > /dev/null 2>&1
