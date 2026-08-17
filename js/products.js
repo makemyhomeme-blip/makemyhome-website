@@ -1337,7 +1337,12 @@ async function renderProductDetail() {
   const gallerySpecs = document.getElementById('gallery-specs');
   if (gallerySpecs && gallerySpecs.dataset.ssr !== '1') gallerySpecs.innerHTML = accordionHtml;
 
-  // Matching pairs (panel ↔ 3D letvica sa istom nijansom)
+  /* Matching pairs (panel ↔ 3D letvica sa istom nijansom).
+     Ovaj odjeljak sada ispisuje SERVER (product.php, blok "PANEL ↔ 3D LETVICA
+     ISTE NIJANSE"). Ako je tu, ne crta se ponovo — inace bi Google i posjetilac
+     vidjeli dvije iste sekcije jednu pod drugom.
+     Tabela ispod je kopija one u product.php. Ako se mijenja jedna, mora i
+     druga — inace se sadrzaj razlikuje prije i poslije JavaScripta. */
   const matchingPairs = {
     18: [60], 60: [18],          // CQ006
     19: [64], 64: [19],          // MW010
@@ -1355,7 +1360,8 @@ async function renderProductDetail() {
   };
 
   const partnerIds = matchingPairs[id];
-  if (partnerIds && partnerIds.length > 0) {
+  const _parNaStranici = document.querySelector('.matching-pair-section[data-ssr="1"]');
+  if (partnerIds && partnerIds.length > 0 && !_parNaStranici) {
     const partners = partnerIds.map(pid => allProducts.find(p => p.id === pid)).filter(Boolean);
     if (partners.length > 0) {
       const isPanel = partners[0].category === '3d-letvice';
@@ -1379,7 +1385,7 @@ async function renderProductDetail() {
           </div>
           <div class="pair-card-info">
             <div class="pair-card-name">${p.name}</div>
-            <div class="pair-card-price">${parseFloat(p.price).toFixed(2).replace('.', ',')} €<span class="pair-card-unit"> / ${p.unit}</span></div>
+            <div class="pair-card-price">${(parseFloat(p.price) * (1 - (parseFloat(p.discount) || 0) / 100)).toFixed(2).replace('.', ',')} €<span class="pair-card-unit"> / ${p.unit}</span></div>
             <div class="pair-card-cta">Pogledaj <i class="fas fa-arrow-right"></i></div>
           </div>
         </a>
