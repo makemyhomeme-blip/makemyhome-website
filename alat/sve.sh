@@ -16,18 +16,29 @@
 #
 # Sta se pokrece
 # --------------
-#   1. GIT      lokalno, GitHub i server nose isto; nista necommitovano
-#   2. PRAVILA  54 pravila iz alat/ETALON.md (alat/dok-ne-bude.py)
-#   3. OKO      pravi pregledac, 10 stranica x racunar i telefon
-#   4. KORPA    22 provjere korpe i narudzbe u pravom pregledacu
-#   5. IKONE    svaka ikona ima pravilo u CSS-u I znak u fontu
-#   6. LIGHTHOUSE  Googleov alat na 14 tipova stranica
-#   7. PROMJENE   sta se promijenilo od zadnje ciste provjere
+#    1. GIT        lokalno, GitHub i server nose isto; nista necommitovano
+#    2. PRAVILA    52 pravila iz alat/ETALON.md (alat/dok-ne-bude.py)
+#    3. OKO        pravi pregledac, 10 stranica x racunar i telefon
+#    4. KORPA      22 provjere korpe i narudzbe u pravom pregledacu
+#    5. PREGLEDAC  149 stranica: sto server posalje naspram sto pregledac pokaze
+#    6. SCHEMA     strukturirani podaci, sirovo naspram iscrtanog + obavezna polja
+#    7. BLJESAK    skok rasporeda i sadrzaj koji se pojavi pa nestane
+#    8. ADRESE     duplikati, varijante adresa, ostaci starog sajta
+#    9. OSTALO     lang, kosa crta, schema po tipu, robots.txt
+#   10. SEO        149 adresa sa Googlebot user-agentom
+#   11. IKONE      svaka ikona ima pravilo u CSS-u I znak u fontu
+#   12. PROMJENE   sta se promijenilo od zadnje ciste provjere
+#   + LIGHTHOUSE   Googleov alat na 14 tipova stranica (dodatno)
+#
+# Koraci 5, 6 i 7 su tu zato sto svi ostali gledaju samo jednu stranu — sta
+# server posalje. Recenzije su jednom bile obrisane sa servera i provjera je
+# javila "0 tragova", a vlasnik ih je i dalje gledao na telefonu, jer je
+# pregledac cuvao stari js/products.js iz svog kesa.
 #
 # Pokretanje
 # ----------
-#     bash alat/sve.sh          # sve (oko 40 min)
-#     bash alat/sve.sh brzo     # bez sporih pravila (oko 10 min)
+#     bash alat/sve.sh          # sve, svih 149 stranica (oko 60 min)
+#     bash alat/sve.sh brzo     # uzorak od 12 stranica, bez sporih (oko 12 min)
 #
 # PAZI pri rucnom ciscenju prije pokretanja: "pkill -f" poredi CIJELU komandnu
 # liniju, pa obrazac koji se poklapa sa imenom ovog fajla ubije i sam poziv.
@@ -41,9 +52,18 @@ ISPIS=$(mktemp -d)
 PALO=0
 declare -a REZ
 
+# PAD i PRESK se broje odvojeno. Ranije je i preskoceno racunato kao pad, pa je
+# zakljucak tvrdio "palo 6 koraka" kad su stvarno pala dva, a cetiri su namjerno
+# preskocena zbog 'brzo'. Broj koji nije tacan se prestane citati.
+# Ali preskoceno se NE precutkuje: ako ista nije provjereno, to pise u zakljucku.
+PRESKOCENO=0
 zapisi() {           # zapisi <ime> <status> <detalj>
   REZ+=("$1|$2|$3")
-  if [ "$2" != "OK" ]; then PALO=$((PALO+1)); fi
+  case "$2" in
+    OK)    ;;
+    PRESK) PRESKOCENO=$((PRESKOCENO+1)) ;;
+    *)     PALO=$((PALO+1)) ;;
+  esac
   printf '\n>>> %-10s %s  %s\n' "$1" "$2" "$3"
 }
 
@@ -64,7 +84,7 @@ echo " $(date '+%Y-%m-%d %H:%M')"
 echo "==============================================================="
 
 # ---------------------------------------------------------------- 1. GIT ----
-echo; echo "--- 1/7  GIT · lokalno, GitHub i server ---"
+echo; echo "--- 1/12  GIT · lokalno, GitHub i server ---"
 GRANA=$(git rev-parse --abbrev-ref HEAD)
 git fetch --quiet origin "$GRANA" 2>/dev/null
 NEUPISANO=$(git status --porcelain | grep -c . || true)
@@ -80,7 +100,7 @@ fi
 echo "    (poredjenje sa serverom radi pravilo G4 u sljedecem koraku)"
 
 # ------------------------------------------------------------ 2. PRAVILA ----
-echo; echo "--- 2/7  PRAVILA · 54 pravila iz ETALON.md ---"
+echo; echo "--- 2/12  PRAVILA · 54 pravila iz ETALON.md ---"
 if [ "$BRZO" = "brzo" ]; then
   python3 alat/dok-ne-bude.py > "$ISPIS/pravila.txt" 2>&1
 else
@@ -91,14 +111,21 @@ BROJ=$(grep -oE 'ZAVRSNO: [0-9]+ pravila' "$ISPIS/pravila.txt" | tail -1 | grep 
 if [ $KOD -eq 0 ]; then
   zapisi PRAVILA OK "$BROJ pravila, nijedno nije palo"
 else
-  zapisi PRAVILA PAD "$(grep -c '^PAD' "$ISPIS/pravila.txt" || echo '?') pravila palo — detalji ispod"
+  # Pravilo se u ispisu pojavi dva puta: u svojoj grupi i u zavrsnom sazetku.
+  # Brojanje svih "^PAD" je zato davalo dvostruko vise nego sto je stvarno palo.
+  zapisi PRAVILA PAD "$(grep -oE 'ZAVRSNO: [0-9]+ pravila provjereno, [0-9]+ palo' "$ISPIS/pravila.txt" | tail -1 | grep -oE '[0-9]+ palo' || echo '?') — detalji ispod"
   grep -A3 'PRAVE GRESKE' "$ISPIS/pravila.txt" | head -30
 fi
 
 # --------------------------------------------------------------- 3. OKO ----
-echo; echo "--- 3/7  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
+echo; echo "--- 3/12  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
 ocisti; sleep 1
-php -S 127.0.0.1:8899 -t . > "$ISPIS/php.log" 2>&1 &
+# Sa ruterom: bez njega lokalna kopija ne zna za lijepe adrese
+# (/kategorija/x, /paneli/x) pa svaka pada na 404 stranicu, a alat to
+# izmjeri kao da je stranica prazna. Vec se jednom desilo: osam stranica je
+# prijavljeno kao "cijene se pojavljuju tek poslije JavaScripta", a nijedna
+# od njih nije ni bila ucitana.
+php -S 127.0.0.1:8899 alat/ruter.php > "$ISPIS/php.log" 2>&1 &
 node alat/posrednik.mjs > "$ISPIS/posrednik.log" 2>&1 &
 for _ in $(seq 40); do
   curl -s -o /dev/null http://127.0.0.1:8898/products.php && break
@@ -117,7 +144,7 @@ else
 fi
 
 # ------------------------------------------------------------- 4. KORPA ----
-echo; echo "--- 4/7  KORPA · narudzba od pocetka do kraja ---"
+echo; echo "--- 4/12  KORPA · narudzba od pocetka do kraja ---"
 if curl -s -o /dev/null http://127.0.0.1:8899/korpa.html; then
   node alat/korpa.mjs > "$ISPIS/korpa.txt" 2>&1
   if [ $? -eq 0 ]; then
@@ -129,10 +156,138 @@ if curl -s -o /dev/null http://127.0.0.1:8899/korpa.html; then
 else
   zapisi KORPA PAD "lokalni server nedostupan — korpa NIJE provjerena"
 fi
+# Lokalni server OSTAJE upaljen — trebaju ga koraci 5, 6 i 7 (pregledac,
+# schema, bljesak). Gasi se poslije njih.
+
+# ------------------------------------------------- 5. PREGLEDAC ------------
+#
+# Ovo je korak zbog kojeg je sve ostalo dobilo smisao.
+#
+# Svaki drugi alat gleda STA SERVER POSALJE. Kad je vlasnik obrisao recenzije,
+# provjera je javila "0 tragova na svih 149 stranica" — a on ih je i dalje
+# gledao na svom telefonu. Fajl js/products.js se servira sa "immutable" na
+# godinu dana, a broj u ?v= nije bio podignut, pa je pregledac posluzio stari
+# fajl iz svog kesa. Server cist, pregledac star, i nijedno pravilo to nije
+# moglo vidjeti jer su sva gledala samo jednu stranu.
+#
+# Ovdje se svaka stranica ucitava DVA PUTA u istom Chromiumu — jednom sa
+# iskljucenim, jednom sa ukljucenim JavaScriptom — i broji se isto: cijene,
+# kartice proizvoda, plocice kategorija, JSON-LD blokovi, h1, h2, h3 i duzina
+# vidljivog teksta. Ako se brojevi razlikuju, Google i covjek ne vide isto.
+#
+# Verziju kesiranih fajlova cuvaju pravila G16 i G17 u koraku 2.
+echo; echo "--- 5/12  PREGLEDAC · server naspram onoga sto pregledac pokaze ---"
+curl -s "https://makemyhome.me/sitemap.xml" 2>/dev/null | grep -o '<loc>[^<]*' | sed 's/<loc>//' > "$ISPIS/adrese.txt"
+UKUPNO=$(grep -c . "$ISPIS/adrese.txt" || echo 0)
+if [ "$BRZO" = "brzo" ]; then
+  { head -3 "$ISPIS/adrese.txt"; grep '/kategorija/' "$ISPIS/adrese.txt" | head -4; grep '/paneli/' "$ISPIS/adrese.txt" | head -5; } > "$ISPIS/uzorak.txt"
+  META="$ISPIS/uzorak.txt"
+else
+  META="$ISPIS/adrese.txt"
+fi
+BROJ_META=$(grep -c . "$META" || echo 0)
+if [ "$BROJ_META" -gt 0 ] && curl -s -o /dev/null http://127.0.0.1:8898/; then
+  MMH_IZLAZ="$ISPIS/render" node alat/r2-render.mjs "$META" > "$ISPIS/render.txt" 2>&1
+  LOSE=$(grep -oE '\[!!\] [0-9]+' "$ISPIS/render.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  if [ "$LOSE" = "0" ]; then
+    zapisi PREGLEDAC OK "$BROJ_META stranica: server i pregledac pokazuju isto"
+  else
+    zapisi PREGLEDAC PAD "$LOSE stranica gdje JavaScript gasi ono sto je server ispisao"
+    grep -A 6 'JavaScript gasi' "$ISPIS/render.md" 2>/dev/null | head -20
+  fi
+else
+  zapisi PREGLEDAC PAD "lokalni server nedostupan ili nema adresa — NIJE provjereno"
+fi
+
+# ---------------------------------------------------- 6. SCHEMA -----------
+#
+# Strukturirani podaci moraju biti isti u sirovom HTML-u i poslije JavaScripta.
+# Blok koji ubaci JavaScript Google u prvom prolazu cesto ne pokupi, a blok koji
+# JavaScript obrise Google je vec procitao — i jedno i drugo je problem.
+# Uz to se provjeravaju obavezna polja: Product (name, apsolutna slika, cijena,
+# valuta, dostupnost), LocalBusiness (adresa, telefon, radno vrijeme) i
+# BreadcrumbList (redoslijed 1..N).
+echo; echo "--- 6/12  SCHEMA · strukturirani podaci, sirovo naspram iscrtanog ---"
+if [ "$BROJ_META" -gt 0 ] && curl -s -o /dev/null http://127.0.0.1:8898/; then
+  MMH_IZLAZ="$ISPIS/schema" node alat/r2-jsonld.mjs "$META" > "$ISPIS/schema.txt" 2>&1
+  GR=$(grep -oE 'greske [0-9]+' "$ISPIS/schema.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  UP=$(grep -oE 'upozorenja [0-9]+' "$ISPIS/schema.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  if [ "$GR" = "0" ]; then
+    zapisi SCHEMA OK "$BROJ_META stranica: 0 gresaka, $UP upozorenja"
+  else
+    zapisi SCHEMA PAD "$GR stranica sa greskom u strukturiranim podacima"
+    sed -n '/## Greske/,/## Tabela/p' "$ISPIS/schema.md" 2>/dev/null | head -20
+  fi
+else
+  zapisi SCHEMA PAD "lokalni server nedostupan — NIJE provjereno"
+fi
+
+# ---------------------------------------------------- 7. BLJESAK ----------
+#
+# Sadrzaj koji se pojavi pa nestane, i raspored koji skoci pod prstom.
+# Snima se na 200, 600, 1500 i 3000 ms od pocetka ucitavanja, na telefonu.
+# Googleov prag za skok rasporeda (CLS) je 0,1.
+echo; echo "--- 7/12  BLJESAK · skok rasporeda i sadrzaj koji nestane ---"
+if curl -s -o /dev/null http://127.0.0.1:8898/; then
+  node alat/r2-bljesak.mjs > "$ISPIS/bljesak.txt" 2>&1
+  BLJ=$(grep -oE 'bljesak [0-9]+' "$ISPIS/bljesak.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  CLS=$(grep -oE 'CLS>0,1 [0-9]+' "$ISPIS/bljesak.txt" | tail -1 | grep -oE '[0-9]+$' || echo '?')
+  if [ "$BLJ" = "0" ] && [ "$CLS" = "0" ]; then
+    zapisi BLJESAK OK "14 kategorija: bez bljeska, sve ispod praga 0,1"
+  else
+    zapisi BLJESAK PAD "bljesak na $BLJ, skok rasporeda iznad praga na $CLS kategorija"
+    grep -E '\[!' "$ISPIS/bljesak.txt" | head -8
+  fi
+else
+  zapisi BLJESAK PAD "lokalni server nedostupan — NIJE provjereno"
+fi
 ocisti
 
-# ------------------------------------------------------------- 5. IKONE ----
-echo; echo "--- 5/7  IKONE · pravilo u CSS-u i znak u fontu ---"
+# ---------------------------------------------------- 8. ADRESE -----------
+echo; echo "--- 8/12  ADRESE · duplikati, varijante, ostaci starog sajta ---"
+if [ "$BRZO" = "brzo" ]; then
+  zapisi ADRESE PRESK "preskoceno jer je pokrenuto 'brzo'"
+else
+  python3 alat/r2-adrese.py > "$ISPIS/adrese-log.txt" 2>&1
+  if grep -qE '^\[!' R2-ADRESE.md 2>/dev/null; then
+    zapisi ADRESE PAD "$(grep -cE '^\[!' R2-ADRESE.md) nalaza — ista stranica na vise adresa"
+    grep -E '^\[!' R2-ADRESE.md | head -6
+  else
+    zapisi ADRESE OK "nijedna varijanta adrese ne vraca 200 mimo sitemapa"
+  fi
+fi
+
+# ---------------------------------------------------- 9. OSTALO -----------
+echo; echo "--- 9/12  OSTALO · lang, kosa crta, schema po tipu, robots.txt ---"
+if [ "$BRZO" = "brzo" ]; then
+  zapisi OSTALO PRESK "preskoceno jer je pokrenuto 'brzo'"
+else
+  python3 alat/r2-ostalo.py > "$ISPIS/ostalo-log.txt" 2>&1
+  if grep -qE '^\[!' R2-OSTALO.md 2>/dev/null; then
+    zapisi OSTALO PAD "$(grep -cE '^\[!' R2-OSTALO.md) nalaza"
+    grep -E '^\[!' R2-OSTALO.md | head -6
+  else
+    zapisi OSTALO OK "lang, kose crte, schema po tipu i robots.txt — sve uredu"
+  fi
+fi
+
+# ------------------------------------------------------- 10. SEO ----------
+echo; echo "--- 10/12  SEO · 149 adresa sa Googlebot user-agentom ---"
+if [ "$BRZO" = "brzo" ]; then
+  zapisi SEO PRESK "preskoceno jer je pokrenuto 'brzo'"
+else
+  bash seo-audit.sh > "$ISPIS/seo.txt" 2>&1
+  OZN=$(grep -cE '^\[!' SEO-AUDIT-RAPORT.md 2>/dev/null || echo '?')
+  if [ "$OZN" = "0" ]; then
+    zapisi SEO OK "149 adresa, nijedna oznaka"
+  else
+    zapisi SEO PAD "$OZN oznaka u izvjestaju"
+    grep -E '^\[!' SEO-AUDIT-RAPORT.md | head -8
+  fi
+fi
+
+# ------------------------------------------------------------ 11. IKONE ----
+echo; echo "--- 11/12  IKONE · pravilo u CSS-u i znak u fontu ---"
 python3 alat/ikone.py provjeri > "$ISPIS/ikone.txt" 2>&1
 python3 alat/fontovi.py >> "$ISPIS/ikone.txt" 2>&1
 if grep -qiE 'PAZI|nema u CSS|GRESKA' "$ISPIS/ikone.txt"; then
@@ -152,7 +307,7 @@ fi
 # Ako nije instaliran, TO SE KAZE i broji se kao pad. Tiho preskakanje bi
 # znacilo da izvjestaj tvrdi vise nego sto je provjereno — a bas to je i
 # bio problem: "sve prolazi" je znacilo "sve od onoga sto sam pogledao".
-echo; echo "--- 6/7  LIGHTHOUSE · Googleov alat na 14 tipova stranica ---"
+echo; echo "--- LIGHTHOUSE (dodatno) · Googleov alat na 14 tipova stranica ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi LIGHTHOUSE PRESK "preskoceno jer je pokrenuto 'brzo' — pokreni bez 'brzo' prije indeksiranja"
 elif ! ls /home/user/lighthouse/node_modules/.bin/lighthouse >/dev/null 2>&1 \
@@ -199,7 +354,7 @@ fi
 # usput nestalo nesto drugo — vidi se odmah, a ne za nedjelju dana.
 #
 # Tako je i nadjeno da je "Karakteristike – <ime>" nestalo sa 117 stranica.
-echo; echo "--- 7/7  PROMJENE · sta se promijenilo od zadnje ciste provjere ---"
+echo; echo "--- 12/12  PROMJENE · sta se promijenilo od zadnje ciste provjere ---"
 SNIMCI="$(dirname "$0")/snimci"
 if [ -f "$SNIMCI/zadnji-ok.json.gz" ]; then
   python3 alat/snimak.py snimi sada > /dev/null 2>&1
@@ -208,7 +363,9 @@ if [ -f "$SNIMCI/zadnji-ok.json.gz" ]; then
     zapisi PROMJENE OK "nista se nije promijenilo od zadnje ciste provjere"
   else
     # Promjena NIJE greska — samo se mora vidjeti i potvrditi.
-    BROJ=$(grep -cE "^[a-z_]+ +[0-9]+ stranica" "$ISPIS/promjene.txt" || echo 0)
+    # grep -c vec ispise 0 kad nema pogodaka; dodatni "|| echo 0" je ispisivao
+    # jos jednu nulu, pa je poruka pucala na prelom reda i vidjela se samo "0".
+    BROJ=$(grep -cE "^[a-z_0-9]+ +[0-9]+ stranica" "$ISPIS/promjene.txt" || true)
     zapisi PROMJENE OK "$BROJ vrsta izmjena — spisak ispod, provjeri da je samo ono sto si mijenjao"
     sed -n "/STA SE PROMIJENILO/,\$p" "$ISPIS/promjene.txt" | head -40
   fi
@@ -227,7 +384,14 @@ for r in "${REZ[@]}"; do
   printf ' %-10s %-4s %s\n' "$ime" "$st" "$det"
 done
 echo "==============================================================="
-if [ $PALO -eq 0 ]; then
+if [ $PALO -eq 0 ] && [ $PRESKOCENO -gt 0 ]; then
+  echo
+  echo "  PROLAZI SVE STO JE PROVJERENO — ali $PRESKOCENO koraka nije uradjeno."
+  echo "  Pokrenuto je 'brzo'. Prije slanja na indeksiranje pokreni punu provjeru:"
+  echo "      bash alat/sve.sh"
+  echo "==============================================================="
+  exit 2
+elif [ $PALO -eq 0 ]; then
   # Cisto stanje postaje osnova za sljedecu uporedbu.
   python3 alat/snimak.py snimi zadnji-ok > /dev/null 2>&1
   echo
@@ -244,7 +408,7 @@ if [ $PALO -eq 0 ]; then
   exit 0
 else
   echo
-  echo "  NIJE SPREMNO — palo $PALO od 7 koraka."
+  echo "  NIJE SPREMNO — palo $PALO korak(a), preskoceno $PRESKOCENO."
   echo "  Ne salji na indeksiranje dok ovo ne bude cisto."
   echo "  Puni izlaz: $ISPIS"
   echo "==============================================================="

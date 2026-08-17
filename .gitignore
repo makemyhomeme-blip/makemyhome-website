@@ -34,3 +34,4 @@ __pycache__/
 .seo-audit-kes/
 R2-*.json
 alat/snimci/sada.json.gz
+alat/snimci/oko/
