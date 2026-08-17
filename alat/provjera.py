@@ -68,6 +68,14 @@ def zabiljezi(sifra, opis, greske, provjereno):
         print('        · …i jos %d' % (len(greske) - 6))
 
 
+def bajtovi(u, timeout='20'):
+    """Skini fajl kao BAJTOVE. dohvati() vraca tekst, pa se binarni fajl (woff2)
+    pri dekodiranju izmijeni i hash mu ispadne drugaciji — pravilo G24 je zbog
+    toga prijavilo da se font na serveru razlikuje, a bio je bajt po bajt isti."""
+    r = subprocess.run(CURL + ['--max-time', timeout, u], capture_output=True)
+    return r.stdout if r.returncode == 0 else b''
+
+
 def urlparse_put(u):
     """Samo putanja iz adrese: https://makemyhome.me/paneli/x -> /paneli/x"""
     return re.sub(r'^https?://[^/]+', '', u)
@@ -1249,9 +1257,10 @@ def grupa_G():
     tragovi = ['rv-card', 'rv-wrap', 'testimonial-card', 'aggregateRating',
                'ratingValue', 'reviewCount', 'ratingCount', 'Ocjene korisnika',
                'Šta kažu kupci', 'Šta Kažu Naši Kupci', 'Google ocjena']
+    # Stranice su vec skinute na pocetku (STRANICE) — ne skidaju se po drugi put.
     g = []
     for u in SITEMAP:
-        h, kod, _, _ = dohvati(u, timeout='15')
+        h, kod, _, _ = STRANICE[u]
         if kod != '200':
             g.append('%s → %s' % (u.replace(BAZA, ''), kod))
             continue
@@ -1274,7 +1283,7 @@ def grupa_G():
     g = []
     prov = [u for u in SITEMAP if '/paneli/' in u]
     for u in prov:
-        h, kod, _, _ = dohvati(u, timeout='15')
+        h, kod, _, _ = STRANICE[u]
         if kod != '200':
             g.append('%s → %s' % (u.replace(BAZA, ''), kod))
             continue
@@ -1292,7 +1301,7 @@ def grupa_G():
     # G20 — canonical mora vracati 200 i pokazivati na samu stranicu
     g = []
     for u in SITEMAP:
-        h, kod, _, _ = dohvati(u, timeout='15')
+        h, kod, _, _ = STRANICE[u]
         if kod != '200':
             g.append('%s → %s' % (u.replace(BAZA, ''), kod))
             continue
@@ -1310,32 +1319,46 @@ def grupa_G():
 
     # G21 — svaka adresa iz sitemapa vraca 200 bez skoka (S1-S3 gledaju sadrzaj
     #       sitemapa; ovo gleda ishod svake adrese)
+    # A1 provjerava status svih adresa. Ovdje se gleda ono sto A1 ne gleda:
+    # da adresa iz sitemapa bude ISTA kao canonical te stranice — inace sitemap
+    # salje Google na jednu adresu, a stranica ga upucuje na drugu.
     g = []
     for u in SITEMAP:
-        _, kod, sk, kraj = dohvati(u, prati=True, timeout='15')
+        h, kod, sk, _ = STRANICE[u]
         if kod != '200' or sk != '0':
-            g.append('%s → %s, skokova %s, zavrsi na %s' % (u.replace(BAZA, ''), kod, sk, kraj))
-    zabiljezi('G21', 'Svaka adresa iz sitemapa vraca 200 bez skoka', g, len(SITEMAP))
+            g.append('%s → %s, skokova %s' % (u.replace(BAZA, ''), kod, sk))
+            continue
+        m = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]*href=["\']([^"\']+)', h, re.I)
+        if m and m.group(1) != u:
+            g.append('sitemap ima %s, a canonical je %s' % (u.replace(BAZA, ''), m.group(1)))
+    zabiljezi('G21', 'Adresa iz sitemapa je 200 i jednaka canonical-u', g, len(SITEMAP))
 
     # G22 — nijedna adresa iz sitemapa ne smije imati noindex (ni u HTML-u ni u
     #       zaglavlju), ni kao posjetilac ni kao Googlebot
+    # HTML se gleda na SVIH 149 (stranice su vec skinute), a zaglavlje na uzorku
+    # od 15 kao Googlebot — jedno zaglavlje je jedan zahtjev, a G15 vec pokriva
+    # deset stranica u oba oblika. Broj provjerenog je zato 149 + 15.
     g = []
     for u in SITEMAP:
-        h, kod, _, _ = dohvati(u, timeout='15')
+        h, kod, _, _ = STRANICE[u]
         if kod == '200' and re.search(r'<meta[^>]+name=["\']robots["\'][^>]*noindex', h, re.I):
             g.append('%s → noindex u HTML-u' % u.replace(BAZA, ''))
+    uzorak_zag = [BAZA + '/'] + [u for u in SITEMAP if '/kategorija/' in u][:7] \
+                 + [u for u in SITEMAP if '/paneli/' in u][:7]
+    for u in uzorak_zag:
         zag = subprocess.run(CURL + ['-I', '--max-time', '15', '-A', GOOGLEBOT, u],
                              capture_output=True, text=True, errors='replace').stdout
         if re.search(r'(?i)x-robots-tag:[^\r\n]*noindex', zag):
             g.append('%s → X-Robots-Tag: noindex' % u.replace(BAZA, ''))
-    zabiljezi('G22', 'Nijedna adresa iz sitemapa nema noindex', g, len(SITEMAP) * 2)
+    zabiljezi('G22', 'Nijedna adresa iz sitemapa nema noindex', g,
+              len(SITEMAP) + len(uzorak_zag))
 
     # G23 — do svakog proizvoda se dolazi internim linkovima (I2 broji dolazne
     #       linkove; ovo trazi da ih ima bar jedan sa stranice koja nije sitemap)
     g = []
     dolazni = {}
     for u in SITEMAP:
-        h, kod, _, _ = dohvati(u, timeout='15')
+        h, kod, _, _ = STRANICE[u]
         if kod != '200':
             continue
         bez = re.sub(r'<script[\s\S]*?</script>', '', h, flags=re.I)
@@ -1365,12 +1388,12 @@ def grupa_G():
             continue
         for m in re.finditer(r'(?:src|href)="((?:js|css|fa)/[^"?]+)\?v=([A-Za-z0-9.]+)"', h):
             sred, v = m.group(1), m.group(2)
-            tijelo, k2, _, _ = dohvati('%s/%s?v=%s' % (BAZA, sred, v), timeout='15')
-            if k2 != '200':
-                g.append('%s?v=%s → %s' % (sred, v, k2))
+            tijelo = bajtovi('%s/%s?v=%s' % (BAZA, sred, v), timeout='15')
+            if not tijelo:
+                g.append('%s?v=%s → nije se skinuo' % (sred, v))
                 continue
             prov_sred += 1
-            stvarni = _h.sha256(tijelo.encode('utf-8', 'surrogateescape')).hexdigest()[:8]
+            stvarni = _h.sha256(tijelo).hexdigest()[:8]
             if len(v) == 8 and v != stvarni:
                 g.append('%s: u adresi stoji ?v=%s, a sadrzaj na serveru daje %s '
                          '— pregledaci mogu drzati stari fajl' % (sred, v, stvarni))
