@@ -334,12 +334,26 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
     $revCount  = (int)$rvBlock['count'];
     $avgRating = $rvBlock['avg'];
     $rvDist    = $rvBlock['dist'];
-  } else {
+  } elseif (!$allReviews) {
+    /* Rezervni izvor se koristi SAMO ako je data/reviews.json nedostupan ili
+       pokvaren. Ranije se koristio i kada je datoteka bila u redu ali za ovaj
+       proizvod nije imala zapis — tada bi stranica tiho prikazala stare
+       recenzije ugradjene u products.json: druge tekstove, drugu ocjenu, istu
+       adresu, i nigdje poruke da se to dogodilo. Tako je vec jednom svih 117
+       proizvoda mjesecima prikazivalo pogresne recenzije (vidi komentar na
+       vrhu fajla). Sada su ta dva slucaja razdvojena. */
     $reviews   = $product['reviews'] ?? [];
     $revCount  = count($reviews);
     $avgRating = $revCount > 0 ? round(array_sum(array_column($reviews, 'rating')) / $revCount, 1) : null;
     $rvDist    = [];
     foreach ([5,4,3,2,1] as $s) $rvDist[(string)$s] = count(array_filter($reviews, fn($r) => (int)($r['rating'] ?? 5) === $s));
+  } else {
+    // Datoteka je procitana, ali za ovaj proizvod nema zapisa — ne prikazuje se
+    // nista. Bolje prazno nego tudje ili zastarjelo.
+    $reviews   = [];
+    $revCount  = 0;
+    $avgRating = null;
+    $rvDist    = [];
   }
   // Pomocne funkcije za prikaz ocjena — definisane RANO jer ih koristi i bocni blok i recenzije
   $revPlural = function(int $n) {
