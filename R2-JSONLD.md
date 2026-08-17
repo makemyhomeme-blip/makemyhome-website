@@ -1,6 +1,6 @@
 # R2 — JSON-LD: sirovi HTML naspram iscrtanog DOM-a
 
-Napravljeno: 2026-08-17 12:19 UTC
+Napravljeno: 2026-08-17 15:30 UTC
 
 Za svaku adresu tri mjerenja: sirovi HTML sa **zivog** sajta (curl, Googlebot),
 sirovi HTML **lokalne kopije** i **iscrtani DOM** poslije JavaScripta.

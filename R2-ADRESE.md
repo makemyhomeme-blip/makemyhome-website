@@ -71,7 +71,7 @@ Provjereno 313 varijanti od 149 adresa iz sitemapa.
 | `/shop/` | 301 | `/products.html` | uredu (301 na pravu) |
 | `/product/bambus-panel/` | 301 | `/paneli/akusticni-panel-aku053-zlatni-bambus-linear` | uredu (301 na pravu) |
 | `/product-category/paneli/` | 301 | `/products.html` | uredu (301 na pravu) |
-| `/cart/` | 404 | `/cart/` | uredu |
+| `/cart/` | 502 | `/cart/` | 502 |
 | `/my-account/` | 404 | `/my-account/` | uredu |
 | `/checkout/` | 301 | `/checkout.html` | 301 |
 | `/wp-json/wp/v2/posts` | 410 | `/wp-json/wp/v2/posts` | uredu |

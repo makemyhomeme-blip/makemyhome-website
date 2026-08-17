@@ -10,7 +10,7 @@ Provjereno 149 adresa iz sitemapa.
 
 ## 2. Kosa crta na kraju adrese
 
-- interni linkovi BEZ kose crte na kraju: **6169**
+- interni linkovi BEZ kose crte na kraju: **6195**
 - interni linkovi SA kosom crtom na kraju: **0**
 
 [i] Nijedan interni link nema kosu crtu na kraju — dosljedno.

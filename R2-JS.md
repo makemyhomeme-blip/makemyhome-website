@@ -39,12 +39,12 @@ vec nesto ispisao — `data-ssr`, `querySelector('.product-card')`,
 
 | fajl | linija | funkcija | obrazac |
 |---|---|---|---|
-| `products.php` | 696 | `(vrh fajla)` | textContent = |
-| `products.php` | 913 | `(vrh fajla)` | textContent = |
-| `products.php` | 922 | `(vrh fajla)` | display='none' |
+| `products.php` | 692 | `(vrh fajla)` | textContent = |
+| `products.php` | 909 | `(vrh fajla)` | textContent = |
+| `products.php` | 918 | `(vrh fajla)` | display='none' |
 | `js/products.js` | 347 | `showCategoryGrid` | display='none' |
 | `js/products.js` | 395 | `showCategoryProducts` | display='none' |
-| `js/products.js` | 1338 | `styleMatchHtml` | innerHTML = |
-| `js/products.js` | 1535 | `totalCost` | innerHTML = |
+| `js/products.js` | 859 | `styleMatchHtml` | innerHTML = |
+| `js/products.js` | 1058 | `totalCost` | innerHTML = |
 | `js/products.js` | 429 | `showCategoryProducts` | filter/slice nad listom |
-| `js/products.js` | 1533 | `totalCost` | filter/slice nad listom |
+| `js/products.js` | 1056 | `totalCost` | filter/slice nad listom |

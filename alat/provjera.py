@@ -695,15 +695,19 @@ def grupa_G():
     g = []
     for f in ['data/inquiries.json', 'data/inquiries.json.tmp',
               'data/products.bak.20260807-174841.json', 'data/actions_debug.log',
-              'data/upload_debug.log', 'admin/listall.php', 'admin/listgallery.php']:
+              'data/upload_debug.log', 'admin/listall.php', 'admin/listgallery.php',
+              # Recenzije su uklonjene sa sajta; ova dva fajla nista ne cita, a
+              # nosila su 585 izmisljenih recenzija javno citljivih na adresi.
+              # Sklonjeni su sa servera — ako se ikad vrate, ovo pravilo pada.
+              'data/reviews.json', 'data/reviews-extra.json']:
         _, kod, _, _ = dohvati('%s/%s' % (BAZA, f), timeout='10')
         if kod not in ('403', '404', '410'):
             g.append('%s → %s (podaci kupaca / mrtvi fajl, mora biti zatvoren)' % (f, kod))
-    for f in ['data/products.json', 'data/categories.json', 'data/reviews.json']:
+    for f in ['data/products.json', 'data/categories.json']:
         _, kod, _, _ = dohvati('%s/%s' % (BAZA, f), timeout='10')
         if kod != '200':
             g.append('%s → %s (sajtu treba, ne smije biti zatvoren)' % (f, kod))
-    zabiljezi('G6', 'Podaci kupaca zatvoreni, podaci sajta otvoreni', g, 10)
+    zabiljezi('G6', 'Podaci kupaca zatvoreni, podaci sajta otvoreni', g, 11)
 
     # Sudar admina i sinhronizacije.
     # Admin je CSS za velicinu slika na Decor Box stranici upisivao pravo u
