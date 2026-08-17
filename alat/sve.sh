@@ -188,11 +188,15 @@ fi
 BROJ_META=$(grep -c . "$META" || echo 0)
 if [ "$BROJ_META" -gt 0 ] && curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/render" node alat/r2-render.mjs "$META" > "$ISPIS/render.txt" 2>&1
+  KOD_R=$?
   LOSE=$(grep -oE '\[!!\] [0-9]+' "$ISPIS/render.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
-  if [ "$LOSE" = "0" ]; then
+  PUKLE=$(grep -oE 'pukle [0-9]+' "$ISPIS/render.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  # I izlazni kod I broj nalaza I broj stranica koje se nisu ucitale. Alat je
+  # jednom javio "0 problema" dok nijedna stranica nije bila ucitana.
+  if [ "$LOSE" = "0" ] && [ "$PUKLE" = "0" ] && [ $KOD_R -eq 0 ]; then
     zapisi PREGLEDAC OK "$BROJ_META stranica: server i pregledac pokazuju isto"
   else
-    zapisi PREGLEDAC PAD "$LOSE stranica gdje JavaScript gasi ono sto je server ispisao"
+    zapisi PREGLEDAC PAD "$LOSE stranica gdje JS gasi sadrzaj, $PUKLE se nije ucitalo"
     grep -A 6 'JavaScript gasi' "$ISPIS/render.md" 2>/dev/null | head -20
   fi
 else
@@ -210,9 +214,11 @@ fi
 echo; echo "--- 6/12  SCHEMA · strukturirani podaci, sirovo naspram iscrtanog ---"
 if [ "$BROJ_META" -gt 0 ] && curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/schema" node alat/r2-jsonld.mjs "$META" > "$ISPIS/schema.txt" 2>&1
+  KOD_S=$?
   GR=$(grep -oE 'greske [0-9]+' "$ISPIS/schema.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  PUK_S=$(grep -oE 'pukle [0-9]+' "$ISPIS/schema.txt" | tail -1 | grep -oE '[0-9]+' || echo 0)
   UP=$(grep -oE 'upozorenja [0-9]+' "$ISPIS/schema.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
-  if [ "$GR" = "0" ]; then
+  if [ "$GR" = "0" ] && [ "$PUK_S" = "0" ] && [ $KOD_S -eq 0 ]; then
     zapisi SCHEMA OK "$BROJ_META stranica: 0 gresaka, $UP upozorenja"
   else
     zapisi SCHEMA PAD "$GR stranica sa greskom u strukturiranim podacima"
@@ -229,13 +235,15 @@ fi
 # Googleov prag za skok rasporeda (CLS) je 0,1.
 echo; echo "--- 7/12  BLJESAK · skok rasporeda i sadrzaj koji nestane ---"
 if curl -s -o /dev/null http://127.0.0.1:8898/; then
-  node alat/r2-bljesak.mjs > "$ISPIS/bljesak.txt" 2>&1
+  MMH_IZLAZ="$ISPIS/bljesak" MMH_SNIMCI="$ISPIS/snimci" node alat/r2-bljesak.mjs > "$ISPIS/bljesak.txt" 2>&1
+  KOD_B=$?
   BLJ=$(grep -oE 'bljesak [0-9]+' "$ISPIS/bljesak.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
+  PUK_B=$(grep -oE 'pukle [0-9]+' "$ISPIS/bljesak.txt" | tail -1 | grep -oE '[0-9]+' || echo '?')
   CLS=$(grep -oE 'CLS>0,1 [0-9]+' "$ISPIS/bljesak.txt" | tail -1 | grep -oE '[0-9]+$' || echo '?')
-  if [ "$BLJ" = "0" ] && [ "$CLS" = "0" ]; then
+  if [ "$BLJ" = "0" ] && [ "$CLS" = "0" ] && [ "$PUK_B" = "0" ] && [ $KOD_B -eq 0 ]; then
     zapisi BLJESAK OK "14 kategorija: bez bljeska, sve ispod praga 0,1"
   else
-    zapisi BLJESAK PAD "bljesak na $BLJ, skok rasporeda iznad praga na $CLS kategorija"
+    zapisi BLJESAK PAD "bljesak na $BLJ, CLS iznad praga na $CLS, nije se ucitalo $PUK_B"
     grep -E '\[!' "$ISPIS/bljesak.txt" | head -8
   fi
 else

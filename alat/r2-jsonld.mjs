@@ -297,5 +297,11 @@ function napraviIzvjestaj(redovi) {
   r('- **BreadcrumbList**: `itemListElement` sa `position` 1..N bez rupa, svaki sa `name`');
 
   fs.writeFileSync(IZLAZ + '.md', L.join('\n') + '\n');
-  console.log(`Gotovo → ${IZLAZ}.md  (greske ${lose.length}, upozorenja ${upoz.length})`);
+  const pukle = redovi.filter(x => x.greska);
+  if (pukle.length) {
+    console.log(`  [!!] stranica koje se nisu ucitale: ${pukle.length} — nisu provjerene`);
+  }
+  console.log(`Gotovo → ${IZLAZ}.md  (greske ${lose.length}, upozorenja ${upoz.length}, `
+            + `pukle ${pukle.length})`);
+  if (lose.length || pukle.length) process.exitCode = 1;
 }

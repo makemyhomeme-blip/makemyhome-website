@@ -28,7 +28,12 @@ const GBOT = 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWeb
            + '(KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36 '
            + '(compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
 const TRENUCI = [200, 600, 1500, 3000];
-const SNIMCI = 'alat/snimci';
+/* Izlaz se moze preusmjeriti (MMH_IZLAZ), isto kao kod r2-render.mjs i
+   r2-jsonld.mjs. alat/sve.sh ga tako salje u privremeni direktorijum — inace
+   svako pokretanje provjere ostavi izmijenjen R2-BLJESAK.md u repou, pa
+   sljedeca provjera prijavi "necommitovane izmjene" koje je sama napravila. */
+const IZLAZ = process.env.MMH_IZLAZ || 'R2-BLJESAK';
+const SNIMCI = process.env.MMH_SNIMCI || 'alat/snimci';
 
 const KATEGORIJE = [
   'bambus-paneli', 'bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni',
@@ -111,9 +116,18 @@ const pw = require('/opt/node22/lib/node_modules/playwright/index.js');
   r('**Bljesak** = broj VIDLJIVIH kartica proizvoda poraste pa padne. Tacno to se');
   r('desavalo na bambusu prije popravke: 39 kartica se iscrta, pa nestane.');
   r('');
+  /* Stranica koja se NIJE UCITALA nije "bez bljeska" — ona nije ni izmjerena.
+     Alat je jednom ispisao "bljesak 0, CLS 0, LCP 0" dok su svih 14 kategorija
+     pale na ERR_CONNECTION_REFUSED, jer lokalni server nije bio upaljen. Takav
+     izvjestaj je gori od nikakvog: tvrdi da je provjereno ono sto nije. */
+  const pukle = redovi.filter(x => x.greska || !(x.tacke || []).length);
   const sBljeskom = redovi.filter(x => x.bljesak || x.tekstPada);
   const losCls = redovi.filter(x => (x.cls ?? 0) > 0.1);
   const losLcp = redovi.filter(x => (x.lcp ?? 0) > 2500);
+  if (pukle.length) {
+    r(`- **[!!] kategorija koje se nisu ucitale: ${pukle.length}** — nisu izmjerene:`);
+    for (const x of pukle) r(`  - \`${x.put}\` — ${x.greska || 'nijedna tacka mjerenja'}`);
+  }
   r(`- kategorija sa bljeskom: **${sBljeskom.length}**`);
   r(`- kategorija sa CLS iznad 0,1 (Googleov prag): **${losCls.length}**`);
   r(`- kategorija sa LCP iznad 2,5 s: **${losLcp.length}**`);
@@ -145,7 +159,9 @@ const pw = require('/opt/node22/lib/node_modules/playwright/index.js');
     r(`| \`${x.put}\` | ${z?.lazy ?? '—'} | ${z?.slikeBezIzvora ?? '—'} |`);
   }
 
-  fs.writeFileSync('R2-BLJESAK.md', L.join('\n') + '\n');
-  fs.writeFileSync('R2-BLJESAK.json', JSON.stringify(redovi, null, 1));
-  console.log(`Gotovo → R2-BLJESAK.md  (bljesak ${sBljeskom.length}, CLS>0,1 ${losCls.length}, LCP>2,5s ${losLcp.length})`);
+  fs.writeFileSync(IZLAZ + '.md', L.join('\n') + '\n');
+  fs.writeFileSync(IZLAZ + '.json', JSON.stringify(redovi, null, 1));
+  console.log(`Gotovo → ${IZLAZ}.md  (pukle ${pukle.length}, bljesak ${sBljeskom.length}, `
+            + `CLS>0,1 ${losCls.length}, LCP>2,5s ${losLcp.length})`);
+  if (pukle.length) process.exitCode = 1;
 })();

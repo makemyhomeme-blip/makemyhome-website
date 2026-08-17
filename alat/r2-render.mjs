@@ -261,4 +261,8 @@ function napraviIzvjestaj(redovi) {
   fs.writeFileSync(IZLAZ + '.md', L.join('\n') + '\n');
   fs.writeFileSync(IZLAZ + '.json', JSON.stringify(redovi, null, 1));
   console.log(`Gotovo → ${IZLAZ}.md  ([!!] ${lose.length}, [!] ${sumnjivo.length}, pukle ${pukle.length})`);
+  /* Stranica koja se nije ucitala nije "bez razlike" — nije ni izmjerena.
+     Bez ovoga bi prolaz u kojem padnu sve stranice zavrsio sa "[!!] 0" i
+     izgledao kao cist. */
+  if (lose.length || pukle.length) process.exitCode = 1;
 }
