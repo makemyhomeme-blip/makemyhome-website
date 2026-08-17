@@ -1,6 +1,6 @@
 # SEO audit — makemyhome.me
 
-Napravljeno: 2026-08-17 21:59 UTC · Googlebot user-agent
+Napravljeno: 2026-08-17 23:05 UTC · Googlebot user-agent
 
 **[!!]** blokator · **[!]** ozbiljno · **[i]** informacija
 
@@ -211,9 +211,9 @@ f4c642a Sitemap nije imao nijednu sliku — Google nije mogao ni da ih otkrije
 
 ```
 stranica                                           TTFB   ukupno
-/                                              0.634297s 0.775443s
-/kategorija/bambus-paneli                      0.790613s 1.056573s
-/paneli/drveni-panel-golden-teak               0.773211s 0.898560s
+/                                              0.643610s 0.798084s
+/kategorija/bambus-paneli                      0.775911s 1.030034s
+/paneli/drveni-panel-golden-teak               0.658360s 0.784404s
 ```
 [i] Mjereno kroz posrednik ovog okruzenja — pravi server je brzi za oko 0,5 s.
 

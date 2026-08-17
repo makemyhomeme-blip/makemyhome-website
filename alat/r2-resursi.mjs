@@ -12,6 +12,10 @@
  * Stranica koja se nije ucitala se prijavljuje kao NIJE IZMJERENO i alat vraca
  * izlazni kod 1. Nikad "0 problema" za stranicu koja nije otvorena.
  *
+ * Ogranicenje: zaglavlja kesa se vide samo ako se mjeri zivi sajt. Lokalni
+ * `php -S` ih ne salje, pa provjeru verzija na zivom sajtu rade pravila G16,
+ * G17 i G24 u alat/provjera.py.
+ *
  *   node alat/r2-resursi.mjs spisak.txt
  *   MMH_IZLAZ=/put/ime MMH_BAZA=http://127.0.0.1:8898 node alat/r2-resursi.mjs spisak.txt
  */
@@ -201,6 +205,12 @@ const pw = require('/opt/node22/lib/node_modules/playwright/index.js');
   }
   r('');
   r('## Zaglavlja kesa po vrsti sredstva');
+  r('');
+  r('> **Ogranicenje:** kad se mjeri na lokalnoj kopiji (`php -S`), zaglavlja kesa');
+  r('> ne postoje — lokalni server ih ne salje, pa ovdje stoji „(nema)". Prava');
+  r('> zaglavlja i verzije na zivom sajtu provjeravaju pravila G16, G17 i G24 u');
+  r('> `alat/provjera.py`. Provjera „kesira se godinu a nema ?v=" u ovom alatu');
+  r('> ima smisla samo ako se MMH_BAZA usmjeri na zivi sajt.');
   r('');
   const kesovi = {};
   for (const x of redovi) for (const z of x.zahtjevi) {
