@@ -1,6 +1,14 @@
 # SEO / Search Console audit — makemyhome.me
 
 **Datum:** 17. avgust 2026.
+**STANJE POSLIJE POPRAVKI (isti dan):** svih pet nalaza je zatvoreno.
+Recenzije su **uklonjene sa cijelog sajta** po odluci vlasnika (nijedna nije bila
+od stvarnog kupca) — nema ih ni na stranicama proizvoda, ni na početnoj, ni u
+kodu, ni u strukturiranim podacima; provjereno na svih 149 adresa. Uklonjena je i
+tvrdnja „Google ocjena 4.8 · 22 recenzije" sa početne, `numberOfItems` sada
+odgovara broju stavki, u svaku ponudu na kategoriji dodani su `url` i `seller`,
+blok „u istoj nijansi" ispisuje server, a rezervni izvor recenzija više ne može
+tiho ubaciti zastarjele podatke. `provjera.py` 50/50, sve 149 adresa 200.
 **Metod:** čitanje izvornog koda + mjerenje živog sajta (149 adresa iz sitemapa,
 Googlebot user-agent). **Nijedan postojeći fajl nije mijenjan** — ovo je novi
 fajl sa izvještajem.
