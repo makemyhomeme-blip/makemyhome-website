@@ -322,51 +322,16 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
       ['@type' => 'UnitPriceSpecification', 'priceType' => 'https://schema.org/ListPrice', 'price' => (string)$price, 'priceCurrency' => 'EUR'],
     ];
   }
-  // Reviews & aggregate rating — jedan izvor istine: data/reviews.json
-  // (spojene recenzije: bogat tekst + crnogorski gradovi + svjezi datumi)
-  $allReviews = json_decode(@file_get_contents(__DIR__ . '/data/reviews.json'), true) ?: [];
-  $rvBlock    = $allReviews[(string)$id] ?? null;
-  if ($rvBlock && !empty($rvBlock['items'])) {
-    $reviews = array_map(fn($r) => [
-      'author' => $r['name'], 'city' => $r['city'], 'date' => $r['date'],
-      'rating' => $r['stars'], 'text' => $r['text'],
-    ], $rvBlock['items']);
-    $revCount  = (int)$rvBlock['count'];
-    $avgRating = $rvBlock['avg'];
-    $rvDist    = $rvBlock['dist'];
-  } elseif (!$allReviews) {
-    /* Rezervni izvor se koristi SAMO ako je data/reviews.json nedostupan ili
-       pokvaren. Ranije se koristio i kada je datoteka bila u redu ali za ovaj
-       proizvod nije imala zapis — tada bi stranica tiho prikazala stare
-       recenzije ugradjene u products.json: druge tekstove, drugu ocjenu, istu
-       adresu, i nigdje poruke da se to dogodilo. Tako je vec jednom svih 117
-       proizvoda mjesecima prikazivalo pogresne recenzije (vidi komentar na
-       vrhu fajla). Sada su ta dva slucaja razdvojena. */
-    $reviews   = $product['reviews'] ?? [];
-    $revCount  = count($reviews);
-    $avgRating = $revCount > 0 ? round(array_sum(array_column($reviews, 'rating')) / $revCount, 1) : null;
-    $rvDist    = [];
-    foreach ([5,4,3,2,1] as $s) $rvDist[(string)$s] = count(array_filter($reviews, fn($r) => (int)($r['rating'] ?? 5) === $s));
-  } else {
-    // Datoteka je procitana, ali za ovaj proizvod nema zapisa — ne prikazuje se
-    // nista. Bolje prazno nego tudje ili zastarjelo.
-    $reviews   = [];
-    $revCount  = 0;
-    $avgRating = null;
-    $rvDist    = [];
-  }
-  // Pomocne funkcije za prikaz ocjena — definisane RANO jer ih koristi i bocni blok i recenzije
-  $revPlural = function(int $n) {
-    $d1 = $n % 10; $d2 = $n % 100;
-    if ($d1 === 1 && $d2 !== 11) return 'recenzija';
-    if ($d1 >= 2 && $d1 <= 4 && !($d2 >= 12 && $d2 <= 14)) return 'recenzije';
-    return 'recenzija';
-  };
-  $stars = function(int $n) {
-    $o = '';
-    for ($i = 1; $i <= 5; $i++) $o .= '<i class="fas fa-star ' . ($i <= $n ? 'rv-star-gold' : 'rev-star-empty') . '"></i>';
-    return $o;
-  };
+  /* RECENZIJE SU UKLONJENE SA CIJELOG SAJTA.
+     Bile su izmisljene — 585 zapisa, 117 proizvoda, nijedan ispod 4,6 — a
+     predstavljene kao pravi kupci sa imenom i gradom. Nikad nisu bile u
+     strukturiranim podacima, pa Google zvjezdice ni nije prikazivao; problem je
+     bio u tome sto je prikazivanje izmisljenih recenzija kao pravih nelojalna
+     trgovacka praksa, i sto kupac koji to prepozna izgubi povjerenje u sve
+     ostalo na stranici, uklucujuci cijene i mjere.
+     data/reviews.json i polje "reviews" u products.json ostaju na serveru, ali
+     ih nista ne cita. Kad recenzije budu dolazile od stvarnih kupaca kroz formu,
+     ovdje se vraca citanje, prikaz i tek tada aggregateRating u schemi. */
   $monthMap   = ['Januar'=>'01','Februar'=>'02','Mart'=>'03','April'=>'04','Maj'=>'05','Juni'=>'06',
                  'Juli'=>'07','Avgust'=>'08','Septembar'=>'09','Oktobar'=>'10','Novembar'=>'11','Decembar'=>'12'];
   $schema = [
@@ -390,36 +355,10 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           $schema['material'] = trim(preg_replace('/\s*\([^)]*\)\s*$/u', '', mb_substr($sf, 10)));
       }
   }
-  // ---- OCJENE U STRUKTURIRANIM PODACIMA — NAMJERNO ISKLJUCENO ----
-  // Google (Review snippet – General guidelines): "Ratings must be sourced directly from users".
-  // Dok se ne potvrdi da svaka recenzija dolazi od stvarnog kupca, aggregateRating i review
-  // NE saljemo Google-u. Rizik je rucna kazna i gubitak zvjezdica na CIJELOM sajtu.
-  // Recenzije i dalje stoje vidljivo na stranici (to je dozvoljeno) — samo nisu oznacene u schemi.
-  // Kada budu iz forme koju popunjavaju kupci, ovaj blok se vraca uklanjanjem "false &&".
-  if (false && $avgRating !== null) {
-    $schema['aggregateRating'] = [
-      '@type'       => 'AggregateRating',
-      'ratingValue' => (string)$avgRating,
-      'bestRating'  => '5',
-      'worstRating' => '1',
-      'reviewCount' => $revCount,
-    ];
-    $schema['review'] = array_map(function($r) use ($monthMap) {
-      $date = '';
-      if (preg_match('/^(\w+)\s+(\d{4})$/', trim($r['date'] ?? ''), $m)) {
-        $date = $m[2] . '-' . ($monthMap[$m[1]] ?? '01') . '-01';
-      }
-      $rev = [
-        '@type'        => 'Review',
-        'author'       => ['@type' => 'Person', 'name' => $r['author'] ?? ''],
-        'reviewRating' => ['@type' => 'Rating', 'ratingValue' => (string)($r['rating'] ?? 5), 'bestRating' => '5', 'worstRating' => '1'],
-        'reviewBody'   => $r['text'] ?? '',
-      ];
-      // datePublished samo ako je datum validan — prazan string bi Google prijavio kao invalid value
-      if ($date !== '') $rev['datePublished'] = $date;
-      return $rev;
-    }, $reviews);
-  }
+  /* Ocjena i recenzije se Google-u NE salju. Blok koji ih je slao je uklonjen
+     zajedno sa recenzijama; Google (Review snippet guidelines) trazi da ocjene
+     dolaze od stvarnih korisnika, a nijedna nije. Kad budu dolazile iz forme,
+     ovdje se vracaju aggregateRating i review. */
   echo '<script type="application/ld+json">' . "\n";
   echo json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
   echo "\n</script>\n";
@@ -710,35 +649,9 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <div style="display:inline-flex;align-items:center;gap:6px;background:#f5f0eb;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
           <?php endif; ?>
           <?php
-          /* Ocjena uz naslov cita STVARNI prosjek tog proizvoda.
-             Ranije je ovdje stajalo tvrdo upisano "(4.8) · Odlično" za svaki
-             proizvod, dok blok nize prikazuje pravi prosjek — pa je Nordic Oak
-             na istoj stranici imao 4,8 uz naslov i 4,6 ispod. Pogadjalo je 43
-             proizvoda: deset ih ima prosjek 4,6, trideset tri 5,0.
-             Bez recenzija se ne prikazuje nista, umjesto izmisljene ocjene. */
-          if ($avgRating !== null && $revCount > 0):
-            $oc = (float) $avgRating;
-            // Zaokruzivanje na najblizu polovinu: 4,8 se prikazuje kao pet
-            // punih zvjezdica, 4,6 kao cetiri i po. Racunanje "cijeli dio pa
-            // ostatak" davalo je 4,8 → cetiri pune i jedna prazna, sto izgleda
-            // kao 4,0 iako pise 4.8.
-            $pol  = (int) round($oc * 2);      // broj polovina, 0..10
-            $pun  = intdiv($pol, 2);
-            $pola = ($pol % 2) === 1;
-            $rijec = $oc >= 4.75 ? 'Odlično' : ($oc >= 4.0 ? 'Vrlo dobro' : 'Dobro');
+          /* Ovdje je stajala ocjena sa zvjezdicama uz naslov. Uklonjena je zajedno
+             sa recenzijama — nije bilo prave ocjene da se prikaze. */
           ?>
-          <div class="product-rating">
-            <span class="rating-stars"><?php
-              for ($i = 1; $i <= 5; $i++) {
-                  if ($i <= $pun)                   echo '<i class="fas fa-star"></i>';
-                  elseif ($i === $pun + 1 && $pola) echo '<i class="fas fa-star-half-alt"></i>';
-                  else                              echo '<i class="far fa-star"></i>';
-              }
-            ?></span>
-            <span class="rating-count">(<?= htmlspecialchars(number_format($oc, 1, '.', '')) ?>) · <?= $rijec ?></span>
-          </div>
-          <?php endif; ?>
-
           <?php if ($discount > 0): ?>
           <div class="product-price-lg">
             <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;"><?= mmhBroj($price) ?> €</span>
@@ -988,57 +901,13 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
     </div>
 
     <!-- Recenzije -->
-    <?php
-      // Recenzije — renderovane na serveru (Google ih vidi odmah, kupac dobija isti prikaz).
-      // JS ih NE crta ponovo (guard: data-ssr="1" u js/products.js).
-      if ($product && !empty($reviews)):
-    ?>
-    <div id="product-reviews" data-ssr="1" style="margin-top:60px;">
-      <div class="rv-wrap">
-        <h2 class="rv-title">Šta kažu kupci – <?= htmlspecialchars($product['name']) ?></h2>
-        <div class="rv-summary">
-          <div class="rv-score-col">
-            <div class="rv-big-num"><?= htmlspecialchars(number_format((float)$avgRating, 1)) ?></div>
-            <div class="rv-big-stars"><?= $stars((int)round((float)$avgRating)) ?></div>
-            <div class="rv-count"><?= $revCount ?> <?= $revPlural($revCount) ?></div>
-          </div>
-          <div class="rv-bars-col">
-            <?php foreach ([5,4,3,2,1] as $s):
-              $n   = (int)($rvDist[(string)$s] ?? 0);
-              $pct = $revCount > 0 ? round($n / $revCount * 100) : 0; ?>
-            <div class="rv-bar-row">
-              <span class="rv-bar-label"><?= $s ?></span><i class="fas fa-star rv-star-gold"></i>
-              <div class="rv-bar-track"><div class="rv-bar-fill<?= $n === 0 ? ' rv-bar-fill--empty' : '' ?>" style="width:<?= $pct ?>%"></div></div>
-              <span class="rv-bar-num"><?= $n ?></span>
-            </div>
-            <?php endforeach; ?>
-          </div>
-        </div>
-        <div class="rv-list">
-          <?php $rvI = 0; foreach ($reviews as $r): $rvI++; ?>
-          <div class="rv-card<?= $rvI > 3 ? ' rv-card--hidden' : '' ?>">
-            <div class="rv-card-top">
-              <div class="rv-avatar"><?= htmlspecialchars(mb_substr($r['author'] ?? '?', 0, 1)) ?></div>
-              <div class="rv-card-meta">
-                <div class="rv-card-name"><?= htmlspecialchars($r['author'] ?? '') ?><?= !empty($r['city']) ? ' <span class="rv-card-city">· ' . htmlspecialchars($r['city']) . '</span>' : '' ?></div>
-                <div class="rv-card-stars"><?= $stars((int)($r['rating'] ?? 5)) ?></div>
-              </div>
-              <span class="rv-card-date"><?= htmlspecialchars($r['date'] ?? '') ?></span>
-            </div>
-            <p class="rv-card-text"><?= htmlspecialchars($r['text'] ?? '') ?></p>
-          </div>
-          <?php endforeach; ?>
-        </div>
-        <?php if ($revCount > 3): ?>
-        <button type="button" class="rv-more-btn" id="rv-more-btn"
-                onclick="var w=this.closest('.rv-wrap');w.classList.add('rv-expanded');this.remove();">
-          Prikaži još <?= $revCount - 3 ?> <?= ($revCount - 3) === 1 ? 'komentar' : 'komentara' ?>
-          <i class="fas fa-chevron-down"></i>
-        </button>
-        <?php endif; ?>
-      </div>
-    </div>
-    <?php endif; ?>
+    <!-- Odjeljak "Sta kazu kupci" je uklonjen sa svih 117 stranica proizvoda.
+         Bio je izmisljen: 585 recenzija, nijedan proizvod ispod 4,6, imena i
+         gradovi ljudi koji ne postoje. Nikad nije bio u strukturiranim podacima
+         pa Google zvjezdice nije prikazivao — uklonjen je zato sto je
+         prikazivanje izmisljenih recenzija kao pravih nelojalna trgovacka
+         praksa, i zato sto kupac koji to prepozna prestane vjerovati i cijeni.
+         Kad recenzije budu dolazile od kupaca kroz formu, odjeljak se vraca. -->
 
     <!-- Slični proizvodi — renderuje server, da linkovi rade i bez JavaScripta -->
     <?php if ($product && $srodni): ?>

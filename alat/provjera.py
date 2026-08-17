@@ -1218,43 +1218,47 @@ def grupa_H():
 
 
 def grupa_R():
+    """Recenzija na sajtu NEMA i ne smije ih biti dok ne budu od stvarnih kupaca.
+
+    Ranije su ovdje bila dva pravila koja su provjeravala da se svaka recenzija
+    iz podataka vidi na stranici. Recenzije su uklonjene sa cijelog sajta jer su
+    bile izmisljene (585 zapisa, 117 proizvoda, nijedan ispod 4,6), pa ta dva
+    pravila vise nemaju smisla. Zamijenjena su obrnutim: alat sada cuva da se
+    ne vrate slucajno — ni na stranicu, ni u strukturirane podatke.
+    """
     print('\n=== R · RECENZIJE ===')
-    # Recenzije se traze po ID-u proizvoda u data/reviews.json. Kad su adrese
-    # promijenjene u /paneli/..., iz zahtjeva je nestao ?id=, pa je ID ostajao
-    # nula i svaka stranica je pokazivala STARE tri recenzije iz products.json
-    # umjesto pet novijih. Nista drugo na stranici nije odavalo gresku.
-    import urllib.request as _u
-    rev, _, _, _ = dohvati(BAZA + '/data/reviews.json')
-    try:
-        REV = json.loads(rev)
-    except Exception:
-        zabiljezi('R1', 'Svaka recenzija iz podataka se vidi na stranici', ['ne mogu procitati reviews.json'], 1)
-        return
-    php = subprocess.run(['php', '-r',
-        'require "%s/php/slug.php"; $d=json_decode(file_get_contents("php://stdin"),true); '
-        '$o=[]; foreach($d as $p) $o[$p["id"]]=mmhSlugProizvoda($p); echo json_encode($o);' % KORIJEN],
-        input=json.dumps(PROIZVODI), capture_output=True, text=True)
-    slug = json.loads(php.stdout)
+    tragovi = ['rv-card', 'rv-wrap', 'testimonial-card', 'aggregateRating',
+               'ratingValue', 'reviewCount', '"review"', 'Ocjene korisnika',
+               'Šta kažu kupci', 'Šta Kažu Naši Kupci']
     g = []
-    uk_ocek = uk_prik = 0
-    for pid, blok in REV.items():
-        if pid not in slug:
-            continue
-        ocek = [i.get('name') for i in (blok.get('items') or [])]
-        h, kod, _, _ = dohvati('%s/%s' % (BAZA, slug[pid]), timeout='15')
+    for u in SITEMAP:
+        h, kod, _, _ = dohvati(u, timeout='15')
         if kod != '200':
-            g.append('%s → %s' % (slug[pid], kod))
+            g.append('%s → %s' % (u, kod))
             continue
-        imena = [re.sub(r'<.*', '', x).strip() for x in re.findall(r'class="rv-card-name">([^<]*)', h)]
-        uk_ocek += len(ocek); uk_prik += len(imena)
-        fale = [n for n in ocek if n not in imena]
-        if fale:
-            g.append('%s → fali %d recenzija (%s)' % (slug[pid], len(fale), ', '.join(fale[:2])))
-    zabiljezi('R1', 'Svaka recenzija iz podataka se vidi na stranici', g, len(REV))
+        # Komentari u kodu smiju objasniti zasto su uklonjene — ne broje se.
+        bez = re.sub(r'<!--.*?-->', '', h, flags=re.S)
+        nasao = [t for t in tragovi if t in bez]
+        if nasao:
+            g.append('%s → %s' % (u.replace(BAZA, ''), ', '.join(nasao[:3])))
+    zabiljezi('R1', 'Nigdje na sajtu nema recenzija ni ocjena', g, len(SITEMAP))
+
+    # Isto i u kodu koji se deployuje — da se ne vrati tihо kroz JavaScript.
     g = []
-    if uk_prik != uk_ocek:
-        g.append('prikazano %d od %d recenzija' % (uk_prik, uk_ocek))
-    zabiljezi('R2', 'Ukupan broj prikazanih recenzija = broj u podacima', g, 1)
+    for rel in ('js/products.js', 'js/main-v4.js', 'product.php', 'products.php', 'index.html'):
+        put = os.path.join(KORIJEN, rel)
+        if not os.path.exists(put):
+            continue
+        with open(put, encoding='utf-8', errors='replace') as fh:
+            kod_t = fh.read()
+        # PHP i JS komentari se izbacuju — u njima stoji zapis zasto su uklonjene.
+        kod_t = re.sub(r'/\*.*?\*/', '', kod_t, flags=re.S)
+        kod_t = re.sub(r'^\s*//.*$', '', kod_t, flags=re.M)
+        kod_t = re.sub(r'<!--.*?-->', '', kod_t, flags=re.S)
+        for t in ('rv-card', 'rv-wrap', 'testimonial-card', 'aggregateRating', 'reviewCount'):
+            if t in kod_t:
+                g.append('%s sadrzi %s' % (rel, t))
+    zabiljezi('R2', 'Ni u kodu nema ostatka koji bi ih vratio', g, 5)
 
 
 # ============================================================
