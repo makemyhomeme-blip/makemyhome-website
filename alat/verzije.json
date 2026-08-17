@@ -1,0 +1,30 @@
+{
+ "css/style-v5.css": {
+  "hash": "308abb77c94e4a39",
+  "verzija": "54"
+ },
+ "fa/css/mmh-ikone.css": {
+  "hash": "ce34d1555fc94330",
+  "verzija": "2"
+ },
+ "fa/webfonts/fa-solid-900.woff2": {
+  "hash": "aebfb638a29f12d3",
+  "verzija": "2"
+ },
+ "js/analytics-events.js": {
+  "hash": "6b69b9c05cae85f8",
+  "verzija": "3"
+ },
+ "js/cart.js": {
+  "hash": "2906a9ed005227e6",
+  "verzija": "3"
+ },
+ "js/main-v4.js": {
+  "hash": "d86f5c22a5452550",
+  "verzija": "6"
+ },
+ "js/products.js": {
+  "hash": "a373a25dcde36734",
+  "verzija": "52"
+ }
+}

@@ -1175,6 +1175,82 @@ def grupa_G():
     zabiljezi('G15', 'Nijedna stranica ne salje zabranu indeksiranja zaglavljem',
               g, len(mete) * 2)
 
+    # ---- G16 i G17: IZMJENA MORA STICI DO POSJETIOCA ---------------------
+    #
+    # Zasto ova dva pravila postoje:
+    # Recenzije su obrisane sa servera i provjera je javila "0 tragova na svih
+    # 149 stranica" — a vlasnik ih je i dalje gledao na svom telefonu. Provjera
+    # je gledala STA SERVER POSALJE, a ne STA PREGLEDAC POKAZE. js/products.js
+    # se servira sa "immutable" na godinu, a broj u ?v= je ostao 51, pa je svaki
+    # posjetilac koji je sajt vec otvarao dobijao stari fajl iz svog kesa — sa
+    # svim izmisljenim recenzijama. Google to nije vidio jer bot ne kesira.
+    #
+    # G16: fajl koji se servira dugorocno MORA imati ?v= i istu vrijednost svuda.
+    # G17: ako se sadrzaj fajla promijenio, broj u ?v= se MORA promijeniti.
+    #      Alat pamti par (hash, verzija) u alat/verzije.json i poredi.
+    import hashlib as _h
+    ref = {}          # sredstvo -> {verzija: [fajlovi]}
+    for koren, dirs, fajlovi in os.walk(KORIJEN):
+        dirs[:] = [d for d in dirs if d not in
+                   ('.git', 'alat', 'node_modules', '.seo-audit-kes', 'images', 'data')]
+        for f in fajlovi:
+            if not f.endswith(('.html', '.php')):
+                continue
+            try:
+                with open(os.path.join(koren, f), encoding='utf-8', errors='replace') as fh:
+                    t = fh.read()
+            except OSError:
+                continue
+            for m in re.finditer(
+                    r'(?:src|href)="((?:js|css|fa)/[^"?]+\.(?:js|css|woff2?|ttf))(?:\?v=([0-9.]+))?"', t):
+                ref.setdefault(m.group(1), {}).setdefault(m.group(2) or '', []).append(
+                    os.path.relpath(os.path.join(koren, f), KORIJEN))
+
+    g16 = []
+    dugorocni = []
+    for sred in sorted(ref):
+        zag = subprocess.run(CURL + ['-I', '--max-time', '15', BAZA + '/' + sred],
+                             capture_output=True, text=True, errors='replace').stdout
+        dugo = 'immutable' in zag or 'max-age=31536000' in zag
+        if not dugo:
+            continue
+        dugorocni.append(sred)
+        verzije = ref[sred]
+        if '' in verzije:
+            g16.append('%s se kesira godinu, a %d fajl(ova) ga poziva BEZ ?v= (%s)'
+                       % (sred, len(verzije['']), verzije[''][0]))
+        drugi = [v for v in verzije if v]
+        if len(drugi) > 1:
+            g16.append('%s se poziva sa vise razlicitih verzija: %s' % (sred, ', '.join(sorted(drugi))))
+    zabiljezi('G16', 'Dugorocno kesiran fajl ima verziju, istu svuda', g16, max(len(dugorocni), 1))
+
+    pamcenje = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'verzije.json')
+    try:
+        with open(pamcenje, encoding='utf-8') as fh:
+            staro = json.load(fh)
+    except Exception:
+        staro = {}
+    g17 = []
+    novo = dict(staro)
+    for sred in dugorocni:
+        put = os.path.join(KORIJEN, sred)
+        if not os.path.exists(put):
+            continue
+        with open(put, 'rb') as fh:
+            hesh = _h.sha256(fh.read()).hexdigest()[:16]
+        verzija = sorted([v for v in ref[sred] if v]) or ['']
+        verzija = verzija[0]
+        prije = staro.get(sred)
+        if prije and prije['hash'] != hesh and prije['verzija'] == verzija:
+            g17.append('%s je izmijenjen, a ?v=%s nije podignut — izmjena ne stize '
+                       'do nikoga ko je sajt vec otvarao' % (sred, verzija))
+        else:
+            novo[sred] = {'hash': hesh, 'verzija': verzija}
+    zabiljezi('G17', 'Izmijenjen fajl znaci i podignutu verziju', g17, max(len(dugorocni), 1))
+    if not g17:
+        with open(pamcenje, 'w', encoding='utf-8') as fh:
+            json.dump(novo, fh, ensure_ascii=False, indent=1, sort_keys=True)
+
 
 # ============================================================
 # H — ADRESE KOJE GOOGLE STVARNO IMA
