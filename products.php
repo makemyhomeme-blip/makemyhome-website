@@ -910,14 +910,18 @@ echo "\n</script>\n";
         var isParent=cat==='bambus-paneli';
         // Show back-bar immediately
         var bb=document.getElementById('back-bar');if(bb)bb.style.display='flex';
-        var ct=document.getElementById('cat-title');if(ct)ct.textContent=n;
+        var ct=document.getElementById('cat-title');if(ct&&!ct.dataset.seo)ct.textContent=n;
         if(isParent){
           // Keep category-grid visible (skeleton cat-cards match subcategory layout)
         }else{
-          // Leaf: hide cat-grid, show product skeletons
-          var cg=document.getElementById('category-grid');if(cg)cg.style.display='none';
+          // Leaf: hide cat-grid, show product skeletons.
+          // Kosturi se crtaju SAMO ako server nije nista ispisao. Ovaj blok je
+          // ranije bezuslovno prepisivao #products-container sa sest praznih
+          // pravougaonika — isti kvar koji je na bambusu gasio 39 kartica, samo
+          // uspavan: radi jedino na starim adresama sa ?cat=, a one 301-uju.
+          var cg=document.getElementById('category-grid');if(cg&&!cg.querySelector('.cat-card'))cg.style.display='none';
           var pc=document.getElementById('products-container');
-          if(pc){pc.style.display='grid';pc.innerHTML='<div class="loading-placeholder" style="height:360px;border-radius:16px;"></div>'.repeat(6);}
+          if(pc&&!pc.querySelector('.product-card')){pc.style.display='grid';pc.innerHTML='<div class="loading-placeholder" style="height:360px;border-radius:16px;"></div>'.repeat(6);}
         }
       })();</script>
     </div>

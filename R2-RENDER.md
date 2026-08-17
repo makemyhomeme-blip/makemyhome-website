@@ -1,6 +1,6 @@
 # R2 — sta ostane poslije JavaScripta
 
-Napravljeno: 2026-08-16 21:22 UTC
+Napravljeno: 2026-08-17 12:13 UTC
 
 149 adresa iz sitemapa. Svaka ucitana dva puta u istom Chromiumu:
 jednom sa **iskljucenim** JavaScriptom, jednom sa **ukljucenim** (`networkidle` + 2 s).
@@ -24,7 +24,7 @@ Broji se u zivom DOM-u, isto u oba slucaja — zato su brojevi uporedivi.
 
 | adresa | € bez | € sa | kart bez | kart sa | ploc bez | ploc sa | LD bez | LD sa | h1 | h2 bez | h2 sa | tekst bez | tekst sa | status |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| `/` | 8 | 8 | 4 | 4 | 0 | 0 | 4 | 4 | 1 | 11 | 11 | 7403 | 7577 | [i] |
+| `/` | 8 | 8 | 4 | 4 | 0 | 0 | 4 | 4 | 1 | 11 | 11 | 7403 | 7598 | [i] |
 | `/products.html` | 0 | 0 | 0 | 0 | 8 | 8 | 2 | 2 | 1 | 11 | 11 | 3685 | 3685 | [i] |
 | `/cjenovnik.html` | 50 | 52 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 6 | 6 | 5693 | 5830 | [i] |
 | `/inspiracija.html` | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 4696 | 4696 | [i] |

@@ -1,6 +1,6 @@
 # R2 — bljesak, skok rasporeda i mobilni prikaz
 
-Napravljeno: 2026-08-16 21:24 UTC
+Napravljeno: 2026-08-17 12:20 UTC
 
 Svaka kategorija je snimljena na 200, 600, 1500 i 3000 ms od pocetka ucitavanja,
 na mobilnom ekranu 412×915, sa Googlebot user-agentom. Snimci su u `alat/snimci/`.
@@ -10,24 +10,24 @@ desavalo na bambusu prije popravke: 39 kartica se iscrta, pa nestane.
 
 - kategorija sa bljeskom: **0**
 - kategorija sa CLS iznad 0,1 (Googleov prag): **0**
-- kategorija sa LCP iznad 2,5 s: **0**
+- kategorija sa LCP iznad 2,5 s: **1**
 
 | kategorija | kartice 200/600/1500/3000 ms | tekst 200→3000 ms | CLS | LCP | ocjena |
 |---|---|---|---|---|---|
-| `/kategorija/bambus-paneli` | 39 / 39 / 39 / 39 | 7828 → 7828 | 0.001 | 316 ms | [i] uredu |
-| `/kategorija/bambus-drveni` | 9 / 9 / 9 / 9 | 3681 → 3681 | 0.004 | 244 ms | [i] uredu |
-| `/kategorija/bambus-tekstilni` | 9 / 9 / 9 / 9 | 4249 → 4249 | 0.001 | 248 ms | [i] uredu |
-| `/kategorija/bambus-mermerni` | 13 / 13 / 13 / 13 | 4262 → 4262 | 0.001 | 200 ms | [i] uredu |
-| `/kategorija/bambus-metalni` | 4 / 4 / 4 / 4 | 3258 → 3258 | 0.001 | 224 ms | [i] uredu |
-| `/kategorija/bambus-kozni` | 4 / 4 / 4 / 4 | 3197 → 3197 | 0.001 | 220 ms | [i] uredu |
-| `/kategorija/3d-letvice` | 28 / 28 / 28 / 28 | 6544 → 6544 | 0.001 | 224 ms | [i] uredu |
-| `/kategorija/akusticni-paneli` | 9 / 9 / 9 / 9 | 4825 → 4825 | 0.001 | 268 ms | [i] uredu |
-| `/kategorija/aluminijum-lajsne` | 8 / 8 / 8 / 8 | 4173 → 4173 | 0.001 | 932 ms | [i] uredu |
-| `/kategorija/spc-pod` | 5 / 5 / 5 | 4527 → 4527 | 0.001 | 1952 ms | [i] uredu |
-| `/kategorija/pu-kamen` | 9 / 9 / 9 / 9 | 4693 → 4693 | 0.002 | 212 ms | [i] uredu |
-| `/kategorija/classic` | 4 / 4 / 4 / 4 | 3316 → 3316 | 0.001 | 180 ms | [i] uredu |
-| `/kategorija/mdf` | 5 / 5 / 5 / 5 | 3926 → 3926 | 0.025 | 208 ms | [i] uredu |
-| `/kategorija/flex-stone` | 10 / 10 / 10 / 10 | 4998 → 4998 | 0.005 | 228 ms | [i] uredu |
+| `/kategorija/bambus-paneli` | 39 / 39 / 39 / 39 | 7828 → 7828 | 0.001 | 256 ms | [i] uredu |
+| `/kategorija/bambus-drveni` | 9 / 9 / 9 / 9 | 3681 → 3681 | 0.004 | 184 ms | [i] uredu |
+| `/kategorija/bambus-tekstilni` | 9 / 9 / 9 / 9 | 4249 → 4249 | 0.001 | 216 ms | [i] uredu |
+| `/kategorija/bambus-mermerni` | 13 / 13 / 13 / 13 | 4262 → 4262 | 0.001 | 180 ms | [i] uredu |
+| `/kategorija/bambus-metalni` | 4 / 4 / 4 / 4 | 3258 → 3258 | 0.001 | 192 ms | [i] uredu |
+| `/kategorija/bambus-kozni` | 4 / 4 / 4 / 4 | 3197 → 3197 | 0.001 | 184 ms | [i] uredu |
+| `/kategorija/3d-letvice` | 28 / 28 / 28 / 28 | 6544 → 6544 | 0.001 | 2712 ms | [i] uredu |
+| `/kategorija/akusticni-paneli` | 9 / 9 / 9 | 4825 → 4825 | 0.001 | 2296 ms | [i] uredu |
+| `/kategorija/aluminijum-lajsne` | 8 / 8 / 8 / 8 | 4173 → 4173 | 0.001 | 1080 ms | [i] uredu |
+| `/kategorija/spc-pod` | 5 / 5 / 5 | 4527 → 4527 | 0.001 | 572 ms | [i] uredu |
+| `/kategorija/pu-kamen` | 9 / 9 / 9 / 9 | 4693 → 4693 | 0.002 | 168 ms | [i] uredu |
+| `/kategorija/classic` | 4 / 4 / 4 / 4 | 3316 → 3316 | 0.001 | 168 ms | [i] uredu |
+| `/kategorija/mdf` | 5 / 5 / 5 / 5 | 3926 → 3926 | 0.025 | 184 ms | [i] uredu |
+| `/kategorija/flex-stone` | 10 / 10 / 10 / 10 | 4998 → 4998 | 0.005 | 184 ms | [i] uredu |
 
 ## Lazy loading
 
