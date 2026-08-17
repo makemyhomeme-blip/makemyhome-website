@@ -152,7 +152,7 @@ echo; echo "--- 4/15  KORPA · narudzba od pocetka do kraja ---"
 if curl -s -o /dev/null http://127.0.0.1:8899/korpa.html; then
   node alat/korpa.mjs > "$ISPIS/korpa.txt" 2>&1
   if [ $? -eq 0 ]; then
-    zapisi KORPA OK "$(grep -ciE '^\s*(OK|✓)' "$ISPIS/korpa.txt" || echo '?') provjera prolazi"
+    zapisi KORPA OK "$(grep -ciE '^\s*(OK|✓)' "$ISPIS/korpa.txt" | head -1) provjera prolazi"
   else
     zapisi KORPA PAD "korpa ne radi kako treba"
     tail -15 "$ISPIS/korpa.txt"
@@ -182,14 +182,14 @@ fi
 # Verziju kesiranih fajlova cuvaju pravila G16 i G17 u koraku 2.
 echo; echo "--- 5/15  PREGLEDAC · server naspram onoga sto pregledac pokaze ---"
 curl -s "https://makemyhome.me/sitemap.xml" 2>/dev/null | grep -o '<loc>[^<]*' | sed 's/<loc>//' > "$ISPIS/adrese.txt"
-UKUPNO=$(grep -c . "$ISPIS/adrese.txt" || echo 0)
+UKUPNO=$(grep -c . "$ISPIS/adrese.txt" | head -1)
 if [ "$BRZO" = "brzo" ]; then
   { head -3 "$ISPIS/adrese.txt"; grep '/kategorija/' "$ISPIS/adrese.txt" | head -4; grep '/paneli/' "$ISPIS/adrese.txt" | head -5; } > "$ISPIS/uzorak.txt"
   META="$ISPIS/uzorak.txt"
 else
   META="$ISPIS/adrese.txt"
 fi
-BROJ_META=$(grep -c . "$META" || echo 0)
+BROJ_META=$(grep -c . "$META" | head -1)
 if [ "$BROJ_META" -gt 0 ] && curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/render" node alat/r2-render.mjs "$META" > "$ISPIS/render.txt" 2>&1
   KOD_R=$?
@@ -352,7 +352,11 @@ if [ "$BRZO" = "brzo" ]; then
   zapisi SEO PRESK "preskoceno jer je pokrenuto 'brzo'"
 else
   bash seo-audit.sh > "$ISPIS/seo.txt" 2>&1
-  OZN=$(grep -cE '^\[!' SEO-AUDIT-RAPORT.md 2>/dev/null || echo '?')
+  # grep -c ispise 0 i vrati 1 kad nema pogodaka — "|| echo '?'" je tada dodavao
+  # jos jedan red, pa je OZN bio "0\n?" i poredjenje sa "0" nije prolazilo.
+  # Isti kvar je vec dva puta napravljen u ovom fajlu; ovo je treci i zadnji.
+  OZN=$(grep -cE '^\[!' SEO-AUDIT-RAPORT.md 2>/dev/null | head -1)
+  OZN=${OZN:-?}
   if [ "$OZN" = "0" ]; then
     zapisi SEO OK "149 adresa, nijedna oznaka"
   else
