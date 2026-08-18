@@ -1,6 +1,6 @@
 # SEO audit — makemyhome.me
 
-Napravljeno: 2026-08-18 02:02 UTC · Googlebot user-agent
+Napravljeno: 2026-08-18 09:05 UTC · Googlebot user-agent
 
 **[!!]** blokator · **[!]** ozbiljno · **[i]** informacija
 
@@ -174,7 +174,7 @@ Interni linkovi koji vracaju gresku (uzorak 60):
 ```
 netlify.toml     nema
 vercel.json      nema
-.htaccess        postoji (16029 B)
+.htaccess        postoji (17687 B)
 _redirects       nema
 _headers         nema
 CNAME            nema
@@ -211,9 +211,9 @@ f4c642a Sitemap nije imao nijednu sliku — Google nije mogao ni da ih otkrije
 
 ```
 stranica                                           TTFB   ukupno
-/                                              0.623536s 0.773474s
-/kategorija/bambus-paneli                      0.630251s 0.884998s
-/paneli/drveni-panel-golden-teak               0.759892s 0.885473s
+/                                              0.630543s 0.787248s
+/kategorija/bambus-paneli                      0.768508s 1.016337s
+/paneli/drveni-panel-golden-teak               0.631742s 0.756179s
 ```
 [i] Mjereno kroz posrednik ovog okruzenja — pravi server je brzi za oko 0,5 s.
 
