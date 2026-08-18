@@ -223,6 +223,17 @@ RewriteRule ^decor-box\.html$ decor-box.php [QSA,L]
 # Sitemap se pravi iz podataka (sa slikama), pa je uvijek tacan i kad se doda
 # nov proizvod ili nova fotografija. Adresa ostaje /sitemap.xml.
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
+# Isti spisak je bio dostupan i na /sitemap.php — dvije adrese za isti sitemap.
+# Nista ga ne linkuje i nije u robots.txt, ali Google ne treba da nadje dvije
+# kopije istog spiska, a ni stara prijava na tu adresu ne treba da visi u
+# Search Console-u. Sada 301 na /sitemap.xml.
+#
+# Uslov THE_REQUEST je obavezan: gore stoji unutrasnje prepisivanje
+# sitemap.xml -> sitemap.php, pa bi obicno pravilo napravilo beskonacnu petlju
+# (xml -> php -> xml -> php...). Ovako se preusmjerava samo kad je POSJETILAC
+# stvarno trazio /sitemap.php, a ne kad je server sam prepisao adresu.
+RewriteCond %{THE_REQUEST} \s/+sitemap\.php[\s?] [NC]
+RewriteRule ^sitemap\.php$ /sitemap.xml [R=301,L]
 # Pocetnu servira pocetna.php: ona procita index.html i ubaci kartice proizvoda
 # koje su ranije bile prazne dok se ne pokrene JavaScript — Googlebot ih u
 # prvom prolazu nije vidio. Adresa ostaje "/", index.html ostaje kao rezerva.
