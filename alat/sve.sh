@@ -27,11 +27,13 @@
 #                  tragovi recenzija — i kao mobilni i kao racunar
 #    9. RESURSI    svaki zahtjev pregledaca: 4xx/5xx, velicine, LCP, CLS, kes
 #   10. VERZIJE    ?v= mora biti hash sadrzaja fajla (alat/verzije.py)
-#   11. ADRESE     duplikati, varijante adresa, ostaci starog sajta
-#   12. OSTALO     lang, kosa crta, schema po tipu, robots.txt
-#   13. SEO        149 adresa sa Googlebot user-agentom
-#   14. IKONE      svaka ikona ima pravilo u CSS-u I znak u fontu
-#   15. PROMJENE   sta se promijenilo od zadnje ciste provjere
+#   11. SITEMAP    onako kako ga Google dohvata: zaglavlja, tip, gzip, stare
+#                  sitemap adrese, robots
+#   12. ADRESE     duplikati, varijante adresa, ostaci starog sajta
+#   13. OSTALO     lang, kosa crta, schema po tipu, robots.txt
+#   14. SEO        149 adresa sa Googlebot user-agentom
+#   15. IKONE      svaka ikona ima pravilo u CSS-u I znak u fontu
+#   16. PROMJENE   sta se promijenilo od zadnje ciste provjere
 #   + LIGHTHOUSE   Googleov alat na 14 tipova stranica (dodatno)
 #
 # Koraci 5, 6 i 7 su tu zato sto svi ostali gledaju samo jednu stranu — sta
@@ -88,7 +90,7 @@ echo " $(date '+%Y-%m-%d %H:%M')"
 echo "==============================================================="
 
 # ---------------------------------------------------------------- 1. GIT ----
-echo; echo "--- 1/15  GIT · lokalno, GitHub i server ---"
+echo; echo "--- 1/16  GIT · lokalno, GitHub i server ---"
 GRANA=$(git rev-parse --abbrev-ref HEAD)
 git fetch --quiet origin "$GRANA" 2>/dev/null
 NEUPISANO=$(git status --porcelain | grep -c . || true)
@@ -104,7 +106,7 @@ fi
 echo "    (poredjenje sa serverom radi pravilo G4 u sljedecem koraku)"
 
 # ------------------------------------------------------------ 2. PRAVILA ----
-echo; echo "--- 2/15  PRAVILA · 54 pravila iz ETALON.md ---"
+echo; echo "--- 2/16  PRAVILA · 54 pravila iz ETALON.md ---"
 if [ "$BRZO" = "brzo" ]; then
   python3 alat/dok-ne-bude.py > "$ISPIS/pravila.txt" 2>&1
 else
@@ -122,7 +124,7 @@ else
 fi
 
 # --------------------------------------------------------------- 3. OKO ----
-echo; echo "--- 3/15  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
+echo; echo "--- 3/16  OKO · pravi pregledac, 10 stranica x 2 uredjaja ---"
 ocisti; sleep 1
 # Sa ruterom: bez njega lokalna kopija ne zna za lijepe adrese
 # (/kategorija/x, /paneli/x) pa svaka pada na 404 stranicu, a alat to
@@ -148,7 +150,7 @@ else
 fi
 
 # ------------------------------------------------------------- 4. KORPA ----
-echo; echo "--- 4/15  KORPA · narudzba od pocetka do kraja ---"
+echo; echo "--- 4/16  KORPA · narudzba od pocetka do kraja ---"
 if curl -s -o /dev/null http://127.0.0.1:8899/korpa.html; then
   node alat/korpa.mjs > "$ISPIS/korpa.txt" 2>&1
   if [ $? -eq 0 ]; then
@@ -180,7 +182,7 @@ fi
 # vidljivog teksta. Ako se brojevi razlikuju, Google i covjek ne vide isto.
 #
 # Verziju kesiranih fajlova cuvaju pravila G16 i G17 u koraku 2.
-echo; echo "--- 5/15  PREGLEDAC · server naspram onoga sto pregledac pokaze ---"
+echo; echo "--- 5/16  PREGLEDAC · server naspram onoga sto pregledac pokaze ---"
 curl -s "https://makemyhome.me/sitemap.xml" 2>/dev/null | grep -o '<loc>[^<]*' | sed 's/<loc>//' > "$ISPIS/adrese.txt"
 UKUPNO=$(grep -c . "$ISPIS/adrese.txt" | head -1)
 if [ "$BRZO" = "brzo" ]; then
@@ -215,7 +217,7 @@ fi
 # Uz to se provjeravaju obavezna polja: Product (name, apsolutna slika, cijena,
 # valuta, dostupnost), LocalBusiness (adresa, telefon, radno vrijeme) i
 # BreadcrumbList (redoslijed 1..N).
-echo; echo "--- 6/15  SCHEMA · strukturirani podaci, sirovo naspram iscrtanog ---"
+echo; echo "--- 6/16  SCHEMA · strukturirani podaci, sirovo naspram iscrtanog ---"
 if [ "$BROJ_META" -gt 0 ] && curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/schema" node alat/r2-jsonld.mjs "$META" > "$ISPIS/schema.txt" 2>&1
   KOD_S=$?
@@ -237,7 +239,7 @@ fi
 # Sadrzaj koji se pojavi pa nestane, i raspored koji skoci pod prstom.
 # Snima se na 200, 600, 1500 i 3000 ms od pocetka ucitavanja, na telefonu.
 # Googleov prag za skok rasporeda (CLS) je 0,1.
-echo; echo "--- 7/15  BLJESAK · skok rasporeda i sadrzaj koji nestane ---"
+echo; echo "--- 7/16  BLJESAK · skok rasporeda i sadrzaj koji nestane ---"
 if curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/bljesak" MMH_SNIMCI="$ISPIS/snimci" node alat/r2-bljesak.mjs > "$ISPIS/bljesak.txt" 2>&1
   KOD_B=$?
@@ -261,7 +263,7 @@ fi
 # canonical, meta robots, h1, ime i cijena proizvoda, Product schema, broj slika
 # i internih linkova, tragovi recenzija. Mjeri se i kao mobilni i kao racunar.
 # Uzorak: pocetna + 5 kategorija + 10 proizvoda.
-echo; echo "--- 8/15  SERVER-PREGLEDAC · polje po polju, mobilni i racunar ---"
+echo; echo "--- 8/16  SERVER-PREGLEDAC · polje po polju, mobilni i racunar ---"
 { echo "https://makemyhome.me/"; grep '/kategorija/' "$ISPIS/adrese.txt" | head -5;
   grep '/paneli/' "$ISPIS/adrese.txt" | head -10; } > "$ISPIS/uzorak16.txt"
 if curl -s -o /dev/null http://127.0.0.1:8898/; then
@@ -285,7 +287,7 @@ fi
 # Kriticno je 4xx/5xx, mijesani sadrzaj, greska u konzoli i sredstvo koje se
 # kesira godinu bez verzije u adresi. Velika slika, LCP i CLS su savjet — ne
 # obaraju provjeru, jer su fotografije vlasnikove i ne diraju se bez dogovora.
-echo; echo "--- 9/15  RESURSI · zahtjevi, 4xx/5xx, velicine, LCP, CLS ---"
+echo; echo "--- 9/16  RESURSI · zahtjevi, 4xx/5xx, velicine, LCP, CLS ---"
 if curl -s -o /dev/null http://127.0.0.1:8898/; then
   MMH_IZLAZ="$ISPIS/res" node alat/r2-resursi.mjs "$ISPIS/uzorak16.txt" > "$ISPIS/res.txt" 2>&1
   KOD_RS=$?
@@ -308,7 +310,7 @@ fi
 # Verzija u adresi (?v=) mora biti hash sadrzaja fajla. Ako nije, izmjena ne
 # stize do pregledaca koji fajl vec ima. Pravila G16, G17 i G24 to provjeravaju
 # i na zivom sajtu; ovdje se gleda lokalno stanje, prije deploya.
-echo; echo "--- 10/15  VERZIJE · hash sadrzaja u adresi svakog kesiranog fajla ---"
+echo; echo "--- 10/16  VERZIJE · hash sadrzaja u adresi svakog kesiranog fajla ---"
 python3 alat/verzije.py > "$ISPIS/verzije.txt" 2>&1
 if grep -q "Sve adrese nose tacan hash" "$ISPIS/verzije.txt"; then
   zapisi VERZIJE OK "svaka adresa nosi hash sadrzaja"
@@ -318,8 +320,66 @@ else
 fi
 ocisti
 
-# --------------------------------------------------- 11. ADRESE -----------
-echo; echo "--- 11/15  ADRESE · duplikati, varijante, ostaci starog sajta ---"
+# ------------------------------------- 11. SITEMAP_GOOGLE_READINESS -------
+#
+# Zasto poseban korak: Search Console je pet mjeseci prijavljivao "Temporary
+# processing error" za sitemap, a svaka dosadasnja provjera je govorila da je
+# sitemap ispravan — i bila je u pravu. Nijedna, medjutim, nije gledala sitemap
+# ONAKO KAKO GA GOOGLE DOHVATA: kao poseban fajl, sa svojim zaglavljima,
+# kompresijom, tipom sadrzaja i vremenom odgovora, i sa provjerom da stare
+# sitemap adrese ne vise kao meka greska.
+echo; echo "--- 11/16  SITEMAP · onako kako ga Google dohvata ---"
+SGR=0
+sm_nalaz() { echo "    [!] $1"; SGR=$((SGR+1)); }
+SM="https://makemyhome.me/sitemap.xml"
+SMH="$ISPIS/sm-zag.txt"; SMB="$ISPIS/sm-tijelo.xml"
+curl -sk --cacert /root/.ccr/ca-bundle.crt -D "$SMH" -o "$SMB" \
+     -w "%{http_code}|%{content_type}|%{num_redirects}|%{time_starttransfer}|%{size_download}" \
+     "$SM" > "$ISPIS/sm-mjere.txt" 2>&1
+IFS='|' read -r SM_KOD SM_TIP SM_SKOK SM_TTFB SM_VEL < "$ISPIS/sm-mjere.txt"
+[ "$SM_KOD" = "200" ] || sm_nalaz "sitemap vraca $SM_KOD"
+case "$SM_TIP" in *xml*) ;; *) sm_nalaz "Content-Type je '$SM_TIP', a mora biti XML";; esac
+[ "${SM_SKOK:-0}" = "0" ] || sm_nalaz "sitemap ide preko $SM_SKOK preusmjerenja"
+python3 - "$SMB" <<'PY' || sm_nalaz "XML se ne parsira ili ima gresku u sadrzaju"
+import sys, xml.etree.ElementTree as ET
+b = open(sys.argv[1], 'rb').read()
+assert not b.startswith(b'\xef\xbb\xbf'), 'BOM na pocetku'
+assert b.lstrip() == b, 'praznina prije <?xml'
+k = ET.fromstring(b)
+ns = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+loc = [u.find('s:loc', ns).text for u in k.findall('s:url', ns)]
+assert loc, 'nema nijedan <loc>'
+assert len(loc) == len(set(loc)), 'ima dupliranih adresa'
+assert all(x.startswith('https://makemyhome.me/') for x in loc), 'adresa nije https na pravom domenu'
+PY
+# gzip mora biti ispravan — Google skida sitemap kompresovan
+curl -sk --cacert /root/.ccr/ca-bundle.crt -H "Accept-Encoding: gzip" -o "$ISPIS/sm.gz" "$SM"
+python3 -c "
+import gzip,sys
+b=open('$ISPIS/sm.gz','rb').read()
+if b[:2]==b'\x1f\x8b':
+    gzip.decompress(b)
+" 2>/dev/null || sm_nalaz "gzip verzija sitemapa se ne raspakuje"
+# isti odgovor za Googlebot i za obican pregledac
+H1=$(curl -sk --cacert /root/.ccr/ca-bundle.crt -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "$SM" | md5sum | cut -c1-12)
+H2=$(curl -sk --cacert /root/.ccr/ca-bundle.crt "$SM" | md5sum | cut -c1-12)
+[ "$H1" = "$H2" ] || sm_nalaz "Googlebot dobija drugaciji sitemap nego pregledac"
+# robots.txt mora prijaviti sitemap i sam biti dostupan
+curl -sk --cacert /root/.ccr/ca-bundle.crt "https://makemyhome.me/robots.txt" > "$ISPIS/rb.txt"
+grep -qi "^sitemap:.*sitemap\.xml" "$ISPIS/rb.txt" || sm_nalaz "robots.txt ne prijavljuje sitemap"
+# stare sitemap adrese ne smiju vracati 200 ni 404 — moraju biti 410
+for st in wp-sitemap.xml wp-sitemap-posts-product-1.xml sitemap_index.xml product-sitemap.xml; do
+  K=$(curl -sk --cacert /root/.ccr/ca-bundle.crt -o /dev/null -w "%{http_code}" "https://makemyhome.me/$st")
+  [ "$K" = "410" ] || sm_nalaz "stara sitemap adresa /$st vraca $K (treba 410)"
+done
+if [ $SGR -eq 0 ]; then
+  zapisi SITEMAP OK "$(grep -c '<loc>' "$SMB") adresa, $SM_TIP, bez skoka, TTFB ${SM_TTFB}s, gzip radi, stare 410"
+else
+  zapisi SITEMAP PAD "$SGR nalaza — vidi iznad"
+fi
+
+# --------------------------------------------------- 12. ADRESE -----------
+echo; echo "--- 12/16  ADRESE · duplikati, varijante, ostaci starog sajta ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi ADRESE PRESK "preskoceno jer je pokrenuto 'brzo'"
 else
@@ -333,7 +393,7 @@ else
 fi
 
 # --------------------------------------------------- 12. OSTALO -----------
-echo; echo "--- 12/15  OSTALO · lang, kosa crta, schema po tipu, robots.txt ---"
+echo; echo "--- 13/16  OSTALO · lang, kosa crta, schema po tipu, robots.txt ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi OSTALO PRESK "preskoceno jer je pokrenuto 'brzo'"
 else
@@ -347,7 +407,7 @@ else
 fi
 
 # ------------------------------------------------------- 13. SEO ----------
-echo; echo "--- 13/15  SEO · 149 adresa sa Googlebot user-agentom ---"
+echo; echo "--- 14/16  SEO · 149 adresa sa Googlebot user-agentom ---"
 if [ "$BRZO" = "brzo" ]; then
   zapisi SEO PRESK "preskoceno jer je pokrenuto 'brzo'"
 else
@@ -366,7 +426,7 @@ else
 fi
 
 # ------------------------------------------------------------ 11. IKONE ----
-echo; echo "--- 14/15  IKONE · pravilo u CSS-u i znak u fontu ---"
+echo; echo "--- 15/16  IKONE · pravilo u CSS-u i znak u fontu ---"
 python3 alat/ikone.py provjeri > "$ISPIS/ikone.txt" 2>&1
 python3 alat/fontovi.py >> "$ISPIS/ikone.txt" 2>&1
 if grep -qiE 'PAZI|nema u CSS|GRESKA' "$ISPIS/ikone.txt"; then
@@ -433,7 +493,7 @@ fi
 # usput nestalo nesto drugo — vidi se odmah, a ne za nedjelju dana.
 #
 # Tako je i nadjeno da je "Karakteristike – <ime>" nestalo sa 117 stranica.
-echo; echo "--- 15/15  PROMJENE · sta se promijenilo od zadnje ciste provjere ---"
+echo; echo "--- 16/16  PROMJENE · sta se promijenilo od zadnje ciste provjere ---"
 SNIMCI="$(dirname "$0")/snimci"
 if [ -f "$SNIMCI/zadnji-ok.json.gz" ]; then
   python3 alat/snimak.py snimi sada > /dev/null 2>&1
