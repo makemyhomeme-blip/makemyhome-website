@@ -50,6 +50,24 @@ RewriteRule ^wp-includes/ - [G,L]
 RewriteRule ^wp-content/ - [G,L]
 RewriteRule ^wp-admin/ - [G,L]
 RewriteRule ^wp-json - [G,L]
+# Stare WordPress sitemape → 410 Gone.
+#
+# Zasto bas ovo: u serverskom logu za februar 2026 (posljednji sacuvan) stoji da
+# je WordPress sajt imao sitemap /wp-sitemap.xml i devet djecijih sitemapa
+# (wp-sitemap-posts-*, wp-sitemap-taxonomies-*, wp-sitemap-users-1.xml). Botovi
+# su ih trazili 554 puta u sedamnaest dana i svaki put dobijali 200. To je
+# sitemap koji je tada bio prijavljen alatima, pa vjerovatno i Search Console-u.
+#
+# Danas te adrese vracaju 404 sa HTML stranicom. Pravilo iznad hvata samo
+# wp-*.php i wp-* direktorijume, a ove su .xml pa su ispadale. Sa 410 Google
+# dobija jasno "trajno obrisano" i prestaje da ih drzi u redu za obradu, umjesto
+# da ih ponavlja kao meku gresku.
+#
+# VAZNO: ovo NE dira /sitemap.xml. Aktuelni sitemap je tehnicki ispravan i ne
+# mijenja se.
+RewriteRule ^wp-sitemap.*\.xml$ - [G,L]
+RewriteRule ^sitemap[_-]index\.xml$ - [G,L]
+RewriteRule ^(post|page|product|category|product_cat|product_tag|author)-sitemap\.xml$ - [G,L]
 RewriteRule ^xmlrpc\.php$ - [G,L]
 RewriteRule ^(?!product/)(.*/)?feed/?$ - [G,L]
 RewriteRule ^comments/ - [G,L]
