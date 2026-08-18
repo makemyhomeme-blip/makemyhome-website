@@ -18,17 +18,31 @@ const IZVOR = 'http://127.0.0.1:8899';
 const MOJA = 'http://127.0.0.1:8898';
 const SAJT = 'https://makemyhome.me';
 
+/* Tri pokusaja, ne jedan.
+   Kad provjera ide punom parom, na server ide vise desetina zahtjeva u sekundi
+   i poneki curl se prekine ili istekne. Sa jednim pokusajem to znaci 404 za
+   sliku koja na sajtu postoji, pa pregled izgleda prijavi kvar kojeg nema —
+   bas se to i desilo za cat-mdf-1775496655.jpg: slika je i na sajtu i preko
+   posrednika 200, a jedan prolazni promasaj je oborio cijeli korak. */
 function saServera(put) {
-  const r = spawnSync('curl', ['-sk', '--cacert', '/root/.ccr/ca-bundle.crt',
-    '--max-time', '20', '-w', '\\n@@%{http_code}|%{content_type}', SAJT + put],
-    { encoding: 'buffer', maxBuffer: 40 * 1024 * 1024 });
-  if (r.status !== 0 || !r.stdout) return null;
-  const buf = r.stdout;
-  const i = buf.lastIndexOf(Buffer.from('\n@@'));
-  if (i < 0) return null;
-  const [kod, tip] = buf.slice(i + 3).toString().split('|');
-  if (kod !== '200') return null;
-  return { telo: buf.slice(0, i), tip: (tip || 'application/octet-stream').trim() };
+  for (let pokusaj = 0; pokusaj < 3; pokusaj++) {
+    const r = spawnSync('curl', ['-sk', '--cacert', '/root/.ccr/ca-bundle.crt',
+      '--max-time', '20', '--retry', '1', '-w', '\\n@@%{http_code}|%{content_type}', SAJT + put],
+      { encoding: 'buffer', maxBuffer: 40 * 1024 * 1024 });
+    if (r.status === 0 && r.stdout) {
+      const buf = r.stdout;
+      const i = buf.lastIndexOf(Buffer.from('\n@@'));
+      if (i >= 0) {
+        const [kod, tip] = buf.slice(i + 3).toString().split('|');
+        if (kod === '200') {
+          return { telo: buf.slice(0, i), tip: (tip || 'application/octet-stream').trim() };
+        }
+        if (kod === '404' || kod === '410') return null;   // stvarno ga nema
+      }
+    }
+    spawnSync('sleep', [String(0.4 * (pokusaj + 1))]);
+  }
+  return null;
 }
 
 http.createServer(async (req, res) => {
