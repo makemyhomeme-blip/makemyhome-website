@@ -587,7 +587,19 @@ async function renderProductDetail() {
       </div>`;
     /* Ispis se preskace ako je server vec nacrtao sliku; dogadjaji za listanje
        se kace u svakom slucaju, da swipe i strelice rade i tada. */
-    if (!vecIspisana) galleryMain.innerHTML = _noviHtml;
+    if (!vecIspisana) {
+      galleryMain.innerHTML = _noviHtml;
+    } else {
+      /* Server je sliku ispisao, ali BEZ dogadjaja za klik — a ispod nje stoji
+         "Tapni na sliku za prikaz u punoj rezoluciji". Klik nije radio dok se
+         slika ne promijeni, jer se dogadjaj kacio samo unutar _goToGallery.
+         Zato se ovdje kaci na sliku koju je server vec ispisao. */
+      const _sl = galleryMain.querySelector('#gallery-main-img');
+      if (_sl) {
+        _sl.style.cursor = 'zoom-in';
+        _sl.onclick = () => openImageLightbox(_sl.src, product.name);
+      }
+    }
 
     // Swipe support (mobile)
     let _tx = 0;

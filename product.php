@@ -786,9 +786,11 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             </a>
           </div>
 
-          <!-- Na telefonu harmonika stoji ovdje; na racunaru ispod glavne slike -->
-          <div class="accordion-mobile-only"><?= mmhHarmonikaHTML($product) ?></div>
-
+          <?php /* Blok "u istoj nijansi" stoji ODMAH IZNAD karakteristika.
+                   Ranije je bio na samom dnu kolone, ispod harmonike — kupac bi
+                   ga vidio tek kad prodje cijelu listu karakteristika, ako uopste
+                   dodje do tamo. Ovdje je odmah poslije dugmadi za kupovinu, dok
+                   jos gleda proizvod. */ ?>
           <?php
           /* PANEL ↔ 3D LETVICA ISTE NIJANSE
              Ovaj odjeljak je do sada crtao samo JavaScript, pa ga Google u prvom
@@ -862,6 +864,10 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             </div>
           </div>
           <?php endif; ?>
+
+          <!-- Na telefonu harmonika stoji ovdje; na racunaru ispod glavne slike -->
+          <div class="accordion-mobile-only"><?= mmhHarmonikaHTML($product) ?></div>
+
           <?php else: ?>
           <div class="loading-placeholder" style="height:400px;"></div>
           <?php endif; ?>
@@ -1054,7 +1060,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/products.js?v=a373a25d"></script>
+<script src="js/products.js?v=f08242b4"></script>
 <script src="js/cart.js?v=2906a9ed"></script>
 <script>
   renderProductDetail();
