@@ -2876,3 +2876,64 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   margin: 18px 0 12px;
   font-weight: 700;
 }
+
+
+/* ===== SLICNI PROIZVODI — traka koja se pomjera lijevo-desno ==============
+   Ranije je ovdje bila obicna mreza: na telefonu jedna kartica po redu, pa je
+   sest slicnih proizvoda pravilo dugacko listanje nadolje i kupac bi ih rijetko
+   sve vidio. Sada je jedna traka koja se prevlaci prstom, a na racunaru se
+   pomjera strelicama.
+   Kartice i dalje ispisuje server i sve su u HTML-u — Google ih vidi sve, iako
+   se na ekranu odjednom vidi samo nekoliko. */
+.srodni-okvir { position: relative; }
+
+.srodni-traka {
+  display: flex !important;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;              /* Firefox */
+  padding-bottom: 4px;
+}
+.srodni-traka::-webkit-scrollbar { display: none; }   /* Chrome, Safari */
+
+.srodni-traka > .product-card {
+  flex: 0 0 260px;
+  max-width: 260px;
+  scroll-snap-align: start;
+}
+
+.srodni-strelica {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.10);
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;                      /* skript ih upali kad ima sta da se pomjeri */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.14);
+  z-index: 5;
+  transition: background .15s ease, transform .15s ease;
+}
+.srodni-strelica:hover { background: #f5f0eb; }
+.srodni-strelica:active { transform: translateY(-50%) scale(0.94); }
+.srodni-lijevo  { left: -18px; }
+.srodni-desno   { right: -18px; }
+
+@media (max-width: 900px) {
+  /* Na telefonu se prevlaci prstom, pa strelice stoje unutar okvira da ne vise
+     preko ivice ekrana. Podignute su na visinu slike da ne pokrivaju ime
+     proizvoda i cijenu. */
+  .srodni-lijevo  { left: 4px; }
+  .srodni-desno   { right: 4px; }
+  .srodni-strelica { top: 25%; width: 40px; height: 40px; }
+  .srodni-traka > .product-card { flex: 0 0 78%; max-width: 78%; }
+}

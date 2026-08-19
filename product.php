@@ -394,7 +394,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=86d9ada3">
+  <link rel="stylesheet" href="css/style-v5.css?v=a39487e4">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -600,6 +600,85 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <?php endforeach; ?>
         </div>
         <p class="gallery-open-hint"><i class="fas fa-search-plus"></i> Tapni na sliku za prikaz u punoj rezoluciji</p>
+        <?php /* Blok "u istoj nijansi" stoji ODMAH ISPOD SLIKE, iznad karakteristika.
+                 Ranije je bio u desnoj koloni ispod dugmadi za kupovinu, pa bi ga
+                 kupac vidio tek kad prodje cijelu listu karakteristika — ako uopste
+                 dodje do tamo. Ovdje ga vidi dok jos gleda sam panel.
+                 Ispisuje ga server, pa ga Google vidi i bez JavaScripta. */ ?>
+        <?php
+        /* PANEL ↔ 3D LETVICA ISTE NIJANSE
+           Ovaj odjeljak je do sada crtao samo JavaScript, pa ga Google u prvom
+           prolazu nije vidio: ni tekst, ni 26 internih linkova izmedju parova
+           proizvoda. Sada ga ispisuje server; JavaScript ga preskace kad zatekne
+           data-ssr="1" (js/products.js, blok "Matching pairs").
+           Tabela parova mora ostati ista kao ona u js/products.js — ako se
+           mijenja jedna, mijenja se i druga. */
+        $mmhParovi = [
+          18 => [60], 60 => [18],     // CQ006
+          19 => [64], 64 => [19],     // MW010
+          23 => [61], 61 => [23],     // MW300
+          24 => [63], 63 => [24],     // MW321
+          25 => [67], 67 => [25],     // MW682
+          26 => [62], 62 => [26],     // MW312
+          37 => [82], 82 => [37],     // BW229
+          39 => [80], 80 => [39],     // BW224
+          43 => [81], 81 => [43],     // BW809
+          45 => [79], 79 => [45],     // BW008
+          110 => [77], 77 => [110],   // Classic CS029 ↔ 3D Letvica 029 Topli Mahagonij
+          112 => [72], 72 => [112],   // Classic CS013 ↔ 3D Letvica CS013 Hladno Siva
+          113 => [71], 71 => [113],   // Classic CS022 ↔ 3D Letvica CS022 Betonski Sivi
+        ];
+        $mmhPartneri = [];
+        foreach (($mmhParovi[$id] ?? []) as $pid) {
+            foreach ($products as $pp) {
+                if ((int)($pp['id'] ?? 0) === $pid) { $mmhPartneri[] = $pp; break; }
+            }
+        }
+        if ($mmhPartneri):
+          $mmhJePanel = ($mmhPartneri[0]['category'] ?? '') === '3d-letvice';
+          $mmhVarijante = $mmhJePanel && ($product['category'] ?? '') === '3d-letvice';
+          if ($mmhVarijante) {
+              $mmhNaslov = 'Ostale varijante iste nijanse';
+              $mmhPodnas = 'Ista nijansa dostupna je i u ovim završnicama';
+          } elseif ($mmhJePanel) {
+              $mmhNaslov = 'Ove 3D letvice postoje u istoj nijansi';
+              $mmhPodnas = 'Kombinujte panel sa 3D letvicama iste boje za savršen enterijer';
+          } else {
+              $mmhNaslov = 'Ovaj panel postoji u istoj nijansi';
+              $mmhPodnas = 'Kombinujte 3D letvice sa panelom iste boje za savršen enterijer';
+          }
+        ?>
+        <div class="matching-pair-section" data-ssr="1">
+          <div class="matching-pair-header">
+            <div class="matching-pair-title"><i class="fas fa-link"></i> <?= htmlspecialchars($mmhNaslov) ?></div>
+            <div class="matching-pair-subtitle"><?= htmlspecialchars($mmhPodnas) ?></div>
+          </div>
+          <div class="pair-cards-row">
+            <?php foreach ($mmhPartneri as $pp):
+              /* Cijena je ONA KOJU KUPAC PLACA. JavaScript je ovdje ispisivao punu
+                 cijenu, dok svaka druga kartica na sajtu (products.php) pokazuje
+                 snizenu — pa je ista letvica na kategoriji imala 69,59 € a u ovom
+                 bloku 86,99 €. */
+              $ppPuna  = (float)($pp['price'] ?? 0);
+              $ppPop   = (int)($pp['discount'] ?? 0);
+              $ppPlaca = $ppPop > 0 ? round($ppPuna * (1 - $ppPop / 100), 2) : $ppPuna;
+            ?>
+            <a href="<?= htmlspecialchars(mmhUrlProizvoda($pp)) ?>" class="pair-card">
+              <div class="pair-card-img">
+                <img src="<?= htmlspecialchars($pp['image'] ?? '') ?>" alt="<?= htmlspecialchars($pp['name'] ?? '') ?>" loading="lazy"<?= mmhDimAtributi($pp['image'] ?? '') ?>>
+                <?php if (!empty($pp['badge'])): ?><span class="pair-badge"><?= htmlspecialchars($pp['badge']) ?></span><?php endif; ?>
+              </div>
+              <div class="pair-card-info">
+                <div class="pair-card-name"><?= htmlspecialchars($pp['name'] ?? '') ?></div>
+                <div class="pair-card-price"><?= number_format($ppPlaca, 2, ',', '') ?> €<span class="pair-card-unit"> / <?= htmlspecialchars($pp['unit'] ?? 'kom') ?></span></div>
+                <div class="pair-card-cta">Pogledaj <i class="fas fa-arrow-right"></i></div>
+              </div>
+            </a>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <?php endif; ?>
+
         <div id="gallery-specs" class="gallery-specs-desktop"<?= $product ? ' data-ssr="1"' : '' ?>><?php
           /* Harmoniku ispisuje server. Ranije je ovdje stajao obican spisak,
              a JavaScript bi ga zamijenio harmonikom — pa se pri svakom
@@ -786,84 +865,6 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             </a>
           </div>
 
-          <?php /* Blok "u istoj nijansi" stoji ODMAH IZNAD karakteristika.
-                   Ranije je bio na samom dnu kolone, ispod harmonike — kupac bi
-                   ga vidio tek kad prodje cijelu listu karakteristika, ako uopste
-                   dodje do tamo. Ovdje je odmah poslije dugmadi za kupovinu, dok
-                   jos gleda proizvod. */ ?>
-          <?php
-          /* PANEL ↔ 3D LETVICA ISTE NIJANSE
-             Ovaj odjeljak je do sada crtao samo JavaScript, pa ga Google u prvom
-             prolazu nije vidio: ni tekst, ni 26 internih linkova izmedju parova
-             proizvoda. Sada ga ispisuje server; JavaScript ga preskace kad zatekne
-             data-ssr="1" (js/products.js, blok "Matching pairs").
-             Tabela parova mora ostati ista kao ona u js/products.js — ako se
-             mijenja jedna, mijenja se i druga. */
-          $mmhParovi = [
-            18 => [60], 60 => [18],     // CQ006
-            19 => [64], 64 => [19],     // MW010
-            23 => [61], 61 => [23],     // MW300
-            24 => [63], 63 => [24],     // MW321
-            25 => [67], 67 => [25],     // MW682
-            26 => [62], 62 => [26],     // MW312
-            37 => [82], 82 => [37],     // BW229
-            39 => [80], 80 => [39],     // BW224
-            43 => [81], 81 => [43],     // BW809
-            45 => [79], 79 => [45],     // BW008
-            110 => [77], 77 => [110],   // Classic CS029 ↔ 3D Letvica 029 Topli Mahagonij
-            112 => [72], 72 => [112],   // Classic CS013 ↔ 3D Letvica CS013 Hladno Siva
-            113 => [71], 71 => [113],   // Classic CS022 ↔ 3D Letvica CS022 Betonski Sivi
-          ];
-          $mmhPartneri = [];
-          foreach (($mmhParovi[$id] ?? []) as $pid) {
-              foreach ($products as $pp) {
-                  if ((int)($pp['id'] ?? 0) === $pid) { $mmhPartneri[] = $pp; break; }
-              }
-          }
-          if ($mmhPartneri):
-            $mmhJePanel = ($mmhPartneri[0]['category'] ?? '') === '3d-letvice';
-            $mmhVarijante = $mmhJePanel && ($product['category'] ?? '') === '3d-letvice';
-            if ($mmhVarijante) {
-                $mmhNaslov = 'Ostale varijante iste nijanse';
-                $mmhPodnas = 'Ista nijansa dostupna je i u ovim završnicama';
-            } elseif ($mmhJePanel) {
-                $mmhNaslov = 'Ove 3D letvice postoje u istoj nijansi';
-                $mmhPodnas = 'Kombinujte panel sa 3D letvicama iste boje za savršen enterijer';
-            } else {
-                $mmhNaslov = 'Ovaj panel postoji u istoj nijansi';
-                $mmhPodnas = 'Kombinujte 3D letvice sa panelom iste boje za savršen enterijer';
-            }
-          ?>
-          <div class="matching-pair-section" data-ssr="1">
-            <div class="matching-pair-header">
-              <div class="matching-pair-title"><i class="fas fa-link"></i> <?= htmlspecialchars($mmhNaslov) ?></div>
-              <div class="matching-pair-subtitle"><?= htmlspecialchars($mmhPodnas) ?></div>
-            </div>
-            <div class="pair-cards-row">
-              <?php foreach ($mmhPartneri as $pp):
-                /* Cijena je ONA KOJU KUPAC PLACA. JavaScript je ovdje ispisivao punu
-                   cijenu, dok svaka druga kartica na sajtu (products.php) pokazuje
-                   snizenu — pa je ista letvica na kategoriji imala 69,59 € a u ovom
-                   bloku 86,99 €. */
-                $ppPuna  = (float)($pp['price'] ?? 0);
-                $ppPop   = (int)($pp['discount'] ?? 0);
-                $ppPlaca = $ppPop > 0 ? round($ppPuna * (1 - $ppPop / 100), 2) : $ppPuna;
-              ?>
-              <a href="<?= htmlspecialchars(mmhUrlProizvoda($pp)) ?>" class="pair-card">
-                <div class="pair-card-img">
-                  <img src="<?= htmlspecialchars($pp['image'] ?? '') ?>" alt="<?= htmlspecialchars($pp['name'] ?? '') ?>" loading="lazy"<?= mmhDimAtributi($pp['image'] ?? '') ?>>
-                  <?php if (!empty($pp['badge'])): ?><span class="pair-badge"><?= htmlspecialchars($pp['badge']) ?></span><?php endif; ?>
-                </div>
-                <div class="pair-card-info">
-                  <div class="pair-card-name"><?= htmlspecialchars($pp['name'] ?? '') ?></div>
-                  <div class="pair-card-price"><?= number_format($ppPlaca, 2, ',', '') ?> €<span class="pair-card-unit"> / <?= htmlspecialchars($pp['unit'] ?? 'kom') ?></span></div>
-                  <div class="pair-card-cta">Pogledaj <i class="fas fa-arrow-right"></i></div>
-                </div>
-              </a>
-              <?php endforeach; ?>
-            </div>
-          </div>
-          <?php endif; ?>
 
           <!-- Na telefonu harmonika stoji ovdje; na racunaru ispod glavne slike -->
           <div class="accordion-mobile-only"><?= mmhHarmonikaHTML($product) ?></div>
@@ -922,7 +923,18 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
     <div style="margin-top:80px;">
       <div class="gold-line"></div>
       <h2 class="section-title" style="margin-bottom:40px;">Slični Proizvodi</h2>
-      <div class="products-grid" id="related-products">
+      <?php /* Traka koja se pomjera lijevo-desno umjesto mreze koja se lomi u
+               vise redova. Na telefonu se prevlaci prstom, na racunaru se klikne
+               strelica. Kartice ispisuje SERVER — Google ih vidi sve, bez obzira
+               na to sto se na ekranu vidi samo nekoliko. Strelice su obicna
+               dugmad koja pomjeraju traku; ako JavaScript zakaze, traka i dalje
+               radi prevlacenjem i tockicem misa. */ ?>
+      <div class="srodni-okvir">
+        <button type="button" class="srodni-strelica srodni-lijevo" aria-label="Prethodni proizvodi"
+                onclick="mmhSrodniPomjeri(-1)"><i class="fas fa-chevron-left"></i></button>
+        <button type="button" class="srodni-strelica srodni-desno" aria-label="Sljedeći proizvodi"
+                onclick="mmhSrodniPomjeri(1)"><i class="fas fa-chevron-right"></i></button>
+      <div class="products-grid srodni-traka" id="related-products">
         <?php foreach ($srodni as $sp):
           $spUrl   = mmhUrlProizvoda($sp);
           $spKat   = $catNames[$sp['category'] ?? ''] ?? ($sp['category'] ?? '');
@@ -960,11 +972,38 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           </div>
         </article>
         <?php endforeach; ?>
-      </div>
+      </div><!-- /.srodni-traka -->
+      </div><!-- /.srodni-okvir -->
       <div style="text-align:center;margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
         <a href="<?= htmlspecialchars($prodCatUrl) ?>" class="btn btn-outline">Sve iz kategorije <?= htmlspecialchars($prodCatName) ?></a>
         <a href="<?= htmlspecialchars($vodic[0]) ?>" class="btn btn-outline"><?= htmlspecialchars($vodic[1]) ?></a>
       </div>
+
+      <script>
+        /* Pomjera traku za sirinu jedne kartice. Strelice se sakriju kad se
+           dodje do kraja, da ne stoje mrtve. */
+        function mmhSrodniPomjeri(smjer) {
+          var t = document.getElementById('related-products');
+          if (!t) return;
+          var k = t.querySelector('.product-card');
+          var korak = k ? k.getBoundingClientRect().width + 20 : t.clientWidth * 0.8;
+          t.scrollBy({ left: smjer * korak, behavior: 'smooth' });
+        }
+        (function () {
+          var t = document.getElementById('related-products');
+          if (!t) return;
+          var l = document.querySelector('.srodni-lijevo'), d = document.querySelector('.srodni-desno');
+          function osvjezi() {
+            if (!l || !d) return;
+            var ima = t.scrollWidth > t.clientWidth + 4;
+            l.style.display = (ima && t.scrollLeft > 4) ? 'flex' : 'none';
+            d.style.display = (ima && t.scrollLeft + t.clientWidth < t.scrollWidth - 4) ? 'flex' : 'none';
+          }
+          t.addEventListener('scroll', osvjezi, { passive: true });
+          window.addEventListener('resize', osvjezi);
+          osvjezi();
+        })();
+      </script>
     </div>
     <?php endif; ?>
   </div>
