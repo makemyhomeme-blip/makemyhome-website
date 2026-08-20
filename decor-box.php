@@ -76,7 +76,7 @@
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=a39487e4">
+  <link rel="stylesheet" href="css/style-v5.css?v=78a273d1">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -227,9 +227,18 @@ require_once __DIR__ . '/php/dimenzije.php';
       /* ===== MOBILNO CENTRIRANJE ===== */
       .db-intro-grid,.db-factory-grid{text-align:center;}
       .db-intro .gold-line,.db-factory .gold-line{margin-left:auto!important;margin-right:auto!important;}
-      .db-intro .btn{margin-left:auto;margin-right:auto;}
-      .db-ben-card{flex-direction:column;align-items:center;text-align:center;}
-      .db-ben-card .db-ben-icon{margin:0 auto;}
+      /* Tekst je poravnat lijevo, pa centrirano dugme visi u praznom. Preko
+         cijele sirine je i lakse za palac. */
+      .db-intro .btn{display:flex;width:100%;justify-content:center;margin:0 0 12px;}
+      /* Kartice "Sta dobijate" bile su na telefonu centrirane i u koloni: ikona
+         iznad, pa naslov, pa cetiri reda centriranog teksta. Centriran pasus se
+         cita teze jer svaki red pocinje na drugom mjestu, a kartica je bila
+         visoka preko pola ekrana — sest kartica je davalo skoro 2000 px. Sada
+         ikona stoji lijevo od naslova, a tekst je poravnat lijevo. */
+      .db-ben-card{flex-direction:row;align-items:flex-start;text-align:left;gap:14px;padding:20px 18px;}
+      .db-ben-icon{width:44px;height:44px;border-radius:12px;font-size:18px;}
+      .db-ben-card h3{font-size:16px;}
+      .db-ben-card p{font-size:14px;line-height:1.65;}
       /* Katalozi: na telefonu jedna kartica po redu, ikona i strelica ostaju
          u istom redu sa tekstom da kartica ne naraste bez potrebe. */
       .db-katalozi{padding:56px 0;}
@@ -252,10 +261,49 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-tabela tbody th,.db-namjena-tabela tbody td{display:block;width:auto;padding:0;border-bottom:none;background:transparent!important;}
       .db-namjena-tabela tbody th{font-size:15.5px;margin-bottom:7px;}
       .db-namjena-tabela tbody td{font-size:14px;margin-bottom:9px;}
-      .db-namjena-tabela tbody td:last-child{margin-bottom:0;font-size:14.5px;}
+      /* Kad linkovi postanu dugmad, zarezi i "i" izmedju njih vise nemaju smisla
+         — vise ne stoje u recenici nego lebde izmedju dva dugmeta. Gase se sa
+         font-size:0 na celiji, a dugmad vracaju svoju velicinu. */
+      .db-namjena-tabela tbody td:last-child{margin-bottom:0;font-size:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+      /* Linkovi na kategorije bili su obican podvuceni tekst visok 18 px — na
+         telefonu premalo da se pogodi prstom, i dva susjedna linka se dodiruju.
+         Na uskom ekranu postaju dugmad od 40 px sa razmakom izmedju. */
+      .db-namjena-tabela tbody td:last-child a{font-size:14.5px;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid rgba(121,95,50,0.35);border-radius:999px;background:rgba(201,168,108,0.08);line-height:1.2;}
+      /* Tabela se na telefonu slaze u kartice, pa red i celija ne smiju
+         zadrzati sirinu koja je racunata za tabelu od 640 px. */
+      .db-namjena-tabela{display:block;width:100%;}
+      .db-namjena-tabela tbody{display:block;width:100%;}
+      .db-namjena-tabela tbody th{max-width:100%;}
       .db-namjena-nota{text-align:left;}
-      .db-tok-korak{text-align:center;}
-      .db-tok-broj{margin-left:auto;margin-right:auto;}
+      /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
+         dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
+      .db-namjena-nota a,.db-kat-nota a{display:inline-block;padding:5px 0;}
+      /* Isto vazi i za korake saradnje: broj lijevo, tekst uz njega. */
+      .db-tok-korak{text-align:left;}
+      .db-tok-broj{margin-left:0;margin-right:0;}
+
+      /* Uvodni pasusi ostaju poravnati lijevo — naslov, zlatna crta i dugme su
+         i dalje centrirani. Tri centrirana pasusa jedan ispod drugog su na
+         uskom ekranu bili blok teksta bez ijedne ravne ivice. */
+      .db-lead,.db-lead-sub,.db-factory p{text-align:left;}
+
+      /* Razmaci: na telefonu se izmedju odjeljaka gubilo po 160 px praznog
+         prostora (80 gore + 80 dolje), pa je stranica bila duga 11 500 px.
+         Naslovi su takodje bili velicine kao na racunaru. */
+      .db-intro{padding:44px 0 40px;}
+      .db-benefits,.db-namjena,.db-tok,.db-factory{padding:52px 0;}
+      .db-cta{padding:52px 0;}
+      .db-ben-grid,.db-kat-grid,.db-insp-mreza,.db-namjena-wrap{margin-top:26px;}
+      .db-tok-grid{margin-top:26px;}
+      /* Ispod svakog podnaslova stajalo je 48 px praznog prostora — na uskom
+         ekranu to je pola visine kartice. */
+      .db-katalozi .section-subtitle,.db-namjena .section-subtitle,
+      .db-inspiracija .section-subtitle,.db-benefits .section-subtitle,
+      .db-tok .section-subtitle{margin-bottom:4px;}
+      .db-inspiracija .db-insp-dno{margin-top:24px;}
+      .db-intro-grid{gap:24px!important;}
+      .db-factory-grid{gap:26px!important;}
+      .db-eyebrow{font-size:11px;letter-spacing:2px;}
     }
   </style>
   <style id="nav-fix">
