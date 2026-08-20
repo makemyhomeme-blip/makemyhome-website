@@ -93,6 +93,15 @@ return function (string $base, string $root, string $adminDir): array {
     // ili WhatsAppu. Ranije je tamo isla fotografija sobe sa pocetne, pa se
     // umjesto firme vidjela soba.
     $root . '/images/og-dijeljenje.jpg' => $base . '/images/og-dijeljenje.jpg',
+    // Karte boja: dva PDF-a koja se preuzimaju sa Decor Box stranice, i dvije
+    // slicice sastavljene od stvarnih dezena iz tih karata. Odjeljak na
+    // decor-box.php se ispisuje samo ako PDF postoji na disku, pa PDF-ovi
+    // moraju stici PRIJE nego sto se stranica otvori — zato stoje ovdje, iznad
+    // ostalog, a ne na kraju spiska.
+    $root . '/images/katalog-01-pregled.jpg' => $base . '/images/katalog-01-pregled.jpg',
+    $root . '/images/katalog-02-pregled.jpg' => $base . '/images/katalog-02-pregled.jpg',
+    $root . '/katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf' => $base . '/katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf',
+    $root . '/katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf'        => $base . '/katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf',
     // SEO
     $root . '/404.php'          => $base . '/404.php',
     $root . '/robots.txt'       => $base . '/robots.txt',

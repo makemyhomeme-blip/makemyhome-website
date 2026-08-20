@@ -102,15 +102,23 @@
 
     /* Katalozi */
     .db-katalozi{padding:80px 0;background:var(--light);}
-    .db-kat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:22px;margin-top:44px;}
-    .db-kat-card{display:flex;gap:18px;align-items:center;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:24px 22px;box-shadow:0 2px 14px rgba(0,0,0,0.05);text-decoration:none;transition:transform .2s,box-shadow .2s;}
-    .db-kat-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(201,168,108,0.18);}
-    .db-kat-ikona{flex-shrink:0;width:54px;height:54px;border-radius:14px;background:rgba(201,168,108,0.12);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:24px;}
-    .db-kat-tekst{flex:1;min-width:0;display:block;}
-    .db-kat-ime{display:block;font-family:var(--font-heading,inherit);font-size:17px;color:var(--dark);margin-bottom:5px;}
-    .db-kat-opis{display:block;font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:8px;}
-    .db-kat-meta{display:block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);}
-    .db-kat-strelica{flex-shrink:0;color:var(--primary);font-size:18px;}
+    /* Dvije pravougaone plocice: gore slika sa stvarnim dezenima iz karte, dolje
+       naziv i broj dezena. Cijela plocica je jedan link koji otvara PDF. */
+    .db-kat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:26px;margin-top:44px;}
+    .db-kat-card{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:18px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.05);text-decoration:none;transition:transform .2s,box-shadow .2s;}
+    .db-kat-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(201,168,108,0.22);}
+    .db-kat-slika{display:block;position:relative;background:var(--light);line-height:0;}
+    /* Odnos stranica je fiksiran, pa mjesto za sliku postoji prije nego sto se
+       slika ucita — stranica se ne trza (CLS ostaje 0). */
+    .db-kat-slika img{width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;display:block;}
+    .db-kat-znak{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:6px;background:rgba(26,26,26,0.82);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:6px 11px;border-radius:8px;line-height:1;}
+    .db-kat-tekst{display:block;padding:22px 22px 24px;}
+    .db-kat-ime{display:block;font-family:var(--font-heading,inherit);font-size:19px;color:var(--dark);margin-bottom:7px;}
+    .db-kat-opis{display:block;font-size:14px;color:var(--gray);line-height:1.65;margin-bottom:16px;}
+    .db-kat-red{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+    .db-kat-meta{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);}
+    .db-kat-otvori{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--dark);}
+    .db-kat-card:hover .db-kat-otvori{color:var(--primary);}
     .db-kat-nota{margin-top:28px;text-align:center;font-size:14.5px;color:var(--gray);line-height:1.75;max-width:760px;margin-left:auto;margin-right:auto;}
     .db-kat-nota a{color:var(--dark);font-weight:700;}
 
@@ -204,9 +212,9 @@ require_once __DIR__ . '/php/dimenzije.php';
       /* Katalozi: na telefonu jedna kartica po redu, ikona i strelica ostaju
          u istom redu sa tekstom da kartica ne naraste bez potrebe. */
       .db-katalozi{padding:56px 0;}
-      .db-kat-grid{grid-template-columns:1fr;}
-      .db-kat-card{gap:14px;padding:20px 18px;}
-      .db-kat-ikona{width:46px;height:46px;font-size:20px;}
+      .db-kat-grid{grid-template-columns:1fr;gap:20px;}
+      .db-kat-tekst{padding:18px 18px 20px;}
+      .db-kat-ime{font-size:17.5px;}
       .db-kat-nota{text-align:left;}
       /* Tabela namjena se na telefonu ne skroluje bocno nego se slaze u kartice:
          svaki red postaje jedna kartica, a zaglavlje kolona se sakrije jer se
@@ -544,12 +552,16 @@ require_once __DIR__ . '/php/dimenzije.php';
    Cim se fajl doda u /katalozi, blok se sam pojavi, bez ijedne izmjene koda.
    Ime fajla je dio adrese koju Google indeksira, zato je opisno i malim slovima. */
 $mmhKatalozi = array_values(array_filter([
-  ['fajl' => 'katalozi/katalog-zidni-paneli-make-my-home.pdf',
-   'ime'  => 'Katalog zidnih obloga',
-   'opis' => 'Bambus paneli, mermerni, tekstilni, kožni i metalni dezeni — sa šiframa i dimenzijama.'],
-  ['fajl' => 'katalozi/katalog-3d-letvice-make-my-home.pdf',
-   'ime'  => 'Katalog 3D letvica',
-   'opis' => 'Sve nijanse i profili 3D letvica, uz oznaku panela iste nijanse.'],
+  ['fajl'  => 'katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf',
+   'slika' => 'images/katalog-01-pregled.jpg',
+   'ime'   => 'Karta boja 01 — kamen, tekstil i metal',
+   'opis'  => 'Mermer i travertin, tekstilne strukture, koža, četkani i polirani metal.',
+   'broj'  => 49],
+  ['fajl'  => 'katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf',
+   'slika' => 'images/katalog-02-pregled.jpg',
+   'ime'   => 'Karta boja 02 — drveni dezeni',
+   'opis'  => 'Hrast, orah, teak i tamna drva, uz jednobojne Classic završnice.',
+   'broj'  => 42],
 ], fn($k) => is_file(__DIR__ . '/' . $k['fajl'])));
 if ($mmhKatalozi):
 ?>
@@ -557,28 +569,33 @@ if ($mmhKatalozi):
   <div class="container">
     <div class="text-center">
       <div class="gold-line"></div>
-      <h2 class="section-title">Katalozi za preuzimanje</h2>
-      <p class="section-subtitle">Otvorite na sastanku ili proslijedite klijentu — bez čekanja na naš odgovor</p>
+      <h2 class="section-title">Karte boja za preuzimanje</h2>
+      <p class="section-subtitle">Kliknite na kartu i otvara se cijela paleta sa šiframa — otvorite je na sastanku ili proslijedite klijentu</p>
     </div>
     <div class="db-kat-grid">
       <?php foreach ($mmhKatalozi as $k):
         $mb = round(filesize(__DIR__ . '/' . $k['fajl']) / 1048576, 1);
       ?>
       <a class="db-kat-card animate-on-scroll" href="<?= htmlspecialchars($k['fajl']) ?>" target="_blank" rel="noopener">
-        <span class="db-kat-ikona"><i class="fas fa-file-pdf"></i></span>
+        <span class="db-kat-slika">
+          <img src="<?= htmlspecialchars($k['slika']) ?>" alt="<?= htmlspecialchars($k['ime']) ?> – primjeri dezena iz karte boja Make My Home Decor" loading="lazy"<?= mmhDimAtributi($k['slika']) ?>>
+          <span class="db-kat-znak"><i class="fas fa-file-pdf"></i> PDF</span>
+        </span>
         <span class="db-kat-tekst">
           <span class="db-kat-ime"><?= htmlspecialchars($k['ime']) ?></span>
           <span class="db-kat-opis"><?= htmlspecialchars($k['opis']) ?></span>
-          <span class="db-kat-meta">PDF · <?= $mb ?> MB</span>
+          <span class="db-kat-red">
+            <span class="db-kat-meta"><?= (int)$k['broj'] ?> dezena · <?= $mb ?> MB</span>
+            <span class="db-kat-otvori">Otvori kartu <i class="fas fa-arrow-right"></i></span>
+          </span>
         </span>
-        <span class="db-kat-strelica"><i class="fas fa-download"></i></span>
       </a>
       <?php endforeach; ?>
     </div>
     <p class="db-kat-nota">
-      Katalog pokazuje dezen, ne i boju tačno — ekran i štampa je uvijek pomjere.
+      Karta boja pokazuje dezen, ne i boju tačno — ekran i štampa je uvijek pomjere.
       Prije nego što stavka uđe u projekat, tražite fizički uzorak:
-      <a href="https://wa.me/38269105222?text=Zdravo%2C%20javljam%20se%20iz%20projektnog%20biroa.%20Molim%20uzorke%20za%20dezene%3A" target="_blank" rel="noopener">pošaljite spisak dezena</a>
+      <a href="https://wa.me/38269105222?text=Zdravo%2C%20javljam%20se%20iz%20projektnog%20biroa.%20Molim%20uzorke%20za%20dezene%3A" target="_blank" rel="noopener">pošaljite spisak šifri</a>
       i šaljemo ih na adresu biroa.
     </p>
   </div>
