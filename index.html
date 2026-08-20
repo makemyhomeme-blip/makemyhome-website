@@ -241,7 +241,7 @@
   #karte-boja .kb-ime{font-family:var(--font-heading);font-size:18px;color:var(--dark);}
   #karte-boja .kb-meta{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);}
   #karte-boja .kb-kart:hover .kb-ime{color:var(--primary);}
-  #karte-boja .kb-nota{margin-top:26px;text-align:center;font-size:14.5px;color:var(--gray);line-height:1.7;}
+  #karte-boja .kb-nota{margin-top:26px;text-align:center;font-size:14.5px;color:rgba(255,255,255,0.6);line-height:1.7;}
   @media(max-width:768px){
     #karte-boja{padding:48px 0!important;}
     #karte-boja .kb-mreza{grid-template-columns:1fr;gap:18px;}
@@ -809,17 +809,43 @@
   </div>
 </section>
 
+<!-- ===== ISTAKNUTI PROIZVODI ===== -->
+<section id="featured">
+  <div class="container">
+    <div class="featured-header">
+      <div style="text-align:center;flex:1;">
+        <div class="gold-line" style="margin:0 auto 12px;"></div>
+        <h2 class="section-title">Istaknuti Proizvodi</h2>
+        <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Naši najpopularniji i najprodavaniji modeli</p>
+      </div>
+      <a href="products.html" class="btn btn-dark featured-btn-desktop">
+        Svi Proizvodi <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="products-grid" id="featured-products">
+      <!-- Učitava se dinamički -->
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+      <div class="loading-placeholder"></div>
+    </div>
+    <div class="featured-btn-mobile-wrap">
+      <a href="products.html" class="btn btn-dark">
+        Svi Proizvodi <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
 <!-- ===== KARTE BOJA ===== -->
 <!-- Dvije fabricke karte boja u PDF-u. Odjeljak stoji izmedju granicnika
      KARTE-BOJA-POCETAK / KARTE-BOJA-KRAJ: pocetna.php ga izbaci ako PDF-ovi
      nisu na disku, da nigdje ne ostane link koji vodi u 404. -->
 <!-- KARTE-BOJA-POCETAK -->
-<section id="karte-boja" style="padding:64px 0;background:var(--light);">
+<section id="karte-boja" style="padding:64px 0;background:var(--dark);">
   <div class="container">
     <div style="text-align:center;margin-bottom:34px;">
       <div class="gold-line"></div>
-      <h2 class="section-title">Sve nijanse na jednom mjestu</h2>
-      <p class="section-subtitle">Dvije karte boja u PDF-u — 91 dezen sa šiframa, otvorite i pregledajte cijelu paletu</p>
+      <h2 class="section-title" style="color:#fff;">Sve nijanse na jednom mjestu</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.68);">Dvije karte boja u PDF-u — 91 dezen sa šiframa, otvorite i pregledajte cijelu paletu</p>
     </div>
     <div class="kb-mreza">
       <a class="kb-kart" href="katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf" target="_blank" rel="noopener">
@@ -842,8 +868,8 @@
 </section>
 <!-- KARTE-BOJA-KRAJ -->
 
-<!-- ===== DECOR BOX PROMO ===== -->
-<!-- Korisno prije kupovine — vodi na cjenovnik i uputstvo za montazu -->
+<!-- ===== KORISNO PRIJE KUPOVINE ===== -->
+<!-- Vodi na cjenovnik i uputstvo za montazu -->
 <section id="korisno" style="background:#faf7f2;padding:56px 0;border-top:1px solid rgba(201,168,108,0.18);border-bottom:1px solid rgba(201,168,108,0.18);">
   <div class="container">
     <div style="text-align:center;margin-bottom:32px;">
@@ -880,62 +906,6 @@
   </div>
 </section>
 
-<section id="decor-box-promo" style="background:var(--dark);padding:74px 0;">
-  <div class="container">
-    <div class="db-promo-grid">
-      <div class="animate-on-scroll">
-        <span style="display:inline-block;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">Program saradnje za profesionalce</span>
-        <div class="gold-line"></div>
-        <h2 class="section-title" style="color:#fff;">Decor Box</h2>
-        <p style="color:rgba(255,255,255,0.72);font-size:15px;line-height:1.85;margin-bottom:20px;">
-          Sarađujemo sa <strong style="color:#fff;">arhitektama, dizajnerima enterijera, izvođačima i građevinskim kompanijama</strong> — zajedno stvaramo bolje enterijere, uz stručnu podršku od ideje do realizacije.
-        </p>
-        <ul class="db-check-list">
-          <li><i class="fas fa-check"></i>Posebni uslovi saradnje</li>
-          <li><i class="fas fa-check"></i>Uzorci i katalozi</li>
-          <li><i class="fas fa-check"></i>Sopstvena proizvodnja</li>
-          <li><i class="fas fa-check"></i>Podrška do realizacije</li>
-        </ul>
-        <a href="decor-box.html" class="btn btn-primary btn-lg"><i class="fas fa-handshake"></i> Saznaj Više o Decor Box-u</a>
-      </div>
-      <div class="db-promo-img animate-on-scroll">
-        <picture>
-          <source srcset="images/decor-box-banner.webp" type="image/webp">
-          <img src="images/decor-box-banner.jpg" alt="Decor Box – program saradnje za profesionalce" width="1054" height="553" loading="lazy"
-            onerror="this.onerror=null;this.src='images/showcase-room.jpg'">
-        </picture>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FEATURED PRODUCTS ===== -->
-<section id="featured">
-  <div class="container">
-    <div class="featured-header">
-      <div style="text-align:center;flex:1;">
-        <div class="gold-line" style="margin:0 auto 12px;"></div>
-        <h2 class="section-title">Istaknuti Proizvodi</h2>
-        <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Naši najpopularniji i najprodavaniji modeli</p>
-      </div>
-      <a href="products.html" class="btn btn-dark featured-btn-desktop">
-        Svi Proizvodi <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
-    <div class="products-grid" id="featured-products">
-      <!-- Učitava se dinamički -->
-      <div class="loading-placeholder"></div>
-      <div class="loading-placeholder"></div>
-      <div class="loading-placeholder"></div>
-    </div>
-    <div class="featured-btn-mobile-wrap">
-      <a href="products.html" class="btn btn-dark">
-        Svi Proizvodi <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- ===== O NAMA PREVIEW ===== -->
 <section id="about-preview">
   <div class="container">
@@ -959,8 +929,8 @@
         <div class="gold-line"></div>
         <h2 class="section-title">Vaš Partner za Ljepši Dom</h2>
         <p class="section-subtitle">
-          Make My Home Decor je specijalizovana firma za prodaju bambus obloga, zidnih panela, 3D letvica i dekorativnih obloga za zid u Podgorici, Crna Gora.
-          Nudimo kvalitetne paneli za zid koji transformišu svaki enterijer uz laku montažu i povoljne cijene.
+          Make My Home Decor proizvodi i prodaje dekorativne zidne obloge — bambus panele, 3D letvice, akustične panele, MDF, PU kamen i podove.
+          Roba je iz naše fabrike u Beogradu, showroom i prodaja su u Podgorici, a isporučujemo po cijeloj Crnoj Gori.
         </p>
         <ul class="about-list">
           <li><i class="fas fa-check-circle"></i> Premium kvalitet materijala po pristupačnim cijenama</li>
@@ -1019,6 +989,36 @@
      povjerenje u cijeli sajt, pa i u cijene i mjere.
      Kad recenzije budu dolazile od stvarnih kupaca kroz formu, sekcija se moze
      vratiti — i tek tada i ocjena u strukturirane podatke. -->
+
+<!-- ===== DECOR BOX PROMO ===== -->
+<section id="decor-box-promo" style="background:var(--dark);padding:74px 0;">
+  <div class="container">
+    <div class="db-promo-grid">
+      <div class="animate-on-scroll">
+        <span style="display:inline-block;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">Program saradnje za profesionalce</span>
+        <div class="gold-line"></div>
+        <h2 class="section-title" style="color:#fff;">Decor Box</h2>
+        <p style="color:rgba(255,255,255,0.72);font-size:15px;line-height:1.85;margin-bottom:20px;">
+          Sarađujemo sa <strong style="color:#fff;">arhitektama, dizajnerima enterijera, izvođačima i građevinskim kompanijama</strong> — zajedno stvaramo bolje enterijere, uz stručnu podršku od ideje do realizacije.
+        </p>
+        <ul class="db-check-list">
+          <li><i class="fas fa-check"></i>Posebni uslovi saradnje</li>
+          <li><i class="fas fa-check"></i>Uzorci i katalozi</li>
+          <li><i class="fas fa-check"></i>Sopstvena proizvodnja</li>
+          <li><i class="fas fa-check"></i>Podrška do realizacije</li>
+        </ul>
+        <a href="decor-box.html" class="btn btn-primary btn-lg"><i class="fas fa-handshake"></i> Saznaj Više o Decor Box-u</a>
+      </div>
+      <div class="db-promo-img animate-on-scroll">
+        <picture>
+          <source srcset="images/decor-box-banner.webp" type="image/webp">
+          <img src="images/decor-box-banner.jpg" alt="Decor Box – program saradnje za profesionalce" width="1054" height="553" loading="lazy"
+            onerror="this.onerror=null;this.src='images/showcase-room.jpg'">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== INSTAGRAM FEED ===== -->
 <section id="instagram-feed">
