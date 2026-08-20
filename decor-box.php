@@ -100,6 +100,20 @@
     .db-ben-card h3{font-size:17px;color:var(--dark);margin:2px 0 6px;}
     .db-ben-card p{font-size:14px;color:var(--gray);line-height:1.6;}
 
+    /* Katalozi */
+    .db-katalozi{padding:80px 0;background:var(--light);}
+    .db-kat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:22px;margin-top:44px;}
+    .db-kat-card{display:flex;gap:18px;align-items:center;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:24px 22px;box-shadow:0 2px 14px rgba(0,0,0,0.05);text-decoration:none;transition:transform .2s,box-shadow .2s;}
+    .db-kat-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(201,168,108,0.18);}
+    .db-kat-ikona{flex-shrink:0;width:54px;height:54px;border-radius:14px;background:rgba(201,168,108,0.12);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:24px;}
+    .db-kat-tekst{flex:1;min-width:0;display:block;}
+    .db-kat-ime{display:block;font-family:var(--font-heading,inherit);font-size:17px;color:var(--dark);margin-bottom:5px;}
+    .db-kat-opis{display:block;font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:8px;}
+    .db-kat-meta{display:block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary);}
+    .db-kat-strelica{flex-shrink:0;color:var(--primary);font-size:18px;}
+    .db-kat-nota{margin-top:28px;text-align:center;font-size:14.5px;color:var(--gray);line-height:1.75;max-width:760px;margin-left:auto;margin-right:auto;}
+    .db-kat-nota a{color:var(--dark);font-weight:700;}
+
     /* Factory */
     .db-factory{padding:80px 0;background:var(--dark);color:#fff;}
     .db-factory-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
@@ -187,6 +201,13 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-intro .btn{margin-left:auto;margin-right:auto;}
       .db-ben-card{flex-direction:column;align-items:center;text-align:center;}
       .db-ben-card .db-ben-icon{margin:0 auto;}
+      /* Katalozi: na telefonu jedna kartica po redu, ikona i strelica ostaju
+         u istom redu sa tekstom da kartica ne naraste bez potrebe. */
+      .db-katalozi{padding:56px 0;}
+      .db-kat-grid{grid-template-columns:1fr;}
+      .db-kat-card{gap:14px;padding:20px 18px;}
+      .db-kat-ikona{width:46px;height:46px;font-size:20px;}
+      .db-kat-nota{text-align:left;}
       /* Tabela namjena se na telefonu ne skroluje bocno nego se slaze u kartice:
          svaki red postaje jedna kartica, a zaglavlje kolona se sakrije jer se
          znacenje vidi iz same kartice. */
@@ -476,6 +497,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       Detalji ugradnje i prelaza opisani su u <a href="montaza.html">vodiču za montažu</a>,
       a rješenja po prostorijama u tekstovima o <a href="akusticni-paneli-kancelarija.html">akustici u kancelariji</a>,
       <a href="paneli-za-kupatilo.html">panelima u kupatilu</a> i <a href="tv-zid.html">TV zidu</a>.
+      Kako materijal izgleda u završenom prostoru — <a href="inspiracija.html">u galeriji realizovanih enterijera</a>.
     </p>
   </div>
 </section>
@@ -512,6 +534,56 @@ require_once __DIR__ . '/php/dimenzije.php';
     </ol>
   </div>
 </section>
+
+<!-- KATALOZI -->
+<?php
+/* Katalozi za preuzimanje.
+   Odjeljak se ispisuje SAMO ako PDF stvarno postoji na disku. Dok se fajl ne
+   okaci, na stranici nema ni traga od ovog bloka — dakle nema ni linka koji bi
+   vodio u 404, ni praznog naslova koji Google indeksira bez sadrzaja.
+   Cim se fajl doda u /katalozi, blok se sam pojavi, bez ijedne izmjene koda.
+   Ime fajla je dio adrese koju Google indeksira, zato je opisno i malim slovima. */
+$mmhKatalozi = array_values(array_filter([
+  ['fajl' => 'katalozi/katalog-zidni-paneli-make-my-home.pdf',
+   'ime'  => 'Katalog zidnih obloga',
+   'opis' => 'Bambus paneli, mermerni, tekstilni, kožni i metalni dezeni — sa šiframa i dimenzijama.'],
+  ['fajl' => 'katalozi/katalog-3d-letvice-make-my-home.pdf',
+   'ime'  => 'Katalog 3D letvica',
+   'opis' => 'Sve nijanse i profili 3D letvica, uz oznaku panela iste nijanse.'],
+], fn($k) => is_file(__DIR__ . '/' . $k['fajl'])));
+if ($mmhKatalozi):
+?>
+<section class="db-katalozi">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Katalozi za preuzimanje</h2>
+      <p class="section-subtitle">Otvorite na sastanku ili proslijedite klijentu — bez čekanja na naš odgovor</p>
+    </div>
+    <div class="db-kat-grid">
+      <?php foreach ($mmhKatalozi as $k):
+        $mb = round(filesize(__DIR__ . '/' . $k['fajl']) / 1048576, 1);
+      ?>
+      <a class="db-kat-card animate-on-scroll" href="<?= htmlspecialchars($k['fajl']) ?>" target="_blank" rel="noopener">
+        <span class="db-kat-ikona"><i class="fas fa-file-pdf"></i></span>
+        <span class="db-kat-tekst">
+          <span class="db-kat-ime"><?= htmlspecialchars($k['ime']) ?></span>
+          <span class="db-kat-opis"><?= htmlspecialchars($k['opis']) ?></span>
+          <span class="db-kat-meta">PDF · <?= $mb ?> MB</span>
+        </span>
+        <span class="db-kat-strelica"><i class="fas fa-download"></i></span>
+      </a>
+      <?php endforeach; ?>
+    </div>
+    <p class="db-kat-nota">
+      Katalog pokazuje dezen, ne i boju tačno — ekran i štampa je uvijek pomjere.
+      Prije nego što stavka uđe u projekat, tražite fizički uzorak:
+      <a href="https://wa.me/38269105222?text=Zdravo%2C%20javljam%20se%20iz%20projektnog%20biroa.%20Molim%20uzorke%20za%20dezene%3A" target="_blank" rel="noopener">pošaljite spisak dezena</a>
+      i šaljemo ih na adresu biroa.
+    </p>
+  </div>
+</section>
+<?php endif; ?>
 
 <!-- FACTORY -->
 <section class="db-factory">
@@ -568,6 +640,9 @@ require_once __DIR__ . '/php/dimenzije.php';
       </a>
       <a href="mailto:makemyhome.me@gmail.com?subject=Decor%20Box%20%E2%80%93%20zahtjev%20projektnog%20biroa&amp;body=Namjena%20prostora%3A%0APribli%C5%BEna%20povr%C5%A1ina%20(m2)%3A%0AFaza%20projekta%3A%0ARok%3A%0AProizvodi%20koji%20me%20zanimaju%3A%0A%0ATra%C5%BEim%3A%20dokumentaciju%20%2F%20uzorke%20%2F%20tekst%20za%20specifikaciju%20%2F%20ponudu" class="btn btn-ghost btn-lg">
         <i class="fas fa-file-pdf"></i> Zatražite dokumentaciju
+      </a>
+      <a href="inspiracija.html" class="btn btn-ghost btn-lg">
+        <i class="fas fa-images"></i> Realizovani enterijeri
       </a>
     </div>
   </div>
