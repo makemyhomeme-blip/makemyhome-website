@@ -228,6 +228,27 @@
     #decor-box-promo .db-check-list{grid-template-columns:1fr;width:max-content;max-width:100%;margin-left:auto;margin-right:auto;text-align:left;}
     #decor-box-promo .btn{margin-left:auto;margin-right:auto;}
   }
+  /* Karte boja — dvije plocice koje otvaraju PDF. Visina slike je zadata
+     odnosom stranica, pa mjesto postoji prije nego sto se slika ucita i
+     stranica ne poskakuje. */
+  #karte-boja .kb-mreza{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  #karte-boja .kb-kart{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:18px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.05);text-decoration:none;transition:transform .2s,box-shadow .2s;}
+  #karte-boja .kb-kart:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(201,168,108,0.22);}
+  #karte-boja .kb-slika{display:block;position:relative;line-height:0;background:var(--light);}
+  #karte-boja .kb-slika img{width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;display:block;}
+  #karte-boja .kb-znak{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:6px;background:rgba(26,26,26,0.82);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:6px 11px;border-radius:8px;line-height:1;}
+  #karte-boja .kb-telo{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px 20px 20px;}
+  #karte-boja .kb-ime{font-family:var(--font-heading);font-size:18px;color:var(--dark);}
+  #karte-boja .kb-meta{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);}
+  #karte-boja .kb-kart:hover .kb-ime{color:var(--primary);}
+  #karte-boja .kb-nota{margin-top:26px;text-align:center;font-size:14.5px;color:var(--gray);line-height:1.7;}
+  @media(max-width:768px){
+    #karte-boja{padding:48px 0!important;}
+    #karte-boja .kb-mreza{grid-template-columns:1fr;gap:18px;}
+    #karte-boja .kb-telo{padding:16px 16px 18px;}
+    #karte-boja .kb-ime{font-size:17px;}
+    #karte-boja .kb-nota{text-align:left;}
+  }
 </style>
   <style>
     #showcase{background:var(--light);padding:70px 0 0}
@@ -787,6 +808,39 @@
     </div>
   </div>
 </section>
+
+<!-- ===== KARTE BOJA ===== -->
+<!-- Dvije fabricke karte boja u PDF-u. Odjeljak stoji izmedju granicnika
+     KARTE-BOJA-POCETAK / KARTE-BOJA-KRAJ: pocetna.php ga izbaci ako PDF-ovi
+     nisu na disku, da nigdje ne ostane link koji vodi u 404. -->
+<!-- KARTE-BOJA-POCETAK -->
+<section id="karte-boja" style="padding:64px 0;background:var(--light);">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:34px;">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Sve nijanse na jednom mjestu</h2>
+      <p class="section-subtitle">Dvije karte boja u PDF-u — 91 dezen sa šiframa, otvorite i pregledajte cijelu paletu</p>
+    </div>
+    <div class="kb-mreza">
+      <a class="kb-kart" href="katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf" target="_blank" rel="noopener">
+        <span class="kb-slika">
+          <img src="images/katalog-01-pregled.jpg" alt="Karta boja 01 – mermer, tekstil i metal, dezeni zidnih panela Make My Home Decor" width="1212" height="606" loading="lazy" decoding="async">
+          <span class="kb-znak"><i class="fas fa-file-pdf"></i> PDF</span>
+        </span>
+        <span class="kb-telo"><span class="kb-ime">Kamen, tekstil i metal</span><span class="kb-meta">49 dezena &middot; 4,6 MB</span></span>
+      </a>
+      <a class="kb-kart" href="katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf" target="_blank" rel="noopener">
+        <span class="kb-slika">
+          <img src="images/katalog-02-pregled.jpg" alt="Karta boja 02 – drveni dezeni zidnih panela Make My Home Decor" width="1212" height="606" loading="lazy" decoding="async">
+          <span class="kb-znak"><i class="fas fa-file-pdf"></i> PDF</span>
+        </span>
+        <span class="kb-telo"><span class="kb-ime">Drveni dezeni</span><span class="kb-meta">42 dezena &middot; 4,2 MB</span></span>
+      </a>
+    </div>
+    <p class="kb-nota">Boja se na ekranu nikad ne vidi tačno — svratite u showroom ili tražite uzorak prije nego što se odlučite.</p>
+  </div>
+</section>
+<!-- KARTE-BOJA-KRAJ -->
 
 <!-- ===== DECOR BOX PROMO ===== -->
 <!-- Korisno prije kupovine — vodi na cjenovnik i uputstvo za montazu -->

@@ -234,5 +234,19 @@ if ($slajdovi) {
     );
 }
 
+// ---- Karte boja ----------------------------------------------------------
+// Odjeljak sa dvije karte boja stoji u index.html izmedju granicnika. Ako PDF
+// nije na disku — nije jos okacen, ili je obrisan — cijeli odjeljak se izbaci,
+// da na pocetnoj ne ostane dugme koje vodi u 404.
+$kbFajlovi = [
+    'katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf',
+    'katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf',
+];
+$kbIma = true;
+foreach ($kbFajlovi as $f) if (!is_file(__DIR__ . '/' . $f)) $kbIma = false;
+if (!$kbIma) {
+    $html = preg_replace('#<!-- KARTE-BOJA-POCETAK -->.*?<!-- KARTE-BOJA-KRAJ -->#s', '', $html, 1);
+}
+
 header('Content-Type: text/html; charset=utf-8');
 echo $html;

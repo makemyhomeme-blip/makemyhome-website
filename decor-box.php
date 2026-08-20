@@ -122,6 +122,22 @@
     .db-kat-nota{margin-top:28px;text-align:center;font-size:14.5px;color:var(--gray);line-height:1.75;max-width:760px;margin-left:auto;margin-right:auto;}
     .db-kat-nota a{color:var(--dark);font-weight:700;}
 
+    /* Inspiracija — fotografije gotovih prostora.
+       Tamna pozadina je namjerna: fotografije enterijera na njoj iskacu, a
+       stranica dobija jasan predah izmedju dva svijetla odjeljka.
+       Odnos stranica svake plocice je fiksiran, pa mjesto postoji prije nego
+       sto se slika ucita i stranica ne poskakuje. */
+    .db-inspiracija{padding:80px 0;background:var(--dark);}
+    .db-insp-mreza{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px;}
+    .db-insp-kart{position:relative;display:block;border-radius:14px;overflow:hidden;background:var(--dark-2);text-decoration:none;line-height:0;transition:transform .2s;}
+    .db-insp-kart:hover{transform:translateY(-4px);}
+    .db-insp-kart img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .35s ease;}
+    .db-insp-kart:hover img{transform:scale(1.05);}
+    .db-insp-info{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:2px;padding:26px 16px 14px;line-height:1.35;background:linear-gradient(to top,rgba(0,0,0,0.78),rgba(0,0,0,0));}
+    .db-insp-info strong{color:#fff;font-size:14.5px;font-weight:700;}
+    .db-insp-info em{color:var(--primary);font-size:12px;font-style:normal;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;}
+    .db-insp-dno{text-align:center;margin-top:34px;}
+
     /* Factory */
     .db-factory{padding:80px 0;background:var(--dark);color:#fff;}
     .db-factory-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
@@ -174,7 +190,7 @@ require_once __DIR__ . '/php/dimenzije.php';
     .db-namjena-nota a{color:#795f32;font-weight:600;}
 
     /* Tok saradnje */
-    .db-tok{padding:80px 0;background:var(--light);}
+    .db-tok{padding:80px 0;}
     .db-tok-grid{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
     .db-tok-korak{position:relative;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:30px 24px 26px;box-shadow:0 2px 14px rgba(0,0,0,0.05);}
     .db-tok-broj{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--dark);color:var(--primary);font-family:var(--font-heading);font-size:19px;font-weight:700;margin-bottom:16px;}
@@ -182,8 +198,6 @@ require_once __DIR__ . '/php/dimenzije.php';
     .db-tok-korak p{font-size:14px;color:var(--gray);line-height:1.7;margin:0;}
 
     /* Swatch strip */
-    .db-swatches{display:flex;gap:0;}
-    .db-swatches img{flex:1;height:120px;object-fit:cover;display:block;min-width:0;}
 
     /* CTA */
     .db-cta{padding:72px 0;background:linear-gradient(135deg,#c9a86c 0%,#b8965a 100%);text-align:center;}
@@ -198,8 +212,15 @@ require_once __DIR__ . '/php/dimenzije.php';
 
     @media(max-width:768px){
       .db-intro-grid,.db-factory-grid{grid-template-columns:1fr!important;gap:32px!important;}
+      /* Visinu ovih slika vlasnik zadaje u adminu, a ta visina je racunata za
+         SIROKU kolonu na racunaru. Na telefonu je kolona duplo uza dok visina
+         ostaje ista — pa je object-fit:cover sjekao lijevu i desnu ivicu i sa
+         banera se gubio natpis "DECOR BOX". Na telefonu zato ide prirodna
+         visina: slika se vidi cijela, u svom odnosu stranica. Stranica ne
+         poskakuje jer <img> nosi width i height atribute. */
+      .db-intro-img,.db-factory-img{min-height:auto!important;}
+      .db-intro-img img,.db-factory-img img{height:auto!important;object-fit:contain!important;}
       .db-badges{grid-template-columns:1fr!important;max-width:340px;margin-left:auto;margin-right:auto;}
-      .db-swatches img{height:80px;}
       .db-cta h2{font-size:26px;}
       .db-cta-btns{flex-direction:column;align-items:center;}
       .db-cta-btns .btn{width:100%;max-width:320px;justify-content:center;}
@@ -213,6 +234,11 @@ require_once __DIR__ . '/php/dimenzije.php';
          u istom redu sa tekstom da kartica ne naraste bez potrebe. */
       .db-katalozi{padding:56px 0;}
       .db-kat-grid{grid-template-columns:1fr;gap:20px;}
+      .db-inspiracija{padding:56px 0;}
+      .db-insp-mreza{grid-template-columns:repeat(2,1fr);gap:10px;}
+      .db-insp-info{padding:20px 10px 10px;}
+      .db-insp-info strong{font-size:12.5px;}
+      .db-insp-info em{font-size:10px;}
       .db-kat-tekst{padding:18px 18px 20px;}
       .db-kat-ime{font-size:17.5px;}
       .db-kat-nota{text-align:left;}
@@ -414,42 +440,64 @@ require_once __DIR__ . '/php/dimenzije.php';
   </div>
 </section>
 
-<!-- BENEFITS -->
-<section class="db-benefits">
+<!-- KATALOZI -->
+<?php
+/* Katalozi za preuzimanje.
+   Odjeljak se ispisuje SAMO ako PDF stvarno postoji na disku. Dok se fajl ne
+   okaci, na stranici nema ni traga od ovog bloka — dakle nema ni linka koji bi
+   vodio u 404, ni praznog naslova koji Google indeksira bez sadrzaja.
+   Cim se fajl doda u /katalozi, blok se sam pojavi, bez ijedne izmjene koda.
+   Ime fajla je dio adrese koju Google indeksira, zato je opisno i malim slovima. */
+$mmhKatalozi = array_values(array_filter([
+  ['fajl'  => 'katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf',
+   'slika' => 'images/katalog-01-pregled.jpg',
+   'ime'   => 'Karta boja 01 — kamen, tekstil i metal',
+   'opis'  => 'Mermer i travertin, tekstilne strukture, koža, četkani i polirani metal.',
+   'broj'  => 49],
+  ['fajl'  => 'katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf',
+   'slika' => 'images/katalog-02-pregled.jpg',
+   'ime'   => 'Karta boja 02 — drveni dezeni',
+   'opis'  => 'Hrast, orah, teak i tamna drva, uz jednobojne Classic završnice.',
+   'broj'  => 42],
+], fn($k) => is_file(__DIR__ . '/' . $k['fajl'])));
+if ($mmhKatalozi):
+?>
+<section class="db-katalozi">
   <div class="container">
     <div class="text-center">
       <div class="gold-line"></div>
-      <h2 class="section-title">Šta dobijate za projekat</h2>
-      <p class="section-subtitle">Ono što je potrebno da obloga uđe u crtež, u predmjer i u ponudu</p>
+      <h2 class="section-title">Karte boja za preuzimanje</h2>
+      <p class="section-subtitle">Kliknite na kartu i otvara se cijela paleta sa šiframa — otvorite je na sastanku ili proslijedite klijentu</p>
     </div>
-    <div class="db-ben-grid">
-      <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-file-pdf"></i></div>
-        <div><h3>Dokumentacija za proizvod</h3><p>Za svaki artikal iz ponude šaljemo podatke koje traži projekat: sastav, dimenzije, težinu, način ugradnje i dostupnu fabričku dokumentaciju. Recite koji proizvod i za koju namjenu — dobijate ono što stvarno postoji, bez uopštenih obećanja.</p></div>
-      </div>
-      <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-clipboard-list"></i></div>
-        <div><h3>Tekst za specifikaciju</h3><p>Spreman opis stavke za predmjer i tehnički opis — naziv, šifra, dimenzija, jedinica mjere i količina po m². Kopira se u projekat bez prepravljanja.</p></div>
-      </div>
-      <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-swatchbook"></i></div>
-        <div><h3>Uzorci u vaš biro</h3><p>Fizički uzorci dezena koje razmatrate, dostavljeni na adresu biroa. Boja i tekstura se na ekranu ne vide tačno, a klijent odluku donosi u ruci.</p></div>
-      </div>
-      <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-drafting-compass"></i></div>
-        <div><h3>Detalji ugradnje</h3><p>Kako se rješava unutrašnji i spoljašnji ugao, prelaz na plafon, spoj sa podom i završetak uz otvor — uz odgovarajuće aluminijum lajsne. Detalj se dogovara prije, ne na gradilištu.</p></div>
-      </div>
-      <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-boxes-stacked"></i></div>
-        <div><h3>Dostupnost i rok, prije ponude</h3><p>Provjera stvarne količine na stanju i roka nabavke za veće serije — prije nego što artikal uđe u projekat. Nema neprijatnog otkrića poslije potpisa.</p></div>
-      </div>
-      <div class="db-ben-card animate-on-scroll">
-        <div class="db-ben-icon"><i class="fas fa-handshake"></i></div>
-        <div><h3>Jedna osoba za projekat</h3><p>Isti sagovornik od prvog pitanja do isporuke, sa partnerskim uslovima prema obimu. Ne prepričavate projekat iznova svakome ko se javi.</p></div>
-      </div>
+    <div class="db-kat-grid">
+      <?php foreach ($mmhKatalozi as $k):
+        $mb = round(filesize(__DIR__ . '/' . $k['fajl']) / 1048576, 1);
+      ?>
+      <a class="db-kat-card animate-on-scroll" href="<?= htmlspecialchars($k['fajl']) ?>" target="_blank" rel="noopener">
+        <span class="db-kat-slika">
+          <img src="<?= htmlspecialchars($k['slika']) ?>" alt="<?= htmlspecialchars($k['ime']) ?> – primjeri dezena iz karte boja Make My Home Decor" loading="lazy"<?= mmhDimAtributi($k['slika']) ?>>
+          <span class="db-kat-znak"><i class="fas fa-file-pdf"></i> PDF</span>
+        </span>
+        <span class="db-kat-tekst">
+          <span class="db-kat-ime"><?= htmlspecialchars($k['ime']) ?></span>
+          <span class="db-kat-opis"><?= htmlspecialchars($k['opis']) ?></span>
+          <span class="db-kat-red">
+            <span class="db-kat-meta"><?= (int)$k['broj'] ?> dezena · <?= $mb ?> MB</span>
+            <span class="db-kat-otvori">Otvori kartu <i class="fas fa-arrow-right"></i></span>
+          </span>
+        </span>
+      </a>
+      <?php endforeach; ?>
     </div>
+    <p class="db-kat-nota">
+      Karta boja pokazuje dezen, ne i boju tačno — ekran i štampa je uvijek pomjere.
+      Prije nego što stavka uđe u projekat, tražite fizički uzorak:
+      <a href="https://wa.me/38269105222?text=Zdravo%2C%20javljam%20se%20iz%20projektnog%20biroa.%20Molim%20uzorke%20za%20dezene%3A" target="_blank" rel="noopener">pošaljite spisak šifri</a>
+      i šaljemo ih na adresu biroa.
+    </p>
   </div>
 </section>
+<?php endif; ?>
 
 <!-- NAMJENA PROSTORA -->
 <section class="db-namjena">
@@ -510,6 +558,115 @@ require_once __DIR__ . '/php/dimenzije.php';
   </div>
 </section>
 
+<!-- INSPIRACIJA -->
+<?php
+/* Fotografije gotovih prostora, iz istog izvora kao stranica Inspiracija:
+   polje "gallery" svakog proizvoda u data/products.json. Nista se ne upisuje
+   rucno — cim vlasnik u adminu doda fotografiju nekom panelu, ovdje se sama
+   pojavi. Ako galerija jos nije popunjena, odjeljak se uopste ne ispise. */
+$dbInsP = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+if (isset($dbInsP['products'])) $dbInsP = $dbInsP['products'];
+$dbInsVrijeme = fn($put) => preg_match('/gallery-\d+-(\d{9,11})-/', $put, $m) ? (int) $m[1] : 0;
+$dbInsKat = [
+  'bambus-drveni'=>'Drveni paneli','bambus-tekstilni'=>'Tekstilni paneli','bambus-mermerni'=>'Mermerni paneli',
+  'bambus-metalni'=>'Metalni paneli','bambus-kozni'=>'Kožni paneli','bambus-paneli'=>'Bambus paneli',
+  '3d-letvice'=>'3D letvice','akusticni-paneli'=>'Akustični paneli','aluminijum-lajsne'=>'Alu lajsne',
+  'spc-pod'=>'SPC pod','pu-kamen'=>'PU kamen','classic'=>'Classic paneli','mdf'=>'MDF paneli','flex-stone'=>'Flex Stone',
+];
+$dbIns = [];
+foreach ($dbInsP as $pp) {
+    if (empty($pp['gallery'])) continue;
+    $g = array_values($pp['gallery']);
+    usort($g, fn($a, $b) => $dbInsVrijeme($b) <=> $dbInsVrijeme($a));
+    if (!is_file(__DIR__ . '/' . ltrim($g[0], '/'))) continue;
+    $dbIns[] = ['src' => $g[0], 'p' => $pp, 't' => $dbInsVrijeme($g[0])];
+}
+usort($dbIns, fn($a, $b) => $b['t'] <=> $a['t']);
+/* Sest slika, ali ne sest iz iste kategorije. Bez ovoga bi se prikazalo ono
+   sto je zadnje dodato — a to je po pravilu serija fotografija istog tipa
+   panela, pa je izgledalo kao da prodajemo samo jednu stvar. Ovako se
+   kategorije smjenjuju u krug: po jedna najnovija iz svake. */
+$dbInsPoKat = [];
+foreach ($dbIns as $s) $dbInsPoKat[$s['p']['category'] ?? ''][] = $s;
+$dbInsIzbor = [];
+while ($dbInsPoKat && count($dbInsIzbor) < 6) {
+    foreach (array_keys($dbInsPoKat) as $k) {
+        $dbInsIzbor[] = array_shift($dbInsPoKat[$k]);
+        if (!$dbInsPoKat[$k]) unset($dbInsPoKat[$k]);
+        if (count($dbInsIzbor) >= 6) break;
+    }
+}
+$dbInsUkupno = 0;
+foreach ($dbInsP as $pp) $dbInsUkupno += count($pp['gallery'] ?? []);
+$dbIns = $dbInsIzbor;
+if ($dbIns):
+?>
+<section class="db-inspiracija">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title" style="color:#fff;">Kako to izgleda kad je gotovo</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.68);">Fotografije iz stvarnih prostora — stanovi, hoteli, kancelarije i lokali u Crnoj Gori</p>
+    </div>
+    <div class="db-insp-mreza">
+      <?php foreach ($dbIns as $s):
+        $kat = $dbInsKat[$s['p']['category'] ?? ''] ?? 'Zidni panel';
+      ?>
+      <a class="db-insp-kart" href="inspiracija.html" aria-label="Galerija realizovanih enterijera">
+        <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
+             alt="<?= htmlspecialchars($s['p']['name'] . ' u enterijeru – ' . $kat . ' | Make My Home Decor Podgorica', ENT_QUOTES) ?>"
+             <?= ltrim(mmhDimAtributi($s['src'])) ?> loading="lazy" decoding="async"
+             onerror="this.onerror=null;this.closest('.db-insp-kart').remove();">
+        <span class="db-insp-info"><strong><?= htmlspecialchars($s['p']['name']) ?></strong><em><?= htmlspecialchars($kat) ?></em></span>
+      </a>
+      <?php endforeach; ?>
+    </div>
+    <div class="db-insp-dno">
+      <a href="inspiracija.html" class="btn btn-primary btn-lg">
+        <i class="fas fa-images"></i> Cijela galerija<?= $dbInsUkupno > 6 ? ' — ' . $dbInsUkupno . ' fotografija' : '' ?>
+      </a>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<!-- BENEFITS -->
+<section class="db-benefits">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line"></div>
+      <h2 class="section-title">Šta dobijate za projekat</h2>
+      <p class="section-subtitle">Ono što je potrebno da obloga uđe u crtež, u predmjer i u ponudu</p>
+    </div>
+    <div class="db-ben-grid">
+      <div class="db-ben-card animate-on-scroll">
+        <div class="db-ben-icon"><i class="fas fa-file-pdf"></i></div>
+        <div><h3>Dokumentacija za proizvod</h3><p>Za svaki artikal iz ponude šaljemo podatke koje traži projekat: sastav, dimenzije, težinu, način ugradnje i dostupnu fabričku dokumentaciju. Recite koji proizvod i za koju namjenu — dobijate ono što stvarno postoji, bez uopštenih obećanja.</p></div>
+      </div>
+      <div class="db-ben-card animate-on-scroll">
+        <div class="db-ben-icon"><i class="fas fa-clipboard-list"></i></div>
+        <div><h3>Tekst za specifikaciju</h3><p>Spreman opis stavke za predmjer i tehnički opis — naziv, šifra, dimenzija, jedinica mjere i količina po m². Kopira se u projekat bez prepravljanja.</p></div>
+      </div>
+      <div class="db-ben-card animate-on-scroll">
+        <div class="db-ben-icon"><i class="fas fa-swatchbook"></i></div>
+        <div><h3>Uzorci u vaš biro</h3><p>Fizički uzorci dezena koje razmatrate, dostavljeni na adresu biroa. Boja i tekstura se na ekranu ne vide tačno, a klijent odluku donosi u ruci.</p></div>
+      </div>
+      <div class="db-ben-card animate-on-scroll">
+        <div class="db-ben-icon"><i class="fas fa-drafting-compass"></i></div>
+        <div><h3>Detalji ugradnje</h3><p>Kako se rješava unutrašnji i spoljašnji ugao, prelaz na plafon, spoj sa podom i završetak uz otvor — uz odgovarajuće aluminijum lajsne. Detalj se dogovara prije, ne na gradilištu.</p></div>
+      </div>
+      <div class="db-ben-card animate-on-scroll">
+        <div class="db-ben-icon"><i class="fas fa-boxes-stacked"></i></div>
+        <div><h3>Dostupnost i rok, prije ponude</h3><p>Provjera stvarne količine na stanju i roka nabavke za veće serije — prije nego što artikal uđe u projekat. Nema neprijatnog otkrića poslije potpisa.</p></div>
+      </div>
+      <div class="db-ben-card animate-on-scroll">
+        <div class="db-ben-icon"><i class="fas fa-handshake"></i></div>
+        <div><h3>Jedna osoba za projekat</h3><p>Isti sagovornik od prvog pitanja do isporuke, sa partnerskim uslovima prema obimu. Ne prepričavate projekat iznova svakome ko se javi.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- KAKO TECE SARADNJA -->
 <section class="db-tok">
   <div class="container">
@@ -542,65 +699,6 @@ require_once __DIR__ . '/php/dimenzije.php';
     </ol>
   </div>
 </section>
-
-<!-- KATALOZI -->
-<?php
-/* Katalozi za preuzimanje.
-   Odjeljak se ispisuje SAMO ako PDF stvarno postoji na disku. Dok se fajl ne
-   okaci, na stranici nema ni traga od ovog bloka — dakle nema ni linka koji bi
-   vodio u 404, ni praznog naslova koji Google indeksira bez sadrzaja.
-   Cim se fajl doda u /katalozi, blok se sam pojavi, bez ijedne izmjene koda.
-   Ime fajla je dio adrese koju Google indeksira, zato je opisno i malim slovima. */
-$mmhKatalozi = array_values(array_filter([
-  ['fajl'  => 'katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf',
-   'slika' => 'images/katalog-01-pregled.jpg',
-   'ime'   => 'Karta boja 01 — kamen, tekstil i metal',
-   'opis'  => 'Mermer i travertin, tekstilne strukture, koža, četkani i polirani metal.',
-   'broj'  => 49],
-  ['fajl'  => 'katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf',
-   'slika' => 'images/katalog-02-pregled.jpg',
-   'ime'   => 'Karta boja 02 — drveni dezeni',
-   'opis'  => 'Hrast, orah, teak i tamna drva, uz jednobojne Classic završnice.',
-   'broj'  => 42],
-], fn($k) => is_file(__DIR__ . '/' . $k['fajl'])));
-if ($mmhKatalozi):
-?>
-<section class="db-katalozi">
-  <div class="container">
-    <div class="text-center">
-      <div class="gold-line"></div>
-      <h2 class="section-title">Karte boja za preuzimanje</h2>
-      <p class="section-subtitle">Kliknite na kartu i otvara se cijela paleta sa šiframa — otvorite je na sastanku ili proslijedite klijentu</p>
-    </div>
-    <div class="db-kat-grid">
-      <?php foreach ($mmhKatalozi as $k):
-        $mb = round(filesize(__DIR__ . '/' . $k['fajl']) / 1048576, 1);
-      ?>
-      <a class="db-kat-card animate-on-scroll" href="<?= htmlspecialchars($k['fajl']) ?>" target="_blank" rel="noopener">
-        <span class="db-kat-slika">
-          <img src="<?= htmlspecialchars($k['slika']) ?>" alt="<?= htmlspecialchars($k['ime']) ?> – primjeri dezena iz karte boja Make My Home Decor" loading="lazy"<?= mmhDimAtributi($k['slika']) ?>>
-          <span class="db-kat-znak"><i class="fas fa-file-pdf"></i> PDF</span>
-        </span>
-        <span class="db-kat-tekst">
-          <span class="db-kat-ime"><?= htmlspecialchars($k['ime']) ?></span>
-          <span class="db-kat-opis"><?= htmlspecialchars($k['opis']) ?></span>
-          <span class="db-kat-red">
-            <span class="db-kat-meta"><?= (int)$k['broj'] ?> dezena · <?= $mb ?> MB</span>
-            <span class="db-kat-otvori">Otvori kartu <i class="fas fa-arrow-right"></i></span>
-          </span>
-        </span>
-      </a>
-      <?php endforeach; ?>
-    </div>
-    <p class="db-kat-nota">
-      Karta boja pokazuje dezen, ne i boju tačno — ekran i štampa je uvijek pomjere.
-      Prije nego što stavka uđe u projekat, tražite fizički uzorak:
-      <a href="https://wa.me/38269105222?text=Zdravo%2C%20javljam%20se%20iz%20projektnog%20biroa.%20Molim%20uzorke%20za%20dezene%3A" target="_blank" rel="noopener">pošaljite spisak šifri</a>
-      i šaljemo ih na adresu biroa.
-    </p>
-  </div>
-</section>
-<?php endif; ?>
 
 <!-- FACTORY -->
 <section class="db-factory">
@@ -635,15 +733,6 @@ if ($mmhKatalozi):
     </div>
   </div>
 </section>
-
-<!-- MATERIAL SWATCHES -->
-<div class="db-swatches">
-  <img src="images/products/cq006.jpg" alt="Drveni dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/cq006.jpg') ?>>
-  <img src="images/products/product-1780505348-753.jpg" alt="Mystic Marble – mermerni zidni panel, Make My Home Decor Podgorica" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1780505348-753.jpg') ?>>
-  <img src="images/products/product-1774009566-250.jpg" alt="Metalni dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1774009566-250.jpg') ?>>
-  <img src="images/products/product-1785262175-466.jpg" alt="3D letvica dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1785262175-466.jpg') ?>>
-  <img src="images/products/product-1774006203-686.jpg" alt="Tekstilni dezen" loading="lazy" onerror="this.style.display='none'"<?= mmhDimAtributi('images/products/product-1774006203-686.jpg') ?>>
-</div>
 
 <!-- CTA -->
 <section class="db-cta">
