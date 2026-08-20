@@ -566,7 +566,7 @@ ul { list-style: none; }
 .hero-title .hero-brand {
   display: block;
   margin-top: 10px;
-  font-size: 0.42em;
+  font-size: max(13px, 0.42em);
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
