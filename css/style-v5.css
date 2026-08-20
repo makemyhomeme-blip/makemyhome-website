@@ -561,6 +561,17 @@ ul { list-style: none; }
 }
 
 .hero-title .accent { color: var(--primary); }
+/* Ime firme u H1 stoji zbog upita na goli brend ("Make My Home Decor"), ali ne
+   smije da nadjaca sam naslov — zato ide u zaseban red, manje i mirnije. */
+.hero-title .hero-brand {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.42em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+}
 
 .hero-desc {
   font-size: 18px;
