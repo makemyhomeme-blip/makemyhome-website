@@ -37,3 +37,8 @@ alat/snimci/sada.json.gz
 alat/snimci/oko/
 data/reviews.json
 data/reviews-extra.json
+
+# Mozaik slike za dijeljenje pravi SAM SERVER iz svog data/products.json.
+# Lokalne kopije se ne salju — inace bi prepisale one koje odgovaraju
+# slikama koje je vlasnik okacio kroz admin.
+images/og/

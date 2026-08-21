@@ -33,6 +33,7 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
     $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
     $root . '/php/contact.php'    => $base . '/php/contact.php',
+    $root . '/php/og-mozaik.php' => $base . '/php/og-mozaik.php',
     // HTML stranice
     $root . '/404.html'         => $base . '/404.html',
     $root . '/index.html'       => $base . '/index.html',
