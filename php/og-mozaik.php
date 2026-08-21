@@ -59,11 +59,32 @@ function mmhOgMozaik(string $kategorija, array $proizvodi): ?array
             if (count($slike) >= 6) break;
         }
     } else {
-        foreach ($proizvodi as $p) {
-            if (($p['category'] ?? '') !== $kategorija || empty($p['image'])) continue;
-            if (!is_file($korijen . '/' . ltrim($p['image'], '/'))) continue;
-            $slike[] = $p['image'];
-            if (count($slike) >= 6) break;
+        // "bambus-paneli" je krovna kategorija: nijedan proizvod nema bas taj
+        // kljuc, nego jedan od pet podtipova. Bez ovoga bi bas ta kategorija —
+        // sa najvise dezena — jedina ostala bez mozaika. Uzima se po jedan
+        // dezen iz svakog podtipa, da se u pregledu vidi cio raspon.
+        $podtipovi = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-kozni','bambus-metalni'];
+        if ($kategorija === 'bambus-paneli') {
+            foreach ([1, 2] as $krug) {          // prvi krug: po jedan iz svakog podtipa
+                $uzeto = [];
+                foreach ($proizvodi as $p) {
+                    $k = $p['category'] ?? '';
+                    if (!in_array($k, $podtipovi, true) || empty($p['image'])) continue;
+                    if ($krug === 1 && isset($uzeto[$k])) continue;
+                    if (in_array($p['image'], $slike, true)) continue;
+                    if (!is_file($korijen . '/' . ltrim($p['image'], '/'))) continue;
+                    $uzeto[$k] = true;
+                    $slike[] = $p['image'];
+                    if (count($slike) >= 6) break 2;
+                }
+            }
+        } else {
+            foreach ($proizvodi as $p) {
+                if (($p['category'] ?? '') !== $kategorija || empty($p['image'])) continue;
+                if (!is_file($korijen . '/' . ltrim($p['image'], '/'))) continue;
+                $slike[] = $p['image'];
+                if (count($slike) >= 6) break;
+            }
         }
     }
 
