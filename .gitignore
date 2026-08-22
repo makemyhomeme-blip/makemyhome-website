@@ -42,3 +42,7 @@ data/reviews-extra.json
 # Lokalne kopije se ne salju — inace bi prepisale one koje odgovaraju
 # slikama koje je vlasnik okacio kroz admin.
 images/og/
+
+# Privremene skripte za provjeru u pregledacu (alat/tmp-*.mjs) prave se u toku
+# rada i brisu poslije. Jednom je tmp-u.mjs upao u repo preko "git add -A".
+alat/tmp-*
