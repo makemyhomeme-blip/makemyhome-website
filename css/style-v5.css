@@ -845,11 +845,10 @@ ul { list-style: none; }
   z-index: 1;
 }
 
-.product-badge.new { background: #1c7a41; color: var(--white); }
-.product-badge.sale { background: #c0392b; color: var(--white); }
-.product-badge.limited { background: #7d3c98; color: var(--white); }
-.product-badge.recommended { background: #1f6391; color: var(--white); }
-.product-badge.preorder { background: #a85a0f; color: var(--white); }
+/* Oznake su ranije imale pet boja — zelena, crvena, ljubicasta, plava,
+   narandzasta. Uz vec crveni znak popusta na istoj slici, kartica je imala tri
+   boje bez razloga. Sve oznake sada nose istu zlatnu boju sajta; razliku nosi
+   sam tekst ("Novo", "Najpopularniji", "Preporucujemo"). */
 
 .product-body { padding: 20px; }
 

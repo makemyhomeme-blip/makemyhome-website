@@ -61,6 +61,20 @@ if ($izdvojeni) {
             <?php if ($popust > 0 && !$nema): ?>
             <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $popust ?>%</div>
             <?php endif; ?>
+<?php
+            /* Oznaka zasto je proizvod izdvojen — "Najpopularniji", "Novo",
+               "Preporucujemo". Vlasnik je upisuje u adminu, CSS za nju postoji
+               odavno, ali je nijedna stranica koju ispisuje SERVER nije
+               prikazivala; crtao ju je samo JavaScript, a listu proizvoda vise
+               ne crta JavaScript. Zato je na "Istaknutim proizvodima" pisalo da
+               su istaknuti, a nigdje zasto.
+               "Samo za porucivanje" se ne prikazuje ovdje jer to nije razlog za
+               isticanje nego nacin nabavke. */
+            $oznaka = trim((string)($p['badge'] ?? ''));
+            if ($oznaka !== '' && stripos($oznaka, 'ručivanje') === false && stripos($oznaka, 'rucivanje') === false):
+            ?>
+            <div class="product-badge"><?= htmlspecialchars($oznaka) ?></div>
+            <?php endif; ?>
             <?php if ($nema): ?><div class="oos-tag">Rasprodato</div><?php endif; ?>
           </a>
           <div class="product-body">

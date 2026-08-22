@@ -405,7 +405,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=b31d53dd">
+  <link rel="stylesheet" href="css/style-v5.css?v=7a74f302">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -841,6 +841,20 @@ echo "\n</script>\n";
             <img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?>>
             <?php if ($pD > 0 && !$pNema): ?>
             <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $pD ?>%</div>
+            <?php endif; ?>
+<?php
+            /* Oznaka zasto je proizvod izdvojen — "Najpopularniji", "Novo",
+               "Preporucujemo". Vlasnik je upisuje u adminu, CSS za nju postoji
+               odavno, ali je nijedna stranica koju ispisuje SERVER nije
+               prikazivala; crtao ju je samo JavaScript, a listu proizvoda vise
+               ne crta JavaScript. Zato je na "Istaknutim proizvodima" pisalo da
+               su istaknuti, a nigdje zasto.
+               "Samo za porucivanje" se ne prikazuje ovdje jer to nije razlog za
+               isticanje nego nacin nabavke. */
+            $oznaka = trim((string)($p['badge'] ?? ''));
+            if ($oznaka !== '' && stripos($oznaka, 'ručivanje') === false && stripos($oznaka, 'rucivanje') === false):
+            ?>
+            <div class="product-badge"><?= htmlspecialchars($oznaka) ?></div>
             <?php endif; ?>
             <?php if ($pNema): ?><div class="oos-tag">Rasprodato</div><?php endif; ?>
           </a>
