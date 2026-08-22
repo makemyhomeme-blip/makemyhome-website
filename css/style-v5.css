@@ -1953,31 +1953,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .calc-result strong { color: var(--primary); font-size: 18px; }
 
-/* Trust row */
-.product-trust-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0,0,0,0.07);
-}
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  color: var(--gray);
-  font-weight: 500;
-}
-.trust-item i {
-  color: var(--primary);
-  font-size: 14px;
-}
-
-@media (max-width: 600px) {
-  .product-trust-row { flex-direction: column; }
-}
+/* Traka .product-trust-row je uklonjena sa stranice proizvoda — ponavljala
+   je dostavu, placanje i montazu koje pise u bocnom bloku odmah ispod. */
 
 /* ===== MATCHING PAIR SECTION ===== */
 .matching-pair-section {
@@ -2866,7 +2843,6 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .breadcrumb a { display: inline-block; padding: 9px 2px; }
   /* Ostala mjesta gdje je link bio visok 17–19px */
   .btn-card-detail { min-height: 42px !important; }
-  .product-trust-row .trust-item a { display: inline-flex; align-items: center; min-height: 40px; }
   .contact-info-text a { display: inline-block; padding: 9px 0; }
   .cj-tabela a, .info-table a { display: inline-block; padding: 9px 0; }
 }

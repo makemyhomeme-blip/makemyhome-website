@@ -394,7 +394,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=b386cc67">
+  <link rel="stylesheet" href="css/style-v5.css?v=d6d67611">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -884,10 +884,10 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
                    i odjeljak sa samim recenzijama. */ ?>
 
           <ul class="p-side-list">
-            <li><i class="fas fa-truck"></i><span><strong>Dostava za 1–4 dana</strong> kurirskom službom na adresu, širom Crne Gore</span></li>
+            <li><i class="fas fa-truck"></i><span><strong>Dostava za 1–4 dana</strong> kurirskom službom na adresu, širom Crne Gore — okvirno 20 €</span></li>
             <li><i class="fas fa-hand-holding-dollar"></i><span><strong>Plaćate kad preuzmete</strong> — gotovinom kuriru, bez avansa</span></li>
             <li><i class="fas fa-rotate-left"></i><span><strong>Zamjena u roku od 7 dana</strong> ako niste zadovoljni</span></li>
-            <li><i class="fas fa-screwdriver-wrench"></i><span><strong>Montaža bez majstora</strong> — lijepi se silikonom, siječe skalpelom</span></li>
+            <li><i class="fas fa-screwdriver-wrench"></i><span><strong>Montaža bez majstora</strong> — <a href="montaza.html">savjeti za montažu, korak po korak</a></span></li>
           </ul>
 
           <div class="p-side-box">
@@ -1099,7 +1099,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/products.js?v=f08242b4"></script>
+<script src="js/products.js?v=529f31e4"></script>
 <script src="js/cart.js?v=2906a9ed"></script>
 <script>
   renderProductDetail();

@@ -840,13 +840,10 @@ async function renderProductDetail() {
       </div>` : ''}
 
     </div>
-
-    <!-- Trust row -->
-    <div class="product-trust-row">
-      <div class="trust-item"><i class="fas fa-truck"></i><span>Dostava kurirskom službom — okvirno 20 €</span></div>
-      <div class="trust-item"><i class="fas fa-tools"></i><a href="montaza.html" style="color:inherit;text-decoration:underline;">Savjeti za montažu</a></div>
-      <div class="trust-item"><i class="fas fa-money-bill-wave"></i><span>Plaćanje pouzećem</span></div>
-    </div>`;
+`;
+    /* Traka "Dostava / Savjeti za montazu / Placanje pouzecem" je uklonjena i
+       ovdje i u php/kalkulator.php — isto je pisalo u bocnom bloku odmah
+       ispod. Ako se jedno mijenja, mora i drugo. */
 
   // Desnu kolonu ispisuje SERVER (product.php), ne vise ovaj fajl.
   //

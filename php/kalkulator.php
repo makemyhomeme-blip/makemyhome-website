@@ -224,12 +224,14 @@ function mmhHarmonikaHTML(array $p): string
             . $e(strip_tags($p['highlight'])) . '</div></div></div>';
     }
 
-    $h .= '</div>'
-        . '<div class="product-trust-row">'
-        . '<div class="trust-item"><i class="fas fa-truck"></i><span>Dostava kurirskom službom — okvirno 20 €</span></div>'
-        . '<div class="trust-item"><i class="fas fa-tools"></i><a href="montaza.html" style="color:inherit;text-decoration:underline;">Savjeti za montažu</a></div>'
-        . '<div class="trust-item"><i class="fas fa-money-bill-wave"></i><span>Plaćanje pouzećem</span></div>'
-        . '</div>';
+    /* Ovdje je stajala traka "Dostava — okvirno 20 € / Savjeti za montazu /
+       Placanje pouzecem". Odmah ispod nje, u bocnom bloku (product.php,
+       .p-side-list), pise isto to samo detaljnije: dostava za 1-4 dana,
+       placanje kad preuzmete, montaza bez majstora. Kupac je na telefonu
+       citao dostavu, placanje i montazu DVA PUTA zaredom.
+       Traka je uklonjena; ono sto je samo ona imala — cijena dostave i link
+       na uputstvo — prebaceno je u bocni blok. */
+    $h .= '</div>';
 
     return $h;
 }
