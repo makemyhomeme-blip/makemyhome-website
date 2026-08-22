@@ -76,7 +76,7 @@
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=d6d67611">
+  <link rel="stylesheet" href="css/style-v5.css?v=d56bd854">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -193,6 +193,10 @@ require_once __DIR__ . '/php/dimenzije.php';
     .db-namjena-tabela tbody td:last-child a{display:inline-block;margin:2px 16px 2px 0;}
     .db-namjena-tabela a:hover{color:var(--dark);border-bottom-color:var(--dark);}
     .db-namjena-uvod{max-width:820px;margin:34px auto 0;text-align:center;font-size:16px;line-height:1.85;color:var(--dark-2);}
+    .db-dekori{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:18px;}
+    .db-dekori-nas{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+    .db-dekori a{display:inline-flex;align-items:center;min-height:38px;padding:0 15px;border:1px solid rgba(121,95,50,0.35);border-radius:999px;background:rgba(201,168,108,0.08);color:#795f32;font-weight:700;font-size:14px;text-decoration:none;}
+    .db-dekori a:hover{background:rgba(201,168,108,0.18);color:var(--dark);}
     .db-namjena-uvod a{color:#795f32;font-weight:700;}
     .db-namjena-nota{margin-top:22px;font-size:14px;color:var(--gray);line-height:1.85;max-width:860px;}
     .db-namjena-nota a{color:#795f32;font-weight:600;}
@@ -285,7 +289,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
-      .db-namjena-nota a,.db-kat-nota a,.db-namjena-uvod a{display:inline-block;padding:5px 0;}
+      .db-namjena-nota a,.db-kat-nota a{display:inline-block;padding:5px 0;}
       /* Isto vazi i za korake saradnje: broj lijevo, tekst uz njega. */
       .db-tok-korak{text-align:left;}
       .db-tok-broj{margin-left:0;margin-right:0;}
@@ -295,6 +299,20 @@ require_once __DIR__ . '/php/dimenzije.php';
          uskom ekranu bili blok teksta bez ijedne ravne ivice. */
       .db-lead,.db-lead-sub,.db-factory p{text-align:left;}
 
+      /* Tekst na telefonu: uvodni pasusi su bili 16px sa proredom 1.85, sto je
+         na uskom ekranu davalo vrlo visoke blokove. Spusteno na 15px i proredom
+         1.7 — isti tekst, dva-tri reda manje po pasusu. */
+      .db-lead{font-size:15px;line-height:1.7;margin-bottom:14px;}
+      .db-lead-sub{font-size:14.5px;line-height:1.7;margin-bottom:12px;}
+      .db-namjena-uvod{font-size:14.5px;line-height:1.75;margin-top:24px;text-align:left;}
+      .db-dekori{justify-content:flex-start;gap:8px;margin-top:14px;}
+      .db-dekori a{min-height:36px;padding:0 13px;font-size:13.5px;}
+      .db-ben-card h3,.db-tok-korak h3{font-size:15.5px;}
+      .db-kat-ime{font-size:16px;}
+      .db-namjena-tabela tbody th{font-size:14.5px;}
+      .db-namjena-tabela tbody td{font-size:13.5px;line-height:1.6;}
+      .db-cta h2{font-size:22px;}
+      .db-factory p{font-size:14.5px;line-height:1.7;}
       /* Razmaci: na telefonu se izmedju odjeljaka gubilo po 160 px praznog
          prostora (80 gore + 80 dolje), pa je stranica bila duga 11 500 px.
          Naslovi su takodje bili velicine kao na racunaru. */
@@ -573,16 +591,23 @@ if ($mmhKatalozi):
              Sada je odvojeno ono sto JESTE slobodan izbor (dezen) od onoga sto
              je stvarno ogranicenje: akustika, vlaga, radijus, pod i zavrsetak. */ ?>
     <p class="db-namjena-uvod">
-      U bilo koji prostor ide bilo koji dezen. Kancelarija može biti
-      <a href="/kategorija/bambus-drveni">drvena</a>,
-      <a href="/kategorija/bambus-mermerni">mermerna</a>,
-      <a href="/kategorija/bambus-tekstilni">tekstilna</a>,
-      <a href="/kategorija/bambus-kozni">kožna</a>,
-      <a href="/kategorija/bambus-metalni">metalna</a> ili
-      <a href="/kategorija/classic">jednobojna</a> — isto kao hotelska soba,
-      restoran ili stan. To je stvar projekta, ne materijala.
-      Tabela ispod nabraja samo ono što izbor zaista sužava.
+      U bilo koji prostor ide bilo koji dezen. Kancelarija, hotelska soba,
+      restoran i stan biraju se po istom ključu — to je stvar projekta, ne
+      materijala. Tabela ispod nabraja samo ono što izbor zaista sužava.
     </p>
+    <?php /* Dezeni stoje kao zasebna dugmad, ne kao linkovi unutar recenice.
+             Sest podvucenih linkova u pasusu je razbijalo prored — svaki red sa
+             linkom bio je visi od reda bez njega, pa je tekst izgledao neravno.
+             Ovako su i vidljiviji i lakse se pogode prstom. */ ?>
+    <div class="db-dekori">
+      <span class="db-dekori-nas">Dezeni:</span>
+      <a href="/kategorija/bambus-drveni">Drveni</a>
+      <a href="/kategorija/bambus-mermerni">Mermerni</a>
+      <a href="/kategorija/bambus-tekstilni">Tekstilni</a>
+      <a href="/kategorija/bambus-kozni">Kožni</a>
+      <a href="/kategorija/bambus-metalni">Metalni</a>
+      <a href="/kategorija/classic">Jednobojni</a>
+    </div>
 
     <div class="db-namjena-wrap">
       <table class="db-namjena-tabela">

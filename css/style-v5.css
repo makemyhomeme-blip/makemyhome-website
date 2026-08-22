@@ -232,7 +232,7 @@ ul { list-style: none; }
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(23px, 4vw, 42px);
   color: var(--dark);
   margin-bottom: 16px;
   line-height: 1.2;
@@ -243,6 +243,15 @@ ul { list-style: none; }
   color: var(--gray);
   max-width: 600px;
   margin-bottom: 48px;
+}
+
+/* Na telefonu je sve bilo za nijansu preveliko: naslov odjeljka 28px se lomio
+   u tri reda, ispod njega 48px praznine, pa tek sadrzaj. Na ekranu od 390px to
+   je pola prvog pogleda potroseno prije nego se ista procita.
+   Velicine se ovdje spustaju samo za telefon; na racunaru ostaje sve isto. */
+@media (max-width: 768px) {
+  .section-subtitle { font-size: 15px; line-height: 1.7; margin-bottom: 30px; }
+  .section-title { margin-bottom: 12px; }
 }
 
 .text-center { text-align: center; }
@@ -554,7 +563,7 @@ ul { list-style: none; }
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(36px, 5.5vw, 68px);
+  font-size: clamp(30px, 5.5vw, 68px);
   color: var(--white);
   line-height: 1.1;
   margin-bottom: 24px;
