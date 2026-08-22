@@ -56,7 +56,7 @@ $mmhStatika = [
 ];
 $izvori = array_merge(
     ['data/products.json', 'data/categories.json', 'php/slug.php', 'sitemap.php',
-     'index.html', 'pocetna.php', 'product.php', 'products.php',
+     'index.html', 'pocetna.php', 'product.php', 'products.php', 'data/lastmod.json', 'php/lastmod.php',
      'inspiracija.php', 'cjenovnik.php', 'decor-box.php', 'data/decor-box-style.json'],
     array_column($mmhStatika, 0)
 );
@@ -78,6 +78,18 @@ if (is_file($kesFajl) && filemtime($kesFajl) >= $najnoviji && filesize($kesFajl)
 $BAZA = 'https://makemyhome.me';
 $P = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
 if (isset($P['products'])) $P = $P['products'];
+
+// Datum izmjene po POJEDINOM proizvodu — vidi php/lastmod.php.
+// Do sada je svaka stranica proizvoda nosila datum kad je zadnji put diran
+// product.php, a to je sablon koji se mijenja pri skoro svakom deployu. Time je
+// svaki deploy Googleu javljao da su se SVE stranice promijenile, pa je polje
+// prestalo da nosi ikakav signal.
+require_once __DIR__ . '/php/lastmod.php';
+$mmhDatumi = mmhDatumiProizvoda($P);
+$mmhDatum  = function (array $p) use ($mmhDatumi): int {
+    $d = $mmhDatumi[(string)($p['id'] ?? '')] ?? '';
+    return $d ? (int)strtotime($d) : 0;
+};
 
 $katImena = [
     'bambus-paneli' => 'Bambus Paneli', 'bambus-drveni' => 'Drveni Paneli',
@@ -146,7 +158,7 @@ $dodaj = function (string $loc, string $freq, string $prio, string $slike = '', 
 // ---- Pocetna i staticne stranice ----------------------------------------
 $dodaj($BAZA . '/', 'daily', '1.0',
        mmhSlikaXML('images/showcase-room.jpg', 'Make My Home Decor – zidni paneli, Podgorica'),
-       mmhVrijeme(array_merge($mmhPodaci, ['index.html', 'pocetna.php'])));
+       max(mmhVrijeme(['index.html']), max([0] + array_map($mmhDatum, $P))));
 
 foreach ($mmhStatika as [$f, $fr, $pr]) {
     // Inspiracija dobija SVE fotografije prostora — to je stranica zbog koje
@@ -162,10 +174,10 @@ foreach ($mmhStatika as [$f, $fr, $pr]) {
     }
     // Cetiri stranice sastavlja PHP; njima se gleda i taj fajl, ne samo .html
     $izvori = array_merge($mmhOkvir, [$f]);
-    if ($f === 'inspiracija.html')  $izvori = array_merge($mmhPodaci, ['inspiracija.php']);
-    if ($f === 'cjenovnik.html')    $izvori = array_merge($mmhPodaci, ['cjenovnik.php']);
-    if ($f === 'products.html')     $izvori = array_merge($mmhPodaci, ['products.php']);
-    if ($f === 'decor-box.html')    $izvori = array_merge($mmhOkvir, ['decor-box.php', 'data/decor-box-style.json']);
+    if ($f === 'inspiracija.html')  $izvori = $mmhPodaci;
+    if ($f === 'cjenovnik.html')    $izvori = $mmhPodaci;
+    if ($f === 'products.html')     $izvori = $mmhPodaci;
+    if ($f === 'decor-box.html')    $izvori = ['decor-box.php', 'data/decor-box-style.json'];
     $dodaj($BAZA . '/' . $f, $fr, $pr, $sl, mmhVrijeme($izvori));
 }
 
@@ -195,8 +207,12 @@ foreach ($katImena as $k => $ime) {
     foreach (($poKat[$k] ?? []) as $p) {
         if (!empty($p['image'])) $sl .= mmhSlikaXML($p['image'], $p['name'] . ' – ' . $ime);
     }
+    // Kategorija se mijenja kad se promijeni neki proizvod u njoj — ne kad se
+    // dira products.php.
+    $kadaKat = 0;
+    foreach (($poKat[$k] ?? []) as $p) { $t = $mmhDatum($p); if ($t > $kadaKat) $kadaKat = $t; }
     $dodaj($BAZA . '/kategorija/' . $k, 'weekly', '0.9', $sl,
-           mmhVrijeme(array_merge($mmhPodaci, ['products.php'])));
+           $kadaKat ?: mmhVrijeme($mmhPodaci));
 }
 
 // ---- Proizvodi -----------------------------------------------------------
@@ -209,7 +225,7 @@ foreach ($P as $p) {
         $sl .= mmhSlikaXML($g, $ime . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
     }
     $dodaj($BAZA . '/' . mmhSlugProizvoda($p), 'weekly', '0.8', $sl,
-           mmhVrijeme(array_merge($mmhPodaci, ['product.php'])));
+           $mmhDatum($p) ?: mmhVrijeme($mmhPodaci));
 }
 
 $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"

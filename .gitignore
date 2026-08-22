@@ -46,3 +46,7 @@ images/og/
 # Privremene skripte za provjeru u pregledacu (alat/tmp-*.mjs) prave se u toku
 # rada i brisu poslije. Jednom je tmp-u.mjs upao u repo preko "git add -A".
 alat/tmp-*
+
+# Datumi izmjene po proizvodu — pravi ih SAM SERVER iz svojih podataka.
+# Sa lokalnog se ne salje, inace bi datumi skocili na stanje razvojne masine.
+data/lastmod.json
