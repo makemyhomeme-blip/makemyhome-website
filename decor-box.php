@@ -257,10 +257,14 @@ require_once __DIR__ . '/php/dimenzije.php';
          cita teze jer svaki red pocinje na drugom mjestu, a kartica je bila
          visoka preko pola ekrana — sest kartica je davalo skoro 2000 px. Sada
          ikona stoji lijevo od naslova, a tekst je poravnat lijevo. */
-      .db-ben-card{flex-direction:row;align-items:flex-start;text-align:left;gap:14px;padding:20px 18px;}
-      .db-ben-icon{width:44px;height:44px;border-radius:12px;font-size:18px;}
-      .db-ben-card h3{font-size:16px;}
-      .db-ben-card p{font-size:14px;line-height:1.65;}
+      /* Kartice su bile 20px praznine + ikona od 44px + pasus od pet redova.
+         Sest takvih je uzimalo tri ekrana. Tekst je skracen na jednu recenicu,
+         ikona je manja, praznina manja. */
+      .db-ben-card{flex-direction:row;align-items:flex-start;text-align:left;gap:12px;padding:15px 15px 16px;}
+      .db-ben-icon{width:34px;height:34px;border-radius:10px;font-size:15px;}
+      .db-ben-card h3{font-size:15.5px;margin:0 0 4px;}
+      .db-ben-card p{font-size:14px;line-height:1.55;}
+      .db-ben-grid{gap:12px;}
       /* Katalozi: na telefonu jedna kartica po redu, ikona i strelica ostaju
          u istom redu sa tekstom da kartica ne naraste bez potrebe. */
       .db-katalozi{padding:56px 0;}
@@ -772,27 +776,27 @@ if ($dbIns):
     <div class="db-ben-grid">
       <div class="db-ben-card animate-on-scroll">
         <div class="db-ben-icon"><i class="fas fa-file-pdf"></i></div>
-        <div><h3>Dokumentacija za proizvod</h3><p>Za svaki artikal iz ponude šaljemo podatke koje traži projekat: sastav, dimenzije, težinu, način ugradnje i dostupnu fabričku dokumentaciju. Recite koji proizvod i za koju namjenu — dobijate ono što stvarno postoji, bez uopštenih obećanja.</p></div>
+        <div><h3>Dokumentacija za proizvod</h3><p>Sastav, dimenzije, težina, način ugradnje i fabrička dokumentacija — za svaki artikal iz ponude.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
         <div class="db-ben-icon"><i class="fas fa-clipboard-list"></i></div>
-        <div><h3>Tekst za specifikaciju</h3><p>Spreman opis stavke za predmjer i tehnički opis — naziv, šifra, dimenzija, jedinica mjere i količina po m². Kopira se u projekat bez prepravljanja.</p></div>
+        <div><h3>Tekst za specifikaciju</h3><p>Naziv, šifra, dimenzija, jedinica mjere i količina po m² — kopira se u predmjer bez prepravljanja.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
         <div class="db-ben-icon"><i class="fas fa-swatchbook"></i></div>
-        <div><h3>Uzorci u vaš biro</h3><p>Fizički uzorci dezena koje razmatrate, dostavljeni na adresu biroa. Boja i tekstura se na ekranu ne vide tačno, a klijent odluku donosi u ruci.</p></div>
+        <div><h3>Uzorci u vaš biro</h3><p>Fizički uzorci na adresu biroa. Boja se na ekranu nikad ne vidi tačno, a klijent odlučuje u ruci.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
         <div class="db-ben-icon"><i class="fas fa-drafting-compass"></i></div>
-        <div><h3>Detalji ugradnje</h3><p>Kako se rješava unutrašnji i spoljašnji ugao, prelaz na plafon, spoj sa podom i završetak uz otvor — uz odgovarajuće aluminijum lajsne. Detalj se dogovara prije, ne na gradilištu.</p></div>
+        <div><h3>Detalji ugradnje</h3><p>Ugao, prelaz na plafon, spoj sa podom i završetak uz otvor — dogovoreno prije, ne na gradilištu.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
         <div class="db-ben-icon"><i class="fas fa-boxes-stacked"></i></div>
-        <div><h3>Dostupnost i rok, prije ponude</h3><p>Provjera stvarne količine na stanju i roka nabavke za veće serije — prije nego što artikal uđe u projekat. Nema neprijatnog otkrića poslije potpisa.</p></div>
+        <div><h3>Dostupnost i rok, prije ponude</h3><p>Stvarna količina i rok nabavke — prije nego što artikal uđe u projekat, ne poslije potpisa.</p></div>
       </div>
       <div class="db-ben-card animate-on-scroll">
         <div class="db-ben-icon"><i class="fas fa-handshake"></i></div>
-        <div><h3>Jedna osoba za projekat</h3><p>Isti sagovornik od prvog pitanja do isporuke, sa partnerskim uslovima prema obimu. Ne prepričavate projekat iznova svakome ko se javi.</p></div>
+        <div><h3>Jedna osoba za projekat</h3><p>Isti sagovornik od prvog pitanja do isporuke, sa partnerskim uslovima prema obimu.</p></div>
       </div>
     </div>
   </div>
