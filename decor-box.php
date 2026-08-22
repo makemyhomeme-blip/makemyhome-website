@@ -297,7 +297,11 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-tabela tbody td:first-of-type{order:3;font-size:13px;line-height:1.55;color:var(--gray);margin:0;}
       /* Odgovor: obican zlatan tekst, ne dugme. Visina za prst se dobija
          razmakom iznad i ispod, ne okvirom oko slova. */
-      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-bottom:1px solid rgba(121,95,50,0.4);border-radius:0;background:none;padding:6px 0;margin:0 16px 0 0;line-height:1.2;}
+      /* Podvlaka ide na SLOVA, ne na okvir elementa. Sa border-bottom je
+         linija bila 6px ispod teksta — visila je odvojeno i izgledala kao da
+         je nesto puklo. text-decoration prati sam tekst, a razmak za prst
+         ostaje. */
+      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:6px 0;margin:0 16px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
