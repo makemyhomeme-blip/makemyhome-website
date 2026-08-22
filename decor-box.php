@@ -277,29 +277,27 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-kat-tekst{padding:18px 18px 20px;}
       .db-kat-ime{font-size:17.5px;}
       .db-kat-nota{text-align:left;}
-      /* Tabela namjena se na telefonu ne skroluje bocno nego se slaze u kartice:
-         svaki red postaje jedna kartica, a zaglavlje kolona se sakrije jer se
-         znacenje vidi iz same kartice. */
-      .db-namjena-wrap{overflow-x:visible;border:none;border-radius:0;}
-      .db-namjena-tabela{min-width:0;background:transparent;}
-      .db-namjena-tabela thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
-      .db-namjena-tabela tbody tr{display:block;background:#fff;border:0;border-radius:14px;padding:18px 16px 16px;margin-bottom:12px;box-shadow:0 4px 16px rgba(0,0,0,0.07);}
-      .db-namjena-tabela tbody th,.db-namjena-tabela tbody td{display:block;width:auto;padding:0;border-bottom:none;background:transparent!important;}
-      .db-namjena-tabela tbody th{font-size:15.5px;margin-bottom:7px;}
-      .db-namjena-tabela tbody td{font-size:14px;margin-bottom:9px;}
-      /* Kad linkovi postanu dugmad, zarezi i "i" izmedju njih vise nemaju smisla
-         — vise ne stoje u recenici nego lebde izmedju dva dugmeta. Gase se sa
-         font-size:0 na celiji, a dugmad vracaju svoju velicinu. */
-      .db-namjena-tabela tbody td:last-child{margin-bottom:0;font-size:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
-      /* Linkovi na kategorije bili su obican podvuceni tekst visok 18 px — na
-         telefonu premalo da se pogodi prstom, i dva susjedna linka se dodiruju.
-         Na uskom ekranu postaju dugmad od 40 px sa razmakom izmedju. */
-      .db-namjena-tabela tbody td:last-child a{font-size:14.5px;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid rgba(121,95,50,0.35);border-radius:999px;background:rgba(201,168,108,0.08);line-height:1.2;}
-      /* Tabela se na telefonu slaze u kartice, pa red i celija ne smiju
-         zadrzati sirinu koja je racunata za tabelu od 640 px. */
-      .db-namjena-tabela{display:block;width:100%;}
+      /* Tabela je na telefonu bila sedam bijelih kartica, a u svakoj jos i
+         dugmad — pa je odjeljak bio dug preko 1900 px i izgledao kao sedam
+         odvojenih cjelina. Sada je to jedan spisak: uslov podebljano, odmah
+         ispod odgovor u zlatnom, pa objasnjenje sitnije. Redovi se dijele
+         tankom linijom umjesto karticom.
+         Tabela ostaje tabela u kodu — mijenja se samo kako se prikazuje. */
+      .db-namjena-wrap{overflow-x:visible;border:none;border-radius:0;margin-top:20px;}
+      .db-namjena-tabela{display:block;width:100%;min-width:0;background:transparent;}
       .db-namjena-tabela tbody{display:block;width:100%;}
-      .db-namjena-tabela tbody th{max-width:100%;}
+      .db-namjena-tabela thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+      .db-namjena-tabela tbody tr{display:flex;flex-direction:column;background:none;border:0;border-bottom:1px solid rgba(0,0,0,0.09);border-radius:0;padding:14px 0;margin:0;box-shadow:none;}
+      .db-namjena-tabela tbody tr:last-child{border-bottom:0;}
+      .db-namjena-tabela tbody th,.db-namjena-tabela tbody td{display:block;width:auto;max-width:100%;padding:0;border-bottom:none;background:transparent!important;}
+      /* Uslov ide prvi, pa odgovor, pa objasnjenje — covjek prvo dobije
+         odgovor, a objasnjenje procita samo ako ga zanima. */
+      .db-namjena-tabela tbody th{order:1;font-size:14.5px;line-height:1.35;margin-bottom:5px;}
+      .db-namjena-tabela tbody td:last-child{order:2;margin:0 0 4px;}
+      .db-namjena-tabela tbody td:first-of-type{order:3;font-size:13px;line-height:1.55;color:var(--gray);margin:0;}
+      /* Odgovor: obican zlatan tekst, ne dugme. Visina za prst se dobija
+         razmakom iznad i ispod, ne okvirom oko slova. */
+      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-bottom:1px solid rgba(121,95,50,0.4);border-radius:0;background:none;padding:6px 0;margin:0 16px 0 0;line-height:1.2;}
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
@@ -328,9 +326,14 @@ require_once __DIR__ . '/php/dimenzije.php';
       /* Dugmad su bila visoka 36-40px sa punim zaobljenjem — na uskom ekranu
          su izgledala kao veliki baloni i sest komada je uzimalo dva reda.
          Sada su niza, uza i blago zaobljena; i dalje se lako pogode prstom. */
-      .db-dekori{justify-content:flex-start;gap:7px;margin-top:12px;}
-      .db-dekori a{min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
-      .db-dekori-nas{font-size:11px;letter-spacing:1.5px;}
+      /* Sest dugmadi se lomilo u dva reda. Sada stoje u jednom redu koji se
+         prevlaci prstom — isti nacin kao traka slicnih proizvoda na stranici
+         proizvoda. Stranica se pri tome ne pomjera bocno; skroluje se samo
+         ova traka. */
+      .db-dekori{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;gap:7px;margin-top:12px;padding-bottom:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+      .db-dekori::-webkit-scrollbar{display:none;}
+      .db-dekori-nas{flex:0 0 auto;font-size:11px;letter-spacing:1.5px;}
+      .db-dekori a{flex:0 0 auto;min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
       .db-namjena-tabela tbody td:last-child a{min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
       .db-namjena-tabela tbody td:last-child{gap:7px;}
       .db-ben-card h3,.db-tok-korak h3{font-size:15.5px;}
