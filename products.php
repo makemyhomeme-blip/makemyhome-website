@@ -10,6 +10,7 @@ if (!empty($_GET['slug'])) {
 require_once __DIR__ . '/php/slug.php';
 require_once __DIR__ . '/php/dimenzije.php';
 require_once __DIR__ . '/php/og-mozaik.php';
+require_once __DIR__ . '/php/lastmod.php';
 
 // Kategorija se otvara preko /kategorija/<kljuc>. Stari oblici ?category= i ?cat=
 // i dalje rade, ali odmah salju 301 na novu adresu.
@@ -134,6 +135,16 @@ foreach ($_allProds as $pp) {
 // izbor, a ne jedan panel. Ako mozaik ne uspije — nema GD-a, fali slika,
 // kategorija ima manje od cetiri proizvoda — vraca se stari nacin sa jednom
 // fotografijom, pa se pregled linka ne moze pokvariti.
+/* Vrijeme izmjene: najnoviji proizvod u ovoj kategoriji, plus sabloni. */
+$_dat = mmhDatumiProizvoda($_allProds);
+$_ts  = 0;
+foreach ($_allProds as $_p) {
+    if ($cat !== '' && ($_p['category'] ?? '') !== $cat) continue;
+    $_t = (int)strtotime($_dat[(string)($_p['id'] ?? '')] ?? '');
+    if ($_t > $_ts) $_ts = $_t;
+}
+mmhPosaljiVrijemeIzmjene($_ts, ['product.php','products.php','pocetna.php','index.html','css/style-v5.css','js/products.js','php/kalkulator.php','php/dimenzije.php','php/slug.php','data/products.json','data/categories.json']);
+
 $ogIzbor = mmhOgMozaik($cat, $_allProds) ?? mmhSlikaZaDijeljenje($ogKandidati);
 $ogImage  = 'https://makemyhome.me/' . ltrim($ogIzbor['put'], '/');
 $ogTitle  = $catName . ' | Make My Home Decor';

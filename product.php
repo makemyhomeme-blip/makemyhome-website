@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/php/slug.php';
 require_once __DIR__ . '/php/dimenzije.php';
+require_once __DIR__ . '/php/lastmod.php';
 require_once __DIR__ . '/php/kalkulator.php';
 $productsFile = __DIR__ . '/data/products.json';
 $products = json_decode(@file_get_contents($productsFile), true) ?: [];
@@ -236,6 +237,15 @@ $vodicZaKat = [
     'bambus-drveni' => ['paneli-ili-lamperija.html', 'Zidni paneli ili lamperija — poređenje'],
     'classic' => ['paneli-ili-lamperija.html', 'Zidni paneli ili lamperija — poređenje'],
 ];
+/* Vrijeme izmjene ove stranice — Google moze da pita "je li se promijenilo?"
+   i dobije 304 umjesto cijele stranice. Racuna se iz podataka OVOG proizvoda
+   plus sabloni; vidi php/lastmod.php. */
+if ($product) {
+    $_dat = mmhDatumiProizvoda($products);
+    $_ts  = (int)strtotime($_dat[(string)($product['id'] ?? '')] ?? '');
+    mmhPosaljiVrijemeIzmjene($_ts, ['product.php','products.php','pocetna.php','index.html','css/style-v5.css','js/products.js','php/kalkulator.php','php/dimenzije.php','php/slug.php','data/products.json','data/categories.json']);
+}
+
 $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju — korak po korak'];
 ?>
 <!DOCTYPE html>

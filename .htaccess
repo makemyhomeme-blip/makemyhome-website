@@ -234,6 +234,13 @@ RewriteRule ^sitemap\.xml$ sitemap.php [L]
 # stvarno trazio /sitemap.php, a ne kad je server sam prepisao adresu.
 RewriteCond %{THE_REQUEST} \s/+sitemap\.php[\s?] [NC]
 RewriteRule ^sitemap\.php$ /sitemap.xml [R=301,L]
+
+# pocetna.php je vracao 200 kao zasebna adresa, sa canonicalom na /. Canonical
+# to rjesava, ali je bolje da druga adresa uopste ne postoji — Google onda nema
+# sta ni da uporedjuje. Uslov na THE_REQUEST znaci da se salje samo kad je
+# posjetilac SAM ukucao /pocetna.php; unutrasnje prepisivanje sa / ostaje.
+RewriteCond %{THE_REQUEST} \s/+pocetna\.php[\s?] [NC]
+RewriteRule ^pocetna\.php$ / [R=301,L]
 # Pocetnu servira pocetna.php: ona procita index.html i ubaci kartice proizvoda
 # koje su ranije bile prazne dok se ne pokrene JavaScript — Googlebot ih u
 # prvom prolazu nije vidio. Adresa ostaje "/", index.html ostaje kao rezerva.

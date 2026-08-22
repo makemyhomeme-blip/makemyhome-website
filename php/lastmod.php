@@ -103,3 +103,40 @@ function mmhPrviDatum(array $p, string $korijen): string
     }
     return date('Y-m-d', $naj ?: time());
 }
+
+/**
+ * Salje Last-Modified i, ako pregledac ili Google javi da vec ima tu verziju,
+ * odgovara sa 304 umjesto da ponovo salje cijelu stranicu.
+ *
+ * Zasto:
+ * Stranice koje sastavlja PHP (pocetna, 14 kategorija, 117 proizvoda — 132 od
+ * 149 adresa) nisu slale nijedno zaglavlje o vremenu izmjene. Apache to salje
+ * sam samo za obicne .html fajlove. Bez toga Google nema nacin da pita "je li
+ * se promijenilo?" i dobije jeftin odgovor — svaki obilazak je puno skidanje
+ * cijele stranice. Na dijeljenom hostingu to trosi ono malo obilazaka koje
+ * sajt dobije.
+ *
+ * VAZNO: ovdje vrijeme MORA da uracuna i sablone (product.php, CSS...), jer se
+ * pita "jesu li se promijenili BAJTOVI koje saljem". To nije isto sto i
+ * <lastmod> u sitemapu, koji odgovara na pitanje "je li se promijenio SADRZAJ".
+ * Kad bi se ovdje slao samo datum sadrzaja, posjetilac bi poslije izmjene
+ * izgleda dobio staru stranicu iz svog kesa.
+ */
+function mmhPosaljiVrijemeIzmjene(int $vrijeme, array $sabloni = []): void
+{
+    $korijen = dirname(__DIR__);
+    foreach ($sabloni as $f) {
+        $t = @filemtime($korijen . '/' . ltrim($f, '/'));
+        if ($t && $t > $vrijeme) $vrijeme = $t;
+    }
+    if ($vrijeme <= 0) return;
+
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $vrijeme) . ' GMT');
+
+    $ima = $_SERVER['HTTP_IF_MODIFIED_SINCE'] ?? '';
+    if ($ima !== '' && ($kada = strtotime($ima)) !== false && $kada >= $vrijeme) {
+        header('HTTP/1.1 304 Not Modified');
+        header_remove('Content-Type');
+        exit;
+    }
+}

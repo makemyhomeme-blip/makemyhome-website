@@ -17,6 +17,7 @@
  */
 require_once __DIR__ . '/php/slug.php';
 require_once __DIR__ . '/php/dimenzije.php';
+require_once __DIR__ . '/php/lastmod.php';
 
 $html = @file_get_contents(__DIR__ . '/index.html');
 if ($html === false) {
@@ -26,6 +27,12 @@ if ($html === false) {
 
 $P = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
 if (isset($P['products'])) $P = $P['products'];
+
+/* Vrijeme izmjene pocetne: najnoviji proizvod, plus sabloni. */
+$_dat = mmhDatumiProizvoda($P);
+$_ts  = 0;
+foreach ($_dat as $_d) { $_t=(int)strtotime($_d); if ($_t > $_ts) $_ts = $_t; }
+mmhPosaljiVrijemeIzmjene($_ts, ['product.php','products.php','pocetna.php','index.html','css/style-v5.css','js/products.js','php/kalkulator.php','php/dimenzije.php','php/slug.php','data/products.json','data/categories.json']);
 
 $katImena = [
     'bambus-tekstilni' => 'Tekstilni Paneli', 'bambus-drveni' => 'Drveni Paneli',
