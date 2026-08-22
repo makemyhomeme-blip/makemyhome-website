@@ -192,6 +192,8 @@ require_once __DIR__ . '/php/dimenzije.php';
        ponasanje celije u tabeli, pa se red raspadne i pozadina iskoci. */
     .db-namjena-tabela tbody td:last-child a{display:inline-block;margin:2px 16px 2px 0;}
     .db-namjena-tabela a:hover{color:var(--dark);border-bottom-color:var(--dark);}
+    .db-namjena-uvod{max-width:820px;margin:34px auto 0;text-align:center;font-size:16px;line-height:1.85;color:var(--dark-2);}
+    .db-namjena-uvod a{color:#795f32;font-weight:700;}
     .db-namjena-nota{margin-top:22px;font-size:14px;color:var(--gray);line-height:1.85;max-width:860px;}
     .db-namjena-nota a{color:#795f32;font-weight:600;}
 
@@ -283,7 +285,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
-      .db-namjena-nota a,.db-kat-nota a{display:inline-block;padding:5px 0;}
+      .db-namjena-nota a,.db-kat-nota a,.db-namjena-uvod a{display:inline-block;padding:5px 0;}
       /* Isto vazi i za korake saradnje: broj lijevo, tekst uz njega. */
       .db-tok-korak{text-align:left;}
       .db-tok-broj{margin-left:0;margin-right:0;}
@@ -558,81 +560,80 @@ if ($mmhKatalozi):
   <div class="container">
     <div class="text-center">
       <div class="gold-line"></div>
-      <h2 class="section-title">Izbor obloge po namjeni prostora</h2>
-      <p class="section-subtitle">Prostor postavlja zahtjev, materijal na njega odgovara — polazna tabela za projekat</p>
+      <h2 class="section-title">Šta stvarno određuje izbor obloge</h2>
+      <p class="section-subtitle">Dezen birate slobodno — ovo je spisak tehničkih uslova koji jedini sužavaju izbor</p>
     </div>
+
+    <?php /* Ranije je ovdje stajala tabela "prostor -> obloga": kancelarija
+             trazi akusticne panele, hotelska soba drvene, i tako redom. To nije
+             tacno. Kancelarija se radi i drvenim, i mermernim, i tekstilnim
+             panelima; prostor ne bira materijal. Tabela je govorila kao propis,
+             a bila je samo jedan od mogucih izbora — i time sama sebi suzavala
+             ponudu pred covjekom koji projektuje.
+             Sada je odvojeno ono sto JESTE slobodan izbor (dezen) od onoga sto
+             je stvarno ogranicenje: akustika, vlaga, radijus, pod i zavrsetak. */ ?>
+    <p class="db-namjena-uvod">
+      U bilo koji prostor ide bilo koji dezen. Kancelarija može biti
+      <a href="/kategorija/bambus-drveni">drvena</a>,
+      <a href="/kategorija/bambus-mermerni">mermerna</a>,
+      <a href="/kategorija/bambus-tekstilni">tekstilna</a>,
+      <a href="/kategorija/bambus-kozni">kožna</a>,
+      <a href="/kategorija/bambus-metalni">metalna</a> ili
+      <a href="/kategorija/classic">jednobojna</a> — isto kao hotelska soba,
+      restoran ili stan. To je stvar projekta, ne materijala.
+      Tabela ispod nabraja samo ono što izbor zaista sužava.
+    </p>
+
     <div class="db-namjena-wrap">
       <table class="db-namjena-tabela">
-        <caption class="sr-only">Preporučene zidne obloge prema namjeni prostora i zahtjevu koji prostor postavlja</caption>
+        <caption class="sr-only">Tehnički uslovi koje prostor može postaviti i obloge koje ih rješavaju</caption>
         <thead>
-          <tr><th scope="col">Prostor</th><th scope="col">Šta prostor traži</th><th scope="col">Obloga</th></tr>
+          <tr><th scope="col">Uslov</th><th scope="col">Zašto</th><th scope="col">Rješava</th></tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row"><i class="fas fa-briefcase"></i> Kancelarija, open space, sala za sastanke</th>
-            <td>Smanjenje odjeka i razgovora koji se prenosi kroz prostoriju</td>
-            <td><a href="/kategorija/akusticni-paneli">Akustični paneli</a> <a href="/kategorija/bambus-tekstilni">Tekstilni paneli</a></td>
+            <th scope="row"><i class="fas fa-volume-low"></i> Eho i odzvanjanje u prostoriji</th>
+            <td>Filcana podloga upija odbijeni zvuk. Radi na eho unutar prostorije — ne na izolaciju prema susjedu.</td>
+            <td><a href="/kategorija/akusticni-paneli">Akustični paneli</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-hotel"></i> Hotelska soba, apartman</th>
-            <td>Toplina, otpornost na habanje, brza ugradnja između dvije sezone</td>
-            <td><a href="/kategorija/bambus-drveni">Drveni paneli</a> <a href="/kategorija/bambus-tekstilni">Tekstilni paneli</a></td>
+            <th scope="row"><i class="fas fa-droplet"></i> Stalna vlaga — kupatilo, kuhinja, wellness</th>
+            <td>Bambus paneli, PU kamen i Flex Stone podnose vlagu. MDF je drvena ploča i ide u suve prostorije.</td>
+            <td><a href="/kategorija/bambus-paneli">Bambus paneli</a> <a href="/kategorija/pu-kamen">PU kamen</a> <a href="/kategorija/flex-stone">Flex Stone</a> <a href="/kategorija/spc-pod">SPC pod</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-bell-concierge"></i> Lobi, recepcija, hotelski hol</th>
-            <td>Reprezentativan utisak na prvi pogled, izdržljivost u prometu</td>
-            <td><a href="/kategorija/bambus-mermerni">Mermerni paneli</a> <a href="/kategorija/bambus-metalni">Metalni paneli</a> <a href="/kategorija/flex-stone">Flex Stone</a></td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fas fa-utensils"></i> Restoran, kafić, bar</th>
-            <td>Atmosfera i površina koja podnosi svakodnevno brisanje</td>
-            <td><a href="/kategorija/bambus-drveni">Drveni paneli</a> <a href="/kategorija/3d-letvice">3D letvice</a> <a href="/kategorija/pu-kamen">PU kamen</a></td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fas fa-store"></i> Prodajni prostor, salon, ordinacija</th>
-            <td>Mirna pozadina koja ne odvlači pažnju sa robe ili klijenta</td>
-            <td><a href="/kategorija/classic">Classic paneli</a> <a href="/kategorija/bambus-kozni">Kožni paneli</a></td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fas fa-droplet"></i> Kupatilo, wellness, kuhinja</th>
-            <td>Otpornost na vlagu i lako održavanje</td>
-            <td><a href="/kategorija/bambus-mermerni">Mermerni paneli</a> <a href="/kategorija/pu-kamen">PU kamen</a> <a href="/kategorija/spc-pod">SPC pod</a></td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fas fa-layer-group"></i> Hodnik, stepenište, ulaz</th>
-            <td>Površina koja podnosi dodir i udarce, jednostavna zamjena dijela</td>
-            <td><a href="/kategorija/mdf">MDF kanelirani paneli</a> <a href="/kategorija/classic">Classic paneli</a></td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fas fa-cube"></i> Dnevna soba, TV zid, spavaća</th>
-            <td>Ritam i dubina na zidu bez sužavanja prostorije</td>
-            <td><a href="/kategorija/3d-letvice">3D letvice</a> <a href="/kategorija/bambus-drveni">Drveni paneli</a></td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fas fa-compass-drafting"></i> Stub, luk, zaobljeni zid</th>
-            <td>Obloga koja prati radijus, bez rezanja na segmente</td>
+            <th scope="row"><i class="fas fa-compass-drafting"></i> Zaobljen zid, stub, luk</th>
+            <td>Savija se po radijusu, bez rezanja na segmente. Ostale obloge traže ravnu podlogu.</td>
             <td><a href="/kategorija/flex-stone">Flex Stone</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-border-all"></i> Pod, u cijelom objektu</th>
-            <td>Vodootpornost, otpornost na grebanje, rad sa podnim grijanjem</td>
+            <th scope="row"><i class="fas fa-border-all"></i> Pod</th>
+            <td>Jedina podna obloga u ponudi. Klik ugradnja bez ljepila, ide i na podno grijanje.</td>
             <td><a href="/kategorija/spc-pod">SPC pod</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-ruler-combined"></i> Uglovi, prelazi i LED linije</th>
-            <td>Čist završetak detalja, umjesto rješavanja na gradilištu</td>
+            <th scope="row"><i class="fas fa-cube"></i> Rebrasta površina i sjenka</th>
+            <td>Letvica je zasebna i lijepi se na zid; kanelirani panel je puna ploča sa izrezanim rebrima, pa je ivica oštrija a sjenka tvrđa.</td>
+            <td><a href="/kategorija/3d-letvice">3D letvice</a> <a href="/kategorija/mdf">MDF kanelirani</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fas fa-layer-group"></i> Velika površina, malo spojeva</th>
+            <td>Veliki format zatvara zid sa nekoliko komada, pa se spojevi gotovo ne vide.</td>
+            <td><a href="/kategorija/bambus-paneli">Bambus paneli</a></td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fas fa-ruler-combined"></i> Ugao, prelaz, spoj, LED linija</th>
+            <td>Završetak detalja se rješava lajsnom, a ne improvizacijom na gradilištu.</td>
             <td><a href="/kategorija/aluminijum-lajsne">Aluminijumske lajsne</a></td>
           </tr>
         </tbody>
       </table>
     </div>
     <p class="db-namjena-nota">
-      Tabela je polazna tačka, ne propis — isti materijal često radi u više
-      prostora. Za konkretan prostor, sa površinom, visinom, vlažnošću i
-      namjenom, predlog sužavamo na dva do tri dezena i šaljemo uzorke.
-      Cio raspon dezena je u <a href="/kategorija/bambus-paneli">bambus panelima</a>,
-      a detalji ugradnje i prelaza u <a href="montaza.html">vodiču za montažu</a>.
-      Rješenja po prostorijama opisana su u tekstovima o
+      Ako prostor ne postavlja nijedan od ovih uslova, izbor je čisto pitanje dezena —
+      i tu vam šaljemo uzorke da vidite kako boja stoji na licu mjesta.
+      Detalji ugradnje i prelaza opisani su u <a href="montaza.html">vodiču za montažu</a>,
+      a rješenja po prostorijama u tekstovima o
       <a href="akusticni-paneli-kancelarija.html">akustici u kancelariji</a>,
       <a href="paneli-za-kupatilo.html">panelima u kupatilu</a> i
       <a href="tv-zid.html">TV zidu</a>.
