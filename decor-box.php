@@ -287,21 +287,17 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-tabela{display:block;width:100%;min-width:0;background:transparent;}
       .db-namjena-tabela tbody{display:block;width:100%;}
       .db-namjena-tabela thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
-      .db-namjena-tabela tbody tr{display:flex;flex-direction:column;background:none;border:0;border-bottom:1px solid rgba(0,0,0,0.09);border-radius:0;padding:14px 0;margin:0;box-shadow:none;}
+      .db-namjena-tabela tbody tr{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:10px;row-gap:2px;background:none;border:0;border-bottom:1px solid rgba(0,0,0,0.09);border-radius:0;padding:11px 0;margin:0;box-shadow:none;}
       .db-namjena-tabela tbody tr:last-child{border-bottom:0;}
       .db-namjena-tabela tbody th,.db-namjena-tabela tbody td{display:block;width:auto;max-width:100%;padding:0;border-bottom:none;background:transparent!important;}
-      /* Uslov ide prvi, pa odgovor, pa objasnjenje — covjek prvo dobije
-         odgovor, a objasnjenje procita samo ako ga zanima. */
-      .db-namjena-tabela tbody th{order:1;font-size:14.5px;line-height:1.35;margin-bottom:5px;}
-      .db-namjena-tabela tbody td:last-child{order:2;margin:0 0 4px;}
-      .db-namjena-tabela tbody td:first-of-type{order:3;font-size:13px;line-height:1.55;color:var(--gray);margin:0;}
-      /* Odgovor: obican zlatan tekst, ne dugme. Visina za prst se dobija
-         razmakom iznad i ispod, ne okvirom oko slova. */
-      /* Podvlaka ide na SLOVA, ne na okvir elementa. Sa border-bottom je
-         linija bila 6px ispod teksta — visila je odvojeno i izgledala kao da
-         je nesto puklo. text-decoration prati sam tekst, a razmak za prst
-         ostaje. */
-      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:6px 0;margin:0 16px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
+      /* Uslov i odgovor dijele ISTI red — "Eho u prostoriji  Akusticni paneli".
+         Ranije su bili jedan ispod drugog, pa je svaki uslov trosio tri reda i
+         cio spisak je izgledao kao zid teksta. Objasnjenje ide pod njih,
+         sitnije i sivo, i cita ga samo ko hoce. */
+      .db-namjena-tabela tbody th{order:1;flex:0 0 auto;font-size:14px;line-height:1.3;margin:0;}
+      .db-namjena-tabela tbody td:last-child{order:2;flex:1 1 auto;min-width:0;margin:0;}
+      .db-namjena-tabela tbody td:first-of-type{order:3;flex:0 0 100%;font-size:12.5px;line-height:1.45;color:var(--gray);margin:3px 0 0;}
+      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:5px 0;margin:0 12px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
@@ -338,7 +334,6 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-dekori::-webkit-scrollbar{display:none;}
       .db-dekori-nas{flex:0 0 auto;font-size:11px;letter-spacing:1.5px;}
       .db-dekori a{flex:0 0 auto;min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
-      .db-namjena-tabela tbody td:last-child a{min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
       .db-namjena-tabela tbody td:last-child{gap:7px;}
       .db-ben-card h3,.db-tok-korak h3{font-size:15.5px;}
       .db-kat-ime{font-size:16px;}
@@ -650,17 +645,17 @@ if ($mmhKatalozi):
         </thead>
         <tbody>
           <tr>
-            <th scope="row"><i class="fas fa-volume-low"></i> Eho i odzvanjanje u prostoriji</th>
-            <td>Filcana podloga upija odbijeni zvuk. Radi na eho unutar prostorije — ne na izolaciju prema susjedu.</td>
+            <th scope="row"><i class="fas fa-volume-low"></i> Eho u prostoriji</th>
+            <td>Filcana podloga upija odbijeni zvuk. Radi na eho u prostoriji, ne na izolaciju prema susjedu.</td>
             <td><a href="/kategorija/akusticni-paneli">Akustični paneli</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-droplet"></i> Stalna vlaga — kupatilo, kuhinja, wellness</th>
-            <td>Bambus paneli, PU kamen i Flex Stone podnose vlagu. MDF je drvena ploča i ide u suve prostorije.</td>
+            <th scope="row"><i class="fas fa-droplet"></i> Stalna vlaga</th>
+            <td>Kupatilo, kuhinja, wellness. MDF je drvena ploča i ide u suve prostorije.</td>
             <td><a href="/kategorija/bambus-paneli">Bambus paneli</a> <a href="/kategorija/pu-kamen">PU kamen</a> <a href="/kategorija/flex-stone">Flex Stone</a> <a href="/kategorija/spc-pod">SPC pod</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-compass-drafting"></i> Zaobljen zid, stub, luk</th>
+            <th scope="row"><i class="fas fa-compass-drafting"></i> Zaobljen zid, stub</th>
             <td>Savija se po radijusu, bez rezanja na segmente. Ostale obloge traže ravnu podlogu.</td>
             <td><a href="/kategorija/flex-stone">Flex Stone</a></td>
           </tr>
@@ -670,18 +665,18 @@ if ($mmhKatalozi):
             <td><a href="/kategorija/spc-pod">SPC pod</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-cube"></i> Rebrasta površina i sjenka</th>
-            <td>Letvica je zasebna i lijepi se na zid; kanelirani panel je puna ploča sa izrezanim rebrima, pa je ivica oštrija a sjenka tvrđa.</td>
+            <th scope="row"><i class="fas fa-cube"></i> Rebrasta površina</th>
+            <td>Letvica se lijepi zasebno; kanelirani panel je puna ploča sa izrezanim rebrima — ivica oštrija, sjenka tvrđa.</td>
             <td><a href="/kategorija/3d-letvice">3D letvice</a> <a href="/kategorija/mdf">MDF kanelirani</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-layer-group"></i> Velika površina, malo spojeva</th>
-            <td>Veliki format zatvara zid sa nekoliko komada, pa se spojevi gotovo ne vide.</td>
+            <th scope="row"><i class="fas fa-layer-group"></i> Velika površina</th>
+            <td>Veliki format zatvara zid sa nekoliko komada — spojevi se gotovo ne vide.</td>
             <td><a href="/kategorija/bambus-paneli">Bambus paneli</a></td>
           </tr>
           <tr>
-            <th scope="row"><i class="fas fa-ruler-combined"></i> Ugao, prelaz, spoj, LED linija</th>
-            <td>Završetak detalja se rješava lajsnom, a ne improvizacijom na gradilištu.</td>
+            <th scope="row"><i class="fas fa-ruler-combined"></i> Uglovi i prelazi</th>
+            <td>Spoj, ugao i LED linija se rješavaju lajsnom, ne improvizacijom na gradilištu.</td>
             <td><a href="/kategorija/aluminijum-lajsne">Aluminijumske lajsne</a></td>
           </tr>
         </tbody>
