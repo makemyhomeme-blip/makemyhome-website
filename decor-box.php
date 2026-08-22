@@ -76,7 +76,7 @@
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=bf9cb5ee"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=d56bd854">
+  <link rel="stylesheet" href="css/style-v5.css?v=b31d53dd">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -94,7 +94,7 @@
     /* Benefits */
     .db-benefits{padding:80px 0;background:var(--light);}
     .db-ben-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:44px;}
-    .db-ben-card{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:26px 24px;box-shadow:0 2px 14px rgba(0,0,0,0.05);transition:transform .2s,box-shadow .2s;}
+    .db-ben-card{display:flex;gap:18px;align-items:flex-start;background:#fff;border:0;border-radius:16px;padding:26px 24px;box-shadow:0 4px 18px rgba(0,0,0,0.06);transition:transform .2s,box-shadow .2s;}
     .db-ben-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(201,168,108,0.18);}
     .db-ben-icon{flex-shrink:0;width:54px;height:54px;border-radius:14px;background:rgba(201,168,108,0.12);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:22px;}
     .db-ben-card h3{font-size:17px;color:var(--dark);margin:2px 0 6px;}
@@ -105,7 +105,7 @@
     /* Dvije pravougaone plocice: gore slika sa stvarnim dezenima iz karte, dolje
        naziv i broj dezena. Cijela plocica je jedan link koji otvara PDF. */
     .db-kat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:26px;margin-top:44px;}
-    .db-kat-card{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:18px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.05);text-decoration:none;transition:transform .2s,box-shadow .2s;}
+    .db-kat-card{display:flex;flex-direction:column;background:#fff;border:0;border-radius:18px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.07);text-decoration:none;transition:transform .2s,box-shadow .2s;}
     .db-kat-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(201,168,108,0.22);}
     .db-kat-slika{display:block;position:relative;background:var(--light);line-height:0;}
     /* Odnos stranica je fiksiran, pa mjesto za sliku postoji prije nego sto se
@@ -169,7 +169,13 @@ require_once __DIR__ . '/php/dimenzije.php';
     .db-factory h2{color:#fff;}
     .db-factory p{color:rgba(255,255,255,0.72);font-size:15px;line-height:1.85;margin-bottom:28px;}
     .db-badges{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-    .db-badge{text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,108,0.25);border-radius:14px;padding:22px 12px;}
+    /* Ovdje su bile tri velike kutije sa po tri rijeci unutra — okvir, pozadina i
+       22px praznine oko teksta. Na telefonu su zauzimale pola ekrana da bi rekle
+       "Sopstvena proizvodnja". Sada je to obican spisak: ikona, tekst, tanka
+       linija izmedju. Isto se procita, a ne izgleda kao popunjavanje prostora. */
+    .db-badge{display:flex;align-items:center;gap:12px;text-align:left;background:none;border:0;border-radius:0;padding:0;}
+    .db-badge i{color:var(--primary);font-size:19px;flex-shrink:0;}
+    .db-badge span{color:rgba(255,255,255,0.9);font-size:14.5px;font-weight:600;line-height:1.4;}
     .db-badge i{font-size:26px;color:var(--primary);margin-bottom:10px;display:block;}
     .db-badge span{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.4;display:block;}
 
@@ -204,7 +210,7 @@ require_once __DIR__ . '/php/dimenzije.php';
     /* Tok saradnje */
     .db-tok{padding:80px 0;}
     .db-tok-grid{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
-    .db-tok-korak{position:relative;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:16px;padding:30px 24px 26px;box-shadow:0 2px 14px rgba(0,0,0,0.05);}
+    .db-tok-korak{position:relative;background:#fff;border:0;border-radius:16px;padding:28px 24px 24px;box-shadow:0 4px 18px rgba(0,0,0,0.06);}
     .db-tok-broj{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--dark);color:var(--primary);font-family:var(--font-heading);font-size:19px;font-weight:700;margin-bottom:16px;}
     .db-tok-korak h3{font-size:17px;color:var(--dark);margin:0 0 8px;}
     .db-tok-korak p{font-size:14px;color:var(--gray);line-height:1.7;margin:0;}
@@ -213,14 +219,16 @@ require_once __DIR__ . '/php/dimenzije.php';
 
     /* CTA */
     .db-cta{padding:72px 0;background:linear-gradient(135deg,#c9a86c 0%,#b8965a 100%);text-align:center;}
-    .db-cta .db-cta-script{font-family:var(--font-heading);font-style:italic;font-size:22px;color:rgba(0,0,0,0.55);margin-bottom:4px;}
+    .db-cta .db-cta-script{font-family:var(--font-heading);font-style:italic;font-size:22px;color:rgba(0,0,0,0.72);margin-bottom:6px;}
     .db-cta h2{color:#1a1a1a;font-size:34px;margin-bottom:14px;line-height:1.2;}
     .db-cta-nota{font-size:15px;color:rgba(0,0,0,0.7);line-height:1.7;max-width:620px;margin:0 auto 26px;}
     .db-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
     .db-cta .btn-dark{background:#1a1a1a;color:#fff;border:none;}
     .db-cta .btn-dark:hover{background:#000;}
-    .db-cta .btn-ghost{background:transparent;color:#1a1a1a;border:2px solid #1a1a1a;}
-    .db-cta .btn-ghost:hover{background:rgba(0,0,0,0.08);}
+    /* Prozirna dugmad sa tankim crnim okvirom na zlatnoj podlozi jedva su se
+       vidjela. Puna bijela stoje jasno, a tamno dugme ostaje glavno. */
+    .db-cta .btn-ghost{background:#fff;color:#1a1a1a;border:0;box-shadow:0 3px 12px rgba(0,0,0,0.12);}
+    .db-cta .btn-ghost:hover{background:#f6f1e9;}
 
     @media(max-width:768px){
       .db-intro-grid,.db-factory-grid{grid-template-columns:1fr!important;gap:32px!important;}
@@ -232,7 +240,9 @@ require_once __DIR__ . '/php/dimenzije.php';
          poskakuje jer <img> nosi width i height atribute. */
       .db-intro-img,.db-factory-img{min-height:auto!important;}
       .db-intro-img img,.db-factory-img img{height:auto!important;object-fit:contain!important;}
-      .db-badges{grid-template-columns:1fr!important;max-width:340px;margin-left:auto;margin-right:auto;}
+      .db-badges{grid-template-columns:1fr!important;gap:0!important;max-width:none;margin:0;}
+      .db-badge{padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.10);}
+      .db-badge:last-child{border-bottom:0;}
       .db-cta h2{font-size:26px;}
       .db-cta-btns{flex-direction:column;align-items:center;}
       .db-cta-btns .btn{width:100%;max-width:320px;justify-content:center;}
@@ -269,7 +279,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-wrap{overflow-x:visible;border:none;border-radius:0;}
       .db-namjena-tabela{min-width:0;background:transparent;}
       .db-namjena-tabela thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
-      .db-namjena-tabela tbody tr{display:block;background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:14px;padding:18px 18px 14px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+      .db-namjena-tabela tbody tr{display:block;background:#fff;border:0;border-radius:14px;padding:18px 16px 16px;margin-bottom:12px;box-shadow:0 4px 16px rgba(0,0,0,0.07);}
       .db-namjena-tabela tbody th,.db-namjena-tabela tbody td{display:block;width:auto;padding:0;border-bottom:none;background:transparent!important;}
       .db-namjena-tabela tbody th{font-size:15.5px;margin-bottom:7px;}
       .db-namjena-tabela tbody td{font-size:14px;margin-bottom:9px;}
@@ -879,12 +889,12 @@ if ($dbIns):
         <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
         </p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="social-btn" title="Instagram" style="background:#d62976;color:#fff;"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.facebook.com/61571886302133" target="_blank" rel="noopener" class="social-btn" title="Facebook" style="background:#1877f2;color:#fff;"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/38269105222" target="_blank" rel="noopener" class="social-btn" title="WhatsApp" style="background:#25d366;color:#fff;"><i class="fab fa-whatsapp"></i></a>
-          <a href="viber://contact?number=%2B38269105222" class="social-btn" title="Viber" style="background:#665cac;color:#fff;"><i class="fab fa-viber"></i></a>
-          <a href="https://www.tiktok.com/@makemyhome.me" target="_blank" rel="noopener" class="social-btn" title="TikTok" style="background:#ee1d52;color:#fff;"><i class="fab fa-tiktok"></i></a>
-          <a href="mailto:makemyhome.me@gmail.com" class="social-btn" title="Email" style="background:#c9a86c;color:#fff;"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/61571886302133" target="_blank" rel="noopener" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://wa.me/38269105222" target="_blank" rel="noopener" class="social-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="viber://contact?number=%2B38269105222" class="social-btn" title="Viber"><i class="fab fa-viber"></i></a>
+          <a href="https://www.tiktok.com/@makemyhome.me" target="_blank" rel="noopener" class="social-btn" title="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="mailto:makemyhome.me@gmail.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
       <div>

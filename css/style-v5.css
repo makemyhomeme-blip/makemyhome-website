@@ -1182,32 +1182,33 @@ ul { list-style: none; }
   gap: 10px;
 }
 
+/* Dijete CSS mreze se po pravilu ne suzava ispod sirine svog sadrzaja, pa je
+   prva kolona futera bila 398px u koloni od 358px — tekst "Transformisite Vas
+   prostor" je izlazio van ekrana na telefonu. min-width:0 to ukida. */
+.footer-grid > * { min-width: 0; }
+.footer-desc { overflow-wrap: anywhere; }
+
+/* Sest krugova u punim bojama mreza — roze, plavo, zeleno, ljubicasto, crveno
+   — na tamnom futeru je izgledalo kao sablon, a ne kao ovaj sajt. Sada su svi
+   isti: prozirni krug sa zlatnom ivicom i zlatnom ikonom, a boja se pojavi tek
+   na dodir. Prepoznaju se po ikoni, ne po boji. */
 .social-btn {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(201,168,108,0.45);
+  color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 18px;
   transition: var(--transition);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
+.social-btn:hover,
+.social-btn:focus-visible { background: var(--primary); color: #1a1a1a; border-color: var(--primary); }
 
-.social-btn[title="Instagram"] { background: #d62976; }
-.social-btn[title="WhatsApp"]  { background: #25d366; }
-.social-btn[title="Viber"]     { background: #665cac; }
-.social-btn[title="TikTok"]    { background: #ee1d52; }
-.social-btn[title="Email"]     { background: #c9a86c; }
-.social-btn[title="Facebook"]  { background: #1877f2; }
-
-.social-btn:hover {
-  filter: brightness(1.18);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-}
+/* stari hover je zamijenjen pravilom iznad */
 
 .footer-title {
   font-family: var(--font-heading);
