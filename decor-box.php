@@ -300,9 +300,15 @@ require_once __DIR__ . '/php/dimenzije.php';
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
       .db-namjena-nota a,.db-kat-nota a{display:inline-block;padding:5px 0;}
-      /* Isto vazi i za korake saradnje: broj lijevo, tekst uz njega. */
-      .db-tok-korak{text-align:left;}
-      .db-tok-broj{margin-left:0;margin-right:0;}
+      /* Koraci saradnje: broj je bio krug od 42px sa 16px razmaka ispod, pa
+         naslov, pa tekst — jedna kartica je uzimala trecinu ekrana i na jedan
+         pogled su stajala samo dva koraka. Sada broj i naslov dijele isti red,
+         broj je manji, a kartica ima manje praznine oko sebe. */
+      .db-tok-korak{text-align:left;padding:16px 16px 18px;display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:6px;align-items:center;}
+      .db-tok-broj{width:28px;height:28px;font-size:14px;margin:0;grid-row:1;grid-column:1;}
+      .db-tok-korak h3{margin:0;grid-row:1;grid-column:2;font-size:15.5px;}
+      .db-tok-korak p{grid-row:2;grid-column:1 / -1;font-size:14px;line-height:1.6;}
+      .db-tok-grid{gap:12px;}
 
       /* Uvodni pasusi ostaju poravnati lijevo — naslov, zlatna crta i dugme su
          i dalje centrirani. Tri centrirana pasusa jedan ispod drugog su na
@@ -315,8 +321,14 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-lead{font-size:15px;line-height:1.7;margin-bottom:14px;}
       .db-lead-sub{font-size:14.5px;line-height:1.7;margin-bottom:12px;}
       .db-namjena-uvod{font-size:14.5px;line-height:1.75;margin-top:24px;text-align:left;}
-      .db-dekori{justify-content:flex-start;gap:8px;margin-top:14px;}
-      .db-dekori a{min-height:36px;padding:0 13px;font-size:13.5px;}
+      /* Dugmad su bila visoka 36-40px sa punim zaobljenjem — na uskom ekranu
+         su izgledala kao veliki baloni i sest komada je uzimalo dva reda.
+         Sada su niza, uza i blago zaobljena; i dalje se lako pogode prstom. */
+      .db-dekori{justify-content:flex-start;gap:7px;margin-top:12px;}
+      .db-dekori a{min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
+      .db-dekori-nas{font-size:11px;letter-spacing:1.5px;}
+      .db-namjena-tabela tbody td:last-child a{min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
+      .db-namjena-tabela tbody td:last-child{gap:7px;}
       .db-ben-card h3,.db-tok-korak h3{font-size:15.5px;}
       .db-kat-ime{font-size:16px;}
       .db-namjena-tabela tbody th{font-size:14.5px;}
