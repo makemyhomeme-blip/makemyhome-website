@@ -297,7 +297,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-tabela tbody th{order:1;flex:0 0 auto;font-size:14px;line-height:1.3;margin:0;}
       .db-namjena-tabela tbody td:last-child{order:2;flex:1 1 auto;min-width:0;margin:0;}
       .db-namjena-tabela tbody td:first-of-type{order:3;flex:0 0 100%;font-size:12.5px;line-height:1.45;color:var(--gray);margin:3px 0 0;}
-      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:5px 0;margin:0 12px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
+      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:7px 0;margin:0 14px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
