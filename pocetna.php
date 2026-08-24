@@ -135,6 +135,14 @@ if ($P) {
         '<div class="number">' . $brMod . '</div>' . "\n" . '          <div class="label">Modela i dezena</div>',
         $html
     );
+    // Ista brojka stoji i u kartici "Sirok Asortiman". Tamo je pisalo
+    // "Preko 90 modela u 8 kategorija" — isti zastarjeli podatak koji Google
+    // jos prikazuje sa starog sajta. Racuna se iz istih podataka kao i hero.
+    $html = preg_replace(
+        '~<span class="asort-broj">[^<]*</span>~u',
+        '<span class="asort-broj">' . $brMod . ' modela u ' . $brKat . ' kategorija</span>',
+        $html
+    );
 }
 
 // ---- Mreza kategorija ----------------------------------------------------

@@ -76,7 +76,7 @@
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=f8c93bed">
+  <link rel="stylesheet" href="css/style-v5.css?v=1dd4fe2b">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -297,7 +297,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-tabela tbody th{order:1;flex:0 0 auto;font-size:14px;line-height:1.3;margin:0;}
       .db-namjena-tabela tbody td:last-child{order:2;flex:1 1 auto;min-width:0;margin:0;}
       .db-namjena-tabela tbody td:first-of-type{order:3;flex:0 0 100%;font-size:12.5px;line-height:1.45;color:var(--gray);margin:3px 0 0;}
-      .db-namjena-tabela tbody td:last-child a{display:inline-block;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:7px 0;margin:0 14px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
+      .db-namjena-tabela tbody td:last-child a{display:inline-flex;align-items:center;min-height:44px;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:0;margin:0 14px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
@@ -333,7 +333,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-dekori{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;gap:7px;margin-top:12px;padding-bottom:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
       .db-dekori::-webkit-scrollbar{display:none;}
       .db-dekori-nas{flex:0 0 auto;font-size:11px;letter-spacing:1.5px;}
-      .db-dekori a{flex:0 0 auto;min-height:31px;padding:0 10px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
+      .db-dekori a{flex:0 0 auto;min-height:44px;padding:0 12px;font-size:13px;border-radius:8px;border-color:rgba(121,95,50,0.22);}
       .db-namjena-tabela tbody td:last-child{gap:7px;}
       .db-ben-card h3,.db-tok-korak h3{font-size:15.5px;}
       .db-kat-ime{font-size:16px;}

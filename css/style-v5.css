@@ -3013,3 +3013,26 @@ textarea.form-control { resize: vertical; min-height: 130px; }
     color: rgba(0, 0, 0, 0.3);
   }
 }
+
+/* ===== Mete za prst na telefonu =====
+   Izmjereno pravim pregledacem na 390px: naslov kartice proizvoda je visok
+   27px (a to je glavni link na 30 kartica po stranici), telefon i email u
+   podnozju 32px, mrvice 39px, link ispod kalkulatora 17px. Google trazi 48px,
+   a prst promasi sve ispod ~40px.
+
+   Kartica se ne povecava — umjesto toga link naslova dobija nevidljiv sloj
+   preko CIJELE kartice, pa je meta dodira cijela kartica. Slika i dugme
+   "Detaljnije" ostaju iznad tog sloja; vode na istu adresu, pa se nista ne
+   mijenja ni za misa ni za citac ekrana. */
+@media (max-width: 768px) {
+  .product-card .product-name a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+  .product-card .product-img,
+  .product-card .btn-card-detail { position: relative; z-index: 2; }
+
+  .footer-contact-list li span a { display: inline-block; padding: 11px 0; }
+  .footer-bottom p a            { display: inline-block; padding: 8px 0; }
+  .breadcrumb a                 { padding: 12px 2px; }
+  .kat-vodic a                  { display: inline-block; padding: 12px 0; }
+  .calc-out .sub a              { display: inline-block; padding: 12px 0; }
+  .btn-back                     { min-height: 44px; display: inline-flex; align-items: center; }
+}
