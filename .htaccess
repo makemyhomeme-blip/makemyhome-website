@@ -241,6 +241,25 @@ RewriteRule ^sitemap\.php$ /sitemap.xml [R=301,L]
 # posjetilac SAM ukucao /pocetna.php; unutrasnje prepisivanje sa / ostaje.
 RewriteCond %{THE_REQUEST} \s/+pocetna\.php[\s?] [NC]
 RewriteRule ^pocetna\.php$ / [R=301,L]
+
+# Isto vazi i za ostale stranice koje servira PHP: /cjenovnik.php,
+# /inspiracija.php, /products.php, /product.php i /decor-box.php su vracali 200
+# kao zasebne adrese, a canonical je pokazivao na .html verziju. U Search
+# Console-u se to broji kao "Alternate page with proper canonical tag" — nije
+# greska, ali je to jos pet adresa koje Google obidje i baci. Sada ih nema.
+RewriteCond %{THE_REQUEST} \s/+cjenovnik\.php[\s?] [NC]
+RewriteRule ^cjenovnik\.php$ /cjenovnik.html [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+inspiracija\.php[\s?] [NC]
+RewriteRule ^inspiracija\.php$ /inspiracija.html [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+decor-box\.php[\s?] [NC]
+RewriteRule ^decor-box\.php$ /decor-box.html [R=301,L]
+#
+# Za product.php i products.php se salje SAMO kad nema upitnika. Sa upitnikom
+# (?id=, ?category=, ?k=, ?slug=) te skripte vec same salju 301 pravo na lijepu
+# adresu; kad bi i ovo pravilo radilo, dobila bi se dva skoka umjesto jednog.
+RewriteCond %{QUERY_STRING} ^$
+RewriteCond %{THE_REQUEST} \s/+products\.php[\s?] [NC]
+RewriteRule ^products\.php$ /products.html [R=301,L]
 # Pocetnu servira pocetna.php: ona procita index.html i ubaci kartice proizvoda
 # koje su ranije bile prazne dok se ne pokrene JavaScript — Googlebot ih u
 # prvom prolazu nije vidio. Adresa ostaje "/", index.html ostaje kao rezerva.

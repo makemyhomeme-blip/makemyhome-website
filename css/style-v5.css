@@ -2892,6 +2892,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   max-width: 260px;
   scroll-snap-align: start;
 }
+/* Kartica srodnog proizvoda vise ne nosi opis (vidi product.php). Bez njega bi
+   red sa cijenom bio zalijepljen za sifru, pa razmak koji je opis pravio ostaje. */
+.srodni-traka .product-name { margin-bottom: 6px; }
+.srodni-traka .product-sku  { margin-bottom: 14px; }
 
 .srodni-strelica {
   position: absolute;

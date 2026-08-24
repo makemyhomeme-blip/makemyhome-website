@@ -966,7 +966,16 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <div class="product-category"><?= htmlspecialchars($spKat) ?></div>
             <h3 class="product-name"><a href="<?= htmlspecialchars($spUrl) ?>" style="color:inherit;"><?= htmlspecialchars($sp['name'] ?? '') ?></a></h3>
             <?php if (!empty($sp['sku'])): ?><div class="product-sku">Šifra: <strong><?= htmlspecialchars($sp['sku']) ?></strong></div><?php endif; ?>
-            <p class="product-desc"><?= htmlspecialchars(mb_substr((string)($sp['description'] ?? ''), 0, 150)) ?>…</p>
+            <?php
+            /* Ovdje je nekada stajalo prvih 150 znakova opisa svakog srodnog
+               proizvoda. Sest kartica = oko 130 rijeci TUDJEG opisa na svakoj
+               stranici. Posljedica: stranica proizvoda je dijelila 60–83%
+               teksta sa svojim susjedom (medijana 74%), jer A nosi opise
+               B, C, D..., a B nosi opise A, C, D... Za Google su takve
+               stranice skoro isti dokument — i svih 117 je zavrsilo u
+               "Crawled – currently not indexed". Kartica sada nosi samo ono
+               sto je zaista njeno: sliku, ime, sifru i cijenu. */
+            ?>
             <div class="product-footer">
               <div class="product-price">
                 <?php if ($spPopust > 0): ?>
