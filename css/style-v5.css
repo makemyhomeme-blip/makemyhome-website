@@ -2893,9 +2893,15 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   scroll-snap-align: start;
 }
 /* Kartica srodnog proizvoda vise ne nosi opis (vidi product.php). Bez njega bi
-   red sa cijenom bio zalijepljen za sifru, pa razmak koji je opis pravio ostaje. */
-.srodni-traka .product-name { margin-bottom: 6px; }
-.srodni-traka .product-sku  { margin-bottom: 14px; }
+   red sa cijenom bio zalijepljen za sifru, pa razmak koji je opis pravio ostaje.
+   Opis je ranije i poravnavao kartice: kod imena u dva reda cijena je padala
+   nize nego kod susjeda, pa red cijena nije bio prava linija. Zato se sadrzaj
+   sada rasteze, a red sa cijenom sjeda na dno svake kartice. */
+.srodni-traka > .product-card { display: flex; flex-direction: column; }
+.srodni-traka .product-body   { display: flex; flex-direction: column; flex: 1 1 auto; }
+.srodni-traka .product-name   { margin-bottom: 6px; }
+.srodni-traka .product-sku    { margin-bottom: 14px; }
+.srodni-traka .product-footer { margin-top: auto; }
 
 .srodni-strelica {
   position: absolute;
