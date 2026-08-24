@@ -58,6 +58,14 @@ $headers .= "X-Mailer: PHP/" . phpversion();
 
 $sent = @mail($to, $subject, $body, $headers);
 
+/* Rezultat slanja se do sada nije nigdje pamtio ni provjeravao: ako bi mail
+   pao, posjetilac bi svejedno procitao "Vasa poruka je primljena", a upit bi
+   postojao samo u data/inquiries.json — i to samo ako je i taj upis uspio.
+   Ako ne prodje NI JEDNO ni drugo, upit je nestajao bez traga, a covjek je
+   mislio da ceka odgovor. Sada se pamti da li je mail otisao, a ako oba
+   nacina padnu, posjetilac odmah dobija broj telefona umjesto lazne potvrde. */
+$upisano = false;
+
 // Sačuvaj upit u JSON fajl (atomski zapis)
 $logDir = __DIR__ . '/../data/';
 if (is_dir($logDir)) {
@@ -73,15 +81,24 @@ if (is_dir($logDir)) {
         'phone'   => $phone,
         'product' => $product,
         'message' => $message,
-        'read'    => false
+        'read'    => false,
+        'mail'    => (bool) $sent
     ];
     if (count($inquiries) > 500) {
         $inquiries = array_slice($inquiries, -500);
     }
     $tmp = $logFile . '.tmp';
     if (file_put_contents($tmp, json_encode($inquiries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false) {
-        rename($tmp, $logFile);
+        $upisano = rename($tmp, $logFile);
     }
+}
+
+if (!$sent && !$upisano) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Poruka trenutno ne može da se pošalje. Pozovite nas na 069 105 222 ili pišite na WhatsApp — javićemo se odmah.'
+    ]);
+    exit;
 }
 
 echo json_encode([

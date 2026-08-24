@@ -254,6 +254,10 @@
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_next" value="https://makemyhome.me/hvala.html">
             <input type="hidden" name="_captcha" value="false">
+            <!-- Mamac za robote: pravi kupac ovo polje ne vidi i ostavi ga prazno, a
+                 automat ga popuni. FormSubmit tada odbaci poruku, pa lazne narudzbe
+                 ne stizu na mejl. -->
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
             <input type="hidden" id="f-order" name="Narudzba" value="">
             <input type="hidden" id="f-total" name="Ukupno" value="">
             <input type="hidden" id="f-pay" name="Nacin_placanja" value="">
