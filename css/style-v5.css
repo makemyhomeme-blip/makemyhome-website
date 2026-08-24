@@ -2926,3 +2926,80 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .srodni-strelica { top: 25%; width: 40px; height: 40px; }
   .srodni-traka > .product-card { flex: 0 0 78%; max-width: 78%; }
 }
+
+/* ===== "Prije nego naručite" — tri prečice =====
+   Na telefonu su ove tri kartice bile tri odvojena bijela pravougaonika sa
+   26px unutrasnjeg razmaka, naslovom 17px, opisom 14px i jos jednim redom za
+   poziv na klik. Tri kartice su zauzimale skoro tri ekrana, a nose samo tri
+   linka. Zato se na uskim ekranima pretvaraju u jednu kutiju sa tri reda:
+   ikona, naslov, jedan red opisa i strelica desno — cijeli red je link. */
+.korisno-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.korisno-karta {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid rgba(201, 168, 108, 0.3);
+  border-radius: 16px;
+  padding: 24px 22px;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.korisno-karta:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(201,168,108,0.18); }
+.korisno-karta > i { font-size: 24px; color: var(--primary); flex-shrink: 0; margin-top: 3px; }
+.korisno-tekst { min-width: 0; }
+.korisno-naslov { display: block; font-size: 16.5px; font-weight: 800; color: #1a1a1a; margin-bottom: 5px; }
+.korisno-opis   { display: block; font-size: 14px; color: #5a6672; line-height: 1.6; }
+.korisno-cta    { display: inline-block; margin-top: 10px; font-size: 13.5px; font-weight: 700; color: #795f32; }
+
+@media (max-width: 600px) {
+  #korisno { padding: 40px 0 !important; }
+  #korisno .section-title { margin-bottom: 6px !important; }
+  .korisno-grid {
+    display: block;
+    background: #fff;
+    border: 1px solid rgba(201, 168, 108, 0.28);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .korisno-karta {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) 14px;
+    column-gap: 12px;
+    row-gap: 2px;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid rgba(201, 168, 108, 0.2);
+    border-radius: 0;
+    padding: 13px 15px;
+    min-height: 62px;
+  }
+  .korisno-grid .korisno-karta:last-child { border-bottom: 0; }
+  .korisno-karta:hover { transform: none; box-shadow: none; }
+  .korisno-karta > i {
+    font-size: 18px; margin: 0; text-align: center;
+    grid-column: 1; grid-row: 1 / span 2; align-self: center;
+  }
+  /* Naslov i opis su u <span>-u, a treba da budu direktne celije ovog grida. */
+  .korisno-tekst { display: contents; }
+  .korisno-naslov { grid-column: 2; grid-row: 1; font-size: 15px; font-weight: 700; margin: 0; align-self: end; }
+  .korisno-opis   { grid-column: 2; grid-row: 2; font-size: 12.5px; line-height: 1.45; align-self: start; }
+  /* Poziv na klik je suvisan kad je cijeli red link — ostaje samo strelica. */
+  .korisno-cta {
+    grid-column: 3; grid-row: 1 / span 2;
+    align-self: center; justify-self: end;
+    margin: 0; font-size: 0; line-height: 1;
+  }
+  .korisno-cta::after {
+    content: "\203A";
+    font-size: 21px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.3);
+  }
+}
