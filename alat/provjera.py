@@ -821,7 +821,10 @@ def grupa_G():
     PREKO_HTTP = ('.css', '.js', '.txt', '.woff2', '.ico', '.png', '.jpg', '.webp')
 
     srv_vel = {}
-    for folder in ('', 'css', 'js', 'fa/css', 'fa/webfonts', 'fonts', 'images', 'php', 'admin'):
+    # 'katalozi' je falio, pa je G4 za oba PDF-a tvrdio "nema ga na serveru" —
+    # a bili su tamo, u tacnu bajt velicinu. Svaki novi folder u sync listi mora
+    # i ovdje, inace se javi kao nestao fajl.
+    for folder in ('', 'css', 'js', 'fa/css', 'fa/webfonts', 'fonts', 'images', 'php', 'admin', 'katalozi'):
         dir_srv = '/home/mmhdecor/public_html/makemyhome.me' + ('/' + folder if folder else '')
         r = subprocess.run(CURL + ['--max-time', '30', '-u', 'mmhdecor:fhgkwqjd0F6K',
             'https://cpanel.mmhdecor.mycpanel.rs/execute/Fileman/list_files?dir=%s&include_mime=0'
