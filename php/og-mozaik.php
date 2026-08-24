@@ -131,3 +131,76 @@ function mmhOgMozaik(string $kategorija, array $proizvodi): ?array
 
     return ['put' => $rel . '?v=' . filemtime($put), 'w' => $Š, 'h' => $V];
 }
+
+/**
+ * Slika za dijeljenje POJEDINOG proizvoda kad njegova fotografija nije dovoljno
+ * siroka.
+ *
+ * Zasto postoji:
+ * Facebook, Viber i WhatsApp prikazu veliku karticu tek od 600x315 navise.
+ * Fotografije panela su uspravne — npr. 392x900 — pa je dvanaest proizvoda
+ * (cijela PU serija, tri SPC poda i jedan mermerni panel) padalo na zajednicku
+ * fotografiju showrooma. Ko podijeli link na taj panel, u pregledu nije vidio
+ * taj panel nego neciju dnevnu sobu.
+ *
+ * Kako radi:
+ * Uspravna fotografija se stavi na platno 1200x630 u punoj visini i po sredini,
+ * a pozadinu popunjava ista ta fotografija razvucena i zamucena. Zamucenje se
+ * radi na sicusnom platnu pa se uvecava — tako je jako, a jeftino.
+ *
+ * Rezultat se cuva u images/og/ i pravi se ponovo samo kad se promijeni sama
+ * fotografija. Ako nema GD-a, vrati null i sve ostaje kako je bilo.
+ */
+function mmhOgProizvod(array $p): ?array
+{
+    if (!function_exists('imagecreatetruecolor') || !function_exists('imagejpeg')) return null;
+
+    $rel1 = (string)($p['image'] ?? '');
+    if ($rel1 === '') return null;
+
+    $korijen = dirname(__DIR__);
+    $izvor   = $korijen . '/' . ltrim($rel1, '/');
+    if (!is_file($izvor)) return null;
+
+    $id  = preg_replace('/[^0-9]/', '', (string)($p['id'] ?? '0'));
+    $rel = 'images/og/proizvod-' . $id . '.jpg';
+    $put = $korijen . '/' . $rel;
+
+    if (is_file($put) && filemtime($put) >= filemtime($izvor)) {
+        return ['put' => $rel . '?v=' . filemtime($put), 'w' => 1200, 'h' => 630];
+    }
+
+    $vrsta = @exif_imagetype($izvor);
+    $im = false;
+    if ($vrsta === IMAGETYPE_JPEG && function_exists('imagecreatefromjpeg'))      $im = @imagecreatefromjpeg($izvor);
+    elseif ($vrsta === IMAGETYPE_PNG && function_exists('imagecreatefrompng'))    $im = @imagecreatefrompng($izvor);
+    elseif ($vrsta === IMAGETYPE_WEBP && function_exists('imagecreatefromwebp'))  $im = @imagecreatefromwebp($izvor);
+    if (!$im) return null;
+
+    $Š = 1200; $V = 630;
+    $iŠ = imagesx($im); $iV = imagesy($im);
+    if ($iŠ < 5 || $iV < 5) { imagedestroy($im); return null; }
+
+    $platno = imagecreatetruecolor($Š, $V);
+
+    // Fotografija se ponavlja jedna do druge, u punoj visini platna. Panel je
+    // uspravan i uzak, pa jedna kopija pokriva tek cetvrtinu sirine; niz kopija
+    // izgleda kao zid oblozen tim panelom, a slika ostaje ostra jer se SMANJUJE.
+    // (Razvlacenje jedne kopije preko cijelog platna dalo bi trostruko uvecanje
+    // i mutnu sliku.)
+    $kŠ = max(1, (int) round($iŠ * ($V / $iV)));
+    $kom = (int) ceil($Š / $kŠ);
+    $poc = (int) round(($Š - $kom * $kŠ) / 2);   // visak se podjednako odsijeca lijevo i desno
+    for ($i = 0; $i < $kom; $i++) {
+        imagecopyresampled($platno, $im, $poc + $i * $kŠ, 0, 0, 0, $kŠ, $V, $iŠ, $iV);
+    }
+    imagedestroy($im);
+
+    if (!is_dir(dirname($put))) @mkdir(dirname($put), 0755, true);
+    $ok = @imagejpeg($platno, $put, 84);
+    imagedestroy($platno);
+    if (!$ok) return null;
+    clearstatcache(true, $put);
+
+    return ['put' => $rel . '?v=' . filemtime($put), 'w' => $Š, 'h' => $V];
+}

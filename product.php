@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/php/slug.php';
 require_once __DIR__ . '/php/dimenzije.php';
+require_once __DIR__ . '/php/og-mozaik.php';
 require_once __DIR__ . '/php/lastmod.php';
 require_once __DIR__ . '/php/kalkulator.php';
 $productsFile = __DIR__ . '/data/products.json';
@@ -98,6 +99,14 @@ if ($product) {
     foreach (($product['gallery'] ?? []) as $g) $ogKandidati[] = $g;
 }
 $ogIzbor = mmhSlikaZaDijeljenje($ogKandidati);
+// Dvanaest proizvoda (cijela PU serija, tri SPC poda, jedan mermerni panel)
+// nema nijednu sliku sirju od 600px, pa su svi padali na fotografiju showrooma
+// — ko podijeli link na taj panel, u pregledu nije vidio taj panel. Za njih se
+// napravi platno 1200x630 od njihove sopstvene fotografije.
+if ($product && $ogIzbor['put'] === 'images/showcase-room.jpg') {
+    $ogSvoja = mmhOgProizvod($product);
+    if ($ogSvoja) $ogIzbor = $ogSvoja;
+}
 $ogImage = 'https://makemyhome.me/' . ltrim($ogIzbor['put'], '/');
 
 $ogUrl = $product ? mmhUrlProizvoda($product) : 'https://makemyhome.me/products.html';
@@ -281,10 +290,16 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   $discount  = (int)($product['discount'] ?? 0);
   $salePrice = $discount > 0 ? round($price * (1 - $discount / 100), 2) : $price;
   $inStock   = $product['inStock'] ?? true;
-  $images    = array_filter(array_merge(
-    [$ogImage],
-    array_map(fn($g) => 'https://makemyhome.me/' . $g, $product['gallery'] ?? [])
-  ));
+  /* U schemi mora stajati fotografija SAMOG proizvoda. Ranije je ovdje prva
+     bila slika za dijeljenje, a ona za dvanaest proizvoda nije bila njihova
+     nego zajednicka fotografija showrooma — Google je za tih dvanaest panela
+     dobijao tudju sliku kao "sliku proizvoda". Sada se uzimaju glavna slika i
+     galerija, a showroom samo ako proizvod nema bas nijednu fotografiju. */
+  $images = array_values(array_unique(array_filter(array_merge(
+    !empty($product['image']) ? ['https://makemyhome.me/' . ltrim($product['image'], '/')] : [],
+    array_map(fn($g) => 'https://makemyhome.me/' . ltrim($g, '/'), $product['gallery'] ?? [])
+  ))));
+  if (!$images) $images = [$ogImage];
   $offers = [
     '@type'        => 'Offer',
     'url'          => $ogUrl,
