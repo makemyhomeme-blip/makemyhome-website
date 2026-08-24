@@ -114,7 +114,40 @@ Ako se fajl deployuje preko cPanela prije push-a, prvi sljedeci sync ga vrati na
 
 ## SEO Notes
 
-- Sitemap: `sitemap.xml` (129 URLs, update `lastmod` when content changes)
+- Sitemap: `sitemap.xml` (149 URLs, `lastmod` se racuna sam — `php/lastmod.php`)
 - Canonical: `https://makemyhome.me/` (non-www, HTTPS)
 - Google Search Console connected
 - Old WordPress URLs `/product/slug/` → 301 via `404.php` + `php/slug-match.php` → `/paneli/<ime>`
+
+### Stanje u Search Console — snimak 21.08.2026. (vlasnik poslao)
+
+| Stavka | Broj |
+|---|---|
+| **Indeksirano** | **275** |
+| Nije indeksirano | 577 |
+| — Not found (404) | 246 |
+| — Alternate page with proper canonical tag | 124 |
+| — Page with redirect | 81 |
+| — **Crawled – currently not indexed** | **117** |
+| — Duplicate without user-selected canonical | 7 |
+| — Excluded by 'noindex' tag | 2 |
+| — Blocked by robots.txt / 4xx / Discovered–not indexed | 0 |
+
+Prikazivanja: ~15–45 dnevno, bez rasta od 25.05.2026.
+
+Sta ovi brojevi znace:
+
+- **Sajt JESTE indeksiran** — 275 adresa. Problem nije indeksiranje nego to *sta*
+  je indeksirano i to sto se ne rangira. Sajt ima samo 149 adresa, pa je vise od
+  120 indeksiranih adresa **stara WordPress verzija sajta**.
+- **117 „Crawled – currently not indexed"** je tacno broj proizvoda. Google svaku
+  stranicu proizvoda obidje i **odluci da je ne indeksira**. To nije tehnicka
+  greska (nema blokade, nema noindexa, nema 404) — to je ocjena kvaliteta:
+  stranice su medjusobno previse slicne / premalo sopstvenog teksta.
+- 246 „Not found" i 81 „Page with redirect" su ostaci starog WordPress sajta.
+  To je ocekivano i nije greska; 404 i 301 su tacni odgovori.
+- 0 „Blocked by robots.txt" i 0 „Discovered – currently not indexed" znaci da
+  puzenje radi kako treba i da nema problema sa budzetom obilaska.
+
+**Zakljucak: ne trazi vise tehnicki uzrok. Uzrok je jedinstvenost sadrzaja na
+stranicama proizvoda.**
