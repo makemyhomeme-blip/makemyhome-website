@@ -19,6 +19,8 @@
 #    1. GIT        lokalno, GitHub i server nose isto; nista necommitovano
 #    2. PRAVILA    52 pravila iz alat/ETALON.md (alat/dok-ne-bude.py)
 #    3. OKO        pravi pregledac, 10 stranica x racunar i telefon
+#    3b. RADI      52 provjere DA LI FUNKCIJE RADE: pretraga filtrira, korpa
+#                  pamti, kalkulator racuna, galerija se mijenja (alat/radi.mjs)
 #    4. KORPA      22 provjere korpe i narudzbe u pravom pregledacu
 #    5. PREGLEDAC  149 stranica: sto server posalje naspram sto pregledac pokaze
 #    6. SCHEMA     strukturirani podaci, sirovo naspram iscrtanog + obavezna polja
@@ -145,8 +147,18 @@ if curl -s -o /dev/null http://127.0.0.1:8898/products.php; then
     zapisi OKO PAD "$(grep -c '^  PAD' "$ISPIS/oko.txt") nalaza"
     grep '^  PAD' "$ISPIS/oko.txt" | head -12
   fi
+  # Funkcije, ne izgled: da li pretraga zaista filtrira, da li korpa zaista
+  # pamti, da li kalkulator zaista racuna. Vidi zaglavlje alat/radi.mjs.
+  node alat/radi.mjs http://127.0.0.1:8898 > "$ISPIS/radi.txt" 2>&1
+  if [ $? -eq 0 ]; then
+    zapisi RADI OK "$(grep -c '^OK' "$ISPIS/radi.txt") provjera, sve funkcije rade"
+  else
+    zapisi RADI PAD "$(grep -c '^  PAD' "$ISPIS/radi.txt") nalaza"
+    grep '^  PAD' "$ISPIS/radi.txt" | head -12
+  fi
 else
   zapisi OKO PAD "lokalni server se nije podigao — provjera izgleda NIJE uradjena"
+  zapisi RADI PAD "lokalni server se nije podigao — provjera funkcija NIJE uradjena"
 fi
 
 # ------------------------------------------------------------- 4. KORPA ----
