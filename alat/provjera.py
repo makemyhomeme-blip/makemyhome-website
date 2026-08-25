@@ -1862,12 +1862,125 @@ GRUPE = {'A': grupa_A, 'B': grupa_B, 'C': grupa_C, 'D': grupa_D,
          'E': grupa_E, 'F': grupa_F, 'G': grupa_G, 'H': grupa_H,
          'I': grupa_I, 'R': grupa_R, 'S': grupa_S}
 
+def grupa_J():
+    """
+    Zasto ova grupa postoji
+    -----------------------
+    Sedamdeset pravila je prolazilo, a audit je rukom nasao sedam gresaka. Sve
+    su bile iste vrste: pravila su gledala DA LI nesto postoji i da li je
+    sintaksno ispravno, ali ne i DA LI ONO STO PISE ZAISTA RADI.
+
+      · u schemi je stajala slika koja vraca 404
+      · schema je Google-u obecavala pretragu koja se na sajtu ne izvrsava
+      · stara WordPress adresa je vracala 200 umjesto 301
+      · u sest fajlova je stajao zakomentarisan stari kod
+
+    Ova grupa provjerava tvrdnje, ne prisustvo.
+    """
+    print('\n=== J · DA LI ONO STO PISE ZAISTA RADI ===')
+    import json as _json
+
+    stranice = ['/', '/contact.html', '/about.html', '/products.html',
+                '/kategorija/3d-letvice', '/paneli/3d-letvica-deva', '/decor-box.html']
+
+    # ---- J1: svaka adresa unutar JSON-LD-a mora vracati 200 ----------------
+    g = []
+    adrese = set()
+    for put in stranice:
+        tijelo, kod, _, _ = dohvati(BAZA + put, timeout='25')
+        for blok in re.findall(r'(?is)<script[^>]+ld\+json[^>]*>(.*?)</script>', tijelo):
+            try:
+                podaci = _json.loads(blok)
+            except Exception:
+                continue
+            for u in re.findall(r'"(https://makemyhome\.me/[^"]+\.(?:jpg|jpeg|png|webp|svg|gif|pdf))"',
+                                _json.dumps(podaci, ensure_ascii=False)):
+                adrese.add((put, u))
+    for put, u in sorted(adrese):
+        _, kod, _, _ = dohvati(u, timeout='15')
+        if kod != '200':
+            g.append('%s → schema pokazuje na %s (%s)' % (put, u.replace(BAZA, ''), kod))
+    zabiljezi('J1', 'Svaka slika iz JSON-LD-a stvarno postoji', g, len(adrese))
+
+    # ---- J2: SearchAction mora stvarno filtrirati --------------------------
+    g = []
+    tijelo, _, _, _ = dohvati(BAZA + '/', timeout='25')
+    sablon = re.search(r'"urlTemplate"\s*:\s*"([^"]+)"', tijelo)
+    provjereno = 0
+    if sablon:
+        provjereno = 1
+        cilj = sablon.group(1)
+        if '{search_term_string}' not in cilj:
+            g.append('urlTemplate nema {search_term_string}: %s' % cilj)
+        else:
+            puno, kod1, _, _ = dohvati(cilj.replace('{search_term_string}', 'deva'), timeout='25')
+            prazno, kod2, _, _ = dohvati(cilj.replace('{search_term_string}', 'zzqqxx'), timeout='25')
+            if kod1 != '200':
+                g.append('pretraga vraca %s' % kod1)
+            else:
+                n1 = len(re.findall(r'class="product-card', puno))
+                n2 = len(re.findall(r'class="product-card', prazno))
+                if n1 == 0:
+                    g.append('pretraga za "deva" ne vraca nijedan proizvod')
+                elif n1 == n2:
+                    g.append('pretraga ne filtrira: "deva" i "zzqqxx" daju isti broj kartica (%d)' % n1)
+                if 'noindex' not in prazno.lower():
+                    g.append('stranica rezultata pretrage nema noindex')
+    zabiljezi('J2', 'Pretraga obecana u schemi zaista filtrira', g, provjereno)
+
+    # ---- J3: stare WordPress adrese salju 301, ne 200 ----------------------
+    g = []
+    stare = ['/?page_id=216', '/?p=1', '/?cat=1', '/?m=202401', '/?attachment_id=5',
+             '/?post_type=product', '/?replytocom=1', '/?author=1']
+    for u in stare:
+        _, kod, _, _ = dohvati(BAZA + u, timeout='15')
+        if kod not in ('301', '410'):
+            g.append('%s → %s (ocekivano 301 ili 410)' % (u, kod))
+    zabiljezi('J3', 'Stare WordPress adrese ne vracaju 200', g, len(stare))
+
+    # ---- J4: nasi parametri NE smiju biti uhvaceni tim pravilom ------------
+    g = []
+    nasi = ['/products.php?cat=3d-letvice', '/products.php?category=3d-letvice',
+            '/products.php?k=3d-letvice', '/products.php?search=deva']
+    for u in nasi:
+        _, kod, _, kraj = dohvati(BAZA + u, prati=True, timeout='20')
+        if kod != '200' or '/kategorija/' not in kraj and 'products' not in kraj:
+            g.append('%s → %s (%s)' % (u, kod, kraj))
+    zabiljezi('J4', 'Nasi parametri nisu slucajno uhvaceni redirect pravilom', g, len(nasi))
+
+    # ---- J5: mrtav zakomentarisan kod se ne isporucuje --------------------
+    g = []
+    for put in stranice:
+        tijelo, _, _, _ = dohvati(BAZA + put, timeout='25')
+        for obrazac in ['OLD LOGO', 'TODO', 'FIXME', 'XXX:', 'backup):']:
+            if obrazac in tijelo:
+                g.append('%s → u isporucenom HTML-u stoji "%s"' % (put, obrazac))
+    zabiljezi('J5', 'U isporucenom HTML-u nema mrtvog zakomentarisanog koda', g, len(stranice) * 5)
+
+    # ---- J6: brend u H1 i broj H1 ----------------------------------------
+    g = []
+    tijelo, _, _, _ = dohvati(BAZA + '/', timeout='25')
+    h1 = re.findall(r'(?is)<h1[^>]*>(.*?)</h1>', tijelo)
+    if len(h1) != 1:
+        g.append('pocetna ima %d H1' % len(h1))
+    else:
+        import html as _html
+        tekst = re.sub(r'\s+', ' ', _html.unescape(re.sub(r'<[^>]+>', ' ', h1[0]))).strip()
+        if 'Make My Home Decor' not in tekst:
+            g.append('H1 ne sadrzi ime firme: %s' % tekst)
+        if re.search(r'[a-zćčžšđ]\s+Make My Home Decor', tekst):
+            g.append('ime firme je zalijepljeno za prethodnu rijec bez znaka: %s' % tekst)
+    zabiljezi('J6', 'H1 pocetne nosi ime firme, odvojeno', g, 1)
+
+
+GRUPE['J'] = grupa_J
+
 if __name__ == '__main__':
     arg = (sys.argv[1] if len(sys.argv) > 1 else 'brzo').upper()
     if arg == 'SVE':
-        red = 'ABCDEFGHIRS'
+        red = 'ABCDEFGHIJRS'
     elif arg == 'BRZO':
-        red = 'ACDFGIRS'
+        red = 'ACDFGIJRS'
     else:
         red = arg
     for k in red:

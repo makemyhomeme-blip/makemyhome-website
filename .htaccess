@@ -141,7 +141,9 @@ RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 
 # Ostali stari WordPress query parametri koji renderuju homepage kao duplikat
 # PAŽNJA: cat= i category= su naši parametri — NE smiju biti u ovom redirectu
-RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|paged)=
+# page_id je dodat: /?page_id=216 je vracao 200 (canonical ga je rjesavao, ali je
+# adresa i dalje postojala) i pojavljivao se u Search Console-u kao referring page.
+RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|paged|page_id|m|post_type|replytocom)=
 RewriteRule .* /? [R=301,L]
 
 # /proizvodi/ i /product-category/ sa starom paginacijom → prava kategorija, ne homepage

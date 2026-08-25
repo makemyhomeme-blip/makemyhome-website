@@ -14,6 +14,11 @@ require_once __DIR__ . '/php/lastmod.php';
 
 // Kategorija se otvara preko /kategorija/<kljuc>. Stari oblici ?category= i ?cat=
 // i dalje rade, ali odmah salju 301 na novu adresu.
+/* Pojam iz ?search= se cita ODMAH, jer se koristi jos u <head> (noindex na
+   stranicama rezultata). Filtriranje se radi nize, kad se sastavi spisak. */
+$mmhTrazi = trim((string)($_GET['search'] ?? ''));
+if (mb_strlen($mmhTrazi) > 60) $mmhTrazi = mb_substr($mmhTrazi, 0, 60);
+
 $kSirov    = trim((string)($_GET['k'] ?? ''));
 $catPretty = preg_replace('/[^a-z0-9\-]/', '', strtolower($kSirov));
 // Sve varijante iste adrese (velika slova, /KATEGORIJA/, kosa crta) vracaju se
@@ -74,11 +79,11 @@ $catNames = [
 
 $catImages = [
   'bambus-tekstilni' => 'images/products/product-1774006203-686.jpg',
-  'bambus-drveni'    => 'images/products/cq006.jpg',
+  'bambus-drveni'    => 'images/products/product-1787139015-905.jpg',
   'bambus-mermerni'  => 'images/products/product-1780505348-753.jpg',
   'bambus-metalni'   => 'images/products/product-1774009566-250.jpg',
   'bambus-kozni'     => 'images/products/product-1774454850-237.jpg',
-  'bambus-paneli'    => 'images/products/cq006.jpg',
+  'bambus-paneli'    => 'images/products/product-1774006203-686.jpg',
   '3d-letvice'       => 'images/products/product-1785262175-466.jpg',
   'akusticni-paneli' => 'images/products/product-1774011747-477.jpg',
   'aluminijum-lajsne'=> 'images/products/product-1774013021-738.png',
@@ -115,7 +120,10 @@ if ($cat !== '' && !isset($catNames[$cat])) {
     $catNotFound = true;
 }
 $catName  = isset($catNames[$cat]) ? $catNames[$cat] : 'Katalog Proizvoda';
-$imgPath  = isset($catImages[$cat]) ? $catImages[$cat] : 'images/products/cq006.jpg';
+/* Rezervna slika je bila images/products/cq006.jpg — taj fajl ne postoji vec
+   dugo (404). Koristi se kao prvi kandidat za sliku pri dijeljenju linka, pa je
+   za katalog bez kategorije prvi ponudjeni kandidat bio mrtav fajl. */
+$imgPath  = isset($catImages[$cat]) ? $catImages[$cat] : 'images/showcase-room.jpg';
 // Ista prica kao na stranici proizvoda: uspravna fotografija se na Facebooku
 // i WhatsAppu prikaze kao sicusna slicica. Uzima se prva dovoljno siroka
 // slika iz same kategorije, a ako je nema — fotografija showrooma.
@@ -282,6 +290,9 @@ $pageTitle = $cat
   <meta name="twitter:description" content="<?= htmlspecialchars($ogDesc) ?>">
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($ogUrl) ?>">
+<?php if ($mmhTrazi !== ''): ?>
+  <meta name="robots" content="noindex, follow">
+<?php endif; ?>
   <title><?= htmlspecialchars($pageTitle) ?></title>
   <script type="application/ld+json">
   {
@@ -302,6 +313,32 @@ if (!$cat) {
   $_listProds = array_values(array_filter($_allProds, fn($p) => in_array($p['category'] ?? '', $_bambusCats)));
 } else {
   $_listProds = array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat));
+}
+
+/* ===== PRETRAGA (?search=) =====
+   U WebSite schemi na pocetnoj stoji SearchAction koji Google-u obecava da se
+   pretraga radi preko products.html?search=<pojam>. Taj parametar se do sada
+   nigdje nije citao — stranica bi vratila 200 i prikazala CIO katalog. To je
+   lazno deklarisana sposobnost: da Google prikaze polje za pretragu u
+   rezultatima, kupac bi ukucao pojam i dobio nefiltriran spisak.
+   Sada se parametar stvarno primjenjuje.
+
+   Trazi se po imenu, sifri, opisu i istaknutoj recenici. Slova sa kvacicama se
+   svode na obicna, pa "sivi" nalazi i "Sivi" i "sIvI", a "kozni" nalazi "Kožni".
+   Rezultati pretrage nose noindex: to su beskonacne kombinacije adresa i nemaju
+   sta da stoje u indeksu, a canonical i dalje pokazuje na cist katalog. */
+if ($mmhTrazi !== '') {
+    $mmhNorm = static function (string $t): string {
+        $t = mb_strtolower($t, 'UTF-8');
+        return strtr($t, ['č'=>'c','ć'=>'c','ž'=>'z','š'=>'s','đ'=>'dj','ǆ'=>'dz']);
+    };
+    $igla = $mmhNorm($mmhTrazi);
+    $_listProds = array_values(array_filter($_listProds, function ($p) use ($igla, $mmhNorm) {
+        $sijeno = $mmhNorm(($p['name'] ?? '') . ' ' . ($p['sku'] ?? '') . ' '
+                         . strip_tags((string)($p['description'] ?? '')) . ' '
+                         . strip_tags((string)($p['highlight'] ?? '')));
+        return str_contains($sijeno, $igla);
+    }));
 }
 // Politika povrata i uslovi dostave — isti za sve proizvode, pa se sastave
 // jednom i upisu u svaku ponudu.
@@ -591,13 +628,6 @@ echo "\n</script>\n";
 <header id="header">
   <div class="header-inner">
     <a href="/" class="logo">
-      <!-- OLD LOGO (backup):
-      <div class="logo-icon"><i class="fas fa-home"></i></div>
-      <div class="logo-text">
-        <span class="name">Make My Home Decor</span>
-        <span class="tagline">Dekorativni Bambus Paneli</span>
-      </div>
--->
       <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img" width="567" height="567">
       <div class="logo-text">
         <span class="name">Make My Home Decor</span>
@@ -738,7 +768,10 @@ echo "\n</script>\n";
     }
     // Natpis u traci iznad: koliko podkategorija, odnosno koliko proizvoda.
     $mmhBrojka = '';
-    if ($cat) {
+    if ($mmhTrazi !== '') {
+        $n = count($_listProds);
+        $mmhBrojka = $n === 0 ? 'nema rezultata' : ($n === 1 ? '1 rezultat' : $n . ' rezultata');
+    } elseif ($cat) {
         $mmhBrojka = $mmhKartice
             ? count($mmhKartice) . ' podkategorija'
             : count($_listProds) . ' proizvoda';
@@ -809,8 +842,8 @@ echo "\n</script>\n";
         </a>
         <?php endforeach; ?>
       </div>
-      <div class="products-grid" id="products-container" style="display:<?= $cat ? 'grid' : 'none' ?>;padding-top:20px;">
-        <?php if ($cat): ?>
+      <div class="products-grid" id="products-container" style="display:<?= ($cat || $mmhTrazi !== '') ? 'grid' : 'none' ?>;padding-top:20px;">
+        <?php if ($cat || $mmhTrazi !== ''): ?>
         <?php foreach ($_listProds as $p):
           $pO = (float)($p['price'] ?? 0);
           $pD = (int)($p['discount'] ?? 0);
@@ -972,13 +1005,6 @@ echo "\n</script>\n";
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo">
-          <!-- OLD LOGO (backup):
-      <div class="logo-icon"><i class="fas fa-home"></i></div>
-      <div class="logo-text">
-        <span class="name">Make My Home Decor</span>
-        <span class="tagline">Dekorativni Bambus Paneli</span>
-      </div>
--->
       <img src="images/logo-transparent.png" alt="Make My Home Decor" class="logo-img" width="567" height="567">
       <div class="logo-text">
         <span class="name">Make My Home Decor</span>
