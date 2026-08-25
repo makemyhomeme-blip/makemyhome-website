@@ -225,18 +225,24 @@ switch ($action) {
         // Stari unosi u jednom redu i dalje rade (fallback na zarez).
         $features = mmhParseFeatures($featuresRaw);
 
+        /* TEKST SE CUVA ONAKAV KAKAV JE UNESEN — bez htmlspecialchars.
+           Ranije se escapovao pri SVAKOM snimanju, a stranice ga i pri ispisu
+           escapuju jos jednom. Navodnik je tako postajao &quot;, pa &amp;quot;,
+           pa &amp;amp;quot; — i kupac je citao: bijelo, ali da nije bolnicki&quot;.
+           Escapovanje je posao ispisa (product.php, products.php, harmonika),
+           i tamo se i dalje radi. Ovdje ostaje cist tekst. */
         $newProduct = [
             'id'          => getNextId($products),
-            'name'        => htmlspecialchars($name, ENT_QUOTES, 'UTF-8'),
+            'name'        => $name,
             'category'    => $category,
             'price'       => $price,
             'discount'    => $discount,
             'unit'        => $unit,
-            'description' => htmlspecialchars($description, ENT_QUOTES, 'UTF-8'),
+            'description' => $description,
             'features'    => $features,
             'image'       => $image,
-            'badge'       => $badge ? htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') : null,
-            'sku'         => $sku ? strtoupper(htmlspecialchars($sku, ENT_QUOTES, 'UTF-8')) : null,
+            'badge'       => $badge,
+            'sku'         => $sku ? mb_strtoupper($sku, 'UTF-8') : null,
             'inStock'     => $inStock,
             'featured'    => $featured
         ];
@@ -285,12 +291,13 @@ switch ($action) {
 
         foreach ($products as &$p) {
             if ($p['id'] === $id) {
-                $p['name']        = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+                // Vidi napomenu kod dodavanja: tekst se cuva neescapovan.
+                $p['name']        = $name;
                 $p['category']    = $category;
                 $p['price']       = $price;
                 $p['discount']    = $discount;
                 $p['unit']        = $unit;
-                $p['description'] = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
+                $p['description'] = $description;
                 $p['features']    = $features;
                 if (!empty($image) && $image !== ($p['image'] ?? '')) {
                     // Obriši staru sliku ako postoji i nije ista
@@ -300,8 +307,8 @@ switch ($action) {
                     }
                     $p['image'] = $image;
                 }
-                $p['badge']       = $badge ? htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') : null;
-                $p['sku']         = $sku ? strtoupper(htmlspecialchars($sku, ENT_QUOTES, 'UTF-8')) : ($p['sku'] ?? null);
+                $p['badge']       = $badge;
+                $p['sku']         = $sku ? mb_strtoupper($sku, 'UTF-8') : ($p['sku'] ?? null);
                 $p['inStock']     = $inStock;
                 $p['featured']    = $featured;
                 break;
@@ -417,7 +424,7 @@ switch ($action) {
         $badge = trim($_POST['badge'] ?? '') ?: null;
         foreach ($products as &$p) {
             if ($p['id'] === $id) {
-                $p['badge'] = $badge ? htmlspecialchars($badge, ENT_QUOTES, 'UTF-8') : null;
+                $p['badge'] = $badge;   // cist tekst; ispis escapuje (vidi napomenu gore)
                 break;
             }
         }

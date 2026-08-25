@@ -808,21 +808,49 @@ ul { list-style: none; }
 
 .product-card:hover .product-img img { transform: scale(1.05); }
 
-.out-of-stock .product-img img { }
+/* ===== Rasprodato =====
+   Do sada je jedini znak bila mala crvena oznaka u uglu slike. U mrezi od
+   dvanaest kartica se nije primjecivala — dezen izgleda isto kao i svaki drugi,
+   pa kupac otvori stranicu i tek tamo sazna da robe nema.
+   Sada se cijela kartica gasi: fotografija ide u sivo i posvijetli, a preko nje
+   ide traka sa natpisom. Dezen se i dalje raspoznaje (neko ce ga traziti kad
+   opet stigne), ali se na prvi pogled vidi da se to sada ne moze kupiti. */
+.out-of-stock .product-img img {
+  filter: grayscale(1) contrast(0.9);
+  opacity: 0.5;
+}
+.out-of-stock .product-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.30);
+  pointer-events: none;
+  z-index: 2;
+}
+.out-of-stock .product-name,
+.out-of-stock .product-name a { color: #7c8288; }
+/* Cijena na rasprodatom je i dalje bila crvena kao na akciji — kartica je
+   istovremeno govorila "nema" i "kupi po sniženoj". Boja je upisana u sam
+   element, pa je ovdje potreban !important. */
+.out-of-stock .product-price,
+.out-of-stock .product-price span { color: #8b9096 !important; }
+
 .oos-tag {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: rgba(180,28,28,0.92);
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  background: rgba(28, 28, 28, 0.82);
   color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 20px;
-  z-index: 3;
-  backdrop-filter: blur(4px);
+  text-align: center;
+  padding: 9px 6px;
+  z-index: 4;
+  backdrop-filter: blur(3px);
 }
 
 .product-img-placeholder {

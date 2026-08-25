@@ -416,7 +416,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=1dd4fe2b">
+  <link rel="stylesheet" href="css/style-v5.css?v=c7de765c">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -510,23 +510,10 @@ echo "\n</script>\n";
         font-size: 20px; line-height: 1.25; margin: 0;
       }
     }
-    /* OUT OF STOCK */
-    .out-of-stock .product-img img { }
-    .oos-tag {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(180,28,28,0.92);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: 20px;
-      z-index: 3;
-      backdrop-filter: blur(4px);
-    }
+    /* Izgled rasprodatih kartica je bio i ovdje, prepisan iz style-v5.css. Ova
+       kopija stoji POSLIJE glavnog fajla, pa je uvijek pobjedjivala — izmjena u
+       style-v5.css nije se vidjela bas na katalogu i kategorijama, gdje je i
+       najvaznija. Obrisana; pravila su sada samo na jednom mjestu. */
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
   </style>
 <style id="nav-fix">

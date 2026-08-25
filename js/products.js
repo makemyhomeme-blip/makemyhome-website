@@ -117,12 +117,22 @@ function getBadgeClass(badge) {
   return '';
 }
 
+/* Tekst iz data/products.json se ubacuje kroz innerHTML. Od kada admin cuva
+   tekst neescapovan (vidi admin/actions.php), znak < ili & bi ovdje razbio
+   markup, a navodnik bi iskocio iz alt="...". Zato se svaki tekst propusti kroz
+   ovo prije ubacivanja. Escapovanje pri ispisu — ne pri cuvanju. */
+function mmhE(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 // ===== GENERIŠI KARTICU PROIZVODA =====
 function renderProductCard(product, lazy = true) {
   const isPreorder = product.badge && (product.badge.toLowerCase().includes('poručivanje') || product.badge.toLowerCase().includes('porucivanje'));
 
   const badge = product.badge && !isPreorder
-    ? `<div class="product-badge ${getBadgeClass(product.badge)}">${product.badge}</div>`
+    ? `<div class="product-badge ${getBadgeClass(product.badge)}">${mmhE(product.badge)}</div>`
     : '';
 
   const preorderOverlay = isPreorder
@@ -137,7 +147,7 @@ function renderProductCard(product, lazy = true) {
   const categoryName = allCategories.find(c => c.id === product.category)?.name || product.category;
 
   const imgContent = `
-    <img src="${product.image}" alt="${product.name} – ${categoryName} | Make My Home Decor Podgorica"
+    <img src="${product.image}" alt="${mmhE(product.name)} – ${mmhE(categoryName)} | Make My Home Decor Podgorica"
       onerror="this.onerror=null;this.parentElement.innerHTML='<span class=&quot;product-img-placeholder&quot;><i class=&quot;fas fa-image&quot;></i></span>'"
       ${lazy ? 'loading="lazy"' : ''}>
   `;
@@ -158,10 +168,10 @@ function renderProductCard(product, lazy = true) {
         ${outOfStock ? `<div class="oos-tag">Rasprodato</div>` : ''}
       </div>
       <div class="product-body">
-        <div class="product-category">${categoryName}</div>
-        <h3 class="product-name">${product.name}</h3>
-        ${product.sku ? `<div class="product-sku">Šifra: <strong>${product.sku}</strong></div>` : ''}
-        <p class="product-desc">${product.description}</p>
+        <div class="product-category">${mmhE(categoryName)}</div>
+        <h3 class="product-name">${mmhE(product.name)}</h3>
+        ${product.sku ? `<div class="product-sku">Šifra: <strong>${mmhE(product.sku)}</strong></div>` : ''}
+        <p class="product-desc">${mmhE(product.description)}</p>
         <div class="product-footer">
           <div class="product-price">
             ${product.discount > 0

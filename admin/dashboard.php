@@ -2352,6 +2352,28 @@ async function deleteInquiry(id, btn) {
     el._t = setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.style.display = 'none', 300); }, 2500);
   }
 
+  /* Vracanje na mjesto poslije osvjezavanja + poruka o uspjehu. */
+  (function () {
+    var zapis = null;
+    try { zapis = sessionStorage.getItem('_mmhPoslije'); sessionStorage.removeItem('_mmhPoslije'); }
+    catch (e) { return; }
+    if (!zapis) return;
+    var d;
+    try { d = JSON.parse(zapis); } catch (e) { return; }
+    if (d.sekcija && typeof showSection === 'function' && document.getElementById('section-' + d.sekcija)) {
+      showSection(d.sekcija);
+      // showSection oznaci dugme u meniju preko `event`, a ovdje klika nema.
+      document.querySelectorAll('.sidebar-link').forEach(function (l) {
+        if ((l.getAttribute('onclick') || '').indexOf("'" + d.sekcija + "'") !== -1) l.classList.add('active');
+      });
+    }
+    if (typeof d.skrol === 'number') {
+      window.scrollTo(0, d.skrol);
+      setTimeout(function () { window.scrollTo(0, d.skrol); }, 60);
+    }
+    notify('✓ ' + d.poruka, true);
+  })();
+
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
@@ -2368,8 +2390,28 @@ async function deleteInquiry(id, btn) {
       let data;
       try { data = JSON.parse(text); } catch(e) { data = { ok: false, error: 'Server greška.' }; }
       if (data.ok) {
-        notify('✓ Sačuvano!', true);
+        /* Ranije se ovdje samo javljalo "Sacuvano" i zatvarao prozorcic. Stranica
+           se nije osvjezavala, pa je tabela iza njega i dalje pokazivala STARE
+           vrijednosti: proizvod skinut sa lagera je u adminu ostajao "Na lageru",
+           a kad bi se isti proizvod ponovo otvorio, kvacica je opet bila
+           zakacena — jer se citala iz spiska ucitanog pri otvaranju stranice.
+           Na sajtu je promjena bila vidljiva odmah, pa je izgledalo kao da admin
+           ne cuva. Isto je vazilo za ime, cijenu, popust, oznaku i sifru.
+
+           Sada se stranica ponovo ucitava, ali se pamti gdje je bio skrol i koja
+           je sekcija bila otvorena, pa se ne skace na vrh — zbog cega je AJAX i
+           bio uveden. Poruka o uspjehu se prikaze poslije ucitavanja. */
+        try {
+          var otvorena = (document.querySelector('.section.active') || {}).id || '';
+          sessionStorage.setItem('_mmhPoslije', JSON.stringify({
+            poruka: data.msg || 'Sačuvano!',
+            skrol:  window.scrollY,
+            sekcija: otvorena.replace(/^section-/, '')
+          }));
+        } catch (e) {}
         closeModal();
+        location.reload();
+        return;
       } else {
         notify('✗ ' + (data.error || 'Greška.'), false);
       }
