@@ -56,7 +56,10 @@ async function novaStrana(b, sirina, visina) {
   p.on('response', (r) => {
     if (r.status() < 400) return;
     const u = r.url();
-    if (LOKALNO && /\/images\/(products|categories|og)\//.test(u)) return;
+    // Fajlove koje vlasnik dodaje kroz admin (fotografije, hero slajdovi) nema
+    // u repou — oni stoje samo na serveru. Lokalno njihova 404 nije greska sajta.
+    if (LOKALNO && /\/images\/(products|categories|og|hero-slides)\//.test(u)) return;
+    if (LOKALNO && /\/data\/hero-slides\.json/.test(u)) return;
     if (/favicon|gtag|analytics|googletag/i.test(u)) return;
     greske.push('HTTP ' + r.status() + ' ' + u.replace(BAZA, '').slice(0, 70));
   });
@@ -403,6 +406,11 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
     [...document.querySelectorAll('.insp-kart')].filter((e) => getComputedStyle(e).display !== 'none').length);
 
   const sve = await vidljive();
+  if (LOKALNO && sve === 0) {
+    // Galerija se pravi od fotografija proizvoda; njih lokalno nema, a kartica
+    // se sama uklanja kad joj slika ne stigne (onerror u inspiracija.php).
+    console.log('--   inspiracija: nema fotografija lokalno, provjera preskocena');
+  } else {
   tvrdi('inspiracija: ima fotografija', sve > 10, `${sve}`);
 
   const cipovi = p.locator('.insp-chip[data-k]:not([data-k=""])');
@@ -420,6 +428,7 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
     await p.waitForTimeout(900);
     const nazad = await vidljive();
     tvrdi('inspiracija: "Sve" vraca fotografije', nazad > poslije, `${poslije} -> ${nazad}`);
+  }
   }
   await p.close();
 }

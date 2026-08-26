@@ -19,7 +19,7 @@
 #    1. GIT        lokalno, GitHub i server nose isto; nista necommitovano
 #    2. PRAVILA    52 pravila iz alat/ETALON.md (alat/dok-ne-bude.py)
 #    3. OKO        pravi pregledac, 10 stranica x racunar i telefon
-#    3b. RADI      52 provjere DA LI FUNKCIJE RADE: pretraga filtrira, korpa
+#    3b. RADI      63 provjere DA LI FUNKCIJE RADE: pretraga filtrira, korpa
 #                  pamti, kalkulator racuna, galerija se mijenja (alat/radi.mjs)
 #    4. KORPA      22 provjere korpe i narudzbe u pravom pregledacu
 #    5. PREGLEDAC  149 stranica: sto server posalje naspram sto pregledac pokaze
