@@ -29,6 +29,7 @@ const BAZA = process.argv[2] || 'http://127.0.0.1:8899';
 const LOKALNO = BAZA.includes('127.0.0.1') || BAZA.includes('localhost');
 
 const nalazi = [];
+const preskoceno = [];
 let ukupno = 0;
 
 function tvrdi(ime, uslov, detalj = '') {
@@ -39,6 +40,19 @@ function tvrdi(ime, uslov, detalj = '') {
     console.log(`PAD  ${ime}${detalj ? '  — ' + detalj : ''}`);
     nalazi.push(ime + (detalj ? ' — ' + detalj : ''));
   }
+}
+
+/**
+ * Provjera koja se NIJE mogla izvrsiti — ne racuna se ni kao prolaz ni kao pad,
+ * nego se posebno broji i ispisuje na kraju.
+ *
+ * Zasto: prvo su ovakvi slucajevi bili tiho preskoceni, pa je izvjestaj pisao
+ * "0 palo" iako dvije stvari uopste nisu provjerene. Alat koji precuti da nesto
+ * nije provjerio gori je nego da ga nema.
+ */
+function nemoguce(ime, razlog) {
+  console.log(`--   ${ime}  (nije provjereno: ${razlog})`);
+  preskoceno.push(`${ime} — ${razlog}`);
 }
 
 /**
@@ -58,8 +72,8 @@ async function novaStrana(b, sirina, visina) {
     const u = r.url();
     // Fajlove koje vlasnik dodaje kroz admin (fotografije, hero slajdovi) nema
     // u repou — oni stoje samo na serveru. Lokalno njihova 404 nije greska sajta.
-    if (LOKALNO && /\/images\/(products|categories|og|hero-slides)\//.test(u)) return;
-    if (LOKALNO && /\/data\/hero-slides\.json/.test(u)) return;
+    if (LOKALNO && /\/images\/(products|categories|og|hero-slides)\//.test(u)) { p._samoServer = true; return; }
+    if (LOKALNO && /\/data\/hero-slides\.json/.test(u)) { p._samoServer = true; return; }
     if (/favicon|gtag|analytics|googletag/i.test(u)) return;
     greske.push('HTTP ' + r.status() + ' ' + u.replace(BAZA, '').slice(0, 70));
   });
@@ -409,7 +423,7 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
   if (LOKALNO && sve === 0) {
     // Galerija se pravi od fotografija proizvoda; njih lokalno nema, a kartica
     // se sama uklanja kad joj slika ne stigne (onerror u inspiracija.php).
-    console.log('--   inspiracija: nema fotografija lokalno, provjera preskocena');
+    nemoguce('inspiracija: filter', 'fotografije proizvoda postoje samo na serveru — pokreni: node alat/radi.mjs https://makemyhome.me');
   } else {
   tvrdi('inspiracija: ima fotografija', sve > 10, `${sve}`);
 
@@ -483,6 +497,11 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
 await b.close();
 
 console.log('\n' + '='.repeat(66));
-console.log(`ZAVRSNO: ${ukupno} provjera, ${nalazi.length} palo`);
+console.log(`ZAVRSNO: ${ukupno} provjera, ${nalazi.length} palo, ${preskoceno.length} nije provjereno`);
 for (const n of nalazi) console.log('  PAD  ' + n);
+for (const n of preskoceno) console.log('  --   ' + n);
+if (preskoceno.length && LOKALNO) {
+  console.log('\n  Da bi se i to provjerilo, pokreni protiv pravog sajta:');
+  console.log('    node alat/radi.mjs https://makemyhome.me');
+}
 process.exit(nalazi.length ? 1 : 0);

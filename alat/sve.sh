@@ -151,7 +151,13 @@ if curl -s -o /dev/null http://127.0.0.1:8898/products.php; then
   # pamti, da li kalkulator zaista racuna. Vidi zaglavlje alat/radi.mjs.
   node alat/radi.mjs http://127.0.0.1:8898 > "$ISPIS/radi.txt" 2>&1
   if [ $? -eq 0 ]; then
-    zapisi RADI OK "$(grep -c '^OK' "$ISPIS/radi.txt") provjera, sve funkcije rade"
+    NEPROV=$(grep -c '^--' "$ISPIS/radi.txt" || true)
+    if [ "${NEPROV:-0}" -gt 0 ]; then
+      zapisi RADI OK "$(grep -c '^OK' "$ISPIS/radi.txt") provjera proslo, ALI $NEPROV nije provjereno (vidi radi.txt)"
+      grep '^--' "$ISPIS/radi.txt" | head -6
+    else
+      zapisi RADI OK "$(grep -c '^OK' "$ISPIS/radi.txt") provjera, sve funkcije rade"
+    fi
   else
     zapisi RADI PAD "$(grep -c '^  PAD' "$ISPIS/radi.txt") nalaza"
     grep '^  PAD' "$ISPIS/radi.txt" | head -12
