@@ -306,7 +306,14 @@ $pageTitle = $cat
   </script>
 <?php
 // $_allProds je vec ucitan gore, kod izbora slike za dijeljenje
-$_bambusCats = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-kozni','bambus-metalni'];
+/* Classic je u data/categories.json upisan kao SESTA podkategorija Bambus
+   Panela, i stranica zato prikazuje sest plocica i natpis "6 podkategorija".
+   Ovaj spisak je imao pet — pa je ista ta stranica ispod plocica nabrajala
+   samo 39 proizvoda iz pet podkategorija, a cetiri Classic panela nije
+   prikazivala nigdje. Posjetilac klikne na plocicu Classic i tek tada ih vidi.
+   (Ostatak koda vec tretira classic kao bambus rodjaka — vidi $srodneKat u
+   product.php.) */
+$_bambusCats = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-kozni','bambus-metalni','classic'];
 if (!$cat) {
   $_listProds = $_allProds;
 } elseif ($cat === 'bambus-paneli') {

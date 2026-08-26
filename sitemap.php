@@ -196,8 +196,11 @@ foreach ($P as $p) {
 // bez ijedne slike, dok su sve ostale kategorije svoje imale. Google slike
 // otkriva prvenstveno preko sitemapa, pa je cijela ta kategorija bila
 // nevidljiva za pretragu slika.
+// Classic je sesta podkategorija Bambus Panela (data/categories.json), pa i
+// njegove fotografije spadaju u slike te kategorije. Bez njega je sitemap za
+// /kategorija/bambus-paneli pokrivao pet od sest podtipova.
 $mmhBambus = ['bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni',
-              'bambus-kozni', 'bambus-metalni'];
+              'bambus-kozni', 'bambus-metalni', 'classic'];
 $poKat['bambus-paneli'] = [];
 foreach ($mmhBambus as $k) {
     foreach (($poKat[$k] ?? []) as $p) $poKat['bambus-paneli'][] = $p;

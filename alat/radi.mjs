@@ -355,6 +355,32 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// 10b. KISOBRAN KATEGORIJE — plocice i spisak proizvoda moraju se slagati
+//
+// Zasto: Bambus Paneli su prikazivali sest plocica i natpis "6 podkategorija",
+// a ispod su stajala 39 proizvoda iz pet podkategorija — cetiri Classic panela
+// nisu bila nigdje na toj stranici. Spisak podkategorija je bio na dva mjesta
+// (data/categories.json i $_bambusCats u products.php) i razisao se.
+// ─────────────────────────────────────────────────────────────────────────────
+{
+  const p = await novaStrana(b, 1440, 900);
+  await p.goto(put('/kategorija/bambus-paneli'), { waitUntil: 'load' });
+  await p.waitForTimeout(1200);
+  const plocica = await p.locator('#category-grid a[href*="/kategorija/"]').count();
+  const natpis = (await p.locator('body').innerText()).match(/(\d+)\s+podkategorij/);
+  const kartica = await p.locator('.product-card').count();
+  const zbir = await p.evaluate(() =>
+    [...document.querySelectorAll('#category-grid')].length
+      ? [...document.querySelectorAll('#category-grid')][0].innerText.match(/\d+(?=\s*proizvod)/g)?.reduce((a, x) => a + Number(x), 0) || 0
+      : 0);
+  tvrdi('kisobran: natpis se slaze sa brojem plocica',
+        natpis && Number(natpis[1]) === plocica, `natpis=${natpis && natpis[1]} plocica=${plocica}`);
+  tvrdi('kisobran: prikazuje proizvode iz SVIH podkategorija',
+        zbir > 0 && kartica === zbir, `zbir na plocicama=${zbir} prikazano=${kartica}`);
+  await p.close();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // 11. ZAJEDNICKI DJELOVI — moraju izgledati ISTO na svakoj stranici
 //
 // Zasto: zaglavlje i podnozje su bili prepisani u <style> blok svake stranice,
