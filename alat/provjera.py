@@ -9,6 +9,11 @@ Pokretanje:  python3 alat/provjera.py [grupa]
 
 Svaka stavka je jedno pravilo. Ako pravilo padne, ispise se sta tacno i gdje.
 Fajl se NE deployuje na server (nije u admin/sync.php listi).
+
+Zavisnosti (bez njih pojedina pravila ne mogu da se izvrse):
+    pip install fontTools brotli
+Pravilo C9 (glifovi u fontu) trazi oba; ranije je bez njih javljalo PAD, sto je
+izgledalo kao greska na sajtu a bila je greska u okruzenju.
 """
 import json, re, subprocess, sys, os, collections, hashlib, time, datetime
 import xml.etree.ElementTree as ET

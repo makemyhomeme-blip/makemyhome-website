@@ -14,6 +14,8 @@
 # Ovdje se pokrece SVE sto postoji, redom, i na kraju stoji jedan zakljucak.
 # Ako pise da nije spremno, ne salje se na indeksiranje.
 #
+# Zavisnosti: pip install fontTools brotli   (bez njih pravilo C9 ne moze da radi)
+#
 # Sta se pokrece
 # --------------
 #    1. GIT        lokalno, GitHub i server nose isto; nista necommitovano
