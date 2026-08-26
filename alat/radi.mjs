@@ -355,29 +355,34 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 10b. KISOBRAN KATEGORIJE — plocice i spisak proizvoda moraju se slagati
+// 10b. KISOBRAN KATEGORIJE — samo plocice, bez spiska proizvoda
 //
-// Zasto: Bambus Paneli su prikazivali sest plocica i natpis "6 podkategorija",
-// a ispod su stajala 39 proizvoda iz pet podkategorija — cetiri Classic panela
-// nisu bila nigdje na toj stranici. Spisak podkategorija je bio na dva mjesta
-// (data/categories.json i $_bambusCats u products.php) i razisao se.
+// Zasto: Bambus Paneli su ispod sest plocica nabrajali jos i sve proizvode iz
+// svih podtipova. Plocice su time gubile smisao — posjetilac bira tip, a roba
+// je ionako vec sva ispisana ispod. Sada kisobran prikazuje samo plocice.
+// Kad se trazi (?search=), spisak se prikazuje i tu.
 // ─────────────────────────────────────────────────────────────────────────────
 {
   const p = await novaStrana(b, 1440, 900);
   await p.goto(put('/kategorija/bambus-paneli'), { waitUntil: 'load' });
   await p.waitForTimeout(1200);
-  const plocica = await p.locator('#category-grid a[href*="/kategorija/"]').count();
+  const plocica = await p.locator('#category-grid .cat-card').count();
   const natpis = (await p.locator('body').innerText()).match(/(\d+)\s+podkategorij/);
-  const kartica = await p.locator('.product-card').count();
-  const zbir = await p.evaluate(() =>
-    [...document.querySelectorAll('#category-grid')].length
-      ? [...document.querySelectorAll('#category-grid')][0].innerText.match(/\d+(?=\s*proizvod)/g)?.reduce((a, x) => a + Number(x), 0) || 0
-      : 0);
+  const vidljivi = await p.evaluate(() =>
+    [...document.querySelectorAll('#products-container .product-card')].filter((e) => e.offsetParent).length);
   tvrdi('kisobran: natpis se slaze sa brojem plocica',
         natpis && Number(natpis[1]) === plocica, `natpis=${natpis && natpis[1]} plocica=${plocica}`);
-  tvrdi('kisobran: prikazuje proizvode iz SVIH podkategorija',
-        zbir > 0 && kartica === zbir, `zbir na plocicama=${zbir} prikazano=${kartica}`);
+  tvrdi('kisobran: NE nabraja proizvode ispod plocica', vidljivi === 0, `vidljivih kartica=${vidljivi}`);
   await p.close();
+
+  // Podkategorija i dalje mora prikazivati svoju robu.
+  const q = await novaStrana(b, 1440, 900);
+  await q.goto(put('/kategorija/bambus-drveni'), { waitUntil: 'load' });
+  await q.waitForTimeout(1200);
+  const list = await q.evaluate(() =>
+    [...document.querySelectorAll('#products-container .product-card')].filter((e) => e.offsetParent).length);
+  tvrdi('podkategorija: prikazuje svoje proizvode', list > 0, `${list}`);
+  await q.close();
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

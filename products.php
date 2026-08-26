@@ -306,13 +306,8 @@ $pageTitle = $cat
   </script>
 <?php
 // $_allProds je vec ucitan gore, kod izbora slike za dijeljenje
-/* Classic je u data/categories.json upisan kao SESTA podkategorija Bambus
-   Panela, i stranica zato prikazuje sest plocica i natpis "6 podkategorija".
-   Ovaj spisak je imao pet — pa je ista ta stranica ispod plocica nabrajala
-   samo 39 proizvoda iz pet podkategorija, a cetiri Classic panela nije
-   prikazivala nigdje. Posjetilac klikne na plocicu Classic i tek tada ih vidi.
-   (Ostatak koda vec tretira classic kao bambus rodjaka — vidi $srodneKat u
-   product.php.) */
+/* Sest podtipova bambusa; koristi se za brojac i za pretragu unutar kisobrana.
+   Sama kisobran stranica ne ispisuje proizvode — samo plocice (vidi nize). */
 $_bambusCats = ['bambus-drveni','bambus-tekstilni','bambus-mermerni','bambus-kozni','bambus-metalni','classic'];
 if (!$cat) {
   $_listProds = $_allProds;
@@ -848,8 +843,16 @@ echo "\n</script>\n";
         </a>
         <?php endforeach; ?>
       </div>
-      <div class="products-grid" id="products-container" style="display:<?= ($cat || $mmhTrazi !== '') ? 'grid' : 'none' ?>;padding-top:20px;">
-        <?php if ($cat || $mmhTrazi !== ''): ?>
+      <?php
+      /* Kisobran kategorija (Bambus Paneli) prikazuje SAMO plocice podkategorija.
+         Ranije je ispod njih nabrajala i sve proizvode iz svih podtipova, pa su
+         plocice gubile smisao — posjetilac bira tip, a roba je ionako vec sva
+         ispisana ispod. Kad se trazi (?search=), spisak se prikazuje uvijek. */
+      $mmhSamoPlocice = ($mmhKartice && $mmhTrazi === '');
+      $mmhPrikaziMrezu = ($cat || $mmhTrazi !== '') && !$mmhSamoPlocice;
+      ?>
+      <div class="products-grid" id="products-container" style="display:<?= $mmhPrikaziMrezu ? 'grid' : 'none' ?>;padding-top:20px;">
+        <?php if ($mmhPrikaziMrezu): ?>
         <?php foreach ($_listProds as $p):
           $pO = (float)($p['price'] ?? 0);
           $pD = (int)($p['discount'] ?? 0);
@@ -1100,7 +1103,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/products.js?v=478b6388"></script>
+<script src="js/products.js?v=47ec4066"></script>
 <script src="js/cart.js?v=2906a9ed"></script>
 <script>
   initProductsPage();

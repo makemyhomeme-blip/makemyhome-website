@@ -280,8 +280,8 @@ function buildCatMap() {
 }
 
 function showSubcategoryGrid(parentCat) {
-  /* Server (products.php) za roditeljsku kategoriju ispisuje i plocice
-     podkategorija i kartice proizvoda, obje odmah vidljive i tim redom.
+  /* Server (products.php) za roditeljsku kategoriju ispisuje SAMO plocice
+     podkategorija — mreza proizvoda tamo namjerno ostaje prazna i ugasena.
      Ovdje se zato vise nista ne ispisuje i nista ne gasi — samo se popune
      natpisi. Pravilo je: JavaScript smije filtrirati ono sto je server dao,
      ali ne smije ni ispisivati ni gasiti mreze.
