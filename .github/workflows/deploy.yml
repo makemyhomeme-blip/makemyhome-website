@@ -13,9 +13,10 @@ name: Deploy na makemyhome.me
 #
 # Pristupni podaci se NE upisuju ovdje — citaju se iz CLAUDE.md, gdje vec stoje.
 
+# NE pokrece se sam pri push-u. Dok nema tajne MMH_ADMIN_PASS posao pada, a
+# GitHub za svaki pad salje mejl vlasniku repoa — tri push-a, tri mejla.
+# Pokrece se samo rucno: Actions -> Deploy na makemyhome.me -> Run workflow.
 on:
-  push:
-    branches: [claude/build-product-website-6CvHG]
   workflow_dispatch:
 
 concurrency:
