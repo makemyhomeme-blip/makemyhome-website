@@ -35,40 +35,38 @@ jobs:
         run: sleep 60
 
       - name: Prijava u admin i sync
+        env:
+          ADMIN_LOZINKA: ${{ secrets.MMH_ADMIN_PASS }}
+          # Ako se kljuc promijeni, dodaj tajnu MMH_SYNC_KEY; inace vazi zatecena.
+          SYNC_KLJUC: ${{ secrets.MMH_SYNC_KEY || 'mkhsync2025' }}
         run: |
           set -euo pipefail
 
-          KOR=$(grep -m1 -F '**cPanel username:**' CLAUDE.md | sed 's/.*`\([^`]*\)`.*/\1/')
-          LOZ=$(grep -m1 -F '**cPanel password:**' CLAUDE.md | sed 's/.*`\([^`]*\)`.*/\1/')
-          echo "::add-mask::$LOZ"
-          test -n "$KOR" && test -n "$LOZ"
-
-          echo "1/4  citam admin lozinku sa servera"
-          for i in 1 2 3 4 5; do
-            ODG=$(curl -sS -u "$KOR:$LOZ" --max-time 40 \
-              "https://cpanel.mmhdecor.mycpanel.rs/execute/Fileman/get_file_content?dir=%2Fhome%2Fmmhdecor&file=.mmh-admin-pass" || true)
-            case "$ODG" in
-              \{*) break ;;
-            esac
-            echo "     pokusaj $i nije prosao, cekam"
-            sleep 15
-          done
-          case "$ODG" in
-            \{*) ;;
-            *) echo "cPanel nije vratio JSON — deploy prekinut"; exit 1 ;;
-          esac
-
-          ADMIN=$(printf '%s' "$ODG" | python3 -c "import sys,json;print(json.load(sys.stdin)['data']['content'].strip())")
+          # Lozinka admina dolazi iz GitHub Secrets (Settings -> Secrets and
+          # variables -> Actions -> New repository secret -> MMH_ADMIN_PASS).
+          #
+          # Ranije se citala sa servera preko cPanel API-ja. To vise ne radi:
+          # hosting je ispred cPanela stavio provjeru koja trazi izvrsavanje
+          # JavaScripta ("One moment, please..."), pa svaki poziv iz skripte —
+          # i sa GitHub-ove masine — dobije tu stranicu umjesto odgovora.
+          # Uz to, lozinke ne treba da stoje u fajlu u repou.
+          ADMIN="${ADMIN_LOZINKA:-}"
+          if [ -z "$ADMIN" ]; then
+            echo "::error::Nema tajne MMH_ADMIN_PASS."
+            echo "Dodaj je jednom: GitHub -> Settings -> Secrets and variables -> Actions"
+            echo "-> New repository secret -> ime: MMH_ADMIN_PASS, vrijednost: lozinka admin panela."
+            echo "Poslije toga svaki push sam deployuje sajt."
+            exit 1
+          fi
           echo "::add-mask::$ADMIN"
-          test -n "$ADMIN"
 
-          echo "2/4  prijava u admin"
+          echo "1/3  prijava u admin"
           curl -sS -c /tmp/ck.txt -X POST "https://makemyhome.me/admin/index.php" \
             --data-urlencode "username=admin" --data-urlencode "password=$ADMIN" \
             -L -o /dev/null --max-time 40
 
-          echo "3/4  sync"
-          curl -sS -b /tmp/ck.txt "https://makemyhome.me/admin/sync.php?key=mkhsync2025" \
+          echo "2/3  sync"
+          curl -sS -b /tmp/ck.txt "https://makemyhome.me/admin/sync.php?key=${SYNC_KLJUC}" \
             --max-time 600 -o /tmp/sync.html
           sed -e 's/<[^>]*>//g' /tmp/sync.html | grep -vE '^[[:space:]]*$' | tail -40 || true
 
@@ -80,12 +78,12 @@ jobs:
           if grep -q 'admin/sync.php.*OK' /tmp/sync.html 2>/dev/null; then
             echo "     sync.php je azuriran, pokrecem jos jednom"
             sleep 5
-            curl -sS -b /tmp/ck.txt "https://makemyhome.me/admin/sync.php?key=mkhsync2025" \
+            curl -sS -b /tmp/ck.txt "https://makemyhome.me/admin/sync.php?key=${SYNC_KLJUC}" \
               --max-time 600 -o /tmp/sync2.html
             grep -q 'ažurirano' /tmp/sync2.html || { echo "drugi prolaz nije zavrsio"; exit 1; }
           fi
 
-          echo "4/4  provjera na zivom sajtu"
+          echo "3/3  provjera na zivom sajtu"
           for U in / /kategorija/3d-letvice /paneli/3d-letvica-deva /products.html /cjenovnik.html; do
             K=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 "https://makemyhome.me$U")
             echo "     $K  $U"
