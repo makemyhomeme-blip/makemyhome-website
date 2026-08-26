@@ -146,6 +146,13 @@ RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|paged|page_id|m|post_type|replytocom)=
 RewriteRule .* /? [R=301,L]
 
+# cat= i category= su NASI parametri na products.php, ali na POCETNOJ su ostatak
+# WordPress-a (/?cat=1 je bila arhiva kategorije). Zato se hvataju samo kad je
+# adresa tacno "/" — products.php?cat=3d-letvice time ostaje netaknut.
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{QUERY_STRING} (^|&)(cat|category|tag|year|monthnum|day|w|feed)=
+RewriteRule .* /? [R=301,L]
+
 # /proizvodi/ i /product-category/ sa starom paginacijom → prava kategorija, ne homepage
 RewriteCond %{QUERY_STRING} (^|&)product-page=
 RewriteRule ^proizvodi/?$ /products.html? [R=301,L]

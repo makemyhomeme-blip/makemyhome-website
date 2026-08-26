@@ -836,25 +836,32 @@ def grupa_G():
         except Exception:
             pass
 
+    # Ako cPanel nije dao nijedan fajl, ne znaci da je server prazan — znaci da
+    # do njega nismo mogli. Bez ove razlike je pravilo znalo da ispise 53 lazne
+    # greske "nema ga na serveru" kad je hosting blokirao pristup.
     provjereno = 0
-    for rel in parovi:
-        put = os.path.join(KORIJEN, rel)
-        if not os.path.exists(put):
-            g.append('%s je u sync listi a nema ga lokalno' % rel)
-            continue
-        provjereno += 1
-        sirovo = rel.endswith(PREKO_HTTP) or (rel.endswith('.html') and rel not in PREKO_PHP)
-        if sirovo:
-            lok = hashlib.md5(open(put, 'rb').read()).hexdigest()
-            r = subprocess.run(CURL + ['--max-time', '25', '-L', '-H', 'Accept-Encoding: identity',
-                                       '%s/%s' % (BAZA, rel)], capture_output=True).stdout
-            if hashlib.md5(r).hexdigest() != lok:
-                g.append('%s: sadrzaj na sajtu nije isti kao u gitu' % rel)
-        else:
-            if rel not in srv_vel:
-                g.append('%s: nema ga na serveru' % rel)
-            elif srv_vel[rel] != os.path.getsize(put):
-                g.append('%s: na serveru %d B, u gitu %d B' % (rel, srv_vel[rel], os.path.getsize(put)))
+    if not srv_vel:
+        g.append('cPanel nije odgovorio — poredjenje sa serverom NIJE uradjeno'
+                 ' (hosting trazi provjeru pregledacem)')
+    else:
+        for rel in parovi:
+            put = os.path.join(KORIJEN, rel)
+            if not os.path.exists(put):
+                g.append('%s je u sync listi a nema ga lokalno' % rel)
+                continue
+            provjereno += 1
+            sirovo = rel.endswith(PREKO_HTTP) or (rel.endswith('.html') and rel not in PREKO_PHP)
+            if sirovo:
+                lok = hashlib.md5(open(put, 'rb').read()).hexdigest()
+                r = subprocess.run(CURL + ['--max-time', '25', '-L', '-H', 'Accept-Encoding: identity',
+                                           '%s/%s' % (BAZA, rel)], capture_output=True).stdout
+                if hashlib.md5(r).hexdigest() != lok:
+                    g.append('%s: sadrzaj na sajtu nije isti kao u gitu' % rel)
+            else:
+                if rel not in srv_vel:
+                    g.append('%s: nema ga na serveru' % rel)
+                elif srv_vel[rel] != os.path.getsize(put):
+                    g.append('%s: na serveru %d B, u gitu %d B' % (rel, srv_vel[rel], os.path.getsize(put)))
     zabiljezi('G4', 'Git, cPanel i sajt nose iste fajlove', g, provjereno)
 
     # Stranice koje server sastavlja: mora da se vidi ono sto Google treba da
@@ -1930,8 +1937,9 @@ def grupa_J():
 
     # ---- J3: stare WordPress adrese salju 301, ne 200 ----------------------
     g = []
-    stare = ['/?page_id=216', '/?p=1', '/?cat=1', '/?m=202401', '/?attachment_id=5',
-             '/?post_type=product', '/?replytocom=1', '/?author=1']
+    stare = ['/?page_id=216', '/?p=1', '/?cat=1', '/?category=1', '/?tag=paneli',
+             '/?m=202401', '/?attachment_id=5', '/?post_type=product',
+             '/?replytocom=1', '/?author=1', '/?year=2024', '/?w=12']
     for u in stare:
         _, kod, _, _ = dohvati(BAZA + u, timeout='15')
         if kod not in ('301', '410'):
@@ -1940,8 +1948,11 @@ def grupa_J():
 
     # ---- J4: nasi parametri NE smiju biti uhvaceni tim pravilom ------------
     g = []
+    # cat=/category= na POCETNOJ se 301-uje (stari WordPress), ali na
+    # products.php su nasi i moraju ostati netaknuti — zato oba slucaja.
     nasi = ['/products.php?cat=3d-letvice', '/products.php?category=3d-letvice',
-            '/products.php?k=3d-letvice', '/products.php?search=deva']
+            '/products.php?k=3d-letvice', '/products.php?search=deva',
+            '/kategorija/3d-letvice']
     for u in nasi:
         _, kod, _, kraj = dohvati(BAZA + u, prati=True, timeout='20')
         if kod != '200' or '/kategorija/' not in kraj and 'products' not in kraj:
