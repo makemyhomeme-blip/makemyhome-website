@@ -70,14 +70,14 @@ jobs:
           echo "3/4  sync"
           curl -sS -b /tmp/ck.txt "https://makemyhome.me/admin/sync.php?key=mkhsync2025" \
             --max-time 600 -o /tmp/sync.html
-          sed -e 's/<[^>]*>//g' /tmp/sync.html | grep -vE '^\s*$' | tail -40
+          sed -e 's/<[^>]*>//g' /tmp/sync.html | grep -vE '^[[:space:]]*$' | tail -40 || true
 
           if ! grep -q 'ažurirano' /tmp/sync.html; then
             echo "sync nije javio da je zavrsio"; exit 1
           fi
 
           # Ako se mijenjao sam sync.php, prvi prolaz ga tek postavi — drugi ga koristi.
-          if grep -q 'admin/sync.php.*OK' /tmp/sync.html; then
+          if grep -q 'admin/sync.php.*OK' /tmp/sync.html 2>/dev/null; then
             echo "     sync.php je azuriran, pokrecem jos jednom"
             sleep 5
             curl -sS -b /tmp/ck.txt "https://makemyhome.me/admin/sync.php?key=mkhsync2025" \
@@ -94,7 +94,9 @@ jobs:
 
           echo "     kisobran kategorija ne smije nabrajati proizvode"
           curl -sS --max-time 30 "https://makemyhome.me/kategorija/bambus-paneli" -o /tmp/bp.html
-          BR=$(grep -o 'class="product-card' /tmp/bp.html | wc -l)
+          # `grep` vrati 1 kad nema pogodaka, a uz `pipefail` to obara cijeli
+          # posao — bas u slucaju kad je rezultat ISPRAVAN (nula kartica).
+          BR=$(grep -c 'class="product-card' /tmp/bp.html || true)
           echo "     kartica proizvoda na /kategorija/bambus-paneli: $BR"
           test "$BR" -eq 0
 
