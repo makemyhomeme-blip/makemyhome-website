@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=c7de765c">
+  <link rel="stylesheet" href="css/style-v5.css?v=0b8dc205">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -456,9 +456,6 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLQCZ8CV4"></script>
 <style>
   /* Footer kategorije: čiste 2 kolone bez lomljenja u dva reda */
-  .footer-links-grid{display:block!important;column-count:2!important;column-gap:18px!important;}
-  .footer-links-grid li{break-inside:avoid;margin-bottom:9px;}
-  .footer-links-grid a{font-size:13px!important;white-space:nowrap;}
 </style>
 <style id="nav-wide">
 /* Laptopovi 769–1599px: sve stavke MORAJU stati u red (Kontakt je ranije ispadao van ekrana) */
@@ -1133,7 +1130,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/products.js?v=529f31e4"></script>
+<script src="js/products.js?v=478b6388"></script>
 <script src="js/cart.js?v=2906a9ed"></script>
 <script>
   renderProductDetail();

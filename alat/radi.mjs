@@ -354,6 +354,53 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
   await p.close();
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// 11. ZAJEDNICKI DJELOVI — moraju izgledati ISTO na svakoj stranici
+//
+// Zasto: zaglavlje i podnozje su bili prepisani u <style> blok svake stranice,
+// 22 kopije u tri razlicite verzije. Podnozje je zato imalo razmak 8px na
+// pocetnoj i katalogu, a 9px na ostalih devetnaest stranica, i slova 14px
+// naspram 13px. Niko to nije vidio jer se nikad nisu gledale dvije stranice
+// jedna do druge. Ovdje se mjeri stvarno izracunat stil i trazi razlika.
+// ─────────────────────────────────────────────────────────────────────────────
+{
+  const STRANE = ['/', '/about.html', '/faq.html', '/montaza.html',
+                  '/cjenovnik.html', '/products.html', '/contact.html', '/decor-box.html'];
+  const MJERE = {
+    'nav: velicina slova':      ['.nav-link', 'fontSize'],
+    'nav: unutrasnji razmak':   ['.nav-link', 'padding'],
+    'logo: visina':             ['.logo-img', 'height'],
+    'logo: ime':                ['.logo-text .name', 'fontSize'],
+    'podnozje: razmak stavki':  ['.footer-links-grid li', 'marginBottom'],
+    'podnozje: slova linkova':  ['.footer-links-grid a', 'fontSize'],
+    'podnozje: broj kolona':    ['.footer-links-grid', 'columnCount'],
+    'zaglavlje: sirina':        ['.header-inner', 'maxWidth'],
+  };
+  const skup = {};
+  for (const s of STRANE) {
+    const p = await novaStrana(b, 1440, 900);
+    await p.goto(put(s), { waitUntil: 'load' });
+    await p.waitForTimeout(900);
+    const v = await p.evaluate((M) => {
+      const o = {};
+      for (const [ime, [sel, prop]] of Object.entries(M)) {
+        const e = document.querySelector(sel);
+        o[ime] = e ? getComputedStyle(e)[prop] : '(nema elementa)';
+      }
+      return o;
+    }, MJERE);
+    for (const [ime, vr] of Object.entries(v)) {
+      (skup[ime] = skup[ime] || []).push([s, vr]);
+    }
+    await p.close();
+  }
+  for (const [ime, parovi] of Object.entries(skup)) {
+    const razl = [...new Set(parovi.map(([, v]) => v))];
+    tvrdi(`isto na svim stranicama — ${ime}`, razl.length === 1,
+          razl.length === 1 ? '' : parovi.map(([s, v]) => `${s}=${v}`).join('  '));
+  }
+}
+
 await b.close();
 
 console.log('\n' + '='.repeat(66));

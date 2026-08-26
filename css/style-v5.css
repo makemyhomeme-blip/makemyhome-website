@@ -1252,11 +1252,21 @@ ul { list-style: none; }
   gap: 10px;
 }
 
+/* ===== Spisak linkova u podnozju =====
+   Ovo pravilo je do sada bilo MRTVO: svaka stranica je u svom <style> bloku
+   nosila kopiju sa `display:block!important`, pa se grid nikad nije primijenio.
+   Kopija je bilo 22, u tri razlicite verzije — razmak 18px ili 20px, razmak
+   izmedju stavki 8px ili 9px, slova 13px ili 14px. Podnozje je zato izgledalo
+   drugacije na pocetnoj i katalogu nego na ostalih devetnaest stranica.
+   Kopije su obrisane; pravilo stoji samo ovdje. Velicina slova ostaje 14px iz
+   `.footer-links a` nize — ista na svim stranicama. */
 .footer-links-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px 16px;
+  display: block;
+  column-count: 2;
+  column-gap: 18px;
 }
+.footer-links-grid li { break-inside: avoid; margin-bottom: 9px; }
+.footer-links-grid a  { white-space: nowrap; }
 
 .footer-links a {
   font-size: 14px;
