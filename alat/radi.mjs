@@ -386,6 +386,45 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// 10c. INSPIRACIJA — filter mora stvarno filtrirati
+//
+// Zasto: filter je sakrivao fotografije preko `element.hidden = true`. Pregledac
+// to sprovodi pravilom `[hidden]{display:none}` iz svog podrazumijevanog stila,
+// a ono ima manju tezinu od `.insp-kart{display:block}` iz naseg CSS-a. Atribut
+// se postavljao, ali se nista nije mijenjalo: devet dugmadi je klikalo, a svih
+// 101 fotografija je ostajalo na ekranu. Nijedna dotadasnja provjera to nije
+// mogla vidjeti — dugmad su postojala i JavaScript nije prijavljivao gresku.
+// ─────────────────────────────────────────────────────────────────────────────
+{
+  const p = await novaStrana(b, 1440, 900);
+  await p.goto(put('/inspiracija.html'), { waitUntil: 'load' });
+  await p.waitForTimeout(2500);
+  const vidljive = () => p.evaluate(() =>
+    [...document.querySelectorAll('.insp-kart')].filter((e) => getComputedStyle(e).display !== 'none').length);
+
+  const sve = await vidljive();
+  tvrdi('inspiracija: ima fotografija', sve > 10, `${sve}`);
+
+  const cipovi = p.locator('.insp-chip[data-k]:not([data-k=""])');
+  const brCipova = await cipovi.count();
+  tvrdi('inspiracija: ima dugmadi filtera', brCipova > 1, `${brCipova}`);
+
+  if (sve > 10 && brCipova > 1) {
+    await cipovi.first().click();
+    await p.waitForTimeout(900);
+    const poslije = await vidljive();
+    tvrdi('inspiracija: filter smanjuje broj fotografija', poslije < sve && poslije > 0,
+          `${sve} -> ${poslije}`);
+
+    await p.locator('.insp-chip[data-k=""]').first().click();
+    await p.waitForTimeout(900);
+    const nazad = await vidljive();
+    tvrdi('inspiracija: "Sve" vraca fotografije', nazad > poslije, `${poslije} -> ${nazad}`);
+  }
+  await p.close();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // 11. ZAJEDNICKI DJELOVI — moraju izgledati ISTO na svakoj stranici
 //
 // Zasto: zaglavlje i podnozje su bili prepisani u <style> blok svake stranice,

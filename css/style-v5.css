@@ -2732,6 +2732,15 @@ textarea.form-control { resize: vertical; min-height: 130px; }
    vidjele na vrhu, a slike ispod ekrana su se svejedno ucitavale. */
 .insp-grid { display: flex; align-items: flex-start; gap: 14px; }
 .insp-kol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+/* Filter na Inspiraciji sakriva fotografije preko `element.hidden = true`.
+   Pregledac to sprovodi pravilom `[hidden]{display:none}` iz svog podrazumijevanog
+   stila — a ono ima manju tezinu od bilo kog naseg pravila sa klasom. Posto
+   `.insp-kart` nize postavlja `display:block`, atribut `hidden` nije radio nista:
+   svih devet dugmadi filtera je klikalo, a 101 fotografija je ostajala na ekranu.
+   Isto vazi i za poruku "nema rezultata". */
+.insp-kart[hidden],
+.insp-prazno[hidden] { display: none; }
+
 .insp-kart {
   display: block; position: relative; margin: 0;
   border-radius: 12px; overflow: hidden; text-decoration: none;
