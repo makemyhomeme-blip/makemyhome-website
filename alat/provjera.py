@@ -1973,6 +1973,65 @@ def grupa_J():
                 g.append('%s → u isporucenom HTML-u stoji "%s"' % (put, obrazac))
     zabiljezi('J5', 'U isporucenom HTML-u nema mrtvog zakomentarisanog koda', g, len(stranice) * 5)
 
+    # ---- J5b: cijene napisane u tekstu moraju postojati u podacima --------
+    #
+    # Zasto: u "Cesta pitanja" su stajale cijene 86,99 / 114,99 / 19,99 / 59,99…
+    # To su bile PUNE cijene, prije popusta, dok cijeli sajt prikazuje ono sto se
+    # stvarno placa (69,59 / 91,99 / 15,99 / 47,99). Kupac je u odgovoru citao
+    # cijenu za cetvrtinu vecu nego na stranici proizvoda. Isti tekst stoji i u
+    # strukturiranim podacima, pa ga je i Google mogao prikazati takvog.
+    g = []
+    provjereno = 0
+    try:
+        podaci = json.loads(open(os.path.join(KORIJEN, 'data', 'products.json'),
+                                 encoding='utf-8').read())
+        spisak = podaci.get('products', podaci) if isinstance(podaci, dict) else podaci
+        dozvoljene = set()
+        for x in spisak:
+            try:
+                puna = float(str(x.get('price', 0)).replace(',', '.'))
+            except Exception:
+                continue
+            pop = int(x.get('discount') or 0)
+            placa = round(puna * (1 - pop / 100.0), 2)
+            for v in (puna, placa):
+                dozvoljene.add('%.2f' % v)
+            # Tekst umije da navede i cijenu PO KVADRATU (npr. 20,35 € = 69,59 / 3,42).
+            # Povrsina po komadu se cita iz istih polja kao na stranici proizvoda.
+            pov = None
+            if (x.get('unit') or '') == 'm²':
+                pov = 1.0
+            else:
+                for f in (x.get('features') or []):
+                    m1 = re.search(r'\(\s*([\d]+[.,][\d]+)\s*m²', f)
+                    if m1:
+                        pov = float(m1.group(1).replace(',', '.')); break
+                    m2 = re.search(r'Dimenzije[^:]*:\s*([\d]+(?:[.,][\d]+)?)\s*[×x]\s*([\d]+(?:[.,][\d]+)?)\s*cm', f)
+                    if m2:
+                        pov = (float(m2.group(1).replace(',', '.')) / 100) * (float(m2.group(2).replace(',', '.')) / 100)
+                        break
+            if pov and pov > 0.05:
+                for v in (puna / pov, placa / pov):
+                    # zaokruzeno i na dvije i na jednu decimalu, kako se vec pise
+                    dozvoljene.add('%.2f' % round(v, 2))
+                    dozvoljene.add('%.2f' % round(v, 1))
+                    dozvoljene.add('%.2f' % round(v))
+        # tekstualne stranice u kojima se cijene pisu rukom
+        for ime in ('faq.html', 'montaza.html', 'paneli-za-kupatilo.html', 'tv-zid.html',
+                    'spc-ili-laminat.html', 'paneli-ili-lamperija.html',
+                    'akusticni-paneli-kancelarija.html'):
+            put = os.path.join(KORIJEN, ime)
+            if not os.path.exists(put):
+                continue
+            provjereno += 1
+            tekst = open(put, encoding='utf-8').read()
+            for iznos in set(re.findall(r'(\d{1,3},\d{2})\s*€', tekst)):
+                if iznos.replace(',', '.') not in dozvoljene:
+                    g.append('%s: pise %s € — takve cijene nema ni kod jednog proizvoda' % (ime, iznos))
+    except Exception as e:
+        g.append('ne mogu uporediti cijene: %s' % str(e)[:60])
+    zabiljezi('J5b', 'Cijene napisane u tekstu postoje i u podacima', g, provjereno)
+
     # ---- J6: brend u H1 i broj H1 ----------------------------------------
     g = []
     tijelo, _, _, _ = dohvati(BAZA + '/', timeout='25')

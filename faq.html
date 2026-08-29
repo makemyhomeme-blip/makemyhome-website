@@ -43,7 +43,7 @@
       {
         "@type": "Question",
         "name": "Koliko koštaju zidni paneli u Crnoj Gori?",
-        "acceptedAnswer": { "@type": "Answer", "text": "U Make My Home Decor ponudi bambus zidni panel dimenzija 280x122cm (3,42 m² po komadu) košta 86,99 € po komadu, što je oko 25 € po kvadratnom metru. Metalni bambus paneli su 114,99 € po komadu. 3D dekorativne letvice su 19,99 € po komadu, akustični paneli od 59,99 €, MDF paneli od 109,99 €, Flex Stone od 45,99 €, PU dekorativni kamen od 34,99 €, a SPC vodootporni pod 24,99 € po m². Aluminijum lajsne za spajanje panela su od 13,99 €. Cijene su za showroom u Podgorici i važe širom Crne Gore." }
+        "acceptedAnswer": { "@type": "Answer", "text": "U Make My Home Decor ponudi bambus zidni panel dimenzija 280×122 cm (3,42 m² po komadu) plaća se 69,59 € po komadu, što je oko 20 € po kvadratnom metru (redovna cijena 86,99 €). Metalni bambus paneli su 91,99 € po komadu. 3D dekorativne letvice su 15,99 € po komadu, akustični paneli od 47,99 €, MDF paneli od 87,99 €, Flex Stone od 36,79 €, PU dekorativni kamen od 27,99 €, a SPC vodootporni pod 17,49 € po m². Aluminijum lajsne za spajanje panela su od 13,99 €. Cijene su za showroom u Podgorici i važe širom Crne Gore." }
       },
       {
         "@type": "Question",
@@ -113,7 +113,7 @@
       {
         "@type": "Question",
         "name": "Koji panel je najbolji za smanjenje buke?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Za smanjenje buke koriste se akustični paneli — letvice na filcanoj podlozi koje upijaju zvuk i smanjuju odjek u prostoriji. Idealni su za home office, radne sobe, studije, sale za sastanke, kafiće i restorane, a istovremeno služe kao dekorativni element. U Make My Home Decor ponudi akustični paneli su od 59,99 € po komadu." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Za smanjenje buke koriste se akustični paneli — letvice na filcanoj podlozi koje upijaju zvuk i smanjuju odjek u prostoriji. Idealni su za home office, radne sobe, studije, sale za sastanke, kafiće i restorane, a istovremeno služe kao dekorativni element. U Make My Home Decor ponudi akustični paneli su od 47,99 € po komadu." }
       },
       {
         "@type": "Question",
@@ -142,25 +142,74 @@
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
 
-    /* ===== FAQ ===== */
+    /* ===== ČESTA PITANJA =====
+       Stranica je na telefonu bila visoka 10 012 px — dvanaest ekrana — i svih
+       28 blokova je izgledalo isto: bijela kutija, okvir, sjenka, zaobljeni
+       uglovi, ista slova. Oko nije imalo za sta da se uhvati.
+
+       Sada: pitanja su harmonika (vidi se samo pitanje), a dvanaest vodica je
+       jedan spisak sa tankim linijama umjesto dvanaest kutija. */
     .faq-wrap{padding:66px 0 80px;}
     .faq-group{margin-bottom:44px;}
-    .faq-group-title{display:flex;align-items:center;gap:12px;font-family:var(--font-heading);font-size:22px;color:var(--dark);margin:0 0 20px;padding-bottom:12px;border-bottom:2px solid rgba(201,168,108,0.3);}
+    .faq-group-title{display:flex;align-items:center;gap:12px;font-family:var(--font-heading);font-size:22px;color:var(--dark);margin:0 0 18px;padding-bottom:12px;border-bottom:2px solid rgba(201,168,108,0.3);}
     .faq-group-title i{color:var(--primary);font-size:18px;}
-    .faq-item{background:#fff;border:1px solid rgba(0,0,0,0.07);border-radius:14px;padding:22px 24px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
-    .faq-item h3{font-size:17px;color:var(--dark);margin:0 0 10px;line-height:1.4;display:flex;gap:10px;align-items:flex-start;}
-    .faq-item h3 span.q{color:#795f32;font-weight:800;flex-shrink:0;}
-    .faq-item p{font-size:15px;color:var(--dark-2);line-height:1.8;margin:0;}
-    .faq-item p + p{margin-top:10px;}
-    .faq-intro{max-width:760px;margin:0 auto 44px;text-align:center;font-size:16px;color:var(--gray);line-height:1.8;}
+
+    /* Harmonika: <details> radi bez JavaScripta, a odgovor ostaje u HTML-u pa
+       ga Google i dalje cita. */
+    .faq-item{background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;margin-bottom:8px;overflow:hidden;}
+    .faq-item summary{list-style:none;cursor:pointer;padding:16px 46px 16px 18px;position:relative;}
+    .faq-item summary::-webkit-details-marker{display:none;}
+    .faq-item summary::after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;margin-top:-5px;border-right:2px solid #a9a29a;border-bottom:2px solid #a9a29a;transform:rotate(45deg);transition:transform .2s;}
+    .faq-item[open] summary::after{transform:rotate(225deg);margin-top:-2px;}
+    .faq-item[open] summary{border-bottom:1px solid rgba(0,0,0,0.07);}
+    .faq-item summary h3{font-size:15.5px;font-weight:700;color:var(--dark);margin:0;line-height:1.45;display:inline;}
+    .faq-item summary:hover h3{color:#795f32;}
+    .faq-odg{padding:14px 18px 18px;}
+    .faq-odg p{font-size:14.5px;color:var(--dark-2);line-height:1.75;margin:0;}
+    .faq-odg p + p{margin-top:10px;}
+    .faq-intro{max-width:700px;margin:0 auto 40px;text-align:center;font-size:15.5px;color:var(--gray);line-height:1.75;}
+    .faq-uvod-mali{margin:0 0 16px;color:#5a6672;line-height:1.6;font-size:14px;}
+
+    /* Vodici: jedan spisak umjesto dvanaest kutija */
+    .vodici-grid{border:1px solid rgba(201,168,108,.28);border-radius:14px;overflow:hidden;background:#fff;}
+    .vodici-grid .vodic-kartica{
+      display:grid;grid-template-columns:34px minmax(0,1fr) 14px;align-items:center;
+      column-gap:13px;row-gap:2px;background:none;border:0;border-radius:0;
+      border-bottom:1px solid rgba(201,168,108,.18);padding:13px 16px;transform:none;box-shadow:none;
+    }
+    .vodici-grid .vodic-kartica:last-child{border-bottom:0;}
+    .vodici-grid .vodic-kartica:hover{transform:none;box-shadow:none;background:#faf7f2;border-color:rgba(201,168,108,.18);}
+    .vodici-grid .vodic-kartica i{
+      grid-column:1;grid-row:1/span 2;align-self:center;width:34px;height:34px;margin:0;
+      display:flex;align-items:center;justify-content:center;font-size:15px;
+      background:rgba(201,168,108,.13);border-radius:9px;color:#795f32;
+    }
+    .vodici-grid .vodic-kartica span{grid-column:2;grid-row:1/span 2;min-width:0;}
+    .vodici-grid .vodic-kartica strong{font-size:15px;font-weight:700;margin:0 0 1px;}
+    /* Opis se sijece na dva reda — treci red je uvijek bio nastavak iste
+       recenice i samo je rastezao spisak. */
+    .vodici-grid .vodic-kartica em{
+      font-size:12.5px;line-height:1.45;
+      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    }
+    .vodici-grid .vodic-kartica::after{
+      content:"";grid-column:3;grid-row:1/span 2;align-self:center;justify-self:end;
+      width:7px;height:7px;border-right:2px solid rgba(0,0,0,.28);border-bottom:2px solid rgba(0,0,0,.28);
+      transform:rotate(-45deg);
+    }
     .faq-cta{background:var(--dark);border-radius:20px;padding:44px 32px;text-align:center;margin-top:16px;}
     .faq-cta h2{color:#fff;font-size:26px;margin-bottom:10px;}
     .faq-cta p{color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:26px;}
     .faq-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
     @media(max-width:768px){
-      .faq-group-title{font-size:19px;}
-      .faq-item{padding:18px 18px;}
-      .faq-item h3{font-size:16px;}
+      .faq-wrap{padding:40px 0 60px;}
+      .faq-group{margin-bottom:34px;}
+      .faq-group-title{font-size:18px;margin-bottom:14px;}
+      .faq-intro{font-size:14.5px;margin-bottom:28px;}
+      .faq-item summary{padding:14px 42px 14px 15px;}
+      .faq-item summary h3{font-size:14.5px;}
+      .faq-odg{padding:12px 15px 16px;}
+      .faq-odg p{font-size:13.5px;line-height:1.7;}
       .faq-cta-btns{flex-direction:column;align-items:center;}
       .faq-cta-btns .btn{width:100%;max-width:320px;justify-content:center;}
     }
@@ -318,10 +367,7 @@
 
     <div class="faq-group" id="vodici">
       <h2 class="faq-group-title"><i class="fas fa-book-open"></i> Vodiči — detaljni odgovori</h2>
-      <p style="margin:0 0 20px;color:#5a6672;line-height:1.75;font-size:15.5px;">
-        Za pitanja koja traže više od par rečenica napisali smo posebne stranice.
-        Svaka ima konkretne brojke — koliko komada treba, koliko košta i šta ne valja uraditi.
-      </p>
+      <p class="faq-uvod-mali">Posebne stranice sa konkretnim brojkama — koliko komada treba, koliko košta i šta ne valja uraditi.</p>
       <div class="vodici-grid">
         <a href="paneli-za-kupatilo.html" class="vodic-kartica">
           <i class="fas fa-shower"></i>
@@ -366,103 +412,103 @@
     <div class="faq-group">
       <h2 class="faq-group-title"><i class="fas fa-tags"></i> Cijene i kupovina</h2>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Gdje mogu kupiti zidne panele u Podgorici?</h3>
-        <p>Zidne panele u Podgorici možete kupiti u <strong>showroomu Make My Home Decor</strong> na adresi Vojvode Maša Đurovića 43, City Kvart, Podgorica. U ponudi su bambus zidni paneli, 3D dekorativne letvice, akustični paneli, MDF paneli, PU dekorativni kamen, Flex Stone obloge i SPC podovi. Radno vrijeme: ponedjeljak–petak 09:00–20:00, subota 10:00–17:00. Telefon: <a href="tel:+38269105222">069 105 222</a>. Kompletan katalog sa cijenama dostupan je i online na ovom sajtu.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Gdje mogu kupiti zidne panele u Podgorici?</h3></summary>
+        <div class="faq-odg"><p>Zidne panele u Podgorici možete kupiti u <strong>showroomu Make My Home Decor</strong> na adresi Vojvode Maša Đurovića 43, City Kvart, Podgorica. U ponudi su bambus zidni paneli, 3D dekorativne letvice, akustični paneli, MDF paneli, PU dekorativni kamen, Flex Stone obloge i SPC podovi. Radno vrijeme: ponedjeljak–petak 09:00–20:00, subota 10:00–17:00. Telefon: <a href="tel:+38269105222">069 105 222</a>. Kompletan katalog sa cijenama dostupan je i online na ovom sajtu.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Koliko koštaju zidni paneli u Crnoj Gori?</h3>
-        <p>Bambus zidni panel <strong>280x122cm (3,42 m² po komadu)</strong> košta <strong>86,99 €</strong> po komadu, što je oko <strong>25 € po kvadratnom metru</strong>. Metalni bambus paneli su 114,99 € po komadu.</p>
-        <p>Ostale kategorije: 3D dekorativne letvice <strong>19,99 €</strong> po komadu, akustični paneli od <strong>59,99 €</strong>, MDF paneli od <strong>109,99 €</strong>, Flex Stone od <strong>45,99 €</strong>, PU dekorativni kamen od <strong>34,99 €</strong>, SPC vodootporni pod <strong>24,99 € po m²</strong>, aluminijum lajsne od <strong>13,99 €</strong>. Aktuelne akcijske cijene vidite na stranici svakog proizvoda.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Koliko koštaju zidni paneli u Crnoj Gori?</h3></summary>
+        <div class="faq-odg"><p>Bambus zidni panel <strong>280×122 cm (3,42 m² po komadu)</strong> trenutno se plaća <strong>69,59 €</strong> po komadu — oko <strong>20 € po kvadratnom metru</strong> (redovna cijena 86,99 €). Metalni bambus paneli su 91,99 € po komadu.</p>
+        <p>Ostale kategorije: 3D dekorativne letvice <strong>15,99 €</strong> po komadu, akustični paneli od <strong>47,99 €</strong>, MDF paneli od <strong>87,99 €</strong>, Flex Stone od <strong>36,79 €</strong>, PU dekorativni kamen od <strong>27,99 €</strong>, SPC vodootporni pod <strong>17,49 € po m²</strong>, aluminijum lajsne od <strong>13,99 €</strong>. Ovo su cijene koje se plaćaju danas; tačan iznos za svaki dezen stoji na njegovoj stranici i u <a href="cjenovnik.html">cjenovniku</a>.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Koliko kvadrata pokriva jedan panel i kako da izračunam koliko mi treba?</h3>
-        <p>Jedan bambus panel <strong>280x122cm pokriva 3,42 m²</strong> zida — za zid od 10 m² treba oko 3 panela. SPC pod daska (122x18cm) pokriva 0,22 m², a SPC pločica (61,5x31cm) 0,19 m².</p>
-        <p>Na stranici svakog proizvoda imate <strong>kalkulator</strong>: unesete širinu i visinu zida i odmah dobijete potreban broj komada i cijenu.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Koliko kvadrata pokriva jedan panel i kako da izračunam koliko mi treba?</h3></summary>
+        <div class="faq-odg"><p>Jedan bambus panel <strong>280x122cm pokriva 3,42 m²</strong> zida — za zid od 10 m² treba oko 3 panela. SPC pod daska (122x18cm) pokriva 0,22 m², a SPC pločica (61,5x31cm) 0,19 m².</p>
+        <p>Na stranici svakog proizvoda imate <strong>kalkulator</strong>: unesete širinu i visinu zida i odmah dobijete potreban broj komada i cijenu.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Koliko dezena i modela imate u ponudi?</h3>
-        <p>U ponudi imamo <strong>preko 300 dezena</strong>, od čega je 117 modela dostupno online sa cijenama. Kategorije: bambus paneli (drveni, tekstilni, mermerni, metalni, kožni), Classic paneli, 3D dekorativne letvice, akustični paneli, MDF paneli, PU dekorativni kamen, Flex Stone obloge, aluminijum lajsne i SPC podovi.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Koliko dezena i modela imate u ponudi?</h3></summary>
+        <div class="faq-odg"><p>U ponudi imamo <strong>preko 300 dezena</strong>, od čega je 117 modela dostupno online sa cijenama. Kategorije: bambus paneli (drveni, tekstilni, mermerni, metalni, kožni), Classic paneli, 3D dekorativne letvice, akustični paneli, MDF paneli, PU dekorativni kamen, Flex Stone obloge, aluminijum lajsne i SPC podovi.</p></div>
+      </details>
     </div>
 
     <!-- MONTAŽA -->
     <div class="faq-group">
       <h2 class="faq-group-title"><i class="fas fa-tools"></i> Montaža i održavanje</h2>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Kako se montiraju zidni paneli?</h3>
-        <p>Bambus paneli i 3D letvice se montiraju <strong>lijepljenjem</strong> — montažni silikon se nanosi na zid ili panel, a panel se pritisne na zid. Sijeku se <strong>skalpelom ili nožem</strong>, bez testere i bušenja. Zid treba biti suh i relativno ravan.</p>
-        <p>Većina naših kupaca montira panele sama, <strong>bez majstora</strong>. Za spojeve i završne ivice koriste se aluminijum lajsne. SPC podovi se postavljaju <strong>click-lock sistemom bez ljepila</strong>, plutajuće preko postojećeg poda.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Kako se montiraju zidni paneli?</h3></summary>
+        <div class="faq-odg"><p>Bambus paneli i 3D letvice se montiraju <strong>lijepljenjem</strong> — montažni silikon se nanosi na zid ili panel, a panel se pritisne na zid. Sijeku se <strong>skalpelom ili nožem</strong>, bez testere i bušenja. Zid treba biti suh i relativno ravan.</p>
+        <p>Većina naših kupaca montira panele sama, <strong>bez majstora</strong>. Za spojeve i završne ivice koriste se aluminijum lajsne. SPC podovi se postavljaju <strong>click-lock sistemom bez ljepila</strong>, plutajuće preko postojećeg poda.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Mogu li paneli preko starog zida, pločica ili tapeta?</h3>
-        <p>Da. Paneli se lijepe preko postojećeg <strong>maltera, gipsa, starih pločica ili čvrsto zalijepljenih tapeta</strong>, ako je površina stabilna, suha i ne ljušti se. To znači <strong>bez rušenja, prašine i velikih radova</strong> — zid se obnavlja u jednom danu. Isto važi i za SPC pod koji ide preko starog poda.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Mogu li paneli preko starog zida, pločica ili tapeta?</h3></summary>
+        <div class="faq-odg"><p>Da. Paneli se lijepe preko postojećeg <strong>maltera, gipsa, starih pločica ili čvrsto zalijepljenih tapeta</strong>, ako je površina stabilna, suha i ne ljušti se. To znači <strong>bez rušenja, prašine i velikih radova</strong> — zid se obnavlja u jednom danu. Isto važi i za SPC pod koji ide preko starog poda.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Mogu li paneli na plafon?</h3>
-        <p>Da. Bambus paneli i 3D letvice pogodni su i za <strong>plafone</strong> — često se koriste za spuštene plafone i plafonske akcente u dnevnim sobama, hodnicima, kafićima i restoranima. Zbog male težine i debljine od 5mm lako se lijepe i na plafon.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Mogu li paneli na plafon?</h3></summary>
+        <div class="faq-odg"><p>Da. Bambus paneli i 3D letvice pogodni su i za <strong>plafone</strong> — često se koriste za spuštene plafone i plafonske akcente u dnevnim sobama, hodnicima, kafićima i restoranima. Zbog male težine i debljine od 5mm lako se lijepe i na plafon.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Kako se paneli održavaju i čiste?</h3>
-        <p>Čiste se <strong>vlažnom krpom</strong>, bez abrazivnih sredstava. Površina ima <strong>UV zaštitu</strong> pa ne blijedi na suncu i otporna je na prljavštinu. Nema lakiranja, brušenja ni periodičnog održavanja kao kod pravog drveta ili lamperije.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Kako se paneli održavaju i čiste?</h3></summary>
+        <div class="faq-odg"><p>Čiste se <strong>vlažnom krpom</strong>, bez abrazivnih sredstava. Površina ima <strong>UV zaštitu</strong> pa ne blijedi na suncu i otporna je na prljavštinu. Nema lakiranja, brušenja ni periodičnog održavanja kao kod pravog drveta ili lamperije.</p></div>
+      </details>
     </div>
 
     <!-- IZBOR MATERIJALA -->
     <div class="faq-group">
       <h2 class="faq-group-title"><i class="fas fa-lightbulb"></i> Izbor materijala i primjena</h2>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Mogu li se paneli koristiti u kupatilu?</h3>
-        <p>Da. Naši bambus paneli su <strong>vodootporni</strong> — ne nabreknu i ne deformišu se od vode, otporni su na buđ i vlagu, pa su pogodni za kupatilo, kuhinju i vlažne prostorije. Za kupatilo se najčešće biraju <strong>mermerni bambus paneli</strong> jer daju izgled mermera bez cijene i težine pravog kamena. PU kamen i SPC podovi su takođe 100% vodootporni. Ne preporučujemo postavljanje direktno u tuš-kabinu gdje voda stalno pada.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Mogu li se paneli koristiti u kupatilu?</h3></summary>
+        <div class="faq-odg"><p>Da. Naši bambus paneli su <strong>vodootporni</strong> — ne nabreknu i ne deformišu se od vode, otporni su na buđ i vlagu, pa su pogodni za kupatilo, kuhinju i vlažne prostorije. Za kupatilo se najčešće biraju <strong>mermerni bambus paneli</strong> jer daju izgled mermera bez cijene i težine pravog kamena. PU kamen i SPC podovi su takođe 100% vodootporni. Ne preporučujemo postavljanje direktno u tuš-kabinu gdje voda stalno pada.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Koji paneli su najbolji za TV zid ili akcentni zid?</h3>
-        <p>Za <strong>TV zid i akcentni zid iza kreveta</strong> najčešće se biraju <strong>3D dekorativne letvice</strong> — vertikalni rebrasti profil igrom svjetla i sjene daje dubinu i moderan izgled. Popularni su i bambus paneli u drvenom ili mermernom dezenu, te MDF kanelirani paneli. Za izgled kamena ili cigle iza televizora ili kamina najbolji je <strong>PU dekorativni kamen</strong>.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Koji paneli su najbolji za TV zid ili akcentni zid?</h3></summary>
+        <div class="faq-odg"><p>Za <strong>TV zid i akcentni zid iza kreveta</strong> najčešće se biraju <strong>3D dekorativne letvice</strong> — vertikalni rebrasti profil igrom svjetla i sjene daje dubinu i moderan izgled. Popularni su i bambus paneli u drvenom ili mermernom dezenu, te MDF kanelirani paneli. Za izgled kamena ili cigle iza televizora ili kamina najbolji je <strong>PU dekorativni kamen</strong>.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Koji panel smanjuje buku u prostoriji?</h3>
-        <p><strong>Akustični paneli</strong> — letvice na filcanoj podlozi koje upijaju zvuk i smanjuju odjek. Idealni za home office, radne sobe, studije, sale za sastanke, kafiće i restorane, a istovremeno služe kao dekorativni element. Cijena od <strong>59,99 €</strong> po komadu.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Koji panel smanjuje buku u prostoriji?</h3></summary>
+        <div class="faq-odg"><p><strong>Akustični paneli</strong> — letvice na filcanoj podlozi koje upijaju zvuk i smanjuju odjek. Idealni za home office, radne sobe, studije, sale za sastanke, kafiće i restorane, a istovremeno služe kao dekorativni element. Cijena od <strong>47,99 €</strong> po komadu.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Koja je razlika između bambus panela i klasične lamperije?</h3>
-        <p>Bambus paneli su <strong>moderna zamjena za drvenu lamperiju</strong>. Prednosti: vodootporni su i ne deformišu se od vlage, ne treba ih lakirati ni održavati, dolaze u velikom formatu 280x122cm (malo spojeva na velikom zidu), montiraju se lijepljenjem bez letvica i bušenja, i imaju veći izbor dezena — drvo, mermer, tekstil, metal, koža. Debljina je samo <strong>5mm</strong> pa ne smanjuju prostor.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Koja je razlika između bambus panela i klasične lamperije?</h3></summary>
+        <div class="faq-odg"><p>Bambus paneli su <strong>moderna zamjena za drvenu lamperiju</strong>. Prednosti: vodootporni su i ne deformišu se od vlage, ne treba ih lakirati ni održavati, dolaze u velikom formatu 280x122cm (malo spojeva na velikom zidu), montiraju se lijepljenjem bez letvica i bušenja, i imaju veći izbor dezena — drvo, mermer, tekstil, metal, koža. Debljina je samo <strong>5mm</strong> pa ne smanjuju prostor.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Da li su paneli vatrootporni?</h3>
-        <p>Da — bambus paneli imaju klasu vatrootpornosti <strong>B1</strong>, što znači da usporavaju širenje plamena i teško se zapaljuju. Zato su pogodni i za javne i poslovne prostore: kafiće, restorane, hotele, recepcije i kancelarije.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Da li su paneli vatrootporni?</h3></summary>
+        <div class="faq-odg"><p>Da — bambus paneli imaju klasu vatrootpornosti <strong>B1</strong>, što znači da usporavaju širenje plamena i teško se zapaljuju. Zato su pogodni i za javne i poslovne prostore: kafiće, restorane, hotele, recepcije i kancelarije.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Mogu li paneli u kafić, restoran, hotel ili poslovni prostor?</h3>
-        <p>Da. Bambus paneli su <strong>vatrootporni (B1), vodootporni i otporni na habanje</strong>, pa se redovno koriste u kafićima, restoranima, hotelima, apartmanima, recepcijama, kancelarijama i wellness prostorima. Za veće projekte kroz <a href="decor-box.html" style="color:#795f32;font-weight:600;">Decor Box program</a> nudimo posebne uslove, tehničke listove i specifikacije za tendere.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Mogu li paneli u kafić, restoran, hotel ili poslovni prostor?</h3></summary>
+        <div class="faq-odg"><p>Da. Bambus paneli su <strong>vatrootporni (B1), vodootporni i otporni na habanje</strong>, pa se redovno koriste u kafićima, restoranima, hotelima, apartmanima, recepcijama, kancelarijama i wellness prostorima. Za veće projekte kroz <a href="decor-box.html" style="color:#795f32;font-weight:600;">Decor Box program</a> nudimo posebne uslove, tehničke listove i specifikacije za tendere.</p></div>
+      </details>
     </div>
 
     <!-- DOSTAVA I SARADNJA -->
     <div class="faq-group">
       <h2 class="faq-group-title"><i class="fas fa-truck"></i> Dostava i saradnja</h2>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Kolika je dostava i gdje dostavljate?</h3>
-        <p>Šaljemo <strong>kurirskom službom širom Crne Gore</strong> — Podgorica, Nikšić, Bar, Budva, Herceg Novi, Kotor, Tivat, Bijelo Polje, Berane i ostali gradovi. Dostava je <strong>okvirno 20 €</strong>, konačna cijena zavisi od količine panela. Rok isporuke obično <strong>1–4 radna dana</strong>. Plaćanje je moguće <strong>pouzećem</strong>. Moguće je i lično preuzimanje u showroomu u City Kvartu.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Kolika je dostava i gdje dostavljate?</h3></summary>
+        <div class="faq-odg"><p>Šaljemo <strong>kurirskom službom širom Crne Gore</strong> — Podgorica, Nikšić, Bar, Budva, Herceg Novi, Kotor, Tivat, Bijelo Polje, Berane i ostali gradovi. Dostava je <strong>okvirno 20 €</strong>, konačna cijena zavisi od količine panela. Rok isporuke obično <strong>1–4 radna dana</strong>. Plaćanje je moguće <strong>pouzećem</strong>. Moguće je i lično preuzimanje u showroomu u City Kvartu.</p></div>
+      </details>
 
-      <div class="faq-item">
-        <h3><span class="q">Q</span> Nudite li saradnju arhitektama, dizajnerima i izvođačima?</h3>
-        <p>Da — program se zove <strong><a href="decor-box.html" style="color:#795f32;">Decor Box</a></strong> i namijenjen je arhitektama, dizajnerima enterijera, izvođačima i građevinskim kompanijama. Partneri dobijaju posebne uslove saradnje, fizičke uzorke i kataloge za prezentaciju klijentima, stručnu podršku pri izboru materijala, ponude prilagođene projektu i podršku od ideje do realizacije. Imamo <strong>sopstvenu proizvodnju u Beogradu</strong>, što garantuje kvalitet i pouzdane rokove.</p>
-      </div>
+      <details class="faq-item">
+        <summary><h3>Nudite li saradnju arhitektama, dizajnerima i izvođačima?</h3></summary>
+        <div class="faq-odg"><p>Da — program se zove <strong><a href="decor-box.html" style="color:#795f32;">Decor Box</a></strong> i namijenjen je arhitektama, dizajnerima enterijera, izvođačima i građevinskim kompanijama. Partneri dobijaju posebne uslove saradnje, fizičke uzorke i kataloge za prezentaciju klijentima, stručnu podršku pri izboru materijala, ponude prilagođene projektu i podršku od ideje do realizacije. Imamo <strong>sopstvenu proizvodnju u Beogradu</strong>, što garantuje kvalitet i pouzdane rokove.</p></div>
+      </details>
     </div>
 
     <div class="faq-cta">
