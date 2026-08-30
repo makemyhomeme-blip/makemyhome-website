@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=3207a54a">
+  <link rel="stylesheet" href="css/style-v5.css?v=625f580c">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -888,9 +888,14 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           </div>
 
 
-          <!-- Na telefonu harmonika stoji ovdje; na racunaru ispod glavne slike -->
-          <div class="accordion-mobile-only"><?= mmhHarmonikaHTML($product) ?></div>
-
+          <?php /* Ovdje je stajala DRUGA kopija harmonike, za telefon. Ista lista
+                   karakteristika — dimenzije, boja, montaza, cijena po m² — bila
+                   je time ispisana dva puta na svakoj od 117 stranica proizvoda:
+                   jednom ispod slike (za racunar), jednom ovdje (za telefon).
+                   CSS je jednu od njih krio, ali su obje isle Google-u i objema
+                   je rastao HTML.
+                   Sada postoji jedan ispis, a redoslijed na telefonu se rjesava
+                   CSS-om (vidi `display: contents` u style-v5.css). */ ?>
           <?php else: ?>
           <div class="loading-placeholder" style="height:400px;"></div>
           <?php endif; ?>

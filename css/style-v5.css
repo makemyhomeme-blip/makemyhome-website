@@ -1445,16 +1445,33 @@ ul { list-style: none; }
   max-width: 100%;
 }
 
-.gallery-specs-desktop { display: none; }
-
-/* Na desktopu su sve sekcije (Karakteristike, Idealno za & Stil, O Proizvodu) uvijek otvorene */
-.gallery-specs-desktop .spec-body { display: block !important; }
-.gallery-specs-desktop .spec-arrow { transform: rotate(180deg) !important; }
-.gallery-specs-desktop .spec-header { cursor: default; }
+/* Harmonika sa karakteristikama se ispisuje SAMO JEDNOM, unutar leve kolone.
+   Ranije su postojale dvije kopije — jedna za racunar, jedna za telefon — pa je
+   ista lista stajala dva puta u HTML-u svake stranice proizvoda.
+   Na telefonu obje kolone postaju `display: contents`, pa njihova djeca ulaze
+   pravo u mrezu i redoslijed se odredjuje sa `order`:
+       slike (1) -> cijena i dugmad (2) -> karakteristike (3) -> dostava (4)
+   To je isti redoslijed koji je i ranije vidio kupac, samo bez druge kopije. */
+.gallery-specs-desktop { display: block; }
 
 @media (min-width: 1025px) {
-  .gallery-specs-desktop { display: block; margin-top: 20px; }
-  .product-info .accordion-mobile-only { display: none; }
+  .gallery-specs-desktop { margin-top: 20px; }
+  /* Na racunaru ima mjesta, pa su sve sekcije (Karakteristike, Idealno za &
+     Stil, O Proizvodu) stalno otvorene i harmonika se ne sklapa.
+     Ova pravila su ranije stajala van medija — dok su postojale dvije kopije
+     to nije smetalo, jer je mobilna bila druga. Sada je kopija jedna, pa bi
+     bez ovog ogranicenja harmonika bila trajno otvorena i na telefonu. */
+  .gallery-specs-desktop .spec-body { display: block !important; }
+  .gallery-specs-desktop .spec-arrow { transform: rotate(180deg) !important; }
+  .gallery-specs-desktop .spec-header { cursor: default; }
+}
+
+@media (max-width: 1024px) {
+  .product-gallery, .product-info { display: contents; }
+  .product-gallery > *  { order: 1; }
+  #product-info-content { order: 2; }
+  #gallery-specs        { order: 3; margin-top: 4px; }
+  .p-side               { order: 4; }
 }
 
 .gallery-main {

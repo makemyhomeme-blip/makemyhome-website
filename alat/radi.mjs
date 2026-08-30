@@ -258,11 +258,12 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
   const p = await novaStrana(b, 390, 844);
   await p.goto(put('/paneli/3d-letvica-deva'), { waitUntil: 'load' });
   await p.waitForTimeout(1800);
-  /* Strogo unutar mobilnog bloka: selektor sa zarezom bi pokupio i onu kopiju
-     harmonike koja stoji ispod slike za racunar, a ona je na telefonu skrivena. */
-  const zaglavlja = p.locator('.accordion-mobile-only .spec-header');
+  /* Harmonika se od sada ispisuje SAMO JEDNOM, u #gallery-specs; ranije su
+     postojale dvije kopije (jedna za racunar, jedna za telefon) pa je ista
+     lista karakteristika stajala dva puta u HTML-u. */
+  const zaglavlja = p.locator('#gallery-specs .spec-header');
   if (await zaglavlja.count() > 1) {
-    const tijelo = p.locator('.accordion-mobile-only .spec-body').nth(1);
+    const tijelo = p.locator('#gallery-specs .spec-body').nth(1);
     const prije = await tijelo.isVisible().catch(() => false);
     await zaglavlja.nth(1).click().catch(() => {});
     await p.waitForTimeout(700);
@@ -272,6 +273,10 @@ for (const [ime, w, h, hamburger] of [['racunar', 1440, 900, false], ['telefon',
   } else {
     tvrdi('harmonika (telefon): ima vise odjeljaka', false);
   }
+  // Ista lista ne smije biti ispisana dva puta.
+  tvrdi('harmonika: ispisana samo jednom',
+        (await p.locator('.spec-accordion').count()) === 1,
+        `${await p.locator('.spec-accordion').count()} kopija`);
   await p.close();
 }
 
