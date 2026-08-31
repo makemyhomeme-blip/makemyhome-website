@@ -3038,14 +3038,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .srodni-desno   { right: -18px; }
 
 @media (max-width: 900px) {
-  /* Na telefonu se prevlaci prstom, pa su strelice suvisne — a stajale su preko
-     susjedne kartice (izgledalo je kao odlutalo dugme). Skrivamo ih; ostaje cist
-     swipe. Kartica je sira (85%) pa se sljedeca vidi kao tanka najava, umjesto
-     velike presjecene kartice. Mala leva rezerva da prva kartica ne bude
-     zalijepljena za ivicu ekrana. */
+  /* Kartice srodnih proizvoda su bile PREVELIKE (jedna je zauzimala skoro cijeli
+     ekran). Sada su iste velicine kao kartice u katalogu — DVIJE stanu u red,
+     manje i proporcionalno. Strelice skrivene, prevlaci se prstom. */
   .srodni-strelica { display: none !important; }
-  .srodni-traka { scroll-padding-left: 4px; }
-  .srodni-traka > .product-card { flex: 0 0 85%; max-width: 85%; }
+  .srodni-traka { gap: 12px; scroll-padding-left: 4px; }
+  .srodni-traka > .product-card { flex: 0 0 46%; max-width: 46%; }
 }
 
 /* ===== "Prije nego naručite" — tri prečice =====
