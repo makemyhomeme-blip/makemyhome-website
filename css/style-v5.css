@@ -1186,12 +1186,11 @@ ul { list-style: none; }
 }
 
 .footer-grid {
-  /* Kontakt (adresa, telefon, mejl, radno vrijeme) je spojen u lijevi blok,
-     ispod drustvenih mreza. Zato tri kolone umjesto cetiri, a Navigacija i
-     Kategorije dobijaju vise sirine. align-items:start da kolone ne budu
-     rastegnute na istu visinu (kraca Navigacija je pravila prazninu ispod). */
+  /* Kontakt je spojen u lijevi (brend) blok, a "Navigacija" kolona je uklonjena
+     jer duplira glavni meni iz zaglavlja. Ostaju dvije kolone: brend + Kategorije.
+     align-items:start da kolone ne budu rastegnute na istu visinu. */
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1.05fr;
+  grid-template-columns: 1.5fr 1.05fr;
   gap: 40px 48px;
   align-items: start;
   margin-bottom: 48px;
