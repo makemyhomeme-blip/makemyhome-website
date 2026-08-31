@@ -1242,7 +1242,23 @@ ul { list-style: none; }
 .social-btn:hover,
 .social-btn:focus-visible { background: var(--primary); color: #1a1a1a; border-color: var(--primary); }
 
-/* stari hover je zamijenjen pravilom iznad */
+/* Drustvene mreze u BREND bojama umjesto zlatnog obruba: bijela ikonica na
+   ispuni brenda. TikTok je crn kao i futer, pa dobija tanak svijetli obrub da se
+   vidi. Boje su definisane poslije hover pravila iznad, pa ostaju i na hover. */
+.footer-social .social-btn { color: #fff; border: none; }
+.footer-social .social-btn[title="Instagram"] { background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); }
+.footer-social .social-btn[title="Facebook"]  { background: #1877f2; }
+.footer-social .social-btn[title="WhatsApp"]  { background: #25d366; }
+.footer-social .social-btn[title="Viber"]     { background: #7360f2; }
+.footer-social .social-btn[title="TikTok"]    { background: #000; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.30); }
+.footer-social .social-btn[title="Email"]     { background: #ea4335; }
+.footer-social .social-btn:hover,
+.footer-social .social-btn:focus-visible { color: #fff; transform: translateY(-2px); filter: brightness(1.1); }
+
+/* Na telefonu red ikonica ide na sredinu. */
+@media (max-width: 768px) {
+  .footer-social { justify-content: center; }
+}
 
 /* Kontakt u lijevom bloku: odvojen tankom linijom od mreza, redovi malo zbijeni. */
 /* Veca specificnost: .footer-contact-list nize u fajlu inace pobjedjuje sa gap:14px. */
