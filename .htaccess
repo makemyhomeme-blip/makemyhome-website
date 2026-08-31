@@ -144,8 +144,8 @@ RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 # kroz ISTI resolver (404.php + slug-match.php, odnosno pravila iznad) i odu na pravu
 # adresu JEDNIM 301 skokom — umjesto da /?product=spc02 vraca homepage kao 200 duplikat.
 RewriteCond %{REQUEST_URI} ^/?$
-RewriteCond %{QUERY_STRING} (^|&)product=[^&]
-RewriteRule ^ /wc-product-redirect [L]
+RewriteCond %{QUERY_STRING} (^|&)product=([^&]+)
+RewriteRule ^ /product/%2/? [R=301,L]
 
 RewriteCond %{REQUEST_URI} ^/?$
 RewriteCond %{QUERY_STRING} (^|&)product_cat=([^&]+)
