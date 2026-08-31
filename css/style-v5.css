@@ -3023,13 +3023,14 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .srodni-desno   { right: -18px; }
 
 @media (max-width: 900px) {
-  /* Na telefonu se prevlaci prstom, pa strelice stoje unutar okvira da ne vise
-     preko ivice ekrana. Podignute su na visinu slike da ne pokrivaju ime
-     proizvoda i cijenu. */
-  .srodni-lijevo  { left: 4px; }
-  .srodni-desno   { right: 4px; }
-  .srodni-strelica { top: 25%; width: 40px; height: 40px; }
-  .srodni-traka > .product-card { flex: 0 0 78%; max-width: 78%; }
+  /* Na telefonu se prevlaci prstom, pa su strelice suvisne — a stajale su preko
+     susjedne kartice (izgledalo je kao odlutalo dugme). Skrivamo ih; ostaje cist
+     swipe. Kartica je sira (85%) pa se sljedeca vidi kao tanka najava, umjesto
+     velike presjecene kartice. Mala leva rezerva da prva kartica ne bude
+     zalijepljena za ivicu ekrana. */
+  .srodni-strelica { display: none !important; }
+  .srodni-traka { scroll-padding-left: 4px; }
+  .srodni-traka > .product-card { flex: 0 0 85%; max-width: 85%; }
 }
 
 /* ===== "Prije nego naručite" — tri prečice =====
