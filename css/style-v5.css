@@ -1188,11 +1188,13 @@ ul { list-style: none; }
 .footer-grid {
   /* Kontakt (adresa, telefon, mejl, radno vrijeme) je spojen u lijevi blok,
      ispod drustvenih mreza. Zato tri kolone umjesto cetiri, a Navigacija i
-     Kategorije dobijaju vise sirine. */
+     Kategorije dobijaju vise sirine. align-items:start da kolone ne budu
+     rastegnute na istu visinu (kraca Navigacija je pravila prazninu ispod). */
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 56px;
+  grid-template-columns: 1.5fr 1fr 1.05fr;
+  gap: 40px 48px;
+  align-items: start;
+  margin-bottom: 48px;
 }
 
 .footer-brand .logo { margin-bottom: 20px; }
@@ -1244,12 +1246,14 @@ ul { list-style: none; }
 /* stari hover je zamijenjen pravilom iznad */
 
 /* Kontakt u lijevom bloku: odvojen tankom linijom od mreza, redovi malo zbijeni. */
-.footer-kontakt-brend {
-  margin-top: 22px;
-  padding-top: 20px;
+/* Veca specificnost: .footer-contact-list nize u fajlu inace pobjedjuje sa gap:14px. */
+.footer-brand .footer-kontakt-brend {
+  margin-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid rgba(201,168,108,0.18);
+  gap: 11px;   /* ul je imao gap:14px + li margin:12px = 49px razmak. Ovdje zbijeno. */
 }
-.footer-kontakt-brend li { margin-bottom: 12px; }
+.footer-kontakt-brend li { margin-bottom: 0; }
 
 /* Na telefonu je lijevi blok centriran; kontakt lista se tada slaze kao uredan
    stubic po sredini, sadrzaj lijevo, redovi zbijeni. */
@@ -1258,7 +1262,8 @@ ul { list-style: none; }
     max-width: 300px; margin-left: auto; margin-right: auto;
     text-align: left; padding-top: 18px; margin-top: 18px;
   }
-  .footer-kontakt-brend li { margin-bottom: 14px; align-items: flex-start; }
+  .footer-kontakt-brend { gap: 13px; }   /* samo gap; margin bi se sabrao */
+  .footer-kontakt-brend li { margin-bottom: 0; align-items: flex-start; }
   .footer-brand { text-align: center; }
 }
 
