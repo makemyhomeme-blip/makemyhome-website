@@ -139,11 +139,23 @@ RewriteRule ^product-category/decor-paneli(/.*)?$ /kategorija/bambus-paneli [R=3
 RewriteRule ^product-category/uv-paneli(/.*)?$ /kategorija/bambus-mermerni [R=301,L]
 RewriteRule ^product-category/.*$ /products.html? [R=301,L]
 
+# Stari WooCommerce ?product=slug i ?product_cat=slug (WordPress single/kategorija).
+# NIJE nas parametar. Interno prepisujemo na /product/ i /product-category/ da prodju
+# kroz ISTI resolver (404.php + slug-match.php, odnosno pravila iznad) i odu na pravu
+# adresu JEDNIM 301 skokom — umjesto da /?product=spc02 vraca homepage kao 200 duplikat.
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{QUERY_STRING} (^|&)product=([^&]+)
+RewriteRule ^ /product/%2/? [L]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{QUERY_STRING} (^|&)product_cat=([^&]+)
+RewriteRule ^ /product-category/%2/? [L]
+
 # Ostali stari WordPress query parametri koji renderuju homepage kao duplikat
 # PAŽNJA: cat= i category= su naši parametri — NE smiju biti u ovom redirectu
 # page_id je dodat: /?page_id=216 je vracao 200 (canonical ga je rjesavao, ali je
 # adresa i dalje postojala) i pojavljivao se u Search Console-u kao referring page.
-RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|paged|page_id|m|post_type|replytocom)=
+RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|paged|page_id|m|post_type|replytocom|product_tag)=
 RewriteRule .* /? [R=301,L]
 
 # cat= i category= su NASI parametri na products.php, ali na POCETNOJ su ostatak
