@@ -51,6 +51,9 @@ $mmhStatika = [
     ['paneli-za-kupatilo.html', 'weekly', '0.7'], ['tv-zid.html', 'weekly', '0.7'],
     ['paneli-ili-lamperija.html', 'weekly', '0.7'], ['spc-ili-laminat.html', 'weekly', '0.7'],
     ['akusticni-paneli-kancelarija.html', 'weekly', '0.7'], ['dostava-crna-gora.html', 'weekly', '0.7'],
+    ['blog.html', 'weekly', '0.7'],
+    ['dekorativni-zidni-paneli-vodic.html', 'weekly', '0.7'], ['kako-izabrati-panele-po-prostoriji.html', 'weekly', '0.7'],
+    ['pu-kamen-izgled-kamena.html', 'weekly', '0.7'], ['koliko-kostaju-zidni-paneli.html', 'weekly', '0.7'],
     ['uslovi.html', 'weekly', '0.7'], ['reklamacije.html', 'weekly', '0.7'],
     ['privatnost.html', 'weekly', '0.7'],
 ];

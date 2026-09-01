@@ -667,6 +667,7 @@ echo "\n</script>\n";
       <a href="/kategorija/flex-stone" class="nav-link">Flex Stone</a>
       <a href="/kategorija/spc-pod" class="nav-link">SPC Pod</a>
       <a href="decor-box.html" class="nav-link">Decor Box</a>
+      <a href="blog.html" class="nav-link">Blog</a>
       <a href="faq.html" class="nav-link">Pitanja</a>
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>

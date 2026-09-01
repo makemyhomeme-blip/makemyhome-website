@@ -58,6 +58,12 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/akusticni-paneli-kancelarija.html' => $base . '/akusticni-paneli-kancelarija.html',
     $root . '/spc-ili-laminat.html' => $base . '/spc-ili-laminat.html',
     $root . '/dostava-crna-gora.html' => $base . '/dostava-crna-gora.html',
+    // Blog
+    $root . '/blog.html' => $base . '/blog.html',
+    $root . '/dekorativni-zidni-paneli-vodic.html' => $base . '/dekorativni-zidni-paneli-vodic.html',
+    $root . '/kako-izabrati-panele-po-prostoriji.html' => $base . '/kako-izabrati-panele-po-prostoriji.html',
+    $root . '/pu-kamen-izgled-kamena.html' => $base . '/pu-kamen-izgled-kamena.html',
+    $root . '/koliko-kostaju-zidni-paneli.html' => $base . '/koliko-kostaju-zidni-paneli.html',
     // PHP
     $root . '/product.php'      => $base . '/product.php',
     $root . '/products.php'     => $base . '/products.php',
