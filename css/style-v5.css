@@ -776,17 +776,18 @@ ul { list-style: none; }
 
 .product-card {
   background: var(--white);
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 10px 30px -12px rgba(0,0,0,0.12);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
   position: relative;
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.07);
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-6px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 24px 46px -16px rgba(201,168,108,0.38);
+  border-color: rgba(201,168,108,0.4);
 }
 
 .product-img {
@@ -2595,21 +2596,27 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .form-row { grid-template-columns: 1fr; }
 }
 .btn-card-detail {
-  color: #666e7a;
+  color: #795f32;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
-  transition: color .2s;
+  gap: 6px;
+  padding: 8px 15px;
+  border: 1px solid rgba(201,168,108,0.5);
+  border-radius: 999px;
+  transition: background .2s, color .2s, border-color .2s;
   white-space: nowrap;
 }
-.btn-card-detail:hover { color: #c9a86c; }
+.btn-card-detail:hover { background: #c9a86c; color: #1a1a1a; border-color: #c9a86c; }
+.btn-card-detail i { transition: transform .2s; }
+.btn-card-detail:hover i { transform: translateX(3px); }
 
 /* ===== TAP TARGETS (mobilni) — Google trazi min ~24-48px visine za linkove ===== */
 @media (max-width: 768px) {
-  .btn-card-detail { padding: 9px 4px !important; min-height: 34px; display: inline-flex; align-items: center; }
+  .btn-card-detail { padding: 9px 15px !important; min-height: 38px; display: inline-flex; align-items: center; }
   .footer-contact-list a,
   .footer-contact-list li { min-height: 32px; display: flex; align-items: center; }
   .insta-handle { display: inline-block; padding: 7px 0; }
