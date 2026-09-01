@@ -455,7 +455,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=cd725447">
+  <link rel="stylesheet" href="css/style-v5.css?v=fff5cb8b">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -483,7 +483,7 @@ echo "\n</script>\n";
     .cat-card-img {
       height: 200px;
       overflow: hidden;
-      background: #f5f0eb;
+      background: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -511,7 +511,7 @@ echo "\n</script>\n";
     .cat-card-info p  { font-size: 13px; color: #666e7a; margin-bottom: 8px; line-height: 1.5; }
     .cat-card-count {
       display: inline-block;
-      background: #f5f0eb; color: #795f32;
+      background: #ffffff; color: #795f32;
       padding: 3px 12px; border-radius: 20px;
       font-size: 12px; font-weight: 700;
     }
@@ -529,7 +529,7 @@ echo "\n</script>\n";
     .btn-back:hover { background: #333; }
     .back-bar h2 { font-size: 22px; font-weight: 800; color: #1a1a1a; }
     .back-bar .count-badge {
-      background: #f5f0eb; color: #795f32;
+      background: #ffffff; color: #795f32;
       padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
     }
     /* TELEFON: bez praznog prostora ispod hero-a i bez stiskanja u jedan red */

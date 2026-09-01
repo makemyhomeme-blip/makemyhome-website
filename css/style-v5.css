@@ -188,7 +188,7 @@
   --dark-3: #3a3a3a;
   --gray: #666e7a;   /* bilo #888 — kontrast 3,5 na bijeloj, sitan tekst se lose citao na telefonu */
   --gray-light: #ccc;
-  --light: #f5f0eb;
+  --light: #ffffff;
   --white: #ffffff;
   --danger: #c0392b;
   --success: #27ae60;
@@ -2529,7 +2529,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   padding: 13px 18px; font-family: inherit; font-size: 14px; font-weight: 700;
   cursor: pointer; transition: background .2s, border-color .2s;
 }
-.rv-more-btn:hover { background: #faf7f2; border-color: #c9a86c; }
+.rv-more-btn:hover { background: #ffffff; border-color: #c9a86c; }
 .rv-more-btn i { font-size: 12px; color: #c9a86c; }
 
 /* ===== GALLERY LIGHTBOX ===== */
@@ -2621,7 +2621,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 .p-side-rating {
   display: flex; align-items: center; gap: 14px;
-  background: #faf7f2; border: 1px solid rgba(201,168,108,0.3);
+  background: #ffffff; border: 1px solid rgba(201,168,108,0.3);
   border-radius: 14px; padding: 14px 18px; margin-bottom: 16px;
   text-decoration: none; transition: background .2s, border-color .2s;
 }
@@ -2642,7 +2642,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .p-side-list strong { color: #1a1a1a; font-weight: 700; }
 
 .p-side-box {
-  background: #faf7f2; border-radius: 16px; padding: 22px 22px 20px;
+  background: #ffffff; border-radius: 16px; padding: 22px 22px 20px;
   border: 1px solid rgba(201,168,108,0.35);
 }
 .p-side-box-t { color: #8a6d2f; font-size: 14.5px; font-weight: 800; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
@@ -2728,7 +2728,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 /* ===== Vodič na stranici kategorije ===== */
 .kat-vodic {
   max-width: 860px; margin: 44px auto 0; display: flex; gap: 16px; align-items: flex-start;
-  background: #faf7f2; border: 1px solid rgba(201,168,108,.3); border-left: 3px solid #c9a86c;
+  background: #ffffff; border: 1px solid rgba(201,168,108,.3); border-left: 3px solid #c9a86c;
   border-radius: 12px; padding: 20px 24px;
 }
 .kat-vodic i { font-size: 20px; color: #c9a86c; flex-shrink: 0; margin-top: 2px; }
@@ -2824,7 +2824,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 .insp-cta {
   margin-top: 46px; padding: 30px 26px; text-align: center;
-  background: #faf7f2; border: 1px solid rgba(201,168,108,.35); border-radius: 16px;
+  background: #ffffff; border: 1px solid rgba(201,168,108,.35); border-radius: 16px;
 }
 .insp-cta h2 { margin: 0 0 10px; font-size: 22px; color: #1a1a1a; line-height: 1.3; }
 .insp-cta p { margin: 0 auto 22px; color: #5a6672; max-width: 52ch; line-height: 1.7; }
@@ -3032,7 +3032,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   z-index: 5;
   transition: background .15s ease, transform .15s ease;
 }
-.srodni-strelica:hover { background: #f5f0eb; }
+.srodni-strelica:hover { background: #ffffff; }
 .srodni-strelica:active { transform: translateY(-50%) scale(0.94); }
 .srodni-lijevo  { left: -18px; }
 .srodni-desno   { right: -18px; }
