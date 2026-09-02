@@ -163,7 +163,9 @@ function mmhOgProizvod(array $p): ?array
     if (!is_file($izvor)) return null;
 
     $id  = preg_replace('/[^0-9]/', '', (string)($p['id'] ?? '0'));
-    $rel = 'images/og/proizvod-' . $id . '.jpg';
+    // -v2: nov izgled (jedna slika + zamucena pozadina umjesto 4x plocice).
+    // Promjena imena natjera da se stari keširani (poplochani) OG-ovi zamijene.
+    $rel = 'images/og/proizvod-' . $id . '-v2.jpg';
     $put = $korijen . '/' . $rel;
 
     if (is_file($put) && filemtime($put) >= filemtime($izvor)) {
@@ -182,18 +184,30 @@ function mmhOgProizvod(array $p): ?array
     if ($iŠ < 5 || $iV < 5) { imagedestroy($im); return null; }
 
     $platno = imagecreatetruecolor($Š, $V);
+    imagealphablending($platno, true);
 
-    // Fotografija se ponavlja jedna do druge, u punoj visini platna. Panel je
-    // uspravan i uzak, pa jedna kopija pokriva tek cetvrtinu sirine; niz kopija
-    // izgleda kao zid oblozen tim panelom, a slika ostaje ostra jer se SMANJUJE.
-    // (Razvlacenje jedne kopije preko cijelog platna dalo bi trostruko uvecanje
-    // i mutnu sliku.)
-    $kŠ = max(1, (int) round($iŠ * ($V / $iV)));
-    $kom = (int) ceil($Š / $kŠ);
-    $poc = (int) round(($Š - $kom * $kŠ) / 2);   // visak se podjednako odsijeca lijevo i desno
-    for ($i = 0; $i < $kom; $i++) {
-        imagecopyresampled($platno, $im, $poc + $i * $kŠ, 0, 0, 0, $kŠ, $V, $iŠ, $iV);
+    // Fotografija se prikazuje JEDNOM (ne ponavlja se). Uspravan panel se uklopi
+    // cijeli, ostar i centriran; prazan prostor sa strane popunjava ista slika
+    // razvucena da pokrije platno, pa jako zamucena i zatamnjena — kao mek okvir.
+    // (Ranije se slika poplochavala 4x sto je izgledalo kao plocice.)
+
+    // --- Pozadina: slika "cover" preko platna, zamucena + zatamnjena ---
+    $sk  = max($Š / $iŠ, $V / $iV);
+    $bŠ  = (int) ceil($iŠ * $sk); $bV = (int) ceil($iV * $sk);
+    $bX  = (int) (($Š - $bŠ) / 2); $bY = (int) (($V - $bV) / 2);
+    imagecopyresampled($platno, $im, $bX, $bY, 0, 0, $bŠ, $bV, $iŠ, $iV);
+    if (function_exists('imagefilter')) {
+        for ($b = 0; $b < 14; $b++) @imagefilter($platno, IMG_FILTER_GAUSSIAN_BLUR);
     }
+    $tamno = imagecolorallocatealpha($platno, 8, 8, 8, 66); // ~48% crni preliv
+    imagefilledrectangle($platno, 0, 0, $Š, $V, $tamno);
+
+    // --- Prednji plan: cijela slika uklopljena (contain), ostra, centrirana ---
+    $m    = 26;                                   // margina gore/dole
+    $sk2  = min($Š / $iŠ, ($V - 2 * $m) / $iV);
+    $fŠ   = (int) round($iŠ * $sk2); $fV = (int) round($iV * $sk2);
+    $fX   = (int) (($Š - $fŠ) / 2);  $fY = (int) (($V - $fV) / 2);
+    imagecopyresampled($platno, $im, $fX, $fY, 0, 0, $fŠ, $fV, $iŠ, $iV);
     imagedestroy($im);
 
     if (!is_dir(dirname($put))) @mkdir(dirname($put), 0755, true);
