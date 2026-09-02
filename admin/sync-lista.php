@@ -121,6 +121,7 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/actions.php'    => $base . '/admin/actions.php',
     $adminDir . '/sync.php'       => $base . '/admin/sync.php',
         $adminDir . '/sync-lista.php'  => $base . '/admin/sync-lista.php',
+    $adminDir . '/blog-slike.php'  => $base . '/admin/blog-slike.php',
         $adminDir . '/sesija.php'      => $base . '/admin/sesija.php',
     $adminDir . '/index.php'      => $base . '/admin/index.php',
     $adminDir . '/logout.php'     => $base . '/admin/logout.php',

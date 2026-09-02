@@ -278,6 +278,9 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     <button class="sidebar-link" onclick="showSection('decorbox-img')">
       <i class="fas fa-handshake"></i> Decor Box Slike
     </button>
+    <a href="blog-slike.php" class="sidebar-link">
+      <i class="fas fa-newspaper"></i> Blog Slike
+    </a>
     <div class="nav-section-label">Web sajt</div>
     <a href="../index.html" target="_blank" class="sidebar-link">
       <i class="fas fa-external-link-alt"></i> Pogledaj Sajt

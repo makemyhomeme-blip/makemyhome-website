@@ -94,10 +94,10 @@ $ogDesc = htmlspecialchars($rawDesc, ENT_QUOTES);
 // slicica. Zato se bira prva dovoljno siroka slika ISTOG proizvoda —
 // najprije glavna, pa galerija; tek ako nista ne odgovara ide showroom.
 $ogKandidati = [];
-if ($product) {
-    if (!empty($product['image'])) $ogKandidati[] = $product['image'];
-    foreach (($product['gallery'] ?? []) as $g) $ogKandidati[] = $g;
-}
+// Za dijeljenje (Viber/WhatsApp/Facebook) uvijek ide SLIKA PROIZVODA, ne
+// fotografija sobe iz galerije. Zato u kandidate ide samo glavna slika; ako je
+// manja od 600px, ispod se od nje napravi platno 1200x630 (i dalje taj proizvod).
+if ($product && !empty($product['image'])) $ogKandidati[] = $product['image'];
 $ogIzbor = mmhSlikaZaDijeljenje($ogKandidati);
 // Dvanaest proizvoda (cijela PU serija, tri SPC poda, jedan mermerni panel)
 // nema nijednu sliku sirju od 600px, pa su svi padali na fotografiju showrooma
@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=2289f205">
+  <link rel="stylesheet" href="css/style-v5.css?v=f2e477d3">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
