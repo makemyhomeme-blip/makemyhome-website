@@ -364,12 +364,15 @@
          redom "4000+ Zadovoljnih kupaca". */
       #hero{min-height:100svh;padding-top:86px;padding-bottom:96px;align-items:center;display:flex}
       #hero .hero-content{text-align:left!important;margin-right:auto;width:100%}
-      /* Jači gradient pri dnu da tekst bude čitljiv */
-      #hs-overlay{background:linear-gradient(to top,rgba(5,5,5,.86) 0%,rgba(5,5,5,.40) 48%,rgba(5,5,5,0) 100%)!important}
+      /* Zatamnjenje: jace u sredini gdje stoji tekst, ali vrh slike ostaje vidljiv.
+         Dodatno lijevi sloj tamni bas ispod teksta (poravnat je lijevo). */
+      #hs-overlay{background:
+        linear-gradient(to right,rgba(5,5,5,.80) 0%,rgba(5,5,5,.45) 55%,rgba(5,5,5,.05) 90%),
+        linear-gradient(to top,rgba(5,5,5,.82) 0%,rgba(5,5,5,.50) 50%,rgba(5,5,5,.18) 100%)!important}
       .hero-badge{font-size:9.5px;padding:4px 10px;margin-bottom:10px}
-      .hero-title{font-size:20px!important;line-height:1.15!important;margin-bottom:8px}
-      .hero-title .hero-brand{font-size:13px!important;margin-top:7px!important}
-      .hero-tagline{font-size:13px!important;margin:-2px 0 10px!important}
+      .hero-title{font-size:20px!important;line-height:1.15!important;margin-bottom:8px;text-shadow:0 2px 16px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.8)}
+      .hero-title .hero-brand{font-size:13px!important;margin-top:7px!important;text-shadow:0 2px 12px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.8)}
+      .hero-tagline{font-size:13px!important;margin:-2px 0 10px!important;text-shadow:0 2px 12px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.8)}
       .hero-desc{font-size:12px!important;line-height:1.45!important;margin-bottom:12px!important;opacity:.85}
       .hero-actions{gap:8px;margin-bottom:0}
       .hero-actions .btn-lg{padding:10px 16px;font-size:13px}
