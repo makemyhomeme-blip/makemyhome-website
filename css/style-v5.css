@@ -326,7 +326,7 @@ ul { list-style: none; }
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(26,26,26,0.95);
+  background: rgba(13,13,13,0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(201,168,108,0.2);
@@ -334,7 +334,7 @@ ul { list-style: none; }
 }
 
 #header.scrolled {
-  background: rgba(26,26,26,0.98);
+  background: rgba(10,10,10,0.98);
   box-shadow: 0 2px 30px rgba(0,0,0,0.3);
 }
 
