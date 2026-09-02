@@ -362,11 +362,12 @@
       /* padding-bottom 80 -> 116px: ispod brojki mora stati red tackica (24px)
          i ispod njih "Skrolujte". Na 80px su se tackice preklapale sa
          redom "4000+ Zadovoljnih kupaca". */
-      #hero{min-height:100svh;padding-top:80px;padding-bottom:110px;align-items:stretch;display:flex}
+      #hero{min-height:100svh;padding-top:80px;padding-bottom:140px;align-items:stretch;display:flex}
       #hero .container{display:flex;flex-direction:column;width:100%}
-      /* Badge gore lijevo; naslov/podnaslov lijevo dolje; dugmad i brojke centrirano na dnu */
-      #hero .hero-content{flex:1;display:flex;flex-direction:column;align-items:stretch;text-align:left!important;width:100%;max-width:100%}
-      .hero-badge{align-self:flex-start;margin-bottom:auto!important}
+      /* Cijela grupa (badge iznad imena, naslov, dugmad, brojke) lijevo dolje;
+         podignuta iznad tackica slajdera da se ne preklapaju. */
+      #hero .hero-content{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;text-align:left!important;width:100%;max-width:100%}
+      .hero-badge{align-self:flex-start;margin-bottom:12px!important}
       .hero-actions .btn-lg{justify-content:center}
       .hero-stats{margin-top:18px}
       /* Zatamnjenje: jace u sredini gdje stoji tekst, ali vrh slike ostaje vidljiv.
