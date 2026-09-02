@@ -3170,8 +3170,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 /* HERO — lijevo na desktopu (tekst ne stoji na sred ekrana) */
 @media (min-width: 1025px) {
-  #hero .container { max-width: 100%; padding-left: 6%; padding-right: 6%; }
-  #hero .hero-content { margin-left: 0; margin-right: auto; text-align: left; }
+  #hero .container { max-width: 100%; padding-left: 46px; padding-right: 40px; }
+  #hero .hero-content { margin-left: 0; margin-right: auto; text-align: left; max-width: 580px; }
 }
 /* Vece kartice kategorija na desktopu: 3 u redu, krupnija slika */
 @media (min-width: 1101px) {
