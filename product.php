@@ -243,8 +243,8 @@ $vodicZaKat = [
     'mdf' => ['tv-zid.html', 'TV zid od panela — kako se planira i koliko košta'],
     'pu-kamen' => ['paneli-za-kupatilo.html', 'Paneli za kupatilo — šta podnosi vlagu'],
     'flex-stone' => ['paneli-za-kupatilo.html', 'Paneli za kupatilo — šta podnosi vlagu'],
-    'bambus-drveni' => ['paneli-ili-lamperija.html', 'Zidni paneli ili lamperija — poređenje'],
-    'classic' => ['paneli-ili-lamperija.html', 'Zidni paneli ili lamperija — poređenje'],
+    'bambus-drveni' => ['kako-izabrati-panele-po-prostoriji.html', 'Kako izabrati panele po prostoriji'],
+    'classic' => ['kako-izabrati-panele-po-prostoriji.html', 'Kako izabrati panele po prostoriji'],
 ];
 /* Vrijeme izmjene ove stranice — Google moze da pita "je li se promijenilo?"
    i dobije 304 umjesto cijele stranice. Racuna se iz podataka OVOG proizvoda
@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=73de8c60">
+  <link rel="stylesheet" href="css/style-v5.css?v=2289f205">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -1098,7 +1098,6 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
       <a href="paneli-za-kupatilo.html">Paneli za kupatilo</a>
       <a href="tv-zid.html">TV zid od panela</a>
       <a href="spc-ili-laminat.html">SPC pod ili laminat</a>
-      <a href="paneli-ili-lamperija.html">Paneli ili lamperija</a>
       <a href="akusticni-paneli-kancelarija.html">Akustični paneli u kancelariji</a>
       <a href="dostava-crna-gora.html">Dostava i montaža u Crnoj Gori</a>
     </nav>

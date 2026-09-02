@@ -2674,6 +2674,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 
 /* ===== Pravne stranice: privatnost / uslovi / reklamacije ===== */
+/* Razmaci za tekst clanaka/vodica — naslovi dobiju vazduh iznad, pasusi lakse disu. */
+.info-wrap h2 { font-size: 23px; color: #1a1a1a; margin: 42px 0 14px; line-height: 1.3; }
+.info-wrap h2:first-of-type { margin-top: 24px; }
+.info-wrap p { margin: 0 0 16px; line-height: 1.85; color: #3a3a3a; font-size: 16px; }
+.info-lead { font-size: 18px; line-height: 1.9; margin: 0 0 30px; color: #2a2a2a; }
 .info-wrap h3 { font-size: 18px; color: #1a1a1a; margin: 26px 0 8px; line-height: 1.35; }
 .info-wrap .info-list { list-style: none; padding: 0; margin: 14px 0 20px; }
 .info-wrap .info-list li {

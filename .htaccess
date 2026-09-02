@@ -210,6 +210,7 @@ RewriteRule ^cijene/?$ /cjenovnik.html? [R=301,L]
 RewriteRule ^montaza/?$ /montaza.html? [R=301,L]
 RewriteRule ^montaža/?$ /montaza.html? [R=301,L]
 RewriteRule ^blog/?$ /blog.html [R=301,L]
+RewriteRule ^paneli-ili-lamperija\.html$ /kako-izabrati-panele-po-prostoriji.html [R=301,L]
 # /checkout/ je vec pokriven nize, a /cart/ i /moj-nalog/ su padali na 404.
 RewriteRule ^cart/?$ /korpa.html? [R=301,L]
 RewriteRule ^korpa/?$ /korpa.html? [R=301,L]

@@ -180,18 +180,18 @@ $ogDesc   = $cat
 // Vodic koji odgovara kategoriji — da posjetilac dodje do njega odakle i gleda proizvode
 $catVodic = [
   'bambus-mermerni'   => ['paneli-za-kupatilo.html','Paneli za kupatilo','Mermerni paneli su najcesci izbor za kupatilo. Evo koji smiju, kako se lijepe preko plocica i koliko to kosta.'],
-  'bambus-drveni'     => ['paneli-ili-lamperija.html','Paneli ili lamperija','Poredjenje sa lamperijom — montaza, vlaga, cijena i gdje je lamperija zaista bolja.'],
+  'bambus-drveni'     => ['kako-izabrati-panele-po-prostoriji.html','Kako izabrati panele','Koji panel za koju sobu — dnevna, spavaća, kupatilo, TV zid i kancelarija.'],
   'bambus-tekstilni'  => ['tv-zid.html','Zid iza kreveta ili TV-a','Tekstilni paneli najljepše izgledaju kao akcentni zid iza kreveta ili televizora. Koliko širok zid, koliko komada i gdje ide LED rasvjeta.'],
   'bambus-kozni'      => ['tv-zid.html','Zid iza televizora','Kozni panel iza TV-a — mat ili sjaj, koliko sirok i gdje ide LED traka.'],
   'bambus-metalni'    => ['tv-zid.html','Zid iza televizora','Kako urediti zid iza televizora bez odsjaja.'],
-  'bambus-paneli'     => ['paneli-ili-lamperija.html','Paneli ili lamperija','Poredjenje sa lamperijom — montaza, vlaga, cijena i gdje je lamperija bolja.'],
+  'bambus-paneli'     => ['kako-izabrati-panele-po-prostoriji.html','Kako izabrati panele','Koji panel za koju sobu — dnevna, spavaća, kupatilo, TV zid i kancelarija.'],
   'classic'           => ['tv-zid.html','Zid iza televizora','Jednobojni panel iza TV-a — kako da ne bude previse ravno.'],
   '3d-letvice'        => ['tv-zid.html','Zid iza televizora','Letvice najbolje rade iza TV-a. Koliko sirok zid, gdje ide LED i koliko komada treba.'],
   'akusticni-paneli'  => ['akusticni-paneli-kancelarija.html','Akustika u kancelariji','Koliko panela treba za vasu prostoriju, na koji zid idu i sta znaci NRC 0,65-0,85.'],
   'spc-pod'           => ['spc-ili-laminat.html','SPC ili laminat','Sta izdrzava vodu, sta ide na podno grijanje i gdje je laminat zaista bolji.'],
   'pu-kamen'          => ['paneli-za-kupatilo.html','Paneli za kupatilo','PU kamen je vodootporan. Evo sta jos smije u kupatilo i kako se lijepi.'],
   'flex-stone'        => ['paneli-za-kupatilo.html','Paneli za kupatilo','Flex Stone ide i oko zaobljenih uglova. Evo kako se postavlja u kupatilu.'],
-  'mdf'               => ['paneli-ili-lamperija.html','Paneli ili lamperija','Kanelirani MDF naspram klasicne lamperije — sta je brze i sta traje.'],
+  'mdf'               => ['kako-izabrati-panele-po-prostoriji.html','Kako izabrati panele','Gdje MDF radi najbolje i koji panel za koju prostoriju.'],
   'aluminijum-lajsne' => ['montaza.html','Montaza korak po korak','Gdje tacno ide koja lajsna, kako se rezu uglovi i sta treba od alata.'],
 ];
 
@@ -237,24 +237,24 @@ $sviVodici = [
   'paneli-za-kupatilo.html'            => 'Paneli za kupatilo — šta stvarno podnosi vlagu',
   'tv-zid.html'                        => 'TV zid od panela — kako se planira i koliko košta',
   'spc-ili-laminat.html'               => 'SPC pod ili laminat — šta je bolje za stan',
-  'paneli-ili-lamperija.html'          => 'Zidni paneli ili lamperija — poređenje',
+  'kako-izabrati-panele-po-prostoriji.html' => 'Kako izabrati panele po prostoriji',
   'akusticni-paneli-kancelarija.html'  => 'Akustični paneli u kancelariji — koliko smanjuju buku',
   'dostava-crna-gora.html'             => 'Dostava i montaža u Crnoj Gori',
 ];
 $vodiciZaKat = [
-  'bambus-paneli'    => ['paneli-ili-lamperija.html', 'tv-zid.html', 'paneli-za-kupatilo.html'],
-  'bambus-drveni'    => ['paneli-ili-lamperija.html', 'tv-zid.html', 'dostava-crna-gora.html'],
-  'bambus-tekstilni' => ['akusticni-paneli-kancelarija.html', 'tv-zid.html', 'paneli-ili-lamperija.html'],
-  'bambus-mermerni'  => ['paneli-za-kupatilo.html', 'tv-zid.html', 'paneli-ili-lamperija.html'],
-  'bambus-metalni'   => ['tv-zid.html', 'paneli-ili-lamperija.html', 'dostava-crna-gora.html'],
-  'bambus-kozni'     => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'paneli-ili-lamperija.html'],
-  'classic'          => ['paneli-ili-lamperija.html', 'paneli-za-kupatilo.html', 'dostava-crna-gora.html'],
-  '3d-letvice'       => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'paneli-ili-lamperija.html'],
+  'bambus-paneli'    => ['kako-izabrati-panele-po-prostoriji.html', 'tv-zid.html', 'paneli-za-kupatilo.html'],
+  'bambus-drveni'    => ['kako-izabrati-panele-po-prostoriji.html', 'tv-zid.html', 'dostava-crna-gora.html'],
+  'bambus-tekstilni' => ['akusticni-paneli-kancelarija.html', 'tv-zid.html', 'kako-izabrati-panele-po-prostoriji.html'],
+  'bambus-mermerni'  => ['paneli-za-kupatilo.html', 'tv-zid.html', 'kako-izabrati-panele-po-prostoriji.html'],
+  'bambus-metalni'   => ['tv-zid.html', 'kako-izabrati-panele-po-prostoriji.html', 'dostava-crna-gora.html'],
+  'bambus-kozni'     => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'kako-izabrati-panele-po-prostoriji.html'],
+  'classic'          => ['kako-izabrati-panele-po-prostoriji.html', 'paneli-za-kupatilo.html', 'dostava-crna-gora.html'],
+  '3d-letvice'       => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'kako-izabrati-panele-po-prostoriji.html'],
   'akusticni-paneli' => ['akusticni-paneli-kancelarija.html', 'tv-zid.html', 'dostava-crna-gora.html'],
-  'aluminijum-lajsne'=> ['tv-zid.html', 'paneli-ili-lamperija.html', 'dostava-crna-gora.html'],
+  'aluminijum-lajsne'=> ['tv-zid.html', 'kako-izabrati-panele-po-prostoriji.html', 'dostava-crna-gora.html'],
   'spc-pod'          => ['spc-ili-laminat.html', 'paneli-za-kupatilo.html', 'dostava-crna-gora.html'],
   'pu-kamen'         => ['paneli-za-kupatilo.html', 'tv-zid.html', 'dostava-crna-gora.html'],
-  'mdf'              => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'paneli-ili-lamperija.html'],
+  'mdf'              => ['tv-zid.html', 'akusticni-paneli-kancelarija.html', 'kako-izabrati-panele-po-prostoriji.html'],
   'flex-stone'       => ['paneli-za-kupatilo.html', 'tv-zid.html', 'dostava-crna-gora.html'],
 ];
 $vodiciOvdje = $cat ? ($vodiciZaKat[$cat] ?? []) : array_keys($sviVodici);
@@ -455,7 +455,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=73de8c60">
+  <link rel="stylesheet" href="css/style-v5.css?v=2289f205">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -1065,7 +1065,6 @@ echo "\n</script>\n";
       <a href="paneli-za-kupatilo.html">Paneli za kupatilo</a>
       <a href="tv-zid.html">TV zid od panela</a>
       <a href="spc-ili-laminat.html">SPC pod ili laminat</a>
-      <a href="paneli-ili-lamperija.html">Paneli ili lamperija</a>
       <a href="akusticni-paneli-kancelarija.html">Akustični paneli u kancelariji</a>
       <a href="dostava-crna-gora.html">Dostava i montaža u Crnoj Gori</a>
     </nav>
