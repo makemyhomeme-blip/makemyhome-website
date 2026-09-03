@@ -1515,9 +1515,10 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   .product-gallery, .product-info { display: contents; }
   .product-gallery > *  { order: 1; }
-  #product-info-content { order: 2; }
-  #gallery-specs        { order: 3; margin-top: 4px; }
-  .p-side               { order: 4; }
+  #product-info-content { order: 2; }               /* sifra/ime/cijena odmah ispod slika */
+  .matching-pair-section { order: 3; }              /* pa "ista 3D letvica" */
+  #gallery-specs        { order: 4; margin-top: 4px; }
+  .p-side               { order: 5; }
 }
 
 .gallery-main {
