@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=295b11db">
+  <link rel="stylesheet" href="css/style-v5.css?v=e47bfb0c">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -622,11 +622,79 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <?php endforeach; ?>
         </div>
         <p class="gallery-open-hint"><i class="fas fa-search-plus"></i> Tapni na sliku za prikaz u punoj rezoluciji</p>
-        <?php /* Blok "u istoj nijansi" stoji ODMAH ISPOD SLIKE, iznad karakteristika.
-                 Ranije je bio u desnoj koloni ispod dugmadi za kupovinu, pa bi ga
-                 kupac vidio tek kad prodje cijelu listu karakteristika — ako uopste
-                 dodje do tamo. Ovdje ga vidi dok jos gleda sam panel.
-                 Ispisuje ga server, pa ga Google vidi i bez JavaScripta. */ ?>
+
+        <div id="gallery-specs" class="gallery-specs-desktop"<?= $product ? ' data-ssr="1"' : '' ?>><?php
+          /* Harmoniku ispisuje server. Ranije je ovdje stajao obican spisak,
+             a JavaScript bi ga zamijenio harmonikom — pa se pri svakom
+             osvjezavanju vidjela promjena. Sada postoji samo jedan ispis. */
+          /* Naslov "Karakteristike – <ime>" je stajao ovdje prije nego sto je
+             blok zamijenjen harmonikom. Harmonika koristi dugme umjesto
+             naslova, pa je H2 nestao sa svih 117 stranica proizvoda — a u
+             njemu stoji i ime proizvoda i rijec koju ljudi kucaju. Nasla ga
+             je tek uporedba snimka prije i poslije (alat/snimak.py). */
+          if ($product) {
+              echo '<h2 class="specs-h2">Karakteristike – '
+                 . htmlspecialchars($product['name'] ?? '') . '</h2>';
+              echo mmhHarmonikaHTML($product);
+          }
+        ?></div>
+      </div>
+
+      <div class="product-info">
+        <?php
+        /* ===== DESNA KOLONA — ISPISUJE SERVER, JAVASCRIPT JE VISE NE CRTA =====
+         *
+         * Ranije je server ispisivao jednu, jednostavniju verziju (naslov,
+         * cijena, opis, stanje), a JavaScript bi je — tek posto skine
+         * data/products.json — u cjelini zamijenio drugom: sa sifrom, ocjenom,
+         * drugacije slozenom cijenom i kalkulatorom. Kupac je pri osvjezavanju
+         * vidio prvo jedan raspored pa drugi, a kalkulator se pojavljivao
+         * zadnji. To se dogadjalo na SVAKOJ stranici proizvoda.
+         *
+         * Sada server odmah ispisuje konacan izgled. Predlozak u
+         * js/products.js je obrisan da ne ostanu dvije kopije istog HTML-a
+         * koje se vremenom raziđu — JavaScript samo ozivi dugmad.
+         * Oznaka data-ssr="1" mu kaze da ovdje nema sta da crta.
+         */
+        $pKat      = $prodCatName ?: ($product['category'] ?? '');
+        $pokriva   = $product ? mmhPokrivenostPoKomadu($product) : null;
+        $dimKom    = $product ? mmhDimenzijeKomada($product) : null;
+        $letvW     = ($product && ($product['category'] ?? '') === '3d-letvice') ? mmhSirinaLetviceCm($product) : null;
+        $jeLajsna  = ($product['category'] ?? '') === 'aluminijum-lajsne';
+        $jeSpc     = ($product['category'] ?? '') === 'spc-pod';
+        $jedinica  = $product['unit'] ?? 'kom';
+        $waTekst   = !empty($product['sku']) ? 'šifra: ' . $product['sku'] : ($product['name'] ?? '');
+        $waLink    = 'https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20' . rawurlencode($waTekst);
+        ?>
+        <div id="product-info-content"<?= $product ? ' data-ssr="1"' : '' ?>>
+          <?php if ($product): ?>
+          <div class="product-category"><?= htmlspecialchars($pKat) ?></div>
+          <h1 class="product-name"><?= htmlspecialchars($product['name'] ?? '') ?></h1>
+          <?php if (!empty($product['sku'])): ?>
+          <div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
+          <?php endif; ?>
+          <?php
+          /* Ovdje je stajala ocjena sa zvjezdicama uz naslov. Uklonjena je zajedno
+             sa recenzijama — nije bilo prave ocjene da se prikaze. */
+          ?>
+          <?php if ($discount > 0): ?>
+          <div class="product-price-lg">
+            <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;"><?= mmhBroj($price) ?> €</span>
+            <span style="margin-left:8px;"><?= mmhBroj($salePrice) ?> €</span>
+            <span style="background:#c0392b;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle;">-<?= $discount ?>% POPUST</span>
+            <span style="color:#666e7a;font-size:14px;"> / <?= htmlspecialchars($jedinica) ?></span>
+          </div>
+          <?php else: ?>
+          <div class="product-price-lg"><?= mmhBroj($price) ?> € <span>/ <?= htmlspecialchars($jedinica) ?></span></div>
+          <?php endif; ?>
+
+          <?php if (str_starts_with($product['category'] ?? '', 'bambus') || ($product['category'] ?? '') === 'classic'): ?>
+          <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;">
+            <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
+            <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#795f32;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
+          </a>
+          <?php endif; ?>
+
         <?php
         /* PANEL ↔ 3D LETVICA ISTE NIJANSE
            Ovaj odjeljak je do sada crtao samo JavaScript, pa ga Google u prvom
@@ -700,78 +768,6 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           </div>
         </div>
         <?php endif; ?>
-
-        <div id="gallery-specs" class="gallery-specs-desktop"<?= $product ? ' data-ssr="1"' : '' ?>><?php
-          /* Harmoniku ispisuje server. Ranije je ovdje stajao obican spisak,
-             a JavaScript bi ga zamijenio harmonikom — pa se pri svakom
-             osvjezavanju vidjela promjena. Sada postoji samo jedan ispis. */
-          /* Naslov "Karakteristike – <ime>" je stajao ovdje prije nego sto je
-             blok zamijenjen harmonikom. Harmonika koristi dugme umjesto
-             naslova, pa je H2 nestao sa svih 117 stranica proizvoda — a u
-             njemu stoji i ime proizvoda i rijec koju ljudi kucaju. Nasla ga
-             je tek uporedba snimka prije i poslije (alat/snimak.py). */
-          if ($product) {
-              echo '<h2 class="specs-h2">Karakteristike – '
-                 . htmlspecialchars($product['name'] ?? '') . '</h2>';
-              echo mmhHarmonikaHTML($product);
-          }
-        ?></div>
-      </div>
-
-      <div class="product-info">
-        <?php
-        /* ===== DESNA KOLONA — ISPISUJE SERVER, JAVASCRIPT JE VISE NE CRTA =====
-         *
-         * Ranije je server ispisivao jednu, jednostavniju verziju (naslov,
-         * cijena, opis, stanje), a JavaScript bi je — tek posto skine
-         * data/products.json — u cjelini zamijenio drugom: sa sifrom, ocjenom,
-         * drugacije slozenom cijenom i kalkulatorom. Kupac je pri osvjezavanju
-         * vidio prvo jedan raspored pa drugi, a kalkulator se pojavljivao
-         * zadnji. To se dogadjalo na SVAKOJ stranici proizvoda.
-         *
-         * Sada server odmah ispisuje konacan izgled. Predlozak u
-         * js/products.js je obrisan da ne ostanu dvije kopije istog HTML-a
-         * koje se vremenom raziđu — JavaScript samo ozivi dugmad.
-         * Oznaka data-ssr="1" mu kaze da ovdje nema sta da crta.
-         */
-        $pKat      = $prodCatName ?: ($product['category'] ?? '');
-        $pokriva   = $product ? mmhPokrivenostPoKomadu($product) : null;
-        $dimKom    = $product ? mmhDimenzijeKomada($product) : null;
-        $letvW     = ($product && ($product['category'] ?? '') === '3d-letvice') ? mmhSirinaLetviceCm($product) : null;
-        $jeLajsna  = ($product['category'] ?? '') === 'aluminijum-lajsne';
-        $jeSpc     = ($product['category'] ?? '') === 'spc-pod';
-        $jedinica  = $product['unit'] ?? 'kom';
-        $waTekst   = !empty($product['sku']) ? 'šifra: ' . $product['sku'] : ($product['name'] ?? '');
-        $waLink    = 'https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20' . rawurlencode($waTekst);
-        ?>
-        <div id="product-info-content"<?= $product ? ' data-ssr="1"' : '' ?>>
-          <?php if ($product): ?>
-          <div class="product-category"><?= htmlspecialchars($pKat) ?></div>
-          <h1 class="product-name"><?= htmlspecialchars($product['name'] ?? '') ?></h1>
-          <?php if (!empty($product['sku'])): ?>
-          <div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
-          <?php endif; ?>
-          <?php
-          /* Ovdje je stajala ocjena sa zvjezdicama uz naslov. Uklonjena je zajedno
-             sa recenzijama — nije bilo prave ocjene da se prikaze. */
-          ?>
-          <?php if ($discount > 0): ?>
-          <div class="product-price-lg">
-            <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;"><?= mmhBroj($price) ?> €</span>
-            <span style="margin-left:8px;"><?= mmhBroj($salePrice) ?> €</span>
-            <span style="background:#c0392b;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle;">-<?= $discount ?>% POPUST</span>
-            <span style="color:#666e7a;font-size:14px;"> / <?= htmlspecialchars($jedinica) ?></span>
-          </div>
-          <?php else: ?>
-          <div class="product-price-lg"><?= mmhBroj($price) ?> € <span>/ <?= htmlspecialchars($jedinica) ?></span></div>
-          <?php endif; ?>
-
-          <?php if (str_starts_with($product['category'] ?? '', 'bambus') || ($product['category'] ?? '') === 'classic'): ?>
-          <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;">
-            <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
-            <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#795f32;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
-          </a>
-          <?php endif; ?>
 
           <?php if ($jeLajsna): ?>
           <!-- Lajsne se prodaju na komad — bez kalkulatora m² -->

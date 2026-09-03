@@ -1515,10 +1515,9 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   .product-gallery, .product-info { display: contents; }
   .product-gallery > *  { order: 1; }
-  #product-info-content { order: 2; }               /* sifra/ime/cijena odmah ispod slika */
-  .matching-pair-section { order: 3; }              /* pa "ista 3D letvica" */
-  #gallery-specs        { order: 4; margin-top: 4px; }
-  .p-side               { order: 5; }
+  #product-info-content { order: 2; }               /* sifra/ime/cijena + "3D letvica" iznad kalkulatora */
+  #gallery-specs        { order: 3; margin-top: 4px; }
+  .p-side               { order: 4; }
 }
 
 .gallery-main {
@@ -2089,9 +2088,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .matching-pair-section {
   margin-top: 24px;
   padding: 20px;
-  background: linear-gradient(135deg, #fdf8f0 0%, #fff9f0 100%);
-  border: 1.5px solid rgba(201,168,108,0.35);
+  background: #ffffff;
+  border: 1px solid #ececec;
   border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
 }
 .matching-pair-header {
   margin-bottom: 16px;
