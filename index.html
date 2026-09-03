@@ -419,7 +419,8 @@
   </style>
 <style id="cat-grid-fix">
   /* Velike baner-kartice u stilu konkurenta: slika gore + red (naziv lijevo, Pogledaj desno) */
-  .categories-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:38px 30px!important;}
+  .categories-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:34px 26px!important;}
+  @media(max-width:1100px){.categories-grid{grid-template-columns:repeat(2,1fr)!important;gap:30px 24px!important;}}
   @media(max-width:768px){.categories-grid{grid-template-columns:1fr!important;gap:30px!important;}}
   .category-card{background:transparent!important;box-shadow:none!important;border:none!important;border-radius:0!important;overflow:visible!important;}
   .category-card:hover{transform:none!important;box-shadow:none!important;}
