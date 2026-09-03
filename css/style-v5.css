@@ -1905,7 +1905,18 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .container { padding: 0 16px; }
   #categories, #featured, #about-preview, #why-us, #contact-cta { padding: 64px 0; }
   .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .products-grid { grid-template-columns: 1fr; }
+  /* Product kartice: 2 po redu i kompaktne (bile su 1 po redu — ogromne) */
+  .products-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .product-body { padding: 12px 12px 14px; }
+  .product-category { font-size: 9.5px; letter-spacing: 1px; margin-bottom: 4px; }
+  .product-name { font-size: 15px; line-height: 1.2; margin-bottom: 4px; }
+  .product-sku { font-size: 10.5px; margin-bottom: 6px; }
+  .product-desc { display: none; }
+  .product-footer { flex-direction: column; align-items: stretch; gap: 8px; }
+  .product-price { font-size: 18px; }
+  .product-price span { font-size: 11px; }
+  .btn-card-detail { width: 100%; justify-content: center; padding: 9px 12px; font-size: 13px; }
+  .product-badge { font-size: 10px; padding: 4px 9px; }
 }
 
 /* ===== INSTAGRAM FEED ===== */
