@@ -1851,8 +1851,14 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
-  .product-detail-grid { grid-template-columns: 1fr; }
+  .product-detail-grid { grid-template-columns: 1fr; gap: 14px; }
   .product-gallery { position: static; }
+  /* 140px je bilo za desktop; na telefonu/tabletu ostavlja veliku prazninu iznad putanje */
+  .product-detail-section { padding-top: 90px !important; }
+  /* Kutija slike se prilagodjava slici (bila fiksno 480px pa je ostajao prazan
+     prostor ispod pejzazne slike) */
+  .gallery-main { height: auto !important; margin-bottom: 0 !important; }
+  .gallery-open-hint { margin-top: 8px !important; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
