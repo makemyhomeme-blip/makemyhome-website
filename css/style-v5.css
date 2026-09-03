@@ -942,7 +942,7 @@ ul { list-style: none; }
 /* ===== O NAMA SEKCIJA ===== */
 #about-preview {
   padding: 100px 0;
-  background: var(--dark);
+  background: #ffffff;
   position: relative;
   overflow: hidden;
 }
@@ -1023,9 +1023,9 @@ ul { list-style: none; }
   .about-img-badge .years { font-size: 38px; }
 }
 
-.about-content { color: var(--white); }
-.about-content .section-title { color: var(--white); }
-.about-content .section-subtitle { color: rgba(255,255,255,0.65); }
+.about-content { color: var(--dark); }
+.about-content .section-title { color: var(--dark); }
+.about-content .section-subtitle { color: #555; }
 
 .about-list {
   margin: 32px 0;
@@ -1039,7 +1039,7 @@ ul { list-style: none; }
   align-items: center;
   gap: 12px;
   font-size: 15px;
-  color: rgba(255,255,255,0.8);
+  color: #333;
 }
 
 .about-list li i {
@@ -1410,11 +1410,15 @@ ul { list-style: none; }
 
 /* ===== PRODUCTS PAGE ===== */
 .page-hero {
-  background: var(--dark);
+  background: #0d0d0d;
   padding: 140px 0 70px;
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+@media (max-width: 768px) {
+  /* Bio previse visok (140/70) — velika prazna crna povrsina na telefonu */
+  .page-hero { padding: 96px 0 30px; }
 }
 
 .page-hero::before {
@@ -1853,8 +1857,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
-  .product-detail-grid { grid-template-columns: 1fr; gap: 14px; }
+  /* minmax(0,1fr) (ne 1fr): sprjecava da duga rijec/tekst rastegne kolonu preko
+     ekrana — inace se slika i tekst "Karakteristika" secu na desnoj ivici. */
+  .product-detail-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .product-gallery { position: static; }
+  .product-gallery > *, #product-info-content, #gallery-specs, .matching-pair-section, .p-side { min-width: 0; max-width: 100%; }
   /* 140px je bilo za desktop; na telefonu/tabletu ostavlja veliku prazninu iznad putanje.
      Donji padding sa 80px -> 40px (bila velika praznina ispod "Slicni Proizvodi"). */
   .product-detail-section { padding-top: 90px !important; padding-bottom: 40px !important; }
@@ -2319,9 +2326,15 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 /* Calc tab inner */
 .pq-calc-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 14px;
   margin-bottom: 16px;
+}
+.pq-calc-field, .pq-calc-stepper { min-width: 0; }
+.pq-calc-stepper input { min-width: 0; }
+@media (max-width: 420px) {
+  .pq-calc-inner { gap: 10px; }
+  .pq-calc-stepper button { width: 38px; }
 }
 .pq-calc-field label {
   display: block;
