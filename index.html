@@ -289,11 +289,15 @@
   #decor-box-promo .db-promo-img{border-radius:20px;overflow:hidden;background:var(--dark-2);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
   #decor-box-promo .db-promo-img img{width:100%;height:auto;object-fit:cover;display:block;}
   @media(max-width:768px){
-    #decor-box-promo .db-promo-grid{grid-template-columns:1fr;gap:30px;text-align:center;}
-    #decor-box-promo .gold-line{margin-left:auto;margin-right:auto;}
-    /* Sirina po najduzoj stavci, ne fiksnih 280px — inace kvacice ostanu lijevo
-       od sredine dok su naslov, tekst i dugme centrirani */
-    #decor-box-promo .db-check-list{grid-template-columns:1fr;width:max-content;max-width:100%;margin-left:auto;margin-right:auto;text-align:left;}
+    #decor-box-promo{padding:46px 0!important;}
+    #decor-box-promo .db-promo-grid{grid-template-columns:1fr;gap:20px;text-align:center;}
+    #decor-box-promo .gold-line{margin-left:auto;margin-right:auto;margin-bottom:14px;}
+    #decor-box-promo .db-oznaka{font-size:10.5px!important;letter-spacing:1.6px!important;margin-bottom:8px!important;}
+    #decor-box-promo .section-title{font-size:26px!important;margin-bottom:10px!important;}
+    #decor-box-promo p{font-size:13.5px!important;line-height:1.65!important;margin-bottom:16px!important;}
+    /* Kvacice u 2 kolone da zauzmu manje visine */
+    #decor-box-promo .db-check-list{grid-template-columns:1fr 1fr;gap:8px 14px;margin:0 auto 18px;max-width:340px;text-align:left;}
+    #decor-box-promo .db-check-list li{font-size:12.5px;line-height:1.35;}
     #decor-box-promo .btn{margin-left:auto;margin-right:auto;}
   }
   /* Karte boja — dvije plocice koje otvaraju PDF. Visina slike je zadata
@@ -978,7 +982,7 @@
   <div class="container">
     <div class="db-promo-grid">
       <div class="animate-on-scroll">
-        <span style="display:inline-block;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">Program saradnje za arhitekte i dizajnere</span>
+        <span class="db-oznaka" style="display:inline-block;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;">Program saradnje za arhitekte i dizajnere</span>
         <div class="gold-line"></div>
         <h2 class="section-title" style="color:#fff;">Decor Box</h2>
         <p style="color:rgba(255,255,255,0.72);font-size:15px;line-height:1.85;margin-bottom:20px;">
