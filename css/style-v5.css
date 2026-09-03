@@ -3170,8 +3170,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 /* HERO — lijevo na desktopu (tekst ne stoji na sred ekrana) */
 @media (min-width: 1025px) {
-  #hero .container { max-width: 100%; padding-left: 46px; padding-right: 40px; }
-  #hero .hero-content { margin-left: 0; margin-right: auto; text-align: left; max-width: 580px; }
+  #hero .container { max-width: 1160px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
+  #hero .hero-content { margin-left: auto; margin-right: auto; text-align: center; max-width: 860px; }
+  #hero .hero-title { white-space: nowrap; }
+  #hero .hero-title .hero-brand { white-space: normal; }
+  #hero .hero-actions { justify-content: center; }
+  #hero .hero-stats { justify-content: center; gap: 64px; }
 }
 /* Vece kartice kategorija na desktopu: 3 u redu, krupnija slika */
 @media (min-width: 1101px) {
