@@ -3170,6 +3170,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 /* HERO — lijevo na desktopu (tekst ne stoji na sred ekrana) */
 @media (min-width: 1025px) {
+  #hero { align-items: flex-end; padding-bottom: 128px; }
   #hero .container { max-width: 1160px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
   #hero .hero-content { margin-left: auto; margin-right: auto; text-align: center; max-width: 860px; }
   #hero .hero-title { white-space: nowrap; }
