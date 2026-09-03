@@ -208,6 +208,11 @@
 html {
   scroll-behavior: smooth; font-size: 16px; overflow-x: hidden;
   -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+  /* Sajt ima svoje boje (tamni header/hero, bijele sekcije). Bez ovoga
+     Chrome i Samsung Internet na Androidu ukljucuju "tamni rezim za web" i
+     INVERTUJU bijele sekcije (tekst necitljiv) — iPhone Safari to nema.
+     color-scheme:light kaze pregledacu da ne dira boje. */
+  color-scheme: light;
 }
 
 body {
