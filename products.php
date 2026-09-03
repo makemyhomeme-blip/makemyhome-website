@@ -534,7 +534,7 @@ echo "\n</script>\n";
     }
     /* TELEFON: bez praznog prostora ispod hero-a i bez stiskanja u jedan red */
     @media (max-width: 768px) {
-      .products-section { padding: 22px 0 60px !important; }
+      .products-section { padding: 22px 0 26px !important; }
       .back-bar {
         flex-wrap: wrap; align-items: center;
         gap: 10px; padding: 0 0 16px;
@@ -548,6 +548,13 @@ echo "\n</script>\n";
         order: 3; width: 100%;
         font-size: 20px; line-height: 1.25; margin: 0;
       }
+      /* Neparan broj proizvoda: zadnja kartica preko cijele sirine (nema prazne celije) */
+      #products-container > .product-card:last-child:nth-child(odd),
+      #category-grid > .cat-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+      /* Manji razmaci sekcija ispod proizvoda (bila velika praznina do futera) */
+      .cat-seo-text { margin-top: 26px !important; padding-top: 22px !important; }
+      .cat-vodici { margin-top: 16px !important; padding-bottom: 22px !important; }
+      #contact-cta { padding: 42px 0 !important; }
     }
     /* Izgled rasprodatih kartica je bio i ovdje, prepisan iz style-v5.css. Ova
        kopija stoji POSLIJE glavnog fajla, pa je uvijek pobjedjivala — izmjena u
