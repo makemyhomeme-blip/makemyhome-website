@@ -936,7 +936,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
           'banner'  => [
             'file'  => 'decor-box-banner.jpg',
             'title' => 'Slika 1 — Pored uvodnog teksta',
-            'desc'  => 'Prikazuje se desno od teksta "Program saradnje za profesionalce" (npr. Decor Box banner ili showroom).',
+            'desc'  => 'Prikazuje se desno od teksta "Program saradnje za arhitekte i dizajnere" (npr. Decor Box banner ili showroom).',
           ],
           'fabrika' => [
             'file'  => 'decor-box-fabrika.jpg',
