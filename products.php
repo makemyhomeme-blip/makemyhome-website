@@ -548,9 +548,6 @@ echo "\n</script>\n";
         order: 3; width: 100%;
         font-size: 20px; line-height: 1.25; margin: 0;
       }
-      /* Neparan broj proizvoda: zadnja kartica preko cijele sirine (nema prazne celije) */
-      #products-container > .product-card:last-child:nth-child(odd),
-      #category-grid > .cat-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
       /* Manji razmaci sekcija ispod proizvoda (bila velika praznina do futera) */
       .cat-seo-text { margin-top: 26px !important; padding-top: 22px !important; }
       .cat-vodici { margin-top: 16px !important; padding-bottom: 22px !important; }
