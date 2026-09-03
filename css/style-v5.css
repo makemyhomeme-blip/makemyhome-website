@@ -1471,6 +1471,8 @@ ul { list-style: none; }
 
 /* ===== PRODUCT DETAIL ===== */
 .product-detail-section { padding: 80px 0; }
+.srodni-sekcija { margin-top: 80px; }
+.srodni-naslov { margin-bottom: 40px; }
 
 .product-detail-grid {
   display: grid;
@@ -1853,8 +1855,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .product-detail-grid { grid-template-columns: 1fr; gap: 14px; }
   .product-gallery { position: static; }
-  /* 140px je bilo za desktop; na telefonu/tabletu ostavlja veliku prazninu iznad putanje */
-  .product-detail-section { padding-top: 90px !important; }
+  /* 140px je bilo za desktop; na telefonu/tabletu ostavlja veliku prazninu iznad putanje.
+     Donji padding sa 80px -> 40px (bila velika praznina ispod "Slicni Proizvodi"). */
+  .product-detail-section { padding-top: 90px !important; padding-bottom: 40px !important; }
+  .srodni-sekcija { margin-top: 40px; }
+  .srodni-naslov { margin-bottom: 22px !important; }
   /* Kutija slike se prilagodjava slici (bila fiksno 480px pa je ostajao prazan
      prostor ispod pejzazne slike) */
   .gallery-main { height: auto !important; margin-bottom: 0 !important; }
