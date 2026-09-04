@@ -119,7 +119,7 @@ function optimizeImage($tmpPath, $destPath, $maxW = 1200, $maxH = 900, $quality 
  * Napravi (ili osvježi) .webp pored .jpg. Ako WebP nije podržan ili snimanje padne,
  * ukloni postojeći .webp da <picture> nikad ne posluži staru sliku.
  */
-function syncWebp($destPath, $gdImage = null, $quality = 82) {
+function syncWebp($destPath, $gdImage = null, $quality = 88) {
     $webpPath = preg_replace('/\.(jpe?g|png)$/i', '.webp', $destPath);
     if ($webpPath === $destPath) return false;
     $made = false;
@@ -182,7 +182,9 @@ function handleImageUpload($fieldName) {
     $uploadDir = __DIR__ . '/../images/products/';
     if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
     $destPath  = $uploadDir . $filename;
-    if (optimizeImage($file['tmp_name'], $destPath, 1200, 900, 82)) {
+    // Glavna slika proizvoda je najvaznija — cuva se u visokoj rezoluciji.
+    // (Ranije 1200x900/q82 je uspravne slike panela smanjivalo na ~450x900.)
+    if (optimizeImage($file['tmp_name'], $destPath, 2000, 2000, 90)) {
         syncWebp($destPath);
         return 'images/products/' . $filename;
     }
@@ -776,7 +778,7 @@ switch ($action) {
         if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
         $destPath = $uploadDir . $filename;
         $imgPath  = 'images/products/' . $filename;
-        if (!optimizeImage($file['tmp_name'], $destPath, 1200, 900, 82)) {
+        if (!optimizeImage($file['tmp_name'], $destPath, 2000, 2000, 88)) {
             if (!move_uploaded_file($file['tmp_name'], $destPath)) {
                 echo json_encode(['ok' => false, 'error' => 'Snimanje slike nije uspjelo.']); exit;
             }

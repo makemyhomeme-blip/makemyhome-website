@@ -25,9 +25,9 @@ foreach ($products as $p) {
 }
 
 $dryRun           = ($_GET['apply'] ?? '') !== '1';
-$maxW             = 1600;
-$maxH             = 1200;
-$quality          = 82;
+$maxW             = 2000;
+$maxH             = 2000;
+$quality          = 90;
 $minSizeToProcess = 150 * 1024; // ispod ovoga se ne dira (već dovoljno male)
 
 $backupDir = $root . '/images/products-backup/';
