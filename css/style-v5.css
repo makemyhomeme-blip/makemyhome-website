@@ -1547,7 +1547,9 @@ ul { list-style: none; }
   justify-content: center;
 }
 
-.gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+/* height/object-fit sa !important da pobijede inline "height:auto" na slici —
+   inace visoka uspravna slika prelije kutiju i zauzme cijeli ekran. */
+.gallery-main img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 
 .gallery-thumbs {
   display: flex;
@@ -1875,9 +1877,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .product-detail-section { padding-top: 90px !important; padding-bottom: 40px !important; }
   .srodni-sekcija { margin-top: 40px; }
   .srodni-naslov { margin-bottom: 22px !important; }
-  /* Kutija slike se prilagodjava slici (bila fiksno 480px pa je ostajao prazan
-     prostor ispod pejzazne slike) */
-  .gallery-main { height: auto !important; margin-bottom: 0 !important; }
+  /* Visina glavne slike ogranicena da visoke (uspravne) slike ne zauzmu cijeli
+     ekran; tap na sliku otvara punu rezoluciju. */
+  .gallery-main { height: 420px !important; margin-bottom: 0 !important; }
   .gallery-open-hint { margin-top: 8px !important; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
 }
