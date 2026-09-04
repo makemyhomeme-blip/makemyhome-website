@@ -462,28 +462,31 @@ echo "\n</script>\n";
     .cat-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
-      padding: 40px 0;
+      gap: 22px;
+      padding: 32px 0;
     }
     .cat-card {
       background: #fff;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      border: 1px solid #f0f0f0;
       text-decoration: none;
       color: inherit;
       transition: transform 0.25s, box-shadow 0.25s;
-      display: block;
+      display: flex;
+      flex-direction: column;
       cursor: pointer;
     }
     .cat-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.13);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.15);
     }
     .cat-card-img {
-      height: 200px;
+      height: 170px;
+      position: relative;
       overflow: hidden;
-      background: #ffffff;
+      background: #f3f3f3;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -492,29 +495,35 @@ echo "\n</script>\n";
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s;
+      transition: transform 0.45s;
     }
-    .cat-card:hover .cat-card-img img { transform: scale(1.05); }
-    .cat-card-img i { font-size: 48px; color: #c9a86c; opacity: 0.5; }
-    .cat-card-body {
-      padding: 20px 24px 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
+    .cat-card:hover .cat-card-img img { transform: scale(1.06); }
+    .cat-card-img > i { font-size: 46px; color: #c9a86c; opacity: 0.45; }
     .cat-card-icon {
-      width: 44px; height: 44px; border-radius: 10px;
+      position: absolute; bottom: 12px; left: 12px;
+      width: 42px; height: 42px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 18px; flex-shrink: 0; margin-top: 2px;
+      color: #fff; font-size: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.28);
     }
-    .cat-card-info h2 { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #1a1a1a; }
-    .cat-card-info p  { font-size: 13px; color: #666e7a; margin-bottom: 8px; line-height: 1.5; }
-    .cat-card-count {
-      display: inline-block;
-      background: #ffffff; color: #795f32;
-      padding: 3px 12px; border-radius: 20px;
-      font-size: 12px; font-weight: 700;
+    .cat-card-body {
+      padding: 15px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
+    .cat-card-info { flex: 1; }
+    .cat-card-info h2 { font-size: 18px; font-weight: 800; margin-bottom: 5px; color: #1a1a1a; letter-spacing: -0.2px; }
+    .cat-card-info p  { font-size: 13px; color: #6a6a6a; margin: 0 0 14px; line-height: 1.5; }
+    .cat-card-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 12px; border-top: 1px solid #f1f1f1;
+    }
+    .cat-card-count { font-size: 12.5px; font-weight: 700; color: #795f32; }
+    .cat-card-go { font-size: 13px; font-weight: 700; color: #8a6d2f; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .cat-card-go i { font-size: 11px; transition: transform 0.2s; }
+    .cat-card:hover .cat-card-go i { transform: translateX(4px); }
+    @media (max-width: 768px) { .cat-card-img { height: 150px; } }
     /* ===== BACK BAR ===== */
     .back-bar {
       display: flex; align-items: center; gap: 16px;
@@ -830,18 +839,19 @@ echo "\n</script>\n";
           <div class="cat-card-img">
             <?php if ($prvaSlika): ?>
             <img src="<?= htmlspecialchars($prvaSlika) ?>" alt="<?= htmlspecialchars(($ck['name'] ?? '') . ' – zidni paneli, Make My Home Decor Podgorica') ?>" loading="lazy"<?= mmhDimAtributi($prvaSlika) ?>>
-            <?php else: ?>
-            <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
             <?php endif; ?>
+            <span class="cat-card-icon" style="background:<?= htmlspecialchars($ck['color'] ?? '#7a9e6e') ?>">
+              <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
+            </span>
           </div>
           <div class="cat-card-body">
-            <div class="cat-card-icon" style="background:<?= htmlspecialchars($ck['color'] ?? '#7a9e6e') ?>">
-              <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
-            </div>
             <div class="cat-card-info">
               <h2><?= htmlspecialchars($ck['name'] ?? '') ?></h2>
               <p><?= htmlspecialchars($ck['description'] ?? '') ?></p>
+            </div>
+            <div class="cat-card-foot">
               <span class="cat-card-count"><?= $br ?> proizvoda</span>
+              <span class="cat-card-go">Pogledaj <i class="fas fa-arrow-right"></i></span>
             </div>
           </div>
         </a>
