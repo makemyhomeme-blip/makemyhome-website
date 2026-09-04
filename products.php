@@ -455,7 +455,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=5748fbd6">
+  <link rel="stylesheet" href="css/style-v5.css?v=b8109f17">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -483,7 +483,7 @@ echo "\n</script>\n";
       box-shadow: 0 16px 44px rgba(0,0,0,0.15);
     }
     .cat-card-img {
-      height: 170px;
+      height: 195px;
       position: relative;
       overflow: hidden;
       background: #f3f3f3;
@@ -523,7 +523,7 @@ echo "\n</script>\n";
     .cat-card-go { font-size: 13px; font-weight: 700; color: #8a6d2f; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
     .cat-card-go i { font-size: 11px; transition: transform 0.2s; }
     .cat-card:hover .cat-card-go i { transform: translateX(4px); }
-    @media (max-width: 768px) { .cat-card-img { height: 150px; } }
+    @media (max-width: 768px) { .cat-card-img { height: 185px; } }
     /* ===== BACK BAR ===== */
     .back-bar {
       display: flex; align-items: center; gap: 16px;

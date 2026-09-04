@@ -1432,7 +1432,8 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 100%, rgba(201,168,108,0.2) 0%, transparent 60%);
+  /* Zlatni sjaj uklonjen na zahtjev — hero je cisto crn, bez zlatnog u sredini. */
+  background: none;
 }
 
 .page-hero-content { position: relative; z-index: 1; text-align: center; }
