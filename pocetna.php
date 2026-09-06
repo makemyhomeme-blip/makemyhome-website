@@ -63,7 +63,7 @@ if ($izdvojeni) {
     ?>
         <article class="product-card<?= $nema ? ' out-of-stock' : '' ?>" data-category="<?= htmlspecialchars($p['category'] ?? '') ?>" data-id="<?= (int)($p['id'] ?? 0) ?>">
           <a href="<?= htmlspecialchars($url) ?>" class="product-img" style="display:block;">
-            <img src="<?= htmlspecialchars($p['image'] ?? '') ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?>
+            <img src="<?= htmlspecialchars(mmhThumb($p['image'] ?? '')) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?>
                  alt="<?= htmlspecialchars(($p['name'] ?? '') . ' – ' . $kat . ' | Make My Home Decor Podgorica') ?>">
             <?php if ($popust > 0 && !$nema): ?>
             <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $popust ?>%</div>

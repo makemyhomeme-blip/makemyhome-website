@@ -59,6 +59,22 @@ function mmhDimAtributi(string $rel): string
 }
 
 /**
+ * Sitna (thumbnail) verzija slike proizvoda za KARTICE i LISTE — brzo se
+ * ucitava (velike slike od 2000px su za stranicu proizvoda i zumiranje).
+ * Vrati putanju thumbnaila ako postoji na disku, inace original. Thumbnaili
+ * stoje u images/products/thumbs/ i prave se pri uploadu (admin/actions.php)
+ * i batch skriptom (admin/gen-thumbs.php). WebP verziju servira .htaccess.
+ * Aspect je isti kao original, pa width/height atributi originala ostaju tacni.
+ */
+function mmhThumb(string $rel): string
+{
+    if ($rel === '' || strpos($rel, 'images/products/') !== 0) return $rel;
+    if (strpos($rel, 'images/products/thumbs/') === 0) return $rel; // vec thumb
+    $thumbRel = 'images/products/thumbs/' . basename($rel);
+    return is_file(dirname(__DIR__) . '/' . $thumbRel) ? $thumbRel : $rel;
+}
+
+/**
  * Izaberi sliku za dijeljenje na drustvenim mrezama.
  *
  * Facebook, WhatsApp i Viber prikazu veliku karticu samo ako je slika bar

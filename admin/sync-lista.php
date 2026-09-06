@@ -123,6 +123,7 @@ return function (string $base, string $root, string $adminDir): array {
         $adminDir . '/sync-lista.php'  => $base . '/admin/sync-lista.php',
     $adminDir . '/blog-slike.php'  => $base . '/admin/blog-slike.php',
     $adminDir . '/skini-popuste.php' => $base . '/admin/skini-popuste.php',
+    $adminDir . '/gen-thumbs.php'   => $base . '/admin/gen-thumbs.php',
         $adminDir . '/sesija.php'      => $base . '/admin/sesija.php',
     $adminDir . '/index.php'      => $base . '/admin/index.php',
     $adminDir . '/logout.php'     => $base . '/admin/logout.php',

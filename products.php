@@ -838,7 +838,7 @@ echo "\n</script>\n";
         <a href="/kategorija/<?= htmlspecialchars($kid) ?>" class="cat-card">
           <div class="cat-card-img">
             <?php if ($prvaSlika): ?>
-            <img src="<?= htmlspecialchars($prvaSlika) ?>" alt="<?= htmlspecialchars(($ck['name'] ?? '') . ' – zidni paneli, Make My Home Decor Podgorica') ?>" loading="lazy"<?= mmhDimAtributi($prvaSlika) ?>>
+            <img src="<?= htmlspecialchars(mmhThumb($prvaSlika)) ?>" alt="<?= htmlspecialchars(($ck['name'] ?? '') . ' – zidni paneli, Make My Home Decor Podgorica') ?>" loading="lazy"<?= mmhDimAtributi($prvaSlika) ?>>
             <?php endif; ?>
             <span class="cat-card-icon" style="background:<?= htmlspecialchars($ck['color'] ?? '#7a9e6e') ?>">
               <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
@@ -892,7 +892,7 @@ echo "\n</script>\n";
         ?>
         <article class="product-card<?= $pNema ? ' out-of-stock' : '' ?>" data-ssr="1">
           <a href="<?= htmlspecialchars($pUrl) ?>" class="product-img" style="display:block;">
-            <img src="<?= htmlspecialchars($p['image'] ?? '') ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?>>
+            <img src="<?= htmlspecialchars(mmhThumb($p['image'] ?? '')) ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?>>
             <?php if ($pD > 0 && !$pNema): ?>
             <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $pD ?>%</div>
             <?php endif; ?>
@@ -1099,7 +1099,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/products.js?v=47ec4066"></script>
+<script src="js/products.js?v=3d821098"></script>
 <script src="js/cart.js?v=2906a9ed"></script>
 <script>
   initProductsPage();

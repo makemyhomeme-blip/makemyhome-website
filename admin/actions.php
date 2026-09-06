@@ -143,6 +143,22 @@ function syncWebp($destPath, $gdImage = null, $quality = 88) {
 }
 
 /**
+ * Napravi sitnu (thumbnail) verziju slike proizvoda za KARTICE/LISTE:
+ * images/products/thumbs/<ime>.jpg (~700px) + WebP. Velika (originalna) slika
+ * ostaje netaknuta — ona je za stranicu proizvoda i zumiranje.
+ * Zove se pri uploadu; masovno preko admin/gen-thumbs.php.
+ */
+function napraviThumb($fullPath) {
+    if (!function_exists('imagecreatetruecolor') || !is_file($fullPath)) return;
+    $thumbDir = dirname($fullPath) . '/thumbs/';
+    if (!is_dir($thumbDir)) @mkdir($thumbDir, 0755, true);
+    $thumbPath = $thumbDir . preg_replace('/\.(jpe?g|png|webp)$/i', '.jpg', basename($fullPath));
+    if (optimizeImage($fullPath, $thumbPath, 700, 800, 80)) {
+        syncWebp($thumbPath, null, 78);
+    }
+}
+
+/**
  * Obrise sliku ZAJEDNO sa njenim .webp blizancem.
  *
  * .htaccess servira foto.webp svakom pregledacu koji kaze da razumije WebP.
@@ -186,6 +202,7 @@ function handleImageUpload($fieldName) {
     // (Ranije 1200x900/q82 je uspravne slike panela smanjivalo na ~450x900.)
     if (optimizeImage($file['tmp_name'], $destPath, 2000, 2000, 90)) {
         syncWebp($destPath);
+        napraviThumb($destPath);
         return 'images/products/' . $filename;
     }
     // Fallback: sačuvaj original ako GD nije dostupan
@@ -784,6 +801,7 @@ switch ($action) {
             }
         }
         syncWebp($destPath);
+        napraviThumb($destPath);
         foreach ($products as &$p) {
             if ($p['id'] === $id) {
                 if (!isset($p['gallery']) || !is_array($p['gallery'])) $p['gallery'] = [];

@@ -146,9 +146,15 @@ function renderProductCard(product, lazy = true) {
 
   const categoryName = allCategories.find(c => c.id === product.category)?.name || product.category;
 
+  // Thumbnail za karticu (brzo); ako thumb ne postoji, onerror vrati na punu sliku.
+  const imgFull  = product.image || '';
+  const imgThumb = imgFull.indexOf('images/products/') === 0
+    ? imgFull.replace('images/products/', 'images/products/thumbs/').replace(/\.(jpe?g|png|webp)$/i, '.jpg')
+    : imgFull;
   const imgContent = `
-    <img src="${product.image}" alt="${mmhE(product.name)} – ${mmhE(categoryName)} | Make My Home Decor Podgorica"
-      onerror="this.onerror=null;this.parentElement.innerHTML='<span class=&quot;product-img-placeholder&quot;><i class=&quot;fas fa-image&quot;></i></span>'"
+    <img src="${imgThumb}" alt="${mmhE(product.name)} – ${mmhE(categoryName)} | Make My Home Decor Podgorica"
+      data-full="${imgFull}"
+      onerror="if(this.dataset.full&&this.src.indexOf('/thumbs/')>-1){this.src=this.dataset.full;}else{this.onerror=null;this.parentElement.innerHTML='<span class=&quot;product-img-placeholder&quot;><i class=&quot;fas fa-image&quot;></i></span>';}"
       ${lazy ? 'loading="lazy"' : ''}>
   `;
 
