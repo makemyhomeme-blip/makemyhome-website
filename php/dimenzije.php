@@ -1,0 +1,102 @@
+<?php
+/**
+ * Prave dimenzije slika — jedno mjesto za cijeli sajt.
+ *
+ * Zasto postoji:
+ * Ako <img> nema width i height, pretrazivac prije ucitavanja ne zna koliko
+ * mjesta da ostavi. Zbog toga se desavaju dvije stvari:
+ *   1. sadrzaj skace dok slike stizu (Google to mjeri kao CLS i racuna u ocjenu),
+ *   2. loading="lazy" ne radi — mreza je visoka nula piksela pa pretrazivac
+ *      misli da su sve slike na ekranu i skida ih sve odjednom.
+ *
+ * Izmisljene dimenzije ne pomazu. Na stranicama kategorija je stajalo
+ * width="400" height="300" za svaku sliku, a slike su stvarno 506x900 ili
+ * 1600x1142 — rezervisani prostor je bio i do dva i po puta manji od pravog.
+ *
+ * getimagesize cita samo zaglavlje fajla, ali za stotinu slika to je pola
+ * sekunde po zahtjevu. Zato se rezultat pamti u data/dimenzije-slika.json,
+ * po imenu fajla i vremenu izmjene — kad vlasnik zamijeni sliku, kljuc se
+ * promijeni i dimenzije se procitaju ponovo.
+ */
+
+/** Vrati [sirina, visina] za sliku, ili null ako se ne moze procitati. */
+function mmhDimenzije(string $rel): ?array
+{
+    static $kes = null, $izmijenjen = false, $put = null;
+
+    if ($kes === null) {
+        $put = dirname(__DIR__) . '/data/dimenzije-slika.json';
+        $kes = json_decode(@file_get_contents($put), true) ?: [];
+        // Upis na kraju zahtjeva, da se ne pise po jednom za svaku sliku
+        register_shutdown_function(function () use (&$kes, &$izmijenjen, &$put) {
+            if (!$izmijenjen) return;
+            if (count($kes) > 1500) $kes = array_slice($kes, -1500, null, true);
+            @file_put_contents($put, json_encode($kes), LOCK_EX);
+        });
+    }
+
+    $rel = ltrim((string)$rel, '/');
+    if ($rel === '') return null;
+
+    $puna = dirname(__DIR__) . '/' . $rel;
+    $vrijeme = @filemtime($puna);
+    if ($vrijeme === false) return null;
+
+    $kljuc = $rel . '|' . $vrijeme;
+    if (!array_key_exists($kljuc, $kes)) {
+        $s = @getimagesize($puna);
+        $kes[$kljuc] = ($s && !empty($s[0]) && !empty($s[1])) ? [(int)$s[0], (int)$s[1]] : null;
+        $izmijenjen = true;
+    }
+    return $kes[$kljuc];
+}
+
+/** Vrati ' width="..." height="..."' spremno za ubacivanje u <img>, ili prazno. */
+function mmhDimAtributi(string $rel): string
+{
+    $d = mmhDimenzije($rel);
+    return $d ? sprintf(' width="%d" height="%d"', $d[0], $d[1]) : '';
+}
+
+/**
+ * Sitna (thumbnail) verzija slike proizvoda za KARTICE i LISTE — brzo se
+ * ucitava (velike slike od 2000px su za stranicu proizvoda i zumiranje).
+ * Vrati putanju thumbnaila ako postoji na disku, inace original. Thumbnaili
+ * stoje u images/products/thumbs/ i prave se pri uploadu (admin/actions.php)
+ * i batch skriptom (admin/gen-thumbs.php). WebP verziju servira .htaccess.
+ * Aspect je isti kao original, pa width/height atributi originala ostaju tacni.
+ */
+function mmhThumb(string $rel): string
+{
+    if ($rel === '' || strpos($rel, 'images/products/') !== 0) return $rel;
+    if (strpos($rel, 'images/products/thumbs/') === 0) return $rel; // vec thumb
+    $thumbRel = 'images/products/thumbs/' . basename($rel);
+    return is_file(dirname(__DIR__) . '/' . $thumbRel) ? $thumbRel : $rel;
+}
+
+/**
+ * Izaberi sliku za dijeljenje na drustvenim mrezama.
+ *
+ * Facebook, WhatsApp i Viber prikazu veliku karticu samo ako je slika bar
+ * 600x315. Ispod toga daju sitnu slicicu ili nista. Vecina fotografija
+ * proizvoda je uspravna (npr. 507x900), pa je 32 stranice dijeljeno kao
+ * sicusna slicica.
+ *
+ * Ovdje se ne dira nijedna slika — samo se od ponudjenih bira prva koja je
+ * dovoljno siroka. Prvo se gleda glavna slika, pa galerija istog proizvoda,
+ * a tek ako nista ne odgovara uzima se zajednicka fotografija showrooma.
+ *
+ * @param array $kandidati relativne putanje, po redu prvenstva
+ */
+function mmhSlikaZaDijeljenje(array $kandidati, string $rezerva = 'images/showcase-room.jpg'): array
+{
+    foreach ($kandidati as $rel) {
+        if (!$rel) continue;
+        $d = mmhDimenzije($rel);
+        if ($d && $d[0] >= 600 && $d[1] >= 315) {
+            return ['put' => $rel, 'w' => $d[0], 'h' => $d[1]];
+        }
+    }
+    $d = mmhDimenzije($rezerva);
+    return ['put' => $rezerva, 'w' => $d[0] ?? 1714, 'h' => $d[1] ?? 800];
+}

@@ -1,0 +1,52 @@
+# Data files managed via admin panel - NEVER overwrite from git
+data/products.json
+data/categories.json
+data/inquiries.json
+data/*.backup-*.json
+# Slajdovi na pocetnoj: vlasnik ih mijenja kroz admin (admin/actions.php ih
+# upisuje). Nisu u sync listi pa se ne mogu prepisati, ali stoje i ovdje da
+# se ta greska ne moze napraviti kasnije.
+data/hero-slides.json
+# Kes sitemapa — pravi ga server, ne drzi se u gitu
+data/sitemap-kes.xml
+data/sitemap-kes.xml.tmp
+
+# Uploads managed on server
+images/categories/
+images/products/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Kes dimenzija slika — pravi ga server pri prvom otvaranju stranice,
+# razlikuje se lokalno i na serveru, i ne deployuje se.
+data/dimenzije-slika.json
+
+# Snimci stanja sajta (alat/snimak.py) — radna evidencija, ne ide na server.
+alat/snimci/*.png
+
+# Python kes — nastaje otkad alat/provjera.py uvozi alat/ikone.py radi
+# provjere ikona (pravilo C6). Pravi ga sam Python, vezan je za verziju
+# interpretera i nema ga sta biti u repou.
+__pycache__/
+*.pyc
+.seo-audit-kes/
+R2-*.json
+alat/snimci/sada.json.gz
+alat/snimci/oko/
+data/reviews.json
+data/reviews-extra.json
+
+# Mozaik slike za dijeljenje pravi SAM SERVER iz svog data/products.json.
+# Lokalne kopije se ne salju — inace bi prepisale one koje odgovaraju
+# slikama koje je vlasnik okacio kroz admin.
+images/og/
+
+# Privremene skripte za provjeru u pregledacu (alat/tmp-*.mjs) prave se u toku
+# rada i brisu poslije. Jednom je tmp-u.mjs upao u repo preko "git add -A".
+alat/tmp-*
+
+# Datumi izmjene po proizvodu — pravi ih SAM SERVER iz svojih podataka.
+# Sa lokalnog se ne salje, inace bi datumi skocili na stanje razvojne masine.
+data/lastmod.json

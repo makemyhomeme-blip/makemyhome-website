@@ -1,0 +1,138 @@
+<?php
+/**
+ * Spisak fajlova koje sync povlaci sa GitHuba.
+ *
+ * Zasto je izdvojen iz sync.php:
+ * sync.php gradi spisak na pocetku izvrsavanja, a sebe prepisuje tek u toku
+ * rada. Kad se doda nov fajl, prvi sync jos uvijek radi po STAROM spisku —
+ * ne povuce novi fajl, a povuce product.php koji ga trazi. Rezultat je 500
+ * na cijelom sajtu dok se sync ne pokrene drugi put. Tako se 11.08.2026
+ * desilo kad je dodat php/dimenzije.php.
+ *
+ * Sada sync.php prvo svjeze skine OVAJ fajl pa tek onda cita spisak, pa je
+ * jedan prolaz uvijek dovoljan.
+ */
+return function (string $base, string $root, string $adminDir): array {
+    return [
+    // ---- ZAVISNOSTI IDU PRVE ----
+    //
+    // Ovi fajlovi se traze na vrhu stranica (require_once). Ranije su stajali
+    // na 27-31. mjestu u spisku, a pocetna.php na 3. i product.php na 23. —
+    // dakle stranica se upisivala PRIJE fajla bez kojeg ne radi. Kad god se
+    // doda nov zavisni fajl, postojao je prozor u kom stranica stoji na
+    // serveru a fajl jos nije, i tada server vraca 500.
+    //
+    // U dnevniku servera to se vidi kao fatalna greska 4. avgusta
+    // (inc/slug-match.php), 11. avgusta (php/dimenzije.php) i 14. avgusta
+    // (php/kalkulator.php). Google sajtu koji vraca 500 smanjuje citanje.
+    //
+    // Zato zavisnosti idu prve. Novi fajl u php/ se OBAVEZNO dodaje ovdje,
+    // ne nize. Pravilo G14 to provjerava.
+    $root . '/php/slug.php'       => $base . '/php/slug.php',
+    $root . '/php/kalkulator.php' => $base . '/php/kalkulator.php',
+    $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
+    $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
+    $root . '/php/contact.php'    => $base . '/php/contact.php',
+    $root . '/php/og-mozaik.php' => $base . '/php/og-mozaik.php',
+    $root . '/php/lastmod.php' => $base . '/php/lastmod.php',
+    // HTML stranice
+    $root . '/404.html'         => $base . '/404.html',
+    $root . '/index.html'       => $base . '/index.html',
+        $root . '/pocetna.php'      => $base . '/pocetna.php',
+    $root . '/product.html'     => $base . '/product.html',
+    $root . '/products.html'    => $base . '/products.html',
+    $root . '/about.html'       => $base . '/about.html',
+    $root . '/contact.html'     => $base . '/contact.html',
+    $root . '/korpa.html'       => $base . '/korpa.html',
+    $root . '/checkout.html'    => $base . '/checkout.html',
+    $root . '/hvala.html'       => $base . '/hvala.html',
+    $root . '/faq.html'         => $base . '/faq.html',
+    $root . '/montaza.html'     => $base . '/montaza.html',
+    $root . '/decor-box.php'    => $base . '/decor-box.php',
+    $root . '/privatnost.html'  => $base . '/privatnost.html',
+    $root . '/uslovi.html'      => $base . '/uslovi.html',
+    $root . '/reklamacije.html' => $base . '/reklamacije.html',
+    $root . '/paneli-za-kupatilo.html' => $base . '/paneli-za-kupatilo.html',
+    $root . '/tv-zid.html' => $base . '/tv-zid.html',
+    $root . '/akusticni-paneli-kancelarija.html' => $base . '/akusticni-paneli-kancelarija.html',
+    $root . '/spc-ili-laminat.html' => $base . '/spc-ili-laminat.html',
+    $root . '/dostava-crna-gora.html' => $base . '/dostava-crna-gora.html',
+    // Blog
+    $root . '/blog.html' => $base . '/blog.html',
+    $root . '/dekorativni-zidni-paneli-vodic.html' => $base . '/dekorativni-zidni-paneli-vodic.html',
+    $root . '/kako-izabrati-panele-po-prostoriji.html' => $base . '/kako-izabrati-panele-po-prostoriji.html',
+    $root . '/pu-kamen-izgled-kamena.html' => $base . '/pu-kamen-izgled-kamena.html',
+    $root . '/koliko-kostaju-zidni-paneli.html' => $base . '/koliko-kostaju-zidni-paneli.html',
+    // PHP
+    $root . '/product.php'      => $base . '/product.php',
+    $root . '/products.php'     => $base . '/products.php',
+    $root . '/cjenovnik.php'    => $base . '/cjenovnik.php',
+    $root . '/inspiracija.php'  => $base . '/inspiracija.php',
+    // Bez ovoga product.php puca sa fatalnom greskom — trazi ga na vrhu.
+    // JS
+    $root . '/js/cart.js'       => $base . '/js/cart.js',
+    $root . '/js/products.js'   => $base . '/js/products.js',
+    $root . '/js/main-v4.js'    => $base . '/js/main-v4.js',
+    $root . '/js/analytics-events.js' => $base . '/js/analytics-events.js',
+    // CSS
+    $root . '/css/style-v5.css' => $base . '/css/style-v5.css',
+    // css/fonts.css je spojen u style-v5.css — jedan blokirajuci zahtjev manje.
+    // Fajl ostaje na serveru kao zaostatak, ali ga nijedna stranica ne trazi.
+    // Images / favicon
+    // Ikone: fontovi su sazeti sa 267 kB na 14 kB (samo 134 ikone koje sajt
+        // stvarno koristi). Isto vazi i za CSS — all.min.css opisuje 1870 ikona
+        // i tezak je 100 kB, a mmh-ikone.css samo onih 134, 22 kB. Pravi ga
+        // alat/ikone.py iz koda, pa ne moze zastarjeti. Sync ih prenosi bajt
+        // po bajt, kao i favicon.
+        $root . '/fa/webfonts/fa-solid-900.woff2'  => $base . '/fa/webfonts/fa-solid-900.woff2',
+        $root . '/fa/webfonts/fa-brands-400.woff2' => $base . '/fa/webfonts/fa-brands-400.woff2',
+        $root . '/fa/css/mmh-ikone.css'              => $base . '/fa/css/mmh-ikone.css',
+        // Tekstualni fontovi: "latin-ext" fajlovi su nosili ogroman opseg znakova
+        // (fonetski, dodatni latinicni...) a sajtu trebaju samo ć č đ š ž.
+        // Sazeti su na cio blok Latin Extended-A i B, da rade i buduca imena.
+        $root . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2' => $base . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2',
+        $root . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2'    => $base . '/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2',
+        $root . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2'    => $base . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2',
+        $root . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2'      => $base . '/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2',
+        $root . '/images/favicon.ico'     => $base . '/images/favicon.ico',
+    $root . '/images/favicon-512.png' => $base . '/images/favicon-512.png',
+    // Slika koja se pokaze kad se link sajta podijeli na Instagramu, Facebooku
+    // ili WhatsAppu. Ranije je tamo isla fotografija sobe sa pocetne, pa se
+    // umjesto firme vidjela soba.
+    $root . '/images/og-dijeljenje.jpg' => $base . '/images/og-dijeljenje.jpg',
+    // Karte boja: dva PDF-a koja se preuzimaju sa Decor Box stranice, i dvije
+    // slicice sastavljene od stvarnih dezena iz tih karata. Odjeljak na
+    // decor-box.php se ispisuje samo ako PDF postoji na disku, pa PDF-ovi
+    // moraju stici PRIJE nego sto se stranica otvori — zato stoje ovdje, iznad
+    // ostalog, a ne na kraju spiska.
+    $root . '/images/katalog-01-pregled.jpg' => $base . '/images/katalog-01-pregled.jpg',
+    $root . '/images/katalog-02-pregled.jpg' => $base . '/images/katalog-02-pregled.jpg',
+    $root . '/katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf' => $base . '/katalozi/karta-boja-01-mermer-tekstil-metal-make-my-home.pdf',
+    $root . '/katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf'        => $base . '/katalozi/karta-boja-02-drveni-dezeni-make-my-home.pdf',
+    // SEO
+    $root . '/404.php'          => $base . '/404.php',
+    $root . '/robots.txt'       => $base . '/robots.txt',
+    $root . '/llms.txt'         => $base . '/llms.txt',
+    $root . '/sitemap.php'      => $base . '/sitemap.php',
+    // Server config
+    $root . '/.htaccess'           => $base . '/.htaccess',
+    // Admin
+    $adminDir . '/dashboard.php'  => $base . '/admin/dashboard.php',
+    $adminDir . '/actions.php'    => $base . '/admin/actions.php',
+    $adminDir . '/sync.php'       => $base . '/admin/sync.php',
+        $adminDir . '/sync-lista.php'  => $base . '/admin/sync-lista.php',
+    $adminDir . '/blog-slike.php'  => $base . '/admin/blog-slike.php',
+    $adminDir . '/skini-popuste.php' => $base . '/admin/skini-popuste.php',
+    $adminDir . '/gen-thumbs.php'   => $base . '/admin/gen-thumbs.php',
+        $adminDir . '/sesija.php'      => $base . '/admin/sesija.php',
+    $adminDir . '/index.php'      => $base . '/admin/index.php',
+    $adminDir . '/logout.php'     => $base . '/admin/logout.php',
+    $adminDir . '/oporavak.php'   => $base . '/admin/oporavak.php',
+    $adminDir . '/sifre.php'      => $base . '/admin/sifre.php',
+    $adminDir . '/optimize-gallery-images.php' => $base . '/admin/optimize-gallery-images.php',
+    $adminDir . '/optimize-main-images.php'    => $base . '/admin/optimize-main-images.php',
+    $adminDir . '/apply-discount.php'          => $base . '/admin/apply-discount.php',
+    $adminDir . '/webp.php'                    => $base . '/admin/webp.php',
+    $adminDir . '/server-status.php'           => $base . '/admin/server-status.php',
+];
+};

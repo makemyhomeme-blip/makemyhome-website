@@ -1,0 +1,377 @@
+# MultiViews servira /faq isto sto i /faq.html -> dva URL-a za istu stranicu.
+# Gasimo ga da bi postojala samo jedna verzija svakog URL-a.
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.php
+
+# 301 redirects: stare WordPress stranice → nove HTML stranice
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+# NAPOMENA: hosting na nivou servera već 301-redirectuje sve */feed/ adrese na početnu
+# (prije .htaccess) — zato feed pravila ovdje pokrivaju samo root /feed/
+
+# Force HTTPS i non-www (canonical URL) — bez ovoga Google tretira http://www. kao duplikat
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://makemyhome.me%{REQUEST_URI} [R=301,L]
+
+# Link kopiran iz poruke/mejla cesto pokupi tacku ili zarez na kraju
+# (npr. .../montaza.html.) — ocisti i preusmjeri umjesto da bacas 404.
+RewriteCond %{REQUEST_URI} ^(/[^?]*\.html)[.,;:!)\]]+$
+RewriteRule ^ %1 [R=301,L]
+
+# Stari WordPress feed URL-ovi → 410 Gone.
+#
+# Ranije su preusmjeravani na pocetnu. To je bila greska: preusmjerenje znaci
+# "sadrzaj je premjesten ovdje", a RSS feed nema svoju zamjenu na novom sajtu.
+# Google takvo preusmjerenje na nepovezanu stranicu tretira kao meku 404 i
+# drzi adresu u redu za obilazak unedogled. 410 znaci "trajno obrisano" —
+# izbaci je iz indeksa i vise ne dolazi po nju.
+# (product/slug/feed je izuzet: njega obradjuje 404.php koji nadje pravi
+#  proizvod, jer TU zamjena postoji.)
+RewriteRule ^feed/?$ - [G,L]
+RewriteRule ^comments/feed/?$ - [G,L]
+
+# Stari WordPress sistemski fajlovi → 410 Gone (najjači signal Googleu: trajno obrisano, izbaci iz indeksa)
+# Ostaci starog WordPress sajta — vracaju 410 Gone da ih Google brzo izbaci iz indeksa.
+# Fajlovi ostaju na disku, samo nisu dostupni preko weba.
+# index.php je stari WP front koji trazi wp-blog-header.php (ne postoji) i vracao je 500.
+RewriteRule ^index\.php$ - [G,L]
+RewriteRule ^index\.html_$ - [G,L]
+RewriteRule ^index_override\.php$ - [G,L]
+RewriteRule ^wp-.*\.php$ - [G,L]
+RewriteRule ^readme\.html$ - [G,L]
+RewriteRule ^license\.txt$ - [G,L]
+RewriteRule ^wp-includes/ - [G,L]
+RewriteRule ^wp-content/ - [G,L]
+RewriteRule ^wp-admin/ - [G,L]
+RewriteRule ^wp-json - [G,L]
+# Stare WordPress sitemape → 410 Gone.
+#
+# Zasto bas ovo: u serverskom logu za februar 2026 (posljednji sacuvan) stoji da
+# je WordPress sajt imao sitemap /wp-sitemap.xml i devet djecijih sitemapa
+# (wp-sitemap-posts-*, wp-sitemap-taxonomies-*, wp-sitemap-users-1.xml). Botovi
+# su ih trazili 554 puta u sedamnaest dana i svaki put dobijali 200. To je
+# sitemap koji je tada bio prijavljen alatima, pa vjerovatno i Search Console-u.
+#
+# Danas te adrese vracaju 404 sa HTML stranicom. Pravilo iznad hvata samo
+# wp-*.php i wp-* direktorijume, a ove su .xml pa su ispadale. Sa 410 Google
+# dobija jasno "trajno obrisano" i prestaje da ih drzi u redu za obradu, umjesto
+# da ih ponavlja kao meku gresku.
+#
+# VAZNO: ovo NE dira /sitemap.xml. Aktuelni sitemap je tehnicki ispravan i ne
+# mijenja se.
+RewriteRule ^wp-sitemap.*\.xml$ - [G,L]
+RewriteRule ^sitemap[_-]index\.xml$ - [G,L]
+RewriteRule ^(post|page|product|category|product_cat|product_tag|author)-sitemap\.xml$ - [G,L]
+RewriteRule ^xmlrpc\.php$ - [G,L]
+RewriteRule ^(?!product/)(.*/)?feed/?$ - [G,L]
+RewriteRule ^comments/ - [G,L]
+# /hello-world/ je podrazumijevani prvi clanak koji WordPress sam napravi.
+# Google ga jos drzi u svom grafu — u URL Inspection-u za pocetnu stoji kao
+# "Referring page". Vracao je 404; 410 mu jasnije kaze da je trajno obrisan,
+# pa ga brze izbacuje i prestaje da ga koristi kao putokaz do pocetne.
+RewriteRule ^hello-world/?$ - [G,L]
+
+# ── Arhive, backupi i dev fajlovi — 403 Forbidden ──────────────────────────────
+# nas-sajt-backup-*.zip je sadrzao admin/index.php sa lozinkom u citljivom obliku
+# i wp-config.php sa lozinkom baze. Bio je javno skidljiv. Ovo je zastita u dubinu:
+# fajlovi se brisu sa diska, a ovo pravilo sprjecava da ih iko ikad opet izlozi.
+RewriteRule \.(zip|tar|gz|bz2|rar|7z|sql|bak|old|orig|swp|log|md|ini|env|dist)$ - [F,L]
+RewriteRule ^error_log$ - [F,L]
+# data/inquiries.json cuva ime, email, telefon i poruku svakog kupca koji
+# posalje upit preko kontakt forme, a /data/ je javan direktorijum (odatle se
+# cita products.json). Fajl je bio otvoren za svakoga ko zna adresu. Bio je
+# prazan pa nista nije iscurilo, ali prvi sljedeci upit bi bio javan.
+# Blokiraju se i .tmp i .bak varijante, jer upis ide preko privremenog fajla.
+RewriteRule ^data/inquiries\.json - [F,L]
+RewriteRule ^data/inquiries\.json\.(tmp|bak)$ - [F,L]
+# Backupi podataka koje pravi admin (data/*.bak.<datum>.json) — ime ne zavrsava
+# na .bak pa ih gornje pravilo ne hvata. Nisu tajna, ali su duplikat sadrzaja
+# koji Google ne treba da cita.
+RewriteRule ^data/.*\.bak\.[0-9-]+\.json$ - [F,L]
+# Kes sitemapa koji pravi sitemap.php. Isti sadrzaj kao /sitemap.xml — da ga
+# Google ne nadje kao drugu adresu istog spiska, zatvoren je za web.
+RewriteRule ^data/sitemap-kes\.xml(\.tmp)?$ - [F,L]
+# /design/ su makete izgleda sajta (screenshotovi dizajna). Nijedna stranica
+# ih ne linkuje i nisu u sitemapu, ali su bile javno dostupne — da ih Google
+# ne pokupi u pretragu slika kao "slike sajta" umjesto fotografija panela.
+RewriteRule ^design/ - [F,L]
+# Stari Canva katalog (82 str, 27,7 MB, iz 12/2024) — obrisan, svi proizvodi iz njega
+# vec postoje kao stranice na sajtu. Google ga je imao u indeksu, pa 410 umjesto 404.
+RewriteRule ^images/katalog\.pdf$ - [G,L]
+# Isti taj katalog stoji i kao 72 pojedinacne slike stranica. PDF je ugasen jos
+# ranije, a slike su ostale javno dostupne — stari cjenovnik i stari asortiman
+# koji Google moze da pokupi u pretragu slika. Nijedna stranica ih ne koristi.
+RewriteRule ^images/katalog/ - [G,L]
+RewriteRule ^_.*\.php$ - [F,L]
+RewriteRule ^(ads|test|tmp)\.html?$ - [G,L]
+# Stare kopije resursa u rootu (prave kopije su u /css i /js)
+RewriteRule ^(products|script)\.js$ - [G,L]
+RewriteRule ^(style|styles)\.css$ - [G,L]
+
+# index.html → homepage (bez ovoga Google vidi index.html kao posebnu stranicu)
+RewriteRule ^index\.html$ /? [R=301,L]
+
+# WooCommerce akcije korpe (?add-to-cart=, ?wc-ajax=) → 410 Gone.
+# GSC pokazuje 166 ovakvih URL-ova u "Crawled - currently not indexed": 301 ih drzi
+# zivima u Google-ovom redu za crawl unedogled, 410 ih trajno izbacuje.
+# Nas sajt nigdje ne koristi ove parametre (korpa radi preko localStorage).
+RewriteCond %{QUERY_STRING} (^|&)(add-to-cart|wc-ajax|removed_item|undo_item)=
+RewriteRule .* - [G,L]
+
+# Stare WordPress /product-category/ URL-ovi (WooCommerce) → products
+RewriteRule ^product-category/aku-paneli(/.*)?$ /kategorija/akusticni-paneli [R=301,L]
+RewriteRule ^product-category/akusticni-paneli(/.*)?$ /kategorija/akusticni-paneli [R=301,L]
+RewriteRule ^product-category/pu-stone(/.*)?$ /kategorija/pu-kamen [R=301,L]
+RewriteRule ^product-category/pu-kamen(/.*)?$ /kategorija/pu-kamen [R=301,L]
+RewriteRule ^product-category/flex-stone(/.*)?$ /kategorija/flex-stone [R=301,L]
+RewriteRule ^product-category/3d-letvice(/.*)?$ /kategorija/3d-letvice [R=301,L]
+RewriteRule ^product-category/spc(-|/)?pod.*$ /kategorija/spc-pod [R=301,L]
+RewriteRule ^product-category/lajsne(/.*)?$ /kategorija/aluminijum-lajsne [R=301,L]
+RewriteRule ^product-category/mdf(/.*)?$ /kategorija/mdf [R=301,L]
+RewriteRule ^product-category/bambus(-paneli)?(/.*)?$ /kategorija/bambus-paneli [R=301,L]
+RewriteRule ^product-category/decor-paneli(/.*)?$ /kategorija/bambus-paneli [R=301,L]
+RewriteRule ^product-category/uv-paneli(/.*)?$ /kategorija/bambus-mermerni [R=301,L]
+RewriteRule ^product-category/.*$ /products.html? [R=301,L]
+
+# Stari WooCommerce ?product=slug i ?product_cat=slug (WordPress single/kategorija).
+# NIJE nas parametar. Interno prepisujemo na /product/ i /product-category/ da prodju
+# kroz ISTI resolver (404.php + slug-match.php, odnosno pravila iznad) i odu na pravu
+# adresu JEDNIM 301 skokom — umjesto da /?product=spc02 vraca homepage kao 200 duplikat.
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{QUERY_STRING} (^|&)product=([^&]+)
+RewriteRule ^ /product/%2/? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{QUERY_STRING} (^|&)product_cat=([^&]+)
+RewriteRule ^ /product-category/%2/? [L]
+
+# Ostali stari WordPress query parametri koji renderuju homepage kao duplikat
+# PAŽNJA: cat= i category= su naši parametri — NE smiju biti u ovom redirectu
+# page_id je dodat: /?page_id=216 je vracao 200 (canonical ga je rjesavao, ali je
+# adresa i dalje postojala) i pojavljivao se u Search Console-u kao referring page.
+RewriteCond %{QUERY_STRING} (^|&)(p|s|author|attachment_id|paged|page_id|m|post_type|replytocom|product_tag)=
+RewriteRule .* /? [R=301,L]
+
+# cat= i category= su NASI parametri na products.php, ali na POCETNOJ su ostatak
+# WordPress-a (/?cat=1 je bila arhiva kategorije). Zato se hvataju samo kad je
+# adresa tacno "/" — products.php?cat=3d-letvice time ostaje netaknut.
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{QUERY_STRING} (^|&)(cat|category|tag|year|monthnum|day|w|feed)=
+RewriteRule .* /? [R=301,L]
+
+# /proizvodi/ i /product-category/ sa starom paginacijom → prava kategorija, ne homepage
+RewriteCond %{QUERY_STRING} (^|&)product-page=
+RewriteRule ^proizvodi/?$ /products.html? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)product-page=
+RewriteRule .* /products.html? [R=301,L]
+
+# Stare WordPress kategorije → products (? na kraju čisti stare ?add-to-cart= parametre)
+RewriteRule ^proizvodi/?$ /products.html? [R=301,L]
+RewriteRule ^decor-paneli/?$ /kategorija/bambus-paneli [R=301,L]
+RewriteRule ^paneli/?$ /products.html? [R=301,L]
+RewriteRule ^shop/?$ /products.html? [R=301,L]
+RewriteRule ^prodavnica/?$ /products.html? [R=301,L]
+RewriteRule ^dekorativni-zidni-paneli/?$ /products.html? [R=301,L]
+RewriteRule ^aku-paneli/?$ /kategorija/akusticni-paneli [R=301,L]
+RewriteRule ^bambus-paneli/?$ /kategorija/bambus-paneli [R=301,L]
+RewriteRule ^pu-stone/?$ /kategorija/pu-kamen [R=301,L]
+RewriteRule ^pu-kamen/?$ /kategorija/pu-kamen [R=301,L]
+RewriteRule ^lajsne/?$ /kategorija/aluminijum-lajsne [R=301,L]
+RewriteRule ^aluminijum-lajsne/?$ /kategorija/aluminijum-lajsne [R=301,L]
+RewriteRule ^alu-lajsne/?$ /kategorija/aluminijum-lajsne [R=301,L]
+RewriteRule ^spc-podovi/?$ /kategorija/spc-pod [R=301,L]
+RewriteRule ^spc-pod/?$ /kategorija/spc-pod [R=301,L]
+RewriteRule ^spc/?$ /kategorija/spc-pod [R=301,L]
+RewriteRule ^mdf(-paneli)?/?$ /kategorija/mdf [R=301,L]
+RewriteRule ^classic(-paneli)?/?$ /kategorija/classic [R=301,L]
+# "uncategorized" je WordPress-ova fiktivna kategorija u koju padne sve sto
+# nije svrstano — nema zamjenu kod nas, pa 410 umjesto preusmjerenja.
+RewriteRule ^category/uncategorized/?$ - [G,L]
+RewriteRule ^category/.*$ /products.html? [R=301,L]
+RewriteRule ^tag/.*$ /products.html? [R=301,L]
+RewriteRule ^uv-paneli/?$ /kategorija/bambus-mermerni [R=301,L]
+RewriteRule ^flex-stone/?$ /kategorija/flex-stone [R=301,L]
+
+# Stare WordPress info stranice → nove stranice
+RewriteRule ^kontakt/?$ /contact.html? [R=301,L]
+RewriteRule ^o-nama/?$ /about.html? [R=301,L]
+RewriteRule ^onama/?$ /about.html? [R=301,L]
+RewriteRule ^galerija/?$ /products.html? [R=301,L]
+RewriteRule ^usluge/?$ /products.html? [R=301,L]
+RewriteRule ^cjenovnik/?$ /cjenovnik.html? [R=301,L]
+RewriteRule ^cenovnik/?$ /cjenovnik.html? [R=301,L]
+RewriteRule ^cijene/?$ /cjenovnik.html? [R=301,L]
+RewriteRule ^montaza/?$ /montaza.html? [R=301,L]
+RewriteRule ^montaža/?$ /montaza.html? [R=301,L]
+RewriteRule ^blog/?$ /blog.html [R=301,L]
+RewriteRule ^paneli-ili-lamperija\.html$ /kako-izabrati-panele-po-prostoriji.html [R=301,L]
+# /checkout/ je vec pokriven nize, a /cart/ i /moj-nalog/ su padali na 404.
+RewriteRule ^cart/?$ /korpa.html? [R=301,L]
+RewriteRule ^korpa/?$ /korpa.html? [R=301,L]
+RewriteRule ^my-account/?$ /? [R=301,L]
+RewriteRule ^3d-letvice/?$ /kategorija/3d-letvice [R=301,L]
+RewriteRule ^akusticni-paneli/?$ /kategorija/akusticni-paneli [R=301,L]
+
+# /index i /index/ -> pocetna (bez ovoga /index vraca 500 zbog MultiViews-a)
+RewriteRule ^index/?$ /? [R=301,L]
+
+# URL bez ekstenzije -> .html verzija (301).
+# Hosting ima ukljucen MultiViews pa je /faq servirao ISTI sadrzaj kao /faq.html —
+# dva URL-a za istu stranicu, sto Google prijavljuje kao "Alternate page with canonical".
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^/.]+)/?$ /$1.html [R=301,L]
+
+# ===== LIJEPE ADRESE =====
+# /paneli/drveni-panel-golden-teak  → product.php?slug=...
+# /kategorija/3d-letvice            → products.php?k=...
+# Interno prepisivanje (bez R=301) — adresa u pretrazivacu ostaje lijepa.
+# Stari oblici ?id= i ?category= i dalje rade i sami salju 301 na novu adresu.
+
+# Kosa crta na kraju pravi drugu adresu za istu stranicu — 301 na verziju bez nje.
+RewriteRule ^(paneli|kategorija)/([^/]+)/$ /$1/$2 [NC,R=301,L]
+# Prazno /kategorija i /kategorija/ vodi na katalog
+RewriteRule ^kategorija/?$ /products.html [NC,R=301,L]
+
+# Velika slova se prihvataju (link prekopiran iz poruke), a PHP ih vrati na mala 301-om.
+RewriteRule ^paneli/([A-Za-z0-9][A-Za-z0-9-]*)$ product.php?slug=$1 [NC,QSA,L]
+RewriteRule ^kategorija/([A-Za-z0-9][A-Za-z0-9-]*)$ products.php?k=$1 [NC,QSA,L]
+
+RewriteRule ^cjenovnik\.html$ cjenovnik.php [QSA,L]
+RewriteRule ^inspiracija\.html$ inspiracija.php [QSA,L]
+RewriteRule ^decor-box\.html$ decor-box.php [QSA,L]
+# Sitemap se pravi iz podataka (sa slikama), pa je uvijek tacan i kad se doda
+# nov proizvod ili nova fotografija. Adresa ostaje /sitemap.xml.
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+# Isti spisak je bio dostupan i na /sitemap.php — dvije adrese za isti sitemap.
+# Nista ga ne linkuje i nije u robots.txt, ali Google ne treba da nadje dvije
+# kopije istog spiska, a ni stara prijava na tu adresu ne treba da visi u
+# Search Console-u. Sada 301 na /sitemap.xml.
+#
+# Uslov THE_REQUEST je obavezan: gore stoji unutrasnje prepisivanje
+# sitemap.xml -> sitemap.php, pa bi obicno pravilo napravilo beskonacnu petlju
+# (xml -> php -> xml -> php...). Ovako se preusmjerava samo kad je POSJETILAC
+# stvarno trazio /sitemap.php, a ne kad je server sam prepisao adresu.
+RewriteCond %{THE_REQUEST} \s/+sitemap\.php[\s?] [NC]
+RewriteRule ^sitemap\.php$ /sitemap.xml [R=301,L]
+
+# pocetna.php je vracao 200 kao zasebna adresa, sa canonicalom na /. Canonical
+# to rjesava, ali je bolje da druga adresa uopste ne postoji — Google onda nema
+# sta ni da uporedjuje. Uslov na THE_REQUEST znaci da se salje samo kad je
+# posjetilac SAM ukucao /pocetna.php; unutrasnje prepisivanje sa / ostaje.
+RewriteCond %{THE_REQUEST} \s/+pocetna\.php[\s?] [NC]
+RewriteRule ^pocetna\.php$ / [R=301,L]
+
+# Isto vazi i za ostale stranice koje servira PHP: /cjenovnik.php,
+# /inspiracija.php, /products.php, /product.php i /decor-box.php su vracali 200
+# kao zasebne adrese, a canonical je pokazivao na .html verziju. U Search
+# Console-u se to broji kao "Alternate page with proper canonical tag" — nije
+# greska, ali je to jos pet adresa koje Google obidje i baci. Sada ih nema.
+RewriteCond %{THE_REQUEST} \s/+cjenovnik\.php[\s?] [NC]
+RewriteRule ^cjenovnik\.php$ /cjenovnik.html [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+inspiracija\.php[\s?] [NC]
+RewriteRule ^inspiracija\.php$ /inspiracija.html [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+decor-box\.php[\s?] [NC]
+RewriteRule ^decor-box\.php$ /decor-box.html [R=301,L]
+#
+# Za product.php i products.php se salje SAMO kad nema upitnika. Sa upitnikom
+# (?id=, ?category=, ?k=, ?slug=) te skripte vec same salju 301 pravo na lijepu
+# adresu; kad bi i ovo pravilo radilo, dobila bi se dva skoka umjesto jednog.
+RewriteCond %{QUERY_STRING} ^$
+RewriteCond %{THE_REQUEST} \s/+products\.php[\s?] [NC]
+RewriteRule ^products\.php$ /products.html [R=301,L]
+# Pocetnu servira pocetna.php: ona procita index.html i ubaci kartice proizvoda
+# koje su ranije bile prazne dok se ne pokrene JavaScript — Googlebot ih u
+# prvom prolazu nije vidio. Adresa ostaje "/", index.html ostaje kao rezerva.
+RewriteRule ^$ pocetna.php [L]
+RewriteRule ^product\.html$ product.php [QSA,L]
+RewriteRule ^products\.html$ products.php [QSA,L]
+</IfModule>
+
+# ===== WEBP UMJESTO JPG, KAD PREGLEDAC TO UMIJE =====
+# U images/products stoji 263 fotografije, ukupno 34 MB. Kategorija sa 28
+# letvica povuce preko 6 MB dok se skroluje — a najvise posjeta dolazi sa
+# telefona. WebP je na istom kvalitetu upola manji.
+#
+# Kako radi: kad stigne zahtjev za foto.jpg, a pregledac je u zaglavlju Accept
+# rekao da razumije image/webp, I na disku pored stoji foto.webp — servira se
+# webp. Adresa u HTML-u ostaje foto.jpg, nista se u stranicama ne mijenja.
+# Ko ne razumije webp (stari pregledaci, alati, botovi) dobija original.
+#
+# Zasto ovako a ne <picture> u HTML-u: ovako radi i za pozadine iz CSS-a i za
+# slike koje vlasnik tek ubaci kroz admin, bez ijedne izmjene u stranicama.
+#
+# Ako .webp fajlova nema, pravilo ne uradi nista — uslov -f jednostavno ne prodje.
+# Fajlove pravi /admin/webp.php, a admin/actions.php ih odrzava: pri zamjeni
+# slike stari webp se brise zajedno sa originalom, pa se nikad ne servira stara.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{REQUEST_FILENAME} (.+)\.(jpe?g|png)$ [NC]
+  RewriteCond %1.webp -f
+  RewriteRule (.+)\.(jpe?g|png)$ $1.webp [NC,T=image/webp,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Security headers — zaštita od clickjacking, MIME sniffing, forsiranje HTTPS
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Content-Security-Policy — jedino sigurnosno zaglavlje koje je nedostajalo.
+  # NAMJERNO nema script-src ni style-src: sajt ima puno ugradjenih <script> i
+  # style="..." atributa, pa bi ih takvo pravilo poblokiralo i sajt bi stao.
+  # Ovdje stoje samo pravila koja ne mogu nista da pokvare, a stvarno stite:
+  #   base-uri     — napadac ne moze da ubaci <base> i preusmjeri sve putanje;
+  #                  nas <base href> pokazuje na makemyhome.me pa je izricito dozvoljen
+  #   form-action  — forma ne moze da se preusmjeri na tudji server (kontakt forma
+  #                  salje na formsubmit.co, pa je i on dozvoljen)
+  #   object-src   — nema <object>/<embed>, pa se zabranjuje u potpunosti
+  #   frame-ancestors — isto sto i X-Frame-Options, ali ga citaju i noviji citaci
+  # Provjereno kroz pretrazivac na svim tipovima stranica: nijedno krsenje.
+  Header always set Content-Security-Policy "base-uri 'self' https://makemyhome.me; form-action 'self' https://formsubmit.co; object-src 'none'; frame-ancestors 'self'"
+
+  # HTML i JSON - uvijek se provjeri kod servera, ali dozvoli 304 (brži povratni posjet).
+  # no-store je namjerno uklonjen: zabranjivao je i uslovni zahtjev, pa se svaka stranica
+  # skidala iznova pri svakom povratku na sajt.
+  # .php je ovdje jer FilesMatch gleda IME FAJLA NA DISKU, ne adresu. Stranice
+  # /paneli/..., /kategorija/..., cjenovnik i inspiracija servira PHP, pa su bez
+  # ovoga ostajale bez Cache-Control zaglavlja — pretrazivac ih je kesirao po
+  # sopstvenoj procjeni i mogao prikazati staru cijenu ili stanje zaliha.
+  <FilesMatch "\.(html|htm|json|php)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+    Header unset Pragma
+    Header unset Expires
+  </FilesMatch>
+  # CSS i JS - cache 1 godina (fajlovi su verzionisani: style-v5.css)
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Slike - cache 30 dana
+  # Vary: Accept jer ista adresa (foto.jpg) vraca WebP ili JPG zavisno od toga
+  # sta pregledac trazi — bez ovoga bi posrednicki kes mogao dati webp nekome
+  # ko ga ne cita.
+  <FilesMatch "\.(jpg|jpeg|png|gif|ico|webp|svg)$">
+    Header set Cache-Control "public, max-age=2592000"
+    Header append Vary Accept
+  </FilesMatch>
+  # Fontovi - cache 1 godina (imena su hesirana, nikad se ne mijenjaju)
+  <FilesMatch "\.(woff2|woff|ttf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+  # Dodatna zastita
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+</IfModule>
+
+# Kompresija za brže učitavanje
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json image/svg+xml application/xml text/xml
+</IfModule>
