@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!hits.length) {
         resultsBox.style.display = 'block';
-        resultsBox.innerHTML = `<div style="padding:14px 16px;color:rgba(255,255,255,0.45);font-size:14px;">Nema rezultata za „${searchInput.value}"</div>`;
+        resultsBox.innerHTML = `<div style="padding:14px 16px;color:#777;font-size:14px;">Nema rezultata za „${searchInput.value}"</div>`;
         return;
       }
 
@@ -65,15 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const label = catLabels[cat] || cat;
         const thumb = p.image ? `<img src="${p.image}" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
         return `<a href="${(window.mmhUrlProizvoda ? window.mmhUrlProizvoda(p) : "product.html?id=" + p.id)}"
-          style="display:flex;align-items:center;gap:12px;padding:11px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background 0.15s;"
+          style="display:flex;align-items:center;gap:12px;padding:11px 14px;text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.07);transition:background 0.15s;"
           onmouseenter="this.style.background='rgba(0,0,0,0.06)'" onmouseleave="this.style.background=''"
           onclick="document.getElementById('mob-search-input').value='';document.getElementById('mob-search-results').style.display='none';">
           ${thumb}
           <div style="flex:1;min-width:0;">
-            <div style="color:#fff;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+            <div style="color:#1a1a1a;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
             <div style="margin-top:2px;display:flex;gap:6px;flex-wrap:wrap;">
               ${p.sku ? `<span style="font-size:11px;color:#1a1a1a;font-family:monospace;">${p.sku}</span>` : ''}
-              <span style="font-size:11px;color:rgba(255,255,255,0.4);">${label}</span>
+              <span style="font-size:11px;color:#999;">${label}</span>
             </div>
           </div>
           <i class="fas fa-chevron-right" style="color:rgba(0,0,0,0.4);font-size:11px;flex-shrink:0;"></i>
@@ -87,9 +87,10 @@ document.addEventListener('DOMContentLoaded', function () {
       hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('open');
-        if (navMenu.classList.contains('open')) {
-          if (searchInput) setTimeout(() => searchInput.focus(), 120);
-        } else {
+        if (!navMenu.classList.contains('open')) {
+          // Ne fokusiramo search pri otvaranju menija — na Androidu je to
+          // odmah dizalo tastaturu i guralo stavke van ekrana. Korisnik prvo
+          // bira stavku; pretragu koristi tek kad sam klikne u polje.
           if (resultsBox) resultsBox.style.display = 'none';
           if (searchInput) searchInput.value = '';
         }
@@ -150,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ).slice(0, 10);
 
       if (!hits.length) {
-        resBox.innerHTML = `<div style="padding:14px 16px;color:rgba(255,255,255,0.45);font-size:14px;">Nema rezultata za „${input.value}"</div>`;
+        resBox.innerHTML = `<div style="padding:14px 16px;color:#777;font-size:14px;">Nema rezultata za „${input.value}"</div>`;
         resBox.style.display = 'block';
         return;
       }
@@ -162,14 +163,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const label = dCatLabels[cat] || cat;
         const thumb = p.image ? `<img src="${p.image}" style="width:36px;height:36px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
         return `<a href="${(window.mmhUrlProizvoda ? window.mmhUrlProizvoda(p) : "product.html?id=" + p.id)}"
-          style="display:flex;align-items:center;gap:10px;padding:10px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .15s;"
+          style="display:flex;align-items:center;gap:10px;padding:10px 14px;text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.07);transition:background .15s;"
           onmouseenter="this.style.background='rgba(0,0,0,0.06)'" onmouseleave="this.style.background=''">
           ${thumb}
           <div style="flex:1;min-width:0;">
-            <div style="color:#fff;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+            <div style="color:#1a1a1a;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
             <div style="margin-top:2px;display:flex;gap:6px;">
               ${p.sku ? `<span style="font-size:11px;color:#1a1a1a;font-family:monospace;">${p.sku}</span>` : ''}
-              <span style="font-size:11px;color:rgba(255,255,255,0.4);">${label}</span>
+              <span style="font-size:11px;color:#999;">${label}</span>
             </div>
           </div>
         </a>`;
