@@ -756,7 +756,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <a href="<?= htmlspecialchars(mmhUrlProizvoda($pp)) ?>" class="pair-card">
               <div class="pair-card-img">
                 <img src="<?= htmlspecialchars($pp['image'] ?? '') ?>" alt="<?= htmlspecialchars($pp['name'] ?? '') ?>" loading="lazy"<?= mmhDimAtributi($pp['image'] ?? '') ?>>
-                <?php if (!empty($pp['badge'])): ?><span class="pair-badge"><?= htmlspecialchars($pp['badge']) ?></span><?php endif; ?>
+                <?php /* Bez oznake (Najpopularniji/Novo…) na ovoj sitnoj kartici — tu samo zbunjuje. */ ?>
               </div>
               <div class="pair-card-info">
                 <div class="pair-card-name"><?= htmlspecialchars($pp['name'] ?? '') ?></div>
