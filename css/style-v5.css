@@ -373,7 +373,7 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  color: var(--dark);
+  color: #ffffff;
 }
 
 .logo-text {
@@ -441,14 +441,14 @@ ul { list-style: none; }
 
 .nav-cta {
   background: var(--primary);
-  color: var(--dark) !important;
+  color: #ffffff !important;
   padding: 10px 22px !important;
   font-weight: 600;
 }
 
 .nav-cta:hover {
   background: var(--primary-dark) !important;
-  color: var(--dark) !important;
+  color: #ffffff !important;
   transform: translateY(-1px);
 }
 
@@ -868,7 +868,7 @@ ul { list-style: none; }
   top: 14px;
   left: 14px;
   background: var(--primary);
-  color: var(--dark);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 700;
   padding: 4px 10px;
@@ -999,14 +999,14 @@ ul { list-style: none; }
   font-family: var(--font-heading);
   font-size: 48px;
   font-weight: 700;
-  color: var(--dark);
+  color: #ffffff;
   line-height: 1;
 }
 
 .about-img-badge .years-text {
   font-size: 12px;
   font-weight: 600;
-  color: var(--dark-2);
+  color: rgba(255,255,255,0.78);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 4px;
@@ -1106,7 +1106,7 @@ ul { list-style: none; }
 
 .why-card:hover .why-icon {
   background: var(--primary);
-  color: var(--dark);
+  color: #ffffff;
 }
 
 .why-card h3 {
@@ -1476,7 +1476,7 @@ ul { list-style: none; }
 
 .filter-btn.active {
   background: var(--primary);
-  color: var(--dark);
+  color: #ffffff;
   border-color: var(--primary);
 }
 
@@ -1828,7 +1828,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   width: 48px;
   height: 48px;
   background: var(--primary);
-  color: var(--dark);
+  color: #ffffff;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -2005,7 +2005,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .btn-gold {
   flex-shrink: 0;
   background: var(--primary);
-  color: #1a1a1a;
+  color: #ffffff;
   padding: 14px 28px;
   border-radius: 4px;
   font-weight: 600;
@@ -2017,7 +2017,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .btn-gold:hover {
   background: var(--primary-dark);
-  color: #1a1a1a;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -2549,7 +2549,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   height: 40px;
   border-radius: 50%;
   background: var(--primary);
-  color: var(--dark);
+  color: #ffffff;
   font-family: var(--font-heading);
   font-size: 17px;
   font-weight: 700;
@@ -2656,7 +2656,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   transition: background .2s, color .2s, border-color .2s;
   white-space: nowrap;
 }
-.btn-card-detail:hover { background: #1a1a1a; color: #1a1a1a; border-color: #1a1a1a; }
+.btn-card-detail:hover { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
 .btn-card-detail i { transition: transform .2s; }
 .btn-card-detail:hover i { transform: translateX(3px); }
 
@@ -2678,7 +2678,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   border-radius: 14px; padding: 14px 18px; margin-bottom: 16px;
   text-decoration: none; transition: background .2s, border-color .2s;
 }
-.p-side-rating:hover { background: #f5efe4; border-color: #1a1a1a; }
+.p-side-rating:hover { background: #f2f2f2; border-color: #1a1a1a; }
 .p-side-rating-num { font-size: 30px; font-weight: 800; color: #1a1a1a; line-height: 1; }
 .p-side-rating-stars { display: block; margin-bottom: 3px; }
 .p-side-rating-stars i { font-size: 13px; }
@@ -2708,10 +2708,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   padding: 12px 16px; border-radius: 11px; font-size: 14px; font-weight: 700;
   text-decoration: none; transition: opacity .2s, background .2s;
 }
-.p-side-btn--call { background: #1a1a1a; color: #1a1a1a; }
-.p-side-btn--call:hover { background: #dfc080; }
+.p-side-btn--call { background: #1a1a1a; color: #fff; }
+.p-side-btn--call:hover { background: #333333; }
 .p-side-btn--map { background: #fff; color: #1a1a1a; border: 1.5px solid rgba(0,0,0,0.55); }
-.p-side-btn--map:hover { background: #f5efe4; border-color: #1a1a1a; }
+.p-side-btn--map:hover { background: #f2f2f2; border-color: #1a1a1a; }
 .p-side-btn--map i { color: #1a1a1a; }
 
 @media (max-width: 768px) {
@@ -2746,8 +2746,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   background: #1a1a1a; color: #fff; font-weight: 700; font-size: 13px;
   display: flex; align-items: center; justify-content: center;
 }
-.info-wrap p a { color: #8a6d2e; text-decoration: underline; text-underline-offset: 2px; }
-.info-wrap p a:hover { color: #1a1a1a; }
+.info-wrap p a { color: #1a1a1a; text-decoration: underline; text-underline-offset: 2px; }
+.info-wrap p a:hover { color: #555; }
 
 /* ===== Vodiči (kupatilo, TV zid, lamperija, akustika, SPC, dostava) ===== */
 .info-wrap .faq-q {
@@ -2915,7 +2915,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 /* Oznaka "novo" na svježe dodatoj fotografiji */
 .insp-novo {
   position: absolute; top: 10px; left: 10px; z-index: 2;
-  background: #1a1a1a; color: #1a1a1a; font-size: 11px; font-weight: 800;
+  background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 800;
   letter-spacing: .06em; text-transform: uppercase;
   padding: 4px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
@@ -3001,7 +3001,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
    Zlatna #1a1a1a na bijeloj daje kontrast 2,26 — na telefonu, pogotovo napolju,
    takvi linkovi se jedva citaju. Dugmad zadrzavaju svoju boju (a:not(.btn)). */
 .info-wrap a:not(.btn), .info-wrap li a:not(.btn), .info-wrap strong a:not(.btn) {
-  color: #8a6d2e;
+  color: #1a1a1a;
 }
 .info-wrap a:not(.btn):hover { color: #000000; }
 .info-wrap .vodic-cta a:not(.btn) { color: #1a1a1a; }   /* tamna kutija — zlatna je ovdje citljiva */
@@ -3209,7 +3209,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .panel-slojevi li{display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid rgba(0,0,0,0.06);background:#fff;}
 .panel-slojevi li:last-child{border-bottom:0;}
 .panel-slojevi li:nth-child(even){background:#f6f6f5;}
-.panel-slojevi .ps-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--primary);color:#1a1a1a;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.panel-slojevi .ps-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;}
 .panel-slojevi .ps-ime{font-weight:700;color:var(--dark);flex:0 0 auto;min-width:230px;}
 .panel-slojevi .ps-opis{color:#555;font-size:14.5px;line-height:1.5;}
 @media(max-width:640px){.panel-slojevi li{flex-wrap:wrap;}.panel-slojevi .ps-ime{min-width:0;flex:1;}.panel-slojevi .ps-opis{flex-basis:100%;padding-left:44px;}}
