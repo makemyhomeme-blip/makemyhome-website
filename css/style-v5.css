@@ -1248,7 +1248,7 @@ ul { list-style: none; }
   transition: var(--transition);
 }
 .social-btn:hover,
-.social-btn:focus-visible { background: var(--primary); color: #1a1a1a; border-color: var(--primary); }
+.social-btn:focus-visible { background: var(--primary); color: #ffffff; border-color: var(--primary); }
 
 /* Drustvene mreze u BREND bojama umjesto zlatnog obruba: bijela ikonica na
    ispuni brenda. TikTok je crn kao i futer, pa dobija tanak svijetli obrub da se
@@ -2105,7 +2105,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .style-badge {
   background: var(--dark);
-  color: var(--primary);
+  color: #ffffff;
   padding: 4px 12px;
   border-radius: 4px;
   font-size: 11px;
