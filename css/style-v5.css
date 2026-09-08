@@ -392,7 +392,7 @@ ul { list-style: none; }
 
 .logo-text .tagline {
   font-size: 9px;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.8);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -3283,13 +3283,29 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .insta-handle { color: #1a1a1a; }
 
 /* --- TAMNE sekcije: dugmad/ikone/oznake svijetli (crno na crnom = nevidljivo) --- */
+#hero .btn-primary,
 #decor-box-promo .btn-primary, #karte-boja .btn-primary,
 .page-hero .btn-primary, .ideja-traka .btn, #footer .btn-primary {
   background: #ffffff; color: #1a1a1a; border-color: #ffffff;
 }
+#hero .btn-primary:hover,
 #decor-box-promo .btn-primary:hover, #karte-boja .btn-primary:hover,
 .page-hero .btn-primary:hover, #footer .btn-primary:hover {
   background: #e6e6e6; color: #1a1a1a; border-color: #e6e6e6;
+}
+
+/* Hero: tekst i brojevi citljivi na slici (slika je namjerno svjetlija sada,
+   pa tekst dobija sjenku umjesto jaceg zatamnjenja). */
+#hero .stat-item .number {
+  text-shadow: 0 2px 12px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.6);
+}
+#hero .stat-item .label {
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+}
+#hero .btn-outline {
+  color: #ffffff; border-color: #ffffff;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.28);
 }
 /* kvacice i sitne ikone na tamnom -> bijele */
 #decor-box-promo .db-check-list i, #decor-box-promo .db-oznaka,
