@@ -1118,6 +1118,6 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <script>
   renderProductDetail();
 </script>
-<script src="js/analytics-events.js?v=6b69b9c0" defer></script>
+<script src="js/analytics-events.js?v=1750dd92" defer></script>
 </body>
 </html>

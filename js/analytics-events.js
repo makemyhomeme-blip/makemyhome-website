@@ -109,3 +109,71 @@
     if (e.target.closest && e.target.closest('.rv-more-btn')) ev('recenzije_prosireno', {});
   }, true);
 })();
+
+/**
+ * Cookie consent banner (kolačići).
+ * Sajt koristi Google Consent Mode: analitika je po defaultu ODBIJENA
+ * (index.html: gtag consent default analytics_storage:'denied'), pa GA ne
+ * postavlja kolačiće dok posjetilac ne prihvati. Ovaj banner daje izbor i
+ * pamti ga u localStorage. Prihvatanje odobri analitiku, odbijanje je ostavlja
+ * ugašenu. Prikazuje se na svim stranicama (ovaj fajl je svuda uključen).
+ */
+(function () {
+  'use strict';
+  var KEY = 'mmh_cookie_consent';
+  function grantAnalytics() {
+    try { if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
+  }
+  var choice = null;
+  try { choice = localStorage.getItem(KEY); } catch (e) {}
+  if (choice === 'granted') { grantAnalytics(); return; }
+  if (choice === 'denied')  { return; }
+
+  function build() {
+    if (document.getElementById('mmh-cookie')) return;
+    var box = document.createElement('div');
+    box.id = 'mmh-cookie';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-label', 'Obavještenje o kolačićima');
+    box.innerHTML =
+      '<div class="mmh-cookie-txt">Koristimo kolačiće za <strong>analitiku posjeta</strong> kako bismo poboljšali sajt. ' +
+      'Možeš prihvatiti ili odbiti. Više u <a href="/privatnost.html">Politici privatnosti</a>.</div>' +
+      '<div class="mmh-cookie-btns">' +
+        '<button type="button" class="mmh-cookie-no">Odbijam</button>' +
+        '<button type="button" class="mmh-cookie-yes">Prihvatam</button>' +
+      '</div>';
+    var css = document.createElement('style');
+    css.textContent =
+      '#mmh-cookie{position:fixed;left:16px;bottom:16px;z-index:9998;max-width:min(440px,calc(100% - 32px));' +
+      'background:#0d0d0d;color:#fff;border:1px solid rgba(201,168,108,0.35);border-radius:14px;' +
+      'box-shadow:0 12px 40px rgba(0,0,0,0.45);padding:16px 18px;font-size:13.5px;line-height:1.55;' +
+      'font-family:inherit;animation:mmhCk .35s ease}' +
+      '@keyframes mmhCk{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}' +
+      '#mmh-cookie a{color:#d8b877;font-weight:600;text-decoration:underline}' +
+      '#mmh-cookie .mmh-cookie-btns{display:flex;gap:10px;margin-top:14px;justify-content:flex-end}' +
+      '#mmh-cookie button{cursor:pointer;border-radius:9px;padding:9px 18px;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,0.28);font-family:inherit}' +
+      '#mmh-cookie .mmh-cookie-no{background:transparent;color:#cfcfcf}' +
+      '#mmh-cookie .mmh-cookie-no:hover{background:rgba(255,255,255,0.08)}' +
+      '#mmh-cookie .mmh-cookie-yes{background:#c9a86c;color:#1a1a1a;border-color:#c9a86c}' +
+      '#mmh-cookie .mmh-cookie-yes:hover{background:#d8b877}' +
+      '@media(max-width:520px){#mmh-cookie{left:12px;right:12px;bottom:12px;max-width:none}' +
+      '#mmh-cookie .mmh-cookie-btns{margin-top:12px}' +
+      '#mmh-cookie .mmh-cookie-btns button{flex:1}}' +
+      // dok je banner otvoren, sakrij plutajuce dugmad da se ne preklapaju
+      'html.mmh-ck-on #whatsapp-float,html.mmh-ck-on #scroll-top,html.mmh-ck-on .scroll-top{display:none!important}';
+    document.head.appendChild(css);
+    function close(val) {
+      try { localStorage.setItem(KEY, val); } catch (e) {}
+      if (val === 'granted') grantAnalytics();
+      document.documentElement.classList.remove('mmh-ck-on');
+      box.style.opacity = '0';
+      setTimeout(function () { box.parentNode && box.parentNode.removeChild(box); }, 250);
+    }
+    box.querySelector('.mmh-cookie-yes').addEventListener('click', function () { close('granted'); });
+    box.querySelector('.mmh-cookie-no').addEventListener('click', function () { close('denied'); });
+    document.documentElement.classList.add('mmh-ck-on');
+    document.body.appendChild(box);
+  }
+  if (document.body) build();
+  else document.addEventListener('DOMContentLoaded', build);
+})();
