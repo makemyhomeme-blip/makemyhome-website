@@ -98,14 +98,14 @@ function showCartToast(name) {
 
   const t = document.createElement('div');
   t.id = 'cart-toast';
-  t.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:99999;background:#1a1814;border:1.5px solid rgba(201,168,108,0.65);color:#fff;padding:14px 16px;border-radius:14px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.65);font-family:inherit;max-width:340px;width:calc(100vw - 48px);animation:slideInToast .3s ease;';
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:99999;background:#1a1a1a;border:1.5px solid rgba(255,255,255,0.28);color:#fff;padding:14px 16px;border-radius:14px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.65);font-family:inherit;max-width:340px;width:calc(100vw - 48px);animation:slideInToast .3s ease;';
   t.innerHTML = `
-    <i class="fas fa-check-circle" style="color:#c9a86c;font-size:22px;flex-shrink:0;"></i>
+    <i class="fas fa-check-circle" style="color:#ffffff;font-size:22px;flex-shrink:0;"></i>
     <div style="flex:1;min-width:0;">
       <div style="font-weight:700;font-size:14px;margin-bottom:2px;">Dodato u korpu!</div>
       <div style="color:#aaa;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${name}</div>
     </div>
-    <a href="korpa.html" style="flex-shrink:0;background:#c9a86c;color:#0a0a0a;padding:7px 14px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;white-space:nowrap;">Korpa →</a>
+    <a href="korpa.html" style="flex-shrink:0;background:#ffffff;color:#0a0a0a;padding:7px 14px;border-radius:8px;font-weight:700;font-size:12px;text-decoration:none;white-space:nowrap;">Korpa →</a>
   `;
   document.body.appendChild(t);
   setTimeout(() => { if (t.parentNode) t.remove(); }, 4500);

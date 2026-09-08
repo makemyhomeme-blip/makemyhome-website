@@ -43,9 +43,9 @@
     }
     .logo { margin-bottom: 40px; }
     .logo img { height: 48px; }
-    .logo-text { font-size: 22px; font-weight: 700; color: #c9a86c; letter-spacing: 1px; }
-    .error-code { font-size: 120px; font-weight: 900; color: #c9a86c; line-height: 1; margin-bottom: 16px; opacity: 0.15; position: absolute; }
-    .icon { font-size: 64px; color: #c9a86c; margin-bottom: 24px; position: relative; z-index: 1; }
+    .logo-text { font-size: 22px; font-weight: 700; color: #1a1a1a; letter-spacing: 1px; }
+    .error-code { font-size: 120px; font-weight: 900; color: #1a1a1a; line-height: 1; margin-bottom: 16px; opacity: 0.15; position: absolute; }
+    .icon { font-size: 64px; color: #1a1a1a; margin-bottom: 24px; position: relative; z-index: 1; }
     .content { position: relative; }
     h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
     p { font-size: 16px; color: #c4c4c4; margin-bottom: 36px; max-width: 400px; line-height: 1.6; }
@@ -54,9 +54,9 @@
     .preporuke-nas { width: 100%; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
       color: #8f8f8f; margin-bottom: 6px; }
     .preporuke a { color: #e6e2da; text-decoration: none; font-size: 14px; font-weight: 600;
-      border: 1px solid rgba(201,168,108,.4); border-radius: 999px; padding: 9px 15px; min-height: 40px;
+      border: 1px solid rgba(0,0,0,.4); border-radius: 999px; padding: 9px 15px; min-height: 40px;
       display: inline-flex; align-items: center; transition: background .2s, color .2s; }
-    .preporuke a:hover { background: rgba(201,168,108,.15); color: #c9a86c; }
+    .preporuke a:hover { background: rgba(0,0,0,.15); color: #1a1a1a; }
     .buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
     .btn {
       padding: 14px 28px;
@@ -69,11 +69,11 @@
       gap: 8px;
       transition: all .2s;
     }
-    .btn-primary { background: #c9a86c; color: #1a1a1a; }
-    .btn-primary:hover { background: #a8863f; transform: translateY(-2px); }
-    .btn-secondary { background: transparent; color: #c9a86c; border: 1.5px solid #c9a86c; }
-    .btn-secondary:hover { background: rgba(201,168,108,0.1); transform: translateY(-2px); }
-    .divider { width: 60px; height: 2px; background: #c9a86c; margin: 0 auto 32px; opacity: 0.4; }
+    .btn-primary { background: #1a1a1a; color: #1a1a1a; }
+    .btn-primary:hover { background: #000000; transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: #1a1a1a; border: 1.5px solid #1a1a1a; }
+    .btn-secondary:hover { background: rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .divider { width: 60px; height: 2px; background: #1a1a1a; margin: 0 auto 32px; opacity: 0.4; }
   </style>
 <style id="nav-wide">
 /* Laptopovi 769–1599px: sve stavke MORAJU stati u red */
@@ -92,7 +92,7 @@
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(0,0,0,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -159,6 +159,6 @@
       <a href="/contact.html">Kontakt</a>
     </div>
   </div>
-<script src="js/analytics-events.js?v=1750dd92" defer></script>
+<script src="js/analytics-events.js?v=79aeefac" defer></script>
 </body>
 </html>

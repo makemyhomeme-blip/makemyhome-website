@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=a1ddce51">
+  <link rel="stylesheet" href="css/style-v5.css?v=cff7ccaf">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -42,7 +42,7 @@
     /* ===== FAQ ===== */
     .faq-wrap{padding:66px 0 80px;}
     .faq-group{margin-bottom:44px;}
-    .faq-group-title{display:flex;align-items:center;gap:12px;font-family:var(--font-heading);font-size:22px;color:var(--dark);margin:0 0 20px;padding-bottom:12px;border-bottom:2px solid rgba(201,168,108,0.3);}
+    .faq-group-title{display:flex;align-items:center;gap:12px;font-family:var(--font-heading);font-size:22px;color:var(--dark);margin:0 0 20px;padding-bottom:12px;border-bottom:2px solid rgba(0,0,0,0.3);}
     .faq-group-title i{color:var(--primary);font-size:18px;}
     .faq-item{background:#fff;border:1px solid rgba(0,0,0,0.07);border-radius:14px;padding:22px 24px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
     .faq-item h3{font-size:17px;color:var(--dark);margin:0 0 10px;line-height:1.4;display:flex;gap:10px;align-items:flex-start;}
@@ -112,7 +112,7 @@
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(0,0,0,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -141,10 +141,10 @@
   .info-wrap p { color: #5a6672; line-height: 1.8; margin-bottom: 14px; }
   .info-wrap ul, .info-wrap ol { color: #5a6672; line-height: 1.8; padding-left: 22px; margin-bottom: 16px; }
   .info-wrap li { margin-bottom: 8px; }
-  .info-wrap a { color: #c9a86c; font-weight: 600; }
+  .info-wrap a { color: #1a1a1a; font-weight: 600; }
   .step { display: flex; gap: 18px; align-items: flex-start; background: #ffffff;
-          border: 1px solid rgba(201,168,108,0.28); border-radius: 14px; padding: 20px 22px; margin-bottom: 14px; }
-  .step-n { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: #c9a86c; color: #1a1a1a;
+          border: 1px solid rgba(0,0,0,0.28); border-radius: 14px; padding: 20px 22px; margin-bottom: 14px; }
+  .step-n { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: #1a1a1a; color: #1a1a1a;
             font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 16px; }
   .step h3 { margin: 4px 0 6px; font-size: 17px; }
   .step p { margin: 0; font-size: 14.5px; }
@@ -156,7 +156,7 @@
   .info-table tr:hover td { background: #ffffff; }
   .info-table a { white-space: nowrap; }
   .tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .calc { background: #ffffff; border: 1px solid rgba(201,168,108,0.35); border-radius: 16px; padding: 24px; margin: 22px 0; }
+  .calc { background: #ffffff; border: 1px solid rgba(0,0,0,0.35); border-radius: 16px; padding: 24px; margin: 22px 0; }
   .calc-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
   .calc-f { flex: 1; min-width: 140px; }
   .calc-f label { display: block; font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
@@ -164,11 +164,11 @@
     width: 100%; box-sizing: border-box; padding: 11px 13px; border: 1.5px solid rgba(0,0,0,0.14);
     border-radius: 10px; font-size: 15px; font-family: inherit; background: #fff; color: #1a1a1a;
   }
-  .calc-f input:focus, .calc-f select:focus { outline: none; border-color: #c9a86c; }
+  .calc-f input:focus, .calc-f select:focus { outline: none; border-color: #1a1a1a; }
   .calc-out { background: #fff; border-radius: 12px; padding: 18px 20px; margin-top: 6px; border: 1px solid rgba(0,0,0,0.08); }
   .calc-out .big { font-size: 27px; font-weight: 800; color: #1a1a1a; }
   .calc-out .sub { font-size: 14px; color: #5a6672; line-height: 1.7; margin-top: 6px; }
-  .info-cta { background: #ffffff; border: 1px solid rgba(201,168,108,0.35); border-radius: 16px;
+  .info-cta { background: #ffffff; border: 1px solid rgba(0,0,0,0.35); border-radius: 16px;
               padding: 26px; text-align: center; margin-top: 40px; }
   .info-cta h2 { margin: 0 0 8px; font-size: 22px; }
   .info-cta p { margin: 0 0 18px; }
@@ -193,22 +193,22 @@
     </a>
     <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
       <div style="position:relative;">
-        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:12px;pointer-events:none;"></i>
         <input id="desk-search-input" type="text" aria-label="Pretraga proizvoda" placeholder="Traži proizvod…" autocomplete="off"
-          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
-          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
-          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(0,0,0,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(0,0,0,0.4)';this.style.background='rgba(255,255,255,0.06)'">
       </div>
-      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(0,0,0,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
     </div>
     <nav id="nav-menu" class="nav-menu">
       <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
         <div style="position:relative;">
-          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
+          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:14px;pointer-events:none;z-index:1;"></i>
           <input id="mob-search-input" type="text" aria-label="Pretraga proizvoda po imenu ili šifri" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
+            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(0,0,0,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
         </div>
-        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
+        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(0,0,0,0.2);"></div>
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
@@ -225,7 +225,7 @@
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
-    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
+    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#1a1a1a;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
       <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
@@ -334,7 +334,7 @@ Za svaki od ta tri problema ide drugačiji raspored. Showroom je u City Kvartu, 
           </div>
         </a>
         <p class="footer-desc">Premium zidni paneli i 3D letvice u Podgorici. Transformišite Vaš prostor.
-        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
+        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#1a1a1a;">&#9654; Zapratite nas</span>
         </p>
         <div class="footer-social">
           <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -390,9 +390,9 @@ Za svaki od ta tri problema ide drugačiji raspored. Showroom je u City Kvartu, 
 </div>
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
-<script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/cart.js?v=2906a9ed"></script>
-<script src="js/analytics-events.js?v=1750dd92" defer></script>
+<script src="js/main-v4.js?v=e0bfd29f"></script>
+<script src="js/cart.js?v=25285928"></script>
+<script src="js/analytics-events.js?v=79aeefac" defer></script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Koliko akustičnih panela treba za kancelariju?", "acceptedAnswer": {"@type": "Answer", "text": "Oko 15 do 20 % ukupne površine zidova. Za kancelariju 5 × 4 m sa plafonom 2,7 m to je 7 do 10 m², odnosno 5 do 6 panela."}}, {"@type": "Question", "name": "Da li akustični paneli sprječavaju da se zvuk čuje u susjednoj prostoriji?", "acceptedAnswer": {"@type": "Answer", "text": "Ne. Oni upijaju zvuk unutar sobe i smanjuju eho. Za sprječavanje prolaska zvuka kroz zid potrebna je zvučna izolacija u samoj konstrukciji."}}, {"@type": "Question", "name": "Šta znači NRC 0,65–0,85?", "acceptedAnswer": {"@type": "Answer", "text": "To je koeficijent apsorpcije zvuka — panel upija 65 do 85 % zvuka koji ga pogodi. Gipsani zid ima oko 0,05, dakle praktično sve vraća nazad."}}, {"@type": "Question", "name": "Gdje se postavljaju akustični paneli u kancelariji?", "acceptedAnswer": {"@type": "Answer", "text": "Na zid nasuprot govorniku, iza leđa na video pozivima i na jedan od dva paralelna gola zida. Od visine 1,2 m naviše. Bolje je pokriti jedan zid kako treba nego razbacati panele po četiri."}}]}
 </script>

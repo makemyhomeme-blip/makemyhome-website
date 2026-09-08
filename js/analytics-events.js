@@ -145,17 +145,17 @@
     var css = document.createElement('style');
     css.textContent =
       '#mmh-cookie{position:fixed;left:16px;bottom:16px;z-index:9998;max-width:min(440px,calc(100% - 32px));' +
-      'background:#0d0d0d;color:#fff;border:1px solid rgba(201,168,108,0.35);border-radius:14px;' +
+      'background:#0d0d0d;color:#fff;border:1px solid rgba(255,255,255,0.22);border-radius:14px;' +
       'box-shadow:0 12px 40px rgba(0,0,0,0.45);padding:16px 18px;font-size:13.5px;line-height:1.55;' +
       'font-family:inherit;animation:mmhCk .35s ease}' +
       '@keyframes mmhCk{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}' +
-      '#mmh-cookie a{color:#d8b877;font-weight:600;text-decoration:underline}' +
+      '#mmh-cookie a{color:#ffffff;font-weight:600;text-decoration:underline}' +
       '#mmh-cookie .mmh-cookie-btns{display:flex;gap:10px;margin-top:14px;justify-content:flex-end}' +
       '#mmh-cookie button{cursor:pointer;border-radius:9px;padding:9px 18px;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,0.28);font-family:inherit}' +
       '#mmh-cookie .mmh-cookie-no{background:transparent;color:#cfcfcf}' +
       '#mmh-cookie .mmh-cookie-no:hover{background:rgba(255,255,255,0.08)}' +
-      '#mmh-cookie .mmh-cookie-yes{background:#c9a86c;color:#1a1a1a;border-color:#c9a86c}' +
-      '#mmh-cookie .mmh-cookie-yes:hover{background:#d8b877}' +
+      '#mmh-cookie .mmh-cookie-yes{background:#ffffff;color:#1a1a1a;border-color:#ffffff}' +
+      '#mmh-cookie .mmh-cookie-yes:hover{background:#e6e6e6}' +
       '@media(max-width:520px){#mmh-cookie{left:12px;right:12px;bottom:12px;max-width:none}' +
       '#mmh-cookie .mmh-cookie-btns{margin-top:12px}' +
       '#mmh-cookie .mmh-cookie-btns button{flex:1}}' +

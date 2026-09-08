@@ -66,17 +66,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const thumb = p.image ? `<img src="${p.image}" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
         return `<a href="${(window.mmhUrlProizvoda ? window.mmhUrlProizvoda(p) : "product.html?id=" + p.id)}"
           style="display:flex;align-items:center;gap:12px;padding:11px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background 0.15s;"
-          onmouseenter="this.style.background='rgba(201,168,108,0.12)'" onmouseleave="this.style.background=''"
+          onmouseenter="this.style.background='rgba(0,0,0,0.06)'" onmouseleave="this.style.background=''"
           onclick="document.getElementById('mob-search-input').value='';document.getElementById('mob-search-results').style.display='none';">
           ${thumb}
           <div style="flex:1;min-width:0;">
             <div style="color:#fff;font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
             <div style="margin-top:2px;display:flex;gap:6px;flex-wrap:wrap;">
-              ${p.sku ? `<span style="font-size:11px;color:#c9a86c;font-family:monospace;">${p.sku}</span>` : ''}
+              ${p.sku ? `<span style="font-size:11px;color:#1a1a1a;font-family:monospace;">${p.sku}</span>` : ''}
               <span style="font-size:11px;color:rgba(255,255,255,0.4);">${label}</span>
             </div>
           </div>
-          <i class="fas fa-chevron-right" style="color:rgba(201,168,108,0.5);font-size:11px;flex-shrink:0;"></i>
+          <i class="fas fa-chevron-right" style="color:rgba(0,0,0,0.4);font-size:11px;flex-shrink:0;"></i>
         </a>`;
       }).join('');
       resultsBox.style.display = 'block';
@@ -163,12 +163,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const thumb = p.image ? `<img src="${p.image}" style="width:36px;height:36px;object-fit:cover;border-radius:6px;flex-shrink:0;" onerror="this.style.display='none'">` : '';
         return `<a href="${(window.mmhUrlProizvoda ? window.mmhUrlProizvoda(p) : "product.html?id=" + p.id)}"
           style="display:flex;align-items:center;gap:10px;padding:10px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06);transition:background .15s;"
-          onmouseenter="this.style.background='rgba(201,168,108,0.1)'" onmouseleave="this.style.background=''">
+          onmouseenter="this.style.background='rgba(0,0,0,0.06)'" onmouseleave="this.style.background=''">
           ${thumb}
           <div style="flex:1;min-width:0;">
             <div style="color:#fff;font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
             <div style="margin-top:2px;display:flex;gap:6px;">
-              ${p.sku ? `<span style="font-size:11px;color:#c9a86c;font-family:monospace;">${p.sku}</span>` : ''}
+              ${p.sku ? `<span style="font-size:11px;color:#1a1a1a;font-family:monospace;">${p.sku}</span>` : ''}
               <span style="font-size:11px;color:rgba(255,255,255,0.4);">${label}</span>
             </div>
           </div>

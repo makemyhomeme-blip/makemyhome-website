@@ -271,7 +271,7 @@ function buildCatMap() {
         id: p.category,
         name: catData?.name || p.category,
         icon: catData?.icon || 'fas fa-box',
-        color: catData?.color || '#c9a86c',
+        color: catData?.color || '#1a1a1a',
         description: catData?.description || '',
         count: 0,
         firstImage: null
@@ -572,7 +572,7 @@ async function renderProductDetail() {
     });
     // Update dots
     document.querySelectorAll('.gallery-dot').forEach((d, i) => {
-      d.style.background = i === _galleryIndex ? '#c9a86c' : 'rgba(255,255,255,0.35)';
+      d.style.background = i === _galleryIndex ? '#ffffff' : 'rgba(255,255,255,0.35)';
       d.style.transform = i === _galleryIndex ? 'scale(1.25)' : 'scale(1)';
     });
   }
@@ -589,7 +589,7 @@ async function renderProductDetail() {
         display:flex;gap:7px;z-index:10;pointer-events:none;">
         ${_galleryImages.map((_, i) => `<span class="gallery-dot" style="
           display:block;width:7px;height:7px;border-radius:50%;transition:all .2s;
-          background:${i === 0 ? '#c9a86c' : 'rgba(255,255,255,0.35)'};
+          background:${i === 0 ? '#ffffff' : 'rgba(255,255,255,0.35)'};
           transform:${i === 0 ? 'scale(1.25)' : 'scale(1)'};"
         ></span>`).join('')}
       </div>` : '';
@@ -1006,7 +1006,7 @@ async function renderProductDetail() {
       /* Za ovaj profil u podacima nema dimenzija — bolje bez broja nego sa pogresnim */
       res.innerHTML = `Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(1).replace('.', ',')} m²</strong><br>` +
         `<span style="color:#9b7d56;">Za ovaj profil nemamo upisane dimenzije. Pošaljite nam mjere i ` +
-        `izračunamo tačan broj komada isti dan — <a href="tel:+38269105222" style="color:#795f32;font-weight:700;">069 105 222</a>.</span>`;
+        `izračunamo tačan broj komada isti dan — <a href="tel:+38269105222" style="color:#1a1a1a;font-weight:700;">069 105 222</a>.</span>`;
       return;
     }
     const count = Math.ceil(area / coveragePerUnit);
@@ -1020,7 +1020,7 @@ async function renderProductDetail() {
       res.innerHTML = `
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
-          <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${puDims.w}×${puDims.h}cm)<br>
+          <span style="color:#1a1a1a;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${puDims.w}×${puDims.h}cm)<br>
           <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
         </div>`;
     } else if (mdfDims) {
@@ -1031,7 +1031,7 @@ async function renderProductDetail() {
       res.innerHTML = `
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
-          <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${mdfDims.w}×${mdfDims.h}cm)<br>
+          <span style="color:#1a1a1a;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${mdfDims.w}×${mdfDims.h}cm)<br>
           <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
         </div>`;
     } else if (flexDims) {
@@ -1042,7 +1042,7 @@ async function renderProductDetail() {
       res.innerHTML = `
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
-          <span style="color:#c9a86c;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${flexDims.w}×${flexDims.h}cm)<br>
+          <span style="color:#1a1a1a;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${flexDims.w}×${flexDims.h}cm)<br>
           <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
         </div>`;
     } else if (letvicaDims) {
@@ -1130,17 +1130,17 @@ function openImageLightbox(src, name) {
         <div id="lb-dots" style="display:flex;gap:7px;margin-top:10px;">
           ${images.map((_, i) => `<span class="lb-dot" style="display:block;width:7px;height:7px;
             border-radius:50%;transition:all .2s;
-            background:${i===lbIdx?'#c9a86c':'rgba(255,255,255,0.3)'};
+            background:${i===lbIdx?'#ffffff':'rgba(255,255,255,0.3)'};
             transform:${i===lbIdx?'scale(1.3)':'scale(1)'};"></span>`).join('')}
         </div>
         <span id="lb-counter" style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px;">
           ${lbIdx+1} / ${images.length}</span>` : ''}
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;">
         ${canShare
-          ? `<button id="lb-save-btn" style="${btnS}background:#c9a86c;color:#fff;">
+          ? `<button id="lb-save-btn" style="${btnS}background:#1a1a1a;color:#fff;">
                <i class="fas fa-image"></i> Sačuvaj</button>`
           : `<a id="lb-dl" href="${images[lbIdx].src}" download="${name.replace(/\s+/g,'-')}.jpg"
-               style="${btnS}background:#c9a86c;color:#fff;text-decoration:none;">
+               style="${btnS}background:#1a1a1a;color:#fff;text-decoration:none;">
                <i class="fas fa-download"></i> Preuzmi</a>`}
         <button id="lb-close" style="${btnS}background:rgba(255,255,255,0.15);color:#fff;">
           <i class="fas fa-times"></i> Zatvori</button>
@@ -1153,7 +1153,7 @@ function openImageLightbox(src, name) {
     const img = lb.querySelector('#lb-img');
     if (img) { img.style.opacity = '0'; setTimeout(() => { img.src = images[lbIdx].src; img.alt = images[lbIdx].label; img.style.opacity = '1'; }, 100); }
     lb.querySelectorAll('.lb-dot').forEach((d, i) => {
-      d.style.background = i === lbIdx ? '#c9a86c' : 'rgba(255,255,255,0.3)';
+      d.style.background = i === lbIdx ? '#ffffff' : 'rgba(255,255,255,0.3)';
       d.style.transform   = i === lbIdx ? 'scale(1.3)' : 'scale(1)';
     });
     const ctr = lb.querySelector('#lb-counter');

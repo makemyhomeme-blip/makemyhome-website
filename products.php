@@ -455,7 +455,7 @@ echo "\n</script>\n";
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=a1ddce51">
+  <link rel="stylesheet" href="css/style-v5.css?v=cff7ccaf">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     /* ===== CATEGORY GRID ===== */
@@ -498,7 +498,7 @@ echo "\n</script>\n";
       transition: transform 0.45s;
     }
     .cat-card:hover .cat-card-img img { transform: scale(1.06); }
-    .cat-card-img > i { font-size: 46px; color: #c9a86c; opacity: 0.45; }
+    .cat-card-img > i { font-size: 46px; color: #1a1a1a; opacity: 0.45; }
     .cat-card-icon {
       position: absolute; bottom: 12px; left: 12px;
       width: 42px; height: 42px; border-radius: 12px;
@@ -519,8 +519,8 @@ echo "\n</script>\n";
       display: flex; align-items: center; justify-content: space-between;
       padding-top: 12px; border-top: 1px solid #f1f1f1;
     }
-    .cat-card-count { font-size: 12.5px; font-weight: 700; color: #795f32; }
-    .cat-card-go { font-size: 13px; font-weight: 700; color: #8a6d2f; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .cat-card-count { font-size: 12.5px; font-weight: 700; color: #1a1a1a; }
+    .cat-card-go { font-size: 13px; font-weight: 700; color: #1a1a1a; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
     .cat-card-go i { font-size: 11px; transition: transform 0.2s; }
     .cat-card:hover .cat-card-go i { transform: translateX(4px); }
     @media (max-width: 768px) { .cat-card-img { height: 185px; } }
@@ -538,7 +538,7 @@ echo "\n</script>\n";
     .btn-back:hover { background: #333; }
     .back-bar h2 { font-size: 22px; font-weight: 800; color: #1a1a1a; }
     .back-bar .count-badge {
-      background: #ffffff; color: #795f32;
+      background: #ffffff; color: #1a1a1a;
       padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
     }
     /* TELEFON: bez praznog prostora ispod hero-a i bez stiskanja u jedan red */
@@ -615,7 +615,7 @@ echo "\n</script>\n";
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(0,0,0,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -651,23 +651,23 @@ echo "\n</script>\n";
 
     <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
       <div style="position:relative;">
-        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:12px;pointer-events:none;"></i>
         <input id="desk-search-input" type="text" aria-label="Pretraga proizvoda" placeholder="Traži proizvod…" autocomplete="off"
-          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
-          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
-          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(0,0,0,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(0,0,0,0.4)';this.style.background='rgba(255,255,255,0.06)'">
       </div>
-      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(0,0,0,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
     </div>
 
         <nav id="nav-menu" class="nav-menu">
       <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
         <div style="position:relative;">
-          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
+          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:14px;pointer-events:none;z-index:1;"></i>
           <input id="mob-search-input" type="text" aria-label="Pretraga proizvoda po imenu ili šifri" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
+            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(0,0,0,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
         </div>
-        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
+        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(0,0,0,0.2);"></div>
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
@@ -684,7 +684,7 @@ echo "\n</script>\n";
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
-    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
+    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#1a1a1a;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
       <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#c0392b;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
@@ -840,7 +840,7 @@ echo "\n</script>\n";
             <?php if ($prvaSlika): ?>
             <img src="<?= htmlspecialchars(mmhThumb($prvaSlika)) ?>" alt="<?= htmlspecialchars(($ck['name'] ?? '') . ' – zidni paneli, Make My Home Decor Podgorica') ?>" loading="lazy"<?= mmhDimAtributi($prvaSlika) ?>>
             <?php endif; ?>
-            <span class="cat-card-icon" style="background:<?= htmlspecialchars($ck['color'] ?? '#7a9e6e') ?>">
+            <span class="cat-card-icon" style="background:#1a1a1a">
               <i class="<?= htmlspecialchars($ck['icon'] ?? 'fas fa-layer-group') ?>"></i>
             </span>
           </div>
@@ -955,7 +955,7 @@ echo "\n</script>\n";
         <p>Make My Home Decor je specijalizovana prodavnica dekorativnih zidnih obloga u <strong>Podgorici</strong>. U našem showroomu u City Kvartu na jednom mjestu možete vidjeti i opipati kompletnu ponudu – <strong>bambus zidne panele</strong> (drvene, tekstilne, mermerne, metalne i kožne), <strong>3D dekorativne letvice</strong>, <strong>akustične panele</strong>, <strong>MDF kanelirane panele</strong>, <strong>PU dekorativni kamen</strong>, <strong>Flex Stone</strong> savitljivi kameni furnir, <strong>aluminijum lajsne</strong> i <strong>SPC vodootporne podove</strong>.</p>
         <p>Bambus paneli dimenzija 280x122cm prekrivaju 3,42 m² po komadu, pa se veliki zid obnovi brzo i sa malo spojeva. Vodootporni su, otporni na buđ i vlagu, vatrootporni klase B1 i imaju UV zaštitu. Kao moderna zamjena za klasičnu <strong>lamperiju</strong>, montiraju se lijepljenjem – bez bušenja, letvica i majstora, a mogu se postaviti i preko starog maltera, gipsa ili pločica. Popularni su za <strong>TV zid</strong>, akcentni zid iza kreveta, kupatilo, kuhinju, hodnike, kao i za kafiće, restorane, hotele i poslovne prostore.</p>
         <p>Sve cijene su jasno navedene uz svaki proizvod, a na stranici proizvoda imate <strong>kalkulator</strong> koji na osnovu dimenzija zida izračuna potreban broj komada. Dostava kurirskom službom širom <strong>Crne Gore</strong> – Podgorica, Nikšić, Bar, Budva, Herceg Novi, Kotor, Tivat, Bijelo Polje, Berane i ostali gradovi, uz mogućnost plaćanja pouzećem ili ličnog preuzimanja u showroomu.</p>
-        <p>Niste sigurni šta odgovara vašem prostoru? Pogledajte <a href="faq.html" style="color:#795f32;font-weight:600;">česta pitanja</a> ili nas pozovite na <a href="tel:+38269105222" style="color:#795f32;font-weight:600;">069 105 222</a> – savjetujemo bez obaveze. Arhitektama, dizajnerima i izvođačima nudimo posebne uslove kroz program <a href="decor-box.html" style="color:#795f32;font-weight:600;">Decor Box</a>.</p>
+        <p>Niste sigurni šta odgovara vašem prostoru? Pogledajte <a href="faq.html" style="color:#1a1a1a;font-weight:600;">česta pitanja</a> ili nas pozovite na <a href="tel:+38269105222" style="color:#1a1a1a;font-weight:600;">069 105 222</a> – savjetujemo bez obaveze. Arhitektama, dizajnerima i izvođačima nudimo posebne uslove kroz program <a href="decor-box.html" style="color:#1a1a1a;font-weight:600;">Decor Box</a>.</p>
       </section>
       <?php endif; ?>
       <?php if ($vodiciOvdje): ?>
@@ -964,8 +964,8 @@ echo "\n</script>\n";
         <ul style="list-style:none;padding:0;margin:0;display:grid;gap:10px;">
           <?php foreach ($vodiciOvdje as $vf): if (!isset($sviVodici[$vf])) continue; ?>
           <li style="line-height:1.6;">
-            <a href="<?= htmlspecialchars($vf) ?>" style="color:#8a6d3b;font-weight:600;display:inline-block;padding:4px 0;">
-              <i class="fas fa-arrow-right" style="font-size:12px;color:#c9a86c;margin-right:8px;"></i><?= htmlspecialchars($sviVodici[$vf]) ?>
+            <a href="<?= htmlspecialchars($vf) ?>" style="color:#1a1a1a;font-weight:600;display:inline-block;padding:4px 0;">
+              <i class="fas fa-arrow-right" style="font-size:12px;color:#1a1a1a;margin-right:8px;"></i><?= htmlspecialchars($sviVodici[$vf]) ?>
             </a>
           </li>
           <?php endforeach; ?>
@@ -1035,7 +1035,7 @@ echo "\n</script>\n";
       </div>
         </a>
         <p class="footer-desc">Premium zidni paneli i 3D letvice u Podgorici. Transformišite Vaš prostor.
-        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
+        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#1a1a1a;">&#9654; Zapratite nas</span>
         </p>
         <div class="footer-social">
           <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1098,12 +1098,12 @@ echo "\n</script>\n";
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/products.js?v=3d821098"></script>
-<script src="js/cart.js?v=2906a9ed"></script>
+<script src="js/main-v4.js?v=e0bfd29f"></script>
+<script src="js/products.js?v=3fd1c692"></script>
+<script src="js/cart.js?v=25285928"></script>
 <script>
   initProductsPage();
 </script>
-<script src="js/analytics-events.js?v=1750dd92" defer></script>
+<script src="js/analytics-events.js?v=79aeefac" defer></script>
 </body>
 </html>

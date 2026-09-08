@@ -191,7 +191,7 @@ if ($KAT) {
       <a href="/kategorija/<?= htmlspecialchars($kljuc) ?>" class="category-card">
         <div class="category-img" style="overflow:hidden;position:relative;"><?php if ($slika): ?><img class="category-bg-img" src="<?= htmlspecialchars($slika) ?>"<?= $srcset ?> alt="<?= htmlspecialchars(($k['name'] ?? '') . ' – Make My Home Decor Podgorica') ?>" loading="lazy" decoding="async"<?= mmhDimAtributi($slika) ?> style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:<?= $pX ?>% <?= $pY ?>%;transform:scale(<?= $zum ?>);transform-origin:<?= $pX ?>% <?= $pY ?>%;--zoom:<?= $zum ?>;"><?php endif; ?></div>
         <div class="category-body">
-          <div class="category-icon" style="background:<?= htmlspecialchars($k['color'] ?? '#7a9e6e') ?>"><i class="<?= htmlspecialchars($k['icon'] ?? 'fas fa-layer-group') ?>"></i></div>
+          <div class="category-icon" style="background:#1a1a1a"><i class="<?= htmlspecialchars($k['icon'] ?? 'fas fa-layer-group') ?>"></i></div>
           <h3><?= htmlspecialchars($k['name'] ?? '') ?></h3>
           <p><?= htmlspecialchars($k['description'] ?? '') ?></p>
           <span class="category-link">Pogledaj <i class="fas fa-arrow-right"></i></span>

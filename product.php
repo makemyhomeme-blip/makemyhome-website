@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=a1ddce51">
+  <link rel="stylesheet" href="css/style-v5.css?v=cff7ccaf">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -474,7 +474,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(0,0,0,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -509,23 +509,23 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 
     <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
       <div style="position:relative;">
-        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:12px;pointer-events:none;"></i>
         <input id="desk-search-input" type="text" aria-label="Pretraga proizvoda" placeholder="Traži proizvod…" autocomplete="off"
-          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
-          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
-          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(0,0,0,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(0,0,0,0.4)';this.style.background='rgba(255,255,255,0.06)'">
       </div>
-      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(0,0,0,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
     </div>
 
     <nav id="nav-menu" class="nav-menu">
       <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
         <div style="position:relative;">
-          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
+          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:14px;pointer-events:none;z-index:1;"></i>
           <input id="mob-search-input" type="text" aria-label="Pretraga proizvoda po imenu ili šifri" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
+            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(0,0,0,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
         </div>
-        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
+        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(0,0,0,0.2);"></div>
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
@@ -542,7 +542,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
-    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
+    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#1a1a1a;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
       <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#c0392b;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
@@ -558,14 +558,14 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <div class="container">
 <?php if (!$product): ?>
     <div style="max-width:640px;margin:0 auto;text-align:center;padding:30px 16px 60px;">
-      <i class="fas fa-box-open" style="font-size:56px;color:#c9a86c;margin-bottom:22px;display:block;"></i>
+      <i class="fas fa-box-open" style="font-size:56px;color:#1a1a1a;margin-bottom:22px;display:block;"></i>
       <h1 style="font-size:1.7em;color:#1a1a1a;margin-bottom:14px;">Proizvod nije pronađen</h1>
       <p style="color:#5a6672;line-height:1.75;margin-bottom:10px;">
         Ovaj proizvod više nije u ponudi ili je link pogrešan. Cijela ponuda zidnih panela,
         bambus obloga, 3D letvica, akustičnih panela, PU kamena i SPC podova je i dalje dostupna u katalogu.
       </p>
       <p style="color:#5a6672;line-height:1.75;margin-bottom:26px;">
-        Ako tražite određeni dezen, pozovite nas na <a href="tel:+38269105222" style="color:#c9a86c;font-weight:600;">069 105 222</a>
+        Ako tražite određeni dezen, pozovite nas na <a href="tel:+38269105222" style="color:#1a1a1a;font-weight:600;">069 105 222</a>
         ili svratite u showroom u Podgorici — Vojvode Maša Đurovića 43, City Kvart.
       </p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
@@ -577,7 +577,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
         <ul style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;">
           <?php foreach ($catNames as $ck => $cn): ?>
           <li><a href="/kategorija/<?= htmlspecialchars($ck, ENT_QUOTES) ?>"
-                 style="display:inline-block;background:#ffffff;color:#8a6d2f;padding:6px 13px;border-radius:18px;font-size:13px;text-decoration:none;"><?= htmlspecialchars($cn) ?></a></li>
+                 style="display:inline-block;background:#ffffff;color:#1a1a1a;padding:6px 13px;border-radius:18px;font-size:13px;text-decoration:none;"><?= htmlspecialchars($cn) ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>
@@ -589,7 +589,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
       <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <a href="products.html" style="color:#666e7a;text-decoration:none;">Proizvodi</a>
 <?php if ($prodCatName): ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
-      <a href="/kategorija/<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#795f32;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
+      <a href="/kategorija/<?= htmlspecialchars($prodCat, ENT_QUOTES) ?>" style="color:#1a1a1a;text-decoration:none;font-weight:600;"><?= htmlspecialchars($prodCatName) ?></a>
 <?php endif; ?>      <i class="fas fa-chevron-right" style="font-size:9px;"></i>
       <span style="color:#5a5a5a;"><?= htmlspecialchars($product['name']) ?></span>
     </nav>
@@ -671,7 +671,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <div class="product-category"><?= htmlspecialchars($pKat) ?></div>
           <h1 class="product-name"><?= htmlspecialchars($product['name'] ?? '') ?></h1>
           <?php if (!empty($product['sku'])): ?>
-          <div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff;border:1.5px solid rgba(201,168,108,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#795f32;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
+          <div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff;border:1.5px solid rgba(0,0,0,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#1a1a1a;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
           <?php endif; ?>
           <?php
           /* Ovdje je stajala ocjena sa zvjezdicama uz naslov. Uklonjena je zajedno
@@ -689,9 +689,9 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <?php endif; ?>
 
           <?php if (str_starts_with($product['category'] ?? '', 'bambus') || ($product['category'] ?? '') === 'classic'): ?>
-          <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(201,168,108,0.1);border:1.5px solid rgba(201,168,108,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;">
-            <i class="fas fa-ruler-combined" style="color:#c9a86c;font-size:18px;flex-shrink:0;"></i>
-            <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#795f32;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
+          <a href="/kategorija/aluminijum-lajsne" style="display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.1);border:1.5px solid rgba(0,0,0,0.35);border-radius:12px;padding:12px 16px;margin:14px 0 18px;text-decoration:none;color:inherit;">
+            <i class="fas fa-ruler-combined" style="color:#1a1a1a;font-size:18px;flex-shrink:0;"></i>
+            <span style="font-size:13.5px;color:#3a3a3a;line-height:1.4;">Potrebne su vam <strong>lajsne za spajanje panela</strong>? <span style="color:#1a1a1a;font-weight:700;white-space:nowrap;">Pogledajte ovdje <i class="fas fa-arrow-right" style="font-size:11px;"></i></span></span>
           </a>
           <?php endif; ?>
 
@@ -804,12 +804,12 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 
           <div class="pq-panel" id="pq-calc">
             <?php if ($letvW && $pokriva): ?>
-            <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+            <div style="background:rgba(0,0,0,0.12);border:1px solid rgba(0,0,0,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#1a1a1a;display:flex;align-items:center;gap:8px;">
               <i class="fas fa-ruler-horizontal"></i>
               <span>Svaka letvica: <strong>280cm visina × <?= rtrim(rtrim(number_format($letvW, 1, ',', ''), '0'), ',') ?>cm širina</strong> → 1 letvica = <?= mmhBroj($pokriva) ?> m²</span>
             </div>
             <?php elseif ($dimKom && !$jeSpc && $pokriva): ?>
-            <div style="background:rgba(201,168,108,0.12);border:1px solid rgba(201,168,108,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#c9a86c;display:flex;align-items:center;gap:8px;">
+            <div style="background:rgba(0,0,0,0.12);border:1px solid rgba(0,0,0,0.35);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:13px;color:#1a1a1a;display:flex;align-items:center;gap:8px;">
               <i class="fas fa-ruler-combined"></i>
               <span>Svaki panel: <strong><?= $dimKom['w'] ?> × <?= $dimKom['h'] ?> cm</strong> &nbsp;·&nbsp; 1 kom = <?= mmhBroj($pokriva) ?> m² &nbsp;·&nbsp; Uključuje <strong>+5% rezerva</strong></span>
             </div>
@@ -869,11 +869,11 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <div style="background:#fdf3f2;border:1px solid rgba(192,57,43,.3);border-radius:14px;padding:16px 18px;color:#8a3a30;font-size:14.5px;line-height:1.65;">
               Ovaj model je trenutno rasprodat. Javite nam se — reći ćemo vam kada stiže ili predložiti najbliži model koji imamo.
             </div>
-            <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
+            <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#1a1a1a;color:#0a0a0a;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
               <i class="fas fa-phone" style="font-size:17px;"></i><span>069 105 222</span>
             </a>
             <?php else: ?>
-            <button onclick="addProductToCartById(<?= (int)($product['id'] ?? 0) ?>, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c9a86c;color:#0a0a0a;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;">
+            <button onclick="addProductToCartById(<?= (int)($product['id'] ?? 0) ?>, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#1a1a1a;color:#0a0a0a;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;">
               <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
               <span>Dodaj u Korpu</span>
             </button>
@@ -1054,7 +1054,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           </div>
         </a>
         <p class="footer-desc">Premium zidni paneli i 3D letvice u Podgorici.
-        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
+        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#1a1a1a;">&#9654; Zapratite nas</span>
         </p>
         <div class="footer-social">
           <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1112,12 +1112,12 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/products.js?v=3d821098"></script>
-<script src="js/cart.js?v=2906a9ed"></script>
+<script src="js/main-v4.js?v=e0bfd29f"></script>
+<script src="js/products.js?v=3fd1c692"></script>
+<script src="js/cart.js?v=25285928"></script>
 <script>
   renderProductDetail();
 </script>
-<script src="js/analytics-events.js?v=1750dd92" defer></script>
+<script src="js/analytics-events.js?v=79aeefac" defer></script>
 </body>
 </html>

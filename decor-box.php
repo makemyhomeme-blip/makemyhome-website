@@ -76,7 +76,7 @@
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=a1ddce51">
+  <link rel="stylesheet" href="css/style-v5.css?v=cff7ccaf">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -86,7 +86,7 @@
     .db-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
     .db-intro-img{border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.15);background:var(--dark-2);}
     .db-intro-img img{width:100%;display:block;}
-    .db-eyebrow{display:inline-block;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#795f32;margin-bottom:10px;}
+    .db-eyebrow{display:inline-block;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#1a1a1a;margin-bottom:10px;}
     .db-lead{font-size:16px;color:var(--dark-2);line-height:1.85;margin-bottom:18px;}
     .db-lead strong{color:var(--dark);}
     .db-lead-sub{font-size:15px;color:var(--gray);line-height:1.85;margin-bottom:16px;}
@@ -95,8 +95,8 @@
     .db-benefits{padding:80px 0;background:var(--light);}
     .db-ben-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:44px;}
     .db-ben-card{display:flex;gap:18px;align-items:flex-start;background:#fff;border:0;border-radius:16px;padding:26px 24px;box-shadow:0 4px 18px rgba(0,0,0,0.06);transition:transform .2s,box-shadow .2s;}
-    .db-ben-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(201,168,108,0.18);}
-    .db-ben-icon{flex-shrink:0;width:54px;height:54px;border-radius:14px;background:rgba(201,168,108,0.12);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:22px;}
+    .db-ben-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,0.18);}
+    .db-ben-icon{flex-shrink:0;width:54px;height:54px;border-radius:14px;background:rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:22px;}
     .db-ben-card h3{font-size:17px;color:var(--dark);margin:2px 0 6px;}
     .db-ben-card p{font-size:14px;color:var(--gray);line-height:1.6;}
 
@@ -106,7 +106,7 @@
        naziv i broj dezena. Cijela plocica je jedan link koji otvara PDF. */
     .db-kat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:26px;margin-top:44px;}
     .db-kat-card{display:flex;flex-direction:column;background:#fff;border:0;border-radius:18px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.07);text-decoration:none;transition:transform .2s,box-shadow .2s;}
-    .db-kat-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(201,168,108,0.22);}
+    .db-kat-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,0.22);}
     .db-kat-slika{display:block;position:relative;background:var(--light);line-height:0;}
     /* Odnos stranica je fiksiran, pa mjesto za sliku postoji prije nego sto se
        slika ucita — stranica se ne trza (CLS ostaje 0). */
@@ -189,8 +189,8 @@ require_once __DIR__ . '/php/dimenzije.php';
     .db-namjena-tabela tbody th i{color:var(--primary);margin-right:9px;width:1.1em;text-align:center;}
     .db-namjena-tabela td{color:var(--gray);}
     .db-namjena-tabela tbody tr:last-child th,.db-namjena-tabela tbody tr:last-child td{border-bottom:none;}
-    .db-namjena-tabela tbody tr:nth-child(even) th,.db-namjena-tabela tbody tr:nth-child(even) td{background:rgba(201,168,108,0.05);}
-    .db-namjena-tabela a{color:#795f32;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(121,95,50,0.35);}
+    .db-namjena-tabela tbody tr:nth-child(even) th,.db-namjena-tabela tbody tr:nth-child(even) td{background:rgba(0,0,0,0.05);}
+    .db-namjena-tabela a{color:#1a1a1a;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(121,95,50,0.35);}
     /* Kad u istom polju stoje dva ili tri linka, bez razmaka se slijevaju u
        jedan dugacak podvucen niz — "Akusticni paneli Tekstilni paneli" izgleda
        kao jedan link. Razmak ih razdvaja.
@@ -201,11 +201,11 @@ require_once __DIR__ . '/php/dimenzije.php';
     .db-namjena-uvod{max-width:820px;margin:34px auto 0;text-align:center;font-size:16px;line-height:1.85;color:var(--dark-2);}
     .db-dekori{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:18px;}
     .db-dekori-nas{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
-    .db-dekori a{display:inline-flex;align-items:center;min-height:38px;padding:0 15px;border:1px solid rgba(121,95,50,0.35);border-radius:999px;background:rgba(201,168,108,0.08);color:#795f32;font-weight:700;font-size:14px;text-decoration:none;}
-    .db-dekori a:hover{background:rgba(201,168,108,0.18);color:var(--dark);}
-    .db-namjena-uvod a{color:#795f32;font-weight:700;}
+    .db-dekori a{display:inline-flex;align-items:center;min-height:38px;padding:0 15px;border:1px solid rgba(121,95,50,0.35);border-radius:999px;background:rgba(0,0,0,0.08);color:#1a1a1a;font-weight:700;font-size:14px;text-decoration:none;}
+    .db-dekori a:hover{background:rgba(0,0,0,0.18);color:var(--dark);}
+    .db-namjena-uvod a{color:#1a1a1a;font-weight:700;}
     .db-namjena-nota{margin-top:22px;font-size:14px;color:var(--gray);line-height:1.85;max-width:860px;}
-    .db-namjena-nota a{color:#795f32;font-weight:600;}
+    .db-namjena-nota a{color:#1a1a1a;font-weight:600;}
 
     /* Tok saradnje */
     .db-tok{padding:80px 0;}
@@ -218,7 +218,7 @@ require_once __DIR__ . '/php/dimenzije.php';
     /* Swatch strip */
 
     /* CTA */
-    .db-cta{padding:72px 0;background:linear-gradient(135deg,#c9a86c 0%,#b8965a 100%);text-align:center;}
+    .db-cta{padding:72px 0;background:linear-gradient(135deg,#1a1a1a 0%,#b8965a 100%);text-align:center;}
     .db-cta .db-cta-script{font-family:var(--font-heading);font-style:italic;font-size:22px;color:rgba(0,0,0,0.72);margin-bottom:6px;}
     .db-cta h2{color:#1a1a1a;font-size:34px;margin-bottom:14px;line-height:1.2;}
     .db-cta-nota{font-size:15px;color:rgba(0,0,0,0.7);line-height:1.7;max-width:620px;margin:0 auto 26px;}
@@ -297,7 +297,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       .db-namjena-tabela tbody th{order:1;flex:0 0 auto;font-size:14px;line-height:1.3;margin:0;}
       .db-namjena-tabela tbody td:last-child{order:2;flex:1 1 auto;min-width:0;margin:0;}
       .db-namjena-tabela tbody td:first-of-type{order:3;flex:0 0 100%;font-size:12.5px;line-height:1.45;color:var(--gray);margin:3px 0 0;}
-      .db-namjena-tabela tbody td:last-child a{display:inline-flex;align-items:center;min-height:44px;font-size:13.5px;font-weight:700;color:#795f32;border:0;border-radius:0;background:none;padding:0;margin:0 14px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
+      .db-namjena-tabela tbody td:last-child a{display:inline-flex;align-items:center;min-height:44px;font-size:13.5px;font-weight:700;color:#1a1a1a;border:0;border-radius:0;background:none;padding:0;margin:0 14px 0 0;line-height:1.2;text-decoration:underline;text-decoration-color:rgba(121,95,50,0.4);text-underline-offset:3px;text-decoration-thickness:1px;}
       .db-namjena-nota{text-align:left;}
       /* Linkovi unutar recenice ostaju dio teksta, ali dobijaju visi prostor za
          dodir — inace su svega 17 px visoki i tesko se pogadjaju prstom. */
@@ -410,7 +410,7 @@ require_once __DIR__ . '/php/dimenzije.php';
 @media(min-width:769px) and (max-width:1149px){
   .nav-menu{display:none!important;position:absolute!important;top:75px!important;left:0!important;right:0!important;
     background:#1a1a1a!important;flex-direction:column!important;padding:20px!important;gap:4px!important;
-    border-top:1px solid rgba(201,168,108,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
+    border-top:1px solid rgba(0,0,0,0.2)!important;z-index:9999!important;max-height:calc(100vh - 90px)!important;max-height:calc(100dvh - 90px)!important;overflow-y:auto!important;}
   .nav-menu.open{display:flex!important;}
   .hamburger{display:flex!important;}
   .nav-link{width:100%!important;justify-content:center!important;font-size:14px!important;padding:11px 8px!important;}
@@ -444,22 +444,22 @@ require_once __DIR__ . '/php/dimenzije.php';
     </a>
     <div id="desk-search-wrap" style="position:relative;flex-shrink:0;margin-left:auto;margin-right:8px;width:210px;">
       <div style="position:relative;">
-        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:12px;pointer-events:none;"></i>
+        <i class="fas fa-search" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:12px;pointer-events:none;"></i>
         <input id="desk-search-input" type="text" aria-label="Pretraga proizvoda" placeholder="Traži proizvod…" autocomplete="off"
-          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(201,168,108,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
-          onfocus="this.style.borderColor='rgba(201,168,108,0.85)';this.style.background='rgba(255,255,255,0.1)'"
-          onblur="this.style.borderColor='rgba(201,168,108,0.4)';this.style.background='rgba(255,255,255,0.06)'">
+          style="width:100%;box-sizing:border-box;padding:8px 10px 8px 30px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.4);background:rgba(255,255,255,0.06);color:#fff;font-size:12px;font-family:inherit;outline:none;-webkit-appearance:none;transition:border-color .2s,background .2s;"
+          onfocus="this.style.borderColor='rgba(0,0,0,0.85)';this.style.background='rgba(255,255,255,0.1)'"
+          onblur="this.style.borderColor='rgba(0,0,0,0.4)';this.style.background='rgba(255,255,255,0.06)'">
       </div>
-      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(201,168,108,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
+      <div id="desk-search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;width:300px;background:#1a1814;border:1px solid rgba(0,0,0,0.25);border-radius:12px;overflow:hidden;max-height:420px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.5);z-index:99999;"></div>
     </div>
     <nav id="nav-menu" class="nav-menu">
       <div id="mob-search-box" style="padding:4px 0 14px;width:100%;">
         <div style="position:relative;">
-          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#c9a86c;font-size:14px;pointer-events:none;z-index:1;"></i>
+          <i class="fas fa-search" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#1a1a1a;font-size:14px;pointer-events:none;z-index:1;"></i>
           <input id="mob-search-input" type="text" aria-label="Pretraga proizvoda po imenu ili šifri" placeholder="Traži po imenu ili šifri…" autocomplete="off"
-            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(201,168,108,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
+            style="width:100%;box-sizing:border-box;padding:12px 14px 12px 40px;border-radius:10px;border:1.5px solid rgba(0,0,0,0.35);background:rgba(255,255,255,0.07);color:#fff;font-size:15px;font-family:inherit;outline:none;-webkit-appearance:none;">
         </div>
-        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(201,168,108,0.2);"></div>
+        <div id="mob-search-results" style="display:none;margin-top:6px;border-radius:10px;overflow:hidden;max-height:52vh;overflow-y:auto;background:rgba(20,18,15,0.97);border:1px solid rgba(0,0,0,0.2);"></div>
       </div>
       <a href="/" class="nav-link">Početna</a>
       <a href="inspiracija.html" class="nav-link nav-insp">Inspiracija</a>
@@ -476,7 +476,7 @@ require_once __DIR__ . '/php/dimenzije.php';
       <a href="about.html" class="nav-link">O Nama</a>
       <a href="contact.html" class="nav-link nav-cta">Kontakt</a>
     </nav>
-    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#c9a86c;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
+    <a href="korpa.html" class="cart-icon-btn" aria-label="Korpa" style="position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:#1a1a1a;font-size:18px;text-decoration:none;flex-shrink:0;margin-right:4px;">
       <i class="fas fa-shopping-cart"></i>
       <span class="cart-badge" style="display:none;position:absolute;top:3px;right:3px;background:#e74c3c;color:#fff;border-radius:50%;width:17px;height:17px;font-size:9px;font-weight:700;align-items:center;justify-content:center;line-height:1;"></span>
     </a>
@@ -861,7 +861,7 @@ if ($dbIns):
                    onerror="..." prije kraja, pa je ostatak curio na stranicu
                    kao goli tekst ("> ispod fabrike). */ ?>
           <img src="images/decor-box-fabrika.jpg" alt="Make My Home Decor fabrika u Beogradu"<?= mmhDimAtributi('images/decor-box-fabrika.jpg') ?>
-            onerror="this.onerror=null;this.parentElement.parentElement.innerHTML='<div style=&quot;height:100%;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(201,168,108,0.55);gap:14px;&quot;><i class=&quot;fas fa-industry&quot; style=&quot;font-size:72px;&quot;></i><span style=&quot;font-size:13px;letter-spacing:1px;&quot;>Fotografija fabrike</span></div>'">
+            onerror="this.onerror=null;this.parentElement.parentElement.innerHTML='<div style=&quot;height:100%;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(0,0,0,0.55);gap:14px;&quot;><i class=&quot;fas fa-industry&quot; style=&quot;font-size:72px;&quot;></i><span style=&quot;font-size:13px;letter-spacing:1px;&quot;>Fotografija fabrike</span></div>'">
         </picture>
       </div>
     </div>
@@ -901,7 +901,7 @@ if ($dbIns):
           </div>
         </a>
         <p class="footer-desc">Premium zidni paneli i 3D letvice u Podgorici. Transformišite Vaš prostor.
-        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#c9a86c;">&#9654; Zapratite nas</span>
+        <span style="display:block;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#1a1a1a;">&#9654; Zapratite nas</span>
         </p>
         <div class="footer-social">
           <a href="https://www.instagram.com/makemyhome.decor" target="_blank" rel="noopener" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -957,8 +957,8 @@ if ($dbIns):
 </div>
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
-<script src="js/main-v4.js?v=d86f5c22"></script>
-<script src="js/cart.js?v=2906a9ed"></script>
-<script src="js/analytics-events.js?v=1750dd92" defer></script>
+<script src="js/main-v4.js?v=e0bfd29f"></script>
+<script src="js/cart.js?v=25285928"></script>
+<script src="js/analytics-events.js?v=79aeefac" defer></script>
 </body>
 </html>
