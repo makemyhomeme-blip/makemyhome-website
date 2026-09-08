@@ -392,7 +392,7 @@ ul { list-style: none; }
 
 .logo-text .tagline {
   font-size: 9px;
-  color: var(--primary);
+  color: rgba(255,255,255,0.55);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -416,8 +416,8 @@ ul { list-style: none; }
 }
 
 .nav-link:hover, .nav-link.active {
-  color: var(--primary);
-  background: rgba(0,0,0,0.1);
+  color: #ffffff;
+  background: rgba(255,255,255,0.12);
 }
 
 .nav-link.active::after {
@@ -610,7 +610,7 @@ ul { list-style: none; }
 .stat-item .number {
   font-family: var(--font-heading);
   font-size: 32px;
-  color: var(--primary);
+  color: #ffffff;
   font-weight: 700;
   line-height: 1;
 }
@@ -1347,7 +1347,7 @@ ul { list-style: none; }
 }
 
 .footer-contact-list li i {
-  color: var(--primary);
+  color: #ffffff;
   font-size: 14px;
   margin-top: 2px;
   flex-shrink: 0;
@@ -1379,7 +1379,7 @@ ul { list-style: none; }
    nije, stoji sam u redu. Uspravni razmak i inline-block mu dizu visinu
    dodira na 24px, a da se izgled reda ne mijenja. */
 .footer-bottom a {
-  color: var(--primary);
+  color: rgba(255,255,255,0.82);
   text-decoration: underline;
   display: inline-block;
   padding: 4px 2px;
@@ -1440,7 +1440,7 @@ ul { list-style: none; }
 
 .page-hero-content { position: relative; z-index: 1; text-align: center; }
 .page-hero .section-title { color: var(--white); margin-bottom: 12px; }
-.page-hero .section-subtitle { color: rgba(255,255,255,0.6); }
+.page-hero .section-subtitle { color: rgba(255,255,255,0.82); }
 
 .breadcrumb {
   display: flex;
@@ -1448,11 +1448,12 @@ ul { list-style: none; }
   justify-content: center;
   gap: 8px;
   font-size: 13px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.72);
   margin-bottom: 24px;
 }
 
-.breadcrumb a { color: var(--primary); }
+.breadcrumb a { color: #ffffff; }
+.breadcrumb a:hover { color: rgba(255,255,255,0.8); }
 .breadcrumb i { font-size: 10px; }
 
 /* ===== FILTER ===== */
