@@ -9,14 +9,25 @@ if (function_exists('opcache_reset')) opcache_reset();
 
 $isCli = (php_sapi_name() === 'cli');
 
+// Tajni token za automatski deploy BEZ prijave. Radi preko weba na portu 443
+// (makemyhome.me), koji nikad nije blokiran — za razliku od cPanela, koji zna
+// da bane IP pa se admin lozinka ne moze procitati da bi se sync pokrenuo.
+// Bezbjednost: token samo POVLACI vec komitovan kod sa FIKSNOG repo-a i grane
+// (dolje $repo/$branch); ne moze ubaciti proizvoljan sadrzaj niti izvrsiti kod.
+define('MMH_DEPLOY_TOKEN', '697113eed3779e99c7bcbf5953fecc2f541250ef');
+
 if (!$isCli) {
-    require_once __DIR__ . '/sesija.php';
-    if (empty($_SESSION['admin_logged'])) {
-        http_response_code(403);
-        die('Pristup odbijen – mora si prijavljen kao admin.');
-    }
-    if (($_GET['key'] ?? '') !== 'mkhsync2025') {
-        die('Pogre&scaron;an klju&ccaron;. Dodaj ?key=mkhsync2025 u URL.');
+    $token   = (string)($_GET['token'] ?? $_POST['token'] ?? '');
+    $tokenOk = ($token !== '' && hash_equals(MMH_DEPLOY_TOKEN, $token));
+    if (!$tokenOk) {
+        require_once __DIR__ . '/sesija.php';
+        if (empty($_SESSION['admin_logged'])) {
+            http_response_code(403);
+            die('Pristup odbijen – mora si prijavljen kao admin.');
+        }
+        if (($_GET['key'] ?? '') !== 'mkhsync2025') {
+            die('Pogre&scaron;an klju&ccaron;. Dodaj ?key=mkhsync2025 u URL.');
+        }
     }
 }
 

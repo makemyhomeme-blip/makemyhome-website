@@ -80,7 +80,7 @@ if ($izdvojeni) {
             $oznaka = trim((string)($p['badge'] ?? ''));
             if ($oznaka !== '' && stripos($oznaka, 'ručivanje') === false && stripos($oznaka, 'rucivanje') === false):
             ?>
-            <div class="product-badge"><?= htmlspecialchars($oznaka) ?></div>
+            <div class="product-badge <?= mmhBadgeKlasa($oznaka) ?>"><?= htmlspecialchars($oznaka) ?></div>
             <?php endif; ?>
             <?php if ($nema): ?><div class="oos-tag">Rasprodato</div><?php endif; ?>
           </a>

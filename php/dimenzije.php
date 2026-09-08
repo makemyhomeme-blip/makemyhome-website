@@ -100,3 +100,23 @@ function mmhSlikaZaDijeljenje(array $kandidati, string $rezerva = 'images/showca
     $d = mmhDimenzije($rezerva);
     return ['put' => $rezerva, 'w' => $d[0] ?? 1714, 'h' => $d[1] ?? 800];
 }
+
+/**
+ * Boja oznake proizvoda (badge) prema tekstu.
+ *
+ * Sajt je crno-bijel, ali sitne oznake na karticama ("Novo", "Akcija",
+ * "Najpopularniji", "Preporučujemo") nose boju da se razlikuju na prvi pogled —
+ * kao ranije. Vraca CSS klasu koja u style-v5.css nosi boju; nepoznata oznaka
+ * ostaje crna (osnovni .product-badge).
+ */
+function mmhBadgeKlasa(string $oznaka): string
+{
+    $o = mb_strtolower(trim($oznaka), 'UTF-8');
+    if ($o === '') return '';
+    if (mb_strpos($o, 'akcij') !== false) return 'pb-akcija';       // crvena
+    if (mb_strpos($o, 'preporu') !== false) return 'pb-preporuka';  // plava
+    if (mb_strpos($o, 'popular') !== false
+        || mb_strpos($o, 'prodavan') !== false) return 'pb-popularno'; // narandzasta
+    if (mb_strpos($o, 'nov') !== false) return 'pb-novo';           // zelena
+    return '';
+}

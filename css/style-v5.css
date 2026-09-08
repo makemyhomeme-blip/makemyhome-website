@@ -878,10 +878,13 @@ ul { list-style: none; }
   z-index: 1;
 }
 
-/* Oznake su ranije imale pet boja — zelena, crvena, ljubicasta, plava,
-   narandzasta. Uz vec crveni znak popusta na istoj slici, kartica je imala tri
-   boje bez razloga. Sve oznake sada nose istu zlatnu boju sajta; razliku nosi
-   sam tekst ("Novo", "Najpopularniji", "Preporucujemo"). */
+/* Sajt je crno-bijel, ali OVE sitne oznake nose boju da se razlikuju na prvi
+   pogled (kao ranije). Bijeli tekst na obojenoj pozadini — kratke, tihe boje
+   da ne odudaraju od ostatka. Nepoznata oznaka ostaje crna (osnovni badge). */
+.product-badge.pb-novo      { background: #1e8449; color: #fff; }  /* zelena */
+.product-badge.pb-akcija    { background: #c0392b; color: #fff; }  /* crvena */
+.product-badge.pb-popularno { background: #d97706; color: #fff; }  /* narandzasta */
+.product-badge.pb-preporuka { background: #2b6cb0; color: #fff; }  /* plava */
 
 .product-body { padding: 20px; }
 
