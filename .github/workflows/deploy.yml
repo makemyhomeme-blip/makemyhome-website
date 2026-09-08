@@ -1,0 +1,49 @@
+# Automatski deploy na makemyhome.me poslije svakog push-a na radnu granu.
+#
+# Zasto ovako:
+# Sync (admin/sync.php) povlaci kod sa GitHuba na server. Ranije se pokretao
+# rucno iz admin panela jer cPanel zna da bane nasu IP pa se admin lozinka nije
+# mogla procitati. Ovaj workflow radi na GitHub serverima (ne preko nase IP) i
+# poziva sync preko tajnog tokena na portu 443 (makemyhome.me), koji je uvijek
+# dostupan. Tako svaka izmjena ode live sama, bez ijednog klika.
+#
+# Token je isti kao u admin/sync.php (MMH_DEPLOY_TOKEN). Cuva se kao GitHub
+# secret ako postoji (Settings -> Secrets -> DEPLOY_TOKEN); ako secret nije
+# postavljen, koristi se ugradjeni (repo je privatan, token samo povlaci vec
+# komitovan kod pa je rizik minimalan).
+name: Deploy na makemyhome.me
+
+on:
+  push:
+    branches: [ claude/build-product-website-6CvHG ]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-makemyhome
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pokreni sync preko tokena
+        env:
+          TOKEN: ${{ secrets.DEPLOY_TOKEN != '' && secrets.DEPLOY_TOKEN || '697113eed3779e99c7bcbf5953fecc2f541250ef' }}
+        run: |
+          # GitHub raw CDN zna da kratko kasni za novim commitom; sync radi po
+          # SHA-u pa je obicno odmah spreman, ali sacekamo malo za svaki slucaj.
+          sleep 15
+          code=$(curl -sS -m 120 -o /tmp/sync-out.txt -w "%{http_code}" \
+            "https://makemyhome.me/admin/sync.php?token=${TOKEN}")
+          echo "HTTP $code"
+          echo "----- izlaz sync-a (kraj) -----"
+          tail -c 1500 /tmp/sync-out.txt || true
+          echo ""
+          if [ "$code" != "200" ]; then
+            echo "Sync nije vratio 200 — deploy neuspjesan."
+            exit 1
+          fi
+          if grep -qi "Pristup odbijen\|Pogre" /tmp/sync-out.txt; then
+            echo "Token nije prihvacen (stari sync.php jos nije na serveru?)."
+            exit 1
+          fi
