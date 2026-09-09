@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=7088568a">
+  <link rel="stylesheet" href="css/style-v5.css?v=276f34e3">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -869,11 +869,11 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <div style="background:#fdf3f2;border:1px solid rgba(192,57,43,.3);border-radius:14px;padding:16px 18px;color:#8a3a30;font-size:14.5px;line-height:1.65;">
               Ovaj model je trenutno rasprodat. Javite nam se — reći ćemo vam kada stiže ili predložiti najbliži model koji imamo.
             </div>
-            <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#1a1a1a;color:#ffffff;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
+            <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#1f9d63;color:#ffffff;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
               <i class="fas fa-phone" style="font-size:17px;"></i><span>069 105 222</span>
             </a>
             <?php else: ?>
-            <button onclick="addProductToCartById(<?= (int)($product['id'] ?? 0) ?>, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#1a1a1a;color:#ffffff;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;">
+            <button onclick="addProductToCartById(<?= (int)($product['id'] ?? 0) ?>, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#c15a33;color:#ffffff;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;">
               <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
               <span>Dodaj u Korpu</span>
             </button>
