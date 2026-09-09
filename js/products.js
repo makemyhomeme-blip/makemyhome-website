@@ -1049,10 +1049,10 @@ async function renderProductDetail() {
       const total = Math.ceil(area / coveragePerUnit);
       const totalCost = (total * unitPrice).toFixed(2).replace('.', ',');
       const label = total === 1 ? 'letvica' : total < 5 ? 'letvice' : 'letvica';
-      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${total} ${label}</strong> (~${totalCost} €)`;
+      res.innerHTML = `Zid ${w}×${h}m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → <strong>${total} ${label}</strong> ≈ <strong>${totalCost} €</strong>`;
     } else {
       const label = product.unit === 'm²' ? 'm²' : count === 1 ? 'komad' : 'komada';
-      res.innerHTML = `Za zid ${w} × ${h} m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → trebaš <strong>${count} ${label}</strong> (~${totalPrice} €)`;
+      res.innerHTML = `Zid ${w}×${h}m = <strong>${area.toFixed(1).replace('.',',')} m²</strong> → <strong>${count} ${label}</strong> ≈ <strong>${totalPrice} €</strong>`;
     }
   };
 

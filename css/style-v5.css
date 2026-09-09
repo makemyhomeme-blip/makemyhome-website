@@ -2122,7 +2122,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   line-height: 1.6;
   text-align: center;
 }
-.calc-result strong { color: var(--primary); font-size: 18px; }
+.calc-result strong { color: #ffffff; font-size: 15px; }
 
 /* Traka .product-trust-row je uklonjena sa stranice proizvoda — ponavljala
    je dostavu, placanje i montazu koje pise u bocnom bloku odmah ispod. */
@@ -2435,7 +2435,14 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   align-items: center;
   justify-content: center;
 }
-.pq-calc-result strong { color: var(--primary); font-size: 17px; }
+.pq-calc-result strong { color: #ffffff; font-size: 14px; }
+/* Rezultat kalkulatora u JEDNOM redu — na uskim ekranima font se smanji da
+   ne pada u dva reda. clamp drzi da bude citljivo a da stane. */
+.pq-calc-result, .calc-result { white-space: nowrap; }
+@media (max-width: 560px) {
+  .pq-calc-result, .calc-result { font-size: clamp(10px, 3.1vw, 13px); padding: 12px 10px; }
+  .pq-calc-result strong, .calc-result strong { font-size: clamp(10.5px, 3.3vw, 14px); }
+}
 
 /* Spec accordion */
 .spec-accordion {
