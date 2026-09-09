@@ -1096,20 +1096,28 @@ ul { list-style: none; }
 .why-icon {
   width: 60px;
   height: 60px;
-  background: rgba(0,0,0,0.1);
+  background: #5b7f92;
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 26px;
-  color: var(--primary);
+  color: #ffffff;
   margin-bottom: 20px;
-  transition: var(--transition);
+  transition: transform .25s ease, filter .25s ease;
 }
 
+/* Suptilni, prirodni tonovi na ikonicama "Zasto izabrati" — sajt ostaje
+   crno-bijel, ali ovaj red dobija malo topline da se slaze sa slikama drveta
+   i kamena (a ne da bude ispran). Bijela ikona na obojenoj podlozi. */
+.why-card:nth-child(1) .why-icon { background: #a86a4d; }  /* terakota */
+.why-card:nth-child(2) .why-icon { background: #6f8f6a; }  /* zelenkasta (sage) */
+.why-card:nth-child(3) .why-icon { background: #5b7f92; }  /* prasnjavo plava */
+.why-card:nth-child(4) .why-icon { background: #9c5544; }  /* rdja (rust) */
+
 .why-card:hover .why-icon {
-  background: var(--primary);
-  color: #ffffff;
+  transform: scale(1.06);
+  filter: brightness(1.08);
 }
 
 .why-card h3 {
