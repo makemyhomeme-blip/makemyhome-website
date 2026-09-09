@@ -345,6 +345,92 @@ arsort($insKat);
   </div>
 </section>
 
+<?php
+/* ===== KOMBINACIJE PANELA (shop the look) =====
+   Slika prostora sa DVA panela + kartice oba proizvoda (ime, sifra, cijena,
+   link). Podaci u data/kombinacije.json; proizvodi se povlace iz products.json
+   po sifri, pa cijene/imena uvijek prate admin. */
+$kombiPut = __DIR__ . '/data/kombinacije.json';
+$kombinacije = is_file($kombiPut) ? (json_decode(@file_get_contents($kombiPut), true) ?: []) : [];
+$poSku = [];
+foreach ($insP as $pp) { if (!empty($pp['sku'])) $poSku[$pp['sku']] = $pp; }
+$kombiZaPrikaz = [];
+foreach ($kombinacije as $kb) {
+    $prods = [];
+    foreach (($kb['proizvodi'] ?? []) as $sk) { if (isset($poSku[$sk])) $prods[] = $poSku[$sk]; }
+    if (count($prods) >= 2) { $kb['_prods'] = $prods; $kombiZaPrikaz[] = $kb; }
+}
+if ($kombiZaPrikaz):
+?>
+<style>
+  .kombi-sekcija { padding: 6px 0 4px; }
+  .kombi-kartica { display: grid; grid-template-columns: 1fr; gap: 0; max-width: 920px; margin: 20px auto 0; background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 12px 34px rgba(0,0,0,0.12); }
+  @media(min-width:820px){ .kombi-kartica{ grid-template-columns: 1.05fr 1fr; } }
+  .kombi-slika { position:relative; line-height:0; }
+  .kombi-slika img { width:100%; height:100%; object-fit:cover; display:block; aspect-ratio: 5/6; }
+  @media(min-width:820px){ .kombi-slika img{ aspect-ratio:auto; min-height:100%; } }
+  .kombi-prostor { position:absolute; top:14px; left:14px; background:rgba(0,0,0,0.55); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); color:#fff; font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:6px 12px; border-radius:999px; }
+  .kombi-info { padding: 22px 22px 24px; display:flex; flex-direction:column; justify-content:center; }
+  .kombi-naslov { font-size:21px; font-weight:800; color:#1a1a1a; margin:0; line-height:1.22; letter-spacing:-0.2px; }
+  .kombi-oznaka { font-size:11.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--akcenat,#c15a33); margin:12px 0 12px; }
+  .kombi-proizvodi { display:flex; flex-direction:column; gap:12px; }
+  .kombi-proizvod { display:flex; align-items:center; gap:14px; padding:10px 12px 10px 10px; border:1.5px solid rgba(0,0,0,0.10); border-radius:14px; text-decoration:none; color:inherit; transition:border-color .2s, transform .2s, box-shadow .2s; }
+  .kombi-proizvod:hover { border-color:var(--akcenat,#c15a33); transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,0.09); }
+  .kombi-proizvod img { width:62px; height:62px; object-fit:cover; border-radius:10px; flex-shrink:0; }
+  .kombi-proizvod-txt { flex:1; min-width:0; }
+  .kombi-proizvod-ime { font-size:15px; font-weight:800; color:#1a1a1a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kombi-proizvod-sifra { font-size:12px; color:#6a6a6a; margin-top:1px; }
+  .kombi-proizvod-cijena { font-size:14px; font-weight:800; color:#1a1a1a; margin-top:3px; }
+  .kombi-proizvod-cijena span { font-weight:600; color:#6a6a6a; font-size:12px; }
+  .kombi-proizvod > i { color:var(--akcenat,#c15a33); font-size:13px; flex-shrink:0; transition:transform .2s; }
+  .kombi-proizvod:hover > i { transform:translateX(4px); }
+</style>
+<section class="insp-wrap kombi-sekcija">
+  <div class="container">
+    <div class="text-center">
+      <div class="gold-line" style="margin-left:auto;margin-right:auto;"></div>
+      <h2 class="section-title" style="margin-bottom:8px;">Kombinacije panela</h2>
+      <p class="section-subtitle" style="margin:0 auto 4px;">Dva panela u istom prostoru — kliknite da vidite svaki.</p>
+    </div>
+    <?php foreach ($kombiZaPrikaz as $kb):
+      $slika = $kb['slika'] ?? '';
+      $webp  = preg_replace('/\.(jpe?g|png)$/i', '.webp', $slika);
+    ?>
+    <div class="kombi-kartica">
+      <div class="kombi-slika">
+        <picture>
+          <source srcset="<?= htmlspecialchars($webp) ?>" type="image/webp">
+          <img src="<?= htmlspecialchars($slika) ?>" alt="<?= htmlspecialchars($kb['naslov'] ?? 'Kombinacija panela') ?> – Make My Home Decor" loading="lazy"<?= mmhDimAtributi($slika) ?>>
+        </picture>
+        <?php if (!empty($kb['prostor'])): ?><span class="kombi-prostor"><?= htmlspecialchars($kb['prostor']) ?></span><?php endif; ?>
+      </div>
+      <div class="kombi-info">
+        <?php if (!empty($kb['naslov'])): ?><h3 class="kombi-naslov"><?= htmlspecialchars($kb['naslov']) ?></h3><?php endif; ?>
+        <div class="kombi-oznaka">&#9632;&nbsp; U ovoj kombinaciji</div>
+        <div class="kombi-proizvodi">
+          <?php foreach ($kb['_prods'] as $pr):
+            $url = mmhUrlProizvoda($pr);
+            $cijena = isset($pr['price']) ? number_format((float)$pr['price'], 2, ',', '.') : '';
+            $jed = $pr['unit'] ?? 'kom';
+          ?>
+          <a href="<?= htmlspecialchars($url) ?>" class="kombi-proizvod">
+            <img src="<?= htmlspecialchars(mmhThumb($pr['image'] ?? '')) ?>" alt="<?= htmlspecialchars($pr['name'] ?? '') ?>" loading="lazy">
+            <div class="kombi-proizvod-txt">
+              <div class="kombi-proizvod-ime"><?= htmlspecialchars($pr['name'] ?? '') ?></div>
+              <div class="kombi-proizvod-sifra">Šifra: <?= htmlspecialchars($pr['sku'] ?? '') ?></div>
+              <div class="kombi-proizvod-cijena"><?= $cijena ?> € <span>/ <?= htmlspecialchars($jed) ?></span></div>
+            </div>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+    <?php endforeach; ?>
+  </div>
+</section>
+<?php endif; ?>
+
 <section class="insp-wrap">
   <div class="container">
 

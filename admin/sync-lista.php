@@ -100,6 +100,10 @@ return function (string $base, string $root, string $adminDir): array {
     // ili WhatsAppu. Ranije je tamo isla fotografija sobe sa pocetne, pa se
     // umjesto firme vidjela soba.
     $root . '/images/og-dijeljenje.jpg' => $base . '/images/og-dijeljenje.jpg',
+    // Kombinacije panela (shop the look) — slike prostora sa dva panela + podaci.
+    $root . '/data/kombinacije.json' => $base . '/data/kombinacije.json',
+    $root . '/images/kombinacije/spavaca-mermer-orah.jpg'  => $base . '/images/kombinacije/spavaca-mermer-orah.jpg',
+    $root . '/images/kombinacije/spavaca-mermer-orah.webp' => $base . '/images/kombinacije/spavaca-mermer-orah.webp',
     // Karte boja: dva PDF-a koja se preuzimaju sa Decor Box stranice, i dvije
     // slicice sastavljene od stvarnih dezena iz tih karata. Odjeljak na
     // decor-box.php se ispisuje samo ako PDF postoji na disku, pa PDF-ovi
