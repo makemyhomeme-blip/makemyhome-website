@@ -2196,6 +2196,37 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   font-size: 12.5px;
   color: var(--gray);
 }
+/* Slike prostora (kombinacija) u par-sekciji — vode na partnera */
+.pair-lifestyle {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 4px;
+}
+.pair-ls-foto {
+  position: relative;
+  display: block;
+  flex: 1 1 260px;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  text-decoration: none;
+}
+.pair-ls-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.pair-ls-foto:hover img { transform: scale(1.06); }
+.pair-ls-foto::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 55%);
+}
+.pair-ls-oznaka {
+  position: absolute; left: 12px; bottom: 11px; z-index: 2;
+  color: #fff; font-size: 12.5px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 6px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+.pair-ls-oznaka i { font-size: 12px; }
+
 .pair-cards-row {
   display: flex;
   gap: 12px;

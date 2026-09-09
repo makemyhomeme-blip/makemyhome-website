@@ -419,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=7c894dd6">
+  <link rel="stylesheet" href="css/style-v5.css?v=50df79b5">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -743,6 +743,34 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <div class="matching-pair-title"><i class="fas fa-link"></i> <?= htmlspecialchars($mmhNaslov) ?></div>
             <div class="matching-pair-subtitle"><?= htmlspecialchars($mmhPodnas) ?></div>
           </div>
+          <?php
+          /* Slike prostora iz galerije PARTNERA — pokazuju kombinaciju baš na
+             ovoj strani. Npr. letvica najcesce nema svoje sobne slike, ali njen
+             panel iste nijanse ima — pa se tu vide sobe sa oba. Kad vlasnik
+             okaci kombinacijsku sliku na galeriju JEDNOG proizvoda para, ona
+             se sama pojavi i na drugom (svoje slike su vec u glavnoj galeriji). */
+          $mmhKombiSlike = [];
+          foreach ($mmhPartneri as $pp2) {
+              $lnk = mmhUrlProizvoda($pp2);
+              foreach (($pp2['gallery'] ?? []) as $g) { if ($g && !isset($mmhKombiSlike[$g])) $mmhKombiSlike[$g] = $lnk; }
+          }
+          $mmhKombiSlike = array_slice($mmhKombiSlike, 0, 2, true);
+          if ($mmhKombiSlike):
+          ?>
+          <div class="pair-lifestyle">
+            <?php foreach ($mmhKombiSlike as $mmhLsSlika => $mmhLsLink):
+              $mmhLsWebp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $mmhLsSlika);
+            ?>
+            <a href="<?= htmlspecialchars($mmhLsLink) ?>" class="pair-ls-foto">
+              <picture>
+                <source srcset="<?= htmlspecialchars($mmhLsWebp) ?>" type="image/webp">
+                <img src="<?= htmlspecialchars(mmhThumb($mmhLsSlika)) ?>" alt="Kombinacija u prostoru – <?= htmlspecialchars($product['name'] ?? '') ?> | Make My Home Decor" loading="lazy"<?= mmhDimAtributi($mmhLsSlika) ?>>
+              </picture>
+              <span class="pair-ls-oznaka"><i class="fas fa-eye"></i> Pogledaj kombinaciju</span>
+            </a>
+            <?php endforeach; ?>
+          </div>
+          <?php endif; ?>
           <div class="pair-cards-row">
             <?php foreach ($mmhPartneri as $pp):
               /* Cijena je ONA KOJU KUPAC PLACA. JavaScript je ovdje ispisivao punu
