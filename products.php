@@ -465,25 +465,24 @@ echo "\n</script>\n";
       gap: 22px;
       padding: 32px 0;
     }
+    /* Moderne plocice: naslov/broj/strelica PREKO slike, kao na pocetnoj. */
     .cat-card {
-      background: #fff;
-      border-radius: 18px;
+      position: relative;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-      border: 1px solid #f0f0f0;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.10);
       text-decoration: none;
       color: inherit;
-      transition: transform 0.25s, box-shadow 0.25s;
-      display: flex;
-      flex-direction: column;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      display: block;
       cursor: pointer;
     }
     .cat-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 44px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.22);
     }
     .cat-card-img {
-      height: 195px;
+      aspect-ratio: 4 / 3;
       position: relative;
       overflow: hidden;
       background: #f3f3f3;
@@ -497,33 +496,37 @@ echo "\n</script>\n";
       object-fit: cover;
       transition: transform 0.45s;
     }
-    .cat-card:hover .cat-card-img img { transform: scale(1.06); }
+    .cat-card:hover .cat-card-img img { transform: scale(1.07); }
     .cat-card-img > i { font-size: 46px; color: #1a1a1a; opacity: 0.45; }
+    .cat-card-img::after {
+      content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.36) 34%, rgba(0,0,0,0) 64%);
+    }
     .cat-card-icon {
-      position: absolute; bottom: 12px; left: 12px;
-      width: 42px; height: 42px; border-radius: 12px;
+      position: absolute; top: 12px; left: 12px; z-index: 3;
+      width: 40px; height: 40px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 18px;
+      color: #fff; font-size: 17px;
+      background: rgba(0,0,0,0.5) !important;
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
       box-shadow: 0 4px 14px rgba(0,0,0,0.28);
     }
     .cat-card-body {
-      padding: 15px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+      padding: 18px 18px 16px;
+      display: flex; flex-direction: column; gap: 8px;
     }
-    .cat-card-info { flex: 1; }
-    .cat-card-info h2 { font-size: 18px; font-weight: 800; margin-bottom: 5px; color: #1a1a1a; letter-spacing: -0.2px; }
-    .cat-card-info p  { font-size: 13px; color: #6a6a6a; margin: 0 0 14px; line-height: 1.5; }
+    .cat-card-info h2 { font-size: 20px; font-weight: 800; margin: 0; color: #fff; letter-spacing: -0.2px; text-shadow: 0 2px 10px rgba(0,0,0,0.45); }
+    .cat-card-info p  { display: none; }
     .cat-card-foot {
       display: flex; align-items: center; justify-content: space-between;
-      padding-top: 12px; border-top: 1px solid #f1f1f1;
+      padding-top: 0; border-top: none;
     }
-    .cat-card-count { font-size: 12.5px; font-weight: 700; color: #1a1a1a; }
-    .cat-card-go { font-size: 13px; font-weight: 700; color: #1a1a1a; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .cat-card-count { font-size: 12.5px; font-weight: 700; color: rgba(255,255,255,0.88); }
+    .cat-card-go { font-size: 13px; font-weight: 700; color: #fff; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
     .cat-card-go i { font-size: 11px; transition: transform 0.2s; }
     .cat-card:hover .cat-card-go i { transform: translateX(4px); }
-    @media (max-width: 768px) { .cat-card-img { height: 185px; } }
+    @media (max-width: 768px) { .cat-card-img { aspect-ratio: 16 / 10; } }
     /* ===== BACK BAR ===== */
     .back-bar {
       display: flex; align-items: center; gap: 16px;
