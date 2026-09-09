@@ -459,15 +459,20 @@ ul { list-style: none; }
   display: block;
 }
 
-.nav-cta {
-  background: var(--primary);
+/* Kontakt — zelena (kao poziv/WhatsApp), da se izdvoji kao kontakt akcija.
+   !important jer .nav-link.active (siva) inace prebije zelenu na kontakt strani. */
+.nav-cta,
+.nav-cta.active,
+.nav-cta:focus {
+  background: var(--poziv) !important;
   color: #ffffff !important;
   padding: 10px 22px !important;
   font-weight: 600;
+  border-radius: 8px;
 }
 
 .nav-cta:hover {
-  background: var(--primary-dark) !important;
+  background: var(--poziv-hover) !important;
   color: #ffffff !important;
   transform: translateY(-1px);
 }
@@ -1918,13 +1923,20 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 @media (max-width: 768px) {
   .nav-menu {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 75px;
     left: 0;
     right: 0;
+    /* Meni se sam skroluje do dna (Kontakt) na SVIM stranicama — ranije je bio
+       absolute pa se na kratkim stranicama nije moglo doskrolati do dna. */
+    max-height: calc(100vh - 75px);
+    max-height: calc(100dvh - 75px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     background: var(--dark);
     flex-direction: column;
-    padding: 14px 20px 20px;
+    padding: 14px 20px 28px;
     gap: 0;
     border-top: 1px solid rgba(255,255,255,0.1);
   }
