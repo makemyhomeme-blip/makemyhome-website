@@ -2842,14 +2842,14 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 /* ===== Dugmad unutar info stranica =====
    .info-wrap a { color:#1a1a1a } je specificnije od .btn-gold pa je zlatnom dugmetu
    davalo zlatan tekst — dugme je izgledalo prazno. Ovdje vracamo boje dugmadi. */
-/* Bijelo na zlatnom daje kontrast 2,26 — a na ovom dugmetu stoji broj telefona.
-   Tamni tekst na zlatnom daje 8,9 i ostaje u paleti sajta (zlatna + tamna). */
-.info-wrap .btn-gold { color: #1a1a1a; font-weight: 700; }
-.info-wrap .btn-gold:hover { color: #1a1a1a; }
+/* btn-gold je sada CRNO dugme (ne zlatno) — tekst mora biti BIJEL, inace je
+   crno na crnom (broj telefona se nije vidio, dugme je izgledalo prazno). */
+.info-wrap .btn-gold { color: #ffffff; font-weight: 700; }
+.info-wrap .btn-gold:hover { color: #ffffff; }
 .info-wrap .btn-outline { color: #1a1a1a; border-color: rgba(26,26,26,.28); }
 .info-wrap .btn-outline:hover { color: #000000; border-color: #1a1a1a; background: transparent; }
 /* na tamnoj pozadini vodica ostaju svijetla */
-.info-wrap .vodic-cta .btn-gold { color: #1a1a1a; }
+.info-wrap .vodic-cta .btn-gold { color: #ffffff; }
 .info-wrap .vodic-cta .btn-outline { color: #ece9e2; border-color: rgba(255,255,255,.35); }
 .info-wrap .vodic-cta .btn-outline:hover { color: #1a1a1a; border-color: #1a1a1a; }
 
@@ -2924,7 +2924,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .insp-cta p { margin: 0 auto 22px; color: #5a6672; max-width: 52ch; line-height: 1.7; }
 .insp-cta-dugmad { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .insp-cta .btn { margin: 0; }
-.insp-cta .btn-gold { color: #1a1a1a; font-weight: 700; }
+.insp-cta .btn-gold { color: #ffffff; font-weight: 700; }
 /* Kutija je svijetla, pa obrisana dugmad moraju biti tamna — bijela su se gubila u pozadini */
 .insp-cta .btn-outline { color: #1a1a1a; border-color: rgba(26,26,26,.3); background: #fff; font-weight: 700; }
 .insp-cta .btn-outline:hover { color: #000000; border-color: #1a1a1a; background: #fff; }
