@@ -2928,8 +2928,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
    Multi-column je punio prvu kolonu do kraja pa drugu, pa se u prvom redu
    pojavljivala fotografija broj 1 i fotografija broj 46 — najnovije se nisu
    vidjele na vrhu, a slike ispod ekrana su se svejedno ucitavale. */
-.insp-grid { display: flex; align-items: flex-start; gap: 18px; }
-.insp-kol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.insp-grid { display: flex; align-items: flex-start; gap: 12px; }
+.insp-kol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
 /* Filter na Inspiraciji sakriva fotografije preko `element.hidden = true`.
    Pregledac to sprovodi pravilom `[hidden]{display:none}` iz svog podrazumijevanog
    stila — a ono ima manju tezinu od bilo kog naseg pravila sa klasom. Posto
@@ -3006,7 +3006,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .insp-select-wrap { display: block; }
 }
 @media (max-width: 640px) {
-  .insp-grid, .insp-kol { gap: 12px; }
+  /* Krupnije slike na telefonu: manji bocni razmak (skoro do ivice) + tijesni gap */
+  .insp-wrap > .container { padding: 0 12px; }
+  .insp-grid, .insp-kol { gap: 8px; }
   .insp-kart { border-radius: 13px; }
   .insp-kart:hover { transform: none; }
   .insp-info { padding: 32px 12px 11px; }
@@ -3019,10 +3021,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 /* Oznaka "novo" na svježe dodatoj fotografiji */
 .insp-novo {
-  position: absolute; top: 10px; left: 10px; z-index: 2;
-  background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 800;
-  letter-spacing: .06em; text-transform: uppercase;
-  padding: 4px 9px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  position: absolute; top: 9px; left: 9px; z-index: 2;
+  background: var(--akcenat); color: #fff; font-size: 9.5px; font-weight: 800;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.3);
 }
 /* Oznaka da fotografija prikazuje kombinaciju dva panela */
 .insp-kombi {
