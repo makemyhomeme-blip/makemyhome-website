@@ -52,12 +52,32 @@ function backupData($file) {
     @copy($file, $dest);
 }
 
+/**
+ * Regenerise staticki /sitemap.xml poslije izmjene proizvoda ili kategorija.
+ *
+ * Sitemap se od sada servira kao gotov staticki fajl (Apache, brzo) umjesto
+ * da ga PHP pravi pri svakom zahtjevu — to je rijesilo "Sitemap: Temporary
+ * processing error" u Search Console-u. Zbog toga fajl vise nije "uvijek svjez"
+ * sam od sebe: mora ga neko regenerisati kad se sadrzaj promijeni. Cron/sync
+ * to rade svakih par minuta, a ovdje ga osvjezavamo ODMAH cim vlasnik nesto
+ * sacuva u adminu, pa se izmjena vidi u sitemapu bez cekanja.
+ */
+function mmhOsvjeziSitemap(): void {
+    $sitemapPhp = __DIR__ . '/../sitemap.php';
+    if (!is_file($sitemapPhp)) return;
+    if (!defined('MMH_SITEMAP_LIB')) define('MMH_SITEMAP_LIB', 1);
+    require_once $sitemapPhp;
+    if (function_exists('mmhSitemapUpisiStaticki')) @mmhSitemapUpisiStaticki();
+}
+
 function saveProducts($products, $file) {
     backupData($file);
     $json = json_encode(array_values($products), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     $tmp  = $file . '.tmp';
     if (file_put_contents($tmp, $json, LOCK_EX) === false) return false;
-    return rename($tmp, $file);
+    $ok = rename($tmp, $file);
+    if ($ok) mmhOsvjeziSitemap();
+    return $ok;
 }
 
 function saveCategories($cats, $file) {
@@ -65,7 +85,9 @@ function saveCategories($cats, $file) {
     $json = json_encode(array_values($cats), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     $tmp  = $file . '.tmp';
     if (file_put_contents($tmp, $json, LOCK_EX) === false) return false;
-    return rename($tmp, $file);
+    $ok = rename($tmp, $file);
+    if ($ok) mmhOsvjeziSitemap();
+    return $ok;
 }
 
 /**
