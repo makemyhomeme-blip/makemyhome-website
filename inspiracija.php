@@ -86,14 +86,10 @@ for ($i = 1; $i < $n; $i++) {
     }
 }
 
-// Kombinacije idu NA VRH galerije — najzanimljivije su, pa se odmah vide
-// (ranije su znale zavrsiti na dnu, pa ih posjetilac ne primijeti). usort je
-// stabilan u PHP 8, pa ostatak zadrzava svoj redoslijed.
-if ($mmhKombiFoto) {
-    usort($insSlike, function ($a, $b) use ($mmhKombiFoto) {
-        return (isset($mmhKombiFoto[$b['src']]) ? 1 : 0) <=> (isset($mmhKombiFoto[$a['src']]) ? 1 : 0);
-    });
-}
+// Kombinacije se prikazuju na svom PRIRODNOM mjestu u galeriji (redom po
+// vremenu uploada, kao i sve ostalo) — ne guraju se na vrh. Ranije su bile
+// prikvacene na vrh, pa je ista kombinacija stalno stajala prva; to vise nije
+// slucaj. I dalje su jasno oznacene ("Kombinacija" + cipovi panela na slici).
 
 // Oznaku "novo" nosi sve iz posljednje tri sedmice. Racuna se od najnovije fotografije,
 // ne od danasnjeg datuma — da oznaka ne nestane ako se par sedmica nista ne doda.

@@ -55,3 +55,7 @@ alat/tmp-*
 # Datumi izmjene po proizvodu — pravi ih SAM SERVER iz svojih podataka.
 # Sa lokalnog se ne salje, inace bi datumi skocili na stanje razvojne masine.
 data/lastmod.json
+
+# Kes md5 otisaka galerijskih slika (prepoznavanje kombinacija po istom fajlu).
+# Pravi ga SAM SERVER iz slika na disku; lokalno slika nema pa nema ni kesa.
+data/kombi-hash-kes.json
