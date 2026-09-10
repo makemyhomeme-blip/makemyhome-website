@@ -172,6 +172,24 @@ if ($allOk) {
     echo $isCli ? "$msg\n" : "<span style='color:#e74c3c;'>$msg</span>\n";
 }
 
+// --- Regeneracija statickog sitemap.xml ----------------------------------
+// Sitemap se od sada servira kao gotov STATICKI fajl (Apache ga daje za ~50 ms)
+// umjesto da ga PHP pravi pri svakom Googlebot zahtjevu (1-2,5 s -> Google
+// prijavi "Sitemap: Temporary processing error"). Da fajl ostane tacan kad
+// vlasnik doda proizvod ili se promijeni sadrzaj, regenerise se na kraju SVAKOG
+// sync-a — a sync ide i preko cron-a svakih par minuta. Upisuje se samo ako se
+// sadrzaj stvarno promijenio, pa Last-Modified fajla ostaje stabilan.
+$sitemapPhp = $root . '/sitemap.php';
+if (is_file($sitemapPhp)) {
+    if (!defined('MMH_SITEMAP_LIB')) define('MMH_SITEMAP_LIB', 1);
+    require $sitemapPhp;
+    if (function_exists('mmhSitemapUpisiStaticki')) {
+        $smPromjena = mmhSitemapUpisiStaticki();
+        $msg = 'sitemap.xml: ' . ($smPromjena ? 'regenerisan' : 'nepromijenjen');
+        echo $isCli ? "$msg\n" : "<span style='color:#7f8c8d;'>$msg</span>\n";
+    }
+}
+
 if (!$isCli) {
     echo "\n<a href='../' style='color:#c9a86c;'>&rarr; Otvori sajt</a>  ";
     echo "<a href='dashboard.php' style='color:#c9a86c;margin-left:20px;'>&rarr; Admin panel</a>\n";

@@ -10,6 +10,11 @@ data/hero-slides.json
 # Kes sitemapa — pravi ga server, ne drzi se u gitu
 data/sitemap-kes.xml
 data/sitemap-kes.xml.tmp
+# Staticki sitemap — pravi ga SAM SERVER (sitemap.php) iz svojih podataka i
+# servira ga Apache direktno. Ne drzi se u gitu ni u sync-listi: kad bi se
+# slao sa lokalnog, svaki sync bi ga prepisao zastarjelom verzijom.
+sitemap.xml
+sitemap.xml.tmp
 
 # Uploads managed on server
 images/categories/

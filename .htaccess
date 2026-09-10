@@ -248,6 +248,14 @@ RewriteRule ^inspiracija\.html$ inspiracija.php [QSA,L]
 RewriteRule ^decor-box\.html$ decor-box.php [QSA,L]
 # Sitemap se pravi iz podataka (sa slikama), pa je uvijek tacan i kad se doda
 # nov proizvod ili nova fotografija. Adresa ostaje /sitemap.xml.
+#
+# Kad na disku POSTOJI gotov staticki /sitemap.xml (sitemap.php ga upisuje pri
+# svakom sync-u/cron-u), Apache ga servira direktno za ~50 ms — bez PHP-a. To
+# je rijesilo "Sitemap: Temporary processing error": dinamicki sitemap se pravio
+# 1-2,5 s pri svakom Googlebot zahtjevu i pod opterecenjem prelazio Google-ov
+# timeout. Na sitemap.php se pada SAMO ako statickog fajla (jos) nema — tada ga
+# PHP napravi, upise za sljedeci put i posluzi.
+RewriteCond %{DOCUMENT_ROOT}/sitemap.xml !-f
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
 # Isti spisak je bio dostupan i na /sitemap.php — dvije adrese za isti sitemap.
 # Nista ga ne linkuje i nije u robots.txt, ali Google ne treba da nadje dvije

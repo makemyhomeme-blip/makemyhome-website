@@ -8,128 +8,26 @@
  * panela i soba prakticno ne postoji za pretragu slika. Za prodavnicu obloga
  * to je citav jedan kanal koji je stajao zatvoren.
  *
- * Zasto PHP a ne fajl:
- * Vlasnik dodaje proizvode i fotografije kroz admin. Fajl bi zastario cim se
- * doda nova soba, a niko se ne bi sjetio da ga osvjezi. Ovako je sitemap
- * uvijek tacan — pravi se iz istih podataka iz kojih se pravi i sajt.
+ * Zasto se ipak servira STATICKI fajl a ne PHP:
+ * Sitemap se pravi iz podataka (products.json, kategorije, slike) da bi uvijek
+ * bio tacan kad vlasnik doda proizvod. Ali PRAVITI ga pri svakom zahtjevu je
+ * skupo (citanje 383 kB JSON-a, obrada 117 proizvoda, ispis ~450 slika —
+ * 1 do 2,5 sekunde). Google-ov obradjivac sitemapa ima kratak timeout; kad mu
+ * odgovor zakasni prijavi "Sitemap: Temporary processing error" i ne procita
+ * spisak. Na dijeljenom hostingu, pod opterecenjem, to se desavalo iznova.
  *
- * Servira se na adresi /sitemap.xml (pravilo u .htaccess), pa se za Google
- * nista nije promijenilo.
+ * Zato se gotov XML upisuje u PRAVI staticki fajl /sitemap.xml, koji Apache
+ * servira za ~50 ms bez ijednog reda PHP-a. Fajl se regenerise pri svakom
+ * sync-u/deployu (admin/sync.php ga pozove na kraju) i preko cron-a svakih par
+ * minuta, pa je uvijek tacan. .htaccess servira taj staticki fajl kad postoji,
+ * a pada na ovaj PHP samo ako ga (jos) nema — tada ga PHP napravi, upise za
+ * sljedeci put, i posluzi.
+ *
+ * Fajl /sitemap.xml pravi SAM SERVER i NE salje se sa lokalnog (nije u repou
+ * ni u sync-listi) — inace bi ga svaki sync prepisao zastarjelom verzijom.
  */
 require_once __DIR__ . '/php/slug.php';
-// php/dimenzije.php se OVDJE ne koristi — bio je ucitavan bez potrebe i uz
-// njega i kes dimenzija slika od 10 kB, pri svakom zahtjevu za sitemapom.
-
-// ---- Kes ----------------------------------------------------------------
-// Google je u Search Console-u za dvije adrese javio "Sitemap: Temporary
-// processing error". Sitemap se do sada pravio IZNOVA pri svakom zahtjevu:
-// citanje products.json od 383 kB, obrada 117 proizvoda i ispis 447 slika,
-// 0,6 do 1,5 sekunde. Za Googlebot je to nepotreban rizik — ako mu odgovor
-// zakasni, prijavi gresku i ne procita spisak.
-//
-// Sada se gotov XML cuva u fajlu i sluzi se odatle. Ponovo se pravi samo kad
-// se promijeni nesto od cega zavisi: podaci o proizvodima, kategorije ili sam
-// ovaj fajl. Sadrzaj je isti do znaka, samo stize odmah.
-$kesFajl = __DIR__ . '/data/sitemap-kes.xml';
-
-// Spisak SVEGA od cega zavisi bilo koji datum u sitemapu.
-//
-// Ranije su ovdje bila samo cetiri fajla: dva sa podacima, slug.php i ovaj
-// fajl. To je bilo premalo. Datum izmjene svake stranice racuna se i iz njenog
-// HTML-a odnosno PHP-a (about.html, decor-box.php, product.php…), pa bi
-// izmjena teksta na stranici promijenila njen lastmod — a kes se ne bi
-// osvjezio i sitemap bi i dalje javljao stari datum. Google po lastmod-u
-// odlucuje kad ce ponovo doci; stari datum znaci da ne dolazi.
-//
-// Zato spisak mora biti isti onaj iz kog se datumi i racunaju. Drzi se na
-// jednom mjestu da se ne mogu razici.
-$mmhStatika = [
-    ['products.html', 'weekly', '0.9'], ['cjenovnik.html', 'weekly', '0.9'],
-    ['inspiracija.html', 'weekly', '0.9'], ['montaza.html', 'weekly', '0.7'],
-    ['faq.html', 'weekly', '0.7'], ['about.html', 'weekly', '0.7'],
-    ['contact.html', 'weekly', '0.7'], ['decor-box.html', 'weekly', '0.7'],
-    ['paneli-za-kupatilo.html', 'weekly', '0.7'], ['tv-zid.html', 'weekly', '0.7'], ['spc-ili-laminat.html', 'weekly', '0.7'],
-    ['akusticni-paneli-kancelarija.html', 'weekly', '0.7'], ['dostava-crna-gora.html', 'weekly', '0.7'],
-    ['blog.html', 'weekly', '0.7'],
-    ['dekorativni-zidni-paneli-vodic.html', 'weekly', '0.7'], ['kako-izabrati-panele-po-prostoriji.html', 'weekly', '0.7'],
-    ['pu-kamen-izgled-kamena.html', 'weekly', '0.7'], ['koliko-kostaju-zidni-paneli.html', 'weekly', '0.7'],
-    ['uslovi.html', 'weekly', '0.7'], ['reklamacije.html', 'weekly', '0.7'],
-    ['privatnost.html', 'weekly', '0.7'],
-];
-$izvori = array_merge(
-    ['data/products.json', 'data/categories.json', 'php/slug.php', 'sitemap.php',
-     'index.html', 'pocetna.php', 'product.php', 'products.php', 'data/lastmod.json', 'php/lastmod.php',
-     'inspiracija.php', 'cjenovnik.php', 'decor-box.php', 'data/decor-box-style.json'],
-    array_column($mmhStatika, 0)
-);
-$najnoviji = 0;
-foreach ($izvori as $f) {
-    $t = @filemtime(__DIR__ . '/' . $f);
-    if ($t && $t > $najnoviji) $najnoviji = $t;
-}
-
-header('Content-Type: application/xml; charset=utf-8');
-header('Cache-Control: public, max-age=0, must-revalidate');
-if ($najnoviji) header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $najnoviji) . ' GMT');
-
-if (is_file($kesFajl) && filemtime($kesFajl) >= $najnoviji && filesize($kesFajl) > 1000) {
-    readfile($kesFajl);
-    exit;
-}
-
-$BAZA = 'https://makemyhome.me';
-$P = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
-if (isset($P['products'])) $P = $P['products'];
-
-// Datum izmjene po POJEDINOM proizvodu — vidi php/lastmod.php.
-// Do sada je svaka stranica proizvoda nosila datum kad je zadnji put diran
-// product.php, a to je sablon koji se mijenja pri skoro svakom deployu. Time je
-// svaki deploy Googleu javljao da su se SVE stranice promijenile, pa je polje
-// prestalo da nosi ikakav signal.
 require_once __DIR__ . '/php/lastmod.php';
-$mmhDatumi = mmhDatumiProizvoda($P);
-$mmhDatum  = function (array $p) use ($mmhDatumi): int {
-    $d = $mmhDatumi[(string)($p['id'] ?? '')] ?? '';
-    return $d ? (int)strtotime($d) : 0;
-};
-
-$katImena = [
-    'bambus-paneli' => 'Bambus Paneli', 'bambus-drveni' => 'Drveni Paneli',
-    'bambus-tekstilni' => 'Tekstilni Paneli', 'bambus-mermerni' => 'Mermerni Paneli',
-    'bambus-metalni' => 'Metalni Paneli', 'bambus-kozni' => 'Kožni Paneli',
-    '3d-letvice' => '3D Letvice', 'akusticni-paneli' => 'Akustični Paneli',
-    'aluminijum-lajsne' => 'Aluminijum Lajsne', 'spc-pod' => 'SPC Pod',
-    'pu-kamen' => 'PU Kamen', 'classic' => 'Classic Paneli',
-    'mdf' => 'MDF Paneli', 'flex-stone' => 'Flex Stone',
-];
-
-// Datum izmjene po adresi — ne izmisljamo, uzimamo sa diska.
-//
-// Ranije je SVIH 149 adresa dobijalo isti datum, i to onaj kad je zadnji put
-// mijenjan products.json. To je Googleu davalo pogresan signal u oba smjera:
-// stranica o firmi bi "se mijenjala" svaki put kad se doda proizvod, a
-// izmjena izgleda ili teksta na vodicu se ne bi vidjela uopste. Google po
-// lastmod-u odlucuje koliko brzo ce ponovo doci, pa je vrijedjelo srediti.
-//
-// Sada svaka adresa nosi datum onoga sto JOJ stvarno odredjuje sadrzaj:
-// za stranicu proizvoda to su podaci + product.php + stilovi, za staticnu
-// stranicu njen HTML, i tako redom. Uzima se najnoviji od tih datuma.
-function mmhVrijeme(array $fajlovi): int
-{
-    $naj = 0;
-    foreach ($fajlovi as $f) {
-        $t = @filemtime(__DIR__ . '/' . ltrim($f, '/'));
-        if ($t && $t > $naj) $naj = $t;
-    }
-    return $naj ?: time();
-}
-
-// U racun ulazi samo ono sto mijenja SADRZAJ — tekst, cijene, slike. Stilovi
-// i skripte se namjerno NE broje: Google trazi da lastmod znaci stvarnu
-// promjenu sadrzaja, a da se racuna i CSS, sitna izmjena izgleda bi javila da
-// se promijenilo svih 149 stranica i signal bi izgubio vrijednost.
-$mmhOkvir  = [];
-$mmhPodaci = ['data/products.json', 'data/categories.json'];
 
 function mmhX(string $s): string
 {
@@ -146,103 +44,186 @@ function mmhSlikaXML(string $rel, string $naslov): string
          . "    </image:image>\n";
 }
 
-$izlaz = [];
-$dodaj = function (string $loc, string $freq, string $prio, string $slike = '', int $kada = 0) use (&$izlaz) {
-    $izlaz[] = "  <url>\n"
-             . '    <loc>' . mmhX($loc) . "</loc>\n"
-             . '    <lastmod>' . date('Y-m-d', $kada ?: time()) . "</lastmod>\n"
-             . '    <changefreq>' . $freq . "</changefreq>\n"
-             . '    <priority>' . $prio . "</priority>\n"
-             . $slike
-             . "  </url>\n";
-};
+// Datum izmjene po adresi — ne izmisljamo, uzimamo sa diska. U racun ulazi
+// samo ono sto mijenja SADRZAJ (tekst, cijene, slike), ne CSS/JS: Google trazi
+// da lastmod znaci stvarnu promjenu sadrzaja.
+function mmhVrijeme(array $fajlovi): int
+{
+    $naj = 0;
+    foreach ($fajlovi as $f) {
+        $t = @filemtime(__DIR__ . '/' . ltrim($f, '/'));
+        if ($t && $t > $naj) $naj = $t;
+    }
+    return $naj ?: time();
+}
 
-// ---- Pocetna i staticne stranice ----------------------------------------
-$dodaj($BAZA . '/', 'daily', '1.0',
-       mmhSlikaXML('images/showcase-room.jpg', 'Make My Home Decor – zidni paneli, Podgorica'),
-       max(mmhVrijeme(['index.html']), max([0] + array_map($mmhDatum, $P))));
+/**
+ * Sastavlja cio XML sitemapa iz podataka i vraca ga kao string.
+ */
+function mmhSitemapGradi(): string
+{
+    $BAZA = 'https://makemyhome.me';
+    $P = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
+    if (isset($P['products'])) $P = $P['products'];
 
-foreach ($mmhStatika as [$f, $fr, $pr]) {
-    // Inspiracija dobija SVE fotografije prostora — to je stranica zbog koje
-    // uopste i pravimo sitemap sa slikama.
-    $sl = '';
-    if ($f === 'inspiracija.html') {
-        foreach ($P as $p) {
-            foreach (($p['gallery'] ?? []) as $gi => $g) {
-                $kat = $katImena[$p['category'] ?? ''] ?? 'Zidni panel';
-                $sl .= mmhSlikaXML($g, $p['name'] . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
+    // Datum izmjene po POJEDINOM proizvodu — vidi php/lastmod.php. Sablon
+    // (product.php) se mijenja pri skoro svakom deployu; da to ne bi javljalo
+    // da su se SVE stranice promijenile, datum se racuna iz SADRZAJA proizvoda.
+    $mmhDatumi = mmhDatumiProizvoda($P);
+    $mmhDatum  = function (array $p) use ($mmhDatumi): int {
+        $d = $mmhDatumi[(string)($p['id'] ?? '')] ?? '';
+        return $d ? (int)strtotime($d) : 0;
+    };
+
+    $mmhStatika = [
+        ['products.html', 'weekly', '0.9'], ['cjenovnik.html', 'weekly', '0.9'],
+        ['inspiracija.html', 'weekly', '0.9'], ['montaza.html', 'weekly', '0.7'],
+        ['faq.html', 'weekly', '0.7'], ['about.html', 'weekly', '0.7'],
+        ['contact.html', 'weekly', '0.7'], ['decor-box.html', 'weekly', '0.7'],
+        ['paneli-za-kupatilo.html', 'weekly', '0.7'], ['tv-zid.html', 'weekly', '0.7'], ['spc-ili-laminat.html', 'weekly', '0.7'],
+        ['akusticni-paneli-kancelarija.html', 'weekly', '0.7'], ['dostava-crna-gora.html', 'weekly', '0.7'],
+        ['blog.html', 'weekly', '0.7'],
+        ['dekorativni-zidni-paneli-vodic.html', 'weekly', '0.7'], ['kako-izabrati-panele-po-prostoriji.html', 'weekly', '0.7'],
+        ['pu-kamen-izgled-kamena.html', 'weekly', '0.7'], ['koliko-kostaju-zidni-paneli.html', 'weekly', '0.7'],
+        ['uslovi.html', 'weekly', '0.7'], ['reklamacije.html', 'weekly', '0.7'],
+        ['privatnost.html', 'weekly', '0.7'],
+    ];
+
+    $katImena = [
+        'bambus-paneli' => 'Bambus Paneli', 'bambus-drveni' => 'Drveni Paneli',
+        'bambus-tekstilni' => 'Tekstilni Paneli', 'bambus-mermerni' => 'Mermerni Paneli',
+        'bambus-metalni' => 'Metalni Paneli', 'bambus-kozni' => 'Kožni Paneli',
+        '3d-letvice' => '3D Letvice', 'akusticni-paneli' => 'Akustični Paneli',
+        'aluminijum-lajsne' => 'Aluminijum Lajsne', 'spc-pod' => 'SPC Pod',
+        'pu-kamen' => 'PU Kamen', 'classic' => 'Classic Paneli',
+        'mdf' => 'MDF Paneli', 'flex-stone' => 'Flex Stone',
+    ];
+
+    $mmhPodaci = ['data/products.json', 'data/categories.json'];
+
+    $izlaz = [];
+    $dodaj = function (string $loc, string $freq, string $prio, string $slike = '', int $kada = 0) use (&$izlaz) {
+        $izlaz[] = "  <url>\n"
+                 . '    <loc>' . mmhX($loc) . "</loc>\n"
+                 . '    <lastmod>' . date('Y-m-d', $kada ?: time()) . "</lastmod>\n"
+                 . '    <changefreq>' . $freq . "</changefreq>\n"
+                 . '    <priority>' . $prio . "</priority>\n"
+                 . $slike
+                 . "  </url>\n";
+    };
+
+    // ---- Pocetna i staticne stranice ----------------------------------------
+    $dodaj($BAZA . '/', 'daily', '1.0',
+           mmhSlikaXML('images/showcase-room.jpg', 'Make My Home Decor – zidni paneli, Podgorica'),
+           max(mmhVrijeme(['index.html']), max([0] + array_map($mmhDatum, $P))));
+
+    foreach ($mmhStatika as [$f, $fr, $pr]) {
+        // Inspiracija dobija SVE fotografije prostora — to je stranica zbog koje
+        // uopste i pravimo sitemap sa slikama.
+        $sl = '';
+        if ($f === 'inspiracija.html') {
+            foreach ($P as $p) {
+                foreach (($p['gallery'] ?? []) as $gi => $g) {
+                    $kat = $katImena[$p['category'] ?? ''] ?? 'Zidni panel';
+                    $sl .= mmhSlikaXML($g, $p['name'] . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
+                }
             }
         }
+        // Cetiri stranice sastavlja PHP; njima se gleda i taj fajl, ne samo .html
+        $izvori = [$f];
+        if ($f === 'inspiracija.html')  $izvori = $mmhPodaci;
+        if ($f === 'cjenovnik.html')    $izvori = $mmhPodaci;
+        if ($f === 'products.html')     $izvori = $mmhPodaci;
+        if ($f === 'decor-box.html')    $izvori = ['decor-box.php', 'data/decor-box-style.json'];
+        $dodaj($BAZA . '/' . $f, $fr, $pr, $sl, mmhVrijeme($izvori));
     }
-    // Cetiri stranice sastavlja PHP; njima se gleda i taj fajl, ne samo .html
-    $izvori = array_merge($mmhOkvir, [$f]);
-    if ($f === 'inspiracija.html')  $izvori = $mmhPodaci;
-    if ($f === 'cjenovnik.html')    $izvori = $mmhPodaci;
-    if ($f === 'products.html')     $izvori = $mmhPodaci;
-    if ($f === 'decor-box.html')    $izvori = ['decor-box.php', 'data/decor-box-style.json'];
-    $dodaj($BAZA . '/' . $f, $fr, $pr, $sl, mmhVrijeme($izvori));
-}
 
-// ---- Kategorije ----------------------------------------------------------
-$poKat = [];
-foreach ($P as $p) {
-    $k = $p['category'] ?? '';
-    if ($k !== '') $poKat[$k][] = $p;
-}
-
-// bambus-paneli je NADREDJENA kategorija — nijedan proizvod je ne nosi u polju
-// "category", nego se na njoj prikazuju svi bambus podtipovi. products.php to
-// radi preko $_bambusCats; ovdje mora vrijediti isto pravilo.
-//
-// Bez ovoga je stranica sa 39 proizvoda i 39 fotografija u sitemapu stajala
-// bez ijedne slike, dok su sve ostale kategorije svoje imale. Google slike
-// otkriva prvenstveno preko sitemapa, pa je cijela ta kategorija bila
-// nevidljiva za pretragu slika.
-// Classic je sesta podkategorija Bambus Panela (data/categories.json), pa i
-// njegove fotografije spadaju u slike te kategorije. Bez njega je sitemap za
-// /kategorija/bambus-paneli pokrivao pet od sest podtipova.
-$mmhBambus = ['bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni',
-              'bambus-kozni', 'bambus-metalni', 'classic'];
-$poKat['bambus-paneli'] = [];
-foreach ($mmhBambus as $k) {
-    foreach (($poKat[$k] ?? []) as $p) $poKat['bambus-paneli'][] = $p;
-}
-foreach ($katImena as $k => $ime) {
-    $sl = '';
-    foreach (($poKat[$k] ?? []) as $p) {
-        if (!empty($p['image'])) $sl .= mmhSlikaXML($p['image'], $p['name'] . ' – ' . $ime);
+    // ---- Kategorije ----------------------------------------------------------
+    $poKat = [];
+    foreach ($P as $p) {
+        $k = $p['category'] ?? '';
+        if ($k !== '') $poKat[$k][] = $p;
     }
-    // Kategorija se mijenja kad se promijeni neki proizvod u njoj — ne kad se
-    // dira products.php.
-    $kadaKat = 0;
-    foreach (($poKat[$k] ?? []) as $p) { $t = $mmhDatum($p); if ($t > $kadaKat) $kadaKat = $t; }
-    $dodaj($BAZA . '/kategorija/' . $k, 'weekly', '0.9', $sl,
-           $kadaKat ?: mmhVrijeme($mmhPodaci));
-}
 
-// ---- Proizvodi -----------------------------------------------------------
-foreach ($P as $p) {
-    $ime = $p['name'] ?? '';
-    $kat = $katImena[$p['category'] ?? ''] ?? 'Zidni panel';
-    $sl  = '';
-    if (!empty($p['image'])) $sl .= mmhSlikaXML($p['image'], $ime . ' – ' . $kat);
-    foreach (($p['gallery'] ?? []) as $gi => $g) {
-        $sl .= mmhSlikaXML($g, $ime . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
+    // bambus-paneli je NADREDJENA kategorija — nijedan proizvod je ne nosi u
+    // polju "category", nego se na njoj prikazuju svi bambus podtipovi.
+    $mmhBambus = ['bambus-drveni', 'bambus-tekstilni', 'bambus-mermerni',
+                  'bambus-kozni', 'bambus-metalni', 'classic'];
+    $poKat['bambus-paneli'] = [];
+    foreach ($mmhBambus as $k) {
+        foreach (($poKat[$k] ?? []) as $p) $poKat['bambus-paneli'][] = $p;
     }
-    $dodaj($BAZA . '/' . mmhSlugProizvoda($p), 'weekly', '0.8', $sl,
-           $mmhDatum($p) ?: mmhVrijeme($mmhPodaci));
+    foreach ($katImena as $k => $ime) {
+        $sl = '';
+        foreach (($poKat[$k] ?? []) as $p) {
+            if (!empty($p['image'])) $sl .= mmhSlikaXML($p['image'], $p['name'] . ' – ' . $ime);
+        }
+        // Kategorija se mijenja kad se promijeni neki proizvod u njoj — ne kad
+        // se dira products.php.
+        $kadaKat = 0;
+        foreach (($poKat[$k] ?? []) as $p) { $t = $mmhDatum($p); if ($t > $kadaKat) $kadaKat = $t; }
+        $dodaj($BAZA . '/kategorija/' . $k, 'weekly', '0.9', $sl,
+               $kadaKat ?: mmhVrijeme($mmhPodaci));
+    }
+
+    // ---- Proizvodi -----------------------------------------------------------
+    foreach ($P as $p) {
+        $ime = $p['name'] ?? '';
+        $kat = $katImena[$p['category'] ?? ''] ?? 'Zidni panel';
+        $sl  = '';
+        if (!empty($p['image'])) $sl .= mmhSlikaXML($p['image'], $ime . ' – ' . $kat);
+        foreach (($p['gallery'] ?? []) as $gi => $g) {
+            $sl .= mmhSlikaXML($g, $ime . ' u enterijeru ' . ($gi + 1) . ' – ' . $kat);
+        }
+        $dodaj($BAZA . '/' . mmhSlugProizvoda($p), 'weekly', '0.8', $sl,
+               $mmhDatum($p) ?: mmhVrijeme($mmhPodaci));
+    }
+
+    return '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
+         . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n"
+         . '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n"
+         . implode('', $izlaz)
+         . "</urlset>\n";
 }
 
-$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-     . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n"
-     . '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n"
-     . implode('', $izlaz)
-     . "</urlset>\n";
-
-// Prvo u privremeni fajl pa preimenovanje — da Googlebot nikad ne uhvati
-// polovicno upisan sitemap ako naidje bas u trenutku pravljenja.
-$priv = $kesFajl . '.tmp';
-if (@file_put_contents($priv, $xml, LOCK_EX) !== false) {
-    @rename($priv, $kesFajl);
+/**
+ * Pravi sitemap i upisuje ga u STATICKI fajl /sitemap.xml, ali samo ako se
+ * sadrzaj stvarno promijenio — da vrijeme izmjene (Last-Modified) fajla ostane
+ * stabilno i Google ne misli da se sitemap mijenja pri svakom cron prolazu.
+ * Upis ide prvo u .tmp pa atomsko preimenovanje, da Googlebot nikad ne uhvati
+ * polovicno upisan fajl. Vraca true ako je fajl zaista prepisan.
+ */
+function mmhSitemapUpisiStaticki(): bool
+{
+    $xml  = mmhSitemapGradi();
+    $put  = __DIR__ . '/sitemap.xml';
+    if (is_file($put) && @file_get_contents($put) === $xml) return false;
+    $priv = $put . '.tmp';
+    if (@file_put_contents($priv, $xml, LOCK_EX) !== false && @rename($priv, $put)) return true;
+    // Ako preimenovanje ne uspije, probaj direktan upis (bolje nego nista).
+    return @file_put_contents($put, $xml, LOCK_EX) !== false;
 }
+
+// --- Ukljucen kao biblioteka (npr. iz admin/sync.php) — samo definisi
+//     funkcije, ne izvrsavaj nista. Ova provjera MORA biti prije CLI grane:
+//     sync se preko cron-a pokrece kao `php sync.php` (CLI SAPI) i ukljucuje
+//     ovaj fajl, pa bi inace okinuo CLI granu umjesto da samo ucita funkcije.
+if (defined('MMH_SITEMAP_LIB')) return;
+
+// --- CLI: `php sitemap.php` samo regenerise staticki fajl -------------------
+if (PHP_SAPI === 'cli') {
+    echo mmhSitemapUpisiStaticki() ? "sitemap.xml: regenerisan\n" : "sitemap.xml: nepromijenjen\n";
+    return;
+}
+
+// --- Web serviranje (fallback) ---------------------------------------------
+// Dovde se dolazi SAMO kad statickog /sitemap.xml nema (.htaccess ga inace
+// servira direktno). Napravi ga, upisi za sljedeci put, i posluzi odmah.
+$xml = mmhSitemapGradi();
+$put = __DIR__ . '/sitemap.xml';
+$priv = $put . '.tmp';
+if (@file_put_contents($priv, $xml, LOCK_EX) !== false) @rename($priv, $put);
+
+header('Content-Type: application/xml; charset=utf-8');
+header('Cache-Control: public, max-age=3600');
 echo $xml;
