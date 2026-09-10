@@ -139,5 +139,6 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/webp.php'                    => $base . '/admin/webp.php',
     $adminDir . '/server-status.php'           => $base . '/admin/server-status.php',
     $adminDir . '/log-sitemap.php'             => $base . '/admin/log-sitemap.php',
+    $adminDir . '/provjera-sajta.php'          => $base . '/admin/provjera-sajta.php',
 ];
 };
