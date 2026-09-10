@@ -31,6 +31,7 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/php/slug.php'       => $base . '/php/slug.php',
     $root . '/php/kalkulator.php' => $base . '/php/kalkulator.php',
     $root . '/php/dimenzije.php'  => $base . '/php/dimenzije.php',
+    $root . '/php/kombinacije.php' => $base . '/php/kombinacije.php',
     $root . '/php/slug-match.php' => $base . '/php/slug-match.php',
     $root . '/php/contact.php'    => $base . '/php/contact.php',
     $root . '/php/og-mozaik.php' => $base . '/php/og-mozaik.php',
@@ -101,9 +102,6 @@ return function (string $base, string $root, string $adminDir): array {
     // umjesto firme vidjela soba.
     $root . '/images/og-dijeljenje.jpg' => $base . '/images/og-dijeljenje.jpg',
     // Kombinacije panela (shop the look) — slike prostora sa dva panela + podaci.
-    $root . '/data/kombinacije.json' => $base . '/data/kombinacije.json',
-    $root . '/images/kombinacije/spavaca-mermer-orah.jpg'  => $base . '/images/kombinacije/spavaca-mermer-orah.jpg',
-    $root . '/images/kombinacije/spavaca-mermer-orah.webp' => $base . '/images/kombinacije/spavaca-mermer-orah.webp',
     // Karte boja: dva PDF-a koja se preuzimaju sa Decor Box stranice, i dvije
     // slicice sastavljene od stvarnih dezena iz tih karata. Odjeljak na
     // decor-box.php se ispisuje samo ako PDF postoji na disku, pa PDF-ovi
