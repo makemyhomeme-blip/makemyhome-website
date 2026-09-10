@@ -4,7 +4,6 @@ require_once __DIR__ . '/php/dimenzije.php';
 require_once __DIR__ . '/php/og-mozaik.php';
 require_once __DIR__ . '/php/lastmod.php';
 require_once __DIR__ . '/php/kalkulator.php';
-require_once __DIR__ . '/php/kombinacije.php';
 $productsFile = __DIR__ . '/data/products.json';
 $products = json_decode(@file_get_contents($productsFile), true) ?: [];
 
@@ -420,7 +419,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=224c7c11">
+  <link rel="stylesheet" href="css/style-v5.css?v=ed6e3577">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -767,53 +766,6 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             </a>
             <?php endforeach; ?>
           </div>
-        </div>
-        <?php endif; ?>
-
-        <?php
-        /* KOMBINACIJE — slike iz galerije OVOG proizvoda koje se (kao ista
-           fotografija) pojavljuju i u galeriji drugog proizvoda. To znaci da su
-           ta dva panela na istoj slici, pa se ispisuje "Na ovoj slici: A + B" sa
-           linkom na partnera. Prepoznaje se automatski, na obje strane. */
-        $mmhKombiIndex = mmhKombinacije($products);
-        $mmhMoje = $mmhKombiIndex[$id] ?? [];
-        if ($mmhMoje):
-        ?>
-        <div class="kombi-sekcija-proizvod" data-ssr="1">
-          <div class="matching-pair-header">
-            <div class="matching-pair-title"><i class="fas fa-object-group"></i> Panel u kombinaciji</div>
-            <div class="matching-pair-subtitle">Ovaj panel smo u pravom prostoru spojili sa drugim panelom — kliknite da vidite i njega.</div>
-          </div>
-          <?php foreach ($mmhMoje as $mmhKb):
-            $mmhKbSl = $mmhKb['slika'];
-            $mmhKbWebp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $mmhKbSl);
-          ?>
-          <div class="kombi-red">
-            <div class="kombi-red-slika">
-              <picture>
-                <source srcset="<?= htmlspecialchars($mmhKbWebp) ?>" type="image/webp">
-                <img src="<?= htmlspecialchars(mmhThumb($mmhKbSl)) ?>" alt="Kombinacija panela u prostoru – <?= htmlspecialchars($product['name'] ?? '') ?> | Make My Home Decor" loading="lazy"<?= mmhDimAtributi($mmhKbSl) ?>>
-              </picture>
-              <span class="kombi-red-badge"><i class="fas fa-object-group"></i> Kombinacija</span>
-            </div>
-            <div class="kombi-red-info">
-              <div class="kombi-red-oznaka">Na ovoj slici</div>
-              <div class="kombi-red-ovaj"><i class="fas fa-check-circle"></i> <?= htmlspecialchars($product['name'] ?? '') ?> <span>(ovaj panel)</span></div>
-              <?php foreach ($mmhKb['partneri'] as $mmhPt):
-                $mmhPtC = number_format((float)($mmhPt['price'] ?? 0), 2, ',', '.');
-              ?>
-              <a href="<?= htmlspecialchars($mmhPt['url']) ?>" class="kombi-red-partner">
-                <img src="<?= htmlspecialchars(mmhThumb($mmhPt['image'])) ?>" alt="<?= htmlspecialchars($mmhPt['name']) ?>" loading="lazy">
-                <div class="kombi-red-partner-txt">
-                  <div class="kombi-red-partner-ime"><?= htmlspecialchars($mmhPt['name']) ?></div>
-                  <div class="kombi-red-partner-cijena"><?= $mmhPtC ?> € <span>/ <?= htmlspecialchars($mmhPt['unit']) ?></span></div>
-                </div>
-                <span class="kombi-red-go">Pogledaj <i class="fas fa-arrow-right"></i></span>
-              </a>
-              <?php endforeach; ?>
-            </div>
-          </div>
-          <?php endforeach; ?>
         </div>
         <?php endif; ?>
 
