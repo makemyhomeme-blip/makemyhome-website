@@ -2901,8 +2901,16 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .insp-wrap { padding: 40px 0 74px; background: #fff; }
 /* Filter: na telefonu padajuci izbornik (deset kategorija u redovima je izgledalo neuredno),
    na sirem ekranu dugmad poredana u jedan centriran red. Oba vode isti JS. */
-.insp-filter-bar { margin: 0 0 30px; }
-.insp-select-wrap { display: none; position: relative; max-width: 440px; margin: 0 auto; }
+.insp-filter-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 22px; }
+/* Prekidac prikaza: dvije u redu / jedna cijela slika */
+.insp-view { display: inline-flex; flex-shrink: 0; background: #efeeea; border-radius: 11px; padding: 3px; gap: 2px; }
+.insp-view-btn { border: none; background: transparent; color: #9a9a95; width: 40px; height: 36px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: background .18s, color .18s; }
+.insp-view-btn.is-on { background: #fff; color: #1a1a1a; box-shadow: 0 1px 5px rgba(0,0,0,.14); }
+.insp-view-btn:hover { color: #1a1a1a; }
+/* Jedna cijela slika: na desktopu ograniceno da ne bude ogromno; na telefonu puno */
+.insp-grid--jedna { max-width: 680px; margin-left: auto; margin-right: auto; }
+.insp-grid--jedna .insp-info strong { font-size: 21px; }
+.insp-select-wrap { display: none; position: relative; flex: 1; min-width: 0; margin: 0; }
 .insp-select-wrap > i { position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
   color: #1a1a1a; font-size: 13px; pointer-events: none; }
 .insp-select {
@@ -2912,7 +2920,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   box-shadow: 0 2px 10px rgba(0,0,0,.05);
 }
 .insp-select:focus { outline: none; border-color: #1a1a1a; box-shadow: 0 0 0 3px rgba(0,0,0,.2); }
-.insp-filter { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; margin: 0; }
+.insp-filter { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; margin: 0; flex: 1; }
 .insp-chip {
   font: inherit; font-size: 13.5px; font-weight: 600; color: #5a6672;
   background: #fff; border: 1px solid rgba(0,0,0,.14); border-radius: 999px;

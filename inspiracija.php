@@ -146,7 +146,7 @@ arsort($insKat);
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=c3ac8c85">
+  <link rel="stylesheet" href="css/style-v5.css?v=ab6da82f">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -369,6 +369,11 @@ arsort($insKat);
   <div class="container">
 
     <div class="insp-filter-bar">
+      <!-- Prekidac prikaza: dvije slike u redu ili jedna cijela (velika). -->
+      <div class="insp-view" role="group" aria-label="Prikaz slika">
+        <button type="button" class="insp-view-btn is-on" data-kol="auto" aria-label="Dvije u redu" title="Dvije u redu"><i class="fas fa-table-cells"></i></button>
+        <button type="button" class="insp-view-btn" data-kol="1" aria-label="Jedna cijela slika" title="Jedna cijela slika"><i class="fas fa-image"></i></button>
+      </div>
       <!-- Telefon: padajuci izbornik. Sirok ekran: ista lista kao dugmad. -->
       <div class="insp-select-wrap">
         <select id="insp-select" class="insp-select" aria-label="Filter po vrsti panela">
@@ -485,21 +490,44 @@ arsort($insKat);
      fotografija 1 i fotografija 2 — a ne 1 i 46 kao sa CSS kolonama. */
   var kartice = [].slice.call(grid.querySelectorAll('.insp-kart'));
   var kolonaSad = 0;
+  // Izbor prikaza: '1' = jedna cijela slika u redu; inace automatski (2/3).
+  var korisnikPrikaz = null;
+  try { korisnikPrikaz = localStorage.getItem('mmh_insp_prikaz'); } catch (e) {}
   function brojKolona() {
-    // Krupnije slike, cistiji raspored: manje kolona = vece fotografije.
-    return window.innerWidth >= 1000 ? 3 : 2;
+    if (korisnikPrikaz === '1') return 1;              // jedna cijela slika
+    return window.innerWidth >= 1000 ? 3 : 2;           // automatski
   }
-  function rasporedi() {
+  function rasporedi(force) {
     var n = brojKolona();
-    if (n === kolonaSad) return;
+    if (n === kolonaSad && !force) return;
     kolonaSad = n;
     var kol = [];
     for (var i = 0; i < n; i++) { var d = document.createElement('div'); d.className = 'insp-kol'; kol.push(d); }
     kartice.forEach(function (k, i) { kol[i % n].appendChild(k); });
     grid.textContent = '';
     kol.forEach(function (d) { grid.appendChild(d); });
+    grid.classList.toggle('insp-grid--jedna', n === 1);
   }
   rasporedi();
+  // Prekidac prikaza (dvije u redu / jedna cijela)
+  (function () {
+    var vBtns = [].slice.call(document.querySelectorAll('.insp-view-btn'));
+    function oznaci() {
+      vBtns.forEach(function (b) {
+        var on = (b.dataset.kol === '1') ? (korisnikPrikaz === '1') : (korisnikPrikaz !== '1');
+        b.classList.toggle('is-on', on);
+      });
+    }
+    oznaci();
+    vBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        korisnikPrikaz = (b.dataset.kol === '1') ? '1' : null;
+        try { if (korisnikPrikaz) localStorage.setItem('mmh_insp_prikaz', '1'); else localStorage.removeItem('mmh_insp_prikaz'); } catch (e) {}
+        oznaci();
+        rasporedi(true);
+      });
+    });
+  })();
   var tajmer;
   window.addEventListener('resize', function () { clearTimeout(tajmer); tajmer = setTimeout(rasporedi, 200); });
   var izbor = document.getElementById('insp-select');
