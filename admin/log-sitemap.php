@@ -47,22 +47,30 @@ foreach ($kandidati as $f) {
     if ($ok && !$log) $log = $f;
 }
 echo "\n-- Sadrzaj access-logs/ --\n";
+$logovi = [];
 foreach (glob("$home/access-logs/*") ?: [] as $f) {
-    echo "  " . $f . (is_readable($f) ? "  (citljiv, " . @filesize($f) . " B)" : "  (nije citljiv)") . "\n";
-    if (!$log && is_readable($f) && strpos($f, 'makemyhome') !== false) $log = $f;
+    $cit = is_readable($f);
+    echo "  " . $f . ($cit ? "  (citljiv, " . @filesize($f) . " B)" : "  (nije citljiv)") . "\n";
+    // Sve citljive makemyhome logove uzimamo — HTTPS saobracaj (Googlebot) je u
+    // -ssl_log fajlu, koji je veci; obicni GET je u ne-ssl fajlu.
+    if ($cit && stripos($f, 'makemyhome') !== false) $logovi[] = $f;
 }
+foreach ($kandidati as $f) if (@is_readable($f)) $logovi[] = $f;
+$logovi = array_values(array_unique($logovi));
 
-if (!$log) { echo "\nNijedan access log nije citljiv iz PHP-a.\n"; exit; }
+if (!$logovi) { echo "\nNijedan access log nije citljiv iz PHP-a.\n"; exit; }
 
-echo "\n== Citam: $log (" . @filesize($log) . " B) ==\n";
-$sz   = filesize($log);
-$fp   = fopen($log, 'rb');
-$read = 1500000;
-if ($sz > $read) fseek($fp, -$read, SEEK_END);
-$data = fread($fp, $read);
-fclose($fp);
-
-$linije = explode("\n", $data);
+echo "\n== Citam logove: " . implode(', ', array_map('basename', $logovi)) . " ==\n";
+$linije = [];
+foreach ($logovi as $log) {
+    $sz   = filesize($log);
+    $fp   = fopen($log, 'rb');
+    $read = 4000000;
+    if ($sz > $read) fseek($fp, -$read, SEEK_END);
+    $data = fread($fp, $read);
+    fclose($fp);
+    foreach (explode("\n", $data) as $l) $linije[] = $l;
+}
 $sm = [];
 foreach ($linije as $l) {
     if (stripos($l, 'sitemap') !== false) $sm[] = $l;
@@ -79,6 +87,17 @@ foreach ($sm as $l) {
 }
 echo "Googlebot -> /sitemap.*  statusi: " . (json_encode($statG) ?: '{}') . "\n";
 echo "Ostali    -> /sitemap.*  statusi: " . (json_encode($statO) ?: '{}') . "\n\n";
+
+// Sveukupni Googlebot saobracaj (svi zahtjevi) — da vidimo da li ga server
+// uopste posluzuje normalno ili ga odbija (403/406/429/5xx).
+$gAll = []; $gLast = '';
+foreach ($linije as $l) {
+    if (stripos($l, 'Googlebot') === false && stripos($l, 'Google-InspectionTool') === false) continue;
+    if (preg_match('#"\s+(\d{3})\s#', $l, $m)) $gAll[$m[1]] = ($gAll[$m[1]] ?? 0) + 1;
+    $gLast = $l;
+}
+echo "Googlebot -> SVI zahtjevi, statusi: " . (json_encode($gAll) ?: '{}') . "\n";
+echo "Zadnji Googlebot red: " . ($gLast ?: '(nema Googlebot u logu)') . "\n\n";
 
 echo "== Zadnjih 30 redova sa 'sitemap' ==\n";
 foreach (array_slice($sm, -30) as $l) echo $l . "\n";
