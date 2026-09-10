@@ -101,6 +101,8 @@ return function (string $base, string $root, string $adminDir): array {
     // ili WhatsAppu. Ranije je tamo isla fotografija sobe sa pocetne, pa se
     // umjesto firme vidjela soba.
     $root . '/images/og-dijeljenje.jpg' => $base . '/images/og-dijeljenje.jpg',
+    // Eksplicitne kombinacije panela (koje slike prikazuju vise proizvoda).
+    $root . '/data/kombinacije.json' => $base . '/data/kombinacije.json',
     // Kombinacije panela (shop the look) — slike prostora sa dva panela + podaci.
     // Karte boja: dva PDF-a koja se preuzimaju sa Decor Box stranice, i dvije
     // slicice sastavljene od stvarnih dezena iz tih karata. Odjeljak na
