@@ -86,6 +86,15 @@ for ($i = 1; $i < $n; $i++) {
     }
 }
 
+// Kombinacije idu NA VRH galerije — najzanimljivije su, pa se odmah vide
+// (ranije su znale zavrsiti na dnu, pa ih posjetilac ne primijeti). usort je
+// stabilan u PHP 8, pa ostatak zadrzava svoj redoslijed.
+if ($mmhKombiFoto) {
+    usort($insSlike, function ($a, $b) use ($mmhKombiFoto) {
+        return (isset($mmhKombiFoto[$b['src']]) ? 1 : 0) <=> (isset($mmhKombiFoto[$a['src']]) ? 1 : 0);
+    });
+}
+
 // Oznaku "novo" nosi sve iz posljednje tri sedmice. Racuna se od najnovije fotografije,
 // ne od danasnjeg datuma — da oznaka ne nestane ako se par sedmica nista ne doda.
 $insNajnovija = 0;
@@ -137,7 +146,7 @@ arsort($insKat);
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=e50548d3">
+  <link rel="stylesheet" href="css/style-v5.css?v=c3ac8c85">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -434,8 +443,9 @@ arsort($insKat);
              onerror="this.onerror=null;this.closest(&quot;.insp-kart&quot;).remove();">
         <?php if ($s['t'] > $insPrag): ?><span class="insp-novo">Novo</span><?php endif; ?>
         <span class="insp-info insp-info--stalno">
+          <span class="insp-meta"><?= htmlspecialchars($kat) ?></span>
           <strong><?= htmlspecialchars($p['name']) ?></strong>
-          <em><?= htmlspecialchars($kat) ?></em>
+          <span class="insp-vidi">Pogledaj panel <i class="fas fa-arrow-right"></i></span>
         </span>
       </a>
       <?php endif; ?>

@@ -2953,13 +2953,21 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   background: linear-gradient(to top, rgba(12,11,10,.82) 0%, rgba(12,11,10,.35) 52%, transparent 100%);
   color: #fff; opacity: 1;
 }
-.insp-info strong { display: block; font-family: var(--font-heading); font-size: 17px; font-weight: 700; line-height: 1.2; letter-spacing: -0.2px; text-shadow: 0 1px 8px rgba(0,0,0,.55); }
-.insp-info em {
-  display: inline-block; font-style: normal; font-size: 10.5px; color: rgba(255,255,255,0.92);
-  margin-top: 6px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-  text-shadow: 0 1px 6px rgba(0,0,0,.55);
+.insp-info .insp-meta {
+  display: block; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.72); margin-bottom: 4px; text-shadow: 0 1px 6px rgba(0,0,0,.55);
 }
-.insp-info em::after { content: " \2192"; opacity: .8; }
+.insp-info strong { display: block; font-family: var(--font-heading); font-size: 18px; font-weight: 700; line-height: 1.15; letter-spacing: -0.2px; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+.insp-info .insp-vidi {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 9px;
+  font-size: 12px; font-weight: 800; color: #fff; letter-spacing: .01em;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(255,255,255,.16); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  border: 1px solid rgba(255,255,255,.22); transition: background .18s, border-color .18s;
+}
+.insp-info .insp-vidi i { font-size: 10px; transition: transform .2s; }
+.insp-kart:hover .insp-info .insp-vidi { background: var(--akcenat); border-color: var(--akcenat); }
+.insp-kart:hover .insp-info .insp-vidi i { transform: translateX(3px); }
 
 /* KOMBINACIJA: vise panela na slici — cipovi na dnu, svaki vodi na svoj panel */
 .insp-cipovi {
@@ -3011,9 +3019,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .insp-grid, .insp-kol { gap: 8px; }
   .insp-kart { border-radius: 13px; }
   .insp-kart:hover { transform: none; }
-  .insp-info { padding: 32px 12px 11px; }
-  .insp-info strong { font-size: 14px; }
-  .insp-info em { font-size: 9.5px; margin-top: 4px; }
+  .insp-info { padding: 34px 11px 11px; }
+  .insp-info .insp-meta { font-size: 9px; margin-bottom: 3px; }
+  .insp-info strong { font-size: 15px; }
+  .insp-info .insp-vidi { font-size: 11px; margin-top: 7px; padding: 4px 10px; }
   .insp-cta { padding: 24px 18px; }
   .insp-cta-dugmad { flex-direction: column; }
   .insp-cta .btn { width: 100%; justify-content: center; }
