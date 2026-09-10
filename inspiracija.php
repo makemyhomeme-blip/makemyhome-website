@@ -137,7 +137,7 @@ arsort($insKat);
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=ed6e3577">
+  <link rel="stylesheet" href="css/style-v5.css?v=3e0bb7a1">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -397,6 +397,32 @@ arsort($insKat);
         $redni = ($insBroj[$p['id']] = ($insBroj[$p['id']] ?? 0) + 1);
         $alt = $p['name'] . ' u enterijeru ' . $redni . ' – ' . $kat . ' | Make My Home Decor Podgorica';
       ?>
+      <?php
+      $mmhJeKombi = isset($mmhKombiFoto[$s['src']]);
+      if ($mmhJeKombi):
+        // Vise panela na jednoj slici. <a> ne moze da obavije vise linkova, pa je
+        // kartica <div>, a svaki panel je svoj klikabilni cip.
+        $mmhPaneli = [['name' => $p['name'], 'url' => '/' . mmhSlugProizvoda($p)]];
+        foreach ($mmhKombiFoto[$s['src']] as $mmhX) $mmhPaneli[] = ['name' => $mmhX['name'], 'url' => $mmhX['url']];
+      ?>
+      <div class="insp-kart insp-kart--kombi"
+           data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"
+           data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
+        <img src="<?= htmlspecialchars($s['src'], ENT_QUOTES) ?>"
+             alt="Kombinacija panela u prostoru – <?= htmlspecialchars($p['name']) ?> | Make My Home Decor Podgorica"
+             <?= ltrim(mmhDimAtributi($s['src'])) ?>
+             loading="<?= $i < 6 ? 'eager' : 'lazy' ?>" decoding="async"
+             onerror="this.onerror=null;this.closest(&quot;.insp-kart&quot;).remove();">
+        <?php if ($s['t'] > $insPrag): ?><span class="insp-novo">Novo</span><?php endif; ?>
+        <span class="insp-kombi"><i class="fas fa-object-group"></i> Kombinacija</span>
+        <div class="insp-cipovi">
+          <div class="insp-cipovi-naslov">Paneli na slici</div>
+          <?php foreach ($mmhPaneli as $mmhMp): ?>
+          <a href="<?= htmlspecialchars($mmhMp['url']) ?>" class="insp-cip"><span><?= htmlspecialchars($mmhMp['name']) ?></span> <i class="fas fa-arrow-right"></i></a>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <?php else: ?>
       <a class="insp-kart" href="/<?= mmhSlugProizvoda($p) ?>"
          data-k="<?= htmlspecialchars($p['category'] ?? '', ENT_QUOTES) ?>"
          data-novo="<?= $s['t'] > $insPrag ? '1' : '' ?>">
@@ -407,12 +433,12 @@ arsort($insKat);
              fetchpriority="<?= $i < 6 ? 'high' : 'low' ?>"
              onerror="this.onerror=null;this.closest(&quot;.insp-kart&quot;).remove();">
         <?php if ($s['t'] > $insPrag): ?><span class="insp-novo">Novo</span><?php endif; ?>
-        <?php if (isset($mmhKombiFoto[$s['src']])): ?><span class="insp-kombi"><i class="fas fa-object-group"></i> Kombinacija</span><?php endif; ?>
-        <span class="insp-info">
+        <span class="insp-info insp-info--stalno">
           <strong><?= htmlspecialchars($p['name']) ?></strong>
           <em><?= htmlspecialchars($kat) ?> &rsaquo;</em>
         </span>
       </a>
+      <?php endif; ?>
       <?php endforeach; ?>
     </div>
 

@@ -2941,11 +2941,30 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 .insp-info {
   position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 14px 12px;
   background: linear-gradient(to top, rgba(15,14,12,.88) 0%, rgba(15,14,12,.55) 55%, transparent 100%);
-  color: #fff; opacity: 0; transition: opacity .25s;
+  color: #fff; opacity: 1; transition: opacity .25s;
 }
-.insp-kart:hover .insp-info, .insp-kart:focus-visible .insp-info { opacity: 1; }
-.insp-info strong { display: block; font-size: 14.5px; font-weight: 700; line-height: 1.3; }
-.insp-info em { display: block; font-style: normal; font-size: 12.5px; color: rgba(255,255,255,0.85); margin-top: 3px; font-weight: 600; }
+.insp-info strong { display: block; font-size: 14.5px; font-weight: 700; line-height: 1.3; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+.insp-info em { display: block; font-style: normal; font-size: 12.5px; color: rgba(255,255,255,0.9); margin-top: 3px; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+
+/* KOMBINACIJA: vise panela na slici — cipovi na dnu, svaki vodi na svoj panel */
+.insp-cipovi {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: 34px 10px 10px;
+  background: linear-gradient(to top, rgba(10,9,8,.92) 0%, rgba(10,9,8,.6) 55%, transparent 100%);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.insp-cipovi-naslov { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 1px; }
+.insp-cip {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: rgba(255,255,255,.14); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff; text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 11px; border-radius: 9px; transition: background .18s, border-color .18s;
+}
+.insp-cip span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.insp-cip i { font-size: 11px; flex-shrink: 0; opacity: .85; transition: transform .18s; }
+.insp-cip:hover { background: var(--akcenat); border-color: var(--akcenat); }
+.insp-cip:hover i { transform: translateX(3px); opacity: 1; }
 .insp-kart:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 3px; }
 .insp-prazno { text-align: center; color: #666e7a; padding: 40px 0; }
 
