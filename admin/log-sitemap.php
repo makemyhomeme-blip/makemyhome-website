@@ -99,5 +99,22 @@ foreach ($linije as $l) {
 echo "Googlebot -> SVI zahtjevi, statusi: " . (json_encode($gAll) ?: '{}') . "\n";
 echo "Zadnji Googlebot red: " . ($gLast ?: '(nema Googlebot u logu)') . "\n\n";
 
-echo "== Zadnjih 30 redova sa 'sitemap' ==\n";
-foreach (array_slice($sm, -30) as $l) echo $l . "\n";
+// Razbij po TACNOJ sitemap adresi (razliciti stari sitemapi mogu jos da vise
+// u GSC-u i vracaju 404/410 -> to je "greska" koja se nikad ne skloni sama).
+echo "== Sitemap adrese: [status] xN (bez mog curl testa) ==\n";
+$poAdr = [];
+foreach ($sm as $l) {
+    if (stripos($l, 'curl/') !== false) continue; // moj test
+    if (!preg_match('#"\s*(?:GET|HEAD)\s+(\S*sitemap\S*)\s+HTTP[^"]*"\s+(\d{3})#i', $l, $m)) continue;
+    $adr = strtok($m[1], '?');
+    $poAdr[$adr][$m[2]] = ($poAdr[$adr][$m[2]] ?? 0) + 1;
+}
+foreach ($poAdr as $adr => $st) {
+    $parts = [];
+    foreach ($st as $c => $n) $parts[] = "$c×$n";
+    echo "  $adr   " . implode('  ', $parts) . "\n";
+}
+
+echo "\n== Zadnjih 15 NE-curl redova sa 'sitemap' ==\n";
+$nc = array_values(array_filter($sm, fn ($l) => stripos($l, 'curl/') === false));
+foreach (array_slice($nc, -15) as $l) echo $l . "\n";
