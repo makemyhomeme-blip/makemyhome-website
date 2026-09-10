@@ -2888,8 +2888,16 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 /* ===== Inspiracija — fotografije prostora ===== */
 /* Zaglavlje nosi samo naslov, pa nema potrebe za visinom kao na stranicama sa uvodom */
-.page-hero.hero-usko { padding-bottom: 44px; }
+/* Uzak hero (Inspiracija i sl.) — samo breadcrumb + naslov, pa je zbijen da
+   ostane vise prostora za sadrzaj/slike ispod. */
+.page-hero.hero-usko { padding: 90px 0 20px; }
+.page-hero.hero-usko .breadcrumb { margin-bottom: 12px; }
 .page-hero.hero-usko .section-title { margin-bottom: 0; }
+@media (max-width: 768px) {
+  .page-hero.hero-usko { padding: 74px 0 14px; }
+  .page-hero.hero-usko .breadcrumb { margin-bottom: 8px; }
+  .page-hero.hero-usko .section-title { font-size: 23px; }
+}
 .insp-wrap { padding: 40px 0 74px; background: #fff; }
 /* Filter: na telefonu padajuci izbornik (deset kategorija u redovima je izgledalo neuredno),
    na sirem ekranu dugmad poredana u jedan centriran red. Oba vode isti JS. */
