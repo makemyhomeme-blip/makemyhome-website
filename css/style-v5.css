@@ -340,6 +340,42 @@ ul { list-style: none; }
   box-shadow: var(--shadow-hover);
 }
 
+/* ===== Premium CTA dugmad — monohromatska, da ne "odskacu" bojom =====
+   Terracotta/zelena ostaju kao AKCENAT (linkovi, linije, oznake, hover), ali
+   velika dugmad su svijetla na tamnim pozadinama, a tamna na svijetlim — cist,
+   moderan, uklopljen izgled. (Decor Box dugme namjerno ostaje terracotta.) */
+.btn-light {
+  background: #f4f1ea;
+  color: #1a1a1a;
+  border-color: #f4f1ea;
+  font-weight: 600;
+}
+.btn-light:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+}
+.btn-light i { color: #1a1a1a; }
+
+/* Prozirno "glass" dugme — sekundarna akcija na hero fotografiji. */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.btn-glass:hover {
+  background: #ffffff;
+  color: #1a1a1a;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.btn-glass i { color: currentColor; }
+
 .btn-sm { padding: 10px 20px; font-size: 13px; }
 .btn-lg { padding: 18px 40px; font-size: 17px; }
 
@@ -3399,7 +3435,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 /* --- TAMNE sekcije: primarna dugmad nose TOPLI AKCENAT (terakota) --- */
 #hero .btn-primary,
 #decor-box-promo .btn-primary, #karte-boja .btn-primary,
-.page-hero .btn-primary, .ideja-traka .btn, #footer .btn-primary {
+.page-hero .btn-primary, .ideja-traka .btn-primary, #footer .btn-primary {
   background: var(--akcenat); color: #ffffff; border-color: var(--akcenat);
 }
 #hero .btn-primary:hover,
