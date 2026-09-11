@@ -280,7 +280,7 @@
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=39bdfff0">
+  <link rel="stylesheet" href="css/style-v5.css?v=6a8d02d4">
   <style>
   #decor-box-promo .db-promo-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;}
   #decor-box-promo .db-check-list{list-style:none;padding:0;margin:0 0 28px;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;}
@@ -507,6 +507,45 @@
 @media(min-width:1700px){
   .header-inner{max-width:1720px!important;}
   .nav-link{font-size:13.5px!important;padding:8px 13px!important;}
+}
+</style>
+<style>
+/* ===== HERO "WOW": kinematografski ulaz + spori zoom slike =====
+   Prigušeno i elegantno. LCP je zaštićen: naslov klizi bez fejda (opacity
+   ostaje 1), pa se pojavljuje odmah. Poštuje prefers-reduced-motion. */
+@keyframes heroKen   { from { transform: scale(1); }        to { transform: scale(1.08); } }
+@keyframes heroRise  { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes heroTitle { from { transform: translateY(30px); } to { transform: translateY(0); } }
+
+/* Spori Ken Burns na hero slikama (daje dubinu i "život") */
+#hs-track img { transform-origin: 50% 50%; animation: heroKen 22s ease-in-out infinite alternate; }
+
+/* Sadržaj ulazi u nizu (stagger) */
+#hero .hero-badge   { animation: heroRise .8s cubic-bezier(.2,.7,.2,1) .05s both; }
+#hero .hero-title   { animation: heroTitle .9s cubic-bezier(.2,.7,.2,1) .12s both; }
+#hero .hero-tagline { opacity: 0; animation: heroRise .8s cubic-bezier(.2,.7,.2,1) .34s both; }
+#hero .hero-actions { opacity: 0; animation: heroRise .8s cubic-bezier(.2,.7,.2,1) .48s both; }
+#hero .hero-stats   { opacity: 0; animation: heroRise .8s cubic-bezier(.2,.7,.2,1) .62s both; }
+#hero .hero-scroll  { opacity: 0; animation: heroRise 1s ease .95s both; }
+
+/* Suptilan sjaj koji jednom prijeđe preko svijetlog dugmeta na hover */
+.hero-actions .btn-light { position: relative; overflow: hidden; }
+.hero-actions .btn-light::after {
+  content: ""; position: absolute; top: 0; left: -130%; width: 55%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-18deg); pointer-events: none;
+}
+.hero-actions .btn-light:hover::after { transition: left .75s ease; left: 150%; }
+
+/* Profinjeniji badge — blago staklo za premium osjećaj */
+#hero .hero-badge { -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  #hs-track img,
+  #hero .hero-badge, #hero .hero-title, #hero .hero-tagline,
+  #hero .hero-actions, #hero .hero-stats, #hero .hero-scroll {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
 }
 </style>
 </head>

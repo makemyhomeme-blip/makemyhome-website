@@ -185,8 +185,10 @@
   /* TOPLI AKCENAT — crno-bijelo je bilo previse monotono. Terakota se slaze sa
      drvetom/kamenom i sa narandzastim znakom radnje; koristi se na glavnim
      dugmadima i akcentima. Zelena je za poziv/kontakt (kao WhatsApp). */
-  --akcenat: #c15a33;
-  --akcenat-hover: #a84a26;
+  /* Profinjena terracotta-glina: mekša i toplija od stare žive narandžaste
+     (#c15a33) — djeluje premium/moderno, a ostaje u istoj porodici boja. */
+  --akcenat: #c06a4b;
+  --akcenat-hover: #a5543a;
   --poziv: #1f9d63;
   --poziv-hover: #178a54;
   --dark: #1a1a1a;
