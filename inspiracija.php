@@ -68,15 +68,21 @@ while (true) {
     $krug++;
 }
 
-// Prolaz koji razmakne dvije slike istog proizvoda ako su ipak zavrsile jedna do druge
+// Prolaz koji razmakne dvije slike istog proizvoda ako su ipak zavrsile jedna do druge.
+//
+// VAZNO: swap trazi zamjenu SAMO medju KASNIJIM slikama ($j od $i+1 nadalje) —
+// nikad ranijim. Ranije je krenuo od $j=0, pa je znao da povuce sliku sa VRHA
+// (najnoviju) skroz na dno da razbije susjedstvo: najnovija fotografija (npr.
+// nova kombinacija) je zavrsavala kao POSLJEDNJA umjesto prva. Ovako se razmak
+// pravi tako sto se KASNIJA slika dovuce naprijed, a redoslijed po novosti
+// (najnovije na vrhu) ostaje netaknut.
 $n = count($insSlike);
 $idAt = function ($k) use (&$insSlike, $n) {
     return ($k < 0 || $k >= $n) ? null : $insSlike[$k]['p']['id'];
 };
 for ($i = 1; $i < $n; $i++) {
     if ($idAt($i) !== $idAt($i - 1)) continue;
-    for ($j = 0; $j < $n; $j++) {
-        if ($j === $i) continue;
+    for ($j = $i + 1; $j < $n; $j++) {
         $a = $idAt($i); $b = $idAt($j);
         if ($b === $a) continue;
         if ($b === $idAt($i - 1) || $b === $idAt($i + 1)) continue;
