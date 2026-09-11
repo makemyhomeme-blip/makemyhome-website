@@ -1,0 +1,10 @@
+[
+  {
+    "_opis": "SW215 (Mystic Marble) + CS014 (Soft Beige) na istom TV zidu. Fajlovi su ista fotografija ali razlicite velicine (1024x1536 vs 1320x1756), pa ih md5 ne moze sam povezati. MW300+SW216 se NE navode ovdje jer su bajt-identicni fajlovi pa ih program prepozna sam.",
+    "proizvodi": ["SW215", "CS014"],
+    "slike": [
+      "images/products/gallery-46-1789058882-300.jpg",
+      "images/products/gallery-111-1789059679-292.jpg"
+    ]
+  }
+]
