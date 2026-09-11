@@ -185,10 +185,10 @@
   /* TOPLI AKCENAT — crno-bijelo je bilo previse monotono. Terakota se slaze sa
      drvetom/kamenom i sa narandzastim znakom radnje; koristi se na glavnim
      dugmadima i akcentima. Zelena je za poziv/kontakt (kao WhatsApp). */
-  /* Profinjena terracotta-glina: mekša i toplija od stare žive narandžaste
-     (#c15a33) — djeluje premium/moderno, a ostaje u istoj porodici boja. */
-  --akcenat: #c06a4b;
-  --akcenat-hover: #a5543a;
+  /* Bronza / karamel — topao, luksuzan akcenat koji ide uz drvo i mermer.
+     Ranije živa narandžasta (#c15a33), pa terracotta (#c06a4b) → sada bronza. */
+  --akcenat: #b0844e;
+  --akcenat-hover: #96703f;
   --poziv: #1f9d63;
   --poziv-hover: #178a54;
   --dark: #1a1a1a;
@@ -305,7 +305,7 @@ ul { list-style: none; }
   background: var(--akcenat-hover);
   border-color: var(--akcenat-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(193, 90, 51, 0.35);
+  box-shadow: 0 6px 20px rgba(176, 132, 78, 0.35);
 }
 
 /* Dugme za poziv/kontakt — zelena (kao WhatsApp) */
