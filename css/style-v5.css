@@ -887,14 +887,14 @@ ul { list-style: none; }
    prepozna koji je to panel), samo blago prigusimo, a traka "Rasprodato" nosi
    poruku da se sad ne moze kupiti. */
 .out-of-stock .product-img img {
-  filter: grayscale(0.28) contrast(0.97);
-  opacity: 0.85;
+  filter: none;
+  opacity: 0.96;
 }
 .out-of-stock .product-img::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
   pointer-events: none;
   z-index: 2;
 }
