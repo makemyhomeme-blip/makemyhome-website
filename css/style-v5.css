@@ -883,15 +883,18 @@ ul { list-style: none; }
    Sada se cijela kartica gasi: fotografija ide u sivo i posvijetli, a preko nje
    ide traka sa natpisom. Dezen se i dalje raspoznaje (neko ce ga traziti kad
    opet stigne), ali se na prvi pogled vidi da se to sada ne moze kupiti. */
+/* Rasprodato NE gasi boju do kraja — dezen/boja se i dalje jasno vide (da kupac
+   prepozna koji je to panel), samo blago prigusimo, a traka "Rasprodato" nosi
+   poruku da se sad ne moze kupiti. */
 .out-of-stock .product-img img {
-  filter: grayscale(1) contrast(0.9);
-  opacity: 0.5;
+  filter: grayscale(0.28) contrast(0.97);
+  opacity: 0.85;
 }
 .out-of-stock .product-img::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.12);
   pointer-events: none;
   z-index: 2;
 }
