@@ -92,10 +92,24 @@ for ($i = 1; $i < $n; $i++) {
     }
 }
 
-// Kombinacije se prikazuju na svom PRIRODNOM mjestu u galeriji (redom po
-// vremenu uploada, kao i sve ostalo) — ne guraju se na vrh. Ranije su bile
-// prikvacene na vrh, pa je ista kombinacija stalno stajala prva; to vise nije
-// slucaj. I dalje su jasno oznacene ("Kombinacija" + cipovi panela na slici).
+// Kombinacije se prikazuju na svom PRIRODNOM mjestu (po vremenu uploada) — ne
+// guraju se na vrh. Ali kad se doda vise kombinacija zaredom, sve bi se
+// nakupile na vrhu i "zauzele" ga. Zato ih ovdje RAZMIcemo: ako su dvije
+// kombinacije jedna do druge, drugu spustimo nize (zamijenimo je prvom
+// sljedecom obicnom slikom), pa se kombinacije lijepo prepletu sa sobama.
+$jeKombi = function ($k) use (&$insSlike, $n, $mmhKombiFoto) {
+    return ($k >= 0 && $k < $n) && isset($mmhKombiFoto[$insSlike[$k]['src']]);
+};
+for ($i = 1; $i < $n; $i++) {
+    if (!$jeKombi($i) || !$jeKombi($i - 1)) continue;          // dvije kombinacije zaredom
+    for ($j = $i + 1; $j < $n; $j++) {
+        if ($jeKombi($j)) continue;                            // trazimo OBICNU sliku
+        $bid = $insSlike[$j]['p']['id'];
+        if ($bid === $idAt($i - 1) || $bid === $idAt($i + 1)) continue; // ne pravi novi sudar
+        $t = $insSlike[$i]; $insSlike[$i] = $insSlike[$j]; $insSlike[$j] = $t;
+        break;
+    }
+}
 
 // Oznaku "novo" nosi sve iz posljednje tri sedmice. Racuna se od najnovije fotografije,
 // ne od danasnjeg datuma — da oznaka ne nestane ako se par sedmica nista ne doda.
@@ -148,7 +162,7 @@ arsort($insKat);
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=a44e02dc">
+  <link rel="stylesheet" href="css/style-v5.css?v=04df9dd6">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
