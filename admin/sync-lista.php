@@ -66,6 +66,7 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/koliko-kostaju-zidni-paneli.html' => $base . '/koliko-kostaju-zidni-paneli.html',
     $root . '/zidne-obloge-podgorica.html' => $base . '/zidne-obloge-podgorica.html',
     $root . '/3d-letvice-montaza-cijena.html' => $base . '/3d-letvice-montaza-cijena.html',
+    $root . '/bambus-paneli-vrste-cijene.html' => $base . '/bambus-paneli-vrste-cijene.html',
     // PHP
     $root . '/product.php'      => $base . '/product.php',
     $root . '/products.php'     => $base . '/products.php',

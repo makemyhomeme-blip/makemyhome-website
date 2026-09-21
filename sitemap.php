@@ -86,6 +86,7 @@ function mmhSitemapGradi(): string
         ['dekorativni-zidni-paneli-vodic.html', 'weekly', '0.7'], ['kako-izabrati-panele-po-prostoriji.html', 'weekly', '0.7'],
         ['pu-kamen-izgled-kamena.html', 'weekly', '0.7'], ['koliko-kostaju-zidni-paneli.html', 'weekly', '0.7'],
         ['zidne-obloge-podgorica.html', 'weekly', '0.8'], ['3d-letvice-montaza-cijena.html', 'weekly', '0.8'],
+        ['bambus-paneli-vrste-cijene.html', 'weekly', '0.8'],
         ['uslovi.html', 'weekly', '0.7'], ['reklamacije.html', 'weekly', '0.7'],
         ['privatnost.html', 'weekly', '0.7'],
     ];
