@@ -64,6 +64,8 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/kako-izabrati-panele-po-prostoriji.html' => $base . '/kako-izabrati-panele-po-prostoriji.html',
     $root . '/pu-kamen-izgled-kamena.html' => $base . '/pu-kamen-izgled-kamena.html',
     $root . '/koliko-kostaju-zidni-paneli.html' => $base . '/koliko-kostaju-zidni-paneli.html',
+    $root . '/zidne-obloge-podgorica.html' => $base . '/zidne-obloge-podgorica.html',
+    $root . '/3d-letvice-montaza-cijena.html' => $base . '/3d-letvice-montaza-cijena.html',
     // PHP
     $root . '/product.php'      => $base . '/product.php',
     $root . '/products.php'     => $base . '/products.php',
