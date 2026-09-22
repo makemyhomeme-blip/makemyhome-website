@@ -35,38 +35,19 @@ foreach ($insP as $p) {
     $insPo[$p['id']] = ['p' => $p, 'g' => $g, 't' => $insVrijeme($g[0])];
 }
 
-// Proizvodi poredani po tome ko je zadnji dobio novu fotografiju,
-// pa se kategorije smjenjuju da se ne naredaju dvije iste zaredom.
-uasort($insPo, fn($a, $b) => $b['t'] <=> $a['t']);
-$poKat = [];
-foreach ($insPo as $id => $v) $poKat[$v['p']['category'] ?? ''][] = $id;
-uasort($poKat, fn($a, $b) => $insPo[$b[0]]['t'] <=> $insPo[$a[0]]['t']);
-$redom = [];
-while ($poKat) {
-    foreach (array_keys($poKat) as $k) {
-        $redom[] = array_shift($poKat[$k]);
-        if (!$poKat[$k]) unset($poKat[$k]);
-    }
-}
-
-// Naizmjenicno po jedna slika od svakog proizvoda — nikad dvije iste sobe zaredom
+// SVE fotografije poredane STROGO po vremenu uploada — NAJNOVIJE PRVE, pa starije.
+// Ranije se naizmjenicno vrtjelo po kategorijama (po jedna iz svake), pa su iste
+// slike (3D Terrazzo, akusticni...) konstantno stajale na 2. i 3. mjestu bez
+// obzira na to koliko su stare. Sada svaka NOVA fotografija ide na vrh, a starije
+// se nizu ispod — nema fiksnih mjesta.
 $insSlike = [];
-$krug = 0;
-while (true) {
-    $dodato = false;
-    foreach ($redom as $id) {
-        if (isset($insPo[$id]['g'][$krug])) {
-            $put = $insPo[$id]['g'][$krug];
-            $dodato = true;
-            // Kombinacija (ista slika kod vise proizvoda): zadrzavamo samo prvu
-            // pojavu, ostale duplikate preskacemo da se ne prikaze 2 puta.
-            if (isset($mmhKombiSkip[$put])) continue;
-            $insSlike[] = ['src' => $put, 'p' => $insPo[$id]['p'], 't' => $insVrijeme($put)];
-        }
+foreach ($insPo as $v) {
+    foreach ($v['g'] as $put) {
+        if (isset($mmhKombiSkip[$put])) continue; // duplikat kombinacije — preskoci
+        $insSlike[] = ['src' => $put, 'p' => $v['p'], 't' => $insVrijeme($put)];
     }
-    if (!$dodato) break;
-    $krug++;
 }
+usort($insSlike, fn($a, $b) => $b['t'] <=> $a['t']); // najnovije prvo
 
 // Prolaz koji razmakne dvije slike istog proizvoda ako su ipak zavrsile jedna do druge.
 //
