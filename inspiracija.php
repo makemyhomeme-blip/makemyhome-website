@@ -73,24 +73,10 @@ for ($i = 1; $i < $n; $i++) {
     }
 }
 
-// Kombinacije se prikazuju na svom PRIRODNOM mjestu (po vremenu uploada) — ne
-// guraju se na vrh. Ali kad se doda vise kombinacija zaredom, sve bi se
-// nakupile na vrhu i "zauzele" ga. Zato ih ovdje RAZMIcemo: ako su dvije
-// kombinacije jedna do druge, drugu spustimo nize (zamijenimo je prvom
-// sljedecom obicnom slikom), pa se kombinacije lijepo prepletu sa sobama.
-$jeKombi = function ($k) use (&$insSlike, $n, $mmhKombiFoto) {
-    return ($k >= 0 && $k < $n) && isset($mmhKombiFoto[$insSlike[$k]['src']]);
-};
-for ($i = 1; $i < $n; $i++) {
-    if (!$jeKombi($i) || !$jeKombi($i - 1)) continue;          // dvije kombinacije zaredom
-    for ($j = $i + 1; $j < $n; $j++) {
-        if ($jeKombi($j)) continue;                            // trazimo OBICNU sliku
-        $bid = $insSlike[$j]['p']['id'];
-        if ($bid === $idAt($i - 1) || $bid === $idAt($i + 1)) continue; // ne pravi novi sudar
-        $t = $insSlike[$i]; $insSlike[$i] = $insSlike[$j]; $insSlike[$j] = $t;
-        break;
-    }
-}
+// Kombinacije stoje na svom mjestu PO VREMENU UPLOADA, kao i sve ostalo — ne
+// razmicu se posebno. (Ranije se radio prolaz koji ih raspoređuje da ne budu
+// dvije zaredom, ali je to vuklo starije slike gore i kvarilo redoslijed
+// "najnovije prvo" koji vlasnik zeli. Sada je poredak strogo hronoloski.)
 
 // Oznaku "novo" nosi sve iz posljednje tri sedmice. Racuna se od najnovije fotografije,
 // ne od danasnjeg datuma — da oznaka ne nestane ako se par sedmica nista ne doda.
