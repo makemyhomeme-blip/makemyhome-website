@@ -643,12 +643,18 @@ echo "\n</script>\n";
 @media(min-width:1200px){
   .products-grid{ grid-template-columns:repeat(4,1fr); gap:26px; }
   .cat-grid{ grid-template-columns:repeat(4,1fr); }
+  /* Kartice su sada sire (4 u redu), pa slika od 240px izgleda niska.
+     Podizemo VISINU slike da dezen dodje do izrazaja — tekst ostaje isti.
+     Vazi samo za mrezu proizvoda, ne dira srodne proizvode ni druge kartice. */
+  .products-grid .product-img{ height:300px; }
 }
 @media(min-width:1400px){
   .page-hero .container, .products-section .container{ max-width:1600px; }
+  .products-grid .product-img{ height:330px; }
 }
 @media(min-width:1750px){
   .page-hero .container, .products-section .container{ max-width:1780px; }
+  .products-grid .product-img{ height:360px; }
 }
 </style>
 </head>
