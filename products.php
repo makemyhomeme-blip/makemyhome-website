@@ -941,11 +941,10 @@ echo "\n</script>\n";
             <?php if ($pHl): ?><p class="product-desc"><?= htmlspecialchars($pHl) ?></p><?php endif; ?>
             <div class="product-footer">
               <div class="product-price">
-                <?php if ($pD > 0): $pUst = $pO - $pF; ?>
+                <?php if ($pD > 0): ?>
                   <span style="text-decoration:line-through;color:#8a8f98;font-size:14px;font-weight:400;font-family:var(--font-body);display:block;line-height:1.2;"><?= number_format($pO, 2, ',', '.') ?> €</span>
                   <span style="color:#c0392b;font-size:clamp(20px,5.5vw,25px);font-weight:800;line-height:1.15;"><?= number_format($pF, 2, ',', '.') ?> €</span>
                   <span style="color:#666e7a;font-size:12px;font-weight:400;font-family:var(--font-body);"> / <?= htmlspecialchars($pJed) ?></span>
-                  <span style="display:block;margin-top:5px;width:fit-content;background:#1e8449;color:#fff;font-size:11px;font-weight:700;font-family:var(--font-body);letter-spacing:.02em;padding:2px 8px;border-radius:6px;">Ušteda <?= number_format($pUst, 2, ',', '.') ?> €</span>
                 <?php else: ?>
                   <?= number_format($pF, 2, ',', '.') ?> € <span>/ <?= htmlspecialchars($pJed) ?></span>
                 <?php endif; ?>
