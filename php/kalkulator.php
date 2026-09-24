@@ -41,6 +41,18 @@ function mmhPokrivenostPoKomadu(array $p): ?float
 
     if (($p['category'] ?? '') === '3d-letvice') {
         $w = mmhSirinaLetviceCm($p);
+        // Rezerva: sirina iz "Dimenzije: 280×16cm" (drugi broj = sirina letvice
+        // u cm). Nije izmisljena mjera nego procitana iz upisanih dimenzija —
+        // novije letvice imaju "Dimenzije" ali ne i zaseban red "Širina: ..mm",
+        // pa bi bez ovoga kalkulator ostao prazan.
+        if (!$w) {
+            foreach (($p['features'] ?? []) as $f) {
+                if (preg_match('/(\d{2,3})\s*[×x]\s*(\d{1,3})\s*cm/iu', $f, $m)) {
+                    $w = (float) $m[2];
+                    break;
+                }
+            }
+        }
         return $w ? 2.80 * ($w / 100) : null;
     }
 
