@@ -19,27 +19,10 @@ $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po ID-u) — samo tekstualna polja ----
 $dopune = [
-    148 => [
-        'name' => '3D Letvica – Kožna Siva',
-        'highlight' => 'Meka siva sa efektom kože',
-        'description' =>
-            "Kožna Siva se razlikuje od ostalih sivih letvica po površini — nije glatka ni ravno mat, nego ima finu zrnastu teksturu nalik koži, koja svjetlo lomi mekano umjesto da ga odbija.\n\n"
-          . "Zbog toga zid djeluje toplije i „skuplje\" nego kod obične sive: nijansa je neutralna, ali joj tekstura daje karakter. Ne blista pod svjetlom i ne pokazuje otiske prstiju, pa lijepo stoji i u prostoriji sa jakim osvjetljenjem.\n\n"
-          . "Radi kao mirna pozadina za TV zid, iza kreveta ili u hodniku. Uz toplo drvo omekša prostor, a uz crni metal pravi elegantan, suzdržan kontrast.\n\n"
-          . "280×16 cm, jedna letvica pokriva 0,45 m². Za zid 3×2,6 m treba oko 18 komada. PVC — lijepi se silikonom, siječe skalpelom.",
-        'features' => [
-            'Dimenzije: 280×16cm po letvici',
-            'Boja: siva sa kožnom (zrnastom) teksturom',
-            'Meka mat površina – ne blista i ne hvata otiske prstiju',
-            '3D reljefna površina – vertikalne letvice',
-            'Materijal: PVC plastika',
-            'Montaža: lijepi se silikonom, siječe se skalpelom',
-            'Pogodan za zidove, plafone i pregradne panele',
-        ],
-        'idealFor' => ['Dnevna soba', 'Spavaća soba', 'Hodnik', 'Kancelarija'],
-        'styleMatch' => ['Minimalistički', 'Moderni', 'Japandi', 'Skandinavski'],
-        'badge' => 'Novo',
-    ],
+    // prazno: dopuna za id 148 (3D Letvica – Kožna Siva) je vec upisana
+    // 24.09.2026. Isprazniti mapu poslije upisa je namjerno — da ponovno
+    // pokretanje ne prepise izmjene koje vlasnik u medjuvremenu unese preko
+    // admina. Za sljedeci novi proizvod: popuni mapu, deploy, pokreni, isprazni.
 ];
 
 $sirovo = @file_get_contents($put);
