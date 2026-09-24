@@ -19,10 +19,30 @@ $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po ID-u) — samo tekstualna polja ----
 $dopune = [
-    // prazno namjerno — poslije upisa se mapa isprazni da ponovno pokretanje
-    // ne prepise izmjene koje vlasnik u medjuvremenu unese preko admina.
-    // Vec upisano: id 148 (Kožna Siva) i id 73 (Bijela Sjaj), 24.09.2026.
-    // Za sljedeci proizvod: popuni mapu, deploy, pokreni, isprazni.
+    // Vec upisano: id 148 (Kožna Siva), id 73 (Bijela Sjaj) — 24.09.2026.
+    // Nova 3D letvica za dizajn BW222 (isti dezen kao panel "Pura", id 44).
+    149 => [
+        'name' => '3D Letvica – Pura',
+        'highlight' => 'Topla bijela sa tkanom teksturom',
+        'description' =>
+            "Pura je topla bijela sa mekanom tkanom teksturom — u profilu 3D letvice ta tekstura dobija i dubinu, pa zid izgleda kao mekano platno presavijeno u vertikalna rebra.\n\n"
+          . "Toplina nijanse je ono zbog čega je biramo: hladna bijela u prostoriji bez mnogo sunca djeluje sivo, a Pura ostaje topla i pod oblačnim danom i pod sijalicom. Zbog toga najbolje radi u spavaćim i dnevnim sobama — prostorima gdje zid treba da smiruje.\n\n"
+          . "Ista nijansa postoji i kao ravan panel Pura (BW222), pa možete kombinovati letvice i panel na istom zidu za slojevit izgled.\n\n"
+          . "280×16 cm, jedna letvica pokriva 0,45 m². Za zid 3×2,6 m treba oko 18 komada. PVC — lijepi se silikonom, siječe skalpelom.",
+        'features' => [
+            'Dimenzije: 280×16cm po letvici',
+            'Boja: topla bijela sa tkanom (tekstilnom) teksturom',
+            '3D reljefna površina – vertikalne letvice',
+            'Ista nijansa kao panel Pura (BW222) – panel i letvica u kompletu',
+            'Materijal: PVC plastika',
+            'Montaža: lijepi se silikonom, siječe se skalpelom',
+            'Pogodan za zidove, plafone i pregradne panele',
+            'Šifra: I3D160BW222',
+        ],
+        'idealFor' => ['Spavaća soba', 'Dnevna soba', 'Hodnik', 'Recepcija'],
+        'styleMatch' => ['Skandinavski', 'Japandi', 'Moderni', 'Cozy'],
+        'badge' => 'Novo',
+    ],
 ];
 
 $sirovo = @file_get_contents($put);
