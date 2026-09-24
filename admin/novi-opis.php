@@ -19,10 +19,31 @@ $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po ID-u) — samo tekstualna polja ----
 $dopune = [
-    // prazno: dopuna za id 148 (3D Letvica – Kožna Siva) je vec upisana
-    // 24.09.2026. Isprazniti mapu poslije upisa je namjerno — da ponovno
-    // pokretanje ne prepise izmjene koje vlasnik u medjuvremenu unese preko
-    // admina. Za sljedeci novi proizvod: popuni mapu, deploy, pokreni, isprazni.
+    // id 148 (Kožna Siva) je vec upisan 24.09.2026 — ne ponavljati.
+    // Vlasnik je preimenovao id 73 (bila "Hladno Siva Teksturisana",
+    // sifra I3D160JM001) u sjajnu bijelu i promijenio sliku, pa stari opis
+    // vise ne odgovara. Ovdje ide nov tekst za sjajnu bijelu.
+    73 => [
+        'name' => '3D Letvica – Bijela Sjaj',
+        'highlight' => 'Visoki sjaj koji posvjetljuje prostor',
+        'description' =>
+            "Bijela Sjaj je visoki sjaj — lakirana bijela površina koja odbija svjetlo skoro kao staklo. Za razliku od mat bijele, ova letvica „pali\" prostor: hvata svjetlo sa prozora i lampi i vraća ga nazad, pa manja ili mračnija soba odmah djeluje veća i svjetlija.\n\n"
+          . "Sjaj naglašava i sam reljef — vertikalne brazde pod svjetlom dobiju tanke linije odsjaja, što zidu daje čist, luksuzan izgled.\n\n"
+          . "Glatka lakirana površina se lako održava: obriše se vlažnom krpom i ne upija prašinu. Pod jakim direktnim svjetlom sjaj je izražen, pa je najbolja tamo gdje želite svijetao, moderan prostor — ne za prigušenu, mirnu atmosferu.\n\n"
+          . "280×16 cm, jedna letvica pokriva 0,45 m². Za zid 3×2,6 m treba oko 18 komada. PVC — lijepi se silikonom, siječe skalpelom.",
+        'features' => [
+            'Dimenzije: 280×16cm po letvici',
+            'Boja: bijela, visoki sjaj (lakirana površina)',
+            'Sjajna površina – odbija svjetlo i posvjetljuje prostor',
+            '3D reljefna površina – vertikalne letvice',
+            'Materijal: PVC plastika',
+            'Lako održavanje: briše se vlažnom krpom, ne upija prašinu',
+            'Montaža: lijepi se silikonom, siječe se skalpelom',
+            'Šifra: I3D160JM001',
+        ],
+        'idealFor' => ['Dnevna soba', 'Kupatilo', 'Hodnik', 'Manje prostorije'],
+        'styleMatch' => ['Moderni', 'Glamurozni', 'Minimalistički', 'Skandinavski'],
+    ],
 ];
 
 $sirovo = @file_get_contents($put);
