@@ -19,9 +19,11 @@ $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po ID-u) — samo tekstualna polja ----
 $dopune = [
-    // Vlasnik trazi da se NE oznacavaju kao "Novo" — skidamo badge.
-    148 => ['badge' => ''],
-    149 => ['badge' => ''],
+    // prazno namjerno — poslije upisa se mapa isprazni da ponovno pokretanje
+    // ne prepise izmjene koje vlasnik u medjuvremenu unese preko admina.
+    // Vec obradjeno 24.09.2026: id 148 (Kožna Siva), id 73 (Bijela Sjaj),
+    // id 149 (Pura) — opisi + skinut "Novo" badge sa 148 i 149.
+    // Za sljedeci proizvod: popuni mapu, deploy, pokreni, isprazni.
 ];
 
 $sirovo = @file_get_contents($put);
