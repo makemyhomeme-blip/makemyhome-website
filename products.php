@@ -637,15 +637,18 @@ echo "\n</script>\n";
   .header-inner{max-width:1720px!important;}
   .nav-link{font-size:13.5px!important;padding:8px 13px!important;}
 }
-/* Sire kartice na velikim ekranima — da ne ostaje puno praznog sa strana.
+/* Krupnije kartice na desktopu: FIKSNO 4 u redu (ne auto-fill koji je davao 5),
+   uz siri kontejner — pa svaka kartica bude veca, a manje praznog sa strana.
    Vazi samo na stranicama kategorija/proizvoda (ovaj stil je u products.php). */
+@media(min-width:1200px){
+  .products-grid{ grid-template-columns:repeat(4,1fr); gap:26px; }
+  .cat-grid{ grid-template-columns:repeat(4,1fr); }
+}
 @media(min-width:1400px){
-  .page-hero .container, .products-section .container{ max-width:1560px; }
-  .products-grid{ grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:26px; }
-  .cat-grid{ grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }
+  .page-hero .container, .products-section .container{ max-width:1600px; }
 }
 @media(min-width:1750px){
-  .page-hero .container, .products-section .container{ max-width:1720px; }
+  .page-hero .container, .products-section .container{ max-width:1780px; }
 }
 </style>
 </head>
