@@ -19,54 +19,11 @@ $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po ID-u) — samo tekstualna polja ----
 $dopune = [
-    // id 78 (I3D160016): vlasnik promijenio sliku — vise NIJE hladno siva nego
-    // topla greige. Nov naziv + opis. Bez "Novo" oznake.
-    78 => [
-        'name' => '3D Letvica – Latte',
-        'highlight' => 'Topla greige nijansa koja smiruje',
-        'description' =>
-            "Latte je topla greige — bež sa blagim sivim podtonom, negdje između pijeska i taupe. Nije ni hladno siva ni žuta bež, nego mirna neutralna nijansa koja se lako uklapa uz drvo, kamen i tekstil.\n\n"
-          . "Toplina je ono što je izdvaja: za razliku od hladne sive, Latte i u prostoriji bez mnogo sunca ostaje prijatna i ne djeluje sivo. Zbog toga dobro radi u spavaćim i dnevnim sobama, kao mirna pozadina koja ne vuče pažnju na sebe.\n\n"
-          . "Mat površina ne blista pod svjetlom, pa reljef letvica ostaje suptilan i elegantan, bez jakih sjenki.\n\n"
-          . "280×16 cm, jedna letvica pokriva 0,45 m². Za zid 3×2,6 m treba oko 18 komada. PVC — lijepi se silikonom, siječe skalpelom.",
-        'features' => [
-            'Dimenzije: 280×16cm po letvici',
-            'Boja: topla greige (bež sa sivim podtonom)',
-            'Mat površina – ne blista, suptilan reljef',
-            '3D reljefna površina – vertikalne letvice',
-            'Materijal: PVC plastika',
-            'Montaža: lijepi se silikonom, siječe se skalpelom',
-            'Pogodan za zidove, plafone i pregradne panele',
-            'Šifra: I3D160016',
-        ],
-        'idealFor' => ['Spavaća soba', 'Dnevna soba', 'Hodnik', 'Kancelarija'],
-        'styleMatch' => ['Skandinavski', 'Japandi', 'Prirodni', 'Minimalistički'],
-        'badge' => '',
-    ],
-    // id 150 (I3D160025): nova 3D letvica, svijetla hladna siva. Bez "Novo".
-    150 => [
-        'name' => '3D Letvica – Svijetlo Siva',
-        'highlight' => 'Svijetla, mirna siva za moderan prostor',
-        'description' =>
-            "Svijetlo Siva je čista, svijetla siva sa blago hladnim tonom — dovoljno neutralna da bude pozadina, a dovoljno svijetla da ne zatvara prostor kao tamnije sive.\n\n"
-          . "Zbog svjetline lijepo radi u manjim ili slabije osvijetljenim prostorijama: reflektuje svjetlo i drži prostor prozračnim, a opet daje zidu tihu boju umjesto obične bijele.\n\n"
-          . "Kao neutralna pozadina ističe sve što se stavi ispred nje — policu, fotelju, biljku — bez da mijenja njihovu boju. U kancelariji je siguran izbor za zid iza leđa na video pozivima.\n\n"
-          . "Mat površina drži reljef suptilnim; uz toplo drvo pravi ravnotežu, uz crni metal ide u moderan, industrijski pravac.\n\n"
-          . "280×16 cm, jedna letvica pokriva 0,45 m². Za zid 3×2,6 m treba oko 18 komada. PVC — lijepi se silikonom, siječe skalpelom.",
-        'features' => [
-            'Dimenzije: 280×16cm po letvici',
-            'Boja: svijetla siva (blago hladan ton)',
-            'Mat površina – suptilan reljef, ne blista',
-            '3D reljefna površina – vertikalne letvice',
-            'Materijal: PVC plastika',
-            'Montaža: lijepi se silikonom, siječe se skalpelom',
-            'Pogodan za zidove, plafone i pregradne panele',
-            'Šifra: I3D160025',
-        ],
-        'idealFor' => ['Dnevna soba', 'Spavaća soba', 'Kancelarija', 'Hodnik'],
-        'styleMatch' => ['Minimalistički', 'Moderni', 'Skandinavski', 'Japandi'],
-        'badge' => '',
-    ],
+    // prazno namjerno — poslije upisa se mapa isprazni da ponovno pokretanje
+    // ne prepise izmjene koje vlasnik u medjuvremenu unese preko admina.
+    // Vec obradjeno 24.09.2026: id 148 (Kožna Siva), id 73 (Bijela Sjaj),
+    // id 149 (Pura), id 78 (Latte, bila Hladno Siva), id 150 (Svijetlo Siva).
+    // Za sljedeci proizvod: popuni mapu, deploy, pokreni, isprazni.
 ];
 
 $sirovo = @file_get_contents($put);
