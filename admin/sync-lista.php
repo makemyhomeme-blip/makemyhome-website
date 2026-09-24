@@ -144,5 +144,6 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/log-sitemap.php'             => $base . '/admin/log-sitemap.php',
     $adminDir . '/provjera-sajta.php'          => $base . '/admin/provjera-sajta.php',
     $adminDir . '/cijene.php'             => $base . '/admin/cijene.php',
+    $adminDir . '/novi-opis.php'          => $base . '/admin/novi-opis.php',
 ];
 };
