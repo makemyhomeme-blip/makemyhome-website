@@ -17,17 +17,8 @@ $root = dirname(__DIR__);
 $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po sifri, velika slova) ----
-$novaCijena = []; // prazno: cijene se ne mijenjaju
-$noviPopust = [
-    // 20% na 3D letvice: 039, 022, 052, cs022
-    'I3D160039'   => 20,   // Krem Bijela
-    'I3D160022'   => 20,   // Kožna Siva
-    'I3D170SP052' => 20,   // Prirodni Javor
-    'I3D160CS022' => 20,   // Midnight Black (letvica)
-    // 40% na: 170 M51-01 i jm01
-    '170 M51-01'  => 40,   // Topli Tik (Mat)
-    'I3D160JM001' => 40,   // Bijela Sjaj (vec 40 — bez promjene)
-];
+$novaCijena = []; // prazno: izmjene su vec upisane
+$noviPopust = []; // prazno: popusti (039/022/052/cs022 20%, 170 M51-01 40%) vec upisani 24.09.2026
 
 $sirovo = @file_get_contents($put);
 $P = json_decode($sirovo, true);
