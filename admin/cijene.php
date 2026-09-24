@@ -17,13 +17,8 @@ $root = dirname(__DIR__);
 $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po sifri, velika slova) ----
-$novaCijena = [ // sifra => nova cijena (string, kao i ostatak fajla)
-    'BW008' => '94.99', 'BW224' => '94.99', 'MW312' => '94.99', 'CQ006' => '94.99',
-    'SW003' => '94.99', 'MW321' => '94.99', 'SW215' => '94.99', 'SW212' => '94.99',
-];
-$noviPopust = [ // sifra => popust u procentima
-    'YL056' => 40, 'JS23007' => 40, 'I3D160JM001' => 40,
-];
+$novaCijena = []; // prazno: izmjene su vec upisane
+$noviPopust = []; // prazno
 
 $sirovo = @file_get_contents($put);
 $P = json_decode($sirovo, true);
