@@ -17,8 +17,12 @@ $root = dirname(__DIR__);
 $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po sifri, velika slova) ----
-$novaCijena = []; // prazno: izmjene su vec upisane
-$noviPopust = []; // prazno: SPC04-08 na 40% vec upisano 25.09.2026
+$novaCijena = []; // prazno: cijene se ne mijenjaju
+$noviPopust = [
+    // Svi akusticni paneli (na stanju) na 40%
+    'AKU063' => 40, 'AKU064' => 40, 'AKU060' => 40, 'AKU041' => 40, 'AKU005' => 40,
+    'AKU051' => 40, 'AKU050' => 40, 'AKU054' => 40, 'AKU053' => 40,
+];
 
 $sirovo = @file_get_contents($put);
 $P = json_decode($sirovo, true);
