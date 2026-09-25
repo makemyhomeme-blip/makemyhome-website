@@ -17,15 +17,8 @@ $root = dirname(__DIR__);
 $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po sifri, velika slova) ----
-$novaCijena = []; // prazno: cijene se ne mijenjaju
-$noviPopust = [
-    // SPC pod — sve na 40% (bilo 30%)
-    'SPC04' => 40,
-    'SPC05' => 40,
-    'SPC06' => 40,
-    'SPC07' => 40,
-    'SPC08' => 40,
-];
+$novaCijena = []; // prazno: izmjene su vec upisane
+$noviPopust = []; // prazno: SPC04-08 na 40% vec upisano 25.09.2026
 
 $sirovo = @file_get_contents($put);
 $P = json_decode($sirovo, true);
