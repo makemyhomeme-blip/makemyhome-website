@@ -19,11 +19,29 @@ $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po ID-u) — samo tekstualna polja ----
 $dopune = [
-    // prazno namjerno — poslije upisa se mapa isprazni da ponovno pokretanje
-    // ne prepise izmjene koje vlasnik u medjuvremenu unese preko admina.
-    // Vec obradjeno 24.09.2026: id 148 (Kožna Siva), id 73 (Bijela Sjaj),
-    // id 149 (Pura), id 78 (Latte, bila Hladno Siva), id 150 (Svijetlo Siva).
-    // Za sljedeci proizvod: popuni mapu, deploy, pokreni, isprazni.
+    // Nova 3D letvica za dizajn BW220 (isti dezen kao panel "Blanc", id 41).
+    151 => [
+        'name' => '3D Letvica – Blanc',
+        'highlight' => 'Topla krem u lanenom tonu',
+        'description' =>
+            "Blanc je topla krem nijansa sa lanenom tkanom teksturom — u profilu 3D letvice ta tkanina dobija dubinu, pa zid izgleda kao mekano laneno platno presavijeno u vertikalna rebra.\n\n"
+          . "Krem ton je topliji od čiste bijele: pod toplom sijalicom uveče bijela zna da požuti i djeluje prljavo, dok Blanc ostaje ista jer je već topla. Zbog toga najbolje radi u spavaćim i dnevnim sobama, gdje se svjetlo mijenja tokom dana.\n\n"
+          . "Ista nijansa postoji i kao ravan panel Blanc (BW220), pa možete kombinovati letvice i panel na istom zidu za slojevit izgled.\n\n"
+          . "280×16 cm, jedna letvica pokriva 0,45 m². Za zid 3×2,6 m treba oko 18 komada. PVC — lijepi se silikonom, siječe skalpelom.",
+        'features' => [
+            'Dimenzije: 280×16cm po letvici',
+            'Boja: topla krem sa lanenom (tkanom) teksturom',
+            '3D reljefna površina – vertikalne letvice',
+            'Ista nijansa kao panel Blanc (BW220) – panel i letvica u kompletu',
+            'Materijal: PVC plastika',
+            'Montaža: lijepi se silikonom, siječe se skalpelom',
+            'Pogodan za zidove, plafone i pregradne panele',
+            'Šifra: I3D160BW220',
+        ],
+        'idealFor' => ['Spavaća soba', 'Dnevna soba', 'Hodnik', 'Recepcija'],
+        'styleMatch' => ['Skandinavski', 'Japandi', 'Moderni', 'Cozy'],
+        'badge' => '',
+    ],
 ];
 
 $sirovo = @file_get_contents($put);

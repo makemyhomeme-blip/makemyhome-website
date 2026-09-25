@@ -906,6 +906,7 @@ async function renderProductDetail() {
     43: [81], 81: [43],          // BW809
     45: [79], 79: [45],          // BW008
     44: [149], 149: [44],        // BW222 (panel Pura ↔ 3D Letvica Pura)
+    41: [151], 151: [41],        // BW220 (panel Blanc ↔ 3D Letvica Blanc)
     110: [77], 77: [110],        // Classic CS029 ↔ 3D Letvica 029 Topli Mahagonija
     112: [72], 72: [112],        // Classic CS013 ↔ 3D Letvica CS013 Hladno Siva
     113: [71], 71: [113],        // Classic CS022 ↔ 3D Letvica CS022 Betonski Sivi

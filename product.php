@@ -715,6 +715,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           43 => [81], 81 => [43],     // BW809
           45 => [79], 79 => [45],     // BW008
           44 => [149], 149 => [44],   // BW222 (panel Pura ↔ 3D Letvica Pura)
+          41 => [151], 151 => [41],   // BW220 (panel Blanc ↔ 3D Letvica Blanc)
           110 => [77], 77 => [110],   // Classic CS029 ↔ 3D Letvica 029 Topli Mahagonij
           112 => [72], 72 => [112],   // Classic CS013 ↔ 3D Letvica CS013 Hladno Siva
           113 => [71], 71 => [113],   // Classic CS022 ↔ 3D Letvica CS022 Betonski Sivi
@@ -1114,7 +1115,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=f8101bd8"></script>
-<script src="js/products.js?v=b4317283"></script>
+<script src="js/products.js?v=5d828dfa"></script>
 <script src="js/cart.js?v=25285928"></script>
 <script>
   renderProductDetail();
