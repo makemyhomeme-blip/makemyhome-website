@@ -442,17 +442,22 @@ function showCategoryProducts(catId) {
 
   // Render products
   const container = document.getElementById('products-container');
-  const filtered = allProducts.filter(p => p.category === catId);
+
+  /* products.php je kartice vec ispisao (SSR), a ova funkcija se zove samo pri
+     ucitavanju. Ako su kartice tu — ne diramo ih. Ovo mora biti PRIJE filtera:
+     virtuelna kategorija "akcija" nema nijedan proizvod sa category==='akcija',
+     pa bi inace ovdje pisalo "Nema proizvoda" i pregazilo SSR mrezu. */
+  if (container.querySelector('.product-card')) { initAnimations(); return; }
+
+  // Rezerva (kad SSR nije ispisao): "akcija" = svi na popustu, inace po kategoriji.
+  const filtered = catId === 'akcija'
+    ? allProducts.filter(p => (parseInt(p.discount) || 0) > 0 && p.inStock !== false)
+    : allProducts.filter(p => p.category === catId);
 
   if (filtered.length === 0) {
     container.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gray);padding:60px 0;">Nema proizvoda u ovoj kategoriji.</p>';
     return;
   }
-
-  /* Isto kao gore: products.php je kartice vec ispisao, a ova funkcija se zove
-     samo pri ucitavanju. Naslov, brojac i dugme "nazad" iznad se svejedno
-     postave, mijenja se samo to da se mreza ne crta po drugi put. */
-  if (container.querySelector('.product-card')) { initAnimations(); return; }
 
   container.innerHTML = filtered.map(p => renderProductCard(p)).join('');
   initAnimations();

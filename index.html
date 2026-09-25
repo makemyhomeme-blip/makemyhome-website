@@ -654,6 +654,24 @@
   <div id="hs-dots" style="position:absolute;bottom:92px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:4;pointer-events:none;"></div>
 </section>
 
+<!-- ===== AKCIJA TRAKA ===== -->
+<style>
+  #akcija-traka{display:block;text-decoration:none;background:linear-gradient(90deg,#b0271a,#e74c3c);color:#fff;transition:filter .2s;}
+  #akcija-traka:hover{filter:brightness(1.07);}
+  #akcija-traka .at-in{display:flex;align-items:center;justify-content:center;gap:10px 20px;flex-wrap:wrap;padding:14px 16px;text-align:center;}
+  #akcija-traka .at-glavni{font-size:clamp(15px,2.4vw,19px);font-weight:800;letter-spacing:.3px;}
+  #akcija-traka .at-pod{font-size:14px;font-weight:600;opacity:.95;}
+  #akcija-traka .at-dug{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#b0271a;font-weight:800;font-size:14px;padding:9px 18px;border-radius:100px;white-space:nowrap;}
+  @media(max-width:600px){ #akcija-traka .at-pod{display:none;} #akcija-traka .at-in{gap:10px 14px;} }
+</style>
+<a href="/kategorija/akcija" id="akcija-traka" aria-label="Akcija – svi proizvodi na popustu">
+  <div class="container at-in">
+    <span class="at-glavni"><i class="fas fa-fire" style="margin-right:8px;"></i>AKCIJA — sniženja do &minus;40%</span>
+    <span class="at-pod">na odabrane panele, 3D letvice i SPC pod</span>
+    <span class="at-dug">Pogledaj sve na popustu <i class="fas fa-arrow-right"></i></span>
+  </div>
+</a>
+
 <!-- ===== SHOWCASE SEKCIJA ===== -->
 <section id="showcase">
   <div class="container">
@@ -1253,7 +1271,7 @@
 </button>
 
 <script src="js/main-v4.js?v=f8101bd8"></script>
-<script src="js/products.js?v=403c512b"></script>
+<script src="js/products.js?v=b4317283"></script>
 <script src="js/cart.js?v=25285928"></script>
 <script>
   // Učitaj kategorije i featured proizvode

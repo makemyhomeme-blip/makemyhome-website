@@ -1114,7 +1114,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=f8101bd8"></script>
-<script src="js/products.js?v=403c512b"></script>
+<script src="js/products.js?v=b4317283"></script>
 <script src="js/cart.js?v=25285928"></script>
 <script>
   renderProductDetail();

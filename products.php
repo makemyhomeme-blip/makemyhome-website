@@ -37,7 +37,8 @@ $catStari  = preg_replace('/[^a-z0-9\-]/', '', strtolower($_GET['category'] ?? $
 // napravi 301 koji vodi na 404 (Google to prijavljuje kao "redirect error").
 $catPostoje = ['bambus-paneli','bambus-drveni','bambus-tekstilni','bambus-mermerni',
                'bambus-metalni','bambus-kozni','classic','3d-letvice','akusticni-paneli',
-               'aluminijum-lajsne','spc-pod','pu-kamen','mdf','flex-stone'];
+               'aluminijum-lajsne','spc-pod','pu-kamen','mdf','flex-stone',
+               'akcija']; // virtuelna kategorija: svi proizvodi na popustu
 
 if ($catPretty === '' && $catStari !== '') {
     if (in_array($catStari, $catPostoje, true)) {
@@ -75,6 +76,7 @@ $catNames = [
   'classic'          => 'Classic Paneli',
   'mdf'              => 'MDF Paneli',
   'flex-stone'       => 'Flex Stone',
+  'akcija'           => 'Akcija – Sniženja',
 ];
 
 $catImages = [
@@ -92,6 +94,7 @@ $catImages = [
   'classic'          => 'images/products/product-1784309442-679.jpg',
   'mdf'              => 'images/products/product-1775489604-493.jpg',
   'flex-stone'       => 'images/products/product-1775307391-584.jpg',
+  'akcija'           => 'images/products/product-1785262175-466.jpg',
 ];
 
 // H1 po kategoriji — svaka stranica mora imati SVOJ glavni naslov sa svojim ključnim riječima
@@ -110,6 +113,7 @@ $catH1 = [
   'pu-kamen'         => 'PU Dekorativni Kamen za Zid – Imitacija Kamena',
   'mdf'              => 'MDF Kanelirani Zidni Paneli',
   'flex-stone'       => 'Flex Stone – Savitljivi Kameni Furnir',
+  'akcija'           => 'Akcija i Sniženja – Zidni Paneli na Popustu',
 ];
 
 // Nepoznata kategorija (?category=nesto-cega-nema) MORA vratiti 404, ne 200 —
@@ -171,6 +175,7 @@ $catDescs = [
   'classic'          => 'Classic zidni paneli 280x122cm, od 69,59 € po komadu. Jednobojne obloge u bijeloj i neutralnim tonovima, 3,42 m² po panelu. Podgorica, Crna Gora.',
   'mdf'              => 'MDF kanelirani zidni paneli — rebrasti zid od 87,99 € po komadu, 5 modela. Poručuju se po narudžbi, rok dogovorom. Showroom u Podgorici, Crna Gora.',
   'flex-stone'       => 'Flex Stone savitljivi kameni furnir od 36,79 €. Lijepi se na zid, stub ili luk — pravi kamen debljine 2 mm. Podgorica, dostava po Crnoj Gori.',
+  'akcija'           => 'Svi proizvodi na popustu — 3D letvice, paneli i SPC pod na sniženju do -40%. Make My Home Decor, Podgorica, dostava po Crnoj Gori.',
 ];
 $ogDesc   = $cat
   ? ($catDescs[$cat] ?? "Pregledajte {$catName} – Make My Home Decor Podgorica, Crna Gora. Zidni paneli i dekorativne obloge.")
@@ -230,6 +235,7 @@ $catTitles = [
   'pu-kamen'         => 'PU Dekorativni Kamen za Zid – Imitacija',
   'mdf'              => 'MDF Kanelirani Paneli – Rebrasti Zid',
   'flex-stone'       => 'Flex Stone – Savitljivi Kameni Furnir',
+  'akcija'           => 'Akcija i Sniženja – Paneli na Popustu',
 ];
 
 // Vodici koji tematski pripadaju kategoriji (unutrasnje povezivanje)
@@ -290,7 +296,7 @@ $pageTitle = $cat
   <meta name="twitter:description" content="<?= htmlspecialchars($ogDesc) ?>">
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
   <link rel="canonical" href="<?= htmlspecialchars($ogUrl) ?>">
-<?php if ($mmhTrazi !== ''): ?>
+<?php if ($mmhTrazi !== '' || $cat === 'akcija'): ?>
   <meta name="robots" content="noindex, follow">
 <?php endif; ?>
   <title><?= htmlspecialchars($pageTitle) ?></title>
@@ -313,6 +319,14 @@ if (!$cat) {
   $_listProds = $_allProds;
 } elseif ($cat === 'bambus-paneli') {
   $_listProds = array_values(array_filter($_allProds, fn($p) => in_array($p['category'] ?? '', $_bambusCats)));
+} elseif ($cat === 'akcija') {
+  // Virtuelna kategorija: svi proizvodi koji su na popustu, i na stanju.
+  // Sortirano po visini popusta (najveci prvi) pa po nazivu.
+  $_listProds = array_values(array_filter($_allProds, fn($p) =>
+      (int)($p['discount'] ?? 0) > 0 && ($p['inStock'] ?? true) !== false));
+  usort($_listProds, fn($a, $b) =>
+      ((int)($b['discount'] ?? 0) <=> (int)($a['discount'] ?? 0))
+      ?: strcmp((string)($a['name'] ?? ''), (string)($b['name'] ?? '')));
 } else {
   $_listProds = array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat));
 }
@@ -1121,7 +1135,7 @@ echo "\n</script>\n";
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
 <script src="js/main-v4.js?v=f8101bd8"></script>
-<script src="js/products.js?v=403c512b"></script>
+<script src="js/products.js?v=b4317283"></script>
 <script src="js/cart.js?v=25285928"></script>
 <script>
   initProductsPage();
