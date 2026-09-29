@@ -977,6 +977,19 @@
 
 <!-- ===== ISTAKNUTI PROIZVODI ===== -->
 <section id="featured">
+  <style>
+  /* Istaknuti proizvodi: krupnije kartice na desktopu — isto kao na
+     stranicama kategorija (siri kontejner, 4 u redu, visa slika). */
+  @media(min-width:1200px){
+    #featured .container{ max-width:1600px; }
+    #featured .products-grid{ grid-template-columns:repeat(4,1fr); gap:26px; }
+    #featured .product-img{ height:300px; }
+  }
+  @media(min-width:1750px){
+    #featured .container{ max-width:1780px; }
+    #featured .product-img{ height:340px; }
+  }
+  </style>
   <div class="container">
     <div class="featured-header">
       <div style="text-align:center;flex:1;">
