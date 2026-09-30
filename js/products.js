@@ -997,6 +997,12 @@ async function renderProductDetail() {
     const res = document.getElementById('calc-result');
     if (!res || area <= 0) return;
 
+    // Roba bez cijene (u pripremi): ne racunaj "~NaN €", nego pozovi na upit.
+    const imaCijenu = parseFloat(product.price) > 0;
+    const cijenaLinija = (tc) => imaCijenu
+      ? `<span style="font-size:15px;">Okvirna cijena: <strong>~${tc} €</strong></span>`
+      : `<span style="font-size:14px;color:#8a8f98;">Cijena na upit — pošaljite mjere pa vam javimo</span>`;
+
     if (product.category === 'spc-pod') {
       const areaWithWaste = area * 1.10;
       const m2Needed = Math.ceil(areaWithWaste * 10) / 10; // round up to 0.1
@@ -1006,7 +1012,7 @@ async function renderProductDetail() {
         <div style="line-height:1.7;">
           Prostorija <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
           <span style="color:#9b7d56;">+10% za rezove</span> → trebaš <strong>${m2Needed.toFixed(1).replace('.',',')} m²</strong><br>
-          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+          ${cijenaLinija(totalCost)}
         </div>`;
       return;
     }
@@ -1031,7 +1037,7 @@ async function renderProductDetail() {
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
           <span style="color:#1a1a1a;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${puDims.w}×${puDims.h}cm)<br>
-          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+          ${cijenaLinija(totalCost)}
         </div>`;
     } else if (mdfDims) {
       const areaWithBuffer = area * 1.05;
@@ -1042,7 +1048,7 @@ async function renderProductDetail() {
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
           <span style="color:#1a1a1a;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${mdfDims.w}×${mdfDims.h}cm)<br>
-          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+          ${cijenaLinija(totalCost)}
         </div>`;
     } else if (flexDims) {
       const areaWithBuffer = area * 1.05;
@@ -1053,7 +1059,7 @@ async function renderProductDetail() {
         <div style="line-height:1.7;">
           Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(2).replace('.',',')} m²</strong><br>
           <span style="color:#1a1a1a;">+5% rezerva</span> → trebaš <strong>${total} ${label}</strong> (${flexDims.w}×${flexDims.h}cm)<br>
-          <span style="font-size:15px;">Okvirna cijena: <strong>~${totalCost} €</strong></span>
+          ${cijenaLinija(totalCost)}
         </div>`;
     } else if (letvicaDims) {
       const total = Math.ceil(area / coveragePerUnit);
