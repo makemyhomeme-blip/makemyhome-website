@@ -132,5 +132,20 @@
    "images/products/flex-starmoon-stone-beige-p2.jpg",
    "images/products/flex-starmoon-stone-beige-p3.jpg"
   ]
+ },
+ "LINESTONE BOARD BEIGE": {
+  "gallery": [
+   "images/products/flex-linestone-board-beige-p1.jpg"
+  ]
+ },
+ "LINESTONE BOARD DARK GREY": {
+  "gallery": [
+   "images/products/flex-linestone-board-dark-grey-p1.jpg"
+  ]
+ },
+ "FINELINE STONE GREY": {
+  "gallery": [
+   "images/products/flex-fineline-stone-grey-p1.jpg"
+  ]
  }
 }
