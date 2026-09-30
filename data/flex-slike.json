@@ -215,7 +215,34 @@
  },
  "LINEAR TRAVERTINE CLAYBANK": {
   "gallery": [
-   "images/products/flex-linear-travertine-claybank-p1.jpg"
+   "images/products/flex-linear-travertine-claybank-a-p1.jpg",
+   "images/products/flex-linear-travertine-claybank-b-p1.jpg",
+   "images/products/flex-linear-travertine-claybank-c-p1.jpg"
+  ]
+ },
+ "PANDORA MARBLE PILLAR": {
+  "gallery": [
+   "images/products/flex-pandora-marble-pillar-p1.jpg"
+  ]
+ },
+ "WEAVING BEIGE": {
+  "gallery": [
+   "images/products/flex-weaving-beige-p1.jpg"
+  ]
+ },
+ "WEAVING JACINTH": {
+  "gallery": [
+   "images/products/flex-weaving-jacinth-p1.jpg"
+  ]
+ },
+ "WEAVING KHAKI": {
+  "gallery": [
+   "images/products/flex-weaving-khaki-p1.jpg"
+  ]
+ },
+ "WEAVING GREY": {
+  "gallery": [
+   "images/products/flex-weaving-grey-p1.jpg"
   ]
  }
 }
