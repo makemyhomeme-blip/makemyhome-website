@@ -106,6 +106,8 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/images/og-dijeljenje.jpg' => $base . '/images/og-dijeljenje.jpg',
     // Eksplicitne kombinacije panela (koje slike prikazuju vise proizvoda).
     $root . '/data/kombinacije.json' => $base . '/data/kombinacije.json',
+    // Tekst za nove Flex Stone proizvode (dodaje ih admin/dodaj-flex.php).
+    $root . '/data/flex-tekst.json' => $base . '/data/flex-tekst.json',
     // Kombinacije panela (shop the look) — slike prostora sa dva panela + podaci.
     // Karte boja: dva PDF-a koja se preuzimaju sa Decor Box stranice, i dvije
     // slicice sastavljene od stvarnih dezena iz tih karata. Odjeljak na
@@ -145,5 +147,6 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/provjera-sajta.php'          => $base . '/admin/provjera-sajta.php',
     $adminDir . '/cijene.php'             => $base . '/admin/cijene.php',
     $adminDir . '/novi-opis.php'          => $base . '/admin/novi-opis.php',
+    $adminDir . '/dodaj-flex.php'         => $base . '/admin/dodaj-flex.php',
 ];
 };

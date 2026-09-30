@@ -331,6 +331,13 @@ if (!$cat) {
   $_listProds = array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat));
 }
 
+/* Sakrij robu koja je JOŠ u pripremi — nema sliku i/ili cijenu. Novi proizvodi
+   se unesu s tekstom (naziv, opis, dimenzije), a vlasnik naknadno doda sliku i
+   cijenu preko admina; do tada se ne prikazuju (da nema praznih kartica).
+   Cim dobiju sliku i cijenu, sami se pojave. Pretraga i brojac to poštuju. */
+$mmhSpreman = fn($p) => trim((string)($p['image'] ?? '')) !== '' && (float)($p['price'] ?? 0) > 0;
+$_listProds = array_values(array_filter($_listProds, $mmhSpreman));
+
 /* ===== PRETRAGA (?search=) =====
    U WebSite schemi na pocetnoj stoji SearchAction koji Google-u obecava da se
    pretraga radi preko products.html?search=<pojam>. Taj parametar se do sada
@@ -803,6 +810,8 @@ echo "\n</script>\n";
     $brojUKat = [];
     foreach ($_allProds as $pp) {
         $k = $pp['category'] ?? '';
+        // Ne broji robu u pripremi (bez slike/cijene) — vidi $mmhSpreman gore.
+        if (trim((string)($pp['image'] ?? '')) === '' || (float)($pp['price'] ?? 0) <= 0) continue;
         if ($k !== '') $brojUKat[$k] = ($brojUKat[$k] ?? 0) + 1;
     }
     $mmhKartice = [];
@@ -1134,8 +1143,8 @@ echo "\n</script>\n";
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js?v=f8101bd8"></script>
-<script src="js/products.js?v=5d828dfa"></script>
+<script src="js/main-v4.js?v=eb03eb0d"></script>
+<script src="js/products.js?v=f07a2810"></script>
 <script src="js/cart.js?v=25285928"></script>
 <script>
   initProductsPage();

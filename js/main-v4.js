@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
       if (q.length < 2) { resultsBox.style.display = 'none'; resultsBox.innerHTML = ''; return; }
       const products = await loadProductsOnce();
       const hits = products.filter(p =>
-        (p.name || '').toLowerCase().includes(q) ||
-        (p.sku  || '').toLowerCase().includes(q)
+        (String(p.image || '').trim() && parseFloat(p.price) > 0) &&
+        ((p.name || '').toLowerCase().includes(q) ||
+         (p.sku  || '').toLowerCase().includes(q))
       ).slice(0, 12);
 
       if (!hits.length) {
@@ -146,8 +147,9 @@ document.addEventListener('DOMContentLoaded', function () {
       if (q.length < 2) { resBox.style.display = 'none'; resBox.innerHTML = ''; return; }
       const products = await loadProds();
       const hits = products.filter(p =>
-        (p.name || '').toLowerCase().includes(q) ||
-        (p.sku  || '').toLowerCase().includes(q)
+        (String(p.image || '').trim() && parseFloat(p.price) > 0) &&
+        ((p.name || '').toLowerCase().includes(q) ||
+         (p.sku  || '').toLowerCase().includes(q))
       ).slice(0, 10);
 
       if (!hits.length) {

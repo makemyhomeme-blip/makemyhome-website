@@ -129,6 +129,9 @@ function mmhE(v) {
 
 // ===== GENERIŠI KARTICU PROIZVODA =====
 function renderProductCard(product, lazy = true) {
+  // Roba u pripremi (bez slike i/ili cijene) se ne prikazuje nigdje — vidi products.php.
+  if (!product || !String(product.image || '').trim() || !(parseFloat(product.price) > 0)) return '';
+
   const isPreorder = product.badge && (product.badge.toLowerCase().includes('poručivanje') || product.badge.toLowerCase().includes('porucivanje'));
 
   const badge = product.badge && !isPreorder

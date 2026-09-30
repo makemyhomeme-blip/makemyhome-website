@@ -66,6 +66,8 @@ if (!$product) {
 // i racunala ocjenu po njima. Otkad su adrese promijenjene, to je vazilo za
 // svih 117 proizvoda. Ovdje se $id uzima iz pronadjenog proizvoda.
 if ($product) $id = (int)($product['id'] ?? 0);
+// Roba u pripremi (bez slike i/ili cijene) — noindex dok je vlasnik ne dovrsi.
+$mmhURipremi = $product && (trim((string)($product['image'] ?? '')) === '' || (float)($product['price'] ?? 0) <= 0);
 
 $ogTitle = $product
     ? htmlspecialchars($product['name'], ENT_QUOTES) . ' | Make My Home Decor'
@@ -283,7 +285,8 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <meta name="twitter:title" content="<?= $ogTitle ?>">
   <meta name="twitter:description" content="<?= $ogDesc ?>">
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>">
-  <link rel="canonical" href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>">
+  <link rel="canonical" href="<?= htmlspecialchars($ogUrl, ENT_QUOTES) ?>"><?php if (!empty($mmhURipremi)): ?>
+  <meta name="robots" content="noindex, follow"><?php endif; ?>
   <title><?= $pageTitle ?></title>
 <?php if ($product):
   $price     = (float)($product['price'] ?? 0);
@@ -1114,8 +1117,8 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js?v=f8101bd8"></script>
-<script src="js/products.js?v=5d828dfa"></script>
+<script src="js/main-v4.js?v=eb03eb0d"></script>
+<script src="js/products.js?v=f07a2810"></script>
 <script src="js/cart.js?v=25285928"></script>
 <script>
   renderProductDetail();

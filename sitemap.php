@@ -65,6 +65,9 @@ function mmhSitemapGradi(): string
     $BAZA = 'https://makemyhome.me';
     $P = json_decode(@file_get_contents(__DIR__ . '/data/products.json'), true) ?: [];
     if (isset($P['products'])) $P = $P['products'];
+    // Roba u pripremi (bez slike i/ili cijene) ne ide u sitemap — vidi products.php.
+    $P = array_values(array_filter($P, fn($p) =>
+        trim((string)($p['image'] ?? '')) !== '' && (float)($p['price'] ?? 0) > 0));
 
     // Datum izmjene po POJEDINOM proizvodu — vidi php/lastmod.php. Sablon
     // (product.php) se mijenja pri skoro svakom deployu; da to ne bi javljalo
