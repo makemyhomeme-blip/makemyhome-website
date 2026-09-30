@@ -960,7 +960,7 @@ echo "\n</script>\n";
             <?php if ($pNema): ?><div class="oos-tag">Rasprodato</div><?php endif; ?>
           </a>
           <div class="product-body">
-            <?php if ($pKat): ?><div class="product-category"><?= htmlspecialchars($pKat) ?></div><?php endif; ?>
+            <?php if ($pKat && ($p['category'] ?? '') !== 'flex-stone'): ?><div class="product-category"><?= htmlspecialchars($pKat) ?></div><?php endif; ?>
             <h2 class="product-name"><a href="<?= htmlspecialchars($pUrl) ?>" style="color:inherit;"><?= htmlspecialchars($p['name'] ?? '') ?></a></h2>
             <?php if (!empty($p['sku'])): ?><div class="product-sku">Šifra: <strong><?= htmlspecialchars($p['sku']) ?></strong></div><?php endif; ?>
             <?php if ($pHl): ?><p class="product-desc"><?= htmlspecialchars($pHl) ?></p><?php endif; ?>

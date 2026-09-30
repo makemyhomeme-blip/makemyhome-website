@@ -674,7 +674,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
         ?>
         <div id="product-info-content"<?= $product ? ' data-ssr="1"' : '' ?>>
           <?php if ($product): ?>
-          <div class="product-category"><?= htmlspecialchars($pKat) ?></div>
+          <?php if (($product['category'] ?? '') !== 'flex-stone'): ?><div class="product-category"><?= htmlspecialchars($pKat) ?></div><?php endif; ?>
           <h1 class="product-name"><?= htmlspecialchars($product['name'] ?? '') ?></h1>
           <?php if (!empty($product['sku'])): ?>
           <div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff;border:1.5px solid rgba(0,0,0,0.4);border-radius:8px;padding:5px 12px;margin:6px 0 12px;vertical-align:middle;"><span style="font-size:10px;color:#1a1a1a;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1;">Šifra</span><span style="font-size:13px;color:#1a1a1a;font-family:monospace;font-weight:700;letter-spacing:0.5px;line-height:1;"><?= htmlspecialchars($product['sku']) ?></span></div>
