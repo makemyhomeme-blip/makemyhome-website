@@ -269,8 +269,8 @@
        tek kad preuzme i obradi stilove. Preload je najavljuje odmah. Atribut
        type znaci da je pregledac koji ne podrzava WebP preskoci umjesto da je
        uzalud preuzme; taj slucaj hvata JPG iz CSS-a. -->
-  <link rel="preload" as="image" href="images/hero-mobile.webp" type="image/webp" media="(max-width: 768px)">
-  <link rel="preload" as="image" href="images/hero-desktop.webp" type="image/webp" media="(min-width: 769px)">
+  <link rel="preload" as="image" href="images/hero-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="images/hero-desktop.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
   <!-- Ikone se ucitavaju bez blokiranja: media="print" znaci da pregledac fajl
        preuzme ali ga ne ceka da bi iscrtao stranicu, a onload ga odmah vrati u
        upotrebu. Ikone su ukras — LCP element je tekst i ne smije da ceka na njih.
