@@ -148,5 +148,6 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/cijene.php'             => $base . '/admin/cijene.php',
     $adminDir . '/novi-opis.php'          => $base . '/admin/novi-opis.php',
     $adminDir . '/dodaj-flex.php'         => $base . '/admin/dodaj-flex.php',
+    $adminDir . '/rasporedi-flex.php'     => $base . '/admin/rasporedi-flex.php',
 ];
 };

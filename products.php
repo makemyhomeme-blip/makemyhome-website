@@ -331,13 +331,6 @@ if (!$cat) {
   $_listProds = array_values(array_filter($_allProds, fn($p) => ($p['category'] ?? '') === $cat));
 }
 
-/* Sakrij robu koja je JOŠ u pripremi — nema sliku i/ili cijenu. Novi proizvodi
-   se unesu s tekstom (naziv, opis, dimenzije), a vlasnik naknadno doda sliku i
-   cijenu preko admina; do tada se ne prikazuju (da nema praznih kartica).
-   Cim dobiju sliku i cijenu, sami se pojave. Pretraga i brojac to poštuju. */
-$mmhSpreman = fn($p) => trim((string)($p['image'] ?? '')) !== '' && (float)($p['price'] ?? 0) > 0;
-$_listProds = array_values(array_filter($_listProds, $mmhSpreman));
-
 /* ===== PRETRAGA (?search=) =====
    U WebSite schemi na pocetnoj stoji SearchAction koji Google-u obecava da se
    pretraga radi preko products.html?search=<pojam>. Taj parametar se do sada
@@ -810,8 +803,6 @@ echo "\n</script>\n";
     $brojUKat = [];
     foreach ($_allProds as $pp) {
         $k = $pp['category'] ?? '';
-        // Ne broji robu u pripremi (bez slike/cijene) — vidi $mmhSpreman gore.
-        if (trim((string)($pp['image'] ?? '')) === '' || (float)($pp['price'] ?? 0) <= 0) continue;
         if ($k !== '') $brojUKat[$k] = ($brojUKat[$k] ?? 0) + 1;
     }
     $mmhKartice = [];
@@ -936,8 +927,15 @@ echo "\n</script>\n";
                     . ($altBoja ? ', ' . $altBoja : '') . ' | Make My Home Decor Podgorica');
         ?>
         <article class="product-card<?= $pNema ? ' out-of-stock' : '' ?>" data-ssr="1">
-          <a href="<?= htmlspecialchars($pUrl) ?>" class="product-img" style="display:block;">
+          <a href="<?= htmlspecialchars($pUrl) ?>" class="product-img" style="display:block;<?= trim((string)($p['image'] ?? '')) === '' ? 'background:#fff;' : '' ?>">
+            <?php if (trim((string)($p['image'] ?? '')) !== ''): ?>
             <img src="<?= htmlspecialchars(mmhThumb($p['image'] ?? '')) ?>" alt="<?= htmlspecialchars($altTxt) ?>" loading="lazy"<?= mmhDimAtributi($p['image'] ?? '') ?>>
+            <?php else: ?>
+            <span class="product-img-placeholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;background:#fff;color:#c9ccd1;">
+              <i class="fas fa-image" style="font-size:44px;"></i>
+              <span style="font-size:12px;letter-spacing:.5px;color:#b3b7bd;">Slika uskoro</span>
+            </span>
+            <?php endif; ?>
             <?php if ($pD > 0 && !$pNema): ?>
             <div style="position:absolute;top:10px;right:10px;background:#c0392b;color:#fff;font-weight:800;font-size:13px;line-height:1;padding:6px 11px;border-radius:8px;z-index:4;">&minus;<?= $pD ?>%</div>
             <?php endif; ?>
@@ -964,7 +962,9 @@ echo "\n</script>\n";
             <?php if ($pHl): ?><p class="product-desc"><?= htmlspecialchars($pHl) ?></p><?php endif; ?>
             <div class="product-footer">
               <div class="product-price">
-                <?php if ($pD > 0): ?>
+                <?php if ((float)$pO <= 0): ?>
+                  <span style="font-size:16px;font-weight:700;color:#8a8f98;font-family:var(--font-body);">Cijena na upit</span>
+                <?php elseif ($pD > 0): ?>
                   <span style="text-decoration:line-through;color:#8a8f98;font-size:14px;font-weight:400;font-family:var(--font-body);display:block;line-height:1.2;"><?= number_format($pO, 2, ',', '.') ?> €</span>
                   <span style="color:#c0392b;font-size:clamp(20px,5.5vw,25px);font-weight:800;line-height:1.15;"><?= number_format($pF, 2, ',', '.') ?> €</span>
                   <span style="color:#666e7a;font-size:12px;font-weight:400;font-family:var(--font-body);"> / <?= htmlspecialchars($pJed) ?></span>

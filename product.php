@@ -616,7 +616,10 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           if ($galSlike): ?>
           <img id="gallery-main-img" src="<?= htmlspecialchars($galSlike[0][0]) ?>" alt="<?= htmlspecialchars($galSlike[0][1]) ?>"<?= mmhDimAtributi($galSlike[0][0]) ?> style="width:100%;height:auto;display:block;border-radius:16px;">
           <?php else: ?>
-          <div class="loading-placeholder" style="width:100%;height:100%;border-radius:16px;"></div>
+          <div style="width:100%;aspect-ratio:1/1;border-radius:16px;background:#fff;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#c9ccd1;">
+            <i class="fas fa-image" style="font-size:64px;"></i>
+            <span style="font-size:14px;letter-spacing:.5px;color:#b3b7bd;">Slika uskoro</span>
+          </div>
           <?php endif; ?>
         </div>
         <div class="gallery-thumbs" id="gallery-thumbs">
@@ -680,7 +683,9 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           /* Ovdje je stajala ocjena sa zvjezdicama uz naslov. Uklonjena je zajedno
              sa recenzijama — nije bilo prave ocjene da se prikaze. */
           ?>
-          <?php if ($discount > 0): ?>
+          <?php if ($price <= 0): ?>
+          <div class="product-price-lg" style="color:#8a8f98;">Cijena na upit</div>
+          <?php elseif ($discount > 0): ?>
           <div class="product-price-lg">
             <span style="text-decoration:line-through;color:#767676;font-size:18px;font-weight:400;"><?= mmhBroj($price) ?> €</span>
             <span style="margin-left:8px;"><?= mmhBroj($salePrice) ?> €</span>
@@ -878,10 +883,19 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
               <i class="fas fa-phone" style="font-size:17px;"></i><span>069 105 222</span>
             </a>
             <?php else: ?>
+            <?php if ($price <= 0): ?>
+            <div style="background:#f6f7f9;border:1px solid rgba(0,0,0,.12);border-radius:14px;padding:16px 18px;color:#555;font-size:14.5px;line-height:1.6;">
+              <strong>Cijena na upit.</strong> Pošaljite nam dimenzije zida — odmah vam javimo cijenu i dostupnost.
+            </div>
+            <a href="tel:+38269105222" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#1f9d63;color:#ffffff;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;text-decoration:none;font-family:inherit;letter-spacing:0.4px;box-sizing:border-box;">
+              <i class="fas fa-phone" style="font-size:17px;"></i><span>069 105 222</span>
+            </a>
+            <?php else: ?>
             <button onclick="addProductToCartById(<?= (int)($product['id'] ?? 0) ?>, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#b0844e;color:#ffffff;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;">
               <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
               <span>Dodaj u Korpu</span>
             </button>
+            <?php endif; ?>
             <?php endif; ?>
             <a href="<?= htmlspecialchars($waLink, ENT_QUOTES) ?>" target="_blank" rel="noopener" style="width:100%;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border:1.5px solid rgba(37,211,102,0.4);border-radius:14px;background:rgba(37,211,102,0.08);color:#0f7a36;font-size:14px;font-weight:600;text-decoration:none;font-family:inherit;box-sizing:border-box;">
               <i class="fab fa-whatsapp" style="font-size:17px;"></i> Pitaj nas na WhatsApp-u
