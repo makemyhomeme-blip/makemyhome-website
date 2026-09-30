@@ -1,10 +1,104 @@
 {
-  "MILAN TRAVERTINE YELLOW": {
-    "image": "images/products/flex-milan-travertine-yellow.jpg",
-    "gallery": [
-      "images/products/flex-milan-travertine-yellow-g1.jpg",
-      "images/products/flex-milan-travertine-yellow-g2.jpg",
-      "images/products/flex-milan-travertine-yellow-g3.jpg"
-    ]
-  }
+ "MILAN TRAVERTINE YELLOW": {
+  "gallery": [
+   "images/products/flex-milan-travertine-yellow-g1.jpg",
+   "images/products/flex-milan-travertine-yellow-g2.jpg",
+   "images/products/flex-milan-travertine-yellow-g3.jpg"
+  ]
+ },
+ "MILAN TRAVERTINE GREY": {
+  "gallery": [
+   "images/products/flex-milan-travertine-grey-p1.jpg"
+  ]
+ },
+ "ITALIAN TRAVERTINE WHITE": {
+  "gallery": [
+   "images/products/flex-italian-travertine-white-p1.jpg"
+  ]
+ },
+ "ROMAN TRAVERTINE YELLOW": {
+  "gallery": [
+   "images/products/flex-roman-travertine-yellow-p1.jpg"
+  ]
+ },
+ "GRADIENT TRAVERTINE YELLOW": {
+  "gallery": [
+   "images/products/flex-gradient-travertine-yellow-p1.jpg"
+  ]
+ },
+ "BEIGE TRAVERTINE": {
+  "gallery": [
+   "images/products/flex-beige-travertine-p1.jpg"
+  ]
+ },
+ "STACK TRAVERTINE": {
+  "gallery": [
+   "images/products/flex-stack-travertine-p1.jpg"
+  ]
+ },
+ "ITALIAN BROWN TRAVERTINE BIG": {
+  "gallery": [
+   "images/products/flex-italian-brown-travertine-big-p1.jpg"
+  ]
+ },
+ "ITALIAN WHITE TRAVERTINE BIG": {
+  "gallery": [
+   "images/products/flex-italian-white-travertine-big-p1.jpg"
+  ]
+ },
+ "BULGARI MARBLE PILLAR": {
+  "gallery": [
+   "images/products/flex-bulgari-marble-pillar-p1.jpg"
+  ]
+ },
+ "GOLDEN CARRARA MARBLE PILLAR": {
+  "gallery": [
+   "images/products/flex-golden-carrara-marble-pillar-p1.jpg"
+  ]
+ },
+ "ITALIAN MARBLE PILLAR": {
+  "gallery": [
+   "images/products/flex-italian-marble-pillar-p1.jpg"
+  ]
+ },
+ "GOLDEN CARRARA MARBLE BOARD": {
+  "gallery": [
+   "images/products/flex-golden-carrara-marble-board-p1.jpg"
+  ]
+ },
+ "PANDORA MARBLE BOARD": {
+  "gallery": [
+   "images/products/flex-pandora-marble-board-p1.jpg"
+  ]
+ },
+ "ANCIENT WOOD KHAKI": {
+  "gallery": [
+   "images/products/flex-ancient-wood-khaki-p1.jpg"
+  ]
+ },
+ "ANCIENT WOOD DARK": {
+  "gallery": [
+   "images/products/flex-ancient-wood-dark-p1.jpg"
+  ]
+ },
+ "CHARCOAL BURNT WOOD": {
+  "gallery": [
+   "images/products/flex-charcoal-burnt-wood-p1.jpg"
+  ]
+ },
+ "CONCRETE BOARD LIGHT GREY": {
+  "gallery": [
+   "images/products/flex-concrete-board-light-grey-p1.jpg"
+  ]
+ },
+ "ROCKCUT STONE BEIGE": {
+  "gallery": [
+   "images/products/flex-rockcut-stone-beige-p1.jpg"
+  ]
+ },
+ "STARMOON STONE BEIGE": {
+  "gallery": [
+   "images/products/flex-starmoon-stone-beige-p1.jpg"
+  ]
+ }
 }
