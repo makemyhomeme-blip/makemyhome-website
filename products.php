@@ -901,6 +901,10 @@ echo "\n</script>\n";
       $mmhSamoPlocice = ($mmhKartice && $mmhTrazi === '');
       $mmhPrikaziMrezu = ($cat || $mmhTrazi !== '') && !$mmhSamoPlocice;
       ?>
+      <?php if ($cat === 'flex-stone'): ?>
+      <style>/* Flex Stone na telefonu: 1 kartica po redu (krupnije, da se kamen vidi) */
+        @media(max-width:600px){ #products-container.products-grid{ grid-template-columns:1fr !important; gap:18px !important; } }</style>
+      <?php endif; ?>
       <div class="products-grid" id="products-container" style="display:<?= $mmhPrikaziMrezu ? 'grid' : 'none' ?>;padding-top:20px;">
         <?php if ($mmhPrikaziMrezu): ?>
         <?php foreach ($_listProds as $p):

@@ -152,5 +152,6 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/rasporedi-flex.php'     => $base . '/admin/rasporedi-flex.php',
     $adminDir . '/slika-flex.php'         => $base . '/admin/slika-flex.php',
     $adminDir . '/upload-slika.php'       => $base . '/admin/upload-slika.php',
+    $adminDir . '/preimenuj-flex.php'     => $base . '/admin/preimenuj-flex.php',
 ];
 };
