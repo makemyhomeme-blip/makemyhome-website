@@ -85,14 +85,14 @@
  },
  "ANCIENT WOOD KHAKI": {
   "gallery": [
-   "images/products/flex-ancient-wood-khaki-p1.jpg",
-   "images/products/flex-ancient-wood-khaki-p3.jpg"
+   "images/products/flex-ancient-wood-khaki-73.jpg",
+   "images/products/flex-ancient-wood-shared-p76.jpg"
   ]
  },
  "ANCIENT WOOD DARK": {
   "gallery": [
    "images/products/flex-ancient-wood-dark-p1.jpg",
-   "images/products/flex-ancient-wood-dark-p4.jpg"
+   "images/products/flex-ancient-wood-shared-p76.jpg"
   ]
  },
  "CHARCOAL BURNT WOOD": {
@@ -122,7 +122,11 @@
  },
  "LINESTONE BOARD BEIGE": {
   "gallery": [
-   "images/products/flex-linestone-board-beige-p1.jpg"
+   "images/products/flex-linestone-89.jpg",
+   "images/products/flex-linestone-board-beige-p1.jpg",
+   "images/products/flex-linestone-board-beige-p2.jpg",
+   "images/products/flex-linestone-board-beige-p3.jpg",
+   "images/products/flex-linestone-board-beige-p4.jpg"
   ]
  },
  "LINESTONE BOARD DARK GREY": {
@@ -132,7 +136,9 @@
  },
  "FINELINE STONE GREY": {
   "gallery": [
-   "images/products/flex-fineline-stone-grey-p1.jpg"
+   "images/products/flex-fineline-grey-97.jpg",
+   "images/products/flex-fineline-shared-p98.jpg",
+   "images/products/flex-fineline-shared-p99.jpg"
   ]
  },
  "ROUGH GRANITE DARK GREY": {
@@ -142,33 +148,49 @@
  },
  "ROUGH GRANITE BEIGE": {
   "gallery": [
-   "images/products/flex-rough-granite-beige-p1.jpg"
+   "images/products/flex-rough-granite-beige-p1.jpg",
+   "images/products/flex-rough-granite-detalj55.jpg"
   ]
  },
  "ROUGH GRANITE PURE WHITE": {
   "gallery": [
-   "images/products/flex-rough-granite-pure-white-p1.jpg"
+   "images/products/flex-rough-granite-pure-white-p1.jpg",
+   "images/products/flex-rough-granite-detalj55.jpg"
   ]
  },
  "RIPPLE BOARD BEIGE": {
   "gallery": [
-   "images/products/flex-ripple-board-beige-p1.jpg"
+   "images/products/flex-ripple-board-beige-84.jpg",
+   "images/products/flex-ripple-shared-p86.jpg",
+   "images/products/flex-ripple-shared-p87.jpg"
   ]
  },
  "RIPPLE BOARD GREY": {
   "gallery": [
-   "images/products/flex-ripple-board-grey-p1.jpg"
+   "images/products/flex-ripple-board-grey-p1.jpg",
+   "images/products/flex-ripple-shared-p86.jpg",
+   "images/products/flex-ripple-shared-p87.jpg"
   ]
  },
  "ROUNDLINE STONE BEIGE": {
-  "gallery": []
+  "gallery": [
+   "images/products/flex-roundline-stone-beige-p1.jpg",
+   "images/products/flex-roundline-shared-p105.jpg",
+   "images/products/flex-roundline-stone-beige-p2.jpg"
+  ]
  },
  "ROUNDLINE STONE DARK GREY": {
-  "gallery": []
+  "gallery": [
+   "images/products/flex-roundline-stone-dark-grey-p1.jpg",
+   "images/products/flex-roundline-stone-dark-grey-p2.jpg",
+   "images/products/flex-roundline-shared-p105.jpg"
+  ]
  },
  "FINELINE STONE BEIGE": {
   "gallery": [
-   "images/products/flex-fineline-stone-beige-p1.jpg"
+   "images/products/flex-fineline-stone-beige-p1.jpg",
+   "images/products/flex-fineline-shared-p98.jpg",
+   "images/products/flex-fineline-shared-p99.jpg"
   ]
  },
  "MICROCEMENT": {
@@ -193,7 +215,8 @@
  },
  "SLATE STONE BEIGE": {
   "gallery": [
-   "images/products/flex-slate-stone-beige-p1.jpg"
+   "images/products/flex-slate-stone-beige-p1.jpg",
+   "images/products/flex-slate-stone-beige-p2.jpg"
   ]
  },
  "LINEAR TRAVERTINE CLAYBANK": {
@@ -205,7 +228,8 @@
  },
  "PANDORA MARBLE PILLAR": {
   "gallery": [
-   "images/products/flex-pandora-marble-pillar-p1.jpg"
+   "images/products/flex-pandora-marble-pillar-p1.jpg",
+   "images/products/flex-pandora-marble-pillar-p2.jpg"
   ]
  },
  "WEAVING BEIGE": {
