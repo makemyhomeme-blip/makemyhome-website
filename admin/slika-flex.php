@@ -62,10 +62,11 @@ foreach ($flat as $idx => $p) {
         $slike[] = $d['image'];
         $promjene[] = "ID {$p['id']}  $s  glavna: {$d['image']}";
     }
-    if (!empty($d['gallery']) && is_array($d['gallery'])) {
+    if (array_key_exists('gallery', $d) && is_array($d['gallery'])) {
         $flat[$idx]['gallery'] = array_values($d['gallery']);
         foreach ($d['gallery'] as $g) $slike[] = $g;
-        $promjene[] = "ID {$p['id']}  $s  galerija: " . count($d['gallery']) . " sl.";
+        $promjene[] = "ID {$p['id']}  $s  galerija: " . count($d['gallery']) . " sl."
+                    . (count($d['gallery']) === 0 ? "  (ocisceno)" : "");
     }
 }
 
