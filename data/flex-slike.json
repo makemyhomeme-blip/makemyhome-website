@@ -234,7 +234,9 @@
  },
  "WEAVING BEIGE": {
   "gallery": [
-   "images/products/flex-weaving-beige-p1.jpg"
+   "images/products/flex-weaving-beige-p1.jpg",
+   "images/products/flex-weaving-beige-p2.jpg",
+   "images/products/flex-weaving-beige-p3.jpg"
   ]
  },
  "WEAVING JACINTH": {
@@ -249,7 +251,9 @@
  },
  "WEAVING GREY": {
   "gallery": [
-   "images/products/flex-weaving-grey-p1.jpg"
+   "images/products/flex-weaving-grey-p1.jpg",
+   "images/products/flex-weaving-grey-p2.jpg",
+   "images/products/flex-weaving-grey-p3.jpg"
   ]
  },
  "LINEAR TRAVERTINE": {
