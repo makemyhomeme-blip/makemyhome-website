@@ -163,9 +163,10 @@ function mmhOgProizvod(array $p): ?array
     if (!is_file($izvor)) return null;
 
     $id  = preg_replace('/[^0-9]/', '', (string)($p['id'] ?? '0'));
-    // -v2: nov izgled (jedna slika + zamucena pozadina umjesto 4x plocice).
-    // Promjena imena natjera da se stari keširani (poplochani) OG-ovi zamijene.
-    $rel = 'images/og/proizvod-' . $id . '-v2.jpg';
+    // -v3: svjetlija pozadina (ranije ~48% crni preliv je svijetle/tople dezene
+    // — npr. "Topla Bež" — na Viberu prikazivao tamno i muljavo). Promjena imena
+    // natjera Viber/Facebook da zamijene stari (pretamni) keširani OG.
+    $rel = 'images/og/proizvod-' . $id . '-v3.jpg';
     $put = $korijen . '/' . $rel;
 
     if (is_file($put) && filemtime($put) >= filemtime($izvor)) {
@@ -191,7 +192,7 @@ function mmhOgProizvod(array $p): ?array
     // razvucena da pokrije platno, pa jako zamucena i zatamnjena — kao mek okvir.
     // (Ranije se slika poplochavala 4x sto je izgledalo kao plocice.)
 
-    // --- Pozadina: slika "cover" preko platna, zamucena + zatamnjena ---
+    // --- Pozadina: slika "cover" preko platna, zamucena + blago zatamnjena ---
     $sk  = max($Š / $iŠ, $V / $iV);
     $bŠ  = (int) ceil($iŠ * $sk); $bV = (int) ceil($iV * $sk);
     $bX  = (int) (($Š - $bŠ) / 2); $bY = (int) (($V - $bV) / 2);
@@ -199,7 +200,9 @@ function mmhOgProizvod(array $p): ?array
     if (function_exists('imagefilter')) {
         for ($b = 0; $b < 14; $b++) @imagefilter($platno, IMG_FILTER_GAUSSIAN_BLUR);
     }
-    $tamno = imagecolorallocatealpha($platno, 8, 8, 8, 66); // ~48% crni preliv
+    // ~25% crni preliv (ranije ~48%): dovoljno da prednji panel "iskoci", a da
+    // svijetli/topli dezeni na Viberu ne izgledaju tamno.
+    $tamno = imagecolorallocatealpha($platno, 8, 8, 8, 95);
     imagefilledrectangle($platno, 0, 0, $Š, $V, $tamno);
 
     // --- Prednji plan: cijela slika uklopljena (contain), ostra, centrirana ---
