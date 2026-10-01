@@ -91,23 +91,16 @@ if (mb_strlen($rawDesc) > 158) {
 }
 $ogDesc = htmlspecialchars($rawDesc, ENT_QUOTES);
 
-// Facebook, WhatsApp i Viber prikazu veliku karticu tek od 600x315. Vecina
-// fotografija panela je uspravna (507x900), pa se link dijelio kao sicusna
-// slicica. Zato se bira prva dovoljno siroka slika ISTOG proizvoda —
-// najprije glavna, pa galerija; tek ako nista ne odgovara ide showroom.
-$ogKandidati = [];
-// Za dijeljenje (Viber/WhatsApp/Facebook) uvijek ide SLIKA PROIZVODA, ne
-// fotografija sobe iz galerije. Zato u kandidate ide samo glavna slika; ako je
-// manja od 600px, ispod se od nje napravi platno 1200x630 (i dalje taj proizvod).
-if ($product && !empty($product['image'])) $ogKandidati[] = $product['image'];
-$ogIzbor = mmhSlikaZaDijeljenje($ogKandidati);
-// Dvanaest proizvoda (cijela PU serija, tri SPC poda, jedan mermerni panel)
-// nema nijednu sliku sirju od 600px, pa su svi padali na fotografiju showrooma
-// — ko podijeli link na taj panel, u pregledu nije vidio taj panel. Za njih se
-// napravi platno 1200x630 od njihove sopstvene fotografije.
-if ($product && $ogIzbor['put'] === 'images/showcase-room.jpg') {
-    $ogSvoja = mmhOgProizvod($product);
-    if ($ogSvoja) $ogIzbor = $ogSvoja;
+// Za dijeljenje (Viber/WhatsApp/Facebook) ide BAS GLAVNA (hero) slika proizvoda
+// koju je vlasnik dodao — bez ikakve obrade (bez platna, zamucene pozadine ili
+// sjenke). Panel se vidi onako kako je na sajtu. Ako proizvod nema glavnu sliku,
+// tek onda ide zajednicka fotografija showrooma.
+if ($product && !empty($product['image'])) {
+    $d = mmhDimenzije($product['image']);
+    $ogIzbor = ['put' => $product['image'], 'w' => $d[0] ?? 0, 'h' => $d[1] ?? 0];
+} else {
+    $d = mmhDimenzije('images/showcase-room.jpg');
+    $ogIzbor = ['put' => 'images/showcase-room.jpg', 'w' => $d[0] ?? 1714, 'h' => $d[1] ?? 800];
 }
 $ogImage = 'https://makemyhome.me/' . ltrim($ogIzbor['put'], '/');
 
