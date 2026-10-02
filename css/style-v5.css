@@ -1624,9 +1624,13 @@ ul { list-style: none; }
   justify-content: center;
 }
 
-/* height/object-fit sa !important da pobijede inline "height:auto" na slici —
-   inace visoka uspravna slika prelije kutiju i zauzme cijeli ekran. */
-.gallery-main img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+/* CIJELA slika se vidi (contain), ne odsijeca se (ranije "cover" je sjekao
+   siroke fotografije soba gore/dole). Visina je i dalje ogranicena kutijom
+   (.gallery-main) pa visoka uspravna slika ne zauzme cijeli ekran; tap otvara
+   punu rezoluciju. Prazan prostor sa strane/gore-dole popunjava svijetla
+   pozadina kutije. */
+.gallery-main { background: #f4f4f5; }
+.gallery-main img { width: 100% !important; height: 100% !important; object-fit: contain !important; }
 
 .gallery-thumbs {
   display: flex;
