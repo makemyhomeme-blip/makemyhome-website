@@ -656,7 +656,7 @@ echo "\n</script>\n";
    Vazi samo na stranicama kategorija/proizvoda (ovaj stil je u products.php). */
 @media(min-width:1200px){
   .products-grid{ grid-template-columns:repeat(4,1fr); gap:26px; }
-  .cat-grid{ grid-template-columns:repeat(4,1fr); }
+  .cat-grid{ grid-template-columns:repeat(3,1fr); }  /* 3 u redu — vece kartice kategorija */
   /* Kartice su sada sire (4 u redu), pa slika od 240px izgleda niska.
      Podizemo VISINU slike da dezen dodje do izrazaja — tekst ostaje isti.
      Vazi samo za mrezu proizvoda, ne dira srodne proizvode ni druge kartice. */
