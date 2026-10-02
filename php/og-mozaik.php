@@ -211,3 +211,42 @@ function mmhOgProizvod(array $p): ?array
 
     return ['put' => $rel . '?v=' . filemtime($put), 'w' => $Š, 'h' => $V];
 }
+
+/**
+ * MALA kvadratna slika za dijeljenje — da Viber/WhatsApp prikazu KOMPAKTNU
+ * karticu (mala slicica sa strane + tekst) umjesto velike slike preko cijele
+ * sirine. Platforme prikazu veliku karticu kad je og:image >= ~300px; zato je
+ * ovdje 256x256 (centrirani kvadratni isjecak glavne slike). Kesira se u
+ * images/og/ i pravi se ponovo samo kad se glavna slika promijeni.
+ */
+function mmhOgMala(array $p): ?array
+{
+    if (!function_exists('imagecreatetruecolor') || !function_exists('imagejpeg')) return null;
+    $rel1 = (string)($p['image'] ?? '');
+    if ($rel1 === '') return null;
+    $korijen = dirname(__DIR__);
+    $izvor = $korijen . '/' . ltrim($rel1, '/');
+    if (!is_file($izvor)) return null;
+    $id = preg_replace('/[^0-9]/', '', (string)($p['id'] ?? '0'));
+    $rel = 'images/og/mala-' . $id . '-v1.jpg';
+    $put = $korijen . '/' . $rel;
+    if (is_file($put) && filemtime($put) >= filemtime($izvor)) {
+        return ['put' => $rel . '?v=' . filemtime($put), 'w' => 256, 'h' => 256];
+    }
+    $vrsta = @exif_imagetype($izvor); $im = false;
+    if ($vrsta === IMAGETYPE_JPEG && function_exists('imagecreatefromjpeg'))      $im = @imagecreatefromjpeg($izvor);
+    elseif ($vrsta === IMAGETYPE_PNG && function_exists('imagecreatefrompng'))    $im = @imagecreatefrompng($izvor);
+    elseif ($vrsta === IMAGETYPE_WEBP && function_exists('imagecreatefromwebp'))  $im = @imagecreatefromwebp($izvor);
+    if (!$im) return null;
+    $S = 256; $iw = imagesx($im); $ih = imagesy($im);
+    $side = min($iw, $ih); $sx = (int)(($iw - $side) / 2); $sy = (int)(($ih - $side) / 2);
+    $platno = imagecreatetruecolor($S, $S);
+    imagecopyresampled($platno, $im, 0, 0, $sx, $sy, $S, $S, $side, $side);
+    imagedestroy($im);
+    if (!is_dir(dirname($put))) @mkdir(dirname($put), 0755, true);
+    $ok = @imagejpeg($platno, $put, 85);
+    imagedestroy($platno);
+    if (!$ok) return null;
+    clearstatcache(true, $put);
+    return ['put' => $rel . '?v=' . filemtime($put), 'w' => $S, 'h' => $S];
+}

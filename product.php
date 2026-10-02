@@ -91,13 +91,18 @@ if (mb_strlen($rawDesc) > 158) {
 }
 $ogDesc = htmlspecialchars($rawDesc, ENT_QUOTES);
 
-// Za dijeljenje (Viber/WhatsApp/Facebook) ide BAS GLAVNA (hero) slika proizvoda
-// koju je vlasnik dodao — bez ikakve obrade (bez platna, zamucene pozadine ili
-// sjenke). Panel se vidi onako kako je na sajtu. Ako proizvod nema glavnu sliku,
-// tek onda ide zajednicka fotografija showrooma.
+// Za dijeljenje (Viber/WhatsApp) ide MALA kvadratna slicica glavne slike, da se
+// prikaze KOMPAKTNA kartica (mala slika sa strane + tekst), ne velika slika
+// preko cijele sirine. Panel se vidi, ali kartica ostaje mala. Ako proizvod
+// nema glavnu sliku ili GD ne radi, pada na glavnu sliku, pa na showroom.
 if ($product && !empty($product['image'])) {
-    $d = mmhDimenzije($product['image']);
-    $ogIzbor = ['put' => $product['image'], 'w' => $d[0] ?? 0, 'h' => $d[1] ?? 0];
+    $mala = mmhOgMala($product);
+    if ($mala) {
+        $ogIzbor = $mala;
+    } else {
+        $d = mmhDimenzije($product['image']);
+        $ogIzbor = ['put' => $product['image'], 'w' => $d[0] ?? 0, 'h' => $d[1] ?? 0];
+    }
 } else {
     $d = mmhDimenzije('images/showcase-room.jpg');
     $ogIzbor = ['put' => 'images/showcase-room.jpg', 'w' => $d[0] ?? 1714, 'h' => $d[1] ?? 800];
@@ -274,7 +279,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <meta property="og:image:height" content="<?= (int)$ogIzbor['h'] ?>">
   <meta property="og:locale" content="sr_ME">
   <meta property="og:site_name" content="Make My Home Decor">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="<?= $ogTitle ?>">
   <meta name="twitter:description" content="<?= $ogDesc ?>">
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage, ENT_QUOTES) ?>">
