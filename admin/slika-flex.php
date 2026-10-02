@@ -30,6 +30,7 @@ $flat = isset($P['products']) ? $P['products'] : $P;
 function fsWebp($jpg, $q = 82) {
     $wp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $jpg);
     if ($wp === $jpg || !function_exists('imagewebp') || !is_file($jpg)) return;
+    if (is_file($wp) && filemtime($wp) >= filemtime($jpg)) return; // vec napravljen
     $im = @imagecreatefromjpeg($jpg);
     if ($im) { @imagewebp($im, $wp, $q); imagedestroy($im); }
 }
@@ -39,6 +40,7 @@ function fsThumb($root, $rel, $q = 80, $maxW = 700) {
     $thumbDir = $root . '/images/products/thumbs/';
     if (!is_dir($thumbDir)) @mkdir($thumbDir, 0755, true);
     $thumb = $thumbDir . preg_replace('/\.(jpe?g|png|webp)$/i', '.jpg', basename($rel));
+    if (is_file($thumb) && filemtime($thumb) >= filemtime($full)) { fsWebp($thumb, $q); return; } // vec napravljen
     $info = @getimagesize($full); if (!$info) return;
     $src = $info[2] === IMAGETYPE_PNG ? @imagecreatefrompng($full) : @imagecreatefromjpeg($full);
     if (!$src) return;
@@ -76,15 +78,23 @@ foreach ($promjene as $r) echo "  $r\n";
 if ($dry) { echo "\n(dry-run)\n"; exit; }
 if (!$promjene) { echo "\nNista (sifra nije nadjena ili glavna vec postoji).\n"; exit; }
 
-// thumbnail + webp za svaku sliku
-foreach (array_unique($slike) as $rel) { fsThumb($root, $rel); fsWebp($root . '/' . $rel); }
-
+// 1) UPIS products.json PRVO (kriticno) — da ne zavisi od sporog pravljenja
+// thumbnaila. Ranije se products.json upisivao TEK posle svih thumbnaila, pa
+// kad bi zahtjev istekao usred thumbnaila, galerije se ne bi sacuvale.
 $bkp = $root . '/data/products.backup-slike-' . date('Ymd-His') . '.json';
 @file_put_contents($bkp, $sirovo);
 $out = json_encode(array_values($flat), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 $tmp = $put . '.tmp';
 if (@file_put_contents($tmp, $out, LOCK_EX) !== false && @rename($tmp, $put)) {
-    echo "\nUPISANO (+ thumbnaili/webp). Backup: " . basename($bkp) . "\n";
+    echo "\nUPISANO. Backup: " . basename($bkp) . "\n";
 } else {
-    echo "\nGRESKA pri upisu!\n";
+    echo "\nGRESKA pri upisu!\n"; exit;
 }
+
+// 2) thumbnail + webp (best-effort, preskace vec napravljene). Ako zahtjev
+// istekne ovdje, products.json je vec sacuvan; ponovni poziv dovrsi ostatak.
+@set_time_limit(0);
+echo "Pravim thumbnaile...\n"; @ob_flush(); @flush();
+$tn = 0;
+foreach (array_unique($slike) as $rel) { fsThumb($root, $rel); fsWebp($root . '/' . $rel); $tn++; }
+echo "Thumbnaili gotovi ($tn).\n";
