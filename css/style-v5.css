@@ -687,8 +687,13 @@ ul { list-style: none; }
 .hero-scroll {
   position: absolute;
   bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* Centriranje preko margin:auto, NE preko transform — jer heroRise animacija
+     (translateY) prepisuje transform i gubi translateX(-50%), pa je "Skrolujte"
+     bjezao udesno. Ovako centriranje ne zavisi od animacije. */
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -704,8 +709,8 @@ ul { list-style: none; }
 .hero-scroll i { font-size: 18px; }
 
 @keyframes scrollBounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(8px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
 }
 
 /* ===== KATEGORIJE ===== */
