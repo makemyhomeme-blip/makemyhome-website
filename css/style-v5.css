@@ -1617,23 +1617,21 @@ ul { list-style: none; }
 }
 
 .gallery-main {
-  /* Visina se prilagodjava slici (height:auto na slici) — slika se vidi CIJELA,
-     u svom prirodnom obliku: nema sijecanja (cover) ni sivih traka (contain na
-     fiksnoj visini). Uspravni panel je uspravan, siroka soba je siroka. */
+  height: 480px;
   max-width: 100%;
   box-sizing: border-box;
   background: var(--light);
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* CIJELA slika se vidi (contain), ne odsijeca se (ranije "cover" je sjekao
-   siroke fotografije soba gore/dole). Visina je i dalje ogranicena kutijom
-   (.gallery-main) pa visoka uspravna slika ne zauzme cijeli ekran; tap otvara
-   punu rezoluciju. Prazan prostor sa strane/gore-dole popunjava svijetla
-   pozadina kutije. */
-.gallery-main img { width: 100% !important; height: auto !important; display: block; }
+/* height/object-fit sa !important da pobijede inline "height:auto" na slici —
+   inace visoka uspravna slika prelije kutiju i zauzme cijeli ekran. */
+.gallery-main img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 
 .gallery-thumbs {
   display: flex;
@@ -1963,7 +1961,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .srodni-naslov { margin-bottom: 22px !important; }
   /* Visina glavne slike ogranicena da visoke (uspravne) slike ne zauzmu cijeli
      ekran; tap na sliku otvara punu rezoluciju. */
-  .gallery-main { margin-bottom: 0 !important; }
+  .gallery-main { height: 420px !important; margin-bottom: 0 !important; }
   .gallery-open-hint { margin-top: 8px !important; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
 }
