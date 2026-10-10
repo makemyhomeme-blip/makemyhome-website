@@ -156,6 +156,7 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/obrisi-flex.php'        => $base . '/admin/obrisi-flex.php',
     $adminDir . '/og-generisi.php'        => $base . '/admin/og-generisi.php',
     $adminDir . '/upload-batch.php'       => $base . '/admin/upload-batch.php',
+    $adminDir . '/sku-fix.php'            => $base . '/admin/sku-fix.php',
     // ---- Flex Stone galerijske slike (deploy preko sync-a) ----
     $root . '/images/products/flex-ancient-wood-dark-p1.jpg' => $base . '/images/products/flex-ancient-wood-dark-p1.jpg',
     $root . '/images/products/flex-ancient-wood-khaki-73.jpg' => $base . '/images/products/flex-ancient-wood-khaki-73.jpg',
