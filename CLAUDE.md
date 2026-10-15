@@ -6,18 +6,18 @@
 - **Hosting:** cPanel shared hosting, server `cp71.cpanelhosting.rs`
 - **Document root:** `/home/mmhdecor/public_html/makemyhome.me/`
 - **cPanel username:** `mmhdecor`
-- **cPanel password:** `fhgkwqjd0F6K`
+- **cPanel password:** `(uklonjeno iz repoa — promijeniti, cuva se van koda)`
 - **cPanel URL:** `https://cpanel.mmhdecor.mycpanel.rs` (use this — port 2083 SSL fails through proxy)
 - **cPanel UAPI base:** `https://cpanel.mmhdecor.mycpanel.rs/execute/`
 
 ### cPanel API usage (curl)
 ```bash
 # List files
-curl -sk --cacert /root/.ccr/ca-bundle.crt -u "mmhdecor:fhgkwqjd0F6K" \
+curl -sk --cacert /root/.ccr/ca-bundle.crt -u "mmhdecor:(uklonjeno iz repoa — promijeniti, cuva se van koda)" \
   "https://cpanel.mmhdecor.mycpanel.rs/execute/Fileman/list_files?dir=%2Fhome%2Fmmhdecor%2Fpublic_html%2Fmakemyhome.me&include_mime=0"
 
 # Save a file
-curl -sk --cacert /root/.ccr/ca-bundle.crt -u "mmhdecor:fhgkwqjd0F6K" -X POST \
+curl -sk --cacert /root/.ccr/ca-bundle.crt -u "mmhdecor:(uklonjeno iz repoa — promijeniti, cuva se van koda)" -X POST \
   "https://cpanel.mmhdecor.mycpanel.rs/execute/Fileman/save_file_content" \
   --data-urlencode "dir=/home/mmhdecor/public_html/makemyhome.me" \
   --data-urlencode "file=FILENAME" \
@@ -30,7 +30,7 @@ curl -sk --cacert /root/.ccr/ca-bundle.crt -u "mmhdecor:fhgkwqjd0F6K" -X POST \
 - **Username:** `admin`
 - **Password:** NIJE u repou. Cita se sa servera iz `/home/mmhdecor/.mmh-admin-pass`
   (izvan `public_html`, nedostupno preko weba). Procitati preko cPanel API-ja kad zatreba.
-- **Sync:** `https://makemyhome.me/admin/sync.php?key=mkhsync2025`
+- **Sync:** `https://makemyhome.me/admin/sync.php?key=mkhsync-b60a44e3cf`
 
 ### Admin sync via curl
 ```bash
@@ -41,7 +41,7 @@ curl -sk --cacert /root/.ccr/ca-bundle.crt -c /tmp/mkh_cookies.txt \
 
 # 2. Run sync
 curl -sk --cacert /root/.ccr/ca-bundle.crt -b /tmp/mkh_cookies.txt \
-  "https://makemyhome.me/admin/sync.php?key=mkhsync2025"
+  "https://makemyhome.me/admin/sync.php?key=mkhsync-b60a44e3cf"
 ```
 
 ## Git Branch

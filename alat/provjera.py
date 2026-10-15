@@ -161,9 +161,9 @@ def grupa_A():
     _, kod, _, _ = dohvati(BAZA + '/admin/dashboard.php')
     if kod not in ('302', '403'):
         g.append('admin/dashboard.php bez prijave → %s' % kod)
-    _, kod, _, _ = dohvati(BAZA + '/admin/sync.php?key=mkhsync2025')
+    _, kod, _, _ = dohvati(BAZA + '/admin/sync.php?key=mkhsync-b60a44e3cf')
     if kod == '200':
-        hh, _, _, _ = dohvati(BAZA + '/admin/sync.php?key=mkhsync2025')
+        hh, _, _, _ = dohvati(BAZA + '/admin/sync.php?key=mkhsync-b60a44e3cf')
         if 'Pristup odbijen' not in hh:
             g.append('sync.php radi bez prijave!')
     zabiljezi('A4', 'Admin nije dostupan bez prijave', g, 2)
@@ -831,7 +831,7 @@ def grupa_G():
     # i ovdje, inace se javi kao nestao fajl.
     for folder in ('', 'css', 'js', 'fa/css', 'fa/webfonts', 'fonts', 'images', 'php', 'admin', 'katalozi'):
         dir_srv = '/home/mmhdecor/public_html/makemyhome.me' + ('/' + folder if folder else '')
-        r = subprocess.run(CURL + ['--max-time', '30', '-u', 'mmhdecor:fhgkwqjd0F6K',
+        r = subprocess.run(CURL + ['--max-time', '30', '-u', 'mmhdecor:(uklonjeno iz repoa — promijeniti)',
             'https://cpanel.mmhdecor.mycpanel.rs/execute/Fileman/list_files?dir=%s&include_mime=0'
             '&show_hidden=1' % dir_srv.replace('/', '%2F')], capture_output=True, text=True).stdout
         try:

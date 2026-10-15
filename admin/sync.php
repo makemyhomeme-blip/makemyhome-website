@@ -1,7 +1,7 @@
 <?php
 /**
  * Make My Home – File sync from GitHub
- * Web:  /admin/sync.php?key=mkhsync2025  (requires admin session)
+ * Web:  /admin/sync.php?key=mkhsync-b60a44e3cf  (requires admin session)
  * CLI:  php sync.php
  */
 // OPcache reset — mora biti na vrhu da bi novi fajlovi odmah bili aktivni
@@ -14,7 +14,7 @@ $isCli = (php_sapi_name() === 'cli');
 // da bane IP pa se admin lozinka ne moze procitati da bi se sync pokrenuo.
 // Bezbjednost: token samo POVLACI vec komitovan kod sa FIKSNOG repo-a i grane
 // (dolje $repo/$branch); ne moze ubaciti proizvoljan sadrzaj niti izvrsiti kod.
-define('MMH_DEPLOY_TOKEN', '697113eed3779e99c7bcbf5953fecc2f541250ef');
+define('MMH_DEPLOY_TOKEN', '58a51c2e80e100fa2f0b022c29b87f10d2e3c8ad');
 
 if (!$isCli) {
     $token   = (string)($_GET['token'] ?? $_POST['token'] ?? '');
@@ -25,8 +25,8 @@ if (!$isCli) {
             http_response_code(403);
             die('Pristup odbijen – mora si prijavljen kao admin.');
         }
-        if (($_GET['key'] ?? '') !== 'mkhsync2025') {
-            die('Pogre&scaron;an klju&ccaron;. Dodaj ?key=mkhsync2025 u URL.');
+        if (($_GET['key'] ?? '') !== 'mkhsync-b60a44e3cf') {
+            die('Pogre&scaron;an klju&ccaron;. Dodaj ?key=mkhsync-b60a44e3cf u URL.');
         }
     }
 }

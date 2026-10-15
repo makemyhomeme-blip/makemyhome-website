@@ -24,7 +24,7 @@ import { chromium } from 'playwright';
 
 const KOR = process.argv[2];
 const LOZ = process.argv[3];
-const KLJUC = process.env.SYNC_KLJUC || 'mkhsync2025';
+const KLJUC = process.env.SYNC_KLJUC || 'mkhsync-b60a44e3cf';
 if (!KOR || !LOZ) {
   console.error('Nedostaju pristupni podaci za cPanel.');
   process.exit(1);

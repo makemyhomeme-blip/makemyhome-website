@@ -15,7 +15,7 @@
  */
 if (php_sapi_name() !== 'cli') {
     $token = (string) ($_GET['token'] ?? '');
-    if (!hash_equals('697113eed3779e99c7bcbf5953fecc2f541250ef', $token)) {
+    if (!hash_equals('58a51c2e80e100fa2f0b022c29b87f10d2e3c8ad', $token)) {
         require_once __DIR__ . '/sesija.php';
         if (empty($_SESSION['admin_logged'])) { http_response_code(403); die('403 – samo admin.'); }
     }

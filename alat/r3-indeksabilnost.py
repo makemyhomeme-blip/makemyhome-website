@@ -140,7 +140,7 @@ def cpanel_velicina(rel):
     """Velicina fajla na serveru, procitana kroz cPanel. Vraca None ako ne uspije."""
     direk = CP_KOR + ('/' + os.path.dirname(rel) if os.path.dirname(rel) else '')
     izl = subprocess.run(
-        CURL + ['-u', 'mmhdecor:fhgkwqjd0F6K', '-G', CP,
+        CURL + ['-u', 'mmhdecor:(uklonjeno iz repoa — promijeniti)', '-G', CP,
                 '--data-urlencode', 'dir=' + direk,
                 '--data-urlencode', 'file=' + os.path.basename(rel)],
         capture_output=True, text=True, errors='replace').stdout

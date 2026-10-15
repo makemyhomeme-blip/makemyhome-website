@@ -12,7 +12,7 @@
  * ponovo iscrta sve. Pristup: samo deploy token.
  */
 $token = (string) ($_GET['token'] ?? '');
-if (!hash_equals('697113eed3779e99c7bcbf5953fecc2f541250ef', $token)) { http_response_code(403); die('403'); }
+if (!hash_equals('58a51c2e80e100fa2f0b022c29b87f10d2e3c8ad', $token)) { http_response_code(403); die('403'); }
 header('Content-Type: text/plain; charset=utf-8');
 
 $root = dirname(__DIR__);
