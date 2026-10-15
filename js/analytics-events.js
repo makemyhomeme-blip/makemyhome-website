@@ -95,7 +95,25 @@
   }
 
   // ---- 6. Pregled proizvoda ----
-  if (/product\.(html|php)$/.test(location.pathname) && location.search.indexOf('id=') > -1
+  // Radi i na lijepim adresama /paneli/<ime>: product.php ispiše window.MMH_ITEM
+  // sa pravim podacima (id, ime, cijena, kategorija), pa GA4 "view_item" i
+  // izvještaji o artiklima (Items / Best sellers) rade. Ranije je uslov tražio
+  // product.php?id=, čega na lijepim adresama nema, pa se događaj nije ni slao.
+  // Stara logika ostaje kao rezerva.
+  if (window.MMH_ITEM && window.MMH_ITEM.id) {
+    var mi = window.MMH_ITEM;
+    var cijenaItem = (typeof mi.price === 'number' && mi.price > 0) ? mi.price : undefined;
+    ev('view_item', {
+      currency: 'EUR',
+      value: cijenaItem,
+      items: [{
+        item_id: String(mi.id),
+        item_name: mi.name || document.title,
+        price: cijenaItem,
+        item_category: mi.cat || undefined
+      }]
+    });
+  } else if (/product\.(html|php)$/.test(location.pathname) && location.search.indexOf('id=') > -1
       && document.querySelector('.product-detail-grid')) {
     var h1 = document.querySelector('h1');
     ev('view_item', {

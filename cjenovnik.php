@@ -700,6 +700,6 @@ $fmt = fn($v) => number_format($v, 2, ',', '.');
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 <script src="js/main-v4.js?v=eb03eb0d"></script>
 <script src="js/cart.js?v=25285928"></script>
-<script src="js/analytics-events.js?v=79aeefac" defer></script>
+<script src="js/analytics-events.js?v=80f63250" defer></script>
 </body>
 </html>
