@@ -36,6 +36,9 @@ return function (string $base, string $root, string $adminDir): array {
     $root . '/php/contact.php'    => $base . '/php/contact.php',
     $root . '/php/og-mozaik.php' => $base . '/php/og-mozaik.php',
     $root . '/php/lastmod.php' => $base . '/php/lastmod.php',
+    // Brojač pregleda proizvoda — product.php ga trazi (zasticeno), pa ide medju
+    // zavisnosti. Sami podaci (data/pregledi.json) se NE sinhronizuju.
+    $root . '/php/pregledi.php' => $base . '/php/pregledi.php',
     // HTML stranice
     $root . '/404.html'         => $base . '/404.html',
     $root . '/index.html'       => $base . '/index.html',
@@ -157,6 +160,7 @@ return function (string $base, string $root, string $adminDir): array {
     $adminDir . '/og-generisi.php'        => $base . '/admin/og-generisi.php',
     $adminDir . '/upload-batch.php'       => $base . '/admin/upload-batch.php',
     $adminDir . '/sku-fix.php'            => $base . '/admin/sku-fix.php',
+    $adminDir . '/pregledi.php'           => $base . '/admin/pregledi.php',
     // ---- Flex Stone galerijske slike (deploy preko sync-a) ----
     $root . '/images/products/flex-ancient-wood-dark-p1.jpg' => $base . '/images/products/flex-ancient-wood-dark-p1.jpg',
     $root . '/images/products/flex-ancient-wood-khaki-73.jpg' => $base . '/images/products/flex-ancient-wood-khaki-73.jpg',

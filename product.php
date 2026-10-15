@@ -66,6 +66,20 @@ if (!$product) {
 // i racunala ocjenu po njima. Otkad su adrese promijenjene, to je vazilo za
 // svih 117 proizvoda. Ovdje se $id uzima iz pronadjenog proizvoda.
 if ($product) $id = (int)($product['id'] ?? 0);
+
+// Brojač pregleda proizvoda (server-side; broji svakog posjetioca, nezavisno od
+// Google Analyticsa i kolačića). Rezultat se gleda u admin/pregledi.php.
+// Namjerno IZA 301/404 provjera — broje se samo stvarni pregledi postojećeg
+// proizvoda. Učitava se zaštićeno (is_file + function_exists + interni try/catch)
+// da ni u jednom slučaju ne obori stranicu.
+if ($product && $id > 0) {
+    $mmhTrk = __DIR__ . '/php/pregledi.php';
+    if (is_file($mmhTrk)) {
+        require_once $mmhTrk;
+        if (function_exists('mmhZabiljeziPregled')) mmhZabiljeziPregled($id);
+    }
+}
+
 // Roba u pripremi (bez slike i/ili cijene) — noindex dok je vlasnik ne dovrsi.
 $mmhURipremi = $product && (trim((string)($product['image'] ?? '')) === '' || (float)($product['price'] ?? 0) <= 0);
 
