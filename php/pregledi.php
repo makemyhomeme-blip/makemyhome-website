@@ -1,17 +1,22 @@
 <?php
 /**
- * Brojač pregleda proizvoda — SERVER-SIDE, broji SVAKOG posjetioca
+ * Brojač pregleda — SERVER-SIDE, broji SVAKOG posjetioca
  * (ne zavisi od Google Analyticsa ni od pristanka na kolačiće).
  *
  * Zašto postoji:
  * GA4 broji samo posjetioce koji prihvate kolačiće, a kod nas "view_item" nije
  * ni okidao na lijepim adresama /paneli/..., pa je admin ostajao bez prave slike
- * o tome koji se paneli najviše gledaju. Ovaj brojač je nezavisan i uvijek radi —
- * rezultat se gleda u admin/pregledi.php.
+ * o tome šta se najviše gleda. Ovaj brojač je nezavisan i uvijek radi — rezultat
+ * se gleda u admin/pregledi.php.
+ *
+ * Šta se broji (server-side može samo PHP stranice):
+ *   - proizvod   /paneli/<ime>     → ključ "p:<id>"   (product.php)
+ *   - kategorija /kategorija/<k>    → ključ "k:<kljuc>" (products.php)
+ * Statične HTML stranice (početna, blog, products.html) se ne vide odavde.
  *
  * Podaci: data/pregledi.json
- *   { "ukupno": {"<id>": N, ...},
- *     "dani":   {"YYYY-MM-DD": {"<id>": N, ...}, ...} }
+ *   { "ukupno": {"<kljuc>": N, ...},
+ *     "dani":   {"YYYY-MM-DD": {"<kljuc>": N, ...}, ...} }
  * Taj fajl pravi server sam i NE deployuje se sa GitHuba (nije u sync listi),
  * isto kao products.json — da ga svaki sync ne vrati na prazno.
  *
@@ -20,7 +25,7 @@
  * čiste (čuva se zadnjih ~120 dana) da fajl ne raste bez granice.
  */
 
-if (!function_exists('mmhZabiljeziPregled')) {
+if (!function_exists('mmhZabiljeziPregledKljuc')) {
 
 /** Je li posjetilac bot/alat? Bote NE brojimo da rang-lista ostane stvarna
  *  (Googlebot i sl. obiđu svih 117 proizvoda i izravnali bi listu). */
@@ -38,9 +43,10 @@ function mmhPregledBot(): bool {
     return false;
 }
 
-/** Zabilježi jedan pregled proizvoda sa datim ID-om. */
-function mmhZabiljeziPregled(int $id): void {
-    if ($id <= 0) return;
+/** Zabilježi jedan pregled pod proizvoljnim ključem (npr. "p:63", "k:bambus-paneli"). */
+function mmhZabiljeziPregledKljuc(string $kljuc): void {
+    $kljuc = trim($kljuc);
+    if ($kljuc === '' || strlen($kljuc) > 80) return;
     try {
         if (mmhPregledBot()) return;
 
@@ -55,12 +61,10 @@ function mmhZabiljeziPregled(int $id): void {
         if (!isset($D['ukupno']) || !is_array($D['ukupno'])) $D['ukupno'] = [];
         if (!isset($D['dani'])   || !is_array($D['dani']))   $D['dani']   = [];
 
-        $k   = (string)$id;
         $dan = date('Y-m-d');
-
-        $D['ukupno'][$k] = (int)($D['ukupno'][$k] ?? 0) + 1;
+        $D['ukupno'][$kljuc] = (int)($D['ukupno'][$kljuc] ?? 0) + 1;
         if (!isset($D['dani'][$dan]) || !is_array($D['dani'][$dan])) $D['dani'][$dan] = [];
-        $D['dani'][$dan][$k] = (int)($D['dani'][$dan][$k] ?? 0) + 1;
+        $D['dani'][$dan][$kljuc] = (int)($D['dani'][$dan][$kljuc] ?? 0) + 1;
 
         // Čišćenje starih dana — čuvamo zadnjih 120.
         if (count($D['dani']) > 120) {
@@ -78,8 +82,14 @@ function mmhZabiljeziPregled(int $id): void {
         flock($fh, LOCK_UN);
         fclose($fh);
     } catch (\Throwable $e) {
-        // Analitika NIKAD ne smije srušiti stranicu proizvoda.
+        // Analitika NIKAD ne smije srušiti stranicu.
     }
+}
+
+/** Kratica za proizvod po ID-u. */
+function mmhZabiljeziPregled(int $id): void {
+    if ($id <= 0) return;
+    mmhZabiljeziPregledKljuc('p:' . $id);
 }
 
 }

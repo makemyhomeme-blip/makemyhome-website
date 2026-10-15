@@ -283,7 +283,7 @@ $unread = count(array_filter($inquiries, fn($i) => !$i['read']));
     </a>
     <div class="nav-section-label">Statistika</div>
     <a href="pregledi.php" class="sidebar-link">
-      <i class="fas fa-chart-line"></i> Najgledaniji paneli
+      <i class="fas fa-chart-line"></i> Analitika pregleda
     </a>
     <div class="nav-section-label">Web sajt</div>
     <a href="../index.html" target="_blank" class="sidebar-link">

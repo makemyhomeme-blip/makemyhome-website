@@ -61,6 +61,18 @@ if ($catPretty === '' && ($_SERVER['QUERY_STRING'] ?? '') !== '' && isset($_GET[
 
 $cat = $catPretty;
 
+// Brojač pregleda kategorije (server-side; broji svakog posjetioca, nezavisno od
+// Google Analyticsa i kolačića). Rezultat se gleda u admin/pregledi.php. Samo
+// stvarna, postojeća kategorija (nevažeća je gore oborena na 404 i $cat='').
+// Zaštićeno (is_file + function_exists) da ni u jednom slučaju ne obori stranicu.
+if ($cat !== '') {
+    $mmhTrk = __DIR__ . '/php/pregledi.php';
+    if (is_file($mmhTrk)) {
+        require_once $mmhTrk;
+        if (function_exists('mmhZabiljeziPregledKljuc')) mmhZabiljeziPregledKljuc('k:' . $cat);
+    }
+}
+
 $catNames = [
   'bambus-tekstilni' => 'Tekstilni Paneli',
   'bambus-drveni'    => 'Drveni Paneli',
