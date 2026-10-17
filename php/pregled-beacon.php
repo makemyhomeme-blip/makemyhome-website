@@ -13,7 +13,7 @@
 require __DIR__ . '/pregledi.php';
 
 try {
-    $p = (string)($_GET['p'] ?? $_POST['p'] ?? '');
+    $p = (string)($_GET['pg'] ?? $_POST['pg'] ?? '');
     $p = strtok($p, '?');                 // bez query stringa
     $p = strtok((string)$p, '#');         // bez fragmenta
     if ($p === '' || $p === false) $p = '/';
@@ -23,7 +23,7 @@ try {
     if ($p === '' ) $p = '/';
     if (strlen($p) > 70) $p = substr($p, 0, 70);
 
-    $ref = (string)($_GET['r'] ?? $_POST['r'] ?? '');
+    $ref = (string)($_GET['ref'] ?? $_POST['ref'] ?? '');
     if (strlen($ref) > 300) $ref = substr($ref, 0, 300);
 
     if (function_exists('mmhZabiljeziPregledKljuc')) {

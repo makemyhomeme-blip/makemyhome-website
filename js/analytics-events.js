@@ -21,7 +21,7 @@
     var _pp = location.pathname || '/';
     if (!/^\/(paneli|kategorija)\//.test(_pp)) {
       var _ref = (document.referrer || '').slice(0, 200);
-      var _u = '/php/pregled-beacon.php?p=' + encodeURIComponent(_pp) + '&r=' + encodeURIComponent(_ref);
+      var _u = '/php/pregled-beacon.php?pg=' + encodeURIComponent(_pp) + '&ref=' + encodeURIComponent(_ref);
       if (navigator.sendBeacon) { navigator.sendBeacon(_u); }
       else { var _i = new Image(); _i.src = _u; }
     }
