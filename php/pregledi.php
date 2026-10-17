@@ -59,6 +59,14 @@ function mmhPregledIzvor(?string $ref = null): string {
     return 'ostalo';
 }
 
+/** Vrsta uređaja iz User-Agenta: mobile / tablet / desktop. */
+function mmhPregledUredjaj(): string {
+    $ua = strtolower((string)($_SERVER['HTTP_USER_AGENT'] ?? ''));
+    if (strpos($ua, 'ipad') !== false || strpos($ua, 'tablet') !== false) return 'tablet';
+    if (strpos($ua, 'mobi') !== false || strpos($ua, 'iphone') !== false || strpos($ua, 'android') !== false) return 'mobile';
+    return 'desktop';
+}
+
 /** Glavna funkcija: zabilježi pregled pod ključem ("p:63", "k:bambus-paneli", "page:/").
  *  $refOverride: izvor (document.referrer) kad poziv dolazi iz beacona. */
 function mmhZabiljeziPregledKljuc(string $kljuc, ?string $refOverride = null): void {
@@ -86,7 +94,7 @@ function mmhZabiljeziPregledKljuc(string $kljuc, ?string $refOverride = null): v
         $sirovo = stream_get_contents($fh);
         $D = json_decode($sirovo ?: '{}', true);
         if (!is_array($D)) $D = [];
-        foreach (['ukupno','dani','posjete','_fp'] as $g) if (!isset($D[$g]) || !is_array($D[$g])) $D[$g] = [];
+        foreach (['ukupno','dani','posjete','_fp','sati','uredjaji'] as $g) if (!isset($D[$g]) || !is_array($D[$g])) $D[$g] = [];
 
         $dan = date('Y-m-d');
 
@@ -94,6 +102,11 @@ function mmhZabiljeziPregledKljuc(string $kljuc, ?string $refOverride = null): v
         $D['ukupno'][$kljuc] = (int)($D['ukupno'][$kljuc] ?? 0) + 1;
         if (!isset($D['dani'][$dan]) || !is_array($D['dani'][$dan])) $D['dani'][$dan] = [];
         $D['dani'][$dan][$kljuc] = (int)($D['dani'][$dan][$kljuc] ?? 0) + 1;
+
+        // 1b) pregledi po SATU (za "najprometnije sate")
+        $sat = (string)(int)date('G');  // 0–23
+        if (!isset($D['sati'][$dan]) || !is_array($D['sati'][$dan])) $D['sati'][$dan] = [];
+        $D['sati'][$dan][$sat] = (int)($D['sati'][$dan][$sat] ?? 0) + 1;
 
         // 2) posjetioci + jedinstveni + izvori
         if (!isset($D['posjete'][$dan]) || !is_array($D['posjete'][$dan]))
@@ -108,11 +121,17 @@ function mmhZabiljeziPregledKljuc(string $kljuc, ?string $refOverride = null): v
             $izv = mmhPregledIzvor($refOverride);
             if (!isset($D['posjete'][$dan]['izvori']) || !is_array($D['posjete'][$dan]['izvori'])) $D['posjete'][$dan]['izvori'] = [];
             $D['posjete'][$dan]['izvori'][$izv] = (int)($D['posjete'][$dan]['izvori'][$izv] ?? 0) + 1;
+            // uređaj novog jedinstvenog posjetioca (mobile/desktop/tablet)
+            $ur = mmhPregledUredjaj();
+            if (!isset($D['uredjaji'][$dan]) || !is_array($D['uredjaji'][$dan])) $D['uredjaji'][$dan] = [];
+            $D['uredjaji'][$dan][$ur] = (int)($D['uredjaji'][$dan][$ur] ?? 0) + 1;
         }
 
         // 3) čišćenje da fajl ne raste bez granice
         if (count($D['dani'])    > 120) { ksort($D['dani']);    $D['dani']    = array_slice($D['dani'],    -120, null, true); }
         if (count($D['posjete']) > 120) { ksort($D['posjete']); $D['posjete'] = array_slice($D['posjete'], -120, null, true); }
+        if (count($D['sati'])    > 120) { ksort($D['sati']);    $D['sati']    = array_slice($D['sati'],    -120, null, true); }
+        if (count($D['uredjaji'])> 120) { ksort($D['uredjaji']);$D['uredjaji']= array_slice($D['uredjaji'],-120, null, true); }
         if (count($D['_fp'])     > 3)   { ksort($D['_fp']);     $D['_fp']     = array_slice($D['_fp'],     -3,   null, true); }
 
         $novo = json_encode($D, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

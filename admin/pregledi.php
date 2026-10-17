@@ -48,6 +48,8 @@ if (!is_array($D)) $D = [];
 $ukupnoAll = (isset($D['ukupno'])  && is_array($D['ukupno']))  ? $D['ukupno']  : [];
 $dani      = (isset($D['dani'])    && is_array($D['dani']))    ? $D['dani']    : [];
 $posjete   = (isset($D['posjete']) && is_array($D['posjete'])) ? $D['posjete'] : [];
+$sati      = (isset($D['sati'])     && is_array($D['sati']))     ? $D['sati']     : [];
+$uredjaji  = (isset($D['uredjaji']) && is_array($D['uredjaji'])) ? $D['uredjaji'] : [];
 
 $catNames = [
   'bambus-paneli'=>'Bambus Paneli','bambus-drveni'=>'Drveni Paneli','bambus-tekstilni'=>'Tekstilni Paneli',
@@ -180,6 +182,16 @@ $pIzvori = $customRange ? $pR['izvori'] : $p30['izvori'];
 arsort($pIzvori);
 $izvorUk = array_sum($pIzvori);
 $izvoriLabel = $customRange ? ($od . ' – ' . $do) : '30 dana';
+
+// --- grafikoni: sati, uređaji (za izabrani period / 30 dana), trend po danima ---
+$periodDatumi = $customRange ? (isset($rangeDatumi) ? $rangeDatumi : $d30) : $d30;
+$satiZbir = mmhSumaKljuc($sati, $periodDatumi);      // ključevi "0".."23"
+$satiMax  = max(1, empty($satiZbir) ? 1 : max($satiZbir));
+$urZbir   = mmhSumaKljuc($uredjaji, $periodDatumi);  // mobile/desktop/tablet
+$urUk     = array_sum($urZbir);
+$trend = [];
+foreach (array_reverse(mmhDaniUnazad($danas, 14)) as $td) $trend[$td] = (int)($posjete[$td]['uk'] ?? 0);
+$trendMax = max(1, empty($trend) ? 1 : max($trend));
 
 function mmhStr(string $o, string $t): string { return $o === $t ? ' <i class="fas fa-caret-down"></i>' : ''; }
 $rangeQ = $customRange ? '&od=' . urlencode($od) . '&do=' . urlencode($do) : '';
@@ -333,6 +345,41 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
     <?php if ($rb === 0): ?><tr><td colspan="<?= $customRange?7:6 ?>" style="text-align:center;color:var(--gray);padding:26px;">Nema pregleda u izabranom periodu.</td></tr><?php endif; ?>
     </tbody>
   </table>
+
+  <div class="panel" style="margin-top:18px;">
+    <h2><i class="fas fa-chart-column"></i> Promet po danima (zadnjih 14 dana)</h2>
+    <div style="display:flex;align-items:flex-end;gap:4px;height:120px;">
+      <?php foreach ($trend as $td => $tn): $hh = round($tn / $trendMax * 100); ?>
+        <div title="<?= htmlspecialchars($td) ?>: <?= $tn ?> pregleda" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;">
+          <div style="font-size:10px;color:var(--gray);line-height:1;"><?= $tn ?></div>
+          <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:<?= max(2,$hh) ?>%;margin-top:3px;"></div>
+          <div style="font-size:9px;color:var(--gray);margin-top:3px;"><?= (int)substr($td,8,2) ?>.</div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Pregledi cijelog sajta po danima (broj iznad stuba, dan ispod).</p>
+  </div>
+
+  <div class="panel" style="margin-top:18px;">
+    <h2><i class="fas fa-clock"></i> Najprometniji sati (<?= htmlspecialchars($izvoriLabel) ?>)</h2>
+    <div style="display:flex;align-items:flex-end;gap:2px;height:90px;">
+      <?php for ($h = 0; $h < 24; $h++): $hn = (int)($satiZbir[(string)$h] ?? 0); $hh = round($hn / $satiMax * 100); ?>
+        <div title="<?= $h ?>:00 – <?= $hn ?> pregleda" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;">
+          <div style="width:100%;background:#3498db;border-radius:3px 3px 0 0;height:<?= max(2,$hh) ?>%;"></div>
+          <?php if ($h % 3 === 0): ?><div style="font-size:9px;color:var(--gray);margin-top:3px;"><?= $h ?></div><?php else: ?><div style="height:14px;"></div><?php endif; ?>
+        </div>
+      <?php endfor; ?>
+    </div>
+    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Kad ljudi najviše ulaze (sat u danu, 0–23h). Korisno za objave/akcije.</p>
+  </div>
+
+  <div class="panel" style="margin-top:18px;">
+    <h2><i class="fas fa-mobile-screen"></i> Uređaji (<?= htmlspecialchars($izvoriLabel) ?>)</h2>
+    <?php if ($urUk > 0): foreach (['mobile'=>'Mobilni telefon','desktop'=>'Kompjuter','tablet'=>'Tablet'] as $uk => $uime): $un = (int)($urZbir[$uk] ?? 0); if ($un <= 0) continue; $upct = round($un / max(1,$urUk) * 100); ?>
+      <div class="src"><div class="row"><span><?= $uime ?></span><span><strong><?= $un ?></strong> &middot; <?= $upct ?>%</span></div><div class="bar"><span style="width:<?= $upct ?>%"></span></div></div>
+    <?php endforeach; else: ?><p style="font-size:12.5px;color:var(--gray);">Još nema podataka o uređajima.</p><?php endif; ?>
+    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Na čemu ljudi gledaju sajt (najčešće mobilni) — da znaš da sajt mora dobro da izgleda na telefonu.</p>
+  </div>
 
   <div class="panel" style="margin-top:18px;">
     <h2><i class="fas fa-shield-halved"></i> Jesu li posjete realne?</h2>
