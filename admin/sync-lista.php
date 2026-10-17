@@ -39,6 +39,9 @@ return function (string $base, string $root, string $adminDir): array {
     // Brojač pregleda proizvoda — product.php ga trazi (zasticeno), pa ide medju
     // zavisnosti. Sami podaci (data/pregledi.json) se NE sinhronizuju.
     $root . '/php/pregledi.php' => $base . '/php/pregledi.php',
+    // Beacon za posjete statičnim stranicama (početna/blog) — zove ga
+    // analytics-events.js iz browsera. Puni isti data/pregledi.json.
+    $root . '/php/pregled-beacon.php' => $base . '/php/pregled-beacon.php',
     // HTML stranice
     $root . '/404.html'         => $base . '/404.html',
     $root . '/index.html'       => $base . '/index.html',

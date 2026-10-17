@@ -13,6 +13,20 @@
   }
   window.mmhTrack = ev;
 
+  // ---- 0. Vlastiti brojač posjeta sajtu (beacon) ----
+  // Javi serveru da je stranica otvorena, da se u adminu vidi i POČETNA i blog
+  // (statični HTML koje server ne vidi sam). Ne šaljemo za /paneli/ i /kategorija/
+  // jer njih product.php/products.php već broje server-side (da se ne duplira).
+  try {
+    var _pp = location.pathname || '/';
+    if (!/^\/(paneli|kategorija)\//.test(_pp)) {
+      var _ref = (document.referrer || '').slice(0, 200);
+      var _u = '/php/pregled-beacon.php?p=' + encodeURIComponent(_pp) + '&r=' + encodeURIComponent(_ref);
+      if (navigator.sendBeacon) { navigator.sendBeacon(_u); }
+      else { var _i = new Image(); _i.src = _u; }
+    }
+  } catch (e) { /* brojač nikad ne ruši stranicu */ }
+
   // ---- 1. Telefon, WhatsApp, Viber, email ----
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');

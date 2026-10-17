@@ -96,7 +96,22 @@ $p30    = mmhSumaPosjeta($posjete, $d30);
 
 $V = fn(array $a, string $k): int => (int)($a[$k] ?? 0);
 
-$tab  = ($_GET['tab'] ?? 'proizvodi') === 'kategorije' ? 'kategorije' : 'proizvodi';
+// Lijepo ime za statičnu stranicu (ključ "page:<putanja>").
+function mmhImeStranice(string $path): string {
+    $map = [
+        '/' => 'Početna strana', '/products.html' => 'Svi proizvodi (lista)',
+        '/contact.html' => 'Kontakt', '/about.html' => 'O nama',
+        '/korpa.html' => 'Korpa', '/checkout.html' => 'Plaćanje (checkout)',
+        '/hvala.html' => 'Hvala (posle narudžbe)', '/faq.html' => 'Česta pitanja',
+        '/montaza.html' => 'Montaža', '/blog.html' => 'Blog', '/decor-box.php' => 'Decor Box',
+    ];
+    if (isset($map[$path])) return $map[$path];
+    if (substr($path, -5) === '.html') return ucfirst(str_replace('-', ' ', trim(substr($path, 1, -5))));
+    return $path;
+}
+
+$tab  = $_GET['tab'] ?? 'proizvodi';
+if (!in_array($tab, ['proizvodi','kategorije','stranice'], true)) $tab = 'proizvodi';
 $sort = $_GET['sort'] ?? '7';
 if (!in_array($sort, ['danas','7','30','sve'], true)) $sort = '7';
 $sk = ['danas'=>'v1','7'=>'v7','30'=>'v30','sve'=>'vsve'][$sort];
@@ -111,11 +126,21 @@ if ($tab === 'proizvodi') {
             'url'=>function_exists('mmhUrlProizvoda') ? mmhUrlProizvoda($p) : '',
             'v1'=>$V($s1,$k),'v7'=>$V($s7,$k),'v30'=>$V($s30,$k),'vsve'=>$V($ukupnoAll,$k)];
     }
-} else {
+} elseif ($tab === 'kategorije') {
     foreach ($catNames as $k => $ime) {
         $kk = 'k:' . $k;
         $redovi[] = ['ime'=>$ime,'meta'=>$k,
             'url'=>function_exists('mmhUrlKategorije') ? mmhUrlKategorije($k) : '',
+            'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk)];
+    }
+} else { // stranice (page:<putanja>) — početna, blog, products.html…
+    $pageKeys = [];
+    foreach (array_merge(array_keys($ukupnoAll), array_keys($s1), array_keys($s7), array_keys($s30)) as $kk)
+        if (strncmp($kk, 'page:', 5) === 0) $pageKeys[$kk] = true;
+    foreach (array_keys($pageKeys) as $kk) {
+        $path = substr($kk, 5);
+        $redovi[] = ['ime'=>mmhImeStranice($path),'meta'=>$path,
+            'url'=>'https://makemyhome.me' . $path,
             'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk)];
     }
 }
@@ -229,6 +254,7 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
     <span class="seg">
       <a href="?tab=proizvodi&sort=<?= $sort . $qTok ?>" class="<?= $tab==='proizvodi'?'active':'' ?>"><i class="fas fa-box"></i> Proizvodi</a>
       <a href="?tab=kategorije&sort=<?= $sort . $qTok ?>" class="<?= $tab==='kategorije'?'active':'' ?>"><i class="fas fa-layer-group"></i> Kategorije</a>
+      <a href="?tab=stranice&sort=<?= $sort . $qTok ?>" class="<?= $tab==='stranice'?'active':'' ?>"><i class="fas fa-file-lines"></i> Stranice</a>
     </span>
     <span class="spacer"></span>
     <span class="lbl">Poredaj:</span>
@@ -244,7 +270,7 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
     <thead>
       <tr>
         <th class="rank">#</th>
-        <th><?= $tab==='kategorije'?'Kategorija':'Proizvod' ?></th>
+        <th><?= $tab==='kategorije'?'Kategorija':($tab==='stranice'?'Stranica':'Proizvod') ?></th>
         <th class="num"><a href="?<?= $q ?>&sort=danas">Danas<?= mmhStr('danas',$sort) ?></a></th>
         <th class="num"><a href="?<?= $q ?>&sort=7">7 dana<?= mmhStr('7',$sort) ?></a></th>
         <th class="num"><a href="?<?= $q ?>&sort=30">30 dana<?= mmhStr('30',$sort) ?></a></th>
@@ -292,7 +318,7 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
   </div>
 
   <div class="note">
-    <i class="fas fa-circle-info"></i> Prate se <strong>proizvodi</strong> (/paneli/…) i <strong>kategorije</strong> (/kategorija/…). Početna i blog su statične stranice pa ih ovaj brojač ne vidi.
+    <i class="fas fa-circle-info"></i> Broji se <strong>cijeli sajt</strong> — proizvodi (/paneli/…), kategorije (/kategorija/…) i ostale stranice (<strong>početna</strong>, blog, kontakt…). Kartice „Danas / posjetilaca / izvori" gore pokazuju ukupno za cijeli sajt. Tab <strong>Stranice</strong> pokazuje baš početnu i ostale statične stranice (tu reklame vode ljude).
     <?php if ($prviDan): ?> Podaci se skupljaju od <strong><?= htmlspecialchars($prviDan) ?></strong>.<?php endif; ?>
   </div>
 

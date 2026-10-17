@@ -1152,6 +1152,6 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 <?php if ($product && $id > 0): ?>
 <script>window.MMH_ITEM={id:"<?= (int)$id ?>",name:<?= json_encode($product['name'] ?? '', JSON_UNESCAPED_UNICODE|JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_AMP) ?>,price:<?= json_encode((float)($salePrice ?? 0)) ?>,cat:<?= json_encode($product['category'] ?? '', JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_QUOT) ?>};</script>
 <?php endif; ?>
-<script src="js/analytics-events.js?v=80f63250" defer></script>
+<script src="js/analytics-events.js?v=5686bf7f" defer></script>
 </body>
 </html>

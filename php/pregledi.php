@@ -45,9 +45,10 @@ function mmhPregledOtisak(): string {
     return substr(md5($ip . '|' . $ua . '|' . date('Y-m-d') . '|mmh'), 0, 12);
 }
 
-/** Odakle je posjetilac došao (iz Referer zaglavlja). */
-function mmhPregledIzvor(): string {
-    $r = strtolower((string)($_SERVER['HTTP_REFERER'] ?? ''));
+/** Odakle je posjetilac došao. Ako je $ref dat (npr. iz beacona = document.referrer),
+ *  koristi njega; inače Referer zaglavlje. */
+function mmhPregledIzvor(?string $ref = null): string {
+    $r = strtolower($ref !== null ? $ref : (string)($_SERVER['HTTP_REFERER'] ?? ''));
     if ($r === '')                              return 'direktno';
     if (strpos($r, 'instagram') !== false)      return 'instagram';
     if (strpos($r, 'google') !== false)         return 'google';
@@ -58,8 +59,9 @@ function mmhPregledIzvor(): string {
     return 'ostalo';
 }
 
-/** Glavna funkcija: zabilježi pregled pod ključem ("p:63", "k:bambus-paneli"). */
-function mmhZabiljeziPregledKljuc(string $kljuc): void {
+/** Glavna funkcija: zabilježi pregled pod ključem ("p:63", "k:bambus-paneli", "page:/").
+ *  $refOverride: izvor (document.referrer) kad poziv dolazi iz beacona. */
+function mmhZabiljeziPregledKljuc(string $kljuc, ?string $refOverride = null): void {
     $kljuc = trim($kljuc);
     if ($kljuc === '' || strlen($kljuc) > 80) return;
     try {
@@ -103,7 +105,7 @@ function mmhZabiljeziPregledKljuc(string $kljuc): void {
         if (!isset($D['_fp'][$dan][$fp])) {
             if (count($D['_fp'][$dan]) < 8000) $D['_fp'][$dan][$fp] = 1; // novi jedinstveni posjetilac danas
             $D['posjete'][$dan]['jed'] = (int)($D['posjete'][$dan]['jed'] ?? 0) + 1;
-            $izv = mmhPregledIzvor();
+            $izv = mmhPregledIzvor($refOverride);
             if (!isset($D['posjete'][$dan]['izvori']) || !is_array($D['posjete'][$dan]['izvori'])) $D['posjete'][$dan]['izvori'] = [];
             $D['posjete'][$dan]['izvori'][$izv] = (int)($D['posjete'][$dan]['izvori'][$izv] ?? 0) + 1;
         }

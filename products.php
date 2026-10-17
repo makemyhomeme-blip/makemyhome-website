@@ -1165,6 +1165,6 @@ echo "\n</script>\n";
 <script>
   initProductsPage();
 </script>
-<script src="js/analytics-events.js?v=80f63250" defer></script>
+<script src="js/analytics-events.js?v=5686bf7f" defer></script>
 </body>
 </html>
