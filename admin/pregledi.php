@@ -94,6 +94,22 @@ $pDanas = mmhSumaPosjeta($posjete, $d1);
 $p7     = mmhSumaPosjeta($posjete, $d7);
 $p30    = mmhSumaPosjeta($posjete, $d30);
 
+// --- prilagođeni period (biranje datuma od–do) ---
+$od = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)($_GET['od'] ?? '')) ? (string)$_GET['od'] : '';
+$do = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)($_GET['do'] ?? '')) ? (string)$_GET['do'] : '';
+$customRange = ($od !== '' && $do !== '');
+$sR = []; $pR = ['uk' => 0, 'jed' => 0, 'izvori' => []];
+if ($customRange) {
+    if ($od > $do) { $tmp = $od; $od = $do; $do = $tmp; } // obrnuto -> zamijeni
+    try {
+        $cur = new DateTimeImmutable($od); $end = new DateTimeImmutable($do);
+        $rangeDatumi = []; $brc = 0;
+        while ($cur <= $end && $brc < 400) { $rangeDatumi[] = $cur->format('Y-m-d'); $cur = $cur->add(new DateInterval('P1D')); $brc++; }
+        $sR = mmhSumaKljuc($dani, $rangeDatumi);
+        $pR = mmhSumaPosjeta($posjete, $rangeDatumi);
+    } catch (\Throwable $e) { $customRange = false; }
+}
+
 $V = fn(array $a, string $k): int => (int)($a[$k] ?? 0);
 
 // Lijepo ime za statičnu stranicu (ključ "page:<putanja>").
@@ -112,9 +128,10 @@ function mmhImeStranice(string $path): string {
 
 $tab  = $_GET['tab'] ?? 'proizvodi';
 if (!in_array($tab, ['proizvodi','kategorije','stranice'], true)) $tab = 'proizvodi';
-$sort = $_GET['sort'] ?? '7';
-if (!in_array($sort, ['danas','7','30','sve'], true)) $sort = '7';
-$sk = ['danas'=>'v1','7'=>'v7','30'=>'v30','sve'=>'vsve'][$sort];
+$dozvSort = $customRange ? ['danas','7','30','sve','period'] : ['danas','7','30','sve'];
+$sort = $_GET['sort'] ?? ($customRange ? 'period' : '7');
+if (!in_array($sort, $dozvSort, true)) $sort = $customRange ? 'period' : '7';
+$sk = ['danas'=>'v1','7'=>'v7','30'=>'v30','sve'=>'vsve','period'=>'vR'][$sort];
 
 $redovi = [];
 if ($tab === 'proizvodi') {
@@ -124,14 +141,14 @@ if ($tab === 'proizvodi') {
         $redovi[] = ['ime'=>(string)($p['name'] ?? ('#'.$id)),
             'meta'=>trim((string)($p['category'] ?? '') . (!empty($p['sku']) ? ' · '.$p['sku'] : '')),
             'url'=>function_exists('mmhUrlProizvoda') ? mmhUrlProizvoda($p) : '',
-            'v1'=>$V($s1,$k),'v7'=>$V($s7,$k),'v30'=>$V($s30,$k),'vsve'=>$V($ukupnoAll,$k)];
+            'v1'=>$V($s1,$k),'v7'=>$V($s7,$k),'v30'=>$V($s30,$k),'vsve'=>$V($ukupnoAll,$k),'vR'=>$V($sR,$k)];
     }
 } elseif ($tab === 'kategorije') {
     foreach ($catNames as $k => $ime) {
         $kk = 'k:' . $k;
         $redovi[] = ['ime'=>$ime,'meta'=>$k,
             'url'=>function_exists('mmhUrlKategorije') ? mmhUrlKategorije($k) : '',
-            'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk)];
+            'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk),'vR'=>$V($sR,$kk)];
     }
 } else { // stranice (page:<putanja>) — početna, blog, products.html…
     $pageKeys = [];
@@ -141,7 +158,7 @@ if ($tab === 'proizvodi') {
         $path = substr($kk, 5);
         $redovi[] = ['ime'=>mmhImeStranice($path),'meta'=>$path,
             'url'=>'https://makemyhome.me' . $path,
-            'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk)];
+            'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk),'vR'=>$V($sR,$kk)];
     }
 }
 usort($redovi, function ($a, $b) use ($sk) {
@@ -158,11 +175,15 @@ $imaPodataka = !empty($dani) || !empty($ukupnoAll) || !empty($posjete);
 $izvoriImena = ['instagram'=>'Instagram','google'=>'Google','pretraga'=>'Ostale pretrage',
   'drustvene'=>'Društvene mreže','ai'=>'ChatGPT / AI','direktno'=>'Direktno (ukucali)',
   'sa-sajta'=>'Klik sa sajta','ostalo'=>'Ostalo'];
-arsort($p30['izvori']);
-$izvorUk = array_sum($p30['izvori']);
+// Izvori za prikaz: izabrani period ako je biran, inače 30 dana.
+$pIzvori = $customRange ? $pR['izvori'] : $p30['izvori'];
+arsort($pIzvori);
+$izvorUk = array_sum($pIzvori);
+$izvoriLabel = $customRange ? ($od . ' – ' . $do) : '30 dana';
 
 function mmhStr(string $o, string $t): string { return $o === $t ? ' <i class="fas fa-caret-down"></i>' : ''; }
-$q = 'tab=' . $tab . ($prekoTokena ? '&token=' . urlencode($token) : '');
+$rangeQ = $customRange ? '&od=' . urlencode($od) . '&do=' . urlencode($do) : '';
+$q = 'tab=' . $tab . ($prekoTokena ? '&token=' . urlencode($token) : '') . $rangeQ;
 $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
 ?><!DOCTYPE html>
 <html lang="bs">
@@ -232,16 +253,31 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
 <?php else: ?>
 
   <div class="cards">
-    <div class="card hl"><div class="n"><?= number_format($V($pDanas,'uk'),0,',','.') ?></div><div class="l">Pregleda DANAS</div><div class="s"><?= $V($pDanas,'jed') ?> posjetilaca</div></div>
+    <?php if ($customRange): ?>
+    <div class="card hl"><div class="n"><?= number_format($V($pR,'uk'),0,',','.') ?></div><div class="l">Izabrani period</div><div class="s"><?= $V($pR,'jed') ?> posjetilaca · <?= htmlspecialchars($od) ?> → <?= htmlspecialchars($do) ?></div></div>
+    <?php endif; ?>
+    <div class="card <?= $customRange?'':'hl' ?>"><div class="n"><?= number_format($V($pDanas,'uk'),0,',','.') ?></div><div class="l">Pregleda DANAS</div><div class="s"><?= $V($pDanas,'jed') ?> posjetilaca</div></div>
     <div class="card"><div class="n"><?= number_format($V($p7,'uk'),0,',','.') ?></div><div class="l">Pregleda — 7 dana</div><div class="s"><?= $V($p7,'jed') ?> posjetilaca</div></div>
     <div class="card"><div class="n"><?= number_format($V($p30,'uk'),0,',','.') ?></div><div class="l">Pregleda — 30 dana</div><div class="s"><?= $V($p30,'jed') ?> posjetilaca</div></div>
     <div class="card"><div class="n"><?= number_format(array_sum($ukupnoAll),0,',','.') ?></div><div class="l">Pregleda — ukupno</div></div>
   </div>
 
+  <div class="panel" style="padding:14px 18px;">
+    <form method="get" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+      <?php if ($prekoTokena): ?><input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>"><?php endif; ?>
+      <input type="hidden" name="tab" value="<?= htmlspecialchars($tab) ?>">
+      <label style="font-size:12px;color:var(--gray);">Od<br><input type="date" name="od" value="<?= htmlspecialchars($od) ?>" style="padding:8px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;"></label>
+      <label style="font-size:12px;color:var(--gray);">Do<br><input type="date" name="do" value="<?= htmlspecialchars($do) ?>" style="padding:8px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;"></label>
+      <button type="submit" class="btn ok" style="padding:10px 16px;"><i class="fas fa-calendar-check"></i> Prikaži</button>
+      <?php if ($customRange): ?><a class="btn ghost" href="?tab=<?= htmlspecialchars($tab) . $qTok ?>" style="padding:10px 14px;">Poništi datume</a><?php endif; ?>
+    </form>
+    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Izaberi <strong>Od</strong> i <strong>Do</strong> pa „Prikaži" — kartica „Izabrani period" i tabela (kolona <strong>Period</strong>) pokažu baš te dane. (Čuva se zadnjih 120 dana.)</p>
+  </div>
+
   <?php if ($izvorUk > 0): ?>
   <div class="panel">
-    <h2><i class="fas fa-location-arrow"></i> Odakle dolaze posjetioci (30 dana)</h2>
-    <?php foreach ($p30['izvori'] as $k => $n): if ($n <= 0) continue; $pct = round($n / $izvorUk * 100); ?>
+    <h2><i class="fas fa-location-arrow"></i> Odakle dolaze posjetioci (<?= htmlspecialchars($izvoriLabel) ?>)</h2>
+    <?php foreach ($pIzvori as $k => $n): if ($n <= 0) continue; $pct = round($n / max(1,$izvorUk) * 100); ?>
       <div class="src">
         <div class="row"><span><?= htmlspecialchars($izvoriImena[$k] ?? $k) ?></span><span><strong><?= $n ?></strong> &middot; <?= $pct ?>%</span></div>
         <div class="bar"><span style="width:<?= $pct ?>%"></span></div>
@@ -259,6 +295,7 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
     <span class="spacer"></span>
     <span class="lbl">Poredaj:</span>
     <span class="seg">
+      <?php if ($customRange): ?><a href="?<?= $q ?>&sort=period" class="<?= $sort==='period'?'active':'' ?>">Period</a><?php endif; ?>
       <a href="?<?= $q ?>&sort=danas" class="<?= $sort==='danas'?'active':'' ?>">Danas</a>
       <a href="?<?= $q ?>&sort=7"     class="<?= $sort==='7'?'active':'' ?>">7 dana</a>
       <a href="?<?= $q ?>&sort=30"    class="<?= $sort==='30'?'active':'' ?>">30 dana</a>
@@ -271,6 +308,7 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
       <tr>
         <th class="rank">#</th>
         <th><?= $tab==='kategorije'?'Kategorija':($tab==='stranice'?'Stranica':'Proizvod') ?></th>
+        <?php if ($customRange): ?><th class="num"><a href="?<?= $q ?>&sort=period">Period<?= mmhStr('period',$sort) ?></a></th><?php endif; ?>
         <th class="num"><a href="?<?= $q ?>&sort=danas">Danas<?= mmhStr('danas',$sort) ?></a></th>
         <th class="num"><a href="?<?= $q ?>&sort=7">7 dana<?= mmhStr('7',$sort) ?></a></th>
         <th class="num"><a href="?<?= $q ?>&sort=30">30 dana<?= mmhStr('30',$sort) ?></a></th>
@@ -285,13 +323,14 @@ $qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
           <div class="pname"><?php if ($r['url']): ?><a href="<?= htmlspecialchars($r['url']) ?>" target="_blank"><?= htmlspecialchars($r['ime']) ?></a><?php else: ?><?= htmlspecialchars($r['ime']) ?><?php endif; ?></div>
           <?php if ($r['meta'] !== ''): ?><div class="meta"><?= htmlspecialchars($r['meta']) ?></div><?php endif; ?>
         </td>
+        <?php if ($customRange): ?><td class="num <?= $r['vR']===0?'zero':'' ?> <?= $sort==='period'?'big':'' ?>"><?= $r['vR'] ?></td><?php endif; ?>
         <td class="num <?= $r['v1']===0?'zero':'' ?> <?= $sort==='danas'?'big':'' ?>"><?= $r['v1'] ?></td>
         <td class="num <?= $r['v7']===0?'zero':'' ?> <?= $sort==='7'?'big':'' ?>"><?= $r['v7'] ?></td>
         <td class="num <?= $r['v30']===0?'zero':'' ?> <?= $sort==='30'?'big':'' ?>"><?= $r['v30'] ?></td>
         <td class="num <?= $r['vsve']===0?'zero':'' ?> <?= $sort==='sve'?'big':'' ?>"><?= $r['vsve'] ?></td>
       </tr>
     <?php endforeach; ?>
-    <?php if ($rb === 0): ?><tr><td colspan="6" style="text-align:center;color:var(--gray);padding:26px;">Nema pregleda u izabranom periodu.</td></tr><?php endif; ?>
+    <?php if ($rb === 0): ?><tr><td colspan="<?= $customRange?7:6 ?>" style="text-align:center;color:var(--gray);padding:26px;">Nema pregleda u izabranom periodu.</td></tr><?php endif; ?>
     </tbody>
   </table>
 
