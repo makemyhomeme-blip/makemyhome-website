@@ -1,11 +1,9 @@
 <?php
 /**
- * Admin → Analitika pregleda (vlastita, server-side).
+ * Admin → Analitika pregleda (vlastita, server-side) — ČIST, period-vođen prikaz.
  *
- * SAMO ČITA data/pregledi.json (puni ga php/pregledi.php) i data/products.json.
- * Pokazuje: Danas / 7 / 30 dana / ukupno, jedinstvene posjetioce, odakle dolaze,
- * i rang-listu PROIZVODA i KATEGORIJA. Ima samoisključenje vlasnika i reset.
- *
+ * Sve prati JEDAN izabrani period (Danas / 7 / 30 / 90 / prilagođeno Od–Do).
+ * SAMO ČITA data/pregledi.json i data/products.json.
  * Pristup: admin sesija ili deploy token (?token=...).
  */
 
@@ -15,29 +13,26 @@ if (!$prekoTokena) {
     require_once __DIR__ . '/sesija.php';
     if (empty($_SESSION['admin_logged'])) { header('Location: index.php'); exit; }
 }
+$TOK = $prekoTokena ? $token : '';
 
 $root = dirname(__DIR__);
 require_once $root . '/php/slug.php';
 $put = $root . '/data/pregledi.json';
 
-// --- isključi/uključi SEBE (kolačić, važi na cijelom sajtu jer je path=/) ---
+// --- isključi/uključi SEBE ---
 if (isset($_GET['nebroji'])) {
     $off = $_GET['nebroji'] !== '0';
-    @setcookie('mmh_noview', $off ? '1' : '', [
-        'expires' => $off ? time() + 31536000 : time() - 3600, 'path' => '/', 'samesite' => 'Lax',
-    ]);
-    $sufiks = $prekoTokena ? '?token=' . urlencode($token) : '';
-    header('Location: pregledi.php' . $sufiks); exit;
+    @setcookie('mmh_noview', $off ? '1' : '', ['expires' => $off ? time()+31536000 : time()-3600, 'path' => '/', 'samesite' => 'Lax']);
+    header('Location: pregledi.php' . ($TOK !== '' ? '?token=' . urlencode($TOK) : '')); exit;
 }
 $jaIskljucen = (($_COOKIE['mmh_noview'] ?? '') === '1');
 
-// --- reset brojača (backup pa prazno) ---
+// --- reset ---
 $resetovano = isset($_GET['resetovano']);
 if (isset($_GET['reset']) && $_GET['reset'] === 'POTVRDA') {
     if (is_file($put)) @copy($put, $root . '/data/pregledi.backup-' . date('Ymd-His') . '.json');
     @file_put_contents($put, '{}', LOCK_EX);
-    $sufiks = $prekoTokena ? '&token=' . urlencode($token) : '';
-    header('Location: pregledi.php?resetovano=1' . $sufiks); exit;
+    header('Location: pregledi.php?resetovano=1' . ($TOK !== '' ? '&token=' . urlencode($TOK) : '')); exit;
 }
 
 $P = json_decode(@file_get_contents($root . '/data/products.json'), true) ?: [];
@@ -45,11 +40,12 @@ if (isset($P['products'])) $P = $P['products'];
 
 $D = json_decode(@file_get_contents($put), true);
 if (!is_array($D)) $D = [];
-$ukupnoAll = (isset($D['ukupno'])  && is_array($D['ukupno']))  ? $D['ukupno']  : [];
-$dani      = (isset($D['dani'])    && is_array($D['dani']))    ? $D['dani']    : [];
-$posjete   = (isset($D['posjete']) && is_array($D['posjete'])) ? $D['posjete'] : [];
+$ukupnoAll = (isset($D['ukupno'])   && is_array($D['ukupno']))   ? $D['ukupno']   : [];
+$dani      = (isset($D['dani'])     && is_array($D['dani']))     ? $D['dani']     : [];
+$posjete   = (isset($D['posjete'])  && is_array($D['posjete']))  ? $D['posjete']  : [];
 $sati      = (isset($D['sati'])     && is_array($D['sati']))     ? $D['sati']     : [];
 $uredjaji  = (isset($D['uredjaji']) && is_array($D['uredjaji'])) ? $D['uredjaji'] : [];
+$imaPodataka = !empty($dani) || !empty($ukupnoAll) || !empty($posjete);
 
 $catNames = [
   'bambus-paneli'=>'Bambus Paneli','bambus-drveni'=>'Drveni Paneli','bambus-tekstilni'=>'Tekstilni Paneli',
@@ -58,355 +54,261 @@ $catNames = [
   'aluminijum-lajsne'=>'Aluminijum Lajsne','spc-pod'=>'SPC Pod','pu-kamen'=>'PU Kamen','mdf'=>'MDF Paneli',
   'flex-stone'=>'Flex Stone','akcija'=>'Akcija – Sniženja',
 ];
-
-$danas = new DateTimeImmutable('today');
-function mmhDaniUnazad(DateTimeImmutable $danas, int $n): array {
-    $out = [];
-    for ($i = 0; $i < $n; $i++) $out[] = $danas->sub(new DateInterval('P' . $i . 'D'))->format('Y-m-d');
-    return $out;
-}
-// zbir pregleda po KLJUČU za zadnjih N dana
-function mmhSumaKljuc(array $dani, array $datumi): array {
-    $z = [];
-    foreach ($datumi as $d) {
-        if (empty($dani[$d]) || !is_array($dani[$d])) continue;
-        foreach ($dani[$d] as $k => $n) $z[$k] = ($z[$k] ?? 0) + (int)$n;
-    }
-    return $z;
-}
-// zbir POSJETA (uk, jed, izvori) za zadnjih N dana
-function mmhSumaPosjeta(array $posjete, array $datumi): array {
-    $uk = 0; $jed = 0; $izv = [];
-    foreach ($datumi as $d) {
-        if (empty($posjete[$d])) continue;
-        $uk  += (int)($posjete[$d]['uk']  ?? 0);
-        $jed += (int)($posjete[$d]['jed'] ?? 0);
-        foreach (($posjete[$d]['izvori'] ?? []) as $k => $n) $izv[$k] = ($izv[$k] ?? 0) + (int)$n;
-    }
-    return ['uk' => $uk, 'jed' => $jed, 'izvori' => $izv];
-}
-
-$d1  = mmhDaniUnazad($danas, 1);
-$d7  = mmhDaniUnazad($danas, 7);
-$d30 = mmhDaniUnazad($danas, 30);
-$s1  = mmhSumaKljuc($dani, $d1);
-$s7  = mmhSumaKljuc($dani, $d7);
-$s30 = mmhSumaKljuc($dani, $d30);
-$pDanas = mmhSumaPosjeta($posjete, $d1);
-$p7     = mmhSumaPosjeta($posjete, $d7);
-$p30    = mmhSumaPosjeta($posjete, $d30);
-
-// --- prilagođeni period (biranje datuma od–do) ---
-$od = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)($_GET['od'] ?? '')) ? (string)$_GET['od'] : '';
-$do = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)($_GET['do'] ?? '')) ? (string)$_GET['do'] : '';
-$customRange = ($od !== '' && $do !== '');
-$sR = []; $pR = ['uk' => 0, 'jed' => 0, 'izvori' => []];
-if ($customRange) {
-    if ($od > $do) { $tmp = $od; $od = $do; $do = $tmp; } // obrnuto -> zamijeni
-    try {
-        $cur = new DateTimeImmutable($od); $end = new DateTimeImmutable($do);
-        $rangeDatumi = []; $brc = 0;
-        while ($cur <= $end && $brc < 400) { $rangeDatumi[] = $cur->format('Y-m-d'); $cur = $cur->add(new DateInterval('P1D')); $brc++; }
-        $sR = mmhSumaKljuc($dani, $rangeDatumi);
-        $pR = mmhSumaPosjeta($posjete, $rangeDatumi);
-    } catch (\Throwable $e) { $customRange = false; }
-}
-
-$V = fn(array $a, string $k): int => (int)($a[$k] ?? 0);
-
-// Lijepo ime za statičnu stranicu (ključ "page:<putanja>").
 function mmhImeStranice(string $path): string {
-    $map = [
-        '/' => 'Početna strana', '/products.html' => 'Svi proizvodi (lista)',
-        '/contact.html' => 'Kontakt', '/about.html' => 'O nama',
-        '/korpa.html' => 'Korpa', '/checkout.html' => 'Plaćanje (checkout)',
-        '/hvala.html' => 'Hvala (posle narudžbe)', '/faq.html' => 'Česta pitanja',
-        '/montaza.html' => 'Montaža', '/blog.html' => 'Blog', '/decor-box.php' => 'Decor Box',
-    ];
+    $map = ['/' => 'Početna strana','/products.html' => 'Svi proizvodi (lista)','/contact.html' => 'Kontakt',
+        '/about.html' => 'O nama','/korpa.html' => 'Korpa','/checkout.html' => 'Plaćanje','/hvala.html' => 'Hvala (posle narudžbe)',
+        '/faq.html' => 'Česta pitanja','/montaza.html' => 'Montaža','/blog.html' => 'Blog','/decor-box.php' => 'Decor Box'];
     if (isset($map[$path])) return $map[$path];
     if (substr($path, -5) === '.html') return ucfirst(str_replace('-', ' ', trim(substr($path, 1, -5))));
     return $path;
 }
 
-$tab  = $_GET['tab'] ?? 'proizvodi';
-if (!in_array($tab, ['proizvodi','kategorije','stranice'], true)) $tab = 'proizvodi';
-$dozvSort = $customRange ? ['danas','7','30','sve','period'] : ['danas','7','30','sve'];
-$sort = $_GET['sort'] ?? ($customRange ? 'period' : '7');
-if (!in_array($sort, $dozvSort, true)) $sort = $customRange ? 'period' : '7';
-$sk = ['danas'=>'v1','7'=>'v7','30'=>'v30','sve'=>'vsve','period'=>'vR'][$sort];
+// ---------- PERIOD ----------
+$danas = new DateTimeImmutable('today');
+function mmhDaniUnazad(DateTimeImmutable $d, int $n): array { $o=[]; for($i=0;$i<$n;$i++)$o[]=$d->sub(new DateInterval('P'.$i.'D'))->format('Y-m-d'); return $o; }
 
+$period = $_GET['period'] ?? '7';
+if (!in_array($period, ['danas','7','30','90','prilagodjeno'], true)) $period = '7';
+$od = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)($_GET['od'] ?? '')) ? (string)$_GET['od'] : '';
+$do = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)($_GET['do'] ?? '')) ? (string)$_GET['do'] : '';
+if ($period === 'prilagodjeno' && ($od === '' || $do === '')) $period = '7';
+
+if ($period === 'prilagodjeno') {
+    if ($od > $do) { $t=$od; $od=$do; $do=$t; }
+    $periodDatumi = []; $brc = 0;
+    try { $c=new DateTimeImmutable($od); $e=new DateTimeImmutable($do);
+        while ($c <= $e && $brc < 400) { $periodDatumi[]=$c->format('Y-m-d'); $c=$c->add(new DateInterval('P1D')); $brc++; }
+    } catch (\Throwable $ex) { $periodDatumi = mmhDaniUnazad($danas, 7); $period='7'; }
+    $periodLabel = $od . ' – ' . $do;
+} else {
+    $n = ['danas'=>1,'7'=>7,'30'=>30,'90'=>90][$period];
+    $periodDatumi = mmhDaniUnazad($danas, $n);
+    $periodLabel = ['danas'=>'Danas','7'=>'Zadnjih 7 dana','30'=>'Zadnjih 30 dana','90'=>'Zadnjih 90 dana'][$period];
+}
+
+function mmhSuma(array $src, array $datumi): array { $z=[]; foreach($datumi as $d){ if(empty($src[$d])||!is_array($src[$d]))continue; foreach($src[$d] as $k=>$n)$z[$k]=($z[$k]??0)+(int)$n;} return $z; }
+function mmhSumaPosjeta(array $posjete, array $datumi): array { $uk=0;$jed=0;$iz=[]; foreach($datumi as $d){ if(empty($posjete[$d]))continue; $uk+=(int)($posjete[$d]['uk']??0); $jed+=(int)($posjete[$d]['jed']??0); foreach(($posjete[$d]['izvori']??[]) as $k=>$n)$iz[$k]=($iz[$k]??0)+(int)$n;} return ['uk'=>$uk,'jed'=>$jed,'izvori'=>$iz]; }
+
+$sP   = mmhSuma($dani, $periodDatumi);          // pregledi po ključu
+$pP   = mmhSumaPosjeta($posjete, $periodDatumi); // uk, jed, izvori
+$satP = mmhSuma($sati, $periodDatumi);           // "0".."23"
+$urP  = mmhSuma($uredjaji, $periodDatumi);       // mobile/desktop/tablet
+$V = fn(array $a, string $k): int => (int)($a[$k] ?? 0);
+
+// trend (hronološki, max 30 zadnjih dana perioda)
+$pd = $periodDatumi; sort($pd); $trendDani = array_slice($pd, -30);
+$trend = []; foreach ($trendDani as $td) $trend[$td] = (int)($posjete[$td]['uk'] ?? 0);
+$trendMax = max(1, empty($trend) ? 1 : max($trend));
+$satMax = max(1, empty($satP) ? 1 : max($satP));
+$urUk = array_sum($urP);
+
+// ---------- TABELA ----------
+$tab = $_GET['tab'] ?? 'proizvodi';
+if (!in_array($tab, ['proizvodi','kategorije','stranice'], true)) $tab = 'proizvodi';
 $redovi = [];
 if ($tab === 'proizvodi') {
-    foreach ($P as $p) {
-        $id = (int)($p['id'] ?? 0); if ($id <= 0) continue;
-        $k = 'p:' . $id;
-        $redovi[] = ['ime'=>(string)($p['name'] ?? ('#'.$id)),
-            'meta'=>trim((string)($p['category'] ?? '') . (!empty($p['sku']) ? ' · '.$p['sku'] : '')),
-            'url'=>function_exists('mmhUrlProizvoda') ? mmhUrlProizvoda($p) : '',
-            'v1'=>$V($s1,$k),'v7'=>$V($s7,$k),'v30'=>$V($s30,$k),'vsve'=>$V($ukupnoAll,$k),'vR'=>$V($sR,$k)];
-    }
+    foreach ($P as $p) { $id=(int)($p['id']??0); if($id<=0)continue; $k='p:'.$id;
+        $redovi[] = ['ime'=>(string)($p['name']??('#'.$id)), 'meta'=>trim((string)($p['category']??'').(!empty($p['sku'])?' · '.$p['sku']:'')),
+            'url'=>function_exists('mmhUrlProizvoda')?mmhUrlProizvoda($p):'', 'v'=>$V($sP,$k), 'vsve'=>$V($ukupnoAll,$k)]; }
 } elseif ($tab === 'kategorije') {
-    foreach ($catNames as $k => $ime) {
-        $kk = 'k:' . $k;
-        $redovi[] = ['ime'=>$ime,'meta'=>$k,
-            'url'=>function_exists('mmhUrlKategorije') ? mmhUrlKategorije($k) : '',
-            'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk),'vR'=>$V($sR,$kk)];
-    }
-} else { // stranice (page:<putanja>) — početna, blog, products.html…
-    $pageKeys = [];
-    foreach (array_merge(array_keys($ukupnoAll), array_keys($s1), array_keys($s7), array_keys($s30)) as $kk)
-        if (strncmp($kk, 'page:', 5) === 0) $pageKeys[$kk] = true;
-    foreach (array_keys($pageKeys) as $kk) {
-        $path = substr($kk, 5);
-        $redovi[] = ['ime'=>mmhImeStranice($path),'meta'=>$path,
-            'url'=>'https://makemyhome.me' . $path,
-            'v1'=>$V($s1,$kk),'v7'=>$V($s7,$kk),'v30'=>$V($s30,$kk),'vsve'=>$V($ukupnoAll,$kk),'vR'=>$V($sR,$kk)];
-    }
+    foreach ($catNames as $k=>$ime) { $kk='k:'.$k;
+        $redovi[] = ['ime'=>$ime,'meta'=>$k,'url'=>function_exists('mmhUrlKategorije')?mmhUrlKategorije($k):'','v'=>$V($sP,$kk),'vsve'=>$V($ukupnoAll,$kk)]; }
+} else {
+    $pk=[]; foreach(array_merge(array_keys($ukupnoAll),array_keys($sP)) as $kk) if(strncmp($kk,'page:',5)===0)$pk[$kk]=1;
+    foreach (array_keys($pk) as $kk) { $path=substr($kk,5);
+        $redovi[] = ['ime'=>mmhImeStranice($path),'meta'=>$path,'url'=>'https://makemyhome.me'.$path,'v'=>$V($sP,$kk),'vsve'=>$V($ukupnoAll,$kk)]; }
 }
-usort($redovi, function ($a, $b) use ($sk) {
-    if ($b[$sk] !== $a[$sk]) return $b[$sk] - $a[$sk];
-    if ($b['vsve'] !== $a['vsve']) return $b['vsve'] - $a['vsve'];
-    return strcasecmp($a['ime'], $b['ime']);
-});
+usort($redovi, fn($a,$b)=> ($b['v']<=>$a['v']) ?: ($b['vsve']<=>$a['vsve']) ?: strcasecmp($a['ime'],$b['ime']));
 
-$prviDan = '';
-$sviDatumi = array_keys($dani + $posjete);
-if ($sviDatumi) { sort($sviDatumi); $prviDan = $sviDatumi[0]; }
-$imaPodataka = !empty($dani) || !empty($ukupnoAll) || !empty($posjete);
+$izvoriImena = ['instagram'=>'Instagram','google'=>'Google','pretraga'=>'Ostale pretrage','drustvene'=>'Društvene mreže',
+  'ai'=>'ChatGPT / AI','direktno'=>'Direktno (ukucali)','sa-sajta'=>'Klik sa sajta','ostalo'=>'Ostalo'];
+$izvoriP = $pP['izvori']; arsort($izvoriP); $izvUk = array_sum($izvoriP);
 
-$izvoriImena = ['instagram'=>'Instagram','google'=>'Google','pretraga'=>'Ostale pretrage',
-  'drustvene'=>'Društvene mreže','ai'=>'ChatGPT / AI','direktno'=>'Direktno (ukucali)',
-  'sa-sajta'=>'Klik sa sajta','ostalo'=>'Ostalo'];
-// Izvori za prikaz: izabrani period ako je biran, inače 30 dana.
-$pIzvori = $customRange ? $pR['izvori'] : $p30['izvori'];
-arsort($pIzvori);
-$izvorUk = array_sum($pIzvori);
-$izvoriLabel = $customRange ? ($od . ' – ' . $do) : '30 dana';
-
-// --- grafikoni: sati, uređaji (za izabrani period / 30 dana), trend po danima ---
-$periodDatumi = $customRange ? (isset($rangeDatumi) ? $rangeDatumi : $d30) : $d30;
-$satiZbir = mmhSumaKljuc($sati, $periodDatumi);      // ključevi "0".."23"
-$satiMax  = max(1, empty($satiZbir) ? 1 : max($satiZbir));
-$urZbir   = mmhSumaKljuc($uredjaji, $periodDatumi);  // mobile/desktop/tablet
-$urUk     = array_sum($urZbir);
-$trend = [];
-foreach (array_reverse(mmhDaniUnazad($danas, 14)) as $td) $trend[$td] = (int)($posjete[$td]['uk'] ?? 0);
-$trendMax = max(1, empty($trend) ? 1 : max($trend));
-
-function mmhStr(string $o, string $t): string { return $o === $t ? ' <i class="fas fa-caret-down"></i>' : ''; }
-$rangeQ = $customRange ? '&od=' . urlencode($od) . '&do=' . urlencode($do) : '';
-$q = 'tab=' . $tab . ($prekoTokena ? '&token=' . urlencode($token) : '') . $rangeQ;
-$qTok = $prekoTokena ? '&token=' . urlencode($token) : '';
+// linkovi (čuvaju period/datume/tab/token)
+function mmhLink(array $ovr, array $baza): string { $p = array_merge($baza, $ovr); $p = array_filter($p, fn($v)=>$v!=='' && $v!==null); return '?' . http_build_query($p); }
+$baza = ['tab'=>$tab,'period'=>$period,'od'=>$od,'do'=>$do]; if ($TOK!=='') $baza['token']=$TOK;
 ?><!DOCTYPE html>
 <html lang="bs">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Analitika pregleda | Admin</title>
+<title>Analitika | Make My Home</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-  * { box-sizing:border-box; margin:0; padding:0; }
-  :root { --primary:#c9a86c; --dark:#1a1a1a; --gray:#888; --white:#fff; --danger:#e74c3c; --success:#27ae60; }
-  body { font-family:'Inter',sans-serif; background:#f0ede8; color:var(--dark); padding:24px; }
-  .wrap { max-width:1000px; margin:0 auto; }
-  .top { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
-  h1 { font-size:22px; font-weight:700; display:flex; align-items:center; gap:10px; } h1 i { color:var(--primary); }
-  .back { color:var(--gray); text-decoration:none; font-size:13px; font-weight:600; } .back:hover { color:var(--dark); }
-  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-bottom:18px; }
-  .card { background:var(--white); border-radius:14px; padding:16px 18px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
-  .card.hl { background:var(--dark); color:#fff; }
-  .card .n { font-size:25px; font-weight:700; line-height:1; } .card .l { font-size:12px; color:var(--gray); margin-top:6px; }
-  .card.hl .l { color:rgba(255,255,255,0.6); } .card .s { font-size:12px; color:var(--primary); margin-top:3px; font-weight:600; }
-  .panel { background:var(--white); border-radius:14px; padding:18px 20px; box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-bottom:18px; }
-  .panel h2 { font-size:13px; text-transform:uppercase; letter-spacing:.5px; color:var(--gray); margin-bottom:14px; }
-  .src { margin-bottom:10px; } .src:last-child { margin-bottom:0; }
-  .src .row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px; }
-  .src .bar { height:8px; background:#eee4d6; border-radius:5px; overflow:hidden; }
-  .src .bar > span { display:block; height:100%; background:var(--primary); }
-  .bar2 { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
-  .seg { display:inline-flex; background:#e7e1d8; border-radius:100px; padding:3px; flex-wrap:wrap; }
-  .seg a { padding:7px 13px; border-radius:100px; color:var(--dark); text-decoration:none; font-size:13px; font-weight:600; }
-  .seg a.active { background:var(--dark); color:#fff; } .spacer { flex:1; } .lbl { font-size:12px; color:var(--gray); }
-  table { width:100%; border-collapse:collapse; background:var(--white); border-radius:14px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
-  th, td { padding:11px 12px; text-align:left; font-size:13px; border-bottom:1px solid #f0ede8; }
-  th { background:#fbf9f6; font-size:10.5px; text-transform:uppercase; letter-spacing:.4px; color:var(--gray); font-weight:700; }
-  th a { color:inherit; text-decoration:none; }
-  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
-  tr:last-child td { border-bottom:none; }
-  .rank { color:var(--gray); font-weight:700; width:30px; } .rank.top { color:var(--primary); }
-  .pname { font-weight:600; } .pname a { color:var(--dark); text-decoration:none; } .pname a:hover { color:var(--primary); text-decoration:underline; }
-  .meta { font-size:11px; color:var(--gray); margin-top:2px; } .zero { color:#c9c3ba; } .big { font-weight:700; }
-  .note { font-size:12.5px; color:var(--gray); margin-top:16px; line-height:1.6; }
-  .btn { display:inline-flex; align-items:center; gap:7px; padding:9px 14px; border-radius:9px; font-size:12.5px; font-weight:600; text-decoration:none; cursor:pointer; border:1px solid transparent; }
-  .btn.ok { background:rgba(39,174,96,0.12); color:#1e8449; } .btn.warn { background:rgba(231,76,60,0.1); color:#c0392b; }
-  .btn.ghost { background:#f0ede8; color:var(--dark); }
-  .flag { display:inline-block; padding:3px 10px; border-radius:100px; font-size:12px; font-weight:600; }
-  .flag.on { background:rgba(39,174,96,0.14); color:#1e8449; } .flag.off { background:#f0ede8; color:var(--gray); }
-  .empty { background:var(--white); border-radius:14px; padding:40px; text-align:center; color:var(--gray); box-shadow:0 2px 12px rgba(0,0,0,0.06); }
-  .ok-msg { background:rgba(39,174,96,0.12); color:#1e8449; padding:12px 16px; border-radius:10px; font-size:13px; margin-bottom:16px; font-weight:600; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f4f6fb;--card:#fff;--ink:#141a2e;--muted:#8a91a6;--line:#eef0f6;--brand:#6c5ce7;--brand2:#00b894;--blue:#0984e3;--soft:#f0f2f9}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);padding:20px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+  h1{font-size:21px;font-weight:800;display:flex;align-items:center;gap:9px}
+  h1 .dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--blue));display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+  .back{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}.back:hover{color:var(--ink)}
+  .okmsg{background:#e4fbf1;color:#0b8457;padding:12px 16px;border-radius:12px;font-size:13.5px;font-weight:600;margin-bottom:16px}
+  /* period bar */
+  .periodbar{background:var(--card);border-radius:16px;padding:14px;box-shadow:0 4px 24px rgba(20,26,46,.05);margin-bottom:16px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:9px 16px;border-radius:100px;background:var(--soft);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:600;border:1.5px solid transparent;transition:.15s}
+  .chip:hover{background:#e7eaf6}
+  .chip.on{background:var(--ink);color:#fff}
+  .daterow{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+  .daterow label{font-size:11.5px;color:var(--muted);font-weight:600}
+  .daterow input{display:block;margin-top:4px;padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg)}
+  .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none;cursor:pointer;border:none;font-family:inherit}
+  .btn.p{background:var(--brand);color:#fff}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:16px}
+  .stat{background:var(--card);border-radius:16px;padding:18px 20px;box-shadow:0 4px 24px rgba(20,26,46,.05)}
+  .stat .big{font-size:33px;font-weight:800;line-height:1;letter-spacing:-1px}
+  .stat .lab{font-size:12.5px;color:var(--muted);margin-top:7px;font-weight:600}
+  .stat.accent{background:linear-gradient(135deg,var(--brand),var(--blue));color:#fff}
+  .stat.accent .lab{color:rgba(255,255,255,.8)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .panel{background:var(--card);border-radius:16px;padding:18px 20px;box-shadow:0 4px 24px rgba(20,26,46,.05);margin-bottom:16px}
+  .panel h2{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:14px;font-weight:700}
+  .src{margin-bottom:11px}.src:last-child{margin-bottom:0}
+  .src .r{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px;font-weight:500}
+  .src .track{height:8px;background:var(--soft);border-radius:6px;overflow:hidden}.src .track>span{display:block;height:100%;background:var(--brand);border-radius:6px}
+  .bars{display:flex;align-items:flex-end;gap:4px;height:110px}
+  .bars .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .bars .col .n{font-size:10px;color:var(--muted);line-height:1}
+  .bars .col .b{width:100%;border-radius:5px 5px 0 0;margin-top:3px}
+  .bars .col .x{font-size:9px;color:var(--muted);margin-top:4px}
+  /* table */
+  .tabs{display:flex;gap:6px;margin-bottom:12px;background:var(--card);padding:6px;border-radius:14px;box-shadow:0 4px 24px rgba(20,26,46,.05);width:fit-content}
+  .tabs a{padding:9px 16px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:700}
+  .tabs a.on{background:var(--ink);color:#fff}
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(20,26,46,.05)}
+  th,td{padding:13px 16px;text-align:left;font-size:13.5px;border-bottom:1px solid var(--line)}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:700;background:#fafbfe}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+  tr:last-child td{border-bottom:none}
+  .rk{color:var(--muted);font-weight:800;width:34px}.rk.t{color:var(--brand)}
+  .nm{font-weight:600}.nm a{color:var(--ink);text-decoration:none}.nm a:hover{color:var(--brand)}
+  .mt{font-size:11px;color:var(--muted);margin-top:2px}
+  .big2{font-weight:800;font-size:15px}
+  .sub{color:var(--muted);font-size:11px}
+  .note{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:14px}
+  details.set{background:var(--card);border-radius:14px;box-shadow:0 4px 24px rgba(20,26,46,.05);margin-top:16px;padding:4px 18px}
+  details.set summary{cursor:pointer;font-size:13.5px;font-weight:700;padding:14px 0;color:var(--muted);list-style:none}
+  details.set summary::-webkit-details-marker{display:none}
+  .setbtn{display:inline-flex;gap:7px;align-items:center;padding:9px 14px;border-radius:10px;font-size:12.5px;font-weight:700;text-decoration:none;cursor:pointer}
+  .setbtn.ok{background:#e4fbf1;color:#0b8457}.setbtn.warn{background:#fdeceb;color:#c0392b}.setbtn.g{background:var(--soft);color:var(--ink)}
+  .flag{display:inline-block;padding:2px 9px;border-radius:100px;font-size:11.5px;font-weight:700}.flag.on{background:#e4fbf1;color:#0b8457}.flag.off{background:var(--soft);color:var(--muted)}
+  .empty{background:var(--card);border-radius:16px;padding:44px;text-align:center;color:var(--muted);box-shadow:0 4px 24px rgba(20,26,46,.05)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <h1><i class="fas fa-chart-line"></i> Analitika pregleda</h1>
-    <a href="dashboard.php" class="back"><i class="fas fa-arrow-left"></i> Nazad na admin</a>
+    <h1><span class="dot"><i class="fas fa-chart-simple"></i></span> Analitika pregleda</h1>
+    <a href="dashboard.php" class="back"><i class="fas fa-arrow-left"></i> Admin</a>
   </div>
 
-  <?php if ($resetovano): ?><div class="ok-msg"><i class="fas fa-check"></i> Brojač je resetovan — kreće čist od danas.</div><?php endif; ?>
+  <?php if ($resetovano): ?><div class="okmsg"><i class="fas fa-check"></i> Brojač je resetovan — kreće čist.</div><?php endif; ?>
 
 <?php if (!$imaPodataka): ?>
-  <div class="empty">
-    <p style="font-size:16px;font-weight:600;color:var(--dark);margin-bottom:8px;">Još nema zabilježenih pregleda.</p>
-    <p>Brojač skuplja podatke od sad (ne uvozi staru istoriju iz Google Analyticsa).<br>Vrati se za koji dan — ovdje će biti prave brojke.</p>
-  </div>
+  <div class="empty"><p style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px;">Još nema zabilježenih pregleda.</p><p>Brojač skuplja podatke od sad. Vrati se za koji dan.</p></div>
 <?php else: ?>
 
-  <div class="cards">
-    <?php if ($customRange): ?>
-    <div class="card hl"><div class="n"><?= number_format($V($pR,'uk'),0,',','.') ?></div><div class="l">Izabrani period</div><div class="s"><?= $V($pR,'jed') ?> posjetilaca · <?= htmlspecialchars($od) ?> → <?= htmlspecialchars($do) ?></div></div>
-    <?php endif; ?>
-    <div class="card <?= $customRange?'':'hl' ?>"><div class="n"><?= number_format($V($pDanas,'uk'),0,',','.') ?></div><div class="l">Pregleda DANAS</div><div class="s"><?= $V($pDanas,'jed') ?> posjetilaca</div></div>
-    <div class="card"><div class="n"><?= number_format($V($p7,'uk'),0,',','.') ?></div><div class="l">Pregleda — 7 dana</div><div class="s"><?= $V($p7,'jed') ?> posjetilaca</div></div>
-    <div class="card"><div class="n"><?= number_format($V($p30,'uk'),0,',','.') ?></div><div class="l">Pregleda — 30 dana</div><div class="s"><?= $V($p30,'jed') ?> posjetilaca</div></div>
-    <div class="card"><div class="n"><?= number_format(array_sum($ukupnoAll),0,',','.') ?></div><div class="l">Pregleda — ukupno</div></div>
-  </div>
-
-  <div class="panel" style="padding:14px 18px;">
-    <form method="get" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
-      <?php if ($prekoTokena): ?><input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>"><?php endif; ?>
-      <input type="hidden" name="tab" value="<?= htmlspecialchars($tab) ?>">
-      <label style="font-size:12px;color:var(--gray);">Od<br><input type="date" name="od" value="<?= htmlspecialchars($od) ?>" style="padding:8px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;"></label>
-      <label style="font-size:12px;color:var(--gray);">Do<br><input type="date" name="do" value="<?= htmlspecialchars($do) ?>" style="padding:8px;border:1px solid #ddd;border-radius:8px;font-family:inherit;font-size:14px;"></label>
-      <button type="submit" class="btn ok" style="padding:10px 16px;"><i class="fas fa-calendar-check"></i> Prikaži</button>
-      <?php if ($customRange): ?><a class="btn ghost" href="?tab=<?= htmlspecialchars($tab) . $qTok ?>" style="padding:10px 14px;">Poništi datume</a><?php endif; ?>
+  <!-- PERIOD -->
+  <div class="periodbar">
+    <div class="chips">
+      <?php foreach (['danas'=>'Danas','7'=>'7 dana','30'=>'30 dana','90'=>'90 dana'] as $pk=>$pl): ?>
+        <a class="chip <?= ($period===$pk)?'on':'' ?>" href="<?= mmhLink(['period'=>$pk,'od'=>'','do'=>''],$baza) ?>"><?= $pl ?></a>
+      <?php endforeach; ?>
+      <a class="chip <?= $period==='prilagodjeno'?'on':'' ?>" href="<?= mmhLink(['period'=>'prilagodjeno','od'=>($od?:$danas->sub(new DateInterval('P7D'))->format('Y-m-d')),'do'=>($do?:$danas->format('Y-m-d'))],$baza) ?>"><i class="fas fa-calendar-days"></i> Biraj datume</a>
+    </div>
+    <?php if ($period==='prilagodjeno'): ?>
+    <form method="get" class="daterow">
+      <?php if ($TOK!==''): ?><input type="hidden" name="token" value="<?= htmlspecialchars($TOK) ?>"><?php endif; ?>
+      <input type="hidden" name="tab" value="<?= htmlspecialchars($tab) ?>"><input type="hidden" name="period" value="prilagodjeno">
+      <label>Od<input type="date" name="od" value="<?= htmlspecialchars($od) ?>"></label>
+      <label>Do<input type="date" name="do" value="<?= htmlspecialchars($do) ?>"></label>
+      <button type="submit" class="btn p"><i class="fas fa-magnifying-glass"></i> Prikaži</button>
     </form>
-    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Izaberi <strong>Od</strong> i <strong>Do</strong> pa „Prikaži" — kartica „Izabrani period" i tabela (kolona <strong>Period</strong>) pokažu baš te dane. (Čuva se zadnjih 120 dana.)</p>
+    <?php endif; ?>
   </div>
 
-  <?php if ($izvorUk > 0): ?>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat accent"><div class="big"><?= number_format($V($pP,'uk'),0,',','.') ?></div><div class="lab">Pregleda &middot; <?= htmlspecialchars($periodLabel) ?></div></div>
+    <div class="stat"><div class="big"><?= number_format($V($pP,'jed'),0,',','.') ?></div><div class="lab">Posjetilaca (jedinstveni)</div></div>
+    <div class="stat"><div class="big"><?= $urUk>0 ? round(($V($urP,'mobile')/$urUk)*100) : 0 ?>%</div><div class="lab">Sa mobilnog telefona</div></div>
+    <div class="stat"><div class="big"><?= number_format(array_sum($ukupnoAll),0,',','.') ?></div><div class="lab">Pregleda — sve vrijeme</div></div>
+  </div>
+
+  <div class="grid2">
+    <!-- IZVORI -->
+    <div class="panel">
+      <h2><i class="fas fa-location-arrow"></i> Odakle dolaze</h2>
+      <?php if ($izvUk>0): foreach ($izvoriP as $k=>$n): if($n<=0)continue; $pct=round($n/max(1,$izvUk)*100); ?>
+        <div class="src"><div class="r"><span><?= htmlspecialchars($izvoriImena[$k]??$k) ?></span><span><strong><?= $n ?></strong> &middot; <?= $pct ?>%</span></div><div class="track"><span style="width:<?= $pct ?>%"></span></div></div>
+      <?php endforeach; else: ?><p class="sub">Još nema podataka.</p><?php endif; ?>
+    </div>
+    <!-- UREĐAJI -->
+    <div class="panel">
+      <h2><i class="fas fa-mobile-screen"></i> Uređaji</h2>
+      <?php if ($urUk>0): foreach (['mobile'=>'Mobilni telefon','desktop'=>'Kompjuter','tablet'=>'Tablet'] as $uk=>$ui): $un=$V($urP,$uk); if($un<=0)continue; $up=round($un/max(1,$urUk)*100); ?>
+        <div class="src"><div class="r"><span><?= $ui ?></span><span><strong><?= $un ?></strong> &middot; <?= $up ?>%</span></div><div class="track"><span style="width:<?= $up ?>%;background:var(--brand2)"></span></div></div>
+      <?php endforeach; else: ?><p class="sub">Još nema podataka.</p><?php endif; ?>
+    </div>
+  </div>
+
+  <!-- TREND -->
   <div class="panel">
-    <h2><i class="fas fa-location-arrow"></i> Odakle dolaze posjetioci (<?= htmlspecialchars($izvoriLabel) ?>)</h2>
-    <?php foreach ($pIzvori as $k => $n): if ($n <= 0) continue; $pct = round($n / max(1,$izvorUk) * 100); ?>
-      <div class="src">
-        <div class="row"><span><?= htmlspecialchars($izvoriImena[$k] ?? $k) ?></span><span><strong><?= $n ?></strong> &middot; <?= $pct ?>%</span></div>
-        <div class="bar"><span style="width:<?= $pct ?>%"></span></div>
-      </div>
-    <?php endforeach; ?>
-  </div>
-  <?php endif; ?>
-
-  <div class="bar2">
-    <span class="seg">
-      <a href="?tab=proizvodi&sort=<?= $sort . $qTok ?>" class="<?= $tab==='proizvodi'?'active':'' ?>"><i class="fas fa-box"></i> Proizvodi</a>
-      <a href="?tab=kategorije&sort=<?= $sort . $qTok ?>" class="<?= $tab==='kategorije'?'active':'' ?>"><i class="fas fa-layer-group"></i> Kategorije</a>
-      <a href="?tab=stranice&sort=<?= $sort . $qTok ?>" class="<?= $tab==='stranice'?'active':'' ?>"><i class="fas fa-file-lines"></i> Stranice</a>
-    </span>
-    <span class="spacer"></span>
-    <span class="lbl">Poredaj:</span>
-    <span class="seg">
-      <?php if ($customRange): ?><a href="?<?= $q ?>&sort=period" class="<?= $sort==='period'?'active':'' ?>">Period</a><?php endif; ?>
-      <a href="?<?= $q ?>&sort=danas" class="<?= $sort==='danas'?'active':'' ?>">Danas</a>
-      <a href="?<?= $q ?>&sort=7"     class="<?= $sort==='7'?'active':'' ?>">7 dana</a>
-      <a href="?<?= $q ?>&sort=30"    class="<?= $sort==='30'?'active':'' ?>">30 dana</a>
-      <a href="?<?= $q ?>&sort=sve"   class="<?= $sort==='sve'?'active':'' ?>">Ukupno</a>
-    </span>
+    <h2><i class="fas fa-chart-column"></i> Pregledi po danima</h2>
+    <div class="bars">
+      <?php foreach ($trend as $td=>$tn): $h=round($tn/$trendMax*100); ?>
+        <div class="col" title="<?= htmlspecialchars($td) ?>: <?= $tn ?>"><div class="n"><?= $tn ?></div><div class="b" style="height:<?= max(3,$h) ?>%;background:var(--brand)"></div><div class="x"><?= (int)substr($td,8,2) ?>.</div></div>
+      <?php endforeach; ?>
+    </div>
   </div>
 
+  <!-- SATI -->
+  <div class="panel">
+    <h2><i class="fas fa-clock"></i> Najprometniji sati (kad ljudi dolaze)</h2>
+    <div class="bars" style="height:80px">
+      <?php for ($h=0;$h<24;$h++): $hn=(int)($satP[(string)$h]??0); $hh=round($hn/$satMax*100); ?>
+        <div class="col" title="<?= $h ?>:00 – <?= $hn ?>"><div class="b" style="height:<?= max(3,$hh) ?>%;background:var(--blue)"></div><div class="x"><?= $h%3===0?$h:'' ?></div></div>
+      <?php endfor; ?>
+    </div>
+  </div>
+
+  <!-- TABELA -->
+  <div class="tabs">
+    <a class="<?= $tab==='proizvodi'?'on':'' ?>" href="<?= mmhLink(['tab'=>'proizvodi'],$baza) ?>">Proizvodi</a>
+    <a class="<?= $tab==='kategorije'?'on':'' ?>" href="<?= mmhLink(['tab'=>'kategorije'],$baza) ?>">Kategorije</a>
+    <a class="<?= $tab==='stranice'?'on':'' ?>" href="<?= mmhLink(['tab'=>'stranice'],$baza) ?>">Stranice</a>
+  </div>
   <table>
-    <thead>
-      <tr>
-        <th class="rank">#</th>
-        <th><?= $tab==='kategorije'?'Kategorija':($tab==='stranice'?'Stranica':'Proizvod') ?></th>
-        <?php if ($customRange): ?><th class="num"><a href="?<?= $q ?>&sort=period">Period<?= mmhStr('period',$sort) ?></a></th><?php endif; ?>
-        <th class="num"><a href="?<?= $q ?>&sort=danas">Danas<?= mmhStr('danas',$sort) ?></a></th>
-        <th class="num"><a href="?<?= $q ?>&sort=7">7 dana<?= mmhStr('7',$sort) ?></a></th>
-        <th class="num"><a href="?<?= $q ?>&sort=30">30 dana<?= mmhStr('30',$sort) ?></a></th>
-        <th class="num"><a href="?<?= $q ?>&sort=sve">Ukupno<?= mmhStr('sve',$sort) ?></a></th>
-      </tr>
-    </thead>
+    <thead><tr><th class="rk">#</th><th><?= $tab==='kategorije'?'Kategorija':($tab==='stranice'?'Stranica':'Proizvod') ?></th><th class="n">Pregleda<br><span class="sub" style="font-weight:600;text-transform:none;letter-spacing:0"><?= htmlspecialchars($periodLabel) ?></span></th><th class="n">Ukupno</th></tr></thead>
     <tbody>
-    <?php $rb = 0; foreach ($redovi as $r): if ($r[$sk] <= 0) continue; $rb++; ?>
+    <?php $rb=0; foreach ($redovi as $r): if ($r['v']<=0) continue; $rb++; ?>
       <tr>
-        <td class="rank <?= $rb<=3?'top':'' ?>"><?= $rb ?></td>
-        <td>
-          <div class="pname"><?php if ($r['url']): ?><a href="<?= htmlspecialchars($r['url']) ?>" target="_blank"><?= htmlspecialchars($r['ime']) ?></a><?php else: ?><?= htmlspecialchars($r['ime']) ?><?php endif; ?></div>
-          <?php if ($r['meta'] !== ''): ?><div class="meta"><?= htmlspecialchars($r['meta']) ?></div><?php endif; ?>
-        </td>
-        <?php if ($customRange): ?><td class="num <?= $r['vR']===0?'zero':'' ?> <?= $sort==='period'?'big':'' ?>"><?= $r['vR'] ?></td><?php endif; ?>
-        <td class="num <?= $r['v1']===0?'zero':'' ?> <?= $sort==='danas'?'big':'' ?>"><?= $r['v1'] ?></td>
-        <td class="num <?= $r['v7']===0?'zero':'' ?> <?= $sort==='7'?'big':'' ?>"><?= $r['v7'] ?></td>
-        <td class="num <?= $r['v30']===0?'zero':'' ?> <?= $sort==='30'?'big':'' ?>"><?= $r['v30'] ?></td>
-        <td class="num <?= $r['vsve']===0?'zero':'' ?> <?= $sort==='sve'?'big':'' ?>"><?= $r['vsve'] ?></td>
+        <td class="rk <?= $rb<=3?'t':'' ?>"><?= $rb ?></td>
+        <td><div class="nm"><?php if($r['url']): ?><a href="<?= htmlspecialchars($r['url']) ?>" target="_blank"><?= htmlspecialchars($r['ime']) ?></a><?php else: ?><?= htmlspecialchars($r['ime']) ?><?php endif; ?></div><?php if($r['meta']!==''): ?><div class="mt"><?= htmlspecialchars($r['meta']) ?></div><?php endif; ?></td>
+        <td class="n big2"><?= $r['v'] ?></td>
+        <td class="n sub"><?= $r['vsve'] ?></td>
       </tr>
     <?php endforeach; ?>
-    <?php if ($rb === 0): ?><tr><td colspan="<?= $customRange?7:6 ?>" style="text-align:center;color:var(--gray);padding:26px;">Nema pregleda u izabranom periodu.</td></tr><?php endif; ?>
+    <?php if ($rb===0): ?><tr><td colspan="4" style="text-align:center;color:var(--muted);padding:30px;">Nema pregleda u izabranom periodu.</td></tr><?php endif; ?>
     </tbody>
   </table>
 
-  <div class="panel" style="margin-top:18px;">
-    <h2><i class="fas fa-chart-column"></i> Promet po danima (zadnjih 14 dana)</h2>
-    <div style="display:flex;align-items:flex-end;gap:4px;height:120px;">
-      <?php foreach ($trend as $td => $tn): $hh = round($tn / $trendMax * 100); ?>
-        <div title="<?= htmlspecialchars($td) ?>: <?= $tn ?> pregleda" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;">
-          <div style="font-size:10px;color:var(--gray);line-height:1;"><?= $tn ?></div>
-          <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:<?= max(2,$hh) ?>%;margin-top:3px;"></div>
-          <div style="font-size:9px;color:var(--gray);margin-top:3px;"><?= (int)substr($td,8,2) ?>.</div>
-        </div>
-      <?php endforeach; ?>
+  <p class="note"><i class="fas fa-circle-info"></i> Broji se cijeli sajt (proizvodi, kategorije, početna, blog). Botovi se ne broje. Tvoji pregledi: <?= $jaIskljucen?'<span class="flag on">ne broje se</span>':'<span class="flag off">trenutno se broje</span>' ?>.</p>
+
+  <details class="set">
+    <summary><i class="fas fa-gear"></i> Podešavanja (isključi sebe, reset)</summary>
+    <div style="padding:4px 0 16px;display:flex;gap:10px;flex-wrap:wrap;">
+      <?php if ($jaIskljucen): ?><a class="setbtn g" href="?nebroji=0<?= $TOK!==''?'&token='.urlencode($TOK):'' ?>"><i class="fas fa-eye"></i> Ponovo broji moje preglede</a>
+      <?php else: ?><a class="setbtn ok" href="?nebroji=1<?= $TOK!==''?'&token='.urlencode($TOK):'' ?>"><i class="fas fa-user-slash"></i> Ne broji MOJE preglede (ovaj uređaj)</a><?php endif; ?>
+      <a class="setbtn warn" href="?reset=POTVRDA<?= $TOK!==''?'&token='.urlencode($TOK):'' ?>" onclick="return confirm('Obrisati sve brojke i krenuti čisto? (pravi se backup)')"><i class="fas fa-rotate-left"></i> Resetuj brojač</a>
     </div>
-    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Pregledi cijelog sajta po danima (broj iznad stuba, dan ispod).</p>
-  </div>
-
-  <div class="panel" style="margin-top:18px;">
-    <h2><i class="fas fa-clock"></i> Najprometniji sati (<?= htmlspecialchars($izvoriLabel) ?>)</h2>
-    <div style="display:flex;align-items:flex-end;gap:2px;height:90px;">
-      <?php for ($h = 0; $h < 24; $h++): $hn = (int)($satiZbir[(string)$h] ?? 0); $hh = round($hn / $satiMax * 100); ?>
-        <div title="<?= $h ?>:00 – <?= $hn ?> pregleda" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;">
-          <div style="width:100%;background:#3498db;border-radius:3px 3px 0 0;height:<?= max(2,$hh) ?>%;"></div>
-          <?php if ($h % 3 === 0): ?><div style="font-size:9px;color:var(--gray);margin-top:3px;"><?= $h ?></div><?php else: ?><div style="height:14px;"></div><?php endif; ?>
-        </div>
-      <?php endfor; ?>
-    </div>
-    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Kad ljudi najviše ulaze (sat u danu, 0–23h). Korisno za objave/akcije.</p>
-  </div>
-
-  <div class="panel" style="margin-top:18px;">
-    <h2><i class="fas fa-mobile-screen"></i> Uređaji (<?= htmlspecialchars($izvoriLabel) ?>)</h2>
-    <?php if ($urUk > 0): foreach (['mobile'=>'Mobilni telefon','desktop'=>'Kompjuter','tablet'=>'Tablet'] as $uk => $uime): $un = (int)($urZbir[$uk] ?? 0); if ($un <= 0) continue; $upct = round($un / max(1,$urUk) * 100); ?>
-      <div class="src"><div class="row"><span><?= $uime ?></span><span><strong><?= $un ?></strong> &middot; <?= $upct ?>%</span></div><div class="bar"><span style="width:<?= $upct ?>%"></span></div></div>
-    <?php endforeach; else: ?><p style="font-size:12.5px;color:var(--gray);">Još nema podataka o uređajima.</p><?php endif; ?>
-    <p style="font-size:11.5px;color:var(--gray);margin-top:8px;">Na čemu ljudi gledaju sajt (najčešće mobilni) — da znaš da sajt mora dobro da izgleda na telefonu.</p>
-  </div>
-
-  <div class="panel" style="margin-top:18px;">
-    <h2><i class="fas fa-shield-halved"></i> Jesu li posjete realne?</h2>
-    <p style="font-size:13px;line-height:1.7;color:var(--dark);">
-      ✅ <strong>Botovi i alati se NE broje</strong> (Google, pretraživači, WhatsApp/Viber pregled…).<br>
-      ✅ <strong>Jedinstveni posjetioci</strong> se broje odvojeno od pregleda — ako je malo ljudi a puno pregleda, to je ili jedan čovjek koji više puta otvara, ili nije realno.<br>
-      <?php if ($jaIskljucen): ?>
-      ✅ <strong>Tvoji pregledi se NE broje</strong> na ovom uređaju <span class="flag on">isključeno</span>
-      <?php else: ?>
-      ⚠️ <strong>Tvoji pregledi se TRENUTNO broje</strong> na ovom uređaju <span class="flag off">uključeno</span>
-      <?php endif; ?>
-    </p>
-    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-      <?php if ($jaIskljucen): ?>
-        <a class="btn ghost" href="?nebroji=0<?= $qTok ?>"><i class="fas fa-eye"></i> Ponovo broji moje preglede</a>
-      <?php else: ?>
-        <a class="btn ok" href="?nebroji=1<?= $qTok ?>"><i class="fas fa-user-slash"></i> Ne broji MOJE preglede (ovaj uređaj)</a>
-      <?php endif; ?>
-      <a class="btn warn" href="?reset=POTVRDA<?= $qTok ?>" onclick="return confirm('Obrisati sve dosadašnje brojke i krenuti čist od danas? (pravi se backup)')"><i class="fas fa-rotate-left"></i> Resetuj brojač</a>
-    </div>
-    <p style="font-size:11.5px;color:var(--gray);margin-top:10px;">„Ne broji moje" važi po uređaju/pregledaču (zapamti se kolačićem) — uradi isto na telefonu i na kompjuteru.</p>
-  </div>
-
-  <div class="note">
-    <i class="fas fa-circle-info"></i> Broji se <strong>cijeli sajt</strong> — proizvodi (/paneli/…), kategorije (/kategorija/…) i ostale stranice (<strong>početna</strong>, blog, kontakt…). Kartice „Danas / posjetilaca / izvori" gore pokazuju ukupno za cijeli sajt. Tab <strong>Stranice</strong> pokazuje baš početnu i ostale statične stranice (tu reklame vode ljude).
-    <?php if ($prviDan): ?> Podaci se skupljaju od <strong><?= htmlspecialchars($prviDan) ?></strong>.<?php endif; ?>
-  </div>
+    <p class="sub" style="padding-bottom:14px;">„Ne broji moje" važi po uređaju (kolačić) — uradi na telefonu i na kompjuteru.</p>
+  </details>
 
 <?php endif; ?>
 </div>
