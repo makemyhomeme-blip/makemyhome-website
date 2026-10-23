@@ -19,10 +19,34 @@ $put  = $root . '/data/products.json';
 
 // ---- STA MIJENJAMO (po ID-u) — samo tekstualna polja ----
 $dopune = [
-    // prazno namjerno — poslije upisa se mapa isprazni da ponovno pokretanje
-    // ne prepise izmjene koje vlasnik u medjuvremenu unese preko admina.
-    // Zadnje obradjeno 29.09.2026: id 152 (VELARÉ, BW105 tekstilni panel).
-    // Za sljedeci proizvod: popuni mapu, deploy, pokreni, isprazni.
+    // poslije upisa se mapa isprazni da ponovno pokretanje ne prepise izmjene
+    // koje vlasnik u medjuvremenu unese preko admina.
+    // 23.10.2026: id 196 (Travertino Bianco, SW111 mermerni panel).
+    196 => [
+        'description' =>
+            "Travertino Bianco je svijetli, kremasto-bijeli travertin — onaj mirni mediteranski kamen koji prostoriju odmah učini svjetlijom i skupljom. Za razliku od dramatičnih mermera sa jakim žilama, travertin ima nježne vodoravne slojeve i sitne prirodne pore, pa djeluje mekano i elegantno, a ne napadno.\n\n"
+          . "Baš zbog te smirenosti lako ga je staviti — ne bori se sa namještajem nego mu daje topao, prirodan okvir. Pod bočnim svjetlom tekstura travertina blago izbije i zid dobije dubinu, a i dalje ostane svijetao.\n\n"
+          . "Najviše ga biramo za dnevne sobe, zid iza TV-a, recepcije i kupatila — svuda gdje treba luksuz koji ne viče. Prelijepo leži uz svijetlo i tamno drvo, mesing, staklo i zelenilo.\n\n"
+          . "280×122 cm po panelu, pokriva 3,42 m². Za zid 3×2,6 m treba 3 panela. Vodootporan i otporan na buđ (idealan za kupatilo), vatrootporan klasa B1, UV zaštita. Lijepi se silikonom, siječe se skalpelom.",
+        'features' => [
+            "Dimenzije: 280×122cm (3.42 m² po komadu)",
+            "Debljina: 5mm",
+            "Boja: kremasto-bijeli travertin",
+            "Šara: nježni vodoravni slojevi i sitne pore – prirodni travertin",
+            "Površinska UV zaštita – ne blijedi na suncu",
+            "Montaža: lijepi se silikonom, siječe se skalpelom",
+            "Pogodan za zidove i plafone – dnevne sobe, spavaće sobe, kafići, restorani, hoteli, uredi",
+            "Vodootporan – ne nabrekne i ne deformiše se od vode",
+            "Otporan na buđ i vlagu – idealan za kupatila i vlažne prostorije",
+            "Vatrootporan (klasa B1) – usporava širenje plamena",
+            "Otporan na prljavštinu – lako se čisti vlažnom krpom",
+            "Šifra: SW111",
+        ],
+        'idealFor'   => ['Dnevna soba', 'Kupatilo', 'Hodnik', 'Recepcija', 'Trpezarija', 'Spavaća soba', 'Apartman', 'Hotel'],
+        'styleMatch' => ['Moderni', 'Luksuzni', 'Minimalistički', 'Klasični'],
+        'highlight'  => 'Svijetli kremasto-bijeli travertin – mirno i luksuzno',
+        'badge'      => 'Preporučujemo',
+    ],
 ];
 
 $sirovo = @file_get_contents($put);
