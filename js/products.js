@@ -757,8 +757,9 @@ async function renderProductDetail() {
       <span>${room}</span>
     </div>`).join('');
 
+  const _stilPrevod = { 'Vintage': 'Starinski', 'Bohemian': 'Boemski' };
   const styleMatchHtml = (product.styleMatch || []).map(s =>
-    `<span class="style-badge">${s}</span>`).join('');
+    `<span class="style-badge">${_stilPrevod[s] || s}</span>`).join('');
 
   const waIdentifier = product.sku ? `šifra: ${product.sku}` : product.name;
   const waLink = `https://wa.me/38269105222?text=Zdravo%2C%20zanima%20me%20panel%20${encodeURIComponent(waIdentifier)}`;
@@ -1017,7 +1018,9 @@ async function renderProductDetail() {
       return;
     }
 
-    const unitPrice = parseFloat(product.price) * (1 - (product.discount || 0) / 100);
+    // Racunaj sa ZAOKRUZENOM cijenom (na 2 decimale) — ista koja je prikazana
+    // kupcu, da se total slaze sa (broj komada × prikazana cijena).
+    const unitPrice = Math.round(parseFloat(product.price) * (1 - (product.discount || 0) / 100) * 100) / 100;
     if (!coveragePerUnit) {
       /* Za ovaj profil u podacima nema dimenzija — bolje bez broja nego sa pogresnim */
       res.innerHTML = `Zid <strong>${w} × ${h} m</strong> = <strong>${area.toFixed(1).replace('.', ',')} m²</strong><br>` +

@@ -434,7 +434,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
   <link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="fa/css/mmh-ikone.css?v=89e76a80"></noscript>
   <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style-v5.css?v=a49267b0">
+  <link rel="stylesheet" href="css/style-v5.css?v=9d767861">
   <style>
     @media(min-width:769px){.nav-menu{gap:0!important;flex-wrap:nowrap!important;}.nav-link{font-size:12px!important;padding:8px 5px!important;white-space:nowrap!important;}.logo{flex-shrink:0!important;}.logo-text .name,.logo-text .tagline{white-space:nowrap!important;}#desk-search-wrap{flex-shrink:0!important;margin-right:4px!important;}}
   @media(max-width:768px){#desk-search-wrap{display:none!important;}}
@@ -807,7 +807,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
               <i class="fas fa-calculator"></i> Kalkulator m²
             </button>
             <button class="pq-tab" onclick="switchPqTab('qty', this)">
-              <i class="fas fa-list-ol"></i> Unesi Količinu
+              <i class="fas fa-list-ol"></i> Unesi količinu
             </button>
           </div>
 
@@ -905,7 +905,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
             <?php else: ?>
             <button onclick="addProductToCartById(<?= (int)($product['id'] ?? 0) ?>, 1)" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#b0844e;color:#ffffff;border:none;border-radius:14px;padding:18px 24px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.4px;">
               <i class="fas fa-bag-shopping" style="font-size:18px;"></i>
-              <span>Dodaj u Korpu</span>
+              <span>Dodaj u korpu</span>
             </button>
             <?php endif; ?>
             <?php endif; ?>
@@ -976,7 +976,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
     <?php if ($product && $srodni): ?>
     <div class="srodni-sekcija">
       <div class="gold-line"></div>
-      <h2 class="section-title srodni-naslov">Slični Proizvodi</h2>
+      <h2 class="section-title srodni-naslov">Slični proizvodi</h2>
       <?php /* Traka koja se pomjera lijevo-desno umjesto mreze koja se lomi u
                vise redova. Na telefonu se prevlaci prstom, na racunaru se klikne
                strelica. Kartice ispisuje SERVER — Google ih vidi sve, bez obzira
@@ -1143,8 +1143,8 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
 
 <button id="scroll-top" aria-label="Nazad na vrh"><i class="fas fa-chevron-up"></i></button>
 
-<script src="js/main-v4.js?v=eb03eb0d"></script>
-<script src="js/products.js?v=b24b6343"></script>
+<script src="js/main-v4.js?v=252e9144"></script>
+<script src="js/products.js?v=4fe5f08e"></script>
 <script src="js/cart.js?v=25285928"></script>
 <script>
   renderProductDetail();

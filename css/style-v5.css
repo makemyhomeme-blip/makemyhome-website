@@ -1836,7 +1836,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+  /* Samo samo dugme (i tooltip) hvataju klik — prazan prostor oko njega
+     ne smije da prekriva linkove "Pogledaj" na karticama ispod. */
+  pointer-events: none;
 }
+#whatsapp-float a,
+#whatsapp-float .wa-tooltip { pointer-events: auto; }
 
 #whatsapp-float a {
   display: flex;

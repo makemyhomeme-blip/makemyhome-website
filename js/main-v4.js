@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .finally(() => {
           btn.disabled = false;
-          btn.innerHTML = '<i class="fas fa-paper-plane"></i> Pošalji Poruku';
+          btn.innerHTML = '<i class="fas fa-paper-plane"></i> Pošalji poruku';
         });
     });
   }
