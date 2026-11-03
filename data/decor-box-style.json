@@ -1,0 +1,14 @@
+{
+    "banner": {
+        "sel": ".db-intro-img",
+        "mode": "fixed",
+        "height": 291,
+        "fit": "cover"
+    },
+    "fabrika": {
+        "sel": ".db-factory-img",
+        "mode": "fixed",
+        "height": 278,
+        "fit": "cover"
+    }
+}
