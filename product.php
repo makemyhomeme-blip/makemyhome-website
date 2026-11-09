@@ -950,7 +950,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
               Uzorak možete opipati u našem showroomu u Podgorici — <strong>Vojvode Maša Đurovića 43, City Kvart</strong>.
               Donesite mjere zida i na licu mjesta vam izračunamo koliko komada treba i koliko će koštati.
             </p>
-            <p class="p-side-box-h"><i class="fas fa-clock"></i> Pon–Pet 09:00–20:00 &nbsp;·&nbsp; Sub 10:00–17:00</p>
+            <p class="p-side-box-h"><i class="fas fa-clock"></i> Pon–Pet 09:00–15:00 i 16:00–18:00 &nbsp;·&nbsp; Sub 11:00–16:00</p>
             <div class="p-side-btns">
               <a href="tel:+38269105222" class="p-side-btn p-side-btn--call"><i class="fas fa-phone"></i> 069 105 222</a>
               <a href="https://maps.google.com/?cid=46019722303886518" target="_blank" rel="noopener"
@@ -1099,7 +1099,7 @@ $vodic = $vodicZaKat[$prodCat] ?? ['montaza.html', 'Kako se paneli montiraju —
           <li><i class="fas fa-phone"></i><span><a href="tel:+38269105222">069 105 222</a></span></li>
           <li><i class="fas fa-envelope"></i><span><a href="mailto:makemyhome.me@gmail.com">makemyhome.me@gmail.com</a></span></li>
           <li><i class="fas fa-map-marker-alt"></i><span>Vojvode Maša Đurovića 43, City Kvart, Podgorica 81000</span></li>
-          <li><i class="fas fa-clock"></i><span>Pon–Pet: 09:00–20:00 | Sub: 10:00–17:00</span></li>
+          <li><i class="fas fa-clock"></i><span>Pon–Pet: 09:00–15:00 i 16:00–18:00 | Sub: 11:00–16:00</span></li>
         </ul>
       </div>
       <div>
