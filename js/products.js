@@ -666,6 +666,18 @@ async function renderProductDetail() {
       const m = f.match(/Širina:\s*(\d+)\s*mm/i);
       if (m) return parseInt(m[1]) / 10;
     }
+    // Rezerva: ako nema reda "Širina: Xmm", uzmi širinu iz "Dimenzije: 280×16cm"
+    // (širina letvice je manja od dvije dimenzije). Tako kalkulator radi i kad
+    // vlasnik nije posebno upisao Širinu, a dimenzije postoje.
+    for (const f of (product.features || [])) {
+      const m = f.match(/Dimenzije[^:]*:\s*(\d+(?:[.,]\d+)?)\s*[×x]\s*(\d+(?:[.,]\d+)?)\s*cm/i);
+      if (m) {
+        const a = parseFloat(m[1].replace(',', '.'));
+        const b = parseFloat(m[2].replace(',', '.'));
+        const w = Math.min(a, b);
+        if (w > 0) return w;
+      }
+    }
     return null;
   }
   // Koliko m² pokriva jedan komad. Cita se iz featuresa isto kao u product.php:
