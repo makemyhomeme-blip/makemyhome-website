@@ -49,7 +49,7 @@ $dopune = [
         'description' =>
             "Noir Wave je akustični panel sa drvenim rebrima u dubokoj crnoj nijansi na crnom filcu — dramatičan, moderan izgled koji zidu daje karakter i dubinu.\n\n"
           . "Osim što izgleda moćno, panel upija zvuk unutar prostorije i smanjuje eho. Glas se prestane vraćati sa zidova, pa je razgovor jasniji, a snimak čistiji.\n\n"
-          . "Crna varijanta je „statement" izbor — najbolje radi na jednom fokalnom zidu, iza TV-a ili u studiju, uz dobro usmjereno svjetlo (spot ili LED traka) koje istakne reljef rebara.\n\n"
+          . "Crna varijanta je „statement” izbor — najbolje radi na jednom fokalnom zidu, iza TV-a ili u studiju, uz dobro usmjereno svjetlo (spot ili LED traka) koje istakne reljef rebara.\n\n"
           . "Najčešće se bira za home cinema, studije za snimanje, moderne kancelarije i TV zidove.\n\n"
           . "280×60 cm po panelu, pokriva 1,68 m². Za zid 5×2,6 m treba oko 8 panela. Akustični filc debljine 9 mm, NRC 0,65–0,85 (upija 65–85 % zvuka koji ga pogodi). Lijepi se ljepilom ili vješa na sistem kuka — bez podkonstrukcije.",
         'features' => [
@@ -72,7 +72,7 @@ $dopune = [
         'description' =>
             "Amber Echo je akustični panel sa drvenim rebrima u toploj medeno-ćilibarnoj (amber) nijansi na crnom filcu — bogata, topla boja koja prostoriju odmah učini ugodnijom.\n\n"
           . "Panel upija zvuk unutar sobe i smanjuje eho, pa glas prestane da se vraća sa zidova — razgovor postaje lakši, a snimak čistiji.\n\n"
-          . "Topla amber nijansa lijepo grije prostor: odlično leži uz tamni namještaj, zeleno i mesing, i daje toplu „cozy" atmosferu dnevnoj sobi, baru ili radnoj sobi.\n\n"
+          . "Topla amber nijansa lijepo grije prostor: odlično leži uz tamni namještaj, zeleno i mesing, i daje toplu „cozy” atmosferu dnevnoj sobi, baru ili radnoj sobi.\n\n"
           . "Radi u kancelariji, studiju, home cinema sobi i dnevnoj sobi gdje se traži toplina.\n\n"
           . "280×60 cm po panelu, pokriva 1,68 m². Za zid 5×2,6 m treba oko 8 panela. Akustični filc debljine 9 mm, NRC 0,65–0,85 (upija 65–85 % zvuka koji ga pogodi). Lijepi se ljepilom ili vješa na sistem kuka — bez podkonstrukcije.",
         'features' => [
