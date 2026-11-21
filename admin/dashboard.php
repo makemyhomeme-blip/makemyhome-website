@@ -1402,9 +1402,38 @@ function showSection(name) {
 
 // Otvori sekciju iz URL parametra (npr. nakon dodavanja proizvoda)
 (function() {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const urlParams = new URLSearchParams(window.location.search);
   const section = urlParams.get('section');
   if (section) showSection(section);
+
+  // Da brisanje i obicno slanje forme NE skace na vrh: vrati skrol zapamcen
+  // prije slanja. (AJAX akcije imaju svoje vracanje preko _mmhPoslije.)
+  try {
+    var _sk = sessionStorage.getItem('_mmhSkrol');
+    if (_sk !== null) {
+      sessionStorage.removeItem('_mmhSkrol');
+      var _y = parseInt(_sk, 10) || 0;
+      var _vrati = function () { window.scrollTo(0, _y); };
+      _vrati();
+      window.addEventListener('load', _vrati);
+      setTimeout(_vrati, 80);
+      setTimeout(_vrati, 250);
+    }
+  } catch (e) {}
+
+  // Zapamti skrol prije SVAKOG obicnog (ne-AJAX) slanja forme na actions.php.
+  // AJAX forme pozivaju preventDefault, pa ih preskacemo (e.defaultPrevented).
+  document.addEventListener('submit', function (e) {
+    try {
+      var f = e.target;
+      if (f && f.tagName === 'FORM' &&
+          (f.getAttribute('action') || '').indexOf('actions.php') !== -1 &&
+          !e.defaultPrevented) {
+        sessionStorage.setItem('_mmhSkrol', String(window.scrollY));
+      }
+    } catch (err) {}
+  }, false);
 })();
 
 let _editingProductId = null;

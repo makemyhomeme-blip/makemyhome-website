@@ -21,7 +21,12 @@ $put  = $root . '/data/products.json';
 $dopune = [
     // poslije upisa se mapa isprazni da ponovno pokretanje ne prepise izmjene
     // koje vlasnik u medjuvremenu unese preko admina.
-    // 21.11.2026: A1/A2/A3 akusticni paneli (id 197,198,199) upisani i ispraznjeni.
+    // 21.11.2026: AKU064 (id 89) — poslednji komad, 70% popust.
+    89 => [
+        'discount'  => 70,
+        'badge'     => 'Poslednji komad',
+        'highlight' => 'Poslednji komad na zalihama — 70% popusta',
+    ],
 ];
 
 $sirovo = @file_get_contents($put);
