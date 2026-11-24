@@ -668,7 +668,9 @@
 
 <!-- ===== AKCIJA TRAKA ===== -->
 <style>
-  #akcija-traka{display:block;text-decoration:none;background:linear-gradient(90deg,#b0271a,#e74c3c);color:#fff;transition:filter .2s;}
+  #akcija-traka{display:block;text-decoration:none;background:linear-gradient(90deg,#0a0a0a,#1c1c1c 55%,#0a0a0a);color:#fff;transition:filter .2s;border-top:1px solid rgba(201,168,108,.35);border-bottom:1px solid rgba(201,168,108,.35);}
+  #akcija-traka .at-bf{display:inline-flex;align-items:center;gap:8px;background:#c9a86c;color:#111;font-weight:900;letter-spacing:.5px;padding:3px 12px;border-radius:6px;font-size:clamp(14px,2.2vw,18px);text-transform:uppercase;}
+  #akcija-traka .at-20{color:#ffd77a;font-weight:900;}
   #akcija-traka:hover{filter:brightness(1.07);}
   #akcija-traka .at-in{display:flex;align-items:center;justify-content:center;gap:10px 20px;flex-wrap:wrap;padding:14px 16px;text-align:center;}
   #akcija-traka .at-glavni{font-size:clamp(15px,2.4vw,19px);font-weight:800;letter-spacing:.3px;}
@@ -678,9 +680,10 @@
 </style>
 <a href="/kategorija/akcija" id="akcija-traka" aria-label="Akcija – svi proizvodi na popustu">
   <div class="container at-in">
-    <span class="at-glavni"><i class="fas fa-fire" style="margin-right:8px;"></i>AKCIJA — sniženja do &minus;40%</span>
-    <span class="at-pod">na odabrane panele, 3D letvice i SPC pod</span>
-    <span class="at-dug">Pogledaj sve na popustu <i class="fas fa-arrow-right"></i></span>
+    <span class="at-bf"><i class="fas fa-bolt"></i> Black Friday</span>
+    <span class="at-glavni"><span class="at-20">&minus;20%</span> na cijeli asortiman</span>
+    <span class="at-pod">+ veći popusti do &minus;70% na odabrane modele</span>
+    <span class="at-dug">Pogledaj akciju <i class="fas fa-arrow-right"></i></span>
   </div>
 </a>
 
