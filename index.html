@@ -630,17 +630,17 @@
   #akcija-traka .at-glavni{font-size:clamp(17px,3.4vw,24px);font-weight:900;letter-spacing:.3px;text-transform:uppercase;color:#140303;}
   #akcija-traka .at-20{color:#fff;}
   #akcija-traka .at-datum{font-size:clamp(13px,2.3vw,16px);font-weight:800;color:#200505;}
-  #akcija-traka .at-cta{display:inline-flex;align-items:center;gap:7px;color:#fff;font-weight:800;font-size:clamp(13px,2.3vw,16px);text-decoration:underline;text-underline-offset:3px;}
-  #akcija-traka .at-sep{color:#200505;opacity:.5;font-weight:700;}
-  @media(max-width:600px){ #akcija-traka{margin-top:66px;} #akcija-traka .at-sep{display:none;} #akcija-traka .at-in{gap:6px 12px;padding:11px 14px;} }
+  #akcija-traka .at-break{flex-basis:100%;width:100%;height:0;}
+  #akcija-traka .at-cta{display:inline-flex;align-items:center;gap:8px;margin-top:6px;background:#111;color:#fff;font-weight:800;font-size:14px;padding:10px 24px;border-radius:100px;}
+  @media(max-width:600px){ #akcija-traka{margin-top:66px;} #akcija-traka .at-in{gap:4px 12px;padding:12px 14px;} }
 </style>
 <a href="/kategorija/akcija" id="akcija-traka" aria-label="Black Friday – 20% popusta na cijeli asortiman">
   <div class="container at-in">
     <span class="at-bf"><i class="fas fa-bolt"></i> Black Friday</span>
     <span class="at-glavni"><span class="at-20">&minus;20%</span> na sve</span>
-    <span class="at-sep">·</span>
+    <span class="at-break"></span>
     <span class="at-datum">25&ndash;30. novembar</span>
-    <span class="at-sep">·</span>
+    <span class="at-break"></span>
     <span class="at-cta">Pogledaj akciju <i class="fas fa-arrow-right"></i></span>
   </div>
 </a>
