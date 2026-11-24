@@ -623,24 +623,22 @@
 
 <!-- ===== BLACK FRIDAY TRAKA (na vrhu, odmah vidljiva pri ulasku) ===== -->
 <style>
-  #akcija-traka{display:block;text-decoration:none;margin-top:75px;background:linear-gradient(90deg,#9e0b14,#e4121f 52%,#9e0b14);color:#140303;transition:filter .2s;border-top:2px solid #111;border-bottom:2px solid #111;}
+  #akcija-traka{display:block;text-decoration:none;margin-top:75px;background:linear-gradient(135deg,#8f0a12,#e4121f 55%,#8f0a12);color:#fff;transition:filter .2s;border-bottom:3px solid #111;}
   #akcija-traka:hover{filter:brightness(1.06);}
-  #akcija-traka .at-in{display:flex;align-items:center;justify-content:center;gap:8px 14px;flex-wrap:wrap;padding:12px 16px;text-align:center;}
-  #akcija-traka .at-bf{display:inline-flex;align-items:center;gap:8px;background:#111;color:#fff;font-weight:900;letter-spacing:1px;padding:6px 14px;border-radius:6px;font-size:clamp(15px,2.7vw,20px);text-transform:uppercase;}
-  #akcija-traka .at-glavni{font-size:clamp(17px,3.4vw,24px);font-weight:900;letter-spacing:.3px;text-transform:uppercase;color:#140303;}
+  #akcija-traka .at-in{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:18px 16px;text-align:center;}
+  #akcija-traka .at-bf{background:#111;color:#fff;font-weight:800;letter-spacing:4px;padding:6px 16px;border-radius:4px;font-size:clamp(12px,2.4vw,15px);text-transform:uppercase;}
+  #akcija-traka .at-glavni{font-size:clamp(30px,8vw,46px);font-weight:900;letter-spacing:.5px;text-transform:uppercase;line-height:1;color:#fff;}
   #akcija-traka .at-20{color:#fff;}
-  #akcija-traka .at-datum{font-size:clamp(13px,2.3vw,16px);font-weight:800;color:#200505;}
-  #akcija-traka .at-break{flex-basis:100%;width:100%;height:0;}
-  #akcija-traka .at-cta{display:inline-flex;align-items:center;gap:8px;margin-top:6px;background:#111;color:#fff;font-weight:800;font-size:14px;padding:10px 24px;border-radius:100px;}
-  @media(max-width:600px){ #akcija-traka{margin-top:66px;} #akcija-traka .at-in{gap:4px 12px;padding:12px 14px;} }
+  #akcija-traka .at-glavni .at-mali{font-size:.5em;font-weight:800;opacity:.95;}
+  #akcija-traka .at-datum{font-size:clamp(13px,2.6vw,16px);font-weight:700;letter-spacing:2px;color:#ffd9d9;text-transform:uppercase;}
+  #akcija-traka .at-cta{display:inline-flex;align-items:center;gap:9px;margin-top:5px;background:#fff;color:#111;font-weight:800;font-size:15px;padding:12px 30px;border-radius:100px;}
+  @media(max-width:600px){ #akcija-traka{margin-top:66px;} #akcija-traka .at-in{gap:8px;padding:16px 14px;} }
 </style>
 <a href="/kategorija/akcija" id="akcija-traka" aria-label="Black Friday – 20% popusta na cijeli asortiman">
   <div class="container at-in">
     <span class="at-bf"><i class="fas fa-bolt"></i> Black Friday</span>
-    <span class="at-glavni"><span class="at-20">&minus;20%</span> na sve</span>
-    <span class="at-break"></span>
+    <span class="at-glavni"><span class="at-20">&minus;20%</span> <span class="at-mali">na sve</span></span>
     <span class="at-datum">25&ndash;30. novembar</span>
-    <span class="at-break"></span>
     <span class="at-cta">Pogledaj akciju <i class="fas fa-arrow-right"></i></span>
   </div>
 </a>
