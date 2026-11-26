@@ -21,36 +21,7 @@ $put  = $root . '/data/products.json';
 $dopune = [
     // poslije upisa se mapa isprazni da ponovno pokretanje ne prepise izmjene
     // koje vlasnik u medjuvremenu unese preko admina.
-    // 26.11.2026: promjena sifri — id174 -> RGB, id187 -> RBB.
-    174 => [
-        'sku' => 'RGB',
-        'features' => [
-            'Dimenzije: 120×60cm (0,72 m² po komadu)',
-            'Debljina: 3–5mm (fleksibilna ploča)',
-            'Materijal: prirodni kamen na fleksibilnoj podlozi',
-            'Boja / šara: hrapavi granit, bež',
-            'Savitljiva – može se montirati na zaobljene površine',
-            'Montaža: lijepi se ljepilom ili silikonom, siječe se skalpelom',
-            'Vodootporan – pogodan za kupatila i vlažne prostorije',
-            'Otporan na UV – ne blijedi na suncu',
-            'Pogodan za enterijer i eksterijer (fasade / vanjski zidovi)',
-            'Šifra: RGB',
-        ],
-    ],
-    187 => [
-        'sku' => 'RBB',
-        'features' => [
-            'Dimenzije: 300×60cm (1,8 m² po komadu)',
-            'Debljina: 3–5mm (fleksibilna ploča)',
-            'Materijal: prirodni kamen na fleksibilnoj podlozi',
-            'Boja / šara: valoviti reljef, bež',
-            'Savitljiva – može se montirati na zaobljene površine',
-            'Montaža: lijepi se ljepilom ili silikonom, siječe se skalpelom',
-            'Vodootporan – pogodan za kupatila i vlažne prostorije',
-            'Otporan na UV – ne blijedi na suncu',
-            'Šifra: RBB',
-        ],
-    ],
+    // 26.11.2026: RGB/RBB sifre upisane i ispraznjeno.
 ];
 
 $sirovo = @file_get_contents($put);
