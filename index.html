@@ -338,6 +338,10 @@
     #showcase{background:var(--light);padding:70px 0 0}
     .showcase-img-wrap{width:100%;line-height:0;margin-top:48px;padding:0 32px;box-sizing:border-box}
     .showcase-img-wrap img{width:100%;height:auto;display:block;border-radius:8px}
+    /* Interaktivna "shop the look" slika: klikabilne zone preko 8 pločica dolje */
+    .sc-map{position:relative;line-height:0}
+    .sc-hot{position:absolute;bottom:0;height:26%;width:12.5%;display:block;border-radius:6px;transition:background .18s,box-shadow .18s;z-index:2}
+    .sc-hot:hover,.sc-hot:focus-visible{background:rgba(201,168,108,.20);box-shadow:inset 0 0 0 2px rgba(201,168,108,.8);outline:none}
     .showcase-btn-wrap{padding:36px 0 26px}
     @media(max-width:768px){#desk-search-wrap{display:none!important;}}
     @media(max-width:768px){
@@ -700,10 +704,21 @@
     </div>
   </div>
   <div class="showcase-img-wrap animate-on-scroll">
-    <picture>
-      <source srcset="images/showcase-room.webp" type="image/webp">
-      <img src="images/showcase-room.jpg" alt="Make My Home Decor – Kompletna rješenja za enterijer" loading="lazy" width="1714" height="800">
-    </picture>
+    <div class="sc-map">
+      <picture>
+        <source srcset="images/showcase-room.webp" type="image/webp">
+        <img src="images/showcase-room.jpg" alt="Make My Home Decor – Kompletna rješenja za enterijer" loading="lazy" width="1714" height="800">
+      </picture>
+      <!-- Klikabilne zone preko 8 plocica (lijevo->desno), svaka 12.5% sirine -->
+      <a class="sc-hot" href="/kategorija/pu-kamen"          style="left:0%"     title="Poliuretanski kamen" aria-label="Poliuretanski kamen"></a>
+      <a class="sc-hot" href="/kategorija/flex-stone"        style="left:12.5%"  title="Flex Stone" aria-label="Flex Stone"></a>
+      <a class="sc-hot" href="/kategorija/akusticni-paneli"  style="left:25%"    title="Akustični paneli" aria-label="Akustični paneli"></a>
+      <a class="sc-hot" href="/kategorija/aluminijum-lajsne" style="left:37.5%"  title="Aluminijum lajsne" aria-label="Aluminijum lajsne"></a>
+      <a class="sc-hot" href="/kategorija/3d-letvice"        style="left:50%"    title="3D letvice" aria-label="3D letvice"></a>
+      <a class="sc-hot" href="/kategorija/bambus-mermerni"   style="left:62.5%"  title="Bambus panel mermer" aria-label="Bambus panel mermer"></a>
+      <a class="sc-hot" href="/kategorija/bambus-drveni"     style="left:75%"    title="Bambus panel drvo" aria-label="Bambus panel drvo"></a>
+      <a class="sc-hot" href="/kategorija/spc-pod"           style="left:87.5%"  title="SPC pod" aria-label="SPC pod"></a>
+    </div>
   </div>
   <div class="container">
     <div class="text-center showcase-btn-wrap">
